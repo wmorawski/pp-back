@@ -5,6 +5,9 @@ type User {
   parties: [Party!]!
   friends: [User!]!
   chats: [Chat!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deleted: Boolean! @default(value: "false")
 }
 
 type Party {
@@ -12,6 +15,10 @@ type Party {
   title: String!
   description: String!
   author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  games: [Game!]
+  isPublic: Boolean! @default(value: "false")
 }
 
 type Chat {
@@ -19,10 +26,28 @@ type Chat {
   party: Party!
   members: [User!]!
   messages: [Message!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Message {
   id: ID! @unique
   author: User!
   chat: Chat!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Game {
+  id: ID! @unique
+  title: String! @unique
+  cover: String
+  type: GameType!
+}
+
+enum GameType {
+  BOARD,
+  PC,
+  CONSOLE
 }

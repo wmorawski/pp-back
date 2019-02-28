@@ -1,0 +1,28 @@
+type User {
+  id: ID! @unique
+  username: String! @unique
+  email: String! @unique
+  parties: [Party!]!
+  friends: [User!]!
+  chats: [Chat!]!
+}
+
+type Party {
+  id: ID! @unique
+  title: String!
+  description: String!
+  author: User!
+}
+
+type Chat {
+  id: ID! @unique
+  party: Party!
+  members: [User!]!
+  messages: [Message!]!
+}
+
+type Message {
+  id: ID! @unique
+  author: User!
+  chat: Chat!
+}

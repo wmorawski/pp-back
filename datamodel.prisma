@@ -2,6 +2,7 @@ type User {
   id: ID! @unique
   username: String! @unique
   email: String! @unique
+  password: String!
   parties: [Party!]!
   friends: [User!]!
   chats: [Chat!]!
@@ -44,6 +45,8 @@ type Game {
   title: String! @unique
   cover: String
   type: GameType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 enum GameType {

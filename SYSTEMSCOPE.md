@@ -113,6 +113,7 @@ Znajomy | Inny użytkownik, z którym została utworzona odpowiednia relacja
 Chat | Wymiana wiadomości tekstowych między użytkownikami. Uporządkowany zbiór wiadomości tekstowych z przypisanym użytkownikiem oraz grupą docelową (imprezą).
 API | ang. _Application Programming Interface_ - interfejs programistyczny aplikacji. W przypadku projektu zwracający informacje w postaci JSON.
 _TODO_: Dopisać do słownika PTIP i MSP
+
 ## Short Use Cases / Skrócone przypadki użycia
 
 ### **UC1: Tworzenie konta**

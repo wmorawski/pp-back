@@ -1,164 +1,144 @@
 # Project scope / Zakres systemu
 
 ## Brief project description / Krótki opis projektu
-Należy zbudować oprogramowanie wykorzystywane do obsługi paczkomatu, który umożliwia zarówno nadanie nowej, jak i odbiór przesyłki. W celu nadania przesyłki należy wprowadzić dane adresowe nadawcy i odbiorcy oraz lokalizację docelowego paczkomatu. Urządzenie wydaje naklejkę, którą użytkownik nakleja na paczkę, po czym umieszcza ją w odpowiedniej szufladzie automatu. Odbiór paczki odbywa się na podstawie numeru telefonu i unikalnego kodu przesłanego na telefon odbiorcy. Po wprowadzeniu danych automat otwiera odpowiednią szufladę, umożliwiając zabranie paczki. Zarówno podczas nadania, jak i odbioru paczki może zostać pobrana opłata (w zależności od typu paczki) – paczkomat obsługuje płatność kartą, gotówką oraz z wykorzystaniem specjalnego konta prepaid
+
+Należy zbudować aplikację wykorzystywaną do organizacji i zarządzania wydarzeniami społecznościowymi, zwanymi dalej imprezami. W celu korzystania z funkcjonalności aplikacji, użytkownik musi założyć konto poprzez formularz rejestracji lub system OAuth, umożliwiający rejestrację za pomocą serwisów takich jak:  
+
+* Facebook,
+* Twitter,
+* Google.
+
+Po udanej autoryzacji użytkownik otrzymuje dostęp do funkcjonalności takich jak tworzenie i edycja wydarzeń (wydarzenia mogą być prywatne i publiczne), zarządzanie znajomymi, wysyłanie wiadomości. W ramach danego wydarzenia użytkownik może:
+
+* Tworzyć playlisty muzyczne za pomocą serwisu Spotify,
+* Wyszukiwać i dodawać propozycje gier (planszowych, komputerowych i konsolowych) oraz filmów,
+* Udostępnić unikalny link / qrcode do wydarzenia,
+* Rozmawiać za pomocą chatu grupowego z innymi uczestnikami imprezy,
+* Dodać miejsce i czas imprezy, na podstawie których inni zaproszeni mogą wyznaczyć drogę dojazdu za pomocą auta lub komunikacji miejskiej (aktualnie tylko w Poznaniu),
+* Tworzyć listy zakupów z możliwością przypisania się użytkowników do konkretnych punktów listy,
+* Przeglądanie kalendarza z dodanymi wszystkimi imprezami, w których użytkownik brał, bierze lub planuje wziąć udział.
+
 ## System actors with description / Aktorzy systemu i ich opis
 
 ### Primary actors / Aktorzy podstawowi
+
 Actor / Aktor | Opis
 --- | ---
-Client / Klient | Osoba nadająca, odbierająca przesyłkę z paczkomatu, lub zainteresowana jej lokalizacją. Klient jest osobą między 16 a 75 rokiem życia. Przykładowym klientem jest allegrowicz, który może nadawać kilka paczek w tygodniu i potrzebuje systemu, który przyśpieszy i ułatwi ten proces.
-Courier / Kurier | Osoba odpowiada za transportowanie przesyłek pomiędzy paczkomatami. Od kuriera wymagane jest pełnoletniość, posiadanie aktualnego prawa jazdy, zaświadczenie o niekaralności oraz 4-letnie doświadczenie w branży kurierskiej. 
-Helpline Employee / Pracownik Infolinii | Osoba odpowiedzialna za kontakt z klientem, rozwiązywanie problemów i udzielanie informacji. Od pracownika infolinii wymagane jest ukończenie 18 roku życia, wykształcenie wyższe oraz doświadczenie w kontakcie z klientem. Posiadający dobrze rozwinięte umiejętności miękkie..
-Serviceman / Serwisant | Osoba odpowiedzialna za konserwację i naprawę paczkomatów w przypadku usterki. Serwisant musi mieć wykształcenie wyższe techniczne oraz mieć prawo jazdy, oraz samochód umożliwiający mu szybkie dotarcie do paczkomatów. Serwisant powinien być dodatkowo osobą mocno dyspozycyjną w razie poważnych usterek wymagających szybkiej naprawy.
-System admin / Administrator systemu | Osoba odpowiadająca za poprawne funkcjonowanie systemu oraz zarządzanie uprawnieniami. Wymagane jest doświadczenie 2-letnie w administrowaniu podobnie złożonych systemów oraz wykształcenie wyższe techniczne.
+User / Użytkownik | Osoba tworząca i uczestnicząca w imprezach. Użytkownik jest osobą powyżej 18 roku życia. Przykładowym użytkownikiem jest student, który może co tydzień organizować imprezy ze znajomymi ze studiów i potrzebuje aplikacji, która przyśpieszy i ułatwi proces organizacji.
+System admin / Administrator systemu | Osoba odpowiadająca za poprawne funkcjonowanie systemu oraz zarządzanie uprawnieniami. Wymagane jest doświadczenie roczne w administrowaniu podobnie złożonych systemów oraz wykształcenie wyższe techniczne.
 
 ### Secondary actors / Aktorzy wspomagający
+
 Actor / Aktor | Opis
 --- | ---
-Bank System / System bankowy | Instytucja odpowiedzialna za dokonywanie i przetwarzanie płatności. Udostępnia terminal płatniczy. Wspiera płatności walutą zdefiniowaną w liście In/Out.
-ISP / Dostawca usług internetowych | Firma dostarczająca usługi internetowe i gwarantująca stabilne łącze internetowe. Zapewnia bez awaryjność i bezzwłoczne usuwanie usterki. Proponownym łączem jest łącze symetryczne min 25Mb/s i z opóźnieniem nie większym niż 100ms.
-Mobile Network / Telefonia komórkowa | Firma dostarczająca usługi telekomunikacyjne.
+CSP (Cloud Service Provider) / Dostawca usług chmurowych | Firma dostarczająca usługi chmurowe i gwarantująca stabilne ich działanie. Zapewnia bez awaryjność i bezzwłoczne usuwanie usterki.
+Google Play / App Store | Serwis umożliwiający udostępnienie aplikacji mobilnej.
+AAP (Authentication & Authorization Platform) / Serwis uwierzytelniający | Serwis dostarczający rozwiązania do autoryzacji i autentykacji użytkowników na podstawie m.in. protokołu OAuth2. Proponowana platforma to Auth0.
+MSS (Music Streaming Service) / Serwis muzyczny | Udostępnia możliwość tworzenia playlist muzycznych na podstawie zasobów własnych.
+Games Info Provider / Dostawca informacji nt. gier | Serwis udostępniający API do pobierania listy gier wraz z informacjami o nich, np. SteamDB
+MSP (Map Service Provider) / Dostawca usług mapowych | Firma dostarczająca informacje związane z mapami (ich graficzna reprezentacja) oraz wyznaczająca rzeczywisty przebieg trasy między dwoma (lub więcej) punktami, proponowany dostawca to MapBox
+PTIP (Public Transport Info Provider) / Dostawca informacji o komunikacji miejskiej | Firma udostępniająca informacje na temat komunikacji miejskiej w danym mieście. Przykładem jest publiczne API Poznania, gdzie mamy dostęp do informacji na temat linii autobusowych i tramwajowych, przystankach i rozkładach jazdy.
 
 ### External actors / Aktorzy zewnętrzni
+
 Actor / Aktor | Opis
 --- | ---
-Tax office / Urząd skarbowy | Sprawuje kontrole nad poprawnością opodatkowania transakcji
-Owner / Właściciel | Oczekuje, że paczki w paczkomacie nie zostaną skradzione, zostaną dostarczone w nienaruszonym stanie, zostaną dostarczone na czas.
+Owner / Właściciel | Oczekuje wysokiego uptime aplikacji, że dane wrażliwe będa odpowiednio chronione.
 
 ## Actor-goal table / Tabela aktor-cel
 
 ### Primary actors / Aktorzy podstawowi
+
 Actor / Aktor | Goals
 --- | ---
-Client / Klient | Nadawanie paczek 
- | Odbieranie paczek 
-Courier / Kurier | Przekazywanie paczek z jednego do drugiego paczkomatu,
- | Uzupełnianie / opróżnianie paczkomtu,
- | Jeśli jest taka konieczność przetransportowanie paczki do magazynu.
-Helpline Employee / Pracownik Infolinii | Kontakt z klientem drogą telefoniczną
- | Rozwiązywanie problemów użytkowników
- | Wyjaśnienie działania systemu i jego funkcji
- | Tworzenie FAQ
-Serviceman / Serwisant | Naprawa usterek mechanicznych paczkomatu
- | Wymiana materiałów eksploatacyjnych
- | Zgłoszanie usterek niemożliwych do natychmiastowej naprawy
-System admin / Administrator systemu | Usuwanie usterek i błędów systemu,
- | Aktualizowanie oprogramowania paczkomatu,
- | Modernizowanie systemu na podstawie bazy danych problemów i pytań użytkowników.
+User / Użytkownik | Tworzenie wydarzeń
+ || Dołączanie do imprez
+ || Zarządzanie swoimi imprezami
+ || Komunikacja z uczestnikami imprez
+ || Znalezienie drogi na imprezę
 
 ### Secondary actors / Aktorzy wspomagający
+
 Actor / Aktor | Goals
 --- | ---
-Bank System / System bankowy | Udostępnia terminal, za którego pomocą realizowana jest płatność
- | Zarządza obsługą płatności | Dokonywanie zwrotów w przypadku anulowania usługi lub jej niepowodzenia.
-ISP / Dostawca usług internetowych | Zapewnia stabilne łącze internetowe | Dokonuje ekspresowyh napraw w razie awarii | Udostępnia publiczny adres IP
-Mobile Network / Telefonia komórkowa | Pośredniczy w przesyłaniu informacji ( kodu autoryzacyjnego lub informacji o stanie przesyłki )
- | Pośredniczy w komunikacji klienta z pracownikami infolinii
+CSP / Dostawca usług chmurowych | Udostępnia serwer w chmurze, na którym trzymany jest backend i web-frontend aplikacji
+Google Play / App Store | Zapewnia dostęp do aplikacji szerokiemu gronu odbiorców
+| | Raportuje informacji odnośnie urządzeń, na których zainstalowana jest aplikacja
+| | Udostępnia możliwość wdrażania aplikacji w różnych fazach (internal, alfa, beta, release)
+| | Raportuje informacje na temat błędów wewnętrznych aplikacji
+AAP / Serwis uwierzytelniający | Udostępnia API do autoryzacji i autentykacji użytkowników
+|| Zapewnia bezpieczeństwo przechowywania danych użytkowników
+|| Zapewnia bezpieczne logowanie i rejestrację
+MSS / Serwis muzyczny | Udostępnia API do tworzenia playlist na podstawie zasobów własnych
+MSP / Dostawca usług mapowych | Udostępnia graficzną reprezentacje map
+|| Udostępnia API do wyznaczania rzeczywistej trasy między dwoma (lub więcej) punktami
+PTIP / Dostawca informacji o komunikacji miejskiej | Udostępnia informacje na temat komunikacji miejskiej w danym mieście w tym o przystankach, liniach autobusowych, tramwajowych i rozkładach jazdy
 
 ### External actors / Aktorzy zewnętrzni
+
 Actor / Aktor | Goals
 --- | ---
-Tax office / Urząd skarbowy | Prowadzenie egzekucji administracyjnej należności pieniężnych.
 Owner / Właściciel | Sprawowanie kontroli nad funkcjonowaniem systemu.
 
 ## IN-OUT list / Lista IN-OUT
 
 Category / Kategoria    | IN | OUT
 --- | --- | ---
-Payments / Płatności   |  PLN | Reszta form płatności (gotówka etc.)
- | EUR | Reszta walut
- | USD |
- | GBP | 
- | Płatność kartą | 
- | Blik | 
-Types of shipments / Rodzaje przesyłek | Przedpłata
- | Za pobraniem
 Languages / Języki | Polski | Reszta języków
- | Angielski | 
- | Niemiecki | 
-Dimensions of packages / Gabaryty paczek | Minimalne: 9 cm x 14 cm (strona adresowa) z tolerancją +/-2 mm | Mniejsze niż 9cm x 14cm (strona adresowa)
- | Gabaryt A – długość = max 60 cm, szerokość = max 50 cm, wysokość = max 30 cm | Paczka na której uniemożliwone jest umieszczenie w sposób poprawny naklejki adresowej (mocno nieregularne kształty)
-Package Weight / Waga paczki | Waga poniżej 30 kg | Waga powyżej 30 kg
-Place of Delivery / Miejsce doręczenia paczki | Paczkomat | Posiadłość prywatna i inne
-
+|| Angielski
+Auth Services / Serwisy używane do autoryzacji | Logowanie własne | Reszta serwisów
+|| Facebook
+|| Google
+|| Twitter
+Public Transportation / Dojazd za pomocą komunikacji publicznej | Poznań | Inne miasta
 
 ## Project dictionary / Słownik projektowy
+
 Term / Pojęcie | Definition / Definicja
 --- | ---
-Użytkownik | Indywiduum korzystające z paczkomatu
-Klient | Osoba nadająca lub odbierająca przesyłkę z paczkomatu
-Nadawcy | Klient wysyłający przesyłkę
-Adresat | Klient do którego wysyłamy przesyłkę
-Dane nadawcy | Numer telefonu, imię, nazwisko, adres email
-Dane adresata | Numer telefonu, lokalizacja paczkomatu docelowego
-Kurier | Osoba uprawniona do otwierania skrytek klienckich w celu odbioru przesyłki i przekazania jej do paczkomatu docelowego
-Etykietę | Naklejka adresowa umieszczana na przesyłce
-Paczkomat | Maszyna z panelem kontrolnym i zestawem skrytek na przesyłki
-Administrator systemu | Osoba odpowiedzialna za rozwój i utrzymanie software'u Paczkomatów
-Serwistant | Osoba odpowiedzialna za mechaniczną konserwację i naprawę Paczkomatów
-Gabaryt | Rozmiar paczki podawany w 3 wymiarach (wysokość, szerokość, głębokość)
-Infolinia | Udziela informacji użytkownikom i rozwiązuje problemy do których nie potrzeba serwisanta czy administratora
+Użytkownik | Indywiduum korzystające z aplikacji
+Twórca | Osoba tworząca wydarzenie
+Impreza | Wydarzenie społecznościowe gromadzące przynajmniej 2 osoby, odbywające się w konkretnym miejscu i czasie
+Zaproszony | Osoba zaproszona na wydarzenie
+Dane użytkownika | Imię, nazwisko, adres email, unikalny identyfikator, zdjęcie profilowe
+Administrator systemu | Osoba odpowiedzialna za rozwój i utrzymanie software'u
 FAQ | ang. _Frequently Asked Questions_ - najczęściej zadawane pytania
-Telefonia komórkowa | Infrastruktura telekomunikacyjna, umożliwiająca abonentom bezprzewodowe połączenia
-Urząd skarbowy | Jednostka Krajowej Administracji Skarbowej obsługująca naczelnika urzędu skarbowego, który jest organem administracji niezespolonej podlegającym Ministrowi Finansów.
-Dostawca usług internetowych | Podmiot oferujący usługę dostępu do sieci Internet
-System bankowy | Całokształt instytucji bankowych oraz normy, które określają ich wzajemne powiązania i stosunki z otoczeniem
-kod weryfikacyjnego | 6 cyfrowy kod który otrzymuje adresat, służący do odebrania paczki
-numer przesyłki | 20 cyfrowy kod który reprezentuje paczke w systemie
-Materiały eksploatacyjne | Papier termiczny z klejem, na którym drukowane są etykiety przyklejane na przesyłki.
-
+Dostawca usług chmurowych | Podmiot oferujący usługę dostępu do usług chmurowych
+Zaproszenie do aplikacji | unikalny link przedstawiony w formie tekstowej lub graficznej (Kod QR) za pomocą którego użytkownik może jednym kliknięciem dołączyć do imprezy
+Kod QR | alfanumeryczny, dwuwymiarowy, matrycowy, kwadratowy kod graficzny do generowania zaproszeń do aplikacji
+Serwis uwierzytelniający | Podmiot oferujący interfejs programistyczny, za pomocą którego można przeprowadzić autoryzację i autentykację użytkownika
+Serwis muzyczny | Podmiot oferujący interfejs programistyczny do tworzenia playlist muzycznych oraz wyszukiwania muzyki wraz z możliwością 30-sekundowego odsłuchu
+Playlista | Zbiór utowrów muzycznych, może być uporządkowany lub odtwarzany losowo
+Znajomy | Inny użytkownik, z którym została utworzona odpowiednia relacja
+Chat | Wymiana wiadomości tekstowych między użytkownikami. Uporządkowany zbiór wiadomości tekstowych z przypisanym użytkownikiem oraz grupą docelową (imprezą).
+API | ang. _Application Programming Interface_ - interfejs programistyczny aplikacji. W przypadku projektu zwracający informacje w postaci JSON.
+_TODO_: Dopisać do słownika PTIP i MSP
 ## Short Use Cases / Skrócone przypadki użycia
-### UC1: Consignment / Nadanie przesyłki
 
-Klient podchodzi do paczkomatu w celu nadania przesyłki. Klient wybiera z menu opcje nadania przesyłki, po czym wypełnia dane adresata oraz nadawcy. Po wypełnieniu danych klient wybiera formę przesyłki oraz zaznacza odpowiedni gabaryt. Gdy wszystkie dane zostały podane prawidłowo, klient w zależności od formy przesyłki uiszcza opłatę za nadanie przesyłki, następnie pobiera i nakleja etykietę na przesyłce i umieszcza ją w odpowiedniej skrytce. Po tych wszystkich operacjach przesyłka została prawidłowo nadana.
-    
+### **UC1: Tworzenie konta**
 
-### UC2: Consignment / Odebranie przesyłki
+Użytkownik w celu założenia konta przechodzi do odpowiedniej podstrony na stronie lub ekranu w aplikacji mobilnej. Użytkownik podaje wymagane dane, takie jak adres e-mail i hasło, lub wybiera opcje rejestracji za pomocą jednego z wymienionych w liście IN/OUT serwisów. Po udanej rejestracji użytkownik zostaje automatyczcnie zalogowany do aplikacji i może z niej w pełni korzystać.
 
-Klient podchodzi do paczkomatu w celu odebrania przesyłki. Klient wybiera z menu opcje odebrania przesyłki, po czym wypełnia dane do odbioru, m.in. kod weryfikacyjny oraz numer telefonu, na który przyszło powiadomienie o przesyłce. Jeżeli informacje zostały wpisane prawidłowo, klient w zależności od formy przesyłki uiszcza opłatę pobraniową, następnie klient wyjmuje paczkę z odpowiedniej skrytki. Po tych wszystkich operacjach przesyłka została prawidłowo odebrana.
-    
-### UC3: Consignment / Odebranie paczki przez kuriera
+### **UC2: Logowanie użytkownika**
 
-Kurier podchodzi do paczkomatu w celu wyjęcia paczek. Kurier wybiera z menu wyjęcie paczki lub paczek przez kuriera. Dokonuje autoryzacji. Na panelu wybiera otwarcie odpowiednich skrytek. Po wyjęciu paczek zamyka skrytki i potwierdza wyjęcie paczek oraz wylogowywuje się z systemu.
+Użytkownik w celu założenia konta przechodzi do odpowiedniej podstrony na stronie lub ekranu w aplikacji mobilnej. Użytkownik podaje podane podczas tworzenia konta dane lub autoryzuje się za pomocą wybranego w procesie rejestracji serwisu. Po udanej autoryzacji otrzymuje dostęp funkcjonalności systemu.
 
-### UC4: Consignment / Śledzenie przesyłki
+### **UC3: Tworzenie imprezy**
 
-Klient, używając urządzenia mobilnego łączy się ze stroną internetową paczkomatów oraz wybiera opcje śledzenia przesyłki. Po wybraniu opcji klient jest proszony o podanie numeru przesyłki potrzebnego do jej lokalizacji. Jeżeli podany kod został wprowadzony prawidłowo, klient otrzymuje informacje o stanie i lokalizacji paczki.
-    
-### UC5: Consignment / Uzupełnienie paczkomatu przez kuriera
+Użytkownik podaje tytuł oraz opis imprezy. Wskazuje czy jest ona publiczna czy prywatna. Podaje ponaddto miejsce oraz czas, w którym impreza ma się odbyć. Podczas tworzenia wydarzenia użytkowników może dodać z góry zaproszone osoby z listy znajomych. Po pomyślnym utworzeniu imprezy zostaje ona dodana do kalendarza użytkownika, a zaproszone osoby dostają powiadomienie o nowym zaproszeniu.
 
-Kurier podchodzi do paczkomatu w celu umieszczenia paczek. Kurier wybiera z menu uzupełnienie paczkomatu przez kuriera. Dokonuje autoryzacji. Na panelu wybiera otwarcie odpowiednich skrytek. Po umieszczeniu paczek w odpowiednich skrytkach zamyka skrytki i potwierdza uzupełnienie paczkomatu oraz wylogowywuje się z systemu.
+### **UC3: Wysyłanie wiadomości w czacie grupowym**
 
-### UC6: Consignment / Usuwanie usterek i błędów systemu
+Użytkownik na podstronie odpowiedniej imprezy przechodzi do zakładki **Chat**. Na posortowanej liście widzi poprzednie wiadomości na czacie, poniżej ma odpowiedni input (wejście z klawiatury) do wpisania swojej wiadomości. Po kliknięciu odpowiedniego przycisku wiadomość zostaje wysłana, a osoby powiązane z tym chatem dostają powiadomienie o nowej wiadomości.
 
-Administrator dostaje zgłoszenie o wystąpieniu usterki lub błędu w systemie. Administrator przystępuje do jej naprawienia. Po naprawie następuje deploy poprawionej wersji oprogramowania.
+### **UC4: Tworzenie playlist muzycznych**
 
-### UC7: Consignment / Przetransportowanie paczek do magazynu
+Użytkownik w odpowiednim polu wyszukiwarki wpisuje nazwę utworu lub wykonawcę po czym API Spotify zwraca listę z wynikami wyszukiwania. Użytkownik może kliknąć w utwór. Po zapełnieniu listy docelowymi utworami użytkownik klika przycisk **Zapisz** i playlista jest odsyłana z powrotem do serwisu Spotify oraz jest generowany do niej specjalny odsyłacz.
 
-Kurier podjeżdża do paczkomatu. Kurier wybiera z menu wyjęcie paczki lub paczek przez kuriera.
-Dokonuje autoryzacji. Na panelu wybiera otwarcie skrytek z zaległymi paczkami. Po wyjęciu paczek zamyka skrytki i potwierdza wyjęcie paczek oraz wylogowywuje się z systemu.
+### **UC5: Propozycja gier na imprezę**
 
-### UC8: Consignment / Kontakt z pracownikiem infolinii
+Użytkownik może zaproponować grę, którą chciałby, aby pojawiła się na imprezie. W tym celu zaznacza odpowiednio rodzaj gry do preferowanej przez siebie platformy (PC, Konsola, Planszowa) i wyszukuje jej nazwę (lub jej część). Po dodaniu propozycji inni użytkownicy głosują, czy chcą, aby dana gra pojawiła się na imprezie. Po stronie uczestników imprezy leży fizyczne zorganizowanie danej gry.
 
-Klient wybiera numer telefoniczny podanych na paczkomacie, stronie internetowej lub etykiecie. Po wybraniu i zadzwonieniu pod podany numer zostaje połączony z pracownikiem infolinii, któremu opisuje napotkany problem lub zadaje mu pytania związane z funkcjonowaniem systemu paczkomatowego. Pracownik infolinii instruuje klienta, w jaki sposób ma rozwiązać problem lub odpowiada na pytania klienta. Po rozwiązaniu problemu lub uzyskaniu informacji, której potrzebowaliśmy klient kończy rozmowę telefoniczną z pracownikiem infolinii.
+### **UC6: Wyszukiwanie drogi na imprezę**
 
-### UC9: Consignment / Naprawa usterek mechanicznych paczkomatu
-
-Serwisant po wezwaniu przyjeżdża do wskazanego przez zgłaszającego paczkomatu. Po wstępnym zdiagnozowaniu przyczyn i typu usterki przechodzi do prac naprawczych. W pierwszej kolejności wysyła do systemu zgłoszenie o wyłączeniu z użytku danego urządzenia. Wyłącza urządzenie z sieci elektrycznej oraz przechodzi do napraw, zachowując wszystkie zasady bezpiecznej pracy, oraz zasad serwisowych wyznaczonych przez producenta urządzenia. Po zakończonych pracach uruchamia ponownie paczkomat i dokonuje krótkiego sprawdzenia, czy naprawiona rzecz działa dobrze. Po całkowitym zakończeniu prac naprawczych serwisant wysyła informację do systemu, że paczkomat jest sprawny i nadaje się do ponownego użytku.
-
-### UC10: Consignment / Wymiana materiałów eksploatacyjnych
-
-Po otrzymaniu informacji z systemu o wyczerpaniu materiałów eksploatacyjnych serwisant przyjeżdża do wskazanego paczkomatu. Następnie przechodzi do uzupełniania skończonych materiałów, otwiera przedni panel paczkomatu przy pomocy odpowiednich kluczy. Po zakończonej wymianie zamyka panel oraz testuje czy wszystko funkcjonuje dobrze. Zgłasza do systemu informację o uzupełnieniu zasobów oraz o dostępności urządzenia.
-
-### UC11: Consignment / Tworzenie FAQ
-
-Pracownik infolinii na podstawie zebranych danych od klientów dzwoniących z problemami tworzy dokument, w którym zawarte są wszystkie najczęściej zadawane pytania użytkowników. Stara się na wszystkie te pytanie odpowiedzieć w jak najprostrzy i przejrzysty sposób i umieszcza tak sporządzony dokument na stronie www systemu.
-
-### UC12: Consignment / Aktualizowanie oprogramowania paczkomatu
-
-Administrator ma przygotowane nowe elementy systemu lub poprawki, które były wcześniej przetestowane. Korzystając z odpowiednich narzędzi, administrator uaktualnia system dostępny dla klienta oraz dokonuje kolejnych testów. Tworzy dokumentację dotyczącą zmian, jakie zmiany zostały wgrane.
-
-### UC13: Consignment / Modernizowanie systemu na podstawie bazy danych problemów i pytań użytkowników.
-
-Administrator systemu po uzyskaniu odpowiedniej ilości danych o problemach z paczkomatem i najczęstszych pytań użytkowników dokonuje analizy zdarzeń i możliwości wdrożeń zmian w systemie. Po przeanalizowaniu możliwych opcji zgłasza to do właściciela, aby uzyskać zgody wymagane na przystąpienie prac. Następnie zaczyna tworzyć nowe lub poprawiać istniejące funkcjonalności systemu, aby dostosować je do potrzeb klientów oraz aby zwiększyć niezawodność systemu. Tworzy dokładną dokumentację zmian oraz nowych funkcjonalności. Po modernizacjach dokonuje testów i wdraża zmiany do systemu.
+Użytkownik może wyznaczyć drogę ze swojej aktualnej lokalizacji do lokalizacji imprezy. Może wybrać czas, w którym chce dotrzeć (domyślnie jest to godzina rozpoczęcia imprezy). Jeżeli użytkownik oraz miejsce imprezy znajdują się w obsługiwanym na podstawie listy IN/OUT mieście, użytkownik może wybrać znajdowanie drogi za pomocą komunikacji miejskiej. W przeciwnym razie pozostają opcje: pieszo oraz samochodem. Za pomocą MSP wyznaczana jest trasa, a użytkownikami pokazywana jest jest wizualizacja i dodatkowe informacje.

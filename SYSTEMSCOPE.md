@@ -52,10 +52,10 @@ Owner / Właściciel | Oczekuje wysokiego uptime aplikacji, że dane wrażliwe b
 Actor / Aktor | Goals
 --- | ---
 User / Użytkownik | Tworzenie wydarzeń
- || Dołączanie do imprez
- || Zarządzanie swoimi imprezami
- || Komunikacja z uczestnikami imprez
- || Znalezienie drogi na imprezę
+ | Dołączanie do imprez
+ | Zarządzanie swoimi imprezami
+ | Komunikacja z uczestnikami imprez
+ | Znalezienie drogi na imprezę
 
 ### Secondary actors / Aktorzy wspomagający
 
@@ -85,11 +85,11 @@ Owner / Właściciel | Sprawowanie kontroli nad funkcjonowaniem systemu.
 Category / Kategoria    | IN | OUT
 --- | --- | ---
 Languages / Języki | Polski | Reszta języków
-|| Angielski
+ | Angielski
 Auth Services / Serwisy używane do autoryzacji | Logowanie własne | Reszta serwisów
-|| Facebook
-|| Google
-|| Twitter
+ | Facebook
+ | Google
+ | Twitter
 Public Transportation / Dojazd za pomocą komunikacji publicznej | Poznań | Inne miasta
 
 ## Project dictionary / Słownik projektowy

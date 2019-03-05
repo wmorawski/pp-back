@@ -63,15 +63,15 @@ Actor / Aktor | Goals
 --- | ---
 CSP / Dostawca usług chmurowych | Udostępnia serwer w chmurze, na którym trzymany jest backend i web-frontend aplikacji
 Google Play / App Store | Zapewnia dostęp do aplikacji szerokiemu gronu odbiorców
-| | Raportuje informacji odnośnie urządzeń, na których zainstalowana jest aplikacja
-| | Udostępnia możliwość wdrażania aplikacji w różnych fazach (internal, alfa, beta, release)
-| | Raportuje informacje na temat błędów wewnętrznych aplikacji
+ | Raportuje informacji odnośnie urządzeń, na których zainstalowana jest aplikacja
+ | Udostępnia możliwość wdrażania aplikacji w różnych fazach (internal, alfa, beta, release)
+ | Raportuje informacje na temat błędów wewnętrznych aplikacji
 AAP / Serwis uwierzytelniający | Udostępnia API do autoryzacji i autentykacji użytkowników
-|| Zapewnia bezpieczeństwo przechowywania danych użytkowników
-|| Zapewnia bezpieczne logowanie i rejestrację
+ | Zapewnia bezpieczeństwo przechowywania danych użytkowników
+ | Zapewnia bezpieczne logowanie i rejestrację
 MSS / Serwis muzyczny | Udostępnia API do tworzenia playlist na podstawie zasobów własnych
 MSP / Dostawca usług mapowych | Udostępnia graficzną reprezentacje map
-|| Udostępnia API do wyznaczania rzeczywistej trasy między dwoma (lub więcej) punktami
+ | Udostępnia API do wyznaczania rzeczywistej trasy między dwoma (lub więcej) punktami
 PTIP / Dostawca informacji o komunikacji miejskiej | Udostępnia informacje na temat komunikacji miejskiej w danym mieście w tym o przystankach, liniach autobusowych, tramwajowych i rozkładach jazdy
 
 ### External actors / Aktorzy zewnętrzni

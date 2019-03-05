@@ -1,5 +1,5 @@
 import { UsersService } from './users.service';
-import { Get, Controller } from '@nestjs/common';
+import { Get, Controller} from '@nestjs/common';
 import { User } from '../../generated/prisma-client';
 import { ApiUseTags } from '@nestjs/swagger';
 

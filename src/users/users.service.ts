@@ -8,7 +8,9 @@ export class UsersService {
     const users = await prisma.users();
     return users.map(user => ({
       ...user,
-      // email: null,
+      password: null,
+      email: null,
     }));
+    // return users.map(user => OmittedExpression);
   }
 }

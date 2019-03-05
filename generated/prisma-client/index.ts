@@ -15,6 +15,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 
 export interface Exists {
   chat: (where?: ChatWhereInput) => Promise<boolean>;
+  game: (where?: GameWhereInput) => Promise<boolean>;
   message: (where?: MessageWhereInput) => Promise<boolean>;
   party: (where?: PartyWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
@@ -62,6 +63,29 @@ export interface Prisma {
       last?: Int;
     }
   ) => ChatConnectionPromise;
+  game: (where: GameWhereUniqueInput) => GamePromise;
+  games: (
+    args?: {
+      where?: GameWhereInput;
+      orderBy?: GameOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<Game>;
+  gamesConnection: (
+    args?: {
+      where?: GameWhereInput;
+      orderBy?: GameOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => GameConnectionPromise;
   message: (where: MessageWhereUniqueInput) => MessagePromise;
   messages: (
     args?: {
@@ -150,10 +174,29 @@ export interface Prisma {
   ) => ChatPromise;
   deleteChat: (where: ChatWhereUniqueInput) => ChatPromise;
   deleteManyChats: (where?: ChatWhereInput) => BatchPayloadPromise;
+  createGame: (data: GameCreateInput) => GamePromise;
+  updateGame: (
+    args: { data: GameUpdateInput; where: GameWhereUniqueInput }
+  ) => GamePromise;
+  updateManyGames: (
+    args: { data: GameUpdateManyMutationInput; where?: GameWhereInput }
+  ) => BatchPayloadPromise;
+  upsertGame: (
+    args: {
+      where: GameWhereUniqueInput;
+      create: GameCreateInput;
+      update: GameUpdateInput;
+    }
+  ) => GamePromise;
+  deleteGame: (where: GameWhereUniqueInput) => GamePromise;
+  deleteManyGames: (where?: GameWhereInput) => BatchPayloadPromise;
   createMessage: (data: MessageCreateInput) => MessagePromise;
   updateMessage: (
     args: { data: MessageUpdateInput; where: MessageWhereUniqueInput }
   ) => MessagePromise;
+  updateManyMessages: (
+    args: { data: MessageUpdateManyMutationInput; where?: MessageWhereInput }
+  ) => BatchPayloadPromise;
   upsertMessage: (
     args: {
       where: MessageWhereUniqueInput;
@@ -207,6 +250,9 @@ export interface Subscription {
   chat: (
     where?: ChatSubscriptionWhereInput
   ) => ChatSubscriptionPayloadSubscription;
+  game: (
+    where?: GameSubscriptionWhereInput
+  ) => GameSubscriptionPayloadSubscription;
   message: (
     where?: MessageSubscriptionWhereInput
   ) => MessageSubscriptionPayloadSubscription;
@@ -226,6 +272,8 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type GameType = "BOARD" | "PC" | "CONSOLE";
+
 export type PartyOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -236,7 +284,9 @@ export type PartyOrderByInput =
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | "updatedAt_DESC"
+  | "isPublic_ASC"
+  | "isPublic_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -245,10 +295,14 @@ export type UserOrderByInput =
   | "username_DESC"
   | "email_ASC"
   | "email_DESC"
+  | "password_ASC"
+  | "password_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | "updatedAt_DESC"
+  | "deleted_ASC"
+  | "deleted_DESC";
 
 export type ChatOrderByInput =
   | "id_ASC"
@@ -258,9 +312,25 @@ export type ChatOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type GameOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "cover_ASC"
+  | "cover_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type MessageOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "content_ASC"
+  | "content_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -268,18 +338,110 @@ export type MessageOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateDataInput;
+export interface PartyUpdateManyWithoutAuthorInput {
+  create?: PartyCreateWithoutAuthorInput[] | PartyCreateWithoutAuthorInput;
+  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+  set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+  disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+  update?:
+    | PartyUpdateWithWhereUniqueWithoutAuthorInput[]
+    | PartyUpdateWithWhereUniqueWithoutAuthorInput;
+  upsert?:
+    | PartyUpsertWithWhereUniqueWithoutAuthorInput[]
+    | PartyUpsertWithWhereUniqueWithoutAuthorInput;
+  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput;
+  updateMany?:
+    | PartyUpdateManyWithWhereNestedInput[]
+    | PartyUpdateManyWithWhereNestedInput;
 }
 
 export type ChatWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface PartyUpdateWithoutAuthorDataInput {
+export interface GameUpdateDataInput {
   title?: String;
-  description?: String;
+  cover?: String;
+  type?: GameType;
+}
+
+export interface MessageWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  author?: UserWhereInput;
+  chat?: ChatWhereInput;
+  content?: String;
+  content_not?: String;
+  content_in?: String[] | String;
+  content_not_in?: String[] | String;
+  content_lt?: String;
+  content_lte?: String;
+  content_gt?: String;
+  content_gte?: String;
+  content_contains?: String;
+  content_not_contains?: String;
+  content_starts_with?: String;
+  content_not_starts_with?: String;
+  content_ends_with?: String;
+  content_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: MessageWhereInput[] | MessageWhereInput;
+  OR?: MessageWhereInput[] | MessageWhereInput;
+  NOT?: MessageWhereInput[] | MessageWhereInput;
+}
+
+export interface MessageCreateWithoutChatInput {
+  author: UserCreateOneInput;
+  content: String;
+}
+
+export interface UserUpsertWithoutPartiesInput {
+  update: UserUpdateWithoutPartiesDataInput;
+  create: UserCreateWithoutPartiesInput;
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface GameUpsertWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput;
+  update: GameUpdateDataInput;
+  create: GameCreateInput;
+}
+
+export interface UserCreateManyWithoutChatsInput {
+  create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
 }
 
 export interface UserWhereInput {
@@ -325,6 +487,20 @@ export interface UserWhereInput {
   email_not_starts_with?: String;
   email_ends_with?: String;
   email_not_ends_with?: String;
+  password?: String;
+  password_not?: String;
+  password_in?: String[] | String;
+  password_not_in?: String[] | String;
+  password_lt?: String;
+  password_lte?: String;
+  password_gt?: String;
+  password_gte?: String;
+  password_contains?: String;
+  password_not_contains?: String;
+  password_starts_with?: String;
+  password_not_starts_with?: String;
+  password_ends_with?: String;
+  password_not_ends_with?: String;
   parties_every?: PartyWhereInput;
   parties_some?: PartyWhereInput;
   parties_none?: PartyWhereInput;
@@ -334,303 +510,36 @@ export interface UserWhereInput {
   chats_every?: ChatWhereInput;
   chats_some?: ChatWhereInput;
   chats_none?: ChatWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  deleted?: Boolean;
+  deleted_not?: Boolean;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface PartyUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PartyWhereUniqueInput;
-  update: PartyUpdateWithoutAuthorDataInput;
-  create: PartyCreateWithoutAuthorInput;
-}
-
-export interface MessageWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  author?: UserWhereInput;
-  chat?: ChatWhereInput;
-  AND?: MessageWhereInput[] | MessageWhereInput;
-  OR?: MessageWhereInput[] | MessageWhereInput;
-  NOT?: MessageWhereInput[] | MessageWhereInput;
-}
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface PartyUpsertNestedInput {
-  update: PartyUpdateDataInput;
-  create: PartyCreateInput;
-}
-
-export interface UserCreateManyWithoutChatsInput {
-  create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-}
-
-export interface PartyScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  description?: String;
-  description_not?: String;
-  description_in?: String[] | String;
-  description_not_in?: String[] | String;
-  description_lt?: String;
-  description_lte?: String;
-  description_gt?: String;
-  description_gte?: String;
-  description_contains?: String;
-  description_not_contains?: String;
-  description_starts_with?: String;
-  description_not_starts_with?: String;
-  description_ends_with?: String;
-  description_not_ends_with?: String;
-  AND?: PartyScalarWhereInput[] | PartyScalarWhereInput;
-  OR?: PartyScalarWhereInput[] | PartyScalarWhereInput;
-  NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput;
-}
-
 export interface UserCreateWithoutChatsInput {
   username: String;
   email: String;
+  password: String;
   parties?: PartyCreateManyWithoutAuthorInput;
   friends?: UserCreateManyInput;
-}
-
-export interface PartySubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: PartyWhereInput;
-  AND?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
-  OR?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
-  NOT?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
-}
-
-export interface ChatUpdateInput {
-  party?: PartyUpdateOneRequiredInput;
-  members?: UserUpdateManyWithoutChatsInput;
-  messages?: MessageUpdateManyWithoutChatInput;
-}
-
-export interface ChatSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ChatWhereInput;
-  AND?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
-  OR?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
-  NOT?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
-}
-
-export interface PartyUpdateOneRequiredInput {
-  create?: PartyCreateInput;
-  update?: PartyUpdateDataInput;
-  upsert?: PartyUpsertNestedInput;
-  connect?: PartyWhereUniqueInput;
-}
-
-export interface UserUpdateInput {
-  username?: String;
-  email?: String;
-  parties?: PartyUpdateManyWithoutAuthorInput;
-  friends?: UserUpdateManyInput;
-  chats?: ChatUpdateManyWithoutMembersInput;
-}
-
-export interface PartyUpdateDataInput {
-  title?: String;
-  description?: String;
-  author?: UserUpdateOneRequiredWithoutPartiesInput;
-}
-
-export interface PartyUpdateInput {
-  title?: String;
-  description?: String;
-  author?: UserUpdateOneRequiredWithoutPartiesInput;
-}
-
-export interface UserUpdateOneRequiredWithoutPartiesInput {
-  create?: UserCreateWithoutPartiesInput;
-  update?: UserUpdateWithoutPartiesDataInput;
-  upsert?: UserUpsertWithoutPartiesInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface ChatUpsertWithoutMessagesInput {
-  update: ChatUpdateWithoutMessagesDataInput;
-  create: ChatCreateWithoutMessagesInput;
-}
-
-export interface UserUpdateWithoutPartiesDataInput {
-  username?: String;
-  email?: String;
-  friends?: UserUpdateManyInput;
-  chats?: ChatUpdateManyWithoutMembersInput;
-}
-
-export interface ChatUpdateOneRequiredWithoutMessagesInput {
-  create?: ChatCreateWithoutMessagesInput;
-  update?: ChatUpdateWithoutMessagesDataInput;
-  upsert?: ChatUpsertWithoutMessagesInput;
-  connect?: ChatWhereUniqueInput;
-}
-
-export interface UserUpdateManyInput {
-  create?: UserCreateInput[] | UserCreateInput;
-  update?:
-    | UserUpdateWithWhereUniqueNestedInput[]
-    | UserUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | UserUpsertWithWhereUniqueNestedInput[]
-    | UserUpsertWithWhereUniqueNestedInput;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
-  updateMany?:
-    | UserUpdateManyWithWhereNestedInput[]
-    | UserUpdateManyWithWhereNestedInput;
-}
-
-export interface MessageUpdateInput {
-  author?: UserUpdateOneRequiredInput;
-  chat?: ChatUpdateOneRequiredWithoutMessagesInput;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutChatsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutChatsDataInput;
-}
-
-export interface ChatCreateOneWithoutMessagesInput {
-  create?: ChatCreateWithoutMessagesInput;
-  connect?: ChatWhereUniqueInput;
-}
-
-export interface UserUpdateDataInput {
-  username?: String;
-  email?: String;
-  parties?: PartyUpdateManyWithoutAuthorInput;
-  friends?: UserUpdateManyInput;
-  chats?: ChatUpdateManyWithoutMembersInput;
-}
-
-export interface MessageCreateInput {
-  author: UserCreateOneInput;
-  chat: ChatCreateOneWithoutMessagesInput;
-}
-
-export interface PartyUpdateManyWithoutAuthorInput {
-  create?: PartyCreateWithoutAuthorInput[] | PartyCreateWithoutAuthorInput;
-  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-  set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-  disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-  update?:
-    | PartyUpdateWithWhereUniqueWithoutAuthorInput[]
-    | PartyUpdateWithWhereUniqueWithoutAuthorInput;
-  upsert?:
-    | PartyUpsertWithWhereUniqueWithoutAuthorInput[]
-    | PartyUpsertWithWhereUniqueWithoutAuthorInput;
-  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput;
-  updateMany?:
-    | PartyUpdateManyWithWhereNestedInput[]
-    | PartyUpdateManyWithWhereNestedInput;
-}
-
-export interface UserUpdateWithoutChatsDataInput {
-  username?: String;
-  email?: String;
-  parties?: PartyUpdateManyWithoutAuthorInput;
-  friends?: UserUpdateManyInput;
-}
-
-export interface PartyUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PartyWhereUniqueInput;
-  data: PartyUpdateWithoutAuthorDataInput;
-}
-
-export interface ChatCreateInput {
-  party: PartyCreateOneInput;
-  members?: UserCreateManyWithoutChatsInput;
-  messages?: MessageCreateManyWithoutChatInput;
-}
-
-export interface ChatWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  party?: PartyWhereInput;
-  members_every?: UserWhereInput;
-  members_some?: UserWhereInput;
-  members_none?: UserWhereInput;
-  messages_every?: MessageWhereInput;
-  messages_some?: MessageWhereInput;
-  messages_none?: MessageWhereInput;
-  AND?: ChatWhereInput[] | ChatWhereInput;
-  OR?: ChatWhereInput[] | ChatWhereInput;
-  NOT?: ChatWhereInput[] | ChatWhereInput;
-}
-
-export interface PartyCreateInput {
-  title: String;
-  description: String;
-  author: UserCreateOneWithoutPartiesInput;
+  deleted?: Boolean;
 }
 
 export interface PartyWhereInput {
@@ -677,16 +586,159 @@ export interface PartyWhereInput {
   description_ends_with?: String;
   description_not_ends_with?: String;
   author?: UserWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  games_every?: GameWhereInput;
+  games_some?: GameWhereInput;
+  games_none?: GameWhereInput;
+  isPublic?: Boolean;
+  isPublic_not?: Boolean;
   AND?: PartyWhereInput[] | PartyWhereInput;
   OR?: PartyWhereInput[] | PartyWhereInput;
   NOT?: PartyWhereInput[] | PartyWhereInput;
 }
 
-export interface UserCreateWithoutPartiesInput {
-  username: String;
-  email: String;
-  friends?: UserCreateManyInput;
-  chats?: ChatCreateManyWithoutMembersInput;
+export interface ChatUpdateInput {
+  party?: PartyUpdateOneRequiredInput;
+  members?: UserUpdateManyWithoutChatsInput;
+  messages?: MessageUpdateManyWithoutChatInput;
+}
+
+export interface MessageSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: MessageWhereInput;
+  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
+  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
+  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
+}
+
+export interface PartyUpdateOneRequiredInput {
+  create?: PartyCreateInput;
+  update?: PartyUpdateDataInput;
+  upsert?: PartyUpsertNestedInput;
+  connect?: PartyWhereUniqueInput;
+}
+
+export interface ChatSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ChatWhereInput;
+  AND?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
+  OR?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
+  NOT?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
+}
+
+export interface PartyUpdateDataInput {
+  title?: String;
+  description?: String;
+  author?: UserUpdateOneRequiredWithoutPartiesInput;
+  games?: GameUpdateManyInput;
+  isPublic?: Boolean;
+}
+
+export interface UserUpdateInput {
+  username?: String;
+  email?: String;
+  password?: String;
+  parties?: PartyUpdateManyWithoutAuthorInput;
+  friends?: UserUpdateManyInput;
+  chats?: ChatUpdateManyWithoutMembersInput;
+  deleted?: Boolean;
+}
+
+export interface UserUpdateOneRequiredWithoutPartiesInput {
+  create?: UserCreateWithoutPartiesInput;
+  update?: UserUpdateWithoutPartiesDataInput;
+  upsert?: UserUpsertWithoutPartiesInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface PartyUpdateInput {
+  title?: String;
+  description?: String;
+  author?: UserUpdateOneRequiredWithoutPartiesInput;
+  games?: GameUpdateManyInput;
+  isPublic?: Boolean;
+}
+
+export interface UserUpdateWithoutPartiesDataInput {
+  username?: String;
+  email?: String;
+  password?: String;
+  friends?: UserUpdateManyInput;
+  chats?: ChatUpdateManyWithoutMembersInput;
+  deleted?: Boolean;
+}
+
+export type GameWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  title?: String;
+}>;
+
+export interface UserUpdateManyInput {
+  create?: UserCreateInput[] | UserCreateInput;
+  update?:
+    | UserUpdateWithWhereUniqueNestedInput[]
+    | UserUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueNestedInput[]
+    | UserUpsertWithWhereUniqueNestedInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
+}
+
+export interface ChatUpdateWithoutMessagesDataInput {
+  party?: PartyUpdateOneRequiredInput;
+  members?: UserUpdateManyWithoutChatsInput;
+}
+
+export interface UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateDataInput;
+}
+
+export type MessageWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface UserUpdateDataInput {
+  username?: String;
+  email?: String;
+  password?: String;
+  parties?: PartyUpdateManyWithoutAuthorInput;
+  friends?: UserUpdateManyInput;
+  chats?: ChatUpdateManyWithoutMembersInput;
+  deleted?: Boolean;
+}
+
+export interface ChatCreateWithoutMessagesInput {
+  party: PartyCreateOneInput;
+  members?: UserCreateManyWithoutChatsInput;
 }
 
 export interface UserUpdateManyWithoutChatsInput {
@@ -707,12 +759,334 @@ export interface UserUpdateManyWithoutChatsInput {
     | UserUpdateManyWithWhereNestedInput;
 }
 
-export interface UserCreateInput {
-  username: String;
-  email: String;
-  parties?: PartyCreateManyWithoutAuthorInput;
-  friends?: UserCreateManyInput;
-  chats?: ChatCreateManyWithoutMembersInput;
+export type PartyWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface PartyUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PartyWhereUniqueInput;
+  data: PartyUpdateWithoutAuthorDataInput;
+}
+
+export interface GameUpdateManyMutationInput {
+  title?: String;
+  cover?: String;
+  type?: GameType;
+}
+
+export interface PartyUpdateWithoutAuthorDataInput {
+  title?: String;
+  description?: String;
+  games?: GameUpdateManyInput;
+  isPublic?: Boolean;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  username?: String;
+  email?: String;
+}>;
+
+export interface GameUpdateManyInput {
+  create?: GameCreateInput[] | GameCreateInput;
+  update?:
+    | GameUpdateWithWhereUniqueNestedInput[]
+    | GameUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | GameUpsertWithWhereUniqueNestedInput[]
+    | GameUpsertWithWhereUniqueNestedInput;
+  delete?: GameWhereUniqueInput[] | GameWhereUniqueInput;
+  connect?: GameWhereUniqueInput[] | GameWhereUniqueInput;
+  set?: GameWhereUniqueInput[] | GameWhereUniqueInput;
+  disconnect?: GameWhereUniqueInput[] | GameWhereUniqueInput;
+  deleteMany?: GameScalarWhereInput[] | GameScalarWhereInput;
+  updateMany?:
+    | GameUpdateManyWithWhereNestedInput[]
+    | GameUpdateManyWithWhereNestedInput;
+}
+
+export interface UserUpdateWithoutChatsDataInput {
+  username?: String;
+  email?: String;
+  password?: String;
+  parties?: PartyUpdateManyWithoutAuthorInput;
+  friends?: UserUpdateManyInput;
+  deleted?: Boolean;
+}
+
+export interface GameUpdateWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput;
+  data: GameUpdateDataInput;
+}
+
+export interface PartyCreateOneInput {
+  create?: PartyCreateInput;
+  connect?: PartyWhereUniqueInput;
+}
+
+export interface PartyUpsertNestedInput {
+  update: PartyUpdateDataInput;
+  create: PartyCreateInput;
+}
+
+export interface UserCreateOneWithoutPartiesInput {
+  create?: UserCreateWithoutPartiesInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface GameWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  cover?: String;
+  cover_not?: String;
+  cover_in?: String[] | String;
+  cover_not_in?: String[] | String;
+  cover_lt?: String;
+  cover_lte?: String;
+  cover_gt?: String;
+  cover_gte?: String;
+  cover_contains?: String;
+  cover_not_contains?: String;
+  cover_starts_with?: String;
+  cover_not_starts_with?: String;
+  cover_ends_with?: String;
+  cover_not_ends_with?: String;
+  type?: GameType;
+  type_not?: GameType;
+  type_in?: GameType[] | GameType;
+  type_not_in?: GameType[] | GameType;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: GameWhereInput[] | GameWhereInput;
+  OR?: GameWhereInput[] | GameWhereInput;
+  NOT?: GameWhereInput[] | GameWhereInput;
+}
+
+export interface UserCreateManyInput {
+  create?: UserCreateInput[] | UserCreateInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface GameScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  cover?: String;
+  cover_not?: String;
+  cover_in?: String[] | String;
+  cover_not_in?: String[] | String;
+  cover_lt?: String;
+  cover_lte?: String;
+  cover_gt?: String;
+  cover_gte?: String;
+  cover_contains?: String;
+  cover_not_contains?: String;
+  cover_starts_with?: String;
+  cover_not_starts_with?: String;
+  cover_ends_with?: String;
+  cover_not_ends_with?: String;
+  type?: GameType;
+  type_not?: GameType;
+  type_in?: GameType[] | GameType;
+  type_not_in?: GameType[] | GameType;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: GameScalarWhereInput[] | GameScalarWhereInput;
+  OR?: GameScalarWhereInput[] | GameScalarWhereInput;
+  NOT?: GameScalarWhereInput[] | GameScalarWhereInput;
+}
+
+export interface PartyCreateManyWithoutAuthorInput {
+  create?: PartyCreateWithoutAuthorInput[] | PartyCreateWithoutAuthorInput;
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+}
+
+export interface GameUpdateManyWithWhereNestedInput {
+  where: GameScalarWhereInput;
+  data: GameUpdateManyDataInput;
+}
+
+export interface GameCreateManyInput {
+  create?: GameCreateInput[] | GameCreateInput;
+  connect?: GameWhereUniqueInput[] | GameWhereUniqueInput;
+}
+
+export interface GameUpdateManyDataInput {
+  title?: String;
+  cover?: String;
+  type?: GameType;
+}
+
+export interface ChatCreateManyWithoutMembersInput {
+  create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput;
+  connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput;
+}
+
+export interface PartyUpsertWithWhereUniqueWithoutAuthorInput {
+  where: PartyWhereUniqueInput;
+  update: PartyUpdateWithoutAuthorDataInput;
+  create: PartyCreateWithoutAuthorInput;
+}
+
+export interface MessageCreateManyWithoutChatInput {
+  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput;
+  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+}
+
+export interface PartyScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  description?: String;
+  description_not?: String;
+  description_in?: String[] | String;
+  description_not_in?: String[] | String;
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  isPublic?: Boolean;
+  isPublic_not?: Boolean;
+  AND?: PartyScalarWhereInput[] | PartyScalarWhereInput;
+  OR?: PartyScalarWhereInput[] | PartyScalarWhereInput;
+  NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
 export interface PartyUpdateManyWithWhereNestedInput {
@@ -720,19 +1094,27 @@ export interface PartyUpdateManyWithWhereNestedInput {
   data: PartyUpdateManyDataInput;
 }
 
-export interface PartyCreateWithoutAuthorInput {
-  title: String;
-  description: String;
+export interface GameSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: GameWhereInput;
+  AND?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
+  OR?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
+  NOT?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
 }
 
 export interface PartyUpdateManyDataInput {
   title?: String;
   description?: String;
+  isPublic?: Boolean;
 }
 
-export interface ChatCreateWithoutMembersInput {
-  party: PartyCreateOneInput;
-  messages?: MessageCreateManyWithoutChatInput;
+export interface PartyUpdateManyMutationInput {
+  title?: String;
+  description?: String;
+  isPublic?: Boolean;
 }
 
 export interface ChatUpdateManyWithoutMembersInput {
@@ -750,8 +1132,9 @@ export interface ChatUpdateManyWithoutMembersInput {
   deleteMany?: ChatScalarWhereInput[] | ChatScalarWhereInput;
 }
 
-export interface MessageCreateWithoutChatInput {
-  author: UserCreateOneInput;
+export interface ChatUpsertWithoutMessagesInput {
+  update: ChatUpdateWithoutMessagesDataInput;
+  create: ChatCreateWithoutMessagesInput;
 }
 
 export interface ChatUpdateWithWhereUniqueWithoutMembersInput {
@@ -759,15 +1142,10 @@ export interface ChatUpdateWithWhereUniqueWithoutMembersInput {
   data: ChatUpdateWithoutMembersDataInput;
 }
 
-export interface MessageSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: MessageWhereInput;
-  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
-  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
-  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
+export interface MessageUpdateInput {
+  author?: UserUpdateOneRequiredInput;
+  chat?: ChatUpdateOneRequiredWithoutMessagesInput;
+  content?: String;
 }
 
 export interface ChatUpdateWithoutMembersDataInput {
@@ -775,9 +1153,10 @@ export interface ChatUpdateWithoutMembersDataInput {
   messages?: MessageUpdateManyWithoutChatInput;
 }
 
-export interface PartyUpdateManyMutationInput {
-  title?: String;
-  description?: String;
+export interface MessageCreateInput {
+  author: UserCreateOneInput;
+  chat: ChatCreateOneWithoutMessagesInput;
+  content: String;
 }
 
 export interface MessageUpdateManyWithoutChatInput {
@@ -793,11 +1172,15 @@ export interface MessageUpdateManyWithoutChatInput {
     | MessageUpsertWithWhereUniqueWithoutChatInput[]
     | MessageUpsertWithWhereUniqueWithoutChatInput;
   deleteMany?: MessageScalarWhereInput[] | MessageScalarWhereInput;
+  updateMany?:
+    | MessageUpdateManyWithWhereNestedInput[]
+    | MessageUpdateManyWithWhereNestedInput;
 }
 
-export interface ChatUpdateWithoutMessagesDataInput {
-  party?: PartyUpdateOneRequiredInput;
-  members?: UserUpdateManyWithoutChatsInput;
+export interface UserUpsertWithWhereUniqueWithoutChatsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutChatsDataInput;
+  create: UserCreateWithoutChatsInput;
 }
 
 export interface MessageUpdateWithWhereUniqueWithoutChatInput {
@@ -805,19 +1188,24 @@ export interface MessageUpdateWithWhereUniqueWithoutChatInput {
   data: MessageUpdateWithoutChatDataInput;
 }
 
-export interface ChatCreateWithoutMessagesInput {
+export interface ChatCreateInput {
   party: PartyCreateOneInput;
   members?: UserCreateManyWithoutChatsInput;
+  messages?: MessageCreateManyWithoutChatInput;
 }
 
 export interface MessageUpdateWithoutChatDataInput {
   author?: UserUpdateOneRequiredInput;
+  content?: String;
 }
 
-export interface UserUpsertWithWhereUniqueWithoutChatsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutChatsDataInput;
-  create: UserCreateWithoutChatsInput;
+export interface UserCreateWithoutPartiesInput {
+  username: String;
+  email: String;
+  password: String;
+  friends?: UserCreateManyInput;
+  chats?: ChatCreateManyWithoutMembersInput;
+  deleted?: Boolean;
 }
 
 export interface UserUpdateOneRequiredInput {
@@ -827,9 +1215,11 @@ export interface UserUpdateOneRequiredInput {
   connect?: UserWhereUniqueInput;
 }
 
-export interface PartyCreateOneInput {
-  create?: PartyCreateInput;
-  connect?: PartyWhereUniqueInput;
+export interface PartyCreateWithoutAuthorInput {
+  title: String;
+  description: String;
+  games?: GameCreateManyInput;
+  isPublic?: Boolean;
 }
 
 export interface UserUpsertNestedInput {
@@ -837,9 +1227,9 @@ export interface UserUpsertNestedInput {
   create: UserCreateInput;
 }
 
-export interface UserCreateManyInput {
-  create?: UserCreateInput[] | UserCreateInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+export interface ChatCreateWithoutMembersInput {
+  party: PartyCreateOneInput;
+  messages?: MessageCreateManyWithoutChatInput;
 }
 
 export interface MessageUpsertWithWhereUniqueWithoutChatInput {
@@ -848,9 +1238,15 @@ export interface MessageUpsertWithWhereUniqueWithoutChatInput {
   create: MessageCreateWithoutChatInput;
 }
 
-export interface ChatCreateManyWithoutMembersInput {
-  create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput;
-  connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput;
+export interface PartySubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: PartyWhereInput;
+  AND?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
+  OR?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
+  NOT?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
 }
 
 export interface MessageScalarWhereInput {
@@ -868,20 +1264,62 @@ export interface MessageScalarWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
+  content?: String;
+  content_not?: String;
+  content_in?: String[] | String;
+  content_not_in?: String[] | String;
+  content_lt?: String;
+  content_lte?: String;
+  content_gt?: String;
+  content_gte?: String;
+  content_contains?: String;
+  content_not_contains?: String;
+  content_starts_with?: String;
+  content_not_starts_with?: String;
+  content_ends_with?: String;
+  content_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: MessageScalarWhereInput[] | MessageScalarWhereInput;
   OR?: MessageScalarWhereInput[] | MessageScalarWhereInput;
   NOT?: MessageScalarWhereInput[] | MessageScalarWhereInput;
 }
 
-export interface UserSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: UserWhereInput;
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+export interface MessageUpdateManyMutationInput {
+  content?: String;
+}
+
+export interface MessageUpdateManyWithWhereNestedInput {
+  where: MessageScalarWhereInput;
+  data: MessageUpdateManyDataInput;
+}
+
+export interface ChatCreateOneWithoutMessagesInput {
+  create?: ChatCreateWithoutMessagesInput;
+  connect?: ChatWhereUniqueInput;
+}
+
+export interface MessageUpdateManyDataInput {
+  content?: String;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutChatsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutChatsDataInput;
 }
 
 export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
@@ -890,9 +1328,15 @@ export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
   create: ChatCreateWithoutMembersInput;
 }
 
-export type MessageWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
+export interface UserCreateInput {
+  username: String;
+  email: String;
+  password: String;
+  parties?: PartyCreateManyWithoutAuthorInput;
+  friends?: UserCreateManyInput;
+  chats?: ChatCreateManyWithoutMembersInput;
+  deleted?: Boolean;
+}
 
 export interface ChatScalarWhereInput {
   id?: ID_Input;
@@ -909,41 +1353,75 @@ export interface ChatScalarWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: ChatScalarWhereInput[] | ChatScalarWhereInput;
   OR?: ChatScalarWhereInput[] | ChatScalarWhereInput;
   NOT?: ChatScalarWhereInput[] | ChatScalarWhereInput;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  username?: String;
-  email?: String;
-}>;
-
-export interface UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface UserCreateOneWithoutPartiesInput {
-  create?: UserCreateWithoutPartiesInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface MessageCreateManyWithoutChatInput {
-  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput;
-  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
-}
-
-export interface UserUpsertWithoutPartiesInput {
-  update: UserUpdateWithoutPartiesDataInput;
-  create: UserCreateWithoutPartiesInput;
+export interface ChatWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  party?: PartyWhereInput;
+  members_every?: UserWhereInput;
+  members_some?: UserWhereInput;
+  members_none?: UserWhereInput;
+  messages_every?: MessageWhereInput;
+  messages_some?: MessageWhereInput;
+  messages_none?: MessageWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: ChatWhereInput[] | ChatWhereInput;
+  OR?: ChatWhereInput[] | ChatWhereInput;
+  NOT?: ChatWhereInput[] | ChatWhereInput;
 }
 
 export interface UserUpdateManyDataInput {
   username?: String;
   email?: String;
+  password?: String;
+  deleted?: Boolean;
 }
 
 export interface UserUpdateManyWithWhereNestedInput {
@@ -994,24 +1472,82 @@ export interface UserScalarWhereInput {
   email_not_starts_with?: String;
   email_ends_with?: String;
   email_not_ends_with?: String;
+  password?: String;
+  password_not?: String;
+  password_in?: String[] | String;
+  password_not_in?: String[] | String;
+  password_lt?: String;
+  password_lte?: String;
+  password_gt?: String;
+  password_gte?: String;
+  password_contains?: String;
+  password_not_contains?: String;
+  password_starts_with?: String;
+  password_not_starts_with?: String;
+  password_ends_with?: String;
+  password_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  deleted?: Boolean;
+  deleted_not?: Boolean;
   AND?: UserScalarWhereInput[] | UserScalarWhereInput;
   OR?: UserScalarWhereInput[] | UserScalarWhereInput;
   NOT?: UserScalarWhereInput[] | UserScalarWhereInput;
 }
 
+export interface UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
 export interface UserUpdateManyMutationInput {
   username?: String;
   email?: String;
+  password?: String;
+  deleted?: Boolean;
 }
 
-export interface PartyCreateManyWithoutAuthorInput {
-  create?: PartyCreateWithoutAuthorInput[] | PartyCreateWithoutAuthorInput;
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+export interface GameCreateInput {
+  title: String;
+  cover?: String;
+  type: GameType;
 }
 
-export type PartyWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
+export interface PartyCreateInput {
+  title: String;
+  description: String;
+  author: UserCreateOneWithoutPartiesInput;
+  games?: GameCreateManyInput;
+  isPublic?: Boolean;
+}
+
+export interface GameUpdateInput {
+  title?: String;
+  cover?: String;
+  type?: GameType;
+}
+
+export interface ChatUpdateOneRequiredWithoutMessagesInput {
+  create?: ChatCreateWithoutMessagesInput;
+  update?: ChatUpdateWithoutMessagesDataInput;
+  upsert?: ChatUpsertWithoutMessagesInput;
+  connect?: ChatWhereUniqueInput;
+}
 
 export interface NodeNode {
   id: ID_Output;
@@ -1021,6 +1557,10 @@ export interface UserPreviousValues {
   id: ID_Output;
   username: String;
   email: String;
+  password: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  deleted: Boolean;
 }
 
 export interface UserPreviousValuesPromise
@@ -1029,6 +1569,10 @@ export interface UserPreviousValuesPromise
   id: () => Promise<ID_Output>;
   username: () => Promise<String>;
   email: () => Promise<String>;
+  password: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  deleted: () => Promise<Boolean>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -1037,6 +1581,10 @@ export interface UserPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   username: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  deleted: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface AggregateChat {
@@ -1055,58 +1603,21 @@ export interface AggregateChatSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface PartySubscriptionPayload {
-  mutation: MutationType;
-  node: Party;
-  updatedFields: String[];
-  previousValues: PartyPreviousValues;
-}
-
-export interface PartySubscriptionPayloadPromise
-  extends Promise<PartySubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = PartyPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = PartyPreviousValuesPromise>() => T;
-}
-
-export interface PartySubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PartySubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PartySubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PartyPreviousValuesSubscription>() => T;
-}
-
-export interface ChatEdge {
-  node: Chat;
-  cursor: String;
-}
-
-export interface ChatEdgePromise extends Promise<ChatEdge>, Fragmentable {
-  node: <T = ChatPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ChatEdgeSubscription
-  extends Promise<AsyncIterator<ChatEdge>>,
-    Fragmentable {
-  node: <T = ChatSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface User {
   id: ID_Output;
   username: String;
   email: String;
+  password: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  deleted: Boolean;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   username: () => Promise<String>;
   email: () => Promise<String>;
+  password: () => Promise<String>;
   parties: <T = FragmentableArray<Party>>(
     args?: {
       where?: PartyWhereInput;
@@ -1140,6 +1651,9 @@ export interface UserPromise extends Promise<User>, Fragmentable {
       last?: Int;
     }
   ) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  deleted: () => Promise<Boolean>;
 }
 
 export interface UserSubscription
@@ -1148,6 +1662,7 @@ export interface UserSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   username: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
   parties: <T = Promise<AsyncIterator<PartySubscription>>>(
     args?: {
       where?: PartyWhereInput;
@@ -1181,44 +1696,25 @@ export interface UserSubscription
       last?: Int;
     }
   ) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  deleted: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface PartyPreviousValues {
-  id: ID_Output;
-  title: String;
-  description: String;
-}
-
-export interface PartyPreviousValuesPromise
-  extends Promise<PartyPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  description: () => Promise<String>;
-}
-
-export interface PartyPreviousValuesSubscription
-  extends Promise<AsyncIterator<PartyPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-}
-
-export interface UserEdge {
-  node: User;
+export interface ChatEdge {
+  node: Chat;
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
+export interface ChatEdgePromise extends Promise<ChatEdge>, Fragmentable {
+  node: <T = ChatPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface ChatEdgeSubscription
+  extends Promise<AsyncIterator<ChatEdge>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
+  node: <T = ChatSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1245,29 +1741,52 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
+export interface PartyPreviousValues {
+  id: ID_Output;
+  title: String;
+  description: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  isPublic: Boolean;
+}
+
+export interface PartyPreviousValuesPromise
+  extends Promise<PartyPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  isPublic: () => Promise<Boolean>;
+}
+
+export interface PartyPreviousValuesSubscription
+  extends Promise<AsyncIterator<PartyPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  isPublic: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface UserEdge {
   node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
+  cursor: String;
 }
 
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
   node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
   node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ChatConnection {
@@ -1291,6 +1810,49 @@ export interface ChatConnectionSubscription
   aggregate: <T = AggregateChatSubscription>() => T;
 }
 
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface Message {
+  id: ID_Output;
+  content: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface MessagePromise extends Promise<Message>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  author: <T = UserPromise>() => T;
+  chat: <T = ChatPromise>() => T;
+  content: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MessageSubscription
+  extends Promise<AsyncIterator<Message>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  author: <T = UserSubscription>() => T;
+  chat: <T = ChatSubscription>() => T;
+  content: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
 export interface AggregateParty {
   count: Int;
 }
@@ -1307,8 +1869,84 @@ export interface AggregatePartySubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface Party {
+  id: ID_Output;
+  title: String;
+  description: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  isPublic: Boolean;
+}
+
+export interface PartyPromise extends Promise<Party>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  games: <T = FragmentableArray<Game>>(
+    args?: {
+      where?: GameWhereInput;
+      orderBy?: GameOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  isPublic: () => Promise<Boolean>;
+}
+
+export interface PartySubscription
+  extends Promise<AsyncIterator<Party>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  author: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  games: <T = Promise<AsyncIterator<GameSubscription>>>(
+    args?: {
+      where?: GameWhereInput;
+      orderBy?: GameOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  isPublic: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface PartyConnection {
+  pageInfo: PageInfo;
+  edges: PartyEdge[];
+}
+
+export interface PartyConnectionPromise
+  extends Promise<PartyConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartyEdge>>() => T;
+  aggregate: <T = AggregatePartyPromise>() => T;
+}
+
+export interface PartyConnectionSubscription
+  extends Promise<AsyncIterator<PartyConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartyEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartySubscription>() => T;
+}
+
 export interface Chat {
   id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface ChatPromise extends Promise<Chat>, Fragmentable {
@@ -1336,6 +1974,8 @@ export interface ChatPromise extends Promise<Chat>, Fragmentable {
       last?: Int;
     }
   ) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface ChatSubscription
@@ -1365,27 +2005,25 @@ export interface ChatSubscription
       last?: Int;
     }
   ) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface PartyConnection {
-  pageInfo: PageInfo;
-  edges: PartyEdge[];
+export interface MessageEdge {
+  node: Message;
+  cursor: String;
 }
 
-export interface PartyConnectionPromise
-  extends Promise<PartyConnection>,
+export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
+  node: <T = MessagePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MessageEdgeSubscription
+  extends Promise<AsyncIterator<MessageEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartyEdge>>() => T;
-  aggregate: <T = AggregatePartyPromise>() => T;
-}
-
-export interface PartyConnectionSubscription
-  extends Promise<AsyncIterator<PartyConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartyEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartySubscription>() => T;
+  node: <T = MessageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ChatSubscriptionPayload {
@@ -1413,53 +2051,92 @@ export interface ChatSubscriptionPayloadSubscription
   previousValues: <T = ChatPreviousValuesSubscription>() => T;
 }
 
-export interface MessageEdge {
-  node: Message;
-  cursor: String;
+export interface AggregateGame {
+  count: Int;
 }
 
-export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
-  node: <T = MessagePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface MessageEdgeSubscription
-  extends Promise<AsyncIterator<MessageEdge>>,
+export interface AggregateGamePromise
+  extends Promise<AggregateGame>,
     Fragmentable {
-  node: <T = MessageSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateGameSubscription
+  extends Promise<AsyncIterator<AggregateGame>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ChatPreviousValues {
   id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface ChatPreviousValuesPromise
   extends Promise<ChatPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface ChatPreviousValuesSubscription
   extends Promise<AsyncIterator<ChatPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface AggregateUser {
-  count: Int;
+export interface GameConnection {
+  pageInfo: PageInfo;
+  edges: GameEdge[];
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface GameConnectionPromise
+  extends Promise<GameConnection>,
     Fragmentable {
-  count: () => Promise<Int>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<GameEdge>>() => T;
+  aggregate: <T = AggregateGamePromise>() => T;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface GameConnectionSubscription
+  extends Promise<AsyncIterator<GameConnection>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<GameEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateGameSubscription>() => T;
+}
+
+export interface Game {
+  id: ID_Output;
+  title: String;
+  cover?: String;
+  type: GameType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface GamePromise extends Promise<Game>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  cover: () => Promise<String>;
+  type: () => Promise<GameType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface GameSubscription
+  extends Promise<AsyncIterator<Game>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  cover: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<GameType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserConnection {
@@ -1483,42 +2160,92 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface Party {
-  id: ID_Output;
-  title: String;
-  description: String;
+export interface GameSubscriptionPayload {
+  mutation: MutationType;
+  node: Game;
+  updatedFields: String[];
+  previousValues: GamePreviousValues;
 }
 
-export interface PartyPromise extends Promise<Party>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  description: () => Promise<String>;
-  author: <T = UserPromise>() => T;
-}
-
-export interface PartySubscription
-  extends Promise<AsyncIterator<Party>>,
+export interface GameSubscriptionPayloadPromise
+  extends Promise<GameSubscriptionPayload>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  author: <T = UserSubscription>() => T;
+  mutation: () => Promise<MutationType>;
+  node: <T = GamePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = GamePreviousValuesPromise>() => T;
+}
+
+export interface GameSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<GameSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = GameSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = GamePreviousValuesSubscription>() => T;
+}
+
+export interface PartyEdge {
+  node: Party;
+  cursor: String;
+}
+
+export interface PartyEdgePromise extends Promise<PartyEdge>, Fragmentable {
+  node: <T = PartyPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PartyEdgeSubscription
+  extends Promise<AsyncIterator<PartyEdge>>,
+    Fragmentable {
+  node: <T = PartySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MessageConnection {
+  pageInfo: PageInfo;
+  edges: MessageEdge[];
+}
+
+export interface MessageConnectionPromise
+  extends Promise<MessageConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MessageEdge>>() => T;
+  aggregate: <T = AggregateMessagePromise>() => T;
+}
+
+export interface MessageConnectionSubscription
+  extends Promise<AsyncIterator<MessageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMessageSubscription>() => T;
 }
 
 export interface MessagePreviousValues {
   id: ID_Output;
+  content: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface MessagePreviousValuesPromise
   extends Promise<MessagePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface MessagePreviousValuesSubscription
   extends Promise<AsyncIterator<MessagePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  content: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface MessageSubscriptionPayload {
@@ -1546,76 +2273,77 @@ export interface MessageSubscriptionPayloadSubscription
   previousValues: <T = MessagePreviousValuesSubscription>() => T;
 }
 
-export interface Message {
+export interface PartySubscriptionPayload {
+  mutation: MutationType;
+  node: Party;
+  updatedFields: String[];
+  previousValues: PartyPreviousValues;
+}
+
+export interface PartySubscriptionPayloadPromise
+  extends Promise<PartySubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PartyPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PartyPreviousValuesPromise>() => T;
+}
+
+export interface PartySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PartySubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PartySubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PartyPreviousValuesSubscription>() => T;
+}
+
+export interface GamePreviousValues {
   id: ID_Output;
+  title: String;
+  cover?: String;
+  type: GameType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
-export interface MessagePromise extends Promise<Message>, Fragmentable {
+export interface GamePreviousValuesPromise
+  extends Promise<GamePreviousValues>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
-  author: <T = UserPromise>() => T;
-  chat: <T = ChatPromise>() => T;
+  title: () => Promise<String>;
+  cover: () => Promise<String>;
+  type: () => Promise<GameType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface MessageSubscription
-  extends Promise<AsyncIterator<Message>>,
+export interface GamePreviousValuesSubscription
+  extends Promise<AsyncIterator<GamePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  author: <T = UserSubscription>() => T;
-  chat: <T = ChatSubscription>() => T;
+  title: () => Promise<AsyncIterator<String>>;
+  cover: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<GameType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface PartyEdge {
-  node: Party;
+export interface GameEdge {
+  node: Game;
   cursor: String;
 }
 
-export interface PartyEdgePromise extends Promise<PartyEdge>, Fragmentable {
-  node: <T = PartyPromise>() => T;
+export interface GameEdgePromise extends Promise<GameEdge>, Fragmentable {
+  node: <T = GamePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface PartyEdgeSubscription
-  extends Promise<AsyncIterator<PartyEdge>>,
+export interface GameEdgeSubscription
+  extends Promise<AsyncIterator<GameEdge>>,
     Fragmentable {
-  node: <T = PartySubscription>() => T;
+  node: <T = GameSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface MessageConnection {
-  pageInfo: PageInfo;
-  edges: MessageEdge[];
-}
-
-export interface MessageConnectionPromise
-  extends Promise<MessageConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MessageEdge>>() => T;
-  aggregate: <T = AggregateMessagePromise>() => T;
-}
-
-export interface MessageConnectionSubscription
-  extends Promise<AsyncIterator<MessageConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMessageSubscription>() => T;
 }
 
 export interface AggregateMessage {
@@ -1634,28 +2362,79 @@ export interface AggregateMessageSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+DateTime scalar input type, allowing Date
 */
-export type Int = number;
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
 
 export type Long = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
-export type String = string;
+export type Int = number;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /**
  * Model Metadata
@@ -1677,6 +2456,14 @@ export const models: Model[] = [
   {
     name: "Message",
     embedded: false
+  },
+  {
+    name: "Game",
+    embedded: false
+  },
+  {
+    name: "GameType",
+    embedded: false
   }
 ];
 
@@ -1687,6 +2474,7 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev`
+  endpoint: `${process.env["PRISMA_ENDPOINT"]}`,
+  secret: `${process.env["PRISMA_SECRET"]}`
 });
 export const prisma = new Prisma();

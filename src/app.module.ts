@@ -11,6 +11,8 @@ import { PartiesService } from './parties/parties.service';
 import { PartiesModule } from './parties/parties.module';
 import { UsersModule } from './users/users.module';
 import { ChatsModule } from './chats/chats.module';
+import { ConfigService } from './config/config.service';
+import { ConfigModule } from './config/config.module';
 
 @Module({
   imports: [
@@ -20,8 +22,12 @@ import { ChatsModule } from './chats/chats.module';
     PartiesModule,
     UsersModule,
     ChatsModule,
+    ConfigModule,
   ],
   controllers: [AppController, PartiesController, UsersController, ChatsController],
-  providers: [AppService, PartiesService, ChatsService, UsersService],
+  providers: [AppService, PartiesService, ChatsService, UsersService, {
+    provide: ConfigService,
+    useValue: new ConfigService(`${process.env.NODE_ENV ? process.env.NODE_ENV : 'developement'}.env`),
+  }],
 })
 export class AppModule {}

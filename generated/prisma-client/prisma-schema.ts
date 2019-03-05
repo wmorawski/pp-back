@@ -6,6 +6,10 @@ export const typeDefs = /* GraphQL */ `type AggregateChat {
   count: Int!
 }
 
+type AggregateGame {
+  count: Int!
+}
+
 type AggregateMessage {
   count: Int!
 }
@@ -27,6 +31,8 @@ type Chat {
   party: Party!
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type ChatConnection {
@@ -77,6 +83,8 @@ enum ChatOrderByInput {
 
 type ChatPreviousValues {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input ChatScalarWhereInput {
@@ -94,6 +102,22 @@ input ChatScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [ChatScalarWhereInput!]
   OR: [ChatScalarWhereInput!]
   NOT: [ChatScalarWhereInput!]
@@ -189,6 +213,22 @@ input ChatWhereInput {
   messages_every: MessageWhereInput
   messages_some: MessageWhereInput
   messages_none: MessageWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [ChatWhereInput!]
   OR: [ChatWhereInput!]
   NOT: [ChatWhereInput!]
@@ -198,12 +238,289 @@ input ChatWhereUniqueInput {
   id: ID
 }
 
+scalar DateTime
+
+type Game {
+  id: ID!
+  title: String!
+  cover: String
+  type: GameType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GameConnection {
+  pageInfo: PageInfo!
+  edges: [GameEdge]!
+  aggregate: AggregateGame!
+}
+
+input GameCreateInput {
+  title: String!
+  cover: String
+  type: GameType!
+}
+
+input GameCreateManyInput {
+  create: [GameCreateInput!]
+  connect: [GameWhereUniqueInput!]
+}
+
+type GameEdge {
+  node: Game!
+  cursor: String!
+}
+
+enum GameOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  cover_ASC
+  cover_DESC
+  type_ASC
+  type_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type GamePreviousValues {
+  id: ID!
+  title: String!
+  cover: String
+  type: GameType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input GameScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  cover: String
+  cover_not: String
+  cover_in: [String!]
+  cover_not_in: [String!]
+  cover_lt: String
+  cover_lte: String
+  cover_gt: String
+  cover_gte: String
+  cover_contains: String
+  cover_not_contains: String
+  cover_starts_with: String
+  cover_not_starts_with: String
+  cover_ends_with: String
+  cover_not_ends_with: String
+  type: GameType
+  type_not: GameType
+  type_in: [GameType!]
+  type_not_in: [GameType!]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [GameScalarWhereInput!]
+  OR: [GameScalarWhereInput!]
+  NOT: [GameScalarWhereInput!]
+}
+
+type GameSubscriptionPayload {
+  mutation: MutationType!
+  node: Game
+  updatedFields: [String!]
+  previousValues: GamePreviousValues
+}
+
+input GameSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: GameWhereInput
+  AND: [GameSubscriptionWhereInput!]
+  OR: [GameSubscriptionWhereInput!]
+  NOT: [GameSubscriptionWhereInput!]
+}
+
+enum GameType {
+  BOARD
+  PC
+  CONSOLE
+}
+
+input GameUpdateDataInput {
+  title: String
+  cover: String
+  type: GameType
+}
+
+input GameUpdateInput {
+  title: String
+  cover: String
+  type: GameType
+}
+
+input GameUpdateManyDataInput {
+  title: String
+  cover: String
+  type: GameType
+}
+
+input GameUpdateManyInput {
+  create: [GameCreateInput!]
+  update: [GameUpdateWithWhereUniqueNestedInput!]
+  upsert: [GameUpsertWithWhereUniqueNestedInput!]
+  delete: [GameWhereUniqueInput!]
+  connect: [GameWhereUniqueInput!]
+  set: [GameWhereUniqueInput!]
+  disconnect: [GameWhereUniqueInput!]
+  deleteMany: [GameScalarWhereInput!]
+  updateMany: [GameUpdateManyWithWhereNestedInput!]
+}
+
+input GameUpdateManyMutationInput {
+  title: String
+  cover: String
+  type: GameType
+}
+
+input GameUpdateManyWithWhereNestedInput {
+  where: GameScalarWhereInput!
+  data: GameUpdateManyDataInput!
+}
+
+input GameUpdateWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput!
+  data: GameUpdateDataInput!
+}
+
+input GameUpsertWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput!
+  update: GameUpdateDataInput!
+  create: GameCreateInput!
+}
+
+input GameWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  cover: String
+  cover_not: String
+  cover_in: [String!]
+  cover_not_in: [String!]
+  cover_lt: String
+  cover_lte: String
+  cover_gt: String
+  cover_gte: String
+  cover_contains: String
+  cover_not_contains: String
+  cover_starts_with: String
+  cover_not_starts_with: String
+  cover_ends_with: String
+  cover_not_ends_with: String
+  type: GameType
+  type_not: GameType
+  type_in: [GameType!]
+  type_not_in: [GameType!]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [GameWhereInput!]
+  OR: [GameWhereInput!]
+  NOT: [GameWhereInput!]
+}
+
+input GameWhereUniqueInput {
+  id: ID
+  title: String
+}
+
 scalar Long
 
 type Message {
   id: ID!
   author: User!
   chat: Chat!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type MessageConnection {
@@ -215,6 +532,7 @@ type MessageConnection {
 input MessageCreateInput {
   author: UserCreateOneInput!
   chat: ChatCreateOneWithoutMessagesInput!
+  content: String!
 }
 
 input MessageCreateManyWithoutChatInput {
@@ -224,6 +542,7 @@ input MessageCreateManyWithoutChatInput {
 
 input MessageCreateWithoutChatInput {
   author: UserCreateOneInput!
+  content: String!
 }
 
 type MessageEdge {
@@ -234,6 +553,8 @@ type MessageEdge {
 enum MessageOrderByInput {
   id_ASC
   id_DESC
+  content_ASC
+  content_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -242,6 +563,9 @@ enum MessageOrderByInput {
 
 type MessagePreviousValues {
   id: ID!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input MessageScalarWhereInput {
@@ -259,6 +583,36 @@ input MessageScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [MessageScalarWhereInput!]
   OR: [MessageScalarWhereInput!]
   NOT: [MessageScalarWhereInput!]
@@ -285,6 +639,15 @@ input MessageSubscriptionWhereInput {
 input MessageUpdateInput {
   author: UserUpdateOneRequiredInput
   chat: ChatUpdateOneRequiredWithoutMessagesInput
+  content: String
+}
+
+input MessageUpdateManyDataInput {
+  content: String
+}
+
+input MessageUpdateManyMutationInput {
+  content: String
 }
 
 input MessageUpdateManyWithoutChatInput {
@@ -296,10 +659,17 @@ input MessageUpdateManyWithoutChatInput {
   update: [MessageUpdateWithWhereUniqueWithoutChatInput!]
   upsert: [MessageUpsertWithWhereUniqueWithoutChatInput!]
   deleteMany: [MessageScalarWhereInput!]
+  updateMany: [MessageUpdateManyWithWhereNestedInput!]
+}
+
+input MessageUpdateManyWithWhereNestedInput {
+  where: MessageScalarWhereInput!
+  data: MessageUpdateManyDataInput!
 }
 
 input MessageUpdateWithoutChatDataInput {
   author: UserUpdateOneRequiredInput
+  content: String
 }
 
 input MessageUpdateWithWhereUniqueWithoutChatInput {
@@ -330,6 +700,36 @@ input MessageWhereInput {
   id_not_ends_with: ID
   author: UserWhereInput
   chat: ChatWhereInput
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [MessageWhereInput!]
   OR: [MessageWhereInput!]
   NOT: [MessageWhereInput!]
@@ -345,8 +745,15 @@ type Mutation {
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
   deleteChat(where: ChatWhereUniqueInput!): Chat
   deleteManyChats(where: ChatWhereInput): BatchPayload!
+  createGame(data: GameCreateInput!): Game!
+  updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
+  updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
+  upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
+  deleteGame(where: GameWhereUniqueInput!): Game
+  deleteManyGames(where: GameWhereInput): BatchPayload!
   createMessage(data: MessageCreateInput!): Message!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
   upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
   deleteMessage(where: MessageWhereUniqueInput!): Message
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
@@ -386,6 +793,10 @@ type Party {
   title: String!
   description: String!
   author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
+  isPublic: Boolean!
 }
 
 type PartyConnection {
@@ -398,6 +809,8 @@ input PartyCreateInput {
   title: String!
   description: String!
   author: UserCreateOneWithoutPartiesInput!
+  games: GameCreateManyInput
+  isPublic: Boolean
 }
 
 input PartyCreateManyWithoutAuthorInput {
@@ -413,6 +826,8 @@ input PartyCreateOneInput {
 input PartyCreateWithoutAuthorInput {
   title: String!
   description: String!
+  games: GameCreateManyInput
+  isPublic: Boolean
 }
 
 type PartyEdge {
@@ -431,12 +846,17 @@ enum PartyOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  isPublic_ASC
+  isPublic_DESC
 }
 
 type PartyPreviousValues {
   id: ID!
   title: String!
   description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isPublic: Boolean!
 }
 
 input PartyScalarWhereInput {
@@ -482,6 +902,24 @@ input PartyScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  isPublic: Boolean
+  isPublic_not: Boolean
   AND: [PartyScalarWhereInput!]
   OR: [PartyScalarWhereInput!]
   NOT: [PartyScalarWhereInput!]
@@ -509,22 +947,28 @@ input PartyUpdateDataInput {
   title: String
   description: String
   author: UserUpdateOneRequiredWithoutPartiesInput
+  games: GameUpdateManyInput
+  isPublic: Boolean
 }
 
 input PartyUpdateInput {
   title: String
   description: String
   author: UserUpdateOneRequiredWithoutPartiesInput
+  games: GameUpdateManyInput
+  isPublic: Boolean
 }
 
 input PartyUpdateManyDataInput {
   title: String
   description: String
+  isPublic: Boolean
 }
 
 input PartyUpdateManyMutationInput {
   title: String
   description: String
+  isPublic: Boolean
 }
 
 input PartyUpdateManyWithoutAuthorInput {
@@ -554,6 +998,8 @@ input PartyUpdateOneRequiredInput {
 input PartyUpdateWithoutAuthorDataInput {
   title: String
   description: String
+  games: GameUpdateManyInput
+  isPublic: Boolean
 }
 
 input PartyUpdateWithWhereUniqueWithoutAuthorInput {
@@ -616,6 +1062,27 @@ input PartyWhereInput {
   description_ends_with: String
   description_not_ends_with: String
   author: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  games_every: GameWhereInput
+  games_some: GameWhereInput
+  games_none: GameWhereInput
+  isPublic: Boolean
+  isPublic_not: Boolean
   AND: [PartyWhereInput!]
   OR: [PartyWhereInput!]
   NOT: [PartyWhereInput!]
@@ -629,6 +1096,9 @@ type Query {
   chat(where: ChatWhereUniqueInput!): Chat
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
+  game(where: GameWhereUniqueInput!): Game
+  games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
+  gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
   message(where: MessageWhereUniqueInput!): Message
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
   messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
@@ -643,6 +1113,7 @@ type Query {
 
 type Subscription {
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
+  game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
@@ -652,9 +1123,13 @@ type User {
   id: ID!
   username: String!
   email: String!
+  password: String!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deleted: Boolean!
 }
 
 type UserConnection {
@@ -666,9 +1141,11 @@ type UserConnection {
 input UserCreateInput {
   username: String!
   email: String!
+  password: String!
   parties: PartyCreateManyWithoutAuthorInput
   friends: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
+  deleted: Boolean
 }
 
 input UserCreateManyInput {
@@ -694,15 +1171,19 @@ input UserCreateOneWithoutPartiesInput {
 input UserCreateWithoutChatsInput {
   username: String!
   email: String!
+  password: String!
   parties: PartyCreateManyWithoutAuthorInput
   friends: UserCreateManyInput
+  deleted: Boolean
 }
 
 input UserCreateWithoutPartiesInput {
   username: String!
   email: String!
+  password: String!
   friends: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
+  deleted: Boolean
 }
 
 type UserEdge {
@@ -717,16 +1198,24 @@ enum UserOrderByInput {
   username_DESC
   email_ASC
   email_DESC
+  password_ASC
+  password_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  deleted_ASC
+  deleted_DESC
 }
 
 type UserPreviousValues {
   id: ID!
   username: String!
   email: String!
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deleted: Boolean!
 }
 
 input UserScalarWhereInput {
@@ -772,6 +1261,38 @@ input UserScalarWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  deleted: Boolean
+  deleted_not: Boolean
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
@@ -798,22 +1319,28 @@ input UserSubscriptionWhereInput {
 input UserUpdateDataInput {
   username: String
   email: String
+  password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
 }
 
 input UserUpdateInput {
   username: String
   email: String
+  password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
 }
 
 input UserUpdateManyDataInput {
   username: String
   email: String
+  password: String
+  deleted: Boolean
 }
 
 input UserUpdateManyInput {
@@ -831,6 +1358,8 @@ input UserUpdateManyInput {
 input UserUpdateManyMutationInput {
   username: String
   email: String
+  password: String
+  deleted: Boolean
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -867,15 +1396,19 @@ input UserUpdateOneRequiredWithoutPartiesInput {
 input UserUpdateWithoutChatsDataInput {
   username: String
   email: String
+  password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
+  deleted: Boolean
 }
 
 input UserUpdateWithoutPartiesDataInput {
   username: String
   email: String
+  password: String
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -953,6 +1486,20 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput
@@ -962,6 +1509,24 @@ input UserWhereInput {
   chats_every: ChatWhereInput
   chats_some: ChatWhereInput
   chats_none: ChatWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  deleted: Boolean
+  deleted_not: Boolean
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

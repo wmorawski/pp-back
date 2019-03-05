@@ -1,5 +1,6 @@
 endpoint: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
 datamodel: datamodel.prisma
+secret: kaczka
 
 generate:
   - generator: typescript-client

@@ -116,30 +116,22 @@ _TODO_: Dopisać do słownika PTIP i MSP
 
 ## Short Use Cases / Skrócone przypadki użycia
 
-### **UC1: Tworzenie konta**
-
-Użytkownik w celu założenia konta przechodzi do odpowiedniej podstrony na stronie lub ekranu w aplikacji mobilnej. Użytkownik podaje wymagane dane, takie jak adres e-mail i hasło, lub wybiera opcje rejestracji za pomocą jednego z wymienionych w liście IN/OUT serwisów. Po udanej rejestracji użytkownik zostaje automatyczcnie zalogowany do aplikacji i może z niej w pełni korzystać.
-
-### **UC2: Logowanie użytkownika**
-
-Użytkownik w celu założenia konta przechodzi do odpowiedniej podstrony na stronie lub ekranu w aplikacji mobilnej. Użytkownik podaje podane podczas tworzenia konta dane lub autoryzuje się za pomocą wybranego w procesie rejestracji serwisu. Po udanej autoryzacji otrzymuje dostęp funkcjonalności systemu.
-
-### **UC3: Tworzenie imprezy**
+### **UC1: Tworzenie imprezy**
 
 Użytkownik podaje tytuł oraz opis imprezy. Wskazuje czy jest ona publiczna czy prywatna. Podaje ponaddto miejsce oraz czas, w którym impreza ma się odbyć. Podczas tworzenia wydarzenia użytkowników może dodać z góry zaproszone osoby z listy znajomych. Po pomyślnym utworzeniu imprezy zostaje ona dodana do kalendarza użytkownika, a zaproszone osoby dostają powiadomienie o nowym zaproszeniu.
 
-### **UC3: Wysyłanie wiadomości w czacie grupowym**
+### **UC2: Wysyłanie wiadomości w czacie grupowym**
 
 Użytkownik na podstronie odpowiedniej imprezy przechodzi do zakładki **Chat**. Na posortowanej liście widzi poprzednie wiadomości na czacie, poniżej ma odpowiedni input (wejście z klawiatury) do wpisania swojej wiadomości. Po kliknięciu odpowiedniego przycisku wiadomość zostaje wysłana, a osoby powiązane z tym chatem dostają powiadomienie o nowej wiadomości.
 
-### **UC4: Tworzenie playlist muzycznych**
+### **UC3: Tworzenie playlist muzycznych**
 
 Użytkownik w odpowiednim polu wyszukiwarki wpisuje nazwę utworu lub wykonawcę po czym API Spotify zwraca listę z wynikami wyszukiwania. Użytkownik może kliknąć w utwór. Po zapełnieniu listy docelowymi utworami użytkownik klika przycisk **Zapisz** i playlista jest odsyłana z powrotem do serwisu Spotify oraz jest generowany do niej specjalny odsyłacz.
 
-### **UC5: Propozycja gier na imprezę**
+### **UC4: Propozycja gier na imprezę**
 
 Użytkownik może zaproponować grę, którą chciałby, aby pojawiła się na imprezie. W tym celu zaznacza odpowiednio rodzaj gry do preferowanej przez siebie platformy (PC, Konsola, Planszowa) i wyszukuje jej nazwę (lub jej część). Po dodaniu propozycji inni użytkownicy głosują, czy chcą, aby dana gra pojawiła się na imprezie. Po stronie uczestników imprezy leży fizyczne zorganizowanie danej gry.
 
-### **UC6: Wyszukiwanie drogi na imprezę**
+### **UC5: Wyszukiwanie drogi na imprezę**
 
 Użytkownik może wyznaczyć drogę ze swojej aktualnej lokalizacji do lokalizacji imprezy. Może wybrać czas, w którym chce dotrzeć (domyślnie jest to godzina rozpoczęcia imprezy). Jeżeli użytkownik oraz miejsce imprezy znajdują się w obsługiwanym na podstawie listy IN/OUT mieście, użytkownik może wybrać znajdowanie drogi za pomocą komunikacji miejskiej. W przeciwnym razie pozostają opcje: pieszo oraz samochodem. Za pomocą MSP wyznaczana jest trasa, a użytkownikami pokazywana jest jest wizualizacja i dodatkowe informacje.

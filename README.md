@@ -15,12 +15,14 @@ $ npm install
 ## Useful commands
 
 ```bash
-$ npm install -g prisma
-$ npm install -g graphql-cli
-$ prisma init
-$ prisma deploy
-$ graphql get-schema --project database
-$ graphql codegen --project database
+$ npm install -g prisma # installs prisma globally
+$ npm install -g graphql-cli # installs graphql-cli globally
+$ prisma init # initialize prisma service
+$ prisma deploy # deploy prisma model to remote server
+$ prisma token # create JWT from secret
+$ prisma generate # generates prisma client with secret
+$ graphql get-schema --project database # downloads schema from prisma servers
+$ graphql codegen --project database # generates prisma-bindings
 ```
 
 ## Running the app

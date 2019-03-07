@@ -13,4 +13,16 @@ export class UsersService {
     }));
     // return users.map(user => OmittedExpression);
   }
+  async findOneByToken(token: String): Promise<User> {
+    const user = {
+      id: null,
+      username: null,
+      password: null,
+      email: null,
+      createdAt: null,
+      updatedAt: null,
+      deleted: false
+    }
+    return user
+  }
 }

@@ -8,6 +8,7 @@ async function bootstrap() {
   .setTitle('Party Planner Documentation')
   .setDescription('Documentation of the engineering project API')
   .setVersion('0.1.0')
+  .addBearerAuth()
   .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

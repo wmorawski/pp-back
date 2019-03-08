@@ -1111,6 +1111,12 @@ type Query {
   node(id: ID!): Node
 }
 
+enum SocialMediaType {
+  FACEBOOK
+  TWITTER
+  GOOGLE
+}
+
 type Subscription {
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
@@ -1121,7 +1127,6 @@ type Subscription {
 
 type User {
   id: ID!
-  username: String!
   email: String!
   password: String!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
@@ -1130,6 +1135,7 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
+  socialmedia: SocialMediaType
 }
 
 type UserConnection {
@@ -1139,13 +1145,13 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  username: String!
   email: String!
   password: String!
   parties: PartyCreateManyWithoutAuthorInput
   friends: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserCreateManyInput {
@@ -1169,21 +1175,21 @@ input UserCreateOneWithoutPartiesInput {
 }
 
 input UserCreateWithoutChatsInput {
-  username: String!
   email: String!
   password: String!
   parties: PartyCreateManyWithoutAuthorInput
   friends: UserCreateManyInput
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserCreateWithoutPartiesInput {
-  username: String!
   email: String!
   password: String!
   friends: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 type UserEdge {
@@ -1194,8 +1200,6 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  username_ASC
-  username_DESC
   email_ASC
   email_DESC
   password_ASC
@@ -1206,16 +1210,18 @@ enum UserOrderByInput {
   updatedAt_DESC
   deleted_ASC
   deleted_DESC
+  socialmedia_ASC
+  socialmedia_DESC
 }
 
 type UserPreviousValues {
   id: ID!
-  username: String!
   email: String!
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
+  socialmedia: SocialMediaType
 }
 
 input UserScalarWhereInput {
@@ -1233,20 +1239,6 @@ input UserScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  username: String
-  username_not: String
-  username_in: [String!]
-  username_not_in: [String!]
-  username_lt: String
-  username_lte: String
-  username_gt: String
-  username_gte: String
-  username_contains: String
-  username_not_contains: String
-  username_starts_with: String
-  username_not_starts_with: String
-  username_ends_with: String
-  username_not_ends_with: String
   email: String
   email_not: String
   email_in: [String!]
@@ -1293,6 +1285,10 @@ input UserScalarWhereInput {
   updatedAt_gte: DateTime
   deleted: Boolean
   deleted_not: Boolean
+  socialmedia: SocialMediaType
+  socialmedia_not: SocialMediaType
+  socialmedia_in: [SocialMediaType!]
+  socialmedia_not_in: [SocialMediaType!]
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
@@ -1317,30 +1313,30 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateDataInput {
-  username: String
   email: String
   password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserUpdateInput {
-  username: String
   email: String
   password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserUpdateManyDataInput {
-  username: String
   email: String
   password: String
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserUpdateManyInput {
@@ -1356,10 +1352,10 @@ input UserUpdateManyInput {
 }
 
 input UserUpdateManyMutationInput {
-  username: String
   email: String
   password: String
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -1394,21 +1390,21 @@ input UserUpdateOneRequiredWithoutPartiesInput {
 }
 
 input UserUpdateWithoutChatsDataInput {
-  username: String
   email: String
   password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserUpdateWithoutPartiesDataInput {
-  username: String
   email: String
   password: String
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -1458,20 +1454,6 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  username: String
-  username_not: String
-  username_in: [String!]
-  username_not_in: [String!]
-  username_lt: String
-  username_lte: String
-  username_gt: String
-  username_gte: String
-  username_contains: String
-  username_not_contains: String
-  username_starts_with: String
-  username_not_starts_with: String
-  username_ends_with: String
-  username_not_ends_with: String
   email: String
   email_not: String
   email_in: [String!]
@@ -1527,6 +1509,10 @@ input UserWhereInput {
   updatedAt_gte: DateTime
   deleted: Boolean
   deleted_not: Boolean
+  socialmedia: SocialMediaType
+  socialmedia_not: SocialMediaType
+  socialmedia_in: [SocialMediaType!]
+  socialmedia_not_in: [SocialMediaType!]
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -1534,7 +1520,6 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
-  username: String
   email: String
 }
 `

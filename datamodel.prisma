@@ -1,6 +1,5 @@
 type User {
   id: ID! @unique
-  username: String! @unique
   email: String! @unique
   password: String!
   parties: [Party!]!
@@ -9,6 +8,7 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean! @default(value: "false")
+  socialmedia: SocialMediaType
 }
 
 type Party {
@@ -53,4 +53,9 @@ enum GameType {
   BOARD,
   PC,
   CONSOLE
+}
+enum SocialMediaType {
+  FACEBOOK,
+  TWITTER,
+  GOOGLE
 }

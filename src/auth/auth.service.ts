@@ -1,13 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
   constructor(private readonly usersService: UsersService) {}
 
-  async validateUser(token: string): Promise<any> {
-    // Validate if token passed along with HTTP request
-    // is associated with any registered account in the database
-    return await this.usersService.findOneByToken(token);
+  async createToken(id: string, email: string) {
+    const expiresIn = 60 * 60;
+    const secretOrKey = 'secret';
+    const user = { email };
+    const token = jwt.sign(user, secretOrKey, { expiresIn });
+
+    return { expires_in: expiresIn, token };
+  }
+
+  async validateUser(signedUser): Promise<boolean> {
+    if (signedUser && signedUser.email) {
+      return Boolean(this.usersService.findOneByEmail(signedUser.username));
+    }
+
+    return false;
   }
 }

@@ -272,6 +272,8 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type SocialMediaType = "FACEBOOK" | "TWITTER" | "GOOGLE";
+
 export type GameType = "BOARD" | "PC" | "CONSOLE";
 
 export type PartyOrderByInput =
@@ -291,8 +293,6 @@ export type PartyOrderByInput =
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "username_ASC"
-  | "username_DESC"
   | "email_ASC"
   | "email_DESC"
   | "password_ASC"
@@ -302,7 +302,9 @@ export type UserOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC"
   | "deleted_ASC"
-  | "deleted_DESC";
+  | "deleted_DESC"
+  | "socialmedia_ASC"
+  | "socialmedia_DESC";
 
 export type ChatOrderByInput =
   | "id_ASC"
@@ -360,13 +362,33 @@ export type ChatWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
+export interface MessageCreateManyWithoutChatInput {
+  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput;
+  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+}
+
+export interface UserUpsertWithoutPartiesInput {
+  update: UserUpdateWithoutPartiesDataInput;
+  create: UserCreateWithoutPartiesInput;
+}
+
+export interface MessageCreateWithoutChatInput {
+  author: UserCreateOneInput;
+  content: String;
+}
+
 export interface GameUpdateDataInput {
   title?: String;
   cover?: String;
   type?: GameType;
 }
 
-export interface MessageWhereInput {
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface GameWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -381,22 +403,38 @@ export interface MessageWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  author?: UserWhereInput;
-  chat?: ChatWhereInput;
-  content?: String;
-  content_not?: String;
-  content_in?: String[] | String;
-  content_not_in?: String[] | String;
-  content_lt?: String;
-  content_lte?: String;
-  content_gt?: String;
-  content_gte?: String;
-  content_contains?: String;
-  content_not_contains?: String;
-  content_starts_with?: String;
-  content_not_starts_with?: String;
-  content_ends_with?: String;
-  content_not_ends_with?: String;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  cover?: String;
+  cover_not?: String;
+  cover_in?: String[] | String;
+  cover_not_in?: String[] | String;
+  cover_lt?: String;
+  cover_lte?: String;
+  cover_gt?: String;
+  cover_gte?: String;
+  cover_contains?: String;
+  cover_not_contains?: String;
+  cover_starts_with?: String;
+  cover_not_starts_with?: String;
+  cover_ends_with?: String;
+  cover_not_ends_with?: String;
+  type?: GameType;
+  type_not?: GameType;
+  type_in?: GameType[] | GameType;
+  type_not_in?: GameType[] | GameType;
   createdAt?: DateTimeInput;
   createdAt_not?: DateTimeInput;
   createdAt_in?: DateTimeInput[] | DateTimeInput;
@@ -413,30 +451,9 @@ export interface MessageWhereInput {
   updatedAt_lte?: DateTimeInput;
   updatedAt_gt?: DateTimeInput;
   updatedAt_gte?: DateTimeInput;
-  AND?: MessageWhereInput[] | MessageWhereInput;
-  OR?: MessageWhereInput[] | MessageWhereInput;
-  NOT?: MessageWhereInput[] | MessageWhereInput;
-}
-
-export interface MessageCreateWithoutChatInput {
-  author: UserCreateOneInput;
-  content: String;
-}
-
-export interface UserUpsertWithoutPartiesInput {
-  update: UserUpdateWithoutPartiesDataInput;
-  create: UserCreateWithoutPartiesInput;
-}
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface GameUpsertWithWhereUniqueNestedInput {
-  where: GameWhereUniqueInput;
-  update: GameUpdateDataInput;
-  create: GameCreateInput;
+  AND?: GameWhereInput[] | GameWhereInput;
+  OR?: GameWhereInput[] | GameWhereInput;
+  NOT?: GameWhereInput[] | GameWhereInput;
 }
 
 export interface UserCreateManyWithoutChatsInput {
@@ -459,20 +476,6 @@ export interface UserWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  username?: String;
-  username_not?: String;
-  username_in?: String[] | String;
-  username_not_in?: String[] | String;
-  username_lt?: String;
-  username_lte?: String;
-  username_gt?: String;
-  username_gte?: String;
-  username_contains?: String;
-  username_not_contains?: String;
-  username_starts_with?: String;
-  username_not_starts_with?: String;
-  username_ends_with?: String;
-  username_not_ends_with?: String;
   email?: String;
   email_not?: String;
   email_in?: String[] | String;
@@ -528,18 +531,22 @@ export interface UserWhereInput {
   updatedAt_gte?: DateTimeInput;
   deleted?: Boolean;
   deleted_not?: Boolean;
+  socialmedia?: SocialMediaType;
+  socialmedia_not?: SocialMediaType;
+  socialmedia_in?: SocialMediaType[] | SocialMediaType;
+  socialmedia_not_in?: SocialMediaType[] | SocialMediaType;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
 export interface UserCreateWithoutChatsInput {
-  username: String;
   email: String;
   password: String;
   parties?: PartyCreateManyWithoutAuthorInput;
   friends?: UserCreateManyInput;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface PartyWhereInput {
@@ -656,13 +663,13 @@ export interface PartyUpdateDataInput {
 }
 
 export interface UserUpdateInput {
-  username?: String;
   email?: String;
   password?: String;
   parties?: PartyUpdateManyWithoutAuthorInput;
   friends?: UserUpdateManyInput;
   chats?: ChatUpdateManyWithoutMembersInput;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface UserUpdateOneRequiredWithoutPartiesInput {
@@ -681,12 +688,12 @@ export interface PartyUpdateInput {
 }
 
 export interface UserUpdateWithoutPartiesDataInput {
-  username?: String;
   email?: String;
   password?: String;
   friends?: UserUpdateManyInput;
   chats?: ChatUpdateManyWithoutMembersInput;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export type GameWhereUniqueInput = AtLeastOne<{
@@ -727,13 +734,13 @@ export type MessageWhereUniqueInput = AtLeastOne<{
 }>;
 
 export interface UserUpdateDataInput {
-  username?: String;
   email?: String;
   password?: String;
   parties?: PartyUpdateManyWithoutAuthorInput;
   friends?: UserUpdateManyInput;
   chats?: ChatUpdateManyWithoutMembersInput;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface ChatCreateWithoutMessagesInput {
@@ -783,7 +790,6 @@ export interface PartyUpdateWithoutAuthorDataInput {
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
-  username?: String;
   email?: String;
 }>;
 
@@ -806,12 +812,12 @@ export interface GameUpdateManyInput {
 }
 
 export interface UserUpdateWithoutChatsDataInput {
-  username?: String;
   email?: String;
   password?: String;
   parties?: PartyUpdateManyWithoutAuthorInput;
   friends?: UserUpdateManyInput;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface GameUpdateWithWhereUniqueNestedInput {
@@ -834,72 +840,10 @@ export interface UserCreateOneWithoutPartiesInput {
   connect?: UserWhereUniqueInput;
 }
 
-export interface GameWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  cover?: String;
-  cover_not?: String;
-  cover_in?: String[] | String;
-  cover_not_in?: String[] | String;
-  cover_lt?: String;
-  cover_lte?: String;
-  cover_gt?: String;
-  cover_gte?: String;
-  cover_contains?: String;
-  cover_not_contains?: String;
-  cover_starts_with?: String;
-  cover_not_starts_with?: String;
-  cover_ends_with?: String;
-  cover_not_ends_with?: String;
-  type?: GameType;
-  type_not?: GameType;
-  type_in?: GameType[] | GameType;
-  type_not_in?: GameType[] | GameType;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  AND?: GameWhereInput[] | GameWhereInput;
-  OR?: GameWhereInput[] | GameWhereInput;
-  NOT?: GameWhereInput[] | GameWhereInput;
+export interface GameUpsertWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput;
+  update: GameUpdateDataInput;
+  create: GameCreateInput;
 }
 
 export interface UserCreateManyInput {
@@ -1007,9 +951,56 @@ export interface PartyUpsertWithWhereUniqueWithoutAuthorInput {
   create: PartyCreateWithoutAuthorInput;
 }
 
-export interface MessageCreateManyWithoutChatInput {
-  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput;
-  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+export interface MessageWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  author?: UserWhereInput;
+  chat?: ChatWhereInput;
+  content?: String;
+  content_not?: String;
+  content_in?: String[] | String;
+  content_not_in?: String[] | String;
+  content_lt?: String;
+  content_lte?: String;
+  content_gt?: String;
+  content_gte?: String;
+  content_contains?: String;
+  content_not_contains?: String;
+  content_starts_with?: String;
+  content_not_starts_with?: String;
+  content_ends_with?: String;
+  content_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: MessageWhereInput[] | MessageWhereInput;
+  OR?: MessageWhereInput[] | MessageWhereInput;
+  NOT?: MessageWhereInput[] | MessageWhereInput;
 }
 
 export interface PartyScalarWhereInput {
@@ -1200,12 +1191,12 @@ export interface MessageUpdateWithoutChatDataInput {
 }
 
 export interface UserCreateWithoutPartiesInput {
-  username: String;
   email: String;
   password: String;
   friends?: UserCreateManyInput;
   chats?: ChatCreateManyWithoutMembersInput;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface UserUpdateOneRequiredInput {
@@ -1329,13 +1320,13 @@ export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
 }
 
 export interface UserCreateInput {
-  username: String;
   email: String;
   password: String;
   parties?: PartyCreateManyWithoutAuthorInput;
   friends?: UserCreateManyInput;
   chats?: ChatCreateManyWithoutMembersInput;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface ChatScalarWhereInput {
@@ -1418,10 +1409,10 @@ export interface ChatWhereInput {
 }
 
 export interface UserUpdateManyDataInput {
-  username?: String;
   email?: String;
   password?: String;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface UserUpdateManyWithWhereNestedInput {
@@ -1444,20 +1435,6 @@ export interface UserScalarWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  username?: String;
-  username_not?: String;
-  username_in?: String[] | String;
-  username_not_in?: String[] | String;
-  username_lt?: String;
-  username_lte?: String;
-  username_gt?: String;
-  username_gte?: String;
-  username_contains?: String;
-  username_not_contains?: String;
-  username_starts_with?: String;
-  username_not_starts_with?: String;
-  username_ends_with?: String;
-  username_not_ends_with?: String;
   email?: String;
   email_not?: String;
   email_in?: String[] | String;
@@ -1504,6 +1481,10 @@ export interface UserScalarWhereInput {
   updatedAt_gte?: DateTimeInput;
   deleted?: Boolean;
   deleted_not?: Boolean;
+  socialmedia?: SocialMediaType;
+  socialmedia_not?: SocialMediaType;
+  socialmedia_in?: SocialMediaType[] | SocialMediaType;
+  socialmedia_not_in?: SocialMediaType[] | SocialMediaType;
   AND?: UserScalarWhereInput[] | UserScalarWhereInput;
   OR?: UserScalarWhereInput[] | UserScalarWhereInput;
   NOT?: UserScalarWhereInput[] | UserScalarWhereInput;
@@ -1516,10 +1497,10 @@ export interface UserUpsertWithWhereUniqueNestedInput {
 }
 
 export interface UserUpdateManyMutationInput {
-  username?: String;
   email?: String;
   password?: String;
   deleted?: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface GameCreateInput {
@@ -1555,36 +1536,36 @@ export interface NodeNode {
 
 export interface UserPreviousValues {
   id: ID_Output;
-  username: String;
   email: String;
   password: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
   deleted: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  username: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   deleted: () => Promise<Boolean>;
+  socialmedia: () => Promise<SocialMediaType>;
 }
 
 export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  username: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   deleted: () => Promise<AsyncIterator<Boolean>>;
+  socialmedia: () => Promise<AsyncIterator<SocialMediaType>>;
 }
 
 export interface AggregateChat {
@@ -1605,17 +1586,16 @@ export interface AggregateChatSubscription
 
 export interface User {
   id: ID_Output;
-  username: String;
   email: String;
   password: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
   deleted: Boolean;
+  socialmedia?: SocialMediaType;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  username: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   parties: <T = FragmentableArray<Party>>(
@@ -1654,13 +1634,13 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   deleted: () => Promise<Boolean>;
+  socialmedia: () => Promise<SocialMediaType>;
 }
 
 export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  username: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   parties: <T = Promise<AsyncIterator<PartySubscription>>>(
@@ -1699,6 +1679,7 @@ export interface UserSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   deleted: () => Promise<AsyncIterator<Boolean>>;
+  socialmedia: () => Promise<AsyncIterator<SocialMediaType>>;
 }
 
 export interface ChatEdge {
@@ -2404,11 +2385,6 @@ export interface AggregateUserSubscription
 }
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -2417,6 +2393,11 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 export type Long = string;
 
@@ -2463,6 +2444,10 @@ export const models: Model[] = [
   },
   {
     name: "GameType",
+    embedded: false
+  },
+  {
+    name: "SocialMediaType",
     embedded: false
   }
 ];

@@ -1,15 +1,25 @@
 import { LoginUserDto } from './../users/login-user.dto';
 import { UsersService } from 'src/users/users.service';
-import { Controller, Get, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/create-user.dto';
-import { User } from 'dist/generated/prisma-client';
+import { User } from 'generated/prisma-client';
 
 @ApiUseTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService, private readonly usersService: UsersService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @Post('signup')
   @ApiOperation({ title: 'Create user' })
@@ -29,11 +39,16 @@ export class AuthController {
         password: null,
       };
     } catch (e) {
-      const err = (e.result.errors.filter(e => e.code === 3010)[0] || e.result.errors[0]).message;
-      throw new HttpException({
-        status: HttpStatus.CONFLICT,
-        error: err,
-      }, 409);
+      const err = (
+        e.result.errors.filter(e => e.code === 3010)[0] || e.result.errors[0]
+      ).message;
+      throw new HttpException(
+        {
+          status: HttpStatus.CONFLICT,
+          error: err,
+        },
+        409,
+      );
     }
   }
 
@@ -41,10 +56,13 @@ export class AuthController {
   @ApiOperation({ title: 'Login user' })
   async signinUser(@Body() body: LoginUserDto) {
     if (!(body && body.email && body.password)) {
-      throw new HttpException({
-        status: HttpStatus.FORBIDDEN,
-        error: 'Username and password are required',
-      }, 403);
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Username and password are required',
+        },
+        403,
+      );
     }
     const user = await this.usersService.findOneByEmail(body.email);
     if (user) {
@@ -52,9 +70,12 @@ export class AuthController {
         return await this.authService.createToken(user.id, user.email);
       }
     }
-    throw new HttpException({
-      status: HttpStatus.FORBIDDEN,
-      error: 'Username or password wrong!',
-    }, 403);
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Username or password wrong!',
+      },
+      403,
+    );
   }
 }

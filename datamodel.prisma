@@ -31,20 +31,6 @@ type Chat {
   updatedAt: DateTime!
 }
 
-type AuthenticatedUser {
-  token: String!
-  userInfo: User!
-}
-
-type Mutation {
-  signup(
-    firstName: String!
-    lastName: String!
-    password: String!
-    email: String!
-  ): AuthenticatedUser
-}
-
 type Message {
   id: ID! @unique
   author: User!

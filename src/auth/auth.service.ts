@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as jwt from 'jsonwebtoken';
+import { User } from 'generated/prisma-client';
 
 @Injectable()
 export class AuthService {
@@ -15,9 +16,9 @@ export class AuthService {
     return { expires_in: expiresIn, token };
   }
 
-  async validateUser(signedUser): Promise<boolean> {
+  async validateUser(signedUser: User): Promise<boolean> {
     if (signedUser && signedUser.email) {
-      return Boolean(this.usersService.findOneByEmail(signedUser.username));
+      return Boolean(this.usersService.findOneByEmail(signedUser.email));
     }
 
     return false;

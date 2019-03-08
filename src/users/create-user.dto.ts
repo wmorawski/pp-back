@@ -8,6 +8,12 @@ enum SocialMediaType {
 
 export class CreateUserDto {
   @ApiModelProperty()
+  readonly firstName: string;
+
+  @ApiModelProperty()
+  readonly lastName: string;
+
+  @ApiModelProperty()
   readonly email: string;
 
   @ApiModelProperty()

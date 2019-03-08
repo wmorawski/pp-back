@@ -1,6 +1,8 @@
 type User {
   id: ID! @unique
   email: String! @unique
+  firstName: String!
+  lastName: String!
   password: String!
   parties: [Party!]!
   friends: [User!]!
@@ -29,20 +31,6 @@ type Chat {
   messages: [Message!]!
   createdAt: DateTime!
   updatedAt: DateTime!
-}
-
-type AuthenticatedUser {
-  token: String!
-  userInfo: User!
-}
-
-type Mutation {
-  signup(
-    firstName: String!
-    lastName: String!
-    password: String!
-    email: String!
-  ): AuthenticatedUser
 }
 
 type Message {

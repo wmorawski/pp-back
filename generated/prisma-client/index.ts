@@ -295,6 +295,10 @@ export type UserOrderByInput =
   | "id_DESC"
   | "email_ASC"
   | "email_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
   | "password_ASC"
   | "password_DESC"
   | "createdAt_ASC"
@@ -490,6 +494,34 @@ export interface UserWhereInput {
   email_not_starts_with?: String;
   email_ends_with?: String;
   email_not_ends_with?: String;
+  firstName?: String;
+  firstName_not?: String;
+  firstName_in?: String[] | String;
+  firstName_not_in?: String[] | String;
+  firstName_lt?: String;
+  firstName_lte?: String;
+  firstName_gt?: String;
+  firstName_gte?: String;
+  firstName_contains?: String;
+  firstName_not_contains?: String;
+  firstName_starts_with?: String;
+  firstName_not_starts_with?: String;
+  firstName_ends_with?: String;
+  firstName_not_ends_with?: String;
+  lastName?: String;
+  lastName_not?: String;
+  lastName_in?: String[] | String;
+  lastName_not_in?: String[] | String;
+  lastName_lt?: String;
+  lastName_lte?: String;
+  lastName_gt?: String;
+  lastName_gte?: String;
+  lastName_contains?: String;
+  lastName_not_contains?: String;
+  lastName_starts_with?: String;
+  lastName_not_starts_with?: String;
+  lastName_ends_with?: String;
+  lastName_not_ends_with?: String;
   password?: String;
   password_not?: String;
   password_in?: String[] | String;
@@ -542,6 +574,8 @@ export interface UserWhereInput {
 
 export interface UserCreateWithoutChatsInput {
   email: String;
+  firstName: String;
+  lastName: String;
   password: String;
   parties?: PartyCreateManyWithoutAuthorInput;
   friends?: UserCreateManyInput;
@@ -664,6 +698,8 @@ export interface PartyUpdateDataInput {
 
 export interface UserUpdateInput {
   email?: String;
+  firstName?: String;
+  lastName?: String;
   password?: String;
   parties?: PartyUpdateManyWithoutAuthorInput;
   friends?: UserUpdateManyInput;
@@ -689,6 +725,8 @@ export interface PartyUpdateInput {
 
 export interface UserUpdateWithoutPartiesDataInput {
   email?: String;
+  firstName?: String;
+  lastName?: String;
   password?: String;
   friends?: UserUpdateManyInput;
   chats?: ChatUpdateManyWithoutMembersInput;
@@ -735,6 +773,8 @@ export type MessageWhereUniqueInput = AtLeastOne<{
 
 export interface UserUpdateDataInput {
   email?: String;
+  firstName?: String;
+  lastName?: String;
   password?: String;
   parties?: PartyUpdateManyWithoutAuthorInput;
   friends?: UserUpdateManyInput;
@@ -813,6 +853,8 @@ export interface GameUpdateManyInput {
 
 export interface UserUpdateWithoutChatsDataInput {
   email?: String;
+  firstName?: String;
+  lastName?: String;
   password?: String;
   parties?: PartyUpdateManyWithoutAuthorInput;
   friends?: UserUpdateManyInput;
@@ -1192,6 +1234,8 @@ export interface MessageUpdateWithoutChatDataInput {
 
 export interface UserCreateWithoutPartiesInput {
   email: String;
+  firstName: String;
+  lastName: String;
   password: String;
   friends?: UserCreateManyInput;
   chats?: ChatCreateManyWithoutMembersInput;
@@ -1321,6 +1365,8 @@ export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
 
 export interface UserCreateInput {
   email: String;
+  firstName: String;
+  lastName: String;
   password: String;
   parties?: PartyCreateManyWithoutAuthorInput;
   friends?: UserCreateManyInput;
@@ -1410,6 +1456,8 @@ export interface ChatWhereInput {
 
 export interface UserUpdateManyDataInput {
   email?: String;
+  firstName?: String;
+  lastName?: String;
   password?: String;
   deleted?: Boolean;
   socialmedia?: SocialMediaType;
@@ -1449,6 +1497,34 @@ export interface UserScalarWhereInput {
   email_not_starts_with?: String;
   email_ends_with?: String;
   email_not_ends_with?: String;
+  firstName?: String;
+  firstName_not?: String;
+  firstName_in?: String[] | String;
+  firstName_not_in?: String[] | String;
+  firstName_lt?: String;
+  firstName_lte?: String;
+  firstName_gt?: String;
+  firstName_gte?: String;
+  firstName_contains?: String;
+  firstName_not_contains?: String;
+  firstName_starts_with?: String;
+  firstName_not_starts_with?: String;
+  firstName_ends_with?: String;
+  firstName_not_ends_with?: String;
+  lastName?: String;
+  lastName_not?: String;
+  lastName_in?: String[] | String;
+  lastName_not_in?: String[] | String;
+  lastName_lt?: String;
+  lastName_lte?: String;
+  lastName_gt?: String;
+  lastName_gte?: String;
+  lastName_contains?: String;
+  lastName_not_contains?: String;
+  lastName_starts_with?: String;
+  lastName_not_starts_with?: String;
+  lastName_ends_with?: String;
+  lastName_not_ends_with?: String;
   password?: String;
   password_not?: String;
   password_in?: String[] | String;
@@ -1498,6 +1574,8 @@ export interface UserUpsertWithWhereUniqueNestedInput {
 
 export interface UserUpdateManyMutationInput {
   email?: String;
+  firstName?: String;
+  lastName?: String;
   password?: String;
   deleted?: Boolean;
   socialmedia?: SocialMediaType;
@@ -1537,6 +1615,8 @@ export interface NodeNode {
 export interface UserPreviousValues {
   id: ID_Output;
   email: String;
+  firstName: String;
+  lastName: String;
   password: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
@@ -1549,6 +1629,8 @@ export interface UserPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -1561,6 +1643,8 @@ export interface UserPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   email: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -1587,6 +1671,8 @@ export interface AggregateChatSubscription
 export interface User {
   id: ID_Output;
   email: String;
+  firstName: String;
+  lastName: String;
   password: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
@@ -1597,6 +1683,8 @@ export interface User {
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
   password: () => Promise<String>;
   parties: <T = FragmentableArray<Party>>(
     args?: {
@@ -1642,6 +1730,8 @@ export interface UserSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   email: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   parties: <T = Promise<AsyncIterator<PartySubscription>>>(
     args?: {
@@ -2459,7 +2549,7 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `${process.env["PRISMA_ENDPOINT"]}`,
+  endpoint: `https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev/pp-back/dev`,
   secret: `${process.env["PRISMA_SECRET"]}`
 });
 export const prisma = new Prisma();

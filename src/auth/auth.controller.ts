@@ -1,3 +1,4 @@
+import { LoginPayload } from './../../../nestjs-prisma-client-starter/src/auth/auth.types';
 import { LoginUserDto } from './../users/login-user.dto';
 import { UsersService } from 'src/users/users.service';
 import {
@@ -54,7 +55,7 @@ export class AuthController {
 
   @Post('signin')
   @ApiOperation({ title: 'Login user' })
-  async signinUser(@Body() body: LoginUserDto) {
+  async signinUser(@Body() body: LoginPayload) {
     if (!(body && body.email && body.password)) {
       throw new HttpException(
         {
@@ -64,18 +65,17 @@ export class AuthController {
         403,
       );
     }
-    const user = await this.usersService.findOneByEmail(body.email);
-    if (user) {
-      if (await this.usersService.compareHash(body.password, user.password)) {
-        return await this.authService.createToken(user.id, user.email);
-      }
+    try {
+      const user = await this.authService.login(body);
+      return await this.authService.createAuthPayload(user);
+    } catch (e) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Username or password wrong!',
+        },
+        403,
+      );
     }
-    throw new HttpException(
-      {
-        status: HttpStatus.FORBIDDEN,
-        error: 'Username or password wrong!',
-      },
-      403,
-    );
   }
 }

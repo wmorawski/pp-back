@@ -16,18 +16,6 @@ export class UsersService {
     }));
     // return users.map(user => OmittedExpression);
   }
-  async findOneByToken(token: string): Promise<User> {
-    const user = {
-      id: null,
-      username: null,
-      password: null,
-      email: null,
-      createdAt: null,
-      updatedAt: null,
-      deleted: false,
-    };
-    return user;
-  }
   async createUser(payload: CreateUserDto): Promise<any> {
     const password = await this.getHash(payload.password);
     return await prisma.createUser({...payload, password, socialmedia: null});

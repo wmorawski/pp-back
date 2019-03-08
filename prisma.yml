@@ -3,6 +3,12 @@ endpoint: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev/pp-back/
 datamodel: datamodel.prisma
 secret: ${env:PRISMA_SECRET}
 
+hooks:
+  post-deploy:
+    - prisma generate
+    - graphql get-schema --project database
+    - graphql codegen --project database
+
 generate:
   - generator: typescript-client
     output: ./generated/prisma-client/

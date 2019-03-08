@@ -1128,6 +1128,8 @@ type Subscription {
 type User {
   id: ID!
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -1146,6 +1148,8 @@ type UserConnection {
 
 input UserCreateInput {
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   parties: PartyCreateManyWithoutAuthorInput
   friends: UserCreateManyInput
@@ -1176,6 +1180,8 @@ input UserCreateOneWithoutPartiesInput {
 
 input UserCreateWithoutChatsInput {
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   parties: PartyCreateManyWithoutAuthorInput
   friends: UserCreateManyInput
@@ -1185,6 +1191,8 @@ input UserCreateWithoutChatsInput {
 
 input UserCreateWithoutPartiesInput {
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   friends: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
@@ -1202,6 +1210,10 @@ enum UserOrderByInput {
   id_DESC
   email_ASC
   email_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
   password_ASC
   password_DESC
   createdAt_ASC
@@ -1217,6 +1229,8 @@ enum UserOrderByInput {
 type UserPreviousValues {
   id: ID!
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -1253,6 +1267,34 @@ input UserScalarWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
   password: String
   password_not: String
   password_in: [String!]
@@ -1314,6 +1356,8 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateDataInput {
   email: String
+  firstName: String
+  lastName: String
   password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
@@ -1324,6 +1368,8 @@ input UserUpdateDataInput {
 
 input UserUpdateInput {
   email: String
+  firstName: String
+  lastName: String
   password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
@@ -1334,6 +1380,8 @@ input UserUpdateInput {
 
 input UserUpdateManyDataInput {
   email: String
+  firstName: String
+  lastName: String
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
@@ -1353,6 +1401,8 @@ input UserUpdateManyInput {
 
 input UserUpdateManyMutationInput {
   email: String
+  firstName: String
+  lastName: String
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
@@ -1391,6 +1441,8 @@ input UserUpdateOneRequiredWithoutPartiesInput {
 
 input UserUpdateWithoutChatsDataInput {
   email: String
+  firstName: String
+  lastName: String
   password: String
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
@@ -1400,6 +1452,8 @@ input UserUpdateWithoutChatsDataInput {
 
 input UserUpdateWithoutPartiesDataInput {
   email: String
+  firstName: String
+  lastName: String
   password: String
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
@@ -1468,6 +1522,34 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
   password: String
   password_not: String
   password_in: [String!]

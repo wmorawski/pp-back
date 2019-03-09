@@ -1,4 +1,5 @@
-import { UserWhereInput } from './../prisma/prisma.binding';
+import { SignupPayload } from './../auth/auth.types';
+import { UserWhereInput, UserCreateInput } from './../prisma/prisma.binding';
 import { Injectable } from '@nestjs/common';
 import { User } from '../../generated/prisma-client';
 import { CreateUserDto } from './create-user.dto';
@@ -18,10 +19,14 @@ export class UsersService {
   //   // }));
   //   // return users.map(user => OmittedExpression);
   // }
-  async createUser(payload: CreateUserDto): Promise<any> {
+  async createUser(payload: SignupPayload): Promise<any> {
     const password = await this.getHash(payload.password);
+    // better error message needed here
     return await this.prisma.mutation.createUser({
-      data: { ...payload, socialmedia: null, password },
+      data: {
+        ...payload,
+        password,
+      },
     });
   }
   async findOne(whereQuery: UserWhereInput): Promise<User> {

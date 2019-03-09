@@ -14,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  // this function gets called only if ExtractJwt was parsed correctly
+  // this function gets called only if jwt was parsed correctly with ExtractJwt...
   // if not this function will get ignored and unauthorized will be thrown
   async validate(payload: JwtPayload) {
     const isParsedTokenValid = await this.authService.validateParsedToken(

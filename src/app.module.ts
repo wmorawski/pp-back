@@ -20,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
+      context: ({ req }) => ({ req }),
     }),
     PartiesModule,
     UsersModule,

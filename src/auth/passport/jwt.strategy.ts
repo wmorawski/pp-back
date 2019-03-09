@@ -1,28 +1,29 @@
 import * as passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
+import { JwtPayload } from '../auth.types';
+import { PassportStrategy } from '@nestjs/passport';
 
 @Injectable()
-export class JwtStrategy extends Strategy {
-  public authenticate;
+export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
-    super(
-      {
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        passReqToCallback: true,
-        secretOrKey: 'secret',
-      },
-      async (req, payload, next) => await this.verify(req, payload, next),
-    );
-    passport.use(this);
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: 'secretKey',
+    });
   }
 
-  public async verify(req, payload, done) {
-    const isValid = await this.authService.validateUser(payload);
-    if (!isValid) {
-      return done('Unauthorized', false);
+  // this function gets called only if ExtractJwt was parsed correctly
+  // if not this function will get ignored and unauthorized will be thrown
+  async validate(payload: JwtPayload) {
+    const isParsedTokenValid = await this.authService.validateParsedToken(
+      payload,
+    );
+    if (!isParsedTokenValid) {
+      throw new UnauthorizedException();
     }
-    done(null, payload);
+    // return value of this function will be attached to user prop in request object
+    return { userId: payload.userId };
   }
 }

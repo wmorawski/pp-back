@@ -2,6 +2,7 @@ import { User } from 'generated/prisma-client';
 
 export interface JwtPayload {
   userId: string;
+  exp: number;
 }
 
 export interface SignupPayload {

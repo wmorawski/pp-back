@@ -1,7 +1,9 @@
 #endpoint: ${env:PRISMA_ENDPOINT}
 endpoint: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev/pp-back/dev
 datamodel: datamodel.prisma
-secret: ${env:PRISMA_SECRET}
+# ${env:PRISMA_SECRET} => 5ed909234ed04409ba2c0034664815b3
+# env:PRISMA_SECRET always returned null or undefined
+secret: 5ed909234ed04409ba2c0034664815b3
 
 hooks:
   post-deploy:

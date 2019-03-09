@@ -1,13 +1,23 @@
+import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './../users/create-user.dto';
-import { Query, Resolver, Args, Info, Mutation } from '@nestjs/graphql';
-import { PrismaService } from '../prisma/prisma.service';
+import {
+  Query,
+  Resolver,
+  Args,
+  Info,
+  Mutation,
+  Context,
+} from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { SignupPayload, AuthPayload, LoginPayload } from './auth.types';
+import { AuthPayload, LoginPayload } from './auth.types';
 import { UsersService } from 'src/users/users.service';
 
 @Resolver()
 export class AuthResolver {
-  constructor(private readonly prisma: PrismaService, private readonly users: UsersService, private readonly auth: AuthService) {}
+  constructor(
+    private readonly users: UsersService,
+    private readonly auth: AuthService,
+  ) {}
 
   @Mutation('signup')
   async signup(@Args() payload: CreateUserDto): Promise<AuthPayload> {

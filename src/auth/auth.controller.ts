@@ -1,4 +1,3 @@
-import { LoginPayload } from './../../../nestjs-prisma-client-starter/src/auth/auth.types';
 import { LoginUserDto } from './../users/login-user.dto';
 import { UsersService } from 'src/users/users.service';
 import {
@@ -13,6 +12,7 @@ import { AuthService } from './auth.service';
 import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/create-user.dto';
 import { User } from 'generated/prisma-client';
+import { LoginPayload } from './auth.types';
 
 @ApiUseTags('auth')
 @Controller('auth')

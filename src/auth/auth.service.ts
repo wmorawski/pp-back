@@ -1,32 +1,39 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as jwt from 'jsonwebtoken';
 import { User } from 'generated/prisma-client';
-import { LoginPayload, AuthPayload } from './auth.types';
+import { LoginPayload, AuthPayload, JwtPayload } from './auth.types';
 import { prisma } from '../../generated/prisma-client';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService, private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async createToken(id: string, email: string) {
     const expiresIn = 60 * 60;
     const secretOrKey = 'secret';
-    const user = { email };
+    const user = { email, id };
     const token = jwt.sign(user, secretOrKey, { expiresIn });
 
     return { expires_in: expiresIn, token };
   }
 
-  async validateUser(signedUser: User): Promise<boolean> {
-    if (signedUser && signedUser.email) {
-      return Boolean(this.usersService.findOneByEmail(signedUser.email));
+  async validateParsedToken({ exp, userId }: JwtPayload): Promise<boolean> {
+    if (exp < Date.now() / 1000 || !userId) {
+      return false;
     }
-
-    return false;
+    return true;
   }
+
+  async validateToken(token: string) {
+    return await this.jwtService.verify(token);
+  }
+
   async login(payload: LoginPayload): Promise<User> {
     const user = await prisma.user({ email: payload.email });
 

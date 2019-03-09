@@ -38,12 +38,12 @@ export class AuthService {
     const user = await prisma.user({ email: payload.email });
 
     if (!user) {
-      throw new Error(`No user found for email: ${payload.email}`);
+      throw new UnauthorizedException(`No user found for email: ${payload.email}`);
     }
 
     const passwordValid = await this.compare(payload.password, user.password);
     if (!passwordValid) {
-      throw new Error('Invalid password');
+      throw new UnauthorizedException('Invalid password');
     }
     return user;
   }

@@ -9,7 +9,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiOperation, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiUseTags, ApiCreatedResponse } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/create-user.dto';
 import { User } from 'generated/prisma-client';
 import { LoginPayload } from './auth.types';
@@ -55,14 +55,19 @@ export class AuthController {
 
   @Post('signin')
   @ApiOperation({ title: 'Login user' })
+  @ApiCreatedResponse({ description: 'User has been signed in and token has been returned.' })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Invalid email or password'
+  })
   async signinUser(@Body() body: LoginUserDto /* Potrzebuje tutaj tego DTO zeby Swagger dobrze robil docsy */) {
     if (!(body && body.email && body.password)) {
       throw new HttpException(
         {
-          status: HttpStatus.FORBIDDEN,
+          status: HttpStatus.UNAUTHORIZED,
           error: 'Username and password are required',
         },
-        403,
+        401,
       );
     }
     try {
@@ -71,10 +76,10 @@ export class AuthController {
     } catch (e) {
       throw new HttpException(
         {
-          status: HttpStatus.FORBIDDEN,
-          error: e,
+          status: HttpStatus.UNAUTHORIZED,
+          error: e.message.message,
         },
-        403,
+        401,
       );
     }
   }

@@ -797,6 +797,7 @@ type Party {
   updatedAt: DateTime!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
   isPublic: Boolean!
+  members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 type PartyConnection {
@@ -808,13 +809,14 @@ type PartyConnection {
 input PartyCreateInput {
   title: String!
   description: String!
-  author: UserCreateOneWithoutPartiesInput!
+  author: UserCreateOneInput!
   games: GameCreateManyInput
   isPublic: Boolean
+  members: UserCreateManyWithoutPartiesInput
 }
 
-input PartyCreateManyWithoutAuthorInput {
-  create: [PartyCreateWithoutAuthorInput!]
+input PartyCreateManyWithoutMembersInput {
+  create: [PartyCreateWithoutMembersInput!]
   connect: [PartyWhereUniqueInput!]
 }
 
@@ -823,9 +825,10 @@ input PartyCreateOneInput {
   connect: PartyWhereUniqueInput
 }
 
-input PartyCreateWithoutAuthorInput {
+input PartyCreateWithoutMembersInput {
   title: String!
   description: String!
+  author: UserCreateOneInput!
   games: GameCreateManyInput
   isPublic: Boolean
 }
@@ -946,17 +949,19 @@ input PartySubscriptionWhereInput {
 input PartyUpdateDataInput {
   title: String
   description: String
-  author: UserUpdateOneRequiredWithoutPartiesInput
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
   isPublic: Boolean
+  members: UserUpdateManyWithoutPartiesInput
 }
 
 input PartyUpdateInput {
   title: String
   description: String
-  author: UserUpdateOneRequiredWithoutPartiesInput
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
   isPublic: Boolean
+  members: UserUpdateManyWithoutPartiesInput
 }
 
 input PartyUpdateManyDataInput {
@@ -971,14 +976,14 @@ input PartyUpdateManyMutationInput {
   isPublic: Boolean
 }
 
-input PartyUpdateManyWithoutAuthorInput {
-  create: [PartyCreateWithoutAuthorInput!]
+input PartyUpdateManyWithoutMembersInput {
+  create: [PartyCreateWithoutMembersInput!]
   delete: [PartyWhereUniqueInput!]
   connect: [PartyWhereUniqueInput!]
   set: [PartyWhereUniqueInput!]
   disconnect: [PartyWhereUniqueInput!]
-  update: [PartyUpdateWithWhereUniqueWithoutAuthorInput!]
-  upsert: [PartyUpsertWithWhereUniqueWithoutAuthorInput!]
+  update: [PartyUpdateWithWhereUniqueWithoutMembersInput!]
+  upsert: [PartyUpsertWithWhereUniqueWithoutMembersInput!]
   deleteMany: [PartyScalarWhereInput!]
   updateMany: [PartyUpdateManyWithWhereNestedInput!]
 }
@@ -995,16 +1000,17 @@ input PartyUpdateOneRequiredInput {
   connect: PartyWhereUniqueInput
 }
 
-input PartyUpdateWithoutAuthorDataInput {
+input PartyUpdateWithoutMembersDataInput {
   title: String
   description: String
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
   isPublic: Boolean
 }
 
-input PartyUpdateWithWhereUniqueWithoutAuthorInput {
+input PartyUpdateWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput!
-  data: PartyUpdateWithoutAuthorDataInput!
+  data: PartyUpdateWithoutMembersDataInput!
 }
 
 input PartyUpsertNestedInput {
@@ -1012,10 +1018,10 @@ input PartyUpsertNestedInput {
   create: PartyCreateInput!
 }
 
-input PartyUpsertWithWhereUniqueWithoutAuthorInput {
+input PartyUpsertWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput!
-  update: PartyUpdateWithoutAuthorDataInput!
-  create: PartyCreateWithoutAuthorInput!
+  update: PartyUpdateWithoutMembersDataInput!
+  create: PartyCreateWithoutMembersInput!
 }
 
 input PartyWhereInput {
@@ -1083,6 +1089,9 @@ input PartyWhereInput {
   games_none: GameWhereInput
   isPublic: Boolean
   isPublic_not: Boolean
+  members_every: UserWhereInput
+  members_some: UserWhereInput
+  members_none: UserWhereInput
   AND: [PartyWhereInput!]
   OR: [PartyWhereInput!]
   NOT: [PartyWhereInput!]
@@ -1138,6 +1147,7 @@ type User {
   updatedAt: DateTime!
   deleted: Boolean!
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 type UserConnection {
@@ -1151,11 +1161,12 @@ input UserCreateInput {
   firstName: String!
   lastName: String!
   password: String!
-  parties: PartyCreateManyWithoutAuthorInput
+  parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserCreateManyInput {
@@ -1168,13 +1179,13 @@ input UserCreateManyWithoutChatsInput {
   connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
+input UserCreateManyWithoutPartiesInput {
+  create: [UserCreateWithoutPartiesInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateOneWithoutPartiesInput {
-  create: UserCreateWithoutPartiesInput
+input UserCreateOneInput {
+  create: UserCreateInput
   connect: UserWhereUniqueInput
 }
 
@@ -1183,10 +1194,11 @@ input UserCreateWithoutChatsInput {
   firstName: String!
   lastName: String!
   password: String!
-  parties: PartyCreateManyWithoutAuthorInput
+  parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserCreateWithoutPartiesInput {
@@ -1198,6 +1210,7 @@ input UserCreateWithoutPartiesInput {
   chats: ChatCreateManyWithoutMembersInput
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 type UserEdge {
@@ -1224,6 +1237,8 @@ enum UserOrderByInput {
   deleted_DESC
   socialmedia_ASC
   socialmedia_DESC
+  avatar_ASC
+  avatar_DESC
 }
 
 type UserPreviousValues {
@@ -1236,6 +1251,7 @@ type UserPreviousValues {
   updatedAt: DateTime!
   deleted: Boolean!
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserScalarWhereInput {
@@ -1331,6 +1347,20 @@ input UserScalarWhereInput {
   socialmedia_not: SocialMediaType
   socialmedia_in: [SocialMediaType!]
   socialmedia_not_in: [SocialMediaType!]
+  avatar: String
+  avatar_not: String
+  avatar_in: [String!]
+  avatar_not_in: [String!]
+  avatar_lt: String
+  avatar_lte: String
+  avatar_gt: String
+  avatar_gte: String
+  avatar_contains: String
+  avatar_not_contains: String
+  avatar_starts_with: String
+  avatar_not_starts_with: String
+  avatar_ends_with: String
+  avatar_not_ends_with: String
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
@@ -1359,11 +1389,12 @@ input UserUpdateDataInput {
   firstName: String
   lastName: String
   password: String
-  parties: PartyUpdateManyWithoutAuthorInput
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateInput {
@@ -1371,11 +1402,12 @@ input UserUpdateInput {
   firstName: String
   lastName: String
   password: String
-  parties: PartyUpdateManyWithoutAuthorInput
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateManyDataInput {
@@ -1385,6 +1417,7 @@ input UserUpdateManyDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateManyInput {
@@ -1406,6 +1439,7 @@ input UserUpdateManyMutationInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -1416,6 +1450,18 @@ input UserUpdateManyWithoutChatsInput {
   disconnect: [UserWhereUniqueInput!]
   update: [UserUpdateWithWhereUniqueWithoutChatsInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutChatsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutPartiesInput {
+  create: [UserCreateWithoutPartiesInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutPartiesInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutPartiesInput!]
   deleteMany: [UserScalarWhereInput!]
   updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
@@ -1432,22 +1478,16 @@ input UserUpdateOneRequiredInput {
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutPartiesInput {
-  create: UserCreateWithoutPartiesInput
-  update: UserUpdateWithoutPartiesDataInput
-  upsert: UserUpsertWithoutPartiesInput
-  connect: UserWhereUniqueInput
-}
-
 input UserUpdateWithoutChatsDataInput {
   email: String
   firstName: String
   lastName: String
   password: String
-  parties: PartyUpdateManyWithoutAuthorInput
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -1459,6 +1499,7 @@ input UserUpdateWithoutPartiesDataInput {
   chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -1471,14 +1512,14 @@ input UserUpdateWithWhereUniqueWithoutChatsInput {
   data: UserUpdateWithoutChatsDataInput!
 }
 
+input UserUpdateWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutPartiesDataInput!
+}
+
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
-}
-
-input UserUpsertWithoutPartiesInput {
-  update: UserUpdateWithoutPartiesDataInput!
-  create: UserCreateWithoutPartiesInput!
 }
 
 input UserUpsertWithWhereUniqueNestedInput {
@@ -1491,6 +1532,12 @@ input UserUpsertWithWhereUniqueWithoutChatsInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutChatsDataInput!
   create: UserCreateWithoutChatsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutPartiesDataInput!
+  create: UserCreateWithoutPartiesInput!
 }
 
 input UserWhereInput {
@@ -1595,6 +1642,20 @@ input UserWhereInput {
   socialmedia_not: SocialMediaType
   socialmedia_in: [SocialMediaType!]
   socialmedia_not_in: [SocialMediaType!]
+  avatar: String
+  avatar_not: String
+  avatar_in: [String!]
+  avatar_not_in: [String!]
+  avatar_lt: String
+  avatar_lte: String
+  avatar_gt: String
+  avatar_gte: String
+  avatar_contains: String
+  avatar_not_contains: String
+  avatar_starts_with: String
+  avatar_not_starts_with: String
+  avatar_ends_with: String
+  avatar_not_ends_with: String
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

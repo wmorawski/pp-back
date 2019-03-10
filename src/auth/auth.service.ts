@@ -2,16 +2,18 @@ import { JwtService } from '@nestjs/jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as jwt from 'jsonwebtoken';
-import { User } from 'generated/prisma-client';
 import { LoginPayload, AuthPayload, JwtPayload } from './auth.types';
 import { prisma } from '../../generated/prisma-client';
 import * as bcrypt from 'bcrypt';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { User } from 'src/prisma/prisma.binding';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    private readonly prisma: PrismaService,
   ) {}
 
   async createToken(id: string, email: string) {
@@ -35,15 +37,15 @@ export class AuthService {
   }
 
   async login(payload: LoginPayload): Promise<User> {
-    const user = await prisma.user({ email: payload.email });
+    const user = await this.prisma.query.user({ where: {email: payload.email} });
 
     if (!user) {
-      throw new Error(`No user found for email: ${payload.email}`);
+      throw new UnauthorizedException(`No user found for email: ${payload.email}`);
     }
 
     const passwordValid = await this.compare(payload.password, user.password);
     if (!passwordValid) {
-      throw new Error('Invalid password');
+      throw new UnauthorizedException('Invalid password');
     }
     return user;
   }
@@ -53,7 +55,10 @@ export class AuthService {
   createAuthPayload(user: User): AuthPayload {
     return {
       token: this.jwtService.sign({ userId: user.id }),
-      user,
+      user: ({
+        ...user,
+        password: null
+      }),
     };
   }
 }

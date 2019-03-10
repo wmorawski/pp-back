@@ -1,4 +1,5 @@
-import { User } from 'generated/prisma-client';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { User } from 'src/prisma/prisma.binding';
 
 export interface JwtPayload {
   userId: string;

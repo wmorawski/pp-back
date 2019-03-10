@@ -42,7 +42,7 @@ import { AuthModule } from './auth/auth.module';
     {
       provide: ConfigService,
       useValue: new ConfigService(
-        `${process.env.NODE_ENV ? process.env.NODE_ENV : 'developement'}.env`,
+        `${process.env.NODE_ENV ? process.env.NODE_ENV : 'development'}.env`,
       ),
     },
     AuthService,

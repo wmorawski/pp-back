@@ -55,7 +55,7 @@ export class AuthController {
 
   @Post('signin')
   @ApiOperation({ title: 'Login user' })
-  async signinUser(@Body() body: LoginPayload) {
+  async signinUser(@Body() body: LoginUserDto /* Potrzebuje tutaj tego DTO zeby Swagger dobrze robil docsy */) {
     if (!(body && body.email && body.password)) {
       throw new HttpException(
         {
@@ -72,7 +72,7 @@ export class AuthController {
       throw new HttpException(
         {
           status: HttpStatus.FORBIDDEN,
-          error: 'Username or password wrong!',
+          error: e,
         },
         403,
       );

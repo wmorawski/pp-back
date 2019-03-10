@@ -12,7 +12,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  @UseGuards(AuthGuard('bearer'))
+  @UseGuards(AuthGuard())
   @ApiOperation({ title: 'Return paginated list of users' })
   @ApiResponse({
     status: 200,

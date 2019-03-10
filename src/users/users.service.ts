@@ -11,7 +11,7 @@ export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
   private saltRounds = 10;
   async getUsers(): Promise<User[]> {
-    const users = await prisma.users();
+    const users = await this.prisma.query.users({});
     return users.map((user: User) => ({
       ...user,
       password: null,
@@ -23,7 +23,7 @@ export class UsersService {
     const password = await this.getHash(payload.password);
     // better error message needed here
     // prisma client nie potrzebuje dopisku 'mutation' - wygenerowany prisma-client sobie poradzi
-    return await prisma.createUser({
+    return await this.prisma.mutation.createUser({
       data: {
         ...payload,
         password,
@@ -32,7 +32,7 @@ export class UsersService {
   }
   async findOne(whereQuery: UserWhereInput): Promise<User> {
     // jak wyzej z mutation
-    return await prisma.user({ where: whereQuery });
+    return await this.prisma.query.user({ where: whereQuery });
   }
   async getHash(password: string | undefined): Promise<string> {
     return bcrypt.hash(password, this.saltRounds);

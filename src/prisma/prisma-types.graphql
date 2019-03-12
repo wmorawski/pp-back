@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Sat Mar 09 2019 07:57:18 GMT+0100 (Central European Standard Time)
+# timestamp: Tue Mar 12 2019 10:49:24 GMT+0100 (Central European Standard Time)
 
 type AggregateChat {
   count: Int!
@@ -1420,6 +1420,7 @@ type Party implements Node {
   updatedAt: DateTime!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
   isPublic: Boolean!
+  members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -1436,12 +1437,13 @@ input PartyCreateInput {
   title: String!
   description: String!
   isPublic: Boolean
-  author: UserCreateOneWithoutPartiesInput!
+  author: UserCreateOneInput!
   games: GameCreateManyInput
+  members: UserCreateManyWithoutPartiesInput
 }
 
-input PartyCreateManyWithoutAuthorInput {
-  create: [PartyCreateWithoutAuthorInput!]
+input PartyCreateManyWithoutMembersInput {
+  create: [PartyCreateWithoutMembersInput!]
   connect: [PartyWhereUniqueInput!]
 }
 
@@ -1450,10 +1452,11 @@ input PartyCreateOneInput {
   connect: PartyWhereUniqueInput
 }
 
-input PartyCreateWithoutAuthorInput {
+input PartyCreateWithoutMembersInput {
   title: String!
   description: String!
   isPublic: Boolean
+  author: UserCreateOneInput!
   games: GameCreateManyInput
 }
 
@@ -1712,16 +1715,18 @@ input PartyUpdateDataInput {
   title: String
   description: String
   isPublic: Boolean
-  author: UserUpdateOneRequiredWithoutPartiesInput
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
+  members: UserUpdateManyWithoutPartiesInput
 }
 
 input PartyUpdateInput {
   title: String
   description: String
   isPublic: Boolean
-  author: UserUpdateOneRequiredWithoutPartiesInput
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
+  members: UserUpdateManyWithoutPartiesInput
 }
 
 input PartyUpdateManyDataInput {
@@ -1736,16 +1741,16 @@ input PartyUpdateManyMutationInput {
   isPublic: Boolean
 }
 
-input PartyUpdateManyWithoutAuthorInput {
-  create: [PartyCreateWithoutAuthorInput!]
+input PartyUpdateManyWithoutMembersInput {
+  create: [PartyCreateWithoutMembersInput!]
   connect: [PartyWhereUniqueInput!]
   set: [PartyWhereUniqueInput!]
   disconnect: [PartyWhereUniqueInput!]
   delete: [PartyWhereUniqueInput!]
-  update: [PartyUpdateWithWhereUniqueWithoutAuthorInput!]
+  update: [PartyUpdateWithWhereUniqueWithoutMembersInput!]
   updateMany: [PartyUpdateManyWithWhereNestedInput!]
   deleteMany: [PartyScalarWhereInput!]
-  upsert: [PartyUpsertWithWhereUniqueWithoutAuthorInput!]
+  upsert: [PartyUpsertWithWhereUniqueWithoutMembersInput!]
 }
 
 input PartyUpdateManyWithWhereNestedInput {
@@ -1760,16 +1765,17 @@ input PartyUpdateOneRequiredInput {
   upsert: PartyUpsertNestedInput
 }
 
-input PartyUpdateWithoutAuthorDataInput {
+input PartyUpdateWithoutMembersDataInput {
   title: String
   description: String
   isPublic: Boolean
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
 }
 
-input PartyUpdateWithWhereUniqueWithoutAuthorInput {
+input PartyUpdateWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput!
-  data: PartyUpdateWithoutAuthorDataInput!
+  data: PartyUpdateWithoutMembersDataInput!
 }
 
 input PartyUpsertNestedInput {
@@ -1777,10 +1783,10 @@ input PartyUpsertNestedInput {
   create: PartyCreateInput!
 }
 
-input PartyUpsertWithWhereUniqueWithoutAuthorInput {
+input PartyUpsertWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput!
-  update: PartyUpdateWithoutAuthorDataInput!
-  create: PartyCreateWithoutAuthorInput!
+  update: PartyUpdateWithoutMembersDataInput!
+  create: PartyCreateWithoutMembersInput!
 }
 
 input PartyWhereInput {
@@ -1964,6 +1970,9 @@ input PartyWhereInput {
   games_every: GameWhereInput
   games_some: GameWhereInput
   games_none: GameWhereInput
+  members_every: UserWhereInput
+  members_some: UserWhereInput
+  members_none: UserWhereInput
 }
 
 input PartyWhereUniqueInput {
@@ -2016,11 +2025,13 @@ type User implements Node {
   password: String!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  pendingInvitations(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 """A connection to a list of items."""
@@ -2040,8 +2051,10 @@ input UserCreateInput {
   password: String!
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyCreateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
+  pendingInvitations: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
 }
 
@@ -2055,13 +2068,13 @@ input UserCreateManyWithoutChatsInput {
   connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
+input UserCreateManyWithoutPartiesInput {
+  create: [UserCreateWithoutPartiesInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateOneWithoutPartiesInput {
-  create: UserCreateWithoutPartiesInput
+input UserCreateOneInput {
+  create: UserCreateInput
   connect: UserWhereUniqueInput
 }
 
@@ -2072,8 +2085,10 @@ input UserCreateWithoutChatsInput {
   password: String!
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyCreateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
+  pendingInvitations: UserCreateManyInput
 }
 
 input UserCreateWithoutPartiesInput {
@@ -2083,7 +2098,9 @@ input UserCreateWithoutPartiesInput {
   password: String!
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
   friends: UserCreateManyInput
+  pendingInvitations: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
 }
 
@@ -2115,6 +2132,8 @@ enum UserOrderByInput {
   deleted_DESC
   socialmedia_ASC
   socialmedia_DESC
+  avatar_ASC
+  avatar_DESC
 }
 
 type UserPreviousValues {
@@ -2127,6 +2146,7 @@ type UserPreviousValues {
   updatedAt: DateTime!
   deleted: Boolean!
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserScalarWhereInput {
@@ -2396,6 +2416,46 @@ input UserScalarWhereInput {
 
   """All values that are not contained in given list."""
   socialmedia_not_in: [SocialMediaType!]
+  avatar: String
+
+  """All values that are not equal to given value."""
+  avatar_not: String
+
+  """All values that are contained in given list."""
+  avatar_in: [String!]
+
+  """All values that are not contained in given list."""
+  avatar_not_in: [String!]
+
+  """All values less than the given value."""
+  avatar_lt: String
+
+  """All values less than or equal the given value."""
+  avatar_lte: String
+
+  """All values greater than the given value."""
+  avatar_gt: String
+
+  """All values greater than or equal the given value."""
+  avatar_gte: String
+
+  """All values containing the given string."""
+  avatar_contains: String
+
+  """All values not containing the given string."""
+  avatar_not_contains: String
+
+  """All values starting with the given string."""
+  avatar_starts_with: String
+
+  """All values not starting with the given string."""
+  avatar_not_starts_with: String
+
+  """All values ending with the given string."""
+  avatar_ends_with: String
+
+  """All values not ending with the given string."""
+  avatar_not_ends_with: String
 }
 
 type UserSubscriptionPayload {
@@ -2444,8 +2504,10 @@ input UserUpdateDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyUpdateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
 
@@ -2456,8 +2518,10 @@ input UserUpdateInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyUpdateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
 
@@ -2468,6 +2532,7 @@ input UserUpdateManyDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateManyInput {
@@ -2489,6 +2554,7 @@ input UserUpdateManyMutationInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -2503,6 +2569,18 @@ input UserUpdateManyWithoutChatsInput {
   upsert: [UserUpsertWithWhereUniqueWithoutChatsInput!]
 }
 
+input UserUpdateManyWithoutPartiesInput {
+  create: [UserCreateWithoutPartiesInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutPartiesInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutPartiesInput!]
+}
+
 input UserUpdateManyWithWhereNestedInput {
   where: UserScalarWhereInput!
   data: UserUpdateManyDataInput!
@@ -2515,13 +2593,6 @@ input UserUpdateOneRequiredInput {
   upsert: UserUpsertNestedInput
 }
 
-input UserUpdateOneRequiredWithoutPartiesInput {
-  create: UserCreateWithoutPartiesInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateWithoutPartiesDataInput
-  upsert: UserUpsertWithoutPartiesInput
-}
-
 input UserUpdateWithoutChatsDataInput {
   email: String
   firstName: String
@@ -2529,8 +2600,10 @@ input UserUpdateWithoutChatsDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyUpdateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyInput
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -2540,7 +2613,9 @@ input UserUpdateWithoutPartiesDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
   friends: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
 
@@ -2554,14 +2629,14 @@ input UserUpdateWithWhereUniqueWithoutChatsInput {
   data: UserUpdateWithoutChatsDataInput!
 }
 
+input UserUpdateWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutPartiesDataInput!
+}
+
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
-}
-
-input UserUpsertWithoutPartiesInput {
-  update: UserUpdateWithoutPartiesDataInput!
-  create: UserCreateWithoutPartiesInput!
 }
 
 input UserUpsertWithWhereUniqueNestedInput {
@@ -2574,6 +2649,12 @@ input UserUpsertWithWhereUniqueWithoutChatsInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutChatsDataInput!
   create: UserCreateWithoutChatsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutPartiesDataInput!
+  create: UserCreateWithoutPartiesInput!
 }
 
 input UserWhereInput {
@@ -2843,12 +2924,55 @@ input UserWhereInput {
 
   """All values that are not contained in given list."""
   socialmedia_not_in: [SocialMediaType!]
+  avatar: String
+
+  """All values that are not equal to given value."""
+  avatar_not: String
+
+  """All values that are contained in given list."""
+  avatar_in: [String!]
+
+  """All values that are not contained in given list."""
+  avatar_not_in: [String!]
+
+  """All values less than the given value."""
+  avatar_lt: String
+
+  """All values less than or equal the given value."""
+  avatar_lte: String
+
+  """All values greater than the given value."""
+  avatar_gt: String
+
+  """All values greater than or equal the given value."""
+  avatar_gte: String
+
+  """All values containing the given string."""
+  avatar_contains: String
+
+  """All values not containing the given string."""
+  avatar_not_contains: String
+
+  """All values starting with the given string."""
+  avatar_starts_with: String
+
+  """All values not starting with the given string."""
+  avatar_not_starts_with: String
+
+  """All values ending with the given string."""
+  avatar_ends_with: String
+
+  """All values not ending with the given string."""
+  avatar_not_ends_with: String
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput
   friends_every: UserWhereInput
   friends_some: UserWhereInput
   friends_none: UserWhereInput
+  pendingInvitations_every: UserWhereInput
+  pendingInvitations_some: UserWhereInput
+  pendingInvitations_none: UserWhereInput
   chats_every: ChatWhereInput
   chats_some: ChatWhereInput
   chats_none: ChatWhereInput

@@ -1,7 +1,8 @@
 import { SignupPayload } from './../auth/auth.types';
 import { UserWhereInput, UserCreateInput } from './../prisma/prisma.binding';
 import { Injectable } from '@nestjs/common';
-import { User, prisma } from '../../generated/prisma-client';
+import { prisma } from '../../generated/prisma-client';
+import { User } from '../prisma/prisma.binding';
 import { CreateUserDto } from './create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -42,5 +43,19 @@ export class UsersService {
     hash: string | undefined,
   ): Promise<boolean> {
     return bcrypt.compare(password, hash);
+  }
+  async inviteToFriends(args, info): Promise<any> {
+    return await this.prisma.mutation.updateUser({
+      data: {
+        pendingInvitations: {
+          connect: {
+            id: args.sender
+          }
+        }
+      },
+      where: {
+        id: args.receiver
+      }
+    })
   }
 }

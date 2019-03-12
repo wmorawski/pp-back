@@ -5,7 +5,8 @@ type User {
   lastName: String!
   password: String!
   parties: [Party!]! @relation(name: "UserParties")
-  friends: [User!]!
+  friends: [User!]! @relation(name: "UserFriends")
+  pendingInvitations: [User!]! @relation(name: "PendingFriendInvitations")
   chats: [Chat!]!
   createdAt: DateTime!
   updatedAt: DateTime!

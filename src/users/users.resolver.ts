@@ -1,5 +1,5 @@
 import { UsersService } from 'src/users/users.service';
-import { Query, Resolver, Args, Info, Context } from '@nestjs/graphql';
+import { Query, Resolver, Args, Info, Context, Mutation } from '@nestjs/graphql';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
 import { UseGuards } from '@nestjs/common';
@@ -13,6 +13,7 @@ export class UsersResolver {
   ) {}
 
   @Query('getUsers')
+  @UseGuards(GqlAuthGuard)
   async getUsers(@Args() args, @Info() info): Promise<User[]> {
     return await this.prisma.query.users(args, info);
   }
@@ -22,5 +23,10 @@ export class UsersResolver {
   @UseGuards(GqlAuthGuard)
   async me(@Context() { req }): Promise<User> {
     return await this.usersService.findOne({ id: req.user.userId });
+  }
+  @Mutation('inviteToFriends')
+  @UseGuards(GqlAuthGuard)
+  async inviteToFriends(@Args() args, @Info() info): Promise<any> {
+    return await this.usersService.inviteToFriends(args, info);
   }
 }

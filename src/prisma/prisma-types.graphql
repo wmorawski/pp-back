@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Tue Mar 05 2019 14:42:18 GMT+0100 (Środkowoeuropejski czas stand.)
+# timestamp: Sat Mar 09 2019 07:57:18 GMT+0100 (Central European Standard Time)
 
 type AggregateChat {
   count: Int!
@@ -1994,6 +1994,12 @@ type Query {
   ): Node
 }
 
+enum SocialMediaType {
+  FACEBOOK
+  TWITTER
+  GOOGLE
+}
+
 type Subscription {
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
@@ -2004,8 +2010,9 @@ type Subscription {
 
 type User implements Node {
   id: ID!
-  username: String!
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -2013,6 +2020,7 @@ type User implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
+  socialmedia: SocialMediaType
 }
 
 """A connection to a list of items."""
@@ -2026,10 +2034,12 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  username: String!
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   deleted: Boolean
+  socialmedia: SocialMediaType
   parties: PartyCreateManyWithoutAuthorInput
   friends: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
@@ -2056,19 +2066,23 @@ input UserCreateOneWithoutPartiesInput {
 }
 
 input UserCreateWithoutChatsInput {
-  username: String!
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   deleted: Boolean
+  socialmedia: SocialMediaType
   parties: PartyCreateManyWithoutAuthorInput
   friends: UserCreateManyInput
 }
 
 input UserCreateWithoutPartiesInput {
-  username: String!
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   deleted: Boolean
+  socialmedia: SocialMediaType
   friends: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
 }
@@ -2085,10 +2099,12 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  username_ASC
-  username_DESC
   email_ASC
   email_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
   password_ASC
   password_DESC
   createdAt_ASC
@@ -2097,16 +2113,20 @@ enum UserOrderByInput {
   updatedAt_DESC
   deleted_ASC
   deleted_DESC
+  socialmedia_ASC
+  socialmedia_DESC
 }
 
 type UserPreviousValues {
   id: ID!
-  username: String!
   email: String!
+  firstName: String!
+  lastName: String!
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
+  socialmedia: SocialMediaType
 }
 
 input UserScalarWhereInput {
@@ -2158,46 +2178,6 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  username: String
-
-  """All values that are not equal to given value."""
-  username_not: String
-
-  """All values that are contained in given list."""
-  username_in: [String!]
-
-  """All values that are not contained in given list."""
-  username_not_in: [String!]
-
-  """All values less than the given value."""
-  username_lt: String
-
-  """All values less than or equal the given value."""
-  username_lte: String
-
-  """All values greater than the given value."""
-  username_gt: String
-
-  """All values greater than or equal the given value."""
-  username_gte: String
-
-  """All values containing the given string."""
-  username_contains: String
-
-  """All values not containing the given string."""
-  username_not_contains: String
-
-  """All values starting with the given string."""
-  username_starts_with: String
-
-  """All values not starting with the given string."""
-  username_not_starts_with: String
-
-  """All values ending with the given string."""
-  username_ends_with: String
-
-  """All values not ending with the given string."""
-  username_not_ends_with: String
   email: String
 
   """All values that are not equal to given value."""
@@ -2238,6 +2218,86 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  firstName: String
+
+  """All values that are not equal to given value."""
+  firstName_not: String
+
+  """All values that are contained in given list."""
+  firstName_in: [String!]
+
+  """All values that are not contained in given list."""
+  firstName_not_in: [String!]
+
+  """All values less than the given value."""
+  firstName_lt: String
+
+  """All values less than or equal the given value."""
+  firstName_lte: String
+
+  """All values greater than the given value."""
+  firstName_gt: String
+
+  """All values greater than or equal the given value."""
+  firstName_gte: String
+
+  """All values containing the given string."""
+  firstName_contains: String
+
+  """All values not containing the given string."""
+  firstName_not_contains: String
+
+  """All values starting with the given string."""
+  firstName_starts_with: String
+
+  """All values not starting with the given string."""
+  firstName_not_starts_with: String
+
+  """All values ending with the given string."""
+  firstName_ends_with: String
+
+  """All values not ending with the given string."""
+  firstName_not_ends_with: String
+  lastName: String
+
+  """All values that are not equal to given value."""
+  lastName_not: String
+
+  """All values that are contained in given list."""
+  lastName_in: [String!]
+
+  """All values that are not contained in given list."""
+  lastName_not_in: [String!]
+
+  """All values less than the given value."""
+  lastName_lt: String
+
+  """All values less than or equal the given value."""
+  lastName_lte: String
+
+  """All values greater than the given value."""
+  lastName_gt: String
+
+  """All values greater than or equal the given value."""
+  lastName_gte: String
+
+  """All values containing the given string."""
+  lastName_contains: String
+
+  """All values not containing the given string."""
+  lastName_not_contains: String
+
+  """All values starting with the given string."""
+  lastName_starts_with: String
+
+  """All values not starting with the given string."""
+  lastName_not_starts_with: String
+
+  """All values ending with the given string."""
+  lastName_ends_with: String
+
+  """All values not ending with the given string."""
+  lastName_not_ends_with: String
   password: String
 
   """All values that are not equal to given value."""
@@ -2326,6 +2386,16 @@ input UserScalarWhereInput {
 
   """All values that are not equal to given value."""
   deleted_not: Boolean
+  socialmedia: SocialMediaType
+
+  """All values that are not equal to given value."""
+  socialmedia_not: SocialMediaType
+
+  """All values that are contained in given list."""
+  socialmedia_in: [SocialMediaType!]
+
+  """All values that are not contained in given list."""
+  socialmedia_not_in: [SocialMediaType!]
 }
 
 type UserSubscriptionPayload {
@@ -2368,30 +2438,36 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateDataInput {
-  username: String
   email: String
+  firstName: String
+  lastName: String
   password: String
   deleted: Boolean
+  socialmedia: SocialMediaType
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
 
 input UserUpdateInput {
-  username: String
   email: String
+  firstName: String
+  lastName: String
   password: String
   deleted: Boolean
+  socialmedia: SocialMediaType
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
 
 input UserUpdateManyDataInput {
-  username: String
   email: String
+  firstName: String
+  lastName: String
   password: String
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserUpdateManyInput {
@@ -2407,10 +2483,12 @@ input UserUpdateManyInput {
 }
 
 input UserUpdateManyMutationInput {
-  username: String
   email: String
+  firstName: String
+  lastName: String
   password: String
   deleted: Boolean
+  socialmedia: SocialMediaType
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -2445,19 +2523,23 @@ input UserUpdateOneRequiredWithoutPartiesInput {
 }
 
 input UserUpdateWithoutChatsDataInput {
-  username: String
   email: String
+  firstName: String
+  lastName: String
   password: String
   deleted: Boolean
+  socialmedia: SocialMediaType
   parties: PartyUpdateManyWithoutAuthorInput
   friends: UserUpdateManyInput
 }
 
 input UserUpdateWithoutPartiesDataInput {
-  username: String
   email: String
+  firstName: String
+  lastName: String
   password: String
   deleted: Boolean
+  socialmedia: SocialMediaType
   friends: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
@@ -2543,46 +2625,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  username: String
-
-  """All values that are not equal to given value."""
-  username_not: String
-
-  """All values that are contained in given list."""
-  username_in: [String!]
-
-  """All values that are not contained in given list."""
-  username_not_in: [String!]
-
-  """All values less than the given value."""
-  username_lt: String
-
-  """All values less than or equal the given value."""
-  username_lte: String
-
-  """All values greater than the given value."""
-  username_gt: String
-
-  """All values greater than or equal the given value."""
-  username_gte: String
-
-  """All values containing the given string."""
-  username_contains: String
-
-  """All values not containing the given string."""
-  username_not_contains: String
-
-  """All values starting with the given string."""
-  username_starts_with: String
-
-  """All values not starting with the given string."""
-  username_not_starts_with: String
-
-  """All values ending with the given string."""
-  username_ends_with: String
-
-  """All values not ending with the given string."""
-  username_not_ends_with: String
   email: String
 
   """All values that are not equal to given value."""
@@ -2623,6 +2665,86 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  firstName: String
+
+  """All values that are not equal to given value."""
+  firstName_not: String
+
+  """All values that are contained in given list."""
+  firstName_in: [String!]
+
+  """All values that are not contained in given list."""
+  firstName_not_in: [String!]
+
+  """All values less than the given value."""
+  firstName_lt: String
+
+  """All values less than or equal the given value."""
+  firstName_lte: String
+
+  """All values greater than the given value."""
+  firstName_gt: String
+
+  """All values greater than or equal the given value."""
+  firstName_gte: String
+
+  """All values containing the given string."""
+  firstName_contains: String
+
+  """All values not containing the given string."""
+  firstName_not_contains: String
+
+  """All values starting with the given string."""
+  firstName_starts_with: String
+
+  """All values not starting with the given string."""
+  firstName_not_starts_with: String
+
+  """All values ending with the given string."""
+  firstName_ends_with: String
+
+  """All values not ending with the given string."""
+  firstName_not_ends_with: String
+  lastName: String
+
+  """All values that are not equal to given value."""
+  lastName_not: String
+
+  """All values that are contained in given list."""
+  lastName_in: [String!]
+
+  """All values that are not contained in given list."""
+  lastName_not_in: [String!]
+
+  """All values less than the given value."""
+  lastName_lt: String
+
+  """All values less than or equal the given value."""
+  lastName_lte: String
+
+  """All values greater than the given value."""
+  lastName_gt: String
+
+  """All values greater than or equal the given value."""
+  lastName_gte: String
+
+  """All values containing the given string."""
+  lastName_contains: String
+
+  """All values not containing the given string."""
+  lastName_not_contains: String
+
+  """All values starting with the given string."""
+  lastName_starts_with: String
+
+  """All values not starting with the given string."""
+  lastName_not_starts_with: String
+
+  """All values ending with the given string."""
+  lastName_ends_with: String
+
+  """All values not ending with the given string."""
+  lastName_not_ends_with: String
   password: String
 
   """All values that are not equal to given value."""
@@ -2711,6 +2833,16 @@ input UserWhereInput {
 
   """All values that are not equal to given value."""
   deleted_not: Boolean
+  socialmedia: SocialMediaType
+
+  """All values that are not equal to given value."""
+  socialmedia_not: SocialMediaType
+
+  """All values that are contained in given list."""
+  socialmedia_in: [SocialMediaType!]
+
+  """All values that are not contained in given list."""
+  socialmedia_not_in: [SocialMediaType!]
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput
@@ -2724,6 +2856,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
-  username: String
   email: String
 }

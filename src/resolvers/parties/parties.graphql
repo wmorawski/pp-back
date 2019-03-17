@@ -2,12 +2,12 @@ type Query {
   getParties: [Party]!
 }
 type Mutation {
-  createParty(
+  createPartyV(
     title: String!
     description: String!
-    author: User!
-    members: [User!]!
-    games: [Game!]
-    location: Location!
+    author: UserCreateOneInput!
+    members: UserCreateManyWithoutPartiesInput!
+    games: GameCreateManyInput
+    location: LocationCreateOneInput!
   ): Party!
 }

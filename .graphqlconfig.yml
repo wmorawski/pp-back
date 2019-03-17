@@ -2,11 +2,7 @@ projects:
   database:
     schemaPath: src/prisma/prisma-types.graphql
     extensions:
-      endpoints:
-        default: 
-          url: ${env:PRISMA_ENDPOINT}
-          headers:
-            Authorization: "Bearer ${env:PRISMA_TOKEN}"
+      prisma: prisma.yml
       codegen:
         - generator: prisma-binding
           language: typescript

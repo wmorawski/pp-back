@@ -6,16 +6,19 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 export interface Query {
     chats: <T = Array<Chat | null>>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     messages: <T = Array<Message | null>>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    locations: <T = Array<Location | null>>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     parties: <T = Array<Party | null>>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     games: <T = Array<Game | null>>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     chat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     message: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     party: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     game: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     chatsConnection: <T = ChatConnection>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     messagesConnection: <T = MessageConnection>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    locationsConnection: <T = LocationConnection>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partiesConnection: <T = PartyConnection>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     gamesConnection: <T = GameConnection>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -25,30 +28,36 @@ export interface Query {
 export interface Mutation {
     createChat: <T = Chat>(args: { data: ChatCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createMessage: <T = Message>(args: { data: MessageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createParty: <T = Party>(args: { data: PartyCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createGame: <T = Game>(args: { data: GameCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateChat: <T = Chat | null>(args: { data: ChatUpdateInput, where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateMessage: <T = Message | null>(args: { data: MessageUpdateInput, where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateParty: <T = Party | null>(args: { data: PartyUpdateInput, where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateGame: <T = Game | null>(args: { data: GameUpdateInput, where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteChat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteMessage: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteLocation: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteParty: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteGame: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertChat: <T = Chat>(args: { where: ChatWhereUniqueInput, create: ChatCreateInput, update: ChatUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertMessage: <T = Message>(args: { where: MessageWhereUniqueInput, create: MessageCreateInput, update: MessageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertLocation: <T = Location>(args: { where: LocationWhereUniqueInput, create: LocationCreateInput, update: LocationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertParty: <T = Party>(args: { where: PartyWhereUniqueInput, create: PartyCreateInput, update: PartyUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertGame: <T = Game>(args: { where: GameWhereUniqueInput, create: GameCreateInput, update: GameUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyMessages: <T = BatchPayload>(args: { data: MessageUpdateManyMutationInput, where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyLocations: <T = BatchPayload>(args: { data: LocationUpdateManyMutationInput, where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyParties: <T = BatchPayload>(args: { data: PartyUpdateManyMutationInput, where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyGames: <T = BatchPayload>(args: { data: GameUpdateManyMutationInput, where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyChats: <T = BatchPayload>(args: { where?: ChatWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyMessages: <T = BatchPayload>(args: { where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyLocations: <T = BatchPayload>(args: { where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyParties: <T = BatchPayload>(args: { where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyGames: <T = BatchPayload>(args: { where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
@@ -57,6 +66,7 @@ export interface Mutation {
 export interface Subscription {
     chat: <T = ChatSubscriptionPayload | null>(args: { where?: ChatSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     message: <T = MessageSubscriptionPayload | null>(args: { where?: MessageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    location: <T = LocationSubscriptionPayload | null>(args: { where?: LocationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     party: <T = PartySubscriptionPayload | null>(args: { where?: PartySubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     game: <T = GameSubscriptionPayload | null>(args: { where?: GameSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
@@ -65,6 +75,7 @@ export interface Subscription {
 export interface Exists {
   Chat: (where?: ChatWhereInput) => Promise<boolean>
   Message: (where?: MessageWhereInput) => Promise<boolean>
+  Location: (where?: LocationWhereInput) => Promise<boolean>
   Party: (where?: PartyWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
   Game: (where?: GameWhereInput) => Promise<boolean>
@@ -97,6 +108,10 @@ const typeDefs = `type AggregateChat {
 }
 
 type AggregateGame {
+  count: Int!
+}
+
+type AggregateLocation {
   count: Int!
 }
 
@@ -1013,6 +1028,273 @@ input GameWhereUniqueInput {
   title: String
 }
 
+type Location implements Node {
+  id: ID!
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+"""A connection to a list of items."""
+type LocationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LocationEdge]!
+  aggregate: AggregateLocation!
+}
+
+input LocationCreateInput {
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+input LocationCreateOneInput {
+  create: LocationCreateInput
+  connect: LocationWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type LocationEdge {
+  """The item at the end of the edge."""
+  node: Location!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LocationOrderByInput {
+  id_ASC
+  id_DESC
+  placeName_ASC
+  placeName_DESC
+  latitude_ASC
+  latitude_DESC
+  longitude_ASC
+  longitude_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type LocationPreviousValues {
+  id: ID!
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+type LocationSubscriptionPayload {
+  mutation: MutationType!
+  node: Location
+  updatedFields: [String!]
+  previousValues: LocationPreviousValues
+}
+
+input LocationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LocationWhereInput
+}
+
+input LocationUpdateDataInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateManyMutationInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateOneRequiredInput {
+  create: LocationCreateInput
+  connect: LocationWhereUniqueInput
+  update: LocationUpdateDataInput
+  upsert: LocationUpsertNestedInput
+}
+
+input LocationUpsertNestedInput {
+  update: LocationUpdateDataInput!
+  create: LocationCreateInput!
+}
+
+input LocationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  placeName: String
+
+  """All values that are not equal to given value."""
+  placeName_not: String
+
+  """All values that are contained in given list."""
+  placeName_in: [String!]
+
+  """All values that are not contained in given list."""
+  placeName_not_in: [String!]
+
+  """All values less than the given value."""
+  placeName_lt: String
+
+  """All values less than or equal the given value."""
+  placeName_lte: String
+
+  """All values greater than the given value."""
+  placeName_gt: String
+
+  """All values greater than or equal the given value."""
+  placeName_gte: String
+
+  """All values containing the given string."""
+  placeName_contains: String
+
+  """All values not containing the given string."""
+  placeName_not_contains: String
+
+  """All values starting with the given string."""
+  placeName_starts_with: String
+
+  """All values not starting with the given string."""
+  placeName_not_starts_with: String
+
+  """All values ending with the given string."""
+  placeName_ends_with: String
+
+  """All values not ending with the given string."""
+  placeName_not_ends_with: String
+  latitude: Float
+
+  """All values that are not equal to given value."""
+  latitude_not: Float
+
+  """All values that are contained in given list."""
+  latitude_in: [Float!]
+
+  """All values that are not contained in given list."""
+  latitude_not_in: [Float!]
+
+  """All values less than the given value."""
+  latitude_lt: Float
+
+  """All values less than or equal the given value."""
+  latitude_lte: Float
+
+  """All values greater than the given value."""
+  latitude_gt: Float
+
+  """All values greater than or equal the given value."""
+  latitude_gte: Float
+  longitude: Float
+
+  """All values that are not equal to given value."""
+  longitude_not: Float
+
+  """All values that are contained in given list."""
+  longitude_in: [Float!]
+
+  """All values that are not contained in given list."""
+  longitude_not_in: [Float!]
+
+  """All values less than the given value."""
+  longitude_lt: Float
+
+  """All values less than or equal the given value."""
+  longitude_lte: Float
+
+  """All values greater than the given value."""
+  longitude_gt: Float
+
+  """All values greater than or equal the given value."""
+  longitude_gte: Float
+}
+
+input LocationWhereUniqueInput {
+  id: ID
+}
+
 """
 The \`Long\` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -1446,30 +1728,36 @@ input MessageWhereUniqueInput {
 type Mutation {
   createChat(data: ChatCreateInput!): Chat!
   createMessage(data: MessageCreateInput!): Message!
+  createLocation(data: LocationCreateInput!): Location!
   createParty(data: PartyCreateInput!): Party!
   createUser(data: UserCreateInput!): User!
   createGame(data: GameCreateInput!): Game!
   updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
   deleteChat(where: ChatWhereUniqueInput!): Chat
   deleteMessage(where: MessageWhereUniqueInput!): Message
+  deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteParty(where: PartyWhereUniqueInput!): Party
   deleteUser(where: UserWhereUniqueInput!): User
   deleteGame(where: GameWhereUniqueInput!): Game
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
   upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
+  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
   updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
+  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   updateManyParties(data: PartyUpdateManyMutationInput!, where: PartyWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
   deleteManyChats(where: ChatWhereInput): BatchPayload!
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
+  deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyParties(where: PartyWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyGames(where: GameWhereInput): BatchPayload!
@@ -1509,8 +1797,9 @@ type Party implements Node {
   author: User!
   createdAt: DateTime!
   updatedAt: DateTime!
+  location: Location!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
-  isPublic: Boolean!
+  isPublic: Boolean
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
@@ -1529,6 +1818,7 @@ input PartyCreateInput {
   description: String!
   isPublic: Boolean
   author: UserCreateOneInput!
+  location: LocationCreateOneInput!
   games: GameCreateManyInput
   members: UserCreateManyWithoutPartiesInput
 }
@@ -1548,6 +1838,7 @@ input PartyCreateWithoutMembersInput {
   description: String!
   isPublic: Boolean
   author: UserCreateOneInput!
+  location: LocationCreateOneInput!
   games: GameCreateManyInput
 }
 
@@ -1581,7 +1872,7 @@ type PartyPreviousValues {
   description: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  isPublic: Boolean!
+  isPublic: Boolean
 }
 
 input PartyScalarWhereInput {
@@ -1807,6 +2098,7 @@ input PartyUpdateDataInput {
   description: String
   isPublic: Boolean
   author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
   members: UserUpdateManyWithoutPartiesInput
 }
@@ -1816,6 +2108,7 @@ input PartyUpdateInput {
   description: String
   isPublic: Boolean
   author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
   members: UserUpdateManyWithoutPartiesInput
 }
@@ -1861,6 +2154,7 @@ input PartyUpdateWithoutMembersDataInput {
   description: String
   isPublic: Boolean
   author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
 }
 
@@ -2058,6 +2352,7 @@ input PartyWhereInput {
   """All values that are not equal to given value."""
   isPublic_not: Boolean
   author: UserWhereInput
+  location: LocationWhereInput
   games_every: GameWhereInput
   games_some: GameWhereInput
   games_none: GameWhereInput
@@ -2073,16 +2368,19 @@ input PartyWhereUniqueInput {
 type Query {
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
+  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
   chat(where: ChatWhereUniqueInput!): Chat
   message(where: MessageWhereUniqueInput!): Message
+  location(where: LocationWhereUniqueInput!): Location
   party(where: PartyWhereUniqueInput!): Party
   user(where: UserWhereUniqueInput!): User
   game(where: GameWhereUniqueInput!): Game
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
   messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
+  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
@@ -2103,6 +2401,7 @@ enum SocialMediaType {
 type Subscription {
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
@@ -3105,6 +3404,19 @@ export type GameType =   'BOARD' |
   'PC' |
   'CONSOLE'
 
+export type LocationOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'placeName_ASC' |
+  'placeName_DESC' |
+  'latitude_ASC' |
+  'latitude_DESC' |
+  'longitude_ASC' |
+  'longitude_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
 export type MessageOrderByInput =   'id_ASC' |
   'id_DESC' |
   'content_ASC' |
@@ -3541,6 +3853,112 @@ export interface GameWhereUniqueInput {
   title?: String | null
 }
 
+export interface LocationCreateInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+export interface LocationCreateOneInput {
+  create?: LocationCreateInput | null
+  connect?: LocationWhereUniqueInput | null
+}
+
+export interface LocationSubscriptionWhereInput {
+  AND?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
+  OR?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
+  NOT?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: LocationWhereInput | null
+}
+
+export interface LocationUpdateDataInput {
+  placeName?: String | null
+  latitude?: Float | null
+  longitude?: Float | null
+}
+
+export interface LocationUpdateInput {
+  placeName?: String | null
+  latitude?: Float | null
+  longitude?: Float | null
+}
+
+export interface LocationUpdateManyMutationInput {
+  placeName?: String | null
+  latitude?: Float | null
+  longitude?: Float | null
+}
+
+export interface LocationUpdateOneRequiredInput {
+  create?: LocationCreateInput | null
+  connect?: LocationWhereUniqueInput | null
+  update?: LocationUpdateDataInput | null
+  upsert?: LocationUpsertNestedInput | null
+}
+
+export interface LocationUpsertNestedInput {
+  update: LocationUpdateDataInput
+  create: LocationCreateInput
+}
+
+export interface LocationWhereInput {
+  AND?: LocationWhereInput[] | LocationWhereInput | null
+  OR?: LocationWhereInput[] | LocationWhereInput | null
+  NOT?: LocationWhereInput[] | LocationWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  placeName?: String | null
+  placeName_not?: String | null
+  placeName_in?: String[] | String | null
+  placeName_not_in?: String[] | String | null
+  placeName_lt?: String | null
+  placeName_lte?: String | null
+  placeName_gt?: String | null
+  placeName_gte?: String | null
+  placeName_contains?: String | null
+  placeName_not_contains?: String | null
+  placeName_starts_with?: String | null
+  placeName_not_starts_with?: String | null
+  placeName_ends_with?: String | null
+  placeName_not_ends_with?: String | null
+  latitude?: Float | null
+  latitude_not?: Float | null
+  latitude_in?: Float[] | Float | null
+  latitude_not_in?: Float[] | Float | null
+  latitude_lt?: Float | null
+  latitude_lte?: Float | null
+  latitude_gt?: Float | null
+  latitude_gte?: Float | null
+  longitude?: Float | null
+  longitude_not?: Float | null
+  longitude_in?: Float[] | Float | null
+  longitude_not_in?: Float[] | Float | null
+  longitude_lt?: Float | null
+  longitude_lte?: Float | null
+  longitude_gt?: Float | null
+  longitude_gte?: Float | null
+}
+
+export interface LocationWhereUniqueInput {
+  id?: ID_Input | null
+}
+
 export interface MessageCreateInput {
   content: String
   author: UserCreateOneInput
@@ -3726,6 +4144,7 @@ export interface PartyCreateInput {
   description: String
   isPublic?: Boolean | null
   author: UserCreateOneInput
+  location: LocationCreateOneInput
   games?: GameCreateManyInput | null
   members?: UserCreateManyWithoutPartiesInput | null
 }
@@ -3745,6 +4164,7 @@ export interface PartyCreateWithoutMembersInput {
   description: String
   isPublic?: Boolean | null
   author: UserCreateOneInput
+  location: LocationCreateOneInput
   games?: GameCreateManyInput | null
 }
 
@@ -3830,6 +4250,7 @@ export interface PartyUpdateDataInput {
   description?: String | null
   isPublic?: Boolean | null
   author?: UserUpdateOneRequiredInput | null
+  location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
   members?: UserUpdateManyWithoutPartiesInput | null
 }
@@ -3839,6 +4260,7 @@ export interface PartyUpdateInput {
   description?: String | null
   isPublic?: Boolean | null
   author?: UserUpdateOneRequiredInput | null
+  location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
   members?: UserUpdateManyWithoutPartiesInput | null
 }
@@ -3884,6 +4306,7 @@ export interface PartyUpdateWithoutMembersDataInput {
   description?: String | null
   isPublic?: Boolean | null
   author?: UserUpdateOneRequiredInput | null
+  location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
 }
 
@@ -3968,6 +4391,7 @@ export interface PartyWhereInput {
   isPublic?: Boolean | null
   isPublic_not?: Boolean | null
   author?: UserWhereInput | null
+  location?: LocationWhereInput | null
   games_every?: GameWhereInput | null
   games_some?: GameWhereInput | null
   games_none?: GameWhereInput | null
@@ -4468,6 +4892,10 @@ export interface AggregateGame {
   count: Int
 }
 
+export interface AggregateLocation {
+  count: Int
+}
+
 export interface AggregateMessage {
   count: Int
 }
@@ -4569,6 +4997,46 @@ export interface GameSubscriptionPayload {
   previousValues?: GamePreviousValues | null
 }
 
+export interface Location extends Node {
+  id: ID_Output
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface LocationConnection {
+  pageInfo: PageInfo
+  edges: Array<LocationEdge | null>
+  aggregate: AggregateLocation
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface LocationEdge {
+  node: Location
+  cursor: String
+}
+
+export interface LocationPreviousValues {
+  id: ID_Output
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+export interface LocationSubscriptionPayload {
+  mutation: MutationType
+  node?: Location | null
+  updatedFields?: Array<String> | null
+  previousValues?: LocationPreviousValues | null
+}
+
 export interface Message extends Node {
   id: ID_Output
   author: User
@@ -4629,8 +5097,9 @@ export interface Party extends Node {
   author: User
   createdAt: DateTime
   updatedAt: DateTime
+  location: Location
   games?: Array<Game> | null
-  isPublic: Boolean
+  isPublic?: Boolean | null
   members?: Array<User> | null
 }
 
@@ -4659,7 +5128,7 @@ export interface PartyPreviousValues {
   description: String
   createdAt: DateTime
   updatedAt: DateTime
-  isPublic: Boolean
+  isPublic?: Boolean | null
 }
 
 export interface PartySubscriptionPayload {
@@ -4731,6 +5200,11 @@ The `Boolean` scalar type represents `true` or `false`.
 export type Boolean = boolean
 
 export type DateTime = Date | string
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
+*/
+export type Float = number
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.

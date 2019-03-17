@@ -1,11 +1,15 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Tue Mar 12 2019 10:49:24 GMT+0100 (Central European Standard Time)
+# timestamp: Sun Mar 17 2019 23:49:17 GMT+0100 (Środkowoeuropejski czas stand.)
 
 type AggregateChat {
   count: Int!
 }
 
 type AggregateGame {
+  count: Int!
+}
+
+type AggregateLocation {
   count: Int!
 }
 
@@ -922,6 +926,273 @@ input GameWhereUniqueInput {
   title: String
 }
 
+type Location implements Node {
+  id: ID!
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+"""A connection to a list of items."""
+type LocationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LocationEdge]!
+  aggregate: AggregateLocation!
+}
+
+input LocationCreateInput {
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+input LocationCreateOneInput {
+  create: LocationCreateInput
+  connect: LocationWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type LocationEdge {
+  """The item at the end of the edge."""
+  node: Location!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LocationOrderByInput {
+  id_ASC
+  id_DESC
+  placeName_ASC
+  placeName_DESC
+  latitude_ASC
+  latitude_DESC
+  longitude_ASC
+  longitude_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type LocationPreviousValues {
+  id: ID!
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+type LocationSubscriptionPayload {
+  mutation: MutationType!
+  node: Location
+  updatedFields: [String!]
+  previousValues: LocationPreviousValues
+}
+
+input LocationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LocationWhereInput
+}
+
+input LocationUpdateDataInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateManyMutationInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateOneRequiredInput {
+  create: LocationCreateInput
+  connect: LocationWhereUniqueInput
+  update: LocationUpdateDataInput
+  upsert: LocationUpsertNestedInput
+}
+
+input LocationUpsertNestedInput {
+  update: LocationUpdateDataInput!
+  create: LocationCreateInput!
+}
+
+input LocationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LocationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LocationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LocationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  placeName: String
+
+  """All values that are not equal to given value."""
+  placeName_not: String
+
+  """All values that are contained in given list."""
+  placeName_in: [String!]
+
+  """All values that are not contained in given list."""
+  placeName_not_in: [String!]
+
+  """All values less than the given value."""
+  placeName_lt: String
+
+  """All values less than or equal the given value."""
+  placeName_lte: String
+
+  """All values greater than the given value."""
+  placeName_gt: String
+
+  """All values greater than or equal the given value."""
+  placeName_gte: String
+
+  """All values containing the given string."""
+  placeName_contains: String
+
+  """All values not containing the given string."""
+  placeName_not_contains: String
+
+  """All values starting with the given string."""
+  placeName_starts_with: String
+
+  """All values not starting with the given string."""
+  placeName_not_starts_with: String
+
+  """All values ending with the given string."""
+  placeName_ends_with: String
+
+  """All values not ending with the given string."""
+  placeName_not_ends_with: String
+  latitude: Float
+
+  """All values that are not equal to given value."""
+  latitude_not: Float
+
+  """All values that are contained in given list."""
+  latitude_in: [Float!]
+
+  """All values that are not contained in given list."""
+  latitude_not_in: [Float!]
+
+  """All values less than the given value."""
+  latitude_lt: Float
+
+  """All values less than or equal the given value."""
+  latitude_lte: Float
+
+  """All values greater than the given value."""
+  latitude_gt: Float
+
+  """All values greater than or equal the given value."""
+  latitude_gte: Float
+  longitude: Float
+
+  """All values that are not equal to given value."""
+  longitude_not: Float
+
+  """All values that are contained in given list."""
+  longitude_in: [Float!]
+
+  """All values that are not contained in given list."""
+  longitude_not_in: [Float!]
+
+  """All values less than the given value."""
+  longitude_lt: Float
+
+  """All values less than or equal the given value."""
+  longitude_lte: Float
+
+  """All values greater than the given value."""
+  longitude_gt: Float
+
+  """All values greater than or equal the given value."""
+  longitude_gte: Float
+}
+
+input LocationWhereUniqueInput {
+  id: ID
+}
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -1355,30 +1626,36 @@ input MessageWhereUniqueInput {
 type Mutation {
   createChat(data: ChatCreateInput!): Chat!
   createMessage(data: MessageCreateInput!): Message!
+  createLocation(data: LocationCreateInput!): Location!
   createParty(data: PartyCreateInput!): Party!
   createUser(data: UserCreateInput!): User!
   createGame(data: GameCreateInput!): Game!
   updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
   deleteChat(where: ChatWhereUniqueInput!): Chat
   deleteMessage(where: MessageWhereUniqueInput!): Message
+  deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteParty(where: PartyWhereUniqueInput!): Party
   deleteUser(where: UserWhereUniqueInput!): User
   deleteGame(where: GameWhereUniqueInput!): Game
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
   upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
+  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
   updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
+  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   updateManyParties(data: PartyUpdateManyMutationInput!, where: PartyWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
   deleteManyChats(where: ChatWhereInput): BatchPayload!
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
+  deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyParties(where: PartyWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyGames(where: GameWhereInput): BatchPayload!
@@ -1418,8 +1695,9 @@ type Party implements Node {
   author: User!
   createdAt: DateTime!
   updatedAt: DateTime!
+  location: Location!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
-  isPublic: Boolean!
+  isPublic: Boolean
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
@@ -1438,6 +1716,7 @@ input PartyCreateInput {
   description: String!
   isPublic: Boolean
   author: UserCreateOneInput!
+  location: LocationCreateOneInput!
   games: GameCreateManyInput
   members: UserCreateManyWithoutPartiesInput
 }
@@ -1457,6 +1736,7 @@ input PartyCreateWithoutMembersInput {
   description: String!
   isPublic: Boolean
   author: UserCreateOneInput!
+  location: LocationCreateOneInput!
   games: GameCreateManyInput
 }
 
@@ -1490,7 +1770,7 @@ type PartyPreviousValues {
   description: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  isPublic: Boolean!
+  isPublic: Boolean
 }
 
 input PartyScalarWhereInput {
@@ -1716,6 +1996,7 @@ input PartyUpdateDataInput {
   description: String
   isPublic: Boolean
   author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
   members: UserUpdateManyWithoutPartiesInput
 }
@@ -1725,6 +2006,7 @@ input PartyUpdateInput {
   description: String
   isPublic: Boolean
   author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
   members: UserUpdateManyWithoutPartiesInput
 }
@@ -1770,6 +2052,7 @@ input PartyUpdateWithoutMembersDataInput {
   description: String
   isPublic: Boolean
   author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
 }
 
@@ -1967,6 +2250,7 @@ input PartyWhereInput {
   """All values that are not equal to given value."""
   isPublic_not: Boolean
   author: UserWhereInput
+  location: LocationWhereInput
   games_every: GameWhereInput
   games_some: GameWhereInput
   games_none: GameWhereInput
@@ -1982,16 +2266,19 @@ input PartyWhereUniqueInput {
 type Query {
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
+  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
   chat(where: ChatWhereUniqueInput!): Chat
   message(where: MessageWhereUniqueInput!): Message
+  location(where: LocationWhereUniqueInput!): Location
   party(where: PartyWhereUniqueInput!): Party
   user(where: UserWhereUniqueInput!): User
   game(where: GameWhereUniqueInput!): Game
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
   messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
+  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
@@ -2012,6 +2299,7 @@ enum SocialMediaType {
 type Subscription {
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload

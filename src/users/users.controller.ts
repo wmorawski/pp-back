@@ -1,9 +1,9 @@
 import { UsersService } from './users.service';
 import { Get, Controller, UseGuards, Post, Body, HttpException, HttpStatus} from '@nestjs/common';
-import { User } from '../../generated/prisma-client';
 import { ApiUseTags, ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './create-user.dto';
+import { User } from 'src/prisma/prisma.binding';
 
 @ApiUseTags('users')
 @ApiBearerAuth()

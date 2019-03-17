@@ -1,0 +1,13 @@
+type Query {
+  getParties: [Party]!
+}
+type Mutation {
+  createParty(
+    title: String!
+    description: String!
+    author: User!
+    members: [User!]!
+    games: [Game!]
+    location: Location!
+  ): Party!
+}

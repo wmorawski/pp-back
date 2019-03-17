@@ -1,9 +1,7 @@
 import { SignupPayload } from './../auth/auth.types';
 import { UserWhereInput, UserCreateInput } from './../prisma/prisma.binding';
 import { Injectable } from '@nestjs/common';
-import { prisma } from '../../generated/prisma-client';
 import { User } from '../prisma/prisma.binding';
-import { CreateUserDto } from './create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -18,12 +16,9 @@ export class UsersService {
       password: null,
       email: null,
     }));
-    // return users.map(user => OmittedExpression);
   }
   async createUser(payload: SignupPayload): Promise<any> {
     const password = await this.getHash(payload.password);
-    // better error message needed here
-    // prisma client nie potrzebuje dopisku 'mutation' - wygenerowany prisma-client sobie poradzi
     return await this.prisma.mutation.createUser({
       data: {
         ...payload,
@@ -32,7 +27,6 @@ export class UsersService {
     });
   }
   async findOne(whereQuery: UserWhereInput): Promise<User> {
-    // jak wyzej z mutation
     return await this.prisma.query.user({ where: whereQuery });
   }
   async getHash(password: string | undefined): Promise<string> {
@@ -49,13 +43,13 @@ export class UsersService {
       data: {
         pendingInvitations: {
           connect: {
-            id: args.sender
-          }
-        }
+            id: args.sender,
+          },
+        },
       },
       where: {
-        id: args.receiver
-      }
-    })
+        id: args.receiver,
+      },
+    });
   }
 }

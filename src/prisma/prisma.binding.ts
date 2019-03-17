@@ -1511,6 +1511,7 @@ type Party implements Node {
   updatedAt: DateTime!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
   isPublic: Boolean!
+  members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -1527,12 +1528,13 @@ input PartyCreateInput {
   title: String!
   description: String!
   isPublic: Boolean
-  author: UserCreateOneWithoutPartiesInput!
+  author: UserCreateOneInput!
   games: GameCreateManyInput
+  members: UserCreateManyWithoutPartiesInput
 }
 
-input PartyCreateManyWithoutAuthorInput {
-  create: [PartyCreateWithoutAuthorInput!]
+input PartyCreateManyWithoutMembersInput {
+  create: [PartyCreateWithoutMembersInput!]
   connect: [PartyWhereUniqueInput!]
 }
 
@@ -1541,10 +1543,11 @@ input PartyCreateOneInput {
   connect: PartyWhereUniqueInput
 }
 
-input PartyCreateWithoutAuthorInput {
+input PartyCreateWithoutMembersInput {
   title: String!
   description: String!
   isPublic: Boolean
+  author: UserCreateOneInput!
   games: GameCreateManyInput
 }
 
@@ -1803,16 +1806,18 @@ input PartyUpdateDataInput {
   title: String
   description: String
   isPublic: Boolean
-  author: UserUpdateOneRequiredWithoutPartiesInput
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
+  members: UserUpdateManyWithoutPartiesInput
 }
 
 input PartyUpdateInput {
   title: String
   description: String
   isPublic: Boolean
-  author: UserUpdateOneRequiredWithoutPartiesInput
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
+  members: UserUpdateManyWithoutPartiesInput
 }
 
 input PartyUpdateManyDataInput {
@@ -1827,16 +1832,16 @@ input PartyUpdateManyMutationInput {
   isPublic: Boolean
 }
 
-input PartyUpdateManyWithoutAuthorInput {
-  create: [PartyCreateWithoutAuthorInput!]
+input PartyUpdateManyWithoutMembersInput {
+  create: [PartyCreateWithoutMembersInput!]
   connect: [PartyWhereUniqueInput!]
   set: [PartyWhereUniqueInput!]
   disconnect: [PartyWhereUniqueInput!]
   delete: [PartyWhereUniqueInput!]
-  update: [PartyUpdateWithWhereUniqueWithoutAuthorInput!]
+  update: [PartyUpdateWithWhereUniqueWithoutMembersInput!]
   updateMany: [PartyUpdateManyWithWhereNestedInput!]
   deleteMany: [PartyScalarWhereInput!]
-  upsert: [PartyUpsertWithWhereUniqueWithoutAuthorInput!]
+  upsert: [PartyUpsertWithWhereUniqueWithoutMembersInput!]
 }
 
 input PartyUpdateManyWithWhereNestedInput {
@@ -1851,16 +1856,17 @@ input PartyUpdateOneRequiredInput {
   upsert: PartyUpsertNestedInput
 }
 
-input PartyUpdateWithoutAuthorDataInput {
+input PartyUpdateWithoutMembersDataInput {
   title: String
   description: String
   isPublic: Boolean
+  author: UserUpdateOneRequiredInput
   games: GameUpdateManyInput
 }
 
-input PartyUpdateWithWhereUniqueWithoutAuthorInput {
+input PartyUpdateWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput!
-  data: PartyUpdateWithoutAuthorDataInput!
+  data: PartyUpdateWithoutMembersDataInput!
 }
 
 input PartyUpsertNestedInput {
@@ -1868,10 +1874,10 @@ input PartyUpsertNestedInput {
   create: PartyCreateInput!
 }
 
-input PartyUpsertWithWhereUniqueWithoutAuthorInput {
+input PartyUpsertWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput!
-  update: PartyUpdateWithoutAuthorDataInput!
-  create: PartyCreateWithoutAuthorInput!
+  update: PartyUpdateWithoutMembersDataInput!
+  create: PartyCreateWithoutMembersInput!
 }
 
 input PartyWhereInput {
@@ -2055,6 +2061,9 @@ input PartyWhereInput {
   games_every: GameWhereInput
   games_some: GameWhereInput
   games_none: GameWhereInput
+  members_every: UserWhereInput
+  members_some: UserWhereInput
+  members_none: UserWhereInput
 }
 
 input PartyWhereUniqueInput {
@@ -2107,11 +2116,13 @@ type User implements Node {
   password: String!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  pendingInvitations(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 """A connection to a list of items."""
@@ -2131,8 +2142,10 @@ input UserCreateInput {
   password: String!
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyCreateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
+  pendingInvitations: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
 }
 
@@ -2146,13 +2159,13 @@ input UserCreateManyWithoutChatsInput {
   connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
+input UserCreateManyWithoutPartiesInput {
+  create: [UserCreateWithoutPartiesInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateOneWithoutPartiesInput {
-  create: UserCreateWithoutPartiesInput
+input UserCreateOneInput {
+  create: UserCreateInput
   connect: UserWhereUniqueInput
 }
 
@@ -2163,8 +2176,10 @@ input UserCreateWithoutChatsInput {
   password: String!
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyCreateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
+  pendingInvitations: UserCreateManyInput
 }
 
 input UserCreateWithoutPartiesInput {
@@ -2174,7 +2189,9 @@ input UserCreateWithoutPartiesInput {
   password: String!
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
   friends: UserCreateManyInput
+  pendingInvitations: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
 }
 
@@ -2206,6 +2223,8 @@ enum UserOrderByInput {
   deleted_DESC
   socialmedia_ASC
   socialmedia_DESC
+  avatar_ASC
+  avatar_DESC
 }
 
 type UserPreviousValues {
@@ -2218,6 +2237,7 @@ type UserPreviousValues {
   updatedAt: DateTime!
   deleted: Boolean!
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserScalarWhereInput {
@@ -2487,6 +2507,46 @@ input UserScalarWhereInput {
 
   """All values that are not contained in given list."""
   socialmedia_not_in: [SocialMediaType!]
+  avatar: String
+
+  """All values that are not equal to given value."""
+  avatar_not: String
+
+  """All values that are contained in given list."""
+  avatar_in: [String!]
+
+  """All values that are not contained in given list."""
+  avatar_not_in: [String!]
+
+  """All values less than the given value."""
+  avatar_lt: String
+
+  """All values less than or equal the given value."""
+  avatar_lte: String
+
+  """All values greater than the given value."""
+  avatar_gt: String
+
+  """All values greater than or equal the given value."""
+  avatar_gte: String
+
+  """All values containing the given string."""
+  avatar_contains: String
+
+  """All values not containing the given string."""
+  avatar_not_contains: String
+
+  """All values starting with the given string."""
+  avatar_starts_with: String
+
+  """All values not starting with the given string."""
+  avatar_not_starts_with: String
+
+  """All values ending with the given string."""
+  avatar_ends_with: String
+
+  """All values not ending with the given string."""
+  avatar_not_ends_with: String
 }
 
 type UserSubscriptionPayload {
@@ -2535,8 +2595,10 @@ input UserUpdateDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyUpdateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
 
@@ -2547,8 +2609,10 @@ input UserUpdateInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyUpdateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
 
@@ -2559,6 +2623,7 @@ input UserUpdateManyDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateManyInput {
@@ -2580,6 +2645,7 @@ input UserUpdateManyMutationInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -2594,6 +2660,18 @@ input UserUpdateManyWithoutChatsInput {
   upsert: [UserUpsertWithWhereUniqueWithoutChatsInput!]
 }
 
+input UserUpdateManyWithoutPartiesInput {
+  create: [UserCreateWithoutPartiesInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutPartiesInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutPartiesInput!]
+}
+
 input UserUpdateManyWithWhereNestedInput {
   where: UserScalarWhereInput!
   data: UserUpdateManyDataInput!
@@ -2606,13 +2684,6 @@ input UserUpdateOneRequiredInput {
   upsert: UserUpsertNestedInput
 }
 
-input UserUpdateOneRequiredWithoutPartiesInput {
-  create: UserCreateWithoutPartiesInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateWithoutPartiesDataInput
-  upsert: UserUpsertWithoutPartiesInput
-}
-
 input UserUpdateWithoutChatsDataInput {
   email: String
   firstName: String
@@ -2620,8 +2691,10 @@ input UserUpdateWithoutChatsDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
-  parties: PartyUpdateManyWithoutAuthorInput
+  avatar: String
+  parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyInput
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -2631,7 +2704,9 @@ input UserUpdateWithoutPartiesDataInput {
   password: String
   deleted: Boolean
   socialmedia: SocialMediaType
+  avatar: String
   friends: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
 }
 
@@ -2645,14 +2720,14 @@ input UserUpdateWithWhereUniqueWithoutChatsInput {
   data: UserUpdateWithoutChatsDataInput!
 }
 
+input UserUpdateWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutPartiesDataInput!
+}
+
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
-}
-
-input UserUpsertWithoutPartiesInput {
-  update: UserUpdateWithoutPartiesDataInput!
-  create: UserCreateWithoutPartiesInput!
 }
 
 input UserUpsertWithWhereUniqueNestedInput {
@@ -2665,6 +2740,12 @@ input UserUpsertWithWhereUniqueWithoutChatsInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutChatsDataInput!
   create: UserCreateWithoutChatsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutPartiesDataInput!
+  create: UserCreateWithoutPartiesInput!
 }
 
 input UserWhereInput {
@@ -2934,12 +3015,55 @@ input UserWhereInput {
 
   """All values that are not contained in given list."""
   socialmedia_not_in: [SocialMediaType!]
+  avatar: String
+
+  """All values that are not equal to given value."""
+  avatar_not: String
+
+  """All values that are contained in given list."""
+  avatar_in: [String!]
+
+  """All values that are not contained in given list."""
+  avatar_not_in: [String!]
+
+  """All values less than the given value."""
+  avatar_lt: String
+
+  """All values less than or equal the given value."""
+  avatar_lte: String
+
+  """All values greater than the given value."""
+  avatar_gt: String
+
+  """All values greater than or equal the given value."""
+  avatar_gte: String
+
+  """All values containing the given string."""
+  avatar_contains: String
+
+  """All values not containing the given string."""
+  avatar_not_contains: String
+
+  """All values starting with the given string."""
+  avatar_starts_with: String
+
+  """All values not starting with the given string."""
+  avatar_not_starts_with: String
+
+  """All values ending with the given string."""
+  avatar_ends_with: String
+
+  """All values not ending with the given string."""
+  avatar_not_ends_with: String
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput
   friends_every: UserWhereInput
   friends_some: UserWhereInput
   friends_none: UserWhereInput
+  pendingInvitations_every: UserWhereInput
+  pendingInvitations_some: UserWhereInput
+  pendingInvitations_none: UserWhereInput
   chats_every: ChatWhereInput
   chats_some: ChatWhereInput
   chats_none: ChatWhereInput
@@ -3028,7 +3152,9 @@ export type UserOrderByInput =   'id_ASC' |
   'deleted_ASC' |
   'deleted_DESC' |
   'socialmedia_ASC' |
-  'socialmedia_DESC'
+  'socialmedia_DESC' |
+  'avatar_ASC' |
+  'avatar_DESC'
 
 export interface ChatCreateInput {
   party: PartyCreateOneInput
@@ -3599,12 +3725,13 @@ export interface PartyCreateInput {
   title: String
   description: String
   isPublic?: Boolean | null
-  author: UserCreateOneWithoutPartiesInput
+  author: UserCreateOneInput
   games?: GameCreateManyInput | null
+  members?: UserCreateManyWithoutPartiesInput | null
 }
 
-export interface PartyCreateManyWithoutAuthorInput {
-  create?: PartyCreateWithoutAuthorInput[] | PartyCreateWithoutAuthorInput | null
+export interface PartyCreateManyWithoutMembersInput {
+  create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput | null
   connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
 }
 
@@ -3613,10 +3740,11 @@ export interface PartyCreateOneInput {
   connect?: PartyWhereUniqueInput | null
 }
 
-export interface PartyCreateWithoutAuthorInput {
+export interface PartyCreateWithoutMembersInput {
   title: String
   description: String
   isPublic?: Boolean | null
+  author: UserCreateOneInput
   games?: GameCreateManyInput | null
 }
 
@@ -3701,16 +3829,18 @@ export interface PartyUpdateDataInput {
   title?: String | null
   description?: String | null
   isPublic?: Boolean | null
-  author?: UserUpdateOneRequiredWithoutPartiesInput | null
+  author?: UserUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
+  members?: UserUpdateManyWithoutPartiesInput | null
 }
 
 export interface PartyUpdateInput {
   title?: String | null
   description?: String | null
   isPublic?: Boolean | null
-  author?: UserUpdateOneRequiredWithoutPartiesInput | null
+  author?: UserUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
+  members?: UserUpdateManyWithoutPartiesInput | null
 }
 
 export interface PartyUpdateManyDataInput {
@@ -3725,16 +3855,16 @@ export interface PartyUpdateManyMutationInput {
   isPublic?: Boolean | null
 }
 
-export interface PartyUpdateManyWithoutAuthorInput {
-  create?: PartyCreateWithoutAuthorInput[] | PartyCreateWithoutAuthorInput | null
+export interface PartyUpdateManyWithoutMembersInput {
+  create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput | null
   connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
   set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
   disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
   delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
-  update?: PartyUpdateWithWhereUniqueWithoutAuthorInput[] | PartyUpdateWithWhereUniqueWithoutAuthorInput | null
+  update?: PartyUpdateWithWhereUniqueWithoutMembersInput[] | PartyUpdateWithWhereUniqueWithoutMembersInput | null
   updateMany?: PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput | null
   deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
-  upsert?: PartyUpsertWithWhereUniqueWithoutAuthorInput[] | PartyUpsertWithWhereUniqueWithoutAuthorInput | null
+  upsert?: PartyUpsertWithWhereUniqueWithoutMembersInput[] | PartyUpsertWithWhereUniqueWithoutMembersInput | null
 }
 
 export interface PartyUpdateManyWithWhereNestedInput {
@@ -3749,16 +3879,17 @@ export interface PartyUpdateOneRequiredInput {
   upsert?: PartyUpsertNestedInput | null
 }
 
-export interface PartyUpdateWithoutAuthorDataInput {
+export interface PartyUpdateWithoutMembersDataInput {
   title?: String | null
   description?: String | null
   isPublic?: Boolean | null
+  author?: UserUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
 }
 
-export interface PartyUpdateWithWhereUniqueWithoutAuthorInput {
+export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput
-  data: PartyUpdateWithoutAuthorDataInput
+  data: PartyUpdateWithoutMembersDataInput
 }
 
 export interface PartyUpsertNestedInput {
@@ -3766,10 +3897,10 @@ export interface PartyUpsertNestedInput {
   create: PartyCreateInput
 }
 
-export interface PartyUpsertWithWhereUniqueWithoutAuthorInput {
+export interface PartyUpsertWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput
-  update: PartyUpdateWithoutAuthorDataInput
-  create: PartyCreateWithoutAuthorInput
+  update: PartyUpdateWithoutMembersDataInput
+  create: PartyCreateWithoutMembersInput
 }
 
 export interface PartyWhereInput {
@@ -3840,6 +3971,9 @@ export interface PartyWhereInput {
   games_every?: GameWhereInput | null
   games_some?: GameWhereInput | null
   games_none?: GameWhereInput | null
+  members_every?: UserWhereInput | null
+  members_some?: UserWhereInput | null
+  members_none?: UserWhereInput | null
 }
 
 export interface PartyWhereUniqueInput {
@@ -3853,8 +3987,10 @@ export interface UserCreateInput {
   password: String
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
-  parties?: PartyCreateManyWithoutAuthorInput | null
+  avatar?: String | null
+  parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
+  pendingInvitations?: UserCreateManyInput | null
   chats?: ChatCreateManyWithoutMembersInput | null
 }
 
@@ -3868,13 +4004,13 @@ export interface UserCreateManyWithoutChatsInput {
   connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
 }
 
-export interface UserCreateOneInput {
-  create?: UserCreateInput | null
-  connect?: UserWhereUniqueInput | null
+export interface UserCreateManyWithoutPartiesInput {
+  create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
 }
 
-export interface UserCreateOneWithoutPartiesInput {
-  create?: UserCreateWithoutPartiesInput | null
+export interface UserCreateOneInput {
+  create?: UserCreateInput | null
   connect?: UserWhereUniqueInput | null
 }
 
@@ -3885,8 +4021,10 @@ export interface UserCreateWithoutChatsInput {
   password: String
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
-  parties?: PartyCreateManyWithoutAuthorInput | null
+  avatar?: String | null
+  parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
+  pendingInvitations?: UserCreateManyInput | null
 }
 
 export interface UserCreateWithoutPartiesInput {
@@ -3896,7 +4034,9 @@ export interface UserCreateWithoutPartiesInput {
   password: String
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
+  avatar?: String | null
   friends?: UserCreateManyInput | null
+  pendingInvitations?: UserCreateManyInput | null
   chats?: ChatCreateManyWithoutMembersInput | null
 }
 
@@ -3996,6 +4136,20 @@ export interface UserScalarWhereInput {
   socialmedia_not?: SocialMediaType | null
   socialmedia_in?: SocialMediaType[] | SocialMediaType | null
   socialmedia_not_in?: SocialMediaType[] | SocialMediaType | null
+  avatar?: String | null
+  avatar_not?: String | null
+  avatar_in?: String[] | String | null
+  avatar_not_in?: String[] | String | null
+  avatar_lt?: String | null
+  avatar_lte?: String | null
+  avatar_gt?: String | null
+  avatar_gte?: String | null
+  avatar_contains?: String | null
+  avatar_not_contains?: String | null
+  avatar_starts_with?: String | null
+  avatar_not_starts_with?: String | null
+  avatar_ends_with?: String | null
+  avatar_not_ends_with?: String | null
 }
 
 export interface UserSubscriptionWhereInput {
@@ -4016,8 +4170,10 @@ export interface UserUpdateDataInput {
   password?: String | null
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
-  parties?: PartyUpdateManyWithoutAuthorInput | null
+  avatar?: String | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
+  pendingInvitations?: UserUpdateManyInput | null
   chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
@@ -4028,8 +4184,10 @@ export interface UserUpdateInput {
   password?: String | null
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
-  parties?: PartyUpdateManyWithoutAuthorInput | null
+  avatar?: String | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
+  pendingInvitations?: UserUpdateManyInput | null
   chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
@@ -4040,6 +4198,7 @@ export interface UserUpdateManyDataInput {
   password?: String | null
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
+  avatar?: String | null
 }
 
 export interface UserUpdateManyInput {
@@ -4061,6 +4220,7 @@ export interface UserUpdateManyMutationInput {
   password?: String | null
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
+  avatar?: String | null
 }
 
 export interface UserUpdateManyWithoutChatsInput {
@@ -4075,6 +4235,18 @@ export interface UserUpdateManyWithoutChatsInput {
   upsert?: UserUpsertWithWhereUniqueWithoutChatsInput[] | UserUpsertWithWhereUniqueWithoutChatsInput | null
 }
 
+export interface UserUpdateManyWithoutPartiesInput {
+  create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutPartiesInput[] | UserUpdateWithWhereUniqueWithoutPartiesInput | null
+  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutPartiesInput[] | UserUpsertWithWhereUniqueWithoutPartiesInput | null
+}
+
 export interface UserUpdateManyWithWhereNestedInput {
   where: UserScalarWhereInput
   data: UserUpdateManyDataInput
@@ -4087,13 +4259,6 @@ export interface UserUpdateOneRequiredInput {
   upsert?: UserUpsertNestedInput | null
 }
 
-export interface UserUpdateOneRequiredWithoutPartiesInput {
-  create?: UserCreateWithoutPartiesInput | null
-  connect?: UserWhereUniqueInput | null
-  update?: UserUpdateWithoutPartiesDataInput | null
-  upsert?: UserUpsertWithoutPartiesInput | null
-}
-
 export interface UserUpdateWithoutChatsDataInput {
   email?: String | null
   firstName?: String | null
@@ -4101,8 +4266,10 @@ export interface UserUpdateWithoutChatsDataInput {
   password?: String | null
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
-  parties?: PartyUpdateManyWithoutAuthorInput | null
+  avatar?: String | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
+  pendingInvitations?: UserUpdateManyInput | null
 }
 
 export interface UserUpdateWithoutPartiesDataInput {
@@ -4112,7 +4279,9 @@ export interface UserUpdateWithoutPartiesDataInput {
   password?: String | null
   deleted?: Boolean | null
   socialmedia?: SocialMediaType | null
+  avatar?: String | null
   friends?: UserUpdateManyInput | null
+  pendingInvitations?: UserUpdateManyInput | null
   chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
@@ -4126,14 +4295,14 @@ export interface UserUpdateWithWhereUniqueWithoutChatsInput {
   data: UserUpdateWithoutChatsDataInput
 }
 
+export interface UserUpdateWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutPartiesDataInput
+}
+
 export interface UserUpsertNestedInput {
   update: UserUpdateDataInput
   create: UserCreateInput
-}
-
-export interface UserUpsertWithoutPartiesInput {
-  update: UserUpdateWithoutPartiesDataInput
-  create: UserCreateWithoutPartiesInput
 }
 
 export interface UserUpsertWithWhereUniqueNestedInput {
@@ -4146,6 +4315,12 @@ export interface UserUpsertWithWhereUniqueWithoutChatsInput {
   where: UserWhereUniqueInput
   update: UserUpdateWithoutChatsDataInput
   create: UserCreateWithoutChatsInput
+}
+
+export interface UserUpsertWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutPartiesDataInput
+  create: UserCreateWithoutPartiesInput
 }
 
 export interface UserWhereInput {
@@ -4244,12 +4419,29 @@ export interface UserWhereInput {
   socialmedia_not?: SocialMediaType | null
   socialmedia_in?: SocialMediaType[] | SocialMediaType | null
   socialmedia_not_in?: SocialMediaType[] | SocialMediaType | null
+  avatar?: String | null
+  avatar_not?: String | null
+  avatar_in?: String[] | String | null
+  avatar_not_in?: String[] | String | null
+  avatar_lt?: String | null
+  avatar_lte?: String | null
+  avatar_gt?: String | null
+  avatar_gte?: String | null
+  avatar_contains?: String | null
+  avatar_not_contains?: String | null
+  avatar_starts_with?: String | null
+  avatar_not_starts_with?: String | null
+  avatar_ends_with?: String | null
+  avatar_not_ends_with?: String | null
   parties_every?: PartyWhereInput | null
   parties_some?: PartyWhereInput | null
   parties_none?: PartyWhereInput | null
   friends_every?: UserWhereInput | null
   friends_some?: UserWhereInput | null
   friends_none?: UserWhereInput | null
+  pendingInvitations_every?: UserWhereInput | null
+  pendingInvitations_some?: UserWhereInput | null
+  pendingInvitations_none?: UserWhereInput | null
   chats_every?: ChatWhereInput | null
   chats_some?: ChatWhereInput | null
   chats_none?: ChatWhereInput | null
@@ -4439,6 +4631,7 @@ export interface Party extends Node {
   updatedAt: DateTime
   games?: Array<Game> | null
   isPublic: Boolean
+  members?: Array<User> | null
 }
 
 /*
@@ -4484,11 +4677,13 @@ export interface User extends Node {
   password: String
   parties?: Array<Party> | null
   friends?: Array<User> | null
+  pendingInvitations?: Array<User> | null
   chats?: Array<Chat> | null
   createdAt: DateTime
   updatedAt: DateTime
   deleted: Boolean
   socialmedia?: SocialMediaType | null
+  avatar?: String | null
 }
 
 /*
@@ -4520,6 +4715,7 @@ export interface UserPreviousValues {
   updatedAt: DateTime
   deleted: Boolean
   socialmedia?: SocialMediaType | null
+  avatar?: String | null
 }
 
 export interface UserSubscriptionPayload {

@@ -12,6 +12,10 @@ type Mutation {
   ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   updateMe(name: String): User!
+  inviteToFriends(
+    sender: ID!
+    receiver: ID!
+  ): User!
 }
 
 type AuthPayload {

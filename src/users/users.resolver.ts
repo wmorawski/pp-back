@@ -1,5 +1,13 @@
+import { UserConnection } from './../../generated/prisma-client/index';
 import { UsersService } from 'src/users/users.service';
-import { Query, Resolver, Args, Info, Context, Mutation } from '@nestjs/graphql';
+import {
+  Query,
+  Resolver,
+  Args,
+  Info,
+  Context,
+  Mutation,
+} from '@nestjs/graphql';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
 import { UseGuards } from '@nestjs/common';
@@ -18,7 +26,12 @@ export class UsersResolver {
     return await this.prisma.query.users(args, info);
   }
 
-  // this query is protected by authorization header: Bearer ....token__here....
+  @Query('paginateUsers')
+  @UseGuards(GqlAuthGuard)
+  async paginateUsers(@Args() args, @Info() info): Promise<UserConnection> {
+    return await this.prisma.query.usersConnection(args, info);
+  }
+
   @Query('me')
   @UseGuards(GqlAuthGuard)
   async me(@Context() { req }): Promise<User> {

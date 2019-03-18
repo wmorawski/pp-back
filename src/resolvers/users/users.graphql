@@ -1,6 +1,23 @@
 type Query {
   me: User
-  getUsers: [User]!
+  getUsers(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
+  paginateUsers(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): UserConnection!
 }
 
 type Mutation {
@@ -12,10 +29,7 @@ type Mutation {
   ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   updateMe(name: String): User!
-  inviteToFriends(
-    sender: ID!
-    receiver: ID!
-  ): User!
+  inviteToFriends(sender: ID!, receiver: ID!): User!
 }
 
 type AuthPayload {

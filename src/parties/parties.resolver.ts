@@ -1,22 +1,23 @@
+import { Prisma } from './../../dist/generated/prisma-client/index.d';
 import { Party } from './../prisma/prisma.binding';
 import { UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Args, Mutation, Info } from '@nestjs/graphql';
 import { UsersService } from 'src/users/users.service';
 import { AuthenticationError } from 'apollo-server-core';
 import { PartiesService } from './parties.service';
 import { CreatePartyPayload } from './parties.types';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Resolver()
 export class PartiesResolver {
   constructor(
-    private readonly users: UsersService,
     private readonly parties: PartiesService,
+    private readonly prisma: PrismaService,
   ) {}
 
-  @Mutation('createParty')
-  async createParty(@Args() payload: CreatePartyPayload): Promise<Party> {
-    console.log(payload);
-    return await this.parties.createParty(payload);
+  @Mutation('createPartyV')
+  async createParty(@Args() args, @Info() info): Promise<Party> {
+    return await this.prisma.mutation.createParty(args, info);
   }
 }

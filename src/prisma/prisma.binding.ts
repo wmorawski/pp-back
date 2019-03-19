@@ -152,6 +152,7 @@ type ChatConnection {
 }
 
 input ChatCreateInput {
+  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
   messages: MessageCreateManyWithoutChatInput
@@ -168,11 +169,13 @@ input ChatCreateOneWithoutMessagesInput {
 }
 
 input ChatCreateWithoutMembersInput {
+  id: ID
   party: PartyCreateOneInput!
   messages: MessageCreateManyWithoutChatInput
 }
 
 input ChatCreateWithoutMessagesInput {
+  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
 }
@@ -513,6 +516,7 @@ type GameConnection {
 }
 
 input GameCreateInput {
+  id: ID
   title: String!
   cover: String
   type: GameType!
@@ -1046,6 +1050,7 @@ type LocationConnection {
 }
 
 input LocationCreateInput {
+  id: ID
   placeName: String!
   latitude: Float!
   longitude: Float!
@@ -1321,6 +1326,7 @@ type MessageConnection {
 }
 
 input MessageCreateInput {
+  id: ID
   content: String!
   author: UserCreateOneInput!
   chat: ChatCreateOneWithoutMessagesInput!
@@ -1332,6 +1338,7 @@ input MessageCreateManyWithoutChatInput {
 }
 
 input MessageCreateWithoutChatInput {
+  id: ID
   content: String!
   author: UserCreateOneInput!
 }
@@ -1814,6 +1821,7 @@ type PartyConnection {
 }
 
 input PartyCreateInput {
+  id: ID
   title: String!
   description: String!
   isPublic: Boolean
@@ -1834,6 +1842,7 @@ input PartyCreateOneInput {
 }
 
 input PartyCreateWithoutMembersInput {
+  id: ID
   title: String!
   description: String!
   isPublic: Boolean
@@ -2435,6 +2444,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -2469,6 +2479,7 @@ input UserCreateOneInput {
 }
 
 input UserCreateWithoutChatsInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -2482,6 +2493,7 @@ input UserCreateWithoutChatsInput {
 }
 
 input UserCreateWithoutPartiesInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -3469,6 +3481,7 @@ export type UserOrderByInput =   'id_ASC' |
   'avatar_DESC'
 
 export interface ChatCreateInput {
+  id?: ID_Input | null
   party: PartyCreateOneInput
   members?: UserCreateManyWithoutChatsInput | null
   messages?: MessageCreateManyWithoutChatInput | null
@@ -3485,11 +3498,13 @@ export interface ChatCreateOneWithoutMessagesInput {
 }
 
 export interface ChatCreateWithoutMembersInput {
+  id?: ID_Input | null
   party: PartyCreateOneInput
   messages?: MessageCreateManyWithoutChatInput | null
 }
 
 export interface ChatCreateWithoutMessagesInput {
+  id?: ID_Input | null
   party: PartyCreateOneInput
   members?: UserCreateManyWithoutChatsInput | null
 }
@@ -3639,6 +3654,7 @@ export interface ChatWhereUniqueInput {
 }
 
 export interface GameCreateInput {
+  id?: ID_Input | null
   title: String
   cover?: String | null
   type: GameType
@@ -3854,6 +3870,7 @@ export interface GameWhereUniqueInput {
 }
 
 export interface LocationCreateInput {
+  id?: ID_Input | null
   placeName: String
   latitude: Float
   longitude: Float
@@ -3960,6 +3977,7 @@ export interface LocationWhereUniqueInput {
 }
 
 export interface MessageCreateInput {
+  id?: ID_Input | null
   content: String
   author: UserCreateOneInput
   chat: ChatCreateOneWithoutMessagesInput
@@ -3971,6 +3989,7 @@ export interface MessageCreateManyWithoutChatInput {
 }
 
 export interface MessageCreateWithoutChatInput {
+  id?: ID_Input | null
   content: String
   author: UserCreateOneInput
 }
@@ -4140,6 +4159,7 @@ export interface MessageWhereUniqueInput {
 }
 
 export interface PartyCreateInput {
+  id?: ID_Input | null
   title: String
   description: String
   isPublic?: Boolean | null
@@ -4160,6 +4180,7 @@ export interface PartyCreateOneInput {
 }
 
 export interface PartyCreateWithoutMembersInput {
+  id?: ID_Input | null
   title: String
   description: String
   isPublic?: Boolean | null
@@ -4405,6 +4426,7 @@ export interface PartyWhereUniqueInput {
 }
 
 export interface UserCreateInput {
+  id?: ID_Input | null
   email: String
   firstName: String
   lastName: String
@@ -4439,6 +4461,7 @@ export interface UserCreateOneInput {
 }
 
 export interface UserCreateWithoutChatsInput {
+  id?: ID_Input | null
   email: String
   firstName: String
   lastName: String
@@ -4452,6 +4475,7 @@ export interface UserCreateWithoutChatsInput {
 }
 
 export interface UserCreateWithoutPartiesInput {
+  id?: ID_Input | null
   email: String
   firstName: String
   lastName: String

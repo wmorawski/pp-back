@@ -17,6 +17,7 @@ $ npm install
 ```bash
 $ npm install -g prisma # installs prisma globally
 $ npm install -g graphql-cli # installs graphql-cli globally
+$ npm install -g ts-node # needed for seeder
 $ prisma init # initialize prisma service
 $ prisma deploy # deploy prisma model to remote server
 $ prisma token # create JWT from secret

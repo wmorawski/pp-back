@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Sun Mar 17 2019 23:49:17 GMT+0100 (Środkowoeuropejski czas stand.)
+# timestamp: Tue Mar 19 2019 22:48:54 GMT+0100 (Środkowoeuropejski czas stand.)
 
 type AggregateChat {
   count: Int!
@@ -50,6 +50,7 @@ type ChatConnection {
 }
 
 input ChatCreateInput {
+  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
   messages: MessageCreateManyWithoutChatInput
@@ -66,11 +67,13 @@ input ChatCreateOneWithoutMessagesInput {
 }
 
 input ChatCreateWithoutMembersInput {
+  id: ID
   party: PartyCreateOneInput!
   messages: MessageCreateManyWithoutChatInput
 }
 
 input ChatCreateWithoutMessagesInput {
+  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
 }
@@ -411,6 +414,7 @@ type GameConnection {
 }
 
 input GameCreateInput {
+  id: ID
   title: String!
   cover: String
   type: GameType!
@@ -944,6 +948,7 @@ type LocationConnection {
 }
 
 input LocationCreateInput {
+  id: ID
   placeName: String!
   latitude: Float!
   longitude: Float!
@@ -1219,6 +1224,7 @@ type MessageConnection {
 }
 
 input MessageCreateInput {
+  id: ID
   content: String!
   author: UserCreateOneInput!
   chat: ChatCreateOneWithoutMessagesInput!
@@ -1230,6 +1236,7 @@ input MessageCreateManyWithoutChatInput {
 }
 
 input MessageCreateWithoutChatInput {
+  id: ID
   content: String!
   author: UserCreateOneInput!
 }
@@ -1712,6 +1719,7 @@ type PartyConnection {
 }
 
 input PartyCreateInput {
+  id: ID
   title: String!
   description: String!
   isPublic: Boolean
@@ -1732,6 +1740,7 @@ input PartyCreateOneInput {
 }
 
 input PartyCreateWithoutMembersInput {
+  id: ID
   title: String!
   description: String!
   isPublic: Boolean
@@ -2333,6 +2342,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -2367,6 +2377,7 @@ input UserCreateOneInput {
 }
 
 input UserCreateWithoutChatsInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -2380,6 +2391,7 @@ input UserCreateWithoutChatsInput {
 }
 
 input UserCreateWithoutPartiesInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!

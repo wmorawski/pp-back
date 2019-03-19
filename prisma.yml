@@ -15,3 +15,5 @@ hooks:
 generate:
   - generator: typescript-client
     output: ./generated/prisma-client/
+seed:
+  run: ts-node ./src/prisma/seed/seed.ts

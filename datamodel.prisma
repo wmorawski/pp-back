@@ -22,8 +22,9 @@ type Party {
   author: User! @relation(name: "PartiesByUser")
   createdAt: DateTime!
   updatedAt: DateTime!
+  location: Location!
   games: [Game!]
-  isPublic: Boolean! @default(value: "false")
+  isPublic: Boolean @default(value: "false")
   members: [User!]! @relation(name: "UserParties")
 }
 
@@ -52,6 +53,13 @@ type Game {
   type: GameType!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type Location {
+  id: ID! @unique
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
 }
 
 enum GameType {

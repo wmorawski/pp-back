@@ -8,7 +8,6 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { User } from '../../generated/prisma-client';
 import {
   ApiUseTags,
   ApiBearerAuth,
@@ -17,6 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './create-user.dto';
+import { User } from 'src/prisma/prisma.binding';
 
 @ApiUseTags('users')
 @ApiBearerAuth()

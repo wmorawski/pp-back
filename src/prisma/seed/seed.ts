@@ -103,9 +103,10 @@ async function main() {
     return createFakeParty(partyAuthor, partyMembers);
   };
   const parties = Array.from({ length: PARTIES_NUM }, createParty);
-
-  parties.forEach(
-    async party => await prisma.createChat(createFakeChat(party)),
-  );
+  
+  // arr.forEach doesn't respect async/await (it's just like for(i,i<len,i++){callback(arr[i])})
+  for (const party of parties) {
+    await prisma.createChat(createFakeChat(party))
+  }
 }
 main();

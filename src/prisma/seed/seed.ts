@@ -1,7 +1,7 @@
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { prisma } from '../../../generated/prisma-client';
-import { compose } from 'ramda';
+import { compose, filter, map } from 'ramda';
 
 const USERS_NUM = 50;
 const PARTIES_NUM = 10;
@@ -10,6 +10,9 @@ const createFakeUser = () => ({
   email: faker.internet.email(),
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
+  friends: {
+    connect: [],
+  },
   // same password is better you can always log in on this account :)
   password: bcrypt.hashSync('password', 10),
 });
@@ -36,11 +39,24 @@ const getRandomElementsFromArray = (arr: any[]) => {
   const shuffled = arr.sort(() => {
     return 0.5 - Math.random();
   });
+
   return shuffled.slice(
     0,
-    faker.random.number({ min: 0, max: arr.length - 1 }),
+    faker.random.number({ min: 1, max: arr.length - 1 }),
   );
 };
+
+const getUserFriendsConnectionUpdater = (user, userFriendsConnections) => ({
+  where: {
+    id: user.id,
+  },
+  data: {
+    friends: {
+      connect: userFriendsConnections.map(id => ({ id })),
+    },
+  },
+});
+
 const getRandomPartyAuthor = (arr: any[]): any =>
   faker.random.arrayElement(arr);
 
@@ -73,6 +89,8 @@ const createFakeChat = (party: any) => ({
   },
 });
 
+const getFriendsConnectionFromUsers = users => users.map(user => user.id);
+
 async function main() {
   // users
   const savedUsers = [];
@@ -89,6 +107,44 @@ async function main() {
   );
   await Promise.all(usersPromises);
 
+  // this function creates random friendship relations between saved users
+  const usersConnections = savedUsers.reduce(
+    (acc: any, currentFakeUser: any) => {
+      const filteredFriendsToConnect = compose(
+        getRandomElementsFromArray,
+        compose(
+          filter((fakeUser: any) => fakeUser.id !== currentFakeUser.id),
+          filter(
+            (fakeUser: any) =>
+              !(acc[currentFakeUser.id] || []).includes(fakeUser.id),
+          ),
+        ),
+      )(savedUsers);
+
+      filteredFriendsToConnect.forEach(currentFriendToConnectTo => {
+        acc[currentFriendToConnectTo.id] = [
+          ...(acc[currentFriendToConnectTo.id] || []),
+          currentFakeUser.id,
+        ];
+      });
+      acc[currentFakeUser.id] = [
+        ...(acc[currentFakeUser.id] || []),
+        ...(getFriendsConnectionFromUsers(filteredFriendsToConnect) || []),
+      ];
+      return acc;
+    },
+    {},
+  );
+
+  for (const savedUser of savedUsers) {
+    await prisma.updateUser(
+      getUserFriendsConnectionUpdater(
+        savedUser,
+        usersConnections[savedUser.id],
+      ),
+    );
+  }
+
   // parties & chats
   const savedParties = [];
   const getPartMembers = partyAuthor => [
@@ -103,10 +159,10 @@ async function main() {
     return createFakeParty(partyAuthor, partyMembers);
   };
   const parties = Array.from({ length: PARTIES_NUM }, createParty);
-  
+
   // arr.forEach doesn't respect async/await (it's just like for(i,i<len,i++){callback(arr[i])})
   for (const party of parties) {
-    await prisma.createChat(createFakeChat(party))
+    await prisma.createChat(createFakeChat(party));
   }
 }
 main();

@@ -1,7 +1,9 @@
+import { Chat } from './../prisma/prisma.binding';
 import { Get, Param, Controller } from '@nestjs/common';
 import { ChatsService } from './chats.service';
-import { Chat } from '../../generated/prisma-client';
+
 import { ApiImplicitParam, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger';
+
 
 @ApiUseTags('chats')
 @Controller('chats')
@@ -9,7 +11,7 @@ export class ChatsController {
   constructor(private readonly chatsService: ChatsService) {}
   @Get('/')
   @ApiBearerAuth()
-  async getChats(): Promise<Chat[]> {
+  async getChats(): Promise<Chat>[]> {
     return await this.chatsService.getChats();
   }
   @Get('/:id')

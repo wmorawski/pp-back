@@ -43,6 +43,7 @@
     "passport-jwt": "^4.0.0",
     "prisma-binding": "^2.3.3",
     "prisma-client-lib": "^1.27.3",
+    "ramda": "^0.26.1",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.3",
     "rxjs": "^6.3.3"
@@ -56,6 +57,7 @@
     "@types/node": "^10.12.18",
     "@types/passport-facebook-token": "^0.4.33",
     "@types/passport-http-bearer": "^1.0.33",
+    "@types/ramda": "^0.26.3",
     "@types/supertest": "^2.0.7",
     "bcrypt": "^3.0.5",
     "faker": "^4.1.0",

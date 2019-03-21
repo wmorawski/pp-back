@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, Inject, InternalServerErrorException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as jwt from 'jsonwebtoken';
 import { LoginPayload, AuthPayload, JwtPayload } from './auth.types';
@@ -7,18 +7,30 @@ import { prisma } from '../../generated/prisma-client';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from 'src/prisma/prisma.binding';
+import { ConfigService } from 'src/config/config.service';
+import faker = require('faker');
+
+export enum Provider {
+    GOOGLE = 'google',
+    FACEBOOK = 'facebook',
+    SPOTIFY = 'spotify',
+}
 
 @Injectable()
 export class AuthService {
+  private readonly JWT_SECRET_KEY: string;
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     private readonly prisma: PrismaService,
-  ) {}
+    private readonly config: ConfigService,
+  ) {
+    this.JWT_SECRET_KEY = config.get('PRISMA_SECRET');
+  }
 
   async createToken(id: string, email: string) {
     const expiresIn = 60 * 60;
-    const secretOrKey = 'secret';
+    const secretOrKey = this.JWT_SECRET_KEY;
     const user = { email, id };
     const token = jwt.sign(user, secretOrKey, { expiresIn });
 
@@ -49,15 +61,39 @@ export class AuthService {
     }
     return user;
   }
+  async validateOAuthLogin(id: string, email, firstName, lastName, provider): Promise<string> {
+    try {
+        // You can add some registration logic here,
+        // to register the user using their thirdPartyId (in this case their googleId)
+        // let user: IUser = await this.usersService.findOneByThirdPartyId(thirdPartyId, provider);
+        let user = await this.prisma.query.user({ where: {email} });
+        if (!user) {
+          user = await this.usersService.createUser({
+            email,
+            password: faker.internet.password(),
+            firstName,
+            lastName,
+            provider,
+            thirdPartyId: id,
+          });
+        }
+        // if (!user)
+            // user = await this.usersService.registerOAuthUser(thirdPartyId, provider);
+        const { token } = await this.createToken(user.id, user.email);
+        return token;
+    } catch (err) {
+        throw new InternalServerErrorException('validateOAuthLogin', err.message);
+    }
+  }
   compare(password: string, hashedPassword: string): Promise<boolean> {
     return bcrypt.compare(password, hashedPassword);
   }
-  createAuthPayload(user: User): AuthPayload {
+  createAuthPayload(user: any): AuthPayload {
     return {
-      token: this.jwtService.sign({ userId: user.id }),
+      token: jwt.sign({ userId: user.id }, this.JWT_SECRET_KEY),
       user: ({
         ...user,
-        password: null
+        password: null,
       }),
     };
   }

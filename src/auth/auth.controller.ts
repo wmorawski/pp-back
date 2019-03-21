@@ -1,3 +1,4 @@
+import { ConfigService } from 'src/config/config.service';
 import { LoginUserDto } from './../users/login-user.dto';
 import { UsersService } from 'src/users/users.service';
 import {
@@ -7,12 +8,28 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  UseGuards,
+  Req,
+  Res,
+  Next,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiOperation, ApiResponse, ApiUseTags, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiUseTags,
+  ApiCreatedResponse,
+} from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/create-user.dto';
 import { User } from 'generated/prisma-client';
 import { LoginPayload } from './auth.types';
+import { AuthGuard } from '@nestjs/passport';
+import { authenticate } from 'passport';
+
+function getUrlCallback(jwt: string = '') {
+  const state = jwt && jwt.trim().length > 0 ? 'success' : 'error';
+  return `${process.env.WEB_URL}/social-auth?jwt=${jwt}&state=${state}`;
+}
 
 @ApiUseTags('auth')
 @Controller('auth')
@@ -55,12 +72,17 @@ export class AuthController {
 
   @Post('signin')
   @ApiOperation({ title: 'Login user' })
-  @ApiCreatedResponse({ description: 'User has been signed in and token has been returned.' })
+  @ApiCreatedResponse({
+    description: 'User has been signed in and token has been returned.',
+  })
   @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
-    description: 'Invalid email or password'
+    description: 'Invalid email or password',
   })
-  async signinUser(@Body() body: LoginUserDto /* Potrzebuje tutaj tego DTO zeby Swagger dobrze robil docsy */) {
+  async signinUser(
+    @Body()
+    body: LoginUserDto /* Potrzebuje tutaj tego DTO zeby Swagger dobrze robil docsy */,
+  ) {
     if (!(body && body.email && body.password)) {
       throw new HttpException(
         {
@@ -82,5 +104,47 @@ export class AuthController {
         401,
       );
     }
+  }
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  async googleLogin() {
+    // initiates the Google OAuth2 login flow
+  }
+
+  @Get('google/callback')
+  @UseGuards(AuthGuard('google'))
+  async googleLoginCallback(@Req() req, @Res() res) {
+    const jwt: string = req.user.jwt;
+    res.redirect(getUrlCallback(jwt));
+  }
+
+  @Get('spotify')
+  @UseGuards(AuthGuard('spotify'))
+  async spotifyLogin() {
+    // initiates the Spotify login flow
+  }
+
+  @Get('spotify/callback')
+  @UseGuards(AuthGuard('spotify'))
+  async spotifyLoginCallback(@Req() req, @Res() res) {
+    const jwt: string = req.user.jwt;
+    res.redirect(getUrlCallback(jwt));
+  }
+
+  @Get('facebook')
+  async handleOauthRequest(@Req() req: Request, @Res() res: Response, @Next() next) {
+    const params = {
+      session: false,
+      scope: ['email'],
+      callbackURL: `/auth/facebook/callback`,
+    };
+    authenticate('facebook', params)(req, res, next);
+  }
+
+  @Get('facebook/callback')
+  @UseGuards(AuthGuard('facebook'))
+  facebookLoginCallback(@Req() req, @Res() res) {
+    const jwt: string = req.user.jwt;
+    res.redirect(getUrlCallback(jwt));
   }
 }

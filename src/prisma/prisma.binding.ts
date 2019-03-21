@@ -1808,6 +1808,8 @@ type Party implements Node {
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
   isPublic: Boolean
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  startDate: DateTime!
+  endDate: DateTime!
 }
 
 """A connection to a list of items."""
@@ -1825,6 +1827,8 @@ input PartyCreateInput {
   title: String!
   description: String!
   isPublic: Boolean
+  startDate: DateTime
+  endDate: DateTime
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -1846,6 +1850,8 @@ input PartyCreateWithoutMembersInput {
   title: String!
   description: String!
   isPublic: Boolean
+  startDate: DateTime
+  endDate: DateTime
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -1873,6 +1879,10 @@ enum PartyOrderByInput {
   updatedAt_DESC
   isPublic_ASC
   isPublic_DESC
+  startDate_ASC
+  startDate_DESC
+  endDate_ASC
+  endDate_DESC
 }
 
 type PartyPreviousValues {
@@ -1882,6 +1892,8 @@ type PartyPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   isPublic: Boolean
+  startDate: DateTime!
+  endDate: DateTime!
 }
 
 input PartyScalarWhereInput {
@@ -2061,6 +2073,50 @@ input PartyScalarWhereInput {
 
   """All values that are not equal to given value."""
   isPublic_not: Boolean
+  startDate: DateTime
+
+  """All values that are not equal to given value."""
+  startDate_not: DateTime
+
+  """All values that are contained in given list."""
+  startDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startDate_lte: DateTime
+
+  """All values greater than the given value."""
+  startDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startDate_gte: DateTime
+  endDate: DateTime
+
+  """All values that are not equal to given value."""
+  endDate_not: DateTime
+
+  """All values that are contained in given list."""
+  endDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  endDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  endDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  endDate_lte: DateTime
+
+  """All values greater than the given value."""
+  endDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  endDate_gte: DateTime
 }
 
 type PartySubscriptionPayload {
@@ -2106,6 +2162,8 @@ input PartyUpdateDataInput {
   title: String
   description: String
   isPublic: Boolean
+  startDate: DateTime
+  endDate: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2116,6 +2174,8 @@ input PartyUpdateInput {
   title: String
   description: String
   isPublic: Boolean
+  startDate: DateTime
+  endDate: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2126,12 +2186,16 @@ input PartyUpdateManyDataInput {
   title: String
   description: String
   isPublic: Boolean
+  startDate: DateTime
+  endDate: DateTime
 }
 
 input PartyUpdateManyMutationInput {
   title: String
   description: String
   isPublic: Boolean
+  startDate: DateTime
+  endDate: DateTime
 }
 
 input PartyUpdateManyWithoutMembersInput {
@@ -2162,6 +2226,8 @@ input PartyUpdateWithoutMembersDataInput {
   title: String
   description: String
   isPublic: Boolean
+  startDate: DateTime
+  endDate: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2360,6 +2426,50 @@ input PartyWhereInput {
 
   """All values that are not equal to given value."""
   isPublic_not: Boolean
+  startDate: DateTime
+
+  """All values that are not equal to given value."""
+  startDate_not: DateTime
+
+  """All values that are contained in given list."""
+  startDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startDate_lte: DateTime
+
+  """All values greater than the given value."""
+  startDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startDate_gte: DateTime
+  endDate: DateTime
+
+  """All values that are not equal to given value."""
+  endDate_not: DateTime
+
+  """All values that are contained in given list."""
+  endDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  endDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  endDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  endDate_lte: DateTime
+
+  """All values greater than the given value."""
+  endDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  endDate_gte: DateTime
   author: UserWhereInput
   location: LocationWhereInput
   games_every: GameWhereInput
@@ -2403,8 +2513,8 @@ type Query {
 
 enum SocialMediaType {
   FACEBOOK
+  SPOTIFY
   TWITTER
-  GOOGLE
 }
 
 type Subscription {
@@ -2429,8 +2539,9 @@ type User implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
 }
 
 """A connection to a list of items."""
@@ -2450,8 +2561,9 @@ input UserCreateInput {
   lastName: String!
   password: String!
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingInvitations: UserCreateManyInput
@@ -2485,8 +2597,9 @@ input UserCreateWithoutChatsInput {
   lastName: String!
   password: String!
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingInvitations: UserCreateManyInput
@@ -2499,8 +2612,9 @@ input UserCreateWithoutPartiesInput {
   lastName: String!
   password: String!
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
   friends: UserCreateManyInput
   pendingInvitations: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
@@ -2532,10 +2646,12 @@ enum UserOrderByInput {
   updatedAt_DESC
   deleted_ASC
   deleted_DESC
-  socialmedia_ASC
-  socialmedia_DESC
+  provider_ASC
+  provider_DESC
   avatar_ASC
   avatar_DESC
+  thirdPartyId_ASC
+  thirdPartyId_DESC
 }
 
 type UserPreviousValues {
@@ -2547,8 +2663,9 @@ type UserPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean!
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
 }
 
 input UserScalarWhereInput {
@@ -2808,16 +2925,16 @@ input UserScalarWhereInput {
 
   """All values that are not equal to given value."""
   deleted_not: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
 
   """All values that are not equal to given value."""
-  socialmedia_not: SocialMediaType
+  provider_not: SocialMediaType
 
   """All values that are contained in given list."""
-  socialmedia_in: [SocialMediaType!]
+  provider_in: [SocialMediaType!]
 
   """All values that are not contained in given list."""
-  socialmedia_not_in: [SocialMediaType!]
+  provider_not_in: [SocialMediaType!]
   avatar: String
 
   """All values that are not equal to given value."""
@@ -2858,6 +2975,46 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   avatar_not_ends_with: String
+  thirdPartyId: String
+
+  """All values that are not equal to given value."""
+  thirdPartyId_not: String
+
+  """All values that are contained in given list."""
+  thirdPartyId_in: [String!]
+
+  """All values that are not contained in given list."""
+  thirdPartyId_not_in: [String!]
+
+  """All values less than the given value."""
+  thirdPartyId_lt: String
+
+  """All values less than or equal the given value."""
+  thirdPartyId_lte: String
+
+  """All values greater than the given value."""
+  thirdPartyId_gt: String
+
+  """All values greater than or equal the given value."""
+  thirdPartyId_gte: String
+
+  """All values containing the given string."""
+  thirdPartyId_contains: String
+
+  """All values not containing the given string."""
+  thirdPartyId_not_contains: String
+
+  """All values starting with the given string."""
+  thirdPartyId_starts_with: String
+
+  """All values not starting with the given string."""
+  thirdPartyId_not_starts_with: String
+
+  """All values ending with the given string."""
+  thirdPartyId_ends_with: String
+
+  """All values not ending with the given string."""
+  thirdPartyId_not_ends_with: String
 }
 
 type UserSubscriptionPayload {
@@ -2905,8 +3062,9 @@ input UserUpdateDataInput {
   lastName: String
   password: String
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingInvitations: UserUpdateManyInput
@@ -2919,8 +3077,9 @@ input UserUpdateInput {
   lastName: String
   password: String
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingInvitations: UserUpdateManyInput
@@ -2933,8 +3092,9 @@ input UserUpdateManyDataInput {
   lastName: String
   password: String
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
 }
 
 input UserUpdateManyInput {
@@ -2955,8 +3115,9 @@ input UserUpdateManyMutationInput {
   lastName: String
   password: String
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -3001,8 +3162,9 @@ input UserUpdateWithoutChatsDataInput {
   lastName: String
   password: String
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingInvitations: UserUpdateManyInput
@@ -3014,8 +3176,9 @@ input UserUpdateWithoutPartiesDataInput {
   lastName: String
   password: String
   deleted: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
   avatar: String
+  thirdPartyId: String
   friends: UserUpdateManyInput
   pendingInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
@@ -3316,16 +3479,16 @@ input UserWhereInput {
 
   """All values that are not equal to given value."""
   deleted_not: Boolean
-  socialmedia: SocialMediaType
+  provider: SocialMediaType
 
   """All values that are not equal to given value."""
-  socialmedia_not: SocialMediaType
+  provider_not: SocialMediaType
 
   """All values that are contained in given list."""
-  socialmedia_in: [SocialMediaType!]
+  provider_in: [SocialMediaType!]
 
   """All values that are not contained in given list."""
-  socialmedia_not_in: [SocialMediaType!]
+  provider_not_in: [SocialMediaType!]
   avatar: String
 
   """All values that are not equal to given value."""
@@ -3366,6 +3529,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   avatar_not_ends_with: String
+  thirdPartyId: String
+
+  """All values that are not equal to given value."""
+  thirdPartyId_not: String
+
+  """All values that are contained in given list."""
+  thirdPartyId_in: [String!]
+
+  """All values that are not contained in given list."""
+  thirdPartyId_not_in: [String!]
+
+  """All values less than the given value."""
+  thirdPartyId_lt: String
+
+  """All values less than or equal the given value."""
+  thirdPartyId_lte: String
+
+  """All values greater than the given value."""
+  thirdPartyId_gt: String
+
+  """All values greater than or equal the given value."""
+  thirdPartyId_gte: String
+
+  """All values containing the given string."""
+  thirdPartyId_contains: String
+
+  """All values not containing the given string."""
+  thirdPartyId_not_contains: String
+
+  """All values starting with the given string."""
+  thirdPartyId_starts_with: String
+
+  """All values not starting with the given string."""
+  thirdPartyId_not_starts_with: String
+
+  """All values ending with the given string."""
+  thirdPartyId_ends_with: String
+
+  """All values not ending with the given string."""
+  thirdPartyId_not_ends_with: String
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput
@@ -3453,11 +3656,15 @@ export type PartyOrderByInput =   'id_ASC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'isPublic_ASC' |
-  'isPublic_DESC'
+  'isPublic_DESC' |
+  'startDate_ASC' |
+  'startDate_DESC' |
+  'endDate_ASC' |
+  'endDate_DESC'
 
 export type SocialMediaType =   'FACEBOOK' |
-  'TWITTER' |
-  'GOOGLE'
+  'SPOTIFY' |
+  'TWITTER'
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -3475,10 +3682,12 @@ export type UserOrderByInput =   'id_ASC' |
   'updatedAt_DESC' |
   'deleted_ASC' |
   'deleted_DESC' |
-  'socialmedia_ASC' |
-  'socialmedia_DESC' |
+  'provider_ASC' |
+  'provider_DESC' |
   'avatar_ASC' |
-  'avatar_DESC'
+  'avatar_DESC' |
+  'thirdPartyId_ASC' |
+  'thirdPartyId_DESC'
 
 export interface ChatCreateInput {
   id?: ID_Input | null
@@ -4163,6 +4372,8 @@ export interface PartyCreateInput {
   title: String
   description: String
   isPublic?: Boolean | null
+  startDate?: DateTime | null
+  endDate?: DateTime | null
   author: UserCreateOneInput
   location: LocationCreateOneInput
   games?: GameCreateManyInput | null
@@ -4184,6 +4395,8 @@ export interface PartyCreateWithoutMembersInput {
   title: String
   description: String
   isPublic?: Boolean | null
+  startDate?: DateTime | null
+  endDate?: DateTime | null
   author: UserCreateOneInput
   location: LocationCreateOneInput
   games?: GameCreateManyInput | null
@@ -4253,6 +4466,22 @@ export interface PartyScalarWhereInput {
   updatedAt_gte?: DateTime | null
   isPublic?: Boolean | null
   isPublic_not?: Boolean | null
+  startDate?: DateTime | null
+  startDate_not?: DateTime | null
+  startDate_in?: DateTime[] | DateTime | null
+  startDate_not_in?: DateTime[] | DateTime | null
+  startDate_lt?: DateTime | null
+  startDate_lte?: DateTime | null
+  startDate_gt?: DateTime | null
+  startDate_gte?: DateTime | null
+  endDate?: DateTime | null
+  endDate_not?: DateTime | null
+  endDate_in?: DateTime[] | DateTime | null
+  endDate_not_in?: DateTime[] | DateTime | null
+  endDate_lt?: DateTime | null
+  endDate_lte?: DateTime | null
+  endDate_gt?: DateTime | null
+  endDate_gte?: DateTime | null
 }
 
 export interface PartySubscriptionWhereInput {
@@ -4270,6 +4499,8 @@ export interface PartyUpdateDataInput {
   title?: String | null
   description?: String | null
   isPublic?: Boolean | null
+  startDate?: DateTime | null
+  endDate?: DateTime | null
   author?: UserUpdateOneRequiredInput | null
   location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
@@ -4280,6 +4511,8 @@ export interface PartyUpdateInput {
   title?: String | null
   description?: String | null
   isPublic?: Boolean | null
+  startDate?: DateTime | null
+  endDate?: DateTime | null
   author?: UserUpdateOneRequiredInput | null
   location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
@@ -4290,12 +4523,16 @@ export interface PartyUpdateManyDataInput {
   title?: String | null
   description?: String | null
   isPublic?: Boolean | null
+  startDate?: DateTime | null
+  endDate?: DateTime | null
 }
 
 export interface PartyUpdateManyMutationInput {
   title?: String | null
   description?: String | null
   isPublic?: Boolean | null
+  startDate?: DateTime | null
+  endDate?: DateTime | null
 }
 
 export interface PartyUpdateManyWithoutMembersInput {
@@ -4326,6 +4563,8 @@ export interface PartyUpdateWithoutMembersDataInput {
   title?: String | null
   description?: String | null
   isPublic?: Boolean | null
+  startDate?: DateTime | null
+  endDate?: DateTime | null
   author?: UserUpdateOneRequiredInput | null
   location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
@@ -4411,6 +4650,22 @@ export interface PartyWhereInput {
   updatedAt_gte?: DateTime | null
   isPublic?: Boolean | null
   isPublic_not?: Boolean | null
+  startDate?: DateTime | null
+  startDate_not?: DateTime | null
+  startDate_in?: DateTime[] | DateTime | null
+  startDate_not_in?: DateTime[] | DateTime | null
+  startDate_lt?: DateTime | null
+  startDate_lte?: DateTime | null
+  startDate_gt?: DateTime | null
+  startDate_gte?: DateTime | null
+  endDate?: DateTime | null
+  endDate_not?: DateTime | null
+  endDate_in?: DateTime[] | DateTime | null
+  endDate_not_in?: DateTime[] | DateTime | null
+  endDate_lt?: DateTime | null
+  endDate_lte?: DateTime | null
+  endDate_gt?: DateTime | null
+  endDate_gte?: DateTime | null
   author?: UserWhereInput | null
   location?: LocationWhereInput | null
   games_every?: GameWhereInput | null
@@ -4432,8 +4687,9 @@ export interface UserCreateInput {
   lastName: String
   password: String
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
   parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
   pendingInvitations?: UserCreateManyInput | null
@@ -4467,8 +4723,9 @@ export interface UserCreateWithoutChatsInput {
   lastName: String
   password: String
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
   parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
   pendingInvitations?: UserCreateManyInput | null
@@ -4481,8 +4738,9 @@ export interface UserCreateWithoutPartiesInput {
   lastName: String
   password: String
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
   friends?: UserCreateManyInput | null
   pendingInvitations?: UserCreateManyInput | null
   chats?: ChatCreateManyWithoutMembersInput | null
@@ -4580,10 +4838,10 @@ export interface UserScalarWhereInput {
   updatedAt_gte?: DateTime | null
   deleted?: Boolean | null
   deleted_not?: Boolean | null
-  socialmedia?: SocialMediaType | null
-  socialmedia_not?: SocialMediaType | null
-  socialmedia_in?: SocialMediaType[] | SocialMediaType | null
-  socialmedia_not_in?: SocialMediaType[] | SocialMediaType | null
+  provider?: SocialMediaType | null
+  provider_not?: SocialMediaType | null
+  provider_in?: SocialMediaType[] | SocialMediaType | null
+  provider_not_in?: SocialMediaType[] | SocialMediaType | null
   avatar?: String | null
   avatar_not?: String | null
   avatar_in?: String[] | String | null
@@ -4598,6 +4856,20 @@ export interface UserScalarWhereInput {
   avatar_not_starts_with?: String | null
   avatar_ends_with?: String | null
   avatar_not_ends_with?: String | null
+  thirdPartyId?: String | null
+  thirdPartyId_not?: String | null
+  thirdPartyId_in?: String[] | String | null
+  thirdPartyId_not_in?: String[] | String | null
+  thirdPartyId_lt?: String | null
+  thirdPartyId_lte?: String | null
+  thirdPartyId_gt?: String | null
+  thirdPartyId_gte?: String | null
+  thirdPartyId_contains?: String | null
+  thirdPartyId_not_contains?: String | null
+  thirdPartyId_starts_with?: String | null
+  thirdPartyId_not_starts_with?: String | null
+  thirdPartyId_ends_with?: String | null
+  thirdPartyId_not_ends_with?: String | null
 }
 
 export interface UserSubscriptionWhereInput {
@@ -4617,8 +4889,9 @@ export interface UserUpdateDataInput {
   lastName?: String | null
   password?: String | null
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingInvitations?: UserUpdateManyInput | null
@@ -4631,8 +4904,9 @@ export interface UserUpdateInput {
   lastName?: String | null
   password?: String | null
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingInvitations?: UserUpdateManyInput | null
@@ -4645,8 +4919,9 @@ export interface UserUpdateManyDataInput {
   lastName?: String | null
   password?: String | null
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
 }
 
 export interface UserUpdateManyInput {
@@ -4667,8 +4942,9 @@ export interface UserUpdateManyMutationInput {
   lastName?: String | null
   password?: String | null
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
 }
 
 export interface UserUpdateManyWithoutChatsInput {
@@ -4713,8 +4989,9 @@ export interface UserUpdateWithoutChatsDataInput {
   lastName?: String | null
   password?: String | null
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingInvitations?: UserUpdateManyInput | null
@@ -4726,8 +5003,9 @@ export interface UserUpdateWithoutPartiesDataInput {
   lastName?: String | null
   password?: String | null
   deleted?: Boolean | null
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
   friends?: UserUpdateManyInput | null
   pendingInvitations?: UserUpdateManyInput | null
   chats?: ChatUpdateManyWithoutMembersInput | null
@@ -4863,10 +5141,10 @@ export interface UserWhereInput {
   updatedAt_gte?: DateTime | null
   deleted?: Boolean | null
   deleted_not?: Boolean | null
-  socialmedia?: SocialMediaType | null
-  socialmedia_not?: SocialMediaType | null
-  socialmedia_in?: SocialMediaType[] | SocialMediaType | null
-  socialmedia_not_in?: SocialMediaType[] | SocialMediaType | null
+  provider?: SocialMediaType | null
+  provider_not?: SocialMediaType | null
+  provider_in?: SocialMediaType[] | SocialMediaType | null
+  provider_not_in?: SocialMediaType[] | SocialMediaType | null
   avatar?: String | null
   avatar_not?: String | null
   avatar_in?: String[] | String | null
@@ -4881,6 +5159,20 @@ export interface UserWhereInput {
   avatar_not_starts_with?: String | null
   avatar_ends_with?: String | null
   avatar_not_ends_with?: String | null
+  thirdPartyId?: String | null
+  thirdPartyId_not?: String | null
+  thirdPartyId_in?: String[] | String | null
+  thirdPartyId_not_in?: String[] | String | null
+  thirdPartyId_lt?: String | null
+  thirdPartyId_lte?: String | null
+  thirdPartyId_gt?: String | null
+  thirdPartyId_gte?: String | null
+  thirdPartyId_contains?: String | null
+  thirdPartyId_not_contains?: String | null
+  thirdPartyId_starts_with?: String | null
+  thirdPartyId_not_starts_with?: String | null
+  thirdPartyId_ends_with?: String | null
+  thirdPartyId_not_ends_with?: String | null
   parties_every?: PartyWhereInput | null
   parties_some?: PartyWhereInput | null
   parties_none?: PartyWhereInput | null
@@ -5125,6 +5417,8 @@ export interface Party extends Node {
   games?: Array<Game> | null
   isPublic?: Boolean | null
   members?: Array<User> | null
+  startDate: DateTime
+  endDate: DateTime
 }
 
 /*
@@ -5153,6 +5447,8 @@ export interface PartyPreviousValues {
   createdAt: DateTime
   updatedAt: DateTime
   isPublic?: Boolean | null
+  startDate: DateTime
+  endDate: DateTime
 }
 
 export interface PartySubscriptionPayload {
@@ -5175,8 +5471,9 @@ export interface User extends Node {
   createdAt: DateTime
   updatedAt: DateTime
   deleted: Boolean
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
 }
 
 /*
@@ -5207,8 +5504,9 @@ export interface UserPreviousValues {
   createdAt: DateTime
   updatedAt: DateTime
   deleted: Boolean
-  socialmedia?: SocialMediaType | null
+  provider?: SocialMediaType | null
   avatar?: String | null
+  thirdPartyId?: String | null
 }
 
 export interface UserSubscriptionPayload {

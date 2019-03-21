@@ -29,12 +29,5 @@ import { authenticate } from 'passport';
   controllers: [AuthController]
 })
 export class AuthModule {
-  public configure(consumer: MiddlewareConsumer) {
-    consumer
-        .apply(authenticate('facebook', {
-            session: true,
-            scope: ['emails', 'public_profile']
-        }))
-        .forRoutes('facebook/token');
-}
+
 }

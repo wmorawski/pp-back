@@ -11,6 +11,8 @@ export interface SignupPayload {
   password: string;
   firstName: string;
   lastName: string;
+  thirdPartyId?: string;
+  provider?: string;
 }
 
 export interface LoginPayload {

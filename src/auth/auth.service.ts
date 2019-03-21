@@ -8,6 +8,7 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from 'src/prisma/prisma.binding';
 import { ConfigService } from 'src/config/config.service';
+import faker = require('faker');
 
 export enum Provider {
     GOOGLE = 'google',
@@ -29,7 +30,7 @@ export class AuthService {
 
   async createToken(id: string, email: string) {
     const expiresIn = 60 * 60;
-    const secretOrKey = 'secret';
+    const secretOrKey = this.JWT_SECRET_KEY;
     const user = { email, id };
     const token = jwt.sign(user, secretOrKey, { expiresIn });
 
@@ -60,37 +61,40 @@ export class AuthService {
     }
     return user;
   }
+  async validateOAuthLogin(id: string, email, firstName, lastName, provider): Promise<string> {
+    try {
+        // You can add some registration logic here,
+        // to register the user using their thirdPartyId (in this case their googleId)
+        // let user: IUser = await this.usersService.findOneByThirdPartyId(thirdPartyId, provider);
+        let user = await this.prisma.query.user({ where: {email} });
+        if (!user) {
+          user = await this.usersService.createUser({
+            email,
+            password: faker.internet.password(),
+            firstName,
+            lastName,
+            provider,
+            thirdPartyId: id,
+          });
+        }
+        // if (!user)
+            // user = await this.usersService.registerOAuthUser(thirdPartyId, provider);
+        const { token } = await this.createToken(user.id, user.email);
+        return token;
+    } catch (err) {
+        throw new InternalServerErrorException('validateOAuthLogin', err.message);
+    }
+  }
   compare(password: string, hashedPassword: string): Promise<boolean> {
     return bcrypt.compare(password, hashedPassword);
   }
   createAuthPayload(user: any): AuthPayload {
     return {
-      token: this.jwtService.sign({ userId: user.id }),
+      token: jwt.sign({ userId: user.id }, this.JWT_SECRET_KEY),
       user: ({
         ...user,
         password: null,
       }),
     };
   }
-  async validateOAuthLogin(thirdPartyId: string, provider: Provider): Promise<string> {
-        try {
-            // You can add some registration logic here,
-            // to register the user using their thirdPartyId (in this case their googleId)
-            // let user: IUser = await this.usersService.findOneByThirdPartyId(thirdPartyId, provider);
-
-            // if (!user)
-                // user = await this.usersService.registerOAuthUser(thirdPartyId, provider);
-
-            const payload = {
-                thirdPartyId,
-                provider,
-            };
-
-            const token: string = jwt.sign(payload, this.JWT_SECRET_KEY, { expiresIn: 3600 * 24 });
-            return token;
-        } catch (err) {
-            throw new InternalServerErrorException('validateOAuthLogin', err.message);
-        }
-    }
-
 }

@@ -52,9 +52,10 @@
     "prisma-binding": "^2.3.3",
     "prisma-client-lib": "^1.27.3",
     "ramda": "^0.26.1",
-    "reflect-metadata": "^0.1.12",
+    "reflect-metadata": "^0.1.13",
+    "request": "^2.88.0",
     "rimraf": "^2.6.3",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.4.0"
   },
   "devDependencies": {
     "@nestjs/testing": "^5.4.0",

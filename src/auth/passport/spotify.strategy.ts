@@ -14,7 +14,7 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
         super({
             clientID    : config.get('SPOTIFY_CLIENT_ID'),     // <- Replace this with your client id
             clientSecret: config.get('SPOTIFY_SECRET'), // <- Replace this with your client secret
-            callbackURL : 'http://localhost:4000/auth/spotify/callback',
+            callbackURL : '/auth/spotify/callback',
             passReqToCallback: true,
             scope: ['user-read-email', 'user-read-private'],
             showDialog: true,
@@ -23,9 +23,12 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
 
     async validate(request: any, accessToken: string, refreshToken: string, profile, done: Function) {
         try {
-            console.log(profile);
-
-            const jwt: string = await this.authService.validateOAuthLogin(profile.id, Provider.GOOGLE);
+            const jwt: string = await this.authService.validateOAuthLogin(
+                profile.id,
+                profile.emails[0].value,
+                profile.displayName.split(' ')[1],
+                profile.displayName.split(' ')[0],
+                'SPOTIFY');
             const user = {
                 jwt,
             };

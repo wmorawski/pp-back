@@ -1,3 +1,4 @@
+import { ConfigService } from 'src/config/config.service';
 import { LoginUserDto } from './../users/login-user.dto';
 import { UsersService } from 'src/users/users.service';
 import {
@@ -10,6 +11,7 @@ import {
   UseGuards,
   Req,
   Res,
+  Next,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
@@ -22,10 +24,11 @@ import { CreateUserDto } from 'src/users/create-user.dto';
 import { User } from 'generated/prisma-client';
 import { LoginPayload } from './auth.types';
 import { AuthGuard } from '@nestjs/passport';
+import { authenticate } from 'passport';
 
 function getUrlCallback(jwt: string = '') {
   const state = jwt && jwt.trim().length > 0 ? 'success' : 'error';
-  return `http://localhost:3000/social-auth?jwt=${jwt}&state=${state}`;
+  return `${process.env.WEB_URL}/social-auth?jwt=${jwt}&state=${state}`;
 }
 
 @ApiUseTags('auth')
@@ -104,48 +107,44 @@ export class AuthController {
   }
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  googleLogin() {
+  async googleLogin() {
     // initiates the Google OAuth2 login flow
   }
 
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
-  googleLoginCallback(@Req() req, @Res() res) {
-    // handles the Google OAuth2 callback
+  async googleLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
     res.redirect(getUrlCallback(jwt));
   }
 
   @Get('spotify')
   @UseGuards(AuthGuard('spotify'))
-  spotifyLogin() {
-    // initiates the Google OAuth2 login flow
+  async spotifyLogin() {
+    // initiates the Spotify login flow
   }
 
   @Get('spotify/callback')
   @UseGuards(AuthGuard('spotify'))
-  spotifyLoginCallback(@Req() req, @Res() res) {
-    // handles the Google OAuth2 callback
+  async spotifyLoginCallback(@Req() req, @Res() res) {
     const jwt: string = req.user.jwt;
     res.redirect(getUrlCallback(jwt));
   }
 
   @Get('facebook')
-  @UseGuards(AuthGuard('facebook'))
-  facebookLogin() {
-    // initiates the Google OAuth2 login flow
+  async handleOauthRequest(@Req() req: Request, @Res() res: Response, @Next() next) {
+    const params = {
+      session: false,
+      scope: ['email'],
+      callbackURL: `/auth/facebook/callback`,
+    };
+    authenticate('facebook', params)(req, res, next);
   }
 
   @Get('facebook/callback')
   @UseGuards(AuthGuard('facebook'))
   facebookLoginCallback(@Req() req, @Res() res) {
-    // handles the Google OAuth2 callback
     const jwt: string = req.user.jwt;
     res.redirect(getUrlCallback(jwt));
-  }
-  @Post('facebook/token')
-  @UseGuards(AuthGuard('facebook'))
-  facebookToken(@Req() req, @Body() body) {
-      return this.authService.createToken(req.user.id, req.user.email);
   }
 }

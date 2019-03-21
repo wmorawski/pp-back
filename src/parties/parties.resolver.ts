@@ -1,4 +1,3 @@
-import { Prisma } from './../../dist/generated/prisma-client/index.d';
 import { Party } from './../prisma/prisma.binding';
 import { UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';

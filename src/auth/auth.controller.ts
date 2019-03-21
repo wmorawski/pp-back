@@ -12,11 +12,21 @@ import {
   Res,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiOperation, ApiResponse, ApiUseTags, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiUseTags,
+  ApiCreatedResponse,
+} from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/create-user.dto';
 import { User } from 'generated/prisma-client';
 import { LoginPayload } from './auth.types';
 import { AuthGuard } from '@nestjs/passport';
+
+function getUrlCallback(jwt: string = '') {
+  const state = jwt && jwt.trim().length > 0 ? 'success' : 'error';
+  return `http://localhost:3000/social-auth?jwt=${jwt}&state=${state}`;
+}
 
 @ApiUseTags('auth')
 @Controller('auth')
@@ -59,12 +69,17 @@ export class AuthController {
 
   @Post('signin')
   @ApiOperation({ title: 'Login user' })
-  @ApiCreatedResponse({ description: 'User has been signed in and token has been returned.' })
+  @ApiCreatedResponse({
+    description: 'User has been signed in and token has been returned.',
+  })
   @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
-    description: 'Invalid email or password'
+    description: 'Invalid email or password',
   })
-  async signinUser(@Body() body: LoginUserDto /* Potrzebuje tutaj tego DTO zeby Swagger dobrze robil docsy */) {
+  async signinUser(
+    @Body()
+    body: LoginUserDto /* Potrzebuje tutaj tego DTO zeby Swagger dobrze robil docsy */,
+  ) {
     if (!(body && body.email && body.password)) {
       throw new HttpException(
         {
@@ -96,13 +111,9 @@ export class AuthController {
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
   googleLoginCallback(@Req() req, @Res() res) {
-      // handles the Google OAuth2 callback
-      const jwt: string = req.user.jwt;
-      if (jwt) {
-          res.redirect('http://localhost:3000/login/succes/' + jwt);
-      } else {
-          res.redirect('http://localhost:3000/login/failure');
-      }
+    // handles the Google OAuth2 callback
+    const jwt: string = req.user.jwt;
+    res.redirect(getUrlCallback(jwt));
   }
 
   @Get('spotify')
@@ -114,13 +125,9 @@ export class AuthController {
   @Get('spotify/callback')
   @UseGuards(AuthGuard('spotify'))
   spotifyLoginCallback(@Req() req, @Res() res) {
-      // handles the Google OAuth2 callback
-      const jwt: string = req.user.jwt;
-      if (jwt) {
-          res.redirect('http://localhost:3000/login/succes/' + jwt);
-      } else {
-          res.redirect('http://localhost:3000/login/failure');
-      }
+    // handles the Google OAuth2 callback
+    const jwt: string = req.user.jwt;
+    res.redirect(getUrlCallback(jwt));
   }
 
   @Get('facebook')
@@ -130,12 +137,8 @@ export class AuthController {
 
   @Get('facebook/callback')
   facebookLoginCallback(@Req() req, @Res() res) {
-      // handles the Google OAuth2 callback
-      const jwt: string = req.user.jwt;
-      if (jwt) {
-          res.redirect('http://localhost:3000/login/succes/' + jwt);
-      } else {
-          res.redirect('http://localhost:3000/login/failure');
-      }
+    // handles the Google OAuth2 callback
+    const jwt: string = req.user.jwt;
+    res.redirect(getUrlCallback(jwt));
   }
 }

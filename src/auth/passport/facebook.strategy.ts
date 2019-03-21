@@ -1,73 +1,110 @@
-import { UsersService } from './../../users/users.service';
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { PassportStrategy } from '@nestjs/passport';
+import { Strategy } from 'passport-facebook';
+import { ConfigService } from 'src/config/config.service';
+import { AuthService, Provider } from '../auth.service';
 import { use } from 'passport';
-import { User } from '../../prisma/prisma.binding';
-// import { FACEBOOK_CONFIG_TOKEN, USER_MODEL_TOKEN } from '../../../server.constants';
-import { IFacebookConfig } from '../interfaces/facebook-config.interface';
 import * as FacebookTokenStrategy from 'passport-facebook-token';
+
 @Injectable()
-export class FacebookStrategy {
-  constructor(
-    @Inject('FACEBOOK') private readonly fbConfig: IFacebookConfig,
-    private readonly usersService: UsersService,
-  ) {
-    this.init();
-  }
+export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
 
-  private init(): void {
-    use('facebook', new FacebookTokenStrategy({
-      clientID: this.fbConfig.client_id,
-      clientSecret: this.fbConfig.client_secret,
-      profileFields: ['id', 'name', 'displayName', 'emails', 'photos'],
-    }, async (accessToken: string, refreshToken: string, profile: any, done: any) => {
-      try {
-        const providerData = profile._json;
-        providerData.accessToken = accessToken;
-        providerData.refreshToken = refreshToken;
+    constructor(
+        private readonly config: ConfigService,
+        private readonly authService: AuthService,
+    ) {
+        super({
+            clientID    : config.get('FACEBOOK_APP_ID'),     // <- Replace this with your client id
+            clientSecret: config.get('FACEBOOK_APP_SECRET'), // <- Replace this with your client secret
+            callbackURL : 'http://localhost:4000/auth/facebook/callback',
+            passReqToCallback: true,
+            scope: ['email', 'profile'],
+        });
+    }
 
-        let email: string = profile.emails.shift().value;
+    async validate(request: any, accessToken: string, refreshToken: string, profile, done: Function) {
+        try {
+            console.log(profile);
 
-        //  Conditional if facebook doesn't return email
-        if (!email || email === '') { email = `${profile.id}@${profile.provider}.com`; }
+            const jwt: string = await this.authService.validateOAuthLogin(profile.id, Provider.GOOGLE);
+            const user = {
+                jwt,
+            };
 
-        const existingUser: User = await this.usersService.findOneByEmail(email);
-
-        if (existingUser) {
-          return done(null, existingUser);
+            done(null, user);
+        } catch (err) {
+            // console.log(err)
+            done(err, false);
         }
+    }
+    private init(): void {
+        use(
+          'facebook',
+          new FacebookTokenStrategy(
+            {
+              clientID: this.config.get('FACEBOOK_APP_ID'),
+              clientSecret: this.config.get('FACEBOOK_APP_SECRET'),
+            },
+            async (accessToken: string, refreshToken: string, profile: any, done) => {
+              // Logger.log(JSON.stringify(profile), FacebookStrategy.name);
+              console.log(profile)
+              if (!profile.id) {
+                done(null, null);
+              }
+              try {
+                try {
+                //   const { oauthTokensAccesstoken } = await this.oauthTokensAccesstokensService.findByProviderClientId({
+                //     id: profile.id
+                //   });
+                //   const { user } = await this.authService.info({
+                //     id: oauthTokensAccesstoken.user.id
+                //   });
 
-        const providerUserProfile = {
-          firstName: profile.name.givenName,
-          lastName: profile.name.familyName,
-          displayName: profile.displayName,
-          email,
-          username: profile.username || `${profile.id}`,
-          profileImageURL: (profile.id) ? '//graph.facebook.com/' + profile.id + '/picture?type=large' : undefined,
-          provider: 'facebook',
-          providerIdentifierField: 'id',
-          providerData,
-        };
-        done(null, await this.usersService.createUser({
-          username: providerUserProfile.username,
-          email: providerUserProfile.email,
-          password: 'asvx3232wtsdczxasdas',
-          socialmedia: 0,
-        }));
-      } catch (err) {
-        done(err, null);
+                // TODO: Sign in
+                const jwt: string = await this.authService.validateOAuthLogin(profile.id, Provider.FACEBOOK);
+                const user = {
+                    jwt,
+                };
+                done(null, user);
+                } catch (err) {
+                  const email =
+                    profile.emails && profile.emails.length && profile.emails[0].value
+                      ? profile.emails[0].value
+                      : `${profile.id}@facebook.com`;
+                  const username = `facebook_${profile.id}`;
+                  const firstName = profile.name.givenName;
+                  const lastName = profile.name.familyName;
+                  const password = `facebook_${profile.id}`;
+                  // TODO: Sign-up
+                  const jwt: string = await this.authService.validateOAuthLogin(profile.id, Provider.GOOGLE);
+                  const user = {
+                      jwt,
+                  };
+                //   const { user } = await this.authService.signUp(
+                //     plainToClass(SignUpDto, {
+                //       email,
+                //       username,
+                //       password,
+                //       firstName,
+                //       lastName
+                //     })
+                //   );
+                //   const newOauthTokensAccesstoken = new OauthTokensAccesstoken();
+                //   newOauthTokensAccesstoken.user = user;
+                //   newOauthTokensAccesstoken.providerClientId = profile.id;
+                //   newOauthTokensAccesstoken.provider = profile.provider;
+                //   newOauthTokensAccesstoken.accessToken = accessToken;
+                //   await this.oauthTokensAccesstokensService.create({
+                //     item: newOauthTokensAccesstoken
+                //   });
+                  done(null, user);
+                }
+              } catch (err) {
+                done(err, null);
+              }
+            }
+          )
+        );
       }
 
-      // function generateUsername(profile) {
-      //   let username = '';
-
-      //   if (profile.emails) {
-      //     username = profile.emails[0].value.split('@')[0];
-      //   } else if (profile.name) {
-      //     username = profile.name.givenName[0] + profile.name.familyName;
-      //   }
-
-      //   return username.toLowerCase() || undefined;
-      // }
-    }));
-  }
 }

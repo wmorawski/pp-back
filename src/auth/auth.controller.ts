@@ -7,12 +7,16 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  UseGuards,
+  Req,
+  Res,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiOperation, ApiResponse, ApiUseTags, ApiCreatedResponse } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/create-user.dto';
 import { User } from 'generated/prisma-client';
 import { LoginPayload } from './auth.types';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiUseTags('auth')
 @Controller('auth')
@@ -82,5 +86,56 @@ export class AuthController {
         401,
       );
     }
+  }
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  googleLogin() {
+    // initiates the Google OAuth2 login flow
+  }
+
+  @Get('google/callback')
+  @UseGuards(AuthGuard('google'))
+  googleLoginCallback(@Req() req, @Res() res) {
+      // handles the Google OAuth2 callback
+      const jwt: string = req.user.jwt;
+      if (jwt) {
+          res.redirect('http://localhost:3000/login/succes/' + jwt);
+      } else {
+          res.redirect('http://localhost:3000/login/failure');
+      }
+  }
+
+  @Get('spotify')
+  @UseGuards(AuthGuard('spotify'))
+  spotifyLogin() {
+    // initiates the Google OAuth2 login flow
+  }
+
+  @Get('spotify/callback')
+  @UseGuards(AuthGuard('spotify'))
+  spotifyLoginCallback(@Req() req, @Res() res) {
+      // handles the Google OAuth2 callback
+      const jwt: string = req.user.jwt;
+      if (jwt) {
+          res.redirect('http://localhost:3000/login/succes/' + jwt);
+      } else {
+          res.redirect('http://localhost:3000/login/failure');
+      }
+  }
+
+  @Get('facebook')
+  facebookLogin() {
+    // initiates the Google OAuth2 login flow
+  }
+
+  @Get('facebook/callback')
+  facebookLoginCallback(@Req() req, @Res() res) {
+      // handles the Google OAuth2 callback
+      const jwt: string = req.user.jwt;
+      if (jwt) {
+          res.redirect('http://localhost:3000/login/succes/' + jwt);
+      } else {
+          res.redirect('http://localhost:3000/login/failure');
+      }
   }
 }

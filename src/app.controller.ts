@@ -1,14 +1,13 @@
-import { Get, Controller } from '@nestjs/common';
-import { AppService } from './app.service';
-import { ApiUseTags } from '@nestjs/swagger';
+import { Get, Controller, Render, Req, Post } from '@nestjs/common';
+import { AuthService } from './auth/auth.service';
 
-@ApiUseTags('app')
+
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
+  constructor(private readonly authService: AuthService) {}
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Render('app/index')
+  root() {
+    return { message: 'Hello world!' };
   }
 }

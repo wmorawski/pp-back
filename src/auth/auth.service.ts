@@ -63,7 +63,7 @@ export class AuthService {
   compare(password: string, hashedPassword: string): Promise<boolean> {
     return bcrypt.compare(password, hashedPassword);
   }
-  createAuthPayload(user: User): AuthPayload {
+  createAuthPayload(user: any): AuthPayload {
     return {
       token: this.jwtService.sign({ userId: user.id }),
       user: ({

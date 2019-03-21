@@ -124,11 +124,13 @@ export class AuthController {
   }
 
   @Get('facebook')
+  @UseGuards(AuthGuard('facebook'))
   facebookLogin() {
     // initiates the Google OAuth2 login flow
   }
 
   @Get('facebook/callback')
+  @UseGuards(AuthGuard('facebook'))
   facebookLoginCallback(@Req() req, @Res() res) {
       // handles the Google OAuth2 callback
       const jwt: string = req.user.jwt;
@@ -137,5 +139,10 @@ export class AuthController {
       } else {
           res.redirect('http://localhost:3000/login/failure');
       }
+  }
+  @Post('facebook/token')
+  @UseGuards(AuthGuard('facebook'))
+  facebookToken(@Req() req, @Body() body) {
+      return this.authService.createToken(req.user.id, req.user.email);
   }
 }

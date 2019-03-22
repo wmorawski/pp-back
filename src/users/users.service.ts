@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { SignupPayload } from './../auth/auth.types';
 import { UserWhereInput, UserCreateInput } from './../prisma/prisma.binding';
 import { Injectable } from '@nestjs/common';

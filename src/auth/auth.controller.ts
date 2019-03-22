@@ -22,7 +22,7 @@ import {
 } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/create-user.dto';
 import { User } from 'generated/prisma-client';
-import { LoginPayload } from './auth.types';
+
 import { AuthGuard } from '@nestjs/passport';
 import { authenticate } from 'passport';
 
@@ -132,7 +132,11 @@ export class AuthController {
   }
 
   @Get('facebook')
-  async handleOauthRequest(@Req() req: Request, @Res() res: Response, @Next() next) {
+  async handleOauthRequest(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Next() next,
+  ) {
     const params = {
       session: false,
       scope: ['email'],

@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config/config.service';
 import * as passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -7,10 +8,14 @@ import { PassportStrategy } from '@nestjs/passport';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly authService: AuthService) {
+  constructor(
+    private readonly authService: AuthService,
+    readonly config: ConfigService,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'secretKey',
+      secretOrKey: config.getFromEnv('PRISMA_SECRET'),
+      expiresIn: ConfigService.getJwtExpiration(),
     });
   }
 
@@ -20,6 +25,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const isParsedTokenValid = await this.authService.validateParsedToken(
       payload,
     );
+
     if (!isParsedTokenValid) {
       throw new UnauthorizedException();
     }

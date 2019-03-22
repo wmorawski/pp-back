@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-facebook';
 import { ConfigService } from 'src/config/config.service';
 import { AuthService, Provider } from '../auth.service';
+import faker = require('faker');
 
 @Injectable()
 export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
@@ -27,13 +28,15 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
     done: Function,
   ) {
     try {
-      const jwt: string = await this.authService.validateOAuthLogin(
-        profile.id,
-        profile.emails[0].value,
-        profile.name.givenName,
-        profile.name.familyName,
-        'FACEBOOK',
-      );
+      const jwt: string = await this.authService.validateOAuthLogin({
+        thirdPartyId: profile.id,
+        email: profile.emails[0].value,
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        provider: 'FACEBOOK',
+        password: faker.internet.password(),
+        avatar: profile.photos[0] || null,
+      });
       const user = {
         jwt,
       };

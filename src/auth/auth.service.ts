@@ -1,9 +1,11 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable, UnauthorizedException, Inject, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import * as jwt from 'jsonwebtoken';
 import { LoginPayload, AuthPayload, JwtPayload } from './auth.types';
-import { prisma } from '../../generated/prisma-client';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from 'src/prisma/prisma.binding';
@@ -11,30 +13,22 @@ import { ConfigService } from 'src/config/config.service';
 import faker = require('faker');
 
 export enum Provider {
-    GOOGLE = 'google',
-    FACEBOOK = 'facebook',
-    SPOTIFY = 'spotify',
+  GOOGLE = 'google',
+  FACEBOOK = 'facebook',
+  SPOTIFY = 'spotify',
 }
 
 @Injectable()
 export class AuthService {
-  private readonly JWT_SECRET_KEY: string;
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     private readonly prisma: PrismaService,
-    private readonly config: ConfigService,
-  ) {
-    this.JWT_SECRET_KEY = config.get('PRISMA_SECRET');
-  }
+  ) {}
 
-  async createToken(id: string, email: string) {
-    const expiresIn = 60 * 60;
-    const secretOrKey = this.JWT_SECRET_KEY;
-    const user = { email, id };
-    const token = jwt.sign(user, secretOrKey, { expiresIn });
-
-    return { expires_in: expiresIn, token };
+  createToken(id: string) {
+    const token = this.jwtService.sign({ userId: id });
+    return token;
   }
 
   async validateParsedToken({ exp, userId }: JwtPayload): Promise<boolean> {
@@ -48,11 +42,30 @@ export class AuthService {
     return await this.jwtService.verify(token);
   }
 
+  async checkAndThrowIfEmailAlreadyExists(email: string) {
+    const user = await this.prisma.query.user({
+      where: { email },
+    });
+    if (!user) {
+      throw new InternalServerErrorException(`That email is already used`);
+    }
+  }
+
   async login(payload: LoginPayload): Promise<User> {
-    const user = await this.prisma.query.user({ where: {email: payload.email} });
+    const user = await this.prisma.query.user({
+      where: { email: payload.email },
+    });
 
     if (!user) {
-      throw new UnauthorizedException(`No user found for email: ${payload.email}`);
+      throw new UnauthorizedException(
+        `No user found for email: ${payload.email}`,
+      );
+    }
+
+    if (user.provider) {
+      throw new InternalServerErrorException(
+        `You already logged with this email using ${user.provider}`,
+      );
     }
 
     const passwordValid = await this.compare(payload.password, user.password);
@@ -61,28 +74,33 @@ export class AuthService {
     }
     return user;
   }
-  async validateOAuthLogin(id: string, email, firstName, lastName, provider): Promise<string> {
+  async validateOAuthLogin(
+    id: string,
+    email,
+    firstName,
+    lastName,
+    provider,
+  ): Promise<string> {
     try {
-        // You can add some registration logic here,
-        // to register the user using their thirdPartyId (in this case their googleId)
-        // let user: IUser = await this.usersService.findOneByThirdPartyId(thirdPartyId, provider);
-        let user = await this.prisma.query.user({ where: {email} });
-        if (!user) {
-          user = await this.usersService.createUser({
-            email,
-            password: faker.internet.password(),
-            firstName,
-            lastName,
-            provider,
-            thirdPartyId: id,
-          });
-        }
-        // if (!user)
-            // user = await this.usersService.registerOAuthUser(thirdPartyId, provider);
-        const { token } = await this.createToken(user.id, user.email);
-        return token;
+      // You can add some registration logic here,
+      // to register the user using their thirdPartyId (in this case their googleId)
+      // let user: IUser = await this.usersService.findOneByThirdPartyId(thirdPartyId, provider);
+      let user = await this.prisma.query.user({ where: { email } });
+      if (!user) {
+        user = await this.usersService.createUser({
+          email,
+          password: faker.internet.password(),
+          firstName,
+          lastName,
+          provider,
+          thirdPartyId: id,
+        });
+      }
+      // if (!user)
+      // user = await this.usersService.registerOAuthUser(thirdPartyId, provider);
+      return this.createToken(user.id);
     } catch (err) {
-        throw new InternalServerErrorException('validateOAuthLogin', err.message);
+      throw new InternalServerErrorException('validateOAuthLogin', err.message);
     }
   }
   compare(password: string, hashedPassword: string): Promise<boolean> {
@@ -90,11 +108,11 @@ export class AuthService {
   }
   createAuthPayload(user: any): AuthPayload {
     return {
-      token: jwt.sign({ userId: user.id }, this.JWT_SECRET_KEY),
-      user: ({
+      token: this.createToken(user.id),
+      user: {
         ...user,
         password: null,
-      }),
+      },
     };
   }
 }

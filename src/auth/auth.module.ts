@@ -1,3 +1,4 @@
+import { ConfigService } from './../config/config.service';
 import { SpotifyStrategy } from './passport/spotify.strategy';
 import { ConfigModule } from './../config/config.module';
 import { GoogleStrategy } from './passport/google.strategy';
@@ -10,24 +11,30 @@ import { AuthResolver } from './auth.resolver';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './passport/jwt.strategy';
 import { FacebookStrategy } from './passport/facebook.strategy';
-import { authenticate } from 'passport';
 
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secretOrPrivateKey: 'secretKey',
-      signOptions: {
-        expiresIn: 3600 * 24 * 365,
-      },
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secretOrPrivateKey: configService.getFromEnv('PRISMA_SECRET'),
+        expiresIn: ConfigService.getJwtExpiration(),
+      }),
+      inject: [ConfigService],
     }),
     UsersModule,
     UsersModule,
     ConfigModule,
   ],
-  providers: [JwtStrategy, AuthService, AuthResolver, GoogleStrategy, SpotifyStrategy, FacebookStrategy],
-  controllers: [AuthController]
+  providers: [
+    JwtStrategy,
+    AuthService,
+    AuthResolver,
+    GoogleStrategy,
+    SpotifyStrategy,
+    FacebookStrategy,
+  ],
+  controllers: [AuthController],
 })
-export class AuthModule {
-
-}
+export class AuthModule {}

@@ -22,13 +22,13 @@ import {
 } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/create-user.dto';
 import { User } from 'generated/prisma-client';
-import { LoginPayload } from './auth.types';
+
 import { AuthGuard } from '@nestjs/passport';
 import { authenticate } from 'passport';
 
 function getUrlCallback(jwt: string = '') {
   const state = jwt && jwt.trim().length > 0 ? 'success' : 'error';
-  return `${process.env.WEB_URL}/social-auth?jwt=${jwt}&state=${state}`;
+  return `http://localhost:3000/social-auth?jwt=${jwt}&state=${state}`;
 }
 
 @ApiUseTags('auth')
@@ -132,7 +132,11 @@ export class AuthController {
   }
 
   @Get('facebook')
-  async handleOauthRequest(@Req() req: Request, @Res() res: Response, @Next() next) {
+  async handleOauthRequest(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Next() next,
+  ) {
     const params = {
       session: false,
       scope: ['email'],

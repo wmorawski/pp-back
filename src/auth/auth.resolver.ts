@@ -16,6 +16,7 @@ export class AuthResolver {
 
   @Mutation('signup')
   async signup(@Args() payload: SignupPayload): Promise<AuthPayload> {
+    await this.auth.checkAndThrowIfEmailAlreadyExists(payload.email);
     const user = await this.users.createUser(payload);
     return this.auth.createAuthPayload(user);
   }

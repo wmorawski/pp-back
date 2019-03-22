@@ -13,21 +13,39 @@ import { UsersModule } from './users/users.module';
 import { ChatsModule } from './chats/chats.module';
 import { ConfigService } from './config/config.service';
 import { ConfigModule } from './config/config.module';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
+      context: ({ req }) => ({ req }),
     }),
     PartiesModule,
     UsersModule,
     ChatsModule,
     ConfigModule,
+    AuthModule,
   ],
-  controllers: [AppController, PartiesController, UsersController, ChatsController],
-  providers: [AppService, PartiesService, ChatsService, UsersService, {
-    provide: ConfigService,
-    useValue: new ConfigService(`${process.env.NODE_ENV ? process.env.NODE_ENV : 'developement'}.env`),
-  }],
+  controllers: [
+    AppController,
+    PartiesController,
+    UsersController,
+    ChatsController,
+  ],
+  providers: [
+    AppService,
+    PartiesService,
+    ChatsService,
+    UsersService,
+    {
+      provide: ConfigService,
+      useValue: new ConfigService(
+        `${process.env.NODE_ENV ? process.env.NODE_ENV : 'development'}.env`,
+      ),
+    },
+    AuthService,
+  ],
 })
 export class AppModule {}

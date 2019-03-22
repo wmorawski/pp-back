@@ -1,25 +1,34 @@
 type User {
   id: ID! @unique
-  username: String! @unique
   email: String! @unique
+  firstName: String!
+  lastName: String!
   password: String!
-  parties: [Party!]!
-  friends: [User!]!
+  parties: [Party!]! @relation(name: "UserParties")
+  friends: [User!]! @relation(name: "UserFriends")
+  pendingInvitations: [User!]! @relation(name: "PendingFriendInvitations")
   chats: [Chat!]!
   createdAt: DateTime!
   updatedAt: DateTime!
   deleted: Boolean! @default(value: "false")
+  provider: SocialMediaType
+  avatar: String,
+  thirdPartyId: String
 }
 
 type Party {
   id: ID! @unique
   title: String!
   description: String!
-  author: User!
+  author: User! @relation(name: "PartiesByUser")
   createdAt: DateTime!
   updatedAt: DateTime!
+  location: Location!
   games: [Game!]
-  isPublic: Boolean! @default(value: "false")
+  isPublic: Boolean @default(value: "false")
+  members: [User!]! @relation(name: "UserParties")
+  startDate: DateTime! @default(value: "1970-01-01T00:00:01")
+  endDate: DateTime! @default(value: "1970-01-01T00:00:01")
 }
 
 type Chat {
@@ -49,8 +58,20 @@ type Game {
   updatedAt: DateTime!
 }
 
+type Location {
+  id: ID! @unique
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
 enum GameType {
-  BOARD,
-  PC,
+  BOARD
+  PC
   CONSOLE
+}
+enum SocialMediaType {
+  FACEBOOK
+  SPOTIFY
+  TWITTER
 }

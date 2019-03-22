@@ -1,0 +1,6 @@
+type Query {
+  getParties: [Party]!
+}
+type Mutation {
+  createPartyV(data: PartyCreateInput!): Party!
+}

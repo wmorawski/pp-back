@@ -15,6 +15,8 @@ import { ConfigService } from './config/config.service';
 import { ConfigModule } from './config/config.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { PrismaService } from './prisma/prisma.service';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -27,6 +29,7 @@ import { AuthModule } from './auth/auth.module';
     ChatsModule,
     ConfigModule,
     AuthModule,
+    PrismaModule,
   ],
   controllers: [
     AppController,
@@ -46,6 +49,7 @@ import { AuthModule } from './auth/auth.module';
       ),
     },
     AuthService,
+    PrismaService
   ],
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import { Injectable } from '@nestjs/common';
-import { IFacebookConfig } from 'src/auth/interfaces/facebook-config.interface';
+import { IFacebookConfig } from '../auth/interfaces/facebook-config.interface';
 
 const TOKEN_EXPIRATION = '2 days';
 @Injectable()

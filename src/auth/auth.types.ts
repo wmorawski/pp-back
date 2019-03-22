@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { User, SocialMediaType } from 'src/prisma/prisma.binding';
+import { User, SocialMediaType } from '../prisma/prisma.binding';
 
 export interface JwtPayload {
   userId: string;

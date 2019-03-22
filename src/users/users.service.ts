@@ -4,7 +4,7 @@ import { UserWhereInput, UserCreateInput } from './../prisma/prisma.binding';
 import { Injectable } from '@nestjs/common';
 import { User } from '../prisma/prisma.binding';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UsersService {

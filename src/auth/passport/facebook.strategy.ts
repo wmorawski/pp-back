@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-facebook';
-import { ConfigService } from 'src/config/config.service';
+import { ConfigService } from '../../config/config.service';
 import { AuthService, Provider } from '../auth.service';
 import faker = require('faker');
 

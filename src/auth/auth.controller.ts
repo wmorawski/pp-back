@@ -1,6 +1,6 @@
-import { ConfigService } from 'src/config/config.service';
+import { ConfigService } from '../config/config.service';
 import { LoginUserDto } from './../users/login-user.dto';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import {
   Controller,
   Get,
@@ -20,7 +20,7 @@ import {
   ApiUseTags,
   ApiCreatedResponse,
 } from '@nestjs/swagger';
-import { CreateUserDto } from 'src/users/create-user.dto';
+import { CreateUserDto } from '../users/create-user.dto';
 import { User } from 'generated/prisma-client';
 
 import { AuthGuard } from '@nestjs/passport';

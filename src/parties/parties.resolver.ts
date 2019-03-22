@@ -1,12 +1,12 @@
-import { Party } from './../prisma/prisma.binding';
+import { Party } from '../prisma/prisma.binding';
 import { UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Resolver, Args, Mutation, Info } from '@nestjs/graphql';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { AuthenticationError } from 'apollo-server-core';
 import { PartiesService } from './parties.service';
 import { CreatePartyPayload } from './parties.types';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Resolver()
 export class PartiesResolver {

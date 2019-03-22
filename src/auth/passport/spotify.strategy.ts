@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { ConfigService } from 'src/config/config.service';
+import { ConfigService } from '../../config/config.service';
 import { AuthService, Provider } from '../auth.service';
 import { Strategy } from 'passport-spotify';
 import * as faker from 'faker';

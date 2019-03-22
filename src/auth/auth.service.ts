@@ -12,9 +12,9 @@ import {
   SignupPayload,
 } from './auth.types';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { User } from 'src/prisma/prisma.binding';
-import { ConfigService } from 'src/config/config.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { User } from '../prisma/prisma.binding';
+import { ConfigService } from '../config/config.service';
 import faker = require('faker');
 
 export enum Provider {

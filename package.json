@@ -1,8 +1,8 @@
 {
-  "name": "nest-typescript-starter",
-  "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
-  "license": "MIT",
+  "name": "partyplannerio-backend",
+  "version": "0.1.0",
+  "description": "REST and GraphQL API for PartyPlanner.io",
+  "license": "BSD",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -55,7 +55,9 @@
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.0",
     "rimraf": "^2.6.3",
-    "rxjs": "^6.4.0"
+    "rxjs": "^6.4.0",
+    "bcrypt": "^3.0.5",
+    "faker": "^4.1.0"
   },
   "devDependencies": {
     "@nestjs/testing": "^5.4.0",
@@ -68,8 +70,6 @@
     "@types/passport-http-bearer": "^1.0.33",
     "@types/ramda": "^0.26.3",
     "@types/supertest": "^2.0.7",
-    "bcrypt": "^3.0.5",
-    "faker": "^4.1.0",
     "graphql-config-extension-prisma": "^0.3.0",
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",

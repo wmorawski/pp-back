@@ -51,7 +51,7 @@ export class AuthService {
     const user = await this.prisma.query.user({
       where: { email },
     });
-    if (!user) {
+    if (user) {
       throw new InternalServerErrorException(`That email is already used`);
     }
   }

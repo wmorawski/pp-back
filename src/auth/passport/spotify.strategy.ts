@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ConfigService } from 'src/config/config.service';
 import { AuthService, Provider } from '../auth.service';
 import { Strategy } from 'passport-spotify';
+import * as faker from 'faker';
 
 @Injectable()
 export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
@@ -28,13 +29,15 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
     done: Function,
   ) {
     try {
-      const jwt: string = await this.authService.validateOAuthLogin(
-        profile.id,
-        profile.emails[0].value,
-        profile.displayName.split(' ')[1],
-        profile.displayName.split(' ')[0],
-        'SPOTIFY',
-      );
+      const jwt: string = await this.authService.validateOAuthLogin({
+        email: profile.emails[0].value,
+        lastName: profile.displayName.split(' ')[1],
+        firstName: profile.displayName.split(' ')[0],
+        provider: 'SPOTIFY',
+        password: faker.internet.password(),
+        avatar: profile.photos[0] || null,
+        thirdPartyId: profile.id,
+      });
       const user = {
         jwt,
       };

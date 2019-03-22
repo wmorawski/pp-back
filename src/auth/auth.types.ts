@@ -7,6 +7,8 @@ export interface JwtPayload {
 }
 
 export interface SignupPayload {
+  id?: string;
+  avatar?: string;
   email: string;
   password: string;
   firstName: string;

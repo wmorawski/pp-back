@@ -12,7 +12,7 @@ type User {
   updatedAt: DateTime!
   deleted: Boolean! @default(value: "false")
   provider: SocialMediaType
-  avatar: String,
+  avatar: String
   thirdPartyId: String
 }
 
@@ -25,6 +25,7 @@ type Party {
   updatedAt: DateTime!
   location: Location!
   games: [Game!]
+  colorTint: String!
   isPublic: Boolean @default(value: "false")
   members: [User!]! @relation(name: "UserParties")
   startDate: DateTime! @default(value: "1970-01-01T00:00:01")

@@ -24,12 +24,12 @@ import { PrismaModule } from './prisma/prisma.module';
       typePaths: ['./**/*.graphql'],
       context: ({ req }) => ({ req }),
     }),
+    PrismaModule,
     PartiesModule,
     UsersModule,
     ChatsModule,
     ConfigModule,
     AuthModule,
-    PrismaModule,
   ],
   controllers: [
     AppController,
@@ -49,7 +49,7 @@ import { PrismaModule } from './prisma/prisma.module';
       ),
     },
     AuthService,
-    PrismaService
+    PrismaService,
   ],
 })
 export class AppModule {}

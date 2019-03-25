@@ -11,6 +11,9 @@ import { AuthResolver } from './auth.resolver';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './passport/jwt.strategy';
 import { FacebookStrategy } from './passport/facebook.strategy';
+import { TwitterStrategy } from './passport/twitter.strategy';
+import { ExpressSessionMiddleware } from '@nest-middlewares/express-session';
+import passport = require('passport');
 
 @Module({
   imports: [
@@ -34,6 +37,7 @@ import { FacebookStrategy } from './passport/facebook.strategy';
     GoogleStrategy,
     SpotifyStrategy,
     FacebookStrategy,
+    TwitterStrategy,
   ],
   controllers: [AuthController],
 })

@@ -1,7 +1,10 @@
-import { Party } from '../prisma/prisma.binding';
-import { UnauthorizedException } from '@nestjs/common';
+import {
+  Party,
+  PartyConnection,
+  PartyCreateInput,
+} from '../prisma/prisma.binding';
 import { AuthGuard } from '@nestjs/passport';
-import { Resolver, Args, Mutation, Info } from '@nestjs/graphql';
+import { Resolver, Args, Mutation, Info, Query } from '@nestjs/graphql';
 import { UsersService } from '../users/users.service';
 import { AuthenticationError } from 'apollo-server-core';
 import { PartiesService } from './parties.service';
@@ -15,8 +18,23 @@ export class PartiesResolver {
     private readonly prisma: PrismaService,
   ) {}
 
-  @Mutation('createPartyV')
-  async createParty(@Args() args, @Info() info): Promise<Party> {
-    return await this.prisma.mutation.createParty(args, info);
+  @Mutation('createParty')
+  async createParty(
+    @Args() args: { data: PartyCreateInput },
+    @Info() info,
+  ): Promise<Party> {
+    const createdParty = await this.prisma.mutation.createParty(args, info);
+    await this.prisma.mutation.createChat({
+      data: {
+        party: { connect: { id: createdParty.id } },
+        members: { connect: args.data!.members.connect },
+      },
+    });
+    return createdParty;
+  }
+
+  @Query('parties')
+  async Parties(@Args() args, @Info() info): Promise<Party[]> {
+    return await this.prisma.query.parties(args, info);
   }
 }

@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Thu Mar 21 2019 21:50:59 GMT+0100 (Środkowoeuropejski czas stand.)
+# timestamp: Mon Mar 25 2019 12:20:10 GMT+0100 (Central European Standard Time)
 
 type AggregateChat {
   count: Int!
@@ -1704,10 +1704,11 @@ type Party implements Node {
   updatedAt: DateTime!
   location: Location!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
+  colorTint: String!
   isPublic: Boolean
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  startDate: DateTime!
-  endDate: DateTime!
+  start: DateTime!
+  end: DateTime!
 }
 
 """A connection to a list of items."""
@@ -1724,9 +1725,10 @@ input PartyCreateInput {
   id: ID
   title: String!
   description: String!
+  colorTint: String!
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -1747,9 +1749,10 @@ input PartyCreateWithoutMembersInput {
   id: ID
   title: String!
   description: String!
+  colorTint: String!
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -1775,12 +1778,14 @@ enum PartyOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  colorTint_ASC
+  colorTint_DESC
   isPublic_ASC
   isPublic_DESC
-  startDate_ASC
-  startDate_DESC
-  endDate_ASC
-  endDate_DESC
+  start_ASC
+  start_DESC
+  end_ASC
+  end_DESC
 }
 
 type PartyPreviousValues {
@@ -1789,9 +1794,10 @@ type PartyPreviousValues {
   description: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  colorTint: String!
   isPublic: Boolean
-  startDate: DateTime!
-  endDate: DateTime!
+  start: DateTime!
+  end: DateTime!
 }
 
 input PartyScalarWhereInput {
@@ -1967,54 +1973,94 @@ input PartyScalarWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  colorTint: String
+
+  """All values that are not equal to given value."""
+  colorTint_not: String
+
+  """All values that are contained in given list."""
+  colorTint_in: [String!]
+
+  """All values that are not contained in given list."""
+  colorTint_not_in: [String!]
+
+  """All values less than the given value."""
+  colorTint_lt: String
+
+  """All values less than or equal the given value."""
+  colorTint_lte: String
+
+  """All values greater than the given value."""
+  colorTint_gt: String
+
+  """All values greater than or equal the given value."""
+  colorTint_gte: String
+
+  """All values containing the given string."""
+  colorTint_contains: String
+
+  """All values not containing the given string."""
+  colorTint_not_contains: String
+
+  """All values starting with the given string."""
+  colorTint_starts_with: String
+
+  """All values not starting with the given string."""
+  colorTint_not_starts_with: String
+
+  """All values ending with the given string."""
+  colorTint_ends_with: String
+
+  """All values not ending with the given string."""
+  colorTint_not_ends_with: String
   isPublic: Boolean
 
   """All values that are not equal to given value."""
   isPublic_not: Boolean
-  startDate: DateTime
+  start: DateTime
 
   """All values that are not equal to given value."""
-  startDate_not: DateTime
+  start_not: DateTime
 
   """All values that are contained in given list."""
-  startDate_in: [DateTime!]
+  start_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  startDate_not_in: [DateTime!]
+  start_not_in: [DateTime!]
 
   """All values less than the given value."""
-  startDate_lt: DateTime
+  start_lt: DateTime
 
   """All values less than or equal the given value."""
-  startDate_lte: DateTime
+  start_lte: DateTime
 
   """All values greater than the given value."""
-  startDate_gt: DateTime
+  start_gt: DateTime
 
   """All values greater than or equal the given value."""
-  startDate_gte: DateTime
-  endDate: DateTime
+  start_gte: DateTime
+  end: DateTime
 
   """All values that are not equal to given value."""
-  endDate_not: DateTime
+  end_not: DateTime
 
   """All values that are contained in given list."""
-  endDate_in: [DateTime!]
+  end_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  endDate_not_in: [DateTime!]
+  end_not_in: [DateTime!]
 
   """All values less than the given value."""
-  endDate_lt: DateTime
+  end_lt: DateTime
 
   """All values less than or equal the given value."""
-  endDate_lte: DateTime
+  end_lte: DateTime
 
   """All values greater than the given value."""
-  endDate_gt: DateTime
+  end_gt: DateTime
 
   """All values greater than or equal the given value."""
-  endDate_gte: DateTime
+  end_gte: DateTime
 }
 
 type PartySubscriptionPayload {
@@ -2059,9 +2105,10 @@ input PartySubscriptionWhereInput {
 input PartyUpdateDataInput {
   title: String
   description: String
+  colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2071,9 +2118,10 @@ input PartyUpdateDataInput {
 input PartyUpdateInput {
   title: String
   description: String
+  colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2083,17 +2131,19 @@ input PartyUpdateInput {
 input PartyUpdateManyDataInput {
   title: String
   description: String
+  colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateManyMutationInput {
   title: String
   description: String
+  colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateManyWithoutMembersInput {
@@ -2123,9 +2173,10 @@ input PartyUpdateOneRequiredInput {
 input PartyUpdateWithoutMembersDataInput {
   title: String
   description: String
+  colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2320,54 +2371,94 @@ input PartyWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  colorTint: String
+
+  """All values that are not equal to given value."""
+  colorTint_not: String
+
+  """All values that are contained in given list."""
+  colorTint_in: [String!]
+
+  """All values that are not contained in given list."""
+  colorTint_not_in: [String!]
+
+  """All values less than the given value."""
+  colorTint_lt: String
+
+  """All values less than or equal the given value."""
+  colorTint_lte: String
+
+  """All values greater than the given value."""
+  colorTint_gt: String
+
+  """All values greater than or equal the given value."""
+  colorTint_gte: String
+
+  """All values containing the given string."""
+  colorTint_contains: String
+
+  """All values not containing the given string."""
+  colorTint_not_contains: String
+
+  """All values starting with the given string."""
+  colorTint_starts_with: String
+
+  """All values not starting with the given string."""
+  colorTint_not_starts_with: String
+
+  """All values ending with the given string."""
+  colorTint_ends_with: String
+
+  """All values not ending with the given string."""
+  colorTint_not_ends_with: String
   isPublic: Boolean
 
   """All values that are not equal to given value."""
   isPublic_not: Boolean
-  startDate: DateTime
+  start: DateTime
 
   """All values that are not equal to given value."""
-  startDate_not: DateTime
+  start_not: DateTime
 
   """All values that are contained in given list."""
-  startDate_in: [DateTime!]
+  start_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  startDate_not_in: [DateTime!]
+  start_not_in: [DateTime!]
 
   """All values less than the given value."""
-  startDate_lt: DateTime
+  start_lt: DateTime
 
   """All values less than or equal the given value."""
-  startDate_lte: DateTime
+  start_lte: DateTime
 
   """All values greater than the given value."""
-  startDate_gt: DateTime
+  start_gt: DateTime
 
   """All values greater than or equal the given value."""
-  startDate_gte: DateTime
-  endDate: DateTime
+  start_gte: DateTime
+  end: DateTime
 
   """All values that are not equal to given value."""
-  endDate_not: DateTime
+  end_not: DateTime
 
   """All values that are contained in given list."""
-  endDate_in: [DateTime!]
+  end_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  endDate_not_in: [DateTime!]
+  end_not_in: [DateTime!]
 
   """All values less than the given value."""
-  endDate_lt: DateTime
+  end_lt: DateTime
 
   """All values less than or equal the given value."""
-  endDate_lte: DateTime
+  end_lte: DateTime
 
   """All values greater than the given value."""
-  endDate_gt: DateTime
+  end_gt: DateTime
 
   """All values greater than or equal the given value."""
-  endDate_gte: DateTime
+  end_gte: DateTime
   author: UserWhereInput
   location: LocationWhereInput
   games_every: GameWhereInput

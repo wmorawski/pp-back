@@ -1,6 +1,15 @@
 type Query {
-  getParties: [Party]!
+  parties(
+    where: PartyWhereInput
+    orderBy: PartyOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Party]!
 }
+
 type Mutation {
-  createPartyV(data: PartyCreateInput!): Party!
+  createParty(data: PartyCreateInput!): Party!
 }

@@ -1,10 +1,32 @@
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { prisma } from '../../../generated/prisma-client';
-import { compose, filter, map } from 'ramda';
+import { compose, filter } from 'ramda';
+import { parse, addHours } from 'date-fns';
 
 const USERS_NUM = 50;
 const PARTIES_NUM = 10;
+
+const calendarTintsHexArray = [
+  '#f44336',
+  '#e91e63',
+  '#9c27b0',
+  '#673ab7',
+  '#3f51b5',
+  '#2196f3',
+  '#03a9f4',
+  '#00bcd4',
+  '#009688',
+  '#4caf50',
+  '#8bc34a',
+  '#cddc39',
+  '#ffeb3b',
+  '#ffc107',
+  '#ff9800',
+  '#ff5722',
+  '#795548',
+  '#607d8b',
+];
 
 const createFakeUser = () => ({
   email: faker.internet.email(),
@@ -13,28 +35,37 @@ const createFakeUser = () => ({
   friends: {
     connect: [],
   },
+  avatar: faker.image.avatar(),
   // same password is better you can always log in on this account :)
   password: bcrypt.hashSync('password', 10),
 });
-const createFakeParty = (author: any, members: any[]) => ({
-  title: faker.lorem.slug(),
-  author: {
-    connect: {
-      id: author.id,
+const createFakeParty = (author: any, members: any[]) => {
+  const partyStartDate = faker.date.recent();
+  // date-fns please write functions that allow curring or composition :C
+  const partyEndDate = addHours(parse(partyStartDate), 6);
+  return {
+    title: faker.lorem.slug(),
+    author: {
+      connect: {
+        id: author.id,
+      },
     },
-  },
-  members: {
-    connect: members.map(member => ({ id: member.id })),
-  },
-  description: faker.lorem.paragraphs(),
-  location: {
-    create: {
-      placeName: faker.address.streetName(),
-      latitude: parseFloat(faker.address.latitude()),
-      longitude: parseFloat(faker.address.longitude()),
+    members: {
+      connect: members.map(member => ({ id: member.id })),
     },
-  },
-});
+    description: faker.lorem.paragraphs(),
+    location: {
+      create: {
+        placeName: faker.address.streetName(),
+        latitude: parseFloat(faker.address.latitude()),
+        longitude: parseFloat(faker.address.longitude()),
+      },
+    },
+    start: partyStartDate,
+    end: partyEndDate,
+    colorTint: faker.random.arrayElement(calendarTintsHexArray),
+  };
+};
 const getRandomElementsFromArray = (arr: any[]) => {
   const shuffled = arr.sort(() => {
     return 0.5 - Math.random();
@@ -73,19 +104,7 @@ const createFakeChat = (party: any) => ({
     ),
   },
   party: {
-    create: {
-      title: faker.lorem.slug(),
-      author: party.author,
-      members: party.members,
-      description: faker.lorem.paragraphs(),
-      location: {
-        create: {
-          placeName: faker.address.streetName(),
-          latitude: parseFloat(faker.address.latitude()),
-          longitude: parseFloat(faker.address.longitude()),
-        },
-      },
-    },
+    create: party,
   },
 });
 
@@ -146,8 +165,7 @@ async function main() {
   }
 
   // parties & chats
-  const savedParties = [];
-  const getPartMembers = partyAuthor => [
+  const getPartyMembers = partyAuthor => [
     partyAuthor,
     ...getRandomElementsFromArray(savedUsers).filter(partyMember => {
       return partyMember.id !== partyAuthor.id;
@@ -155,7 +173,7 @@ async function main() {
   ];
   const createParty = () => {
     const partyAuthor = getRandomPartyAuthor(savedUsers);
-    const partyMembers = getPartMembers(partyAuthor);
+    const partyMembers = getPartyMembers(partyAuthor);
     return createFakeParty(partyAuthor, partyMembers);
   };
   const parties = Array.from({ length: PARTIES_NUM }, createParty);

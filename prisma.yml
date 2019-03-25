@@ -9,11 +9,12 @@ secret: ${env:PRISMA_SECRET}
 hooks:
   post-deploy:
     - prisma generate
-    - graphql get-schema --project database
     - graphql codegen --project database
 
 generate:
   - generator: typescript-client
     output: ./generated/prisma-client/
+  - generator: graphql-schema
+    output: ./src/prisma/
 seed:
   run: ts-node ./src/prisma/seed/seed.ts

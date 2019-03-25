@@ -34,7 +34,7 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
         firstName: profile.displayName.split(' ')[0],
         provider: 'TWITTER',
         password: faker.internet.password(),
-        avatar: profile.photos[0] || null,
+        avatar: profile.photos[0].value || null,
         thirdPartyId: profile.id,
       });
       const user = {

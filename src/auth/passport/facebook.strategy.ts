@@ -35,7 +35,7 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
         lastName: profile.name.familyName,
         provider: 'FACEBOOK',
         password: faker.internet.password(),
-        avatar: profile.photos[0] || null,
+        avatar: profile.photos[0].value || null,
       });
       const user = {
         jwt,

@@ -35,7 +35,7 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
         firstName: profile.displayName.split(' ')[0],
         provider: 'SPOTIFY',
         password: faker.internet.password(),
-        avatar: profile.photos[0] || null,
+        avatar: profile.photos[0].value || null,
         thirdPartyId: profile.id,
       });
       const user = {

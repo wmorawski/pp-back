@@ -151,4 +151,23 @@ export class AuthController {
     const jwt: string = req.user.jwt;
     res.redirect(getUrlCallback(jwt));
   }
+
+  @Get('twitter')
+  async handleOauthTwitterRequest(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Next() next,
+  ) {
+    const params = {
+      session: true,
+    };
+    authenticate('twitter', params)(req, res, next);
+  }
+
+  @Get('twitter/callback')
+  @UseGuards(AuthGuard('twitter'))
+  async twitterLoginCallback(@Req() req, @Res() res) {
+    const jwt: string = req.user.jwt;
+    res.redirect(getUrlCallback(jwt));
+  }
 }

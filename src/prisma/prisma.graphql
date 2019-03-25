@@ -1,0 +1,2066 @@
+type AggregateChat {
+  count: Int!
+}
+
+type AggregateGame {
+  count: Int!
+}
+
+type AggregateLocation {
+  count: Int!
+}
+
+type AggregateMessage {
+  count: Int!
+}
+
+type AggregateParty {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+type Chat {
+  id: ID!
+  party: Party!
+  members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ChatConnection {
+  pageInfo: PageInfo!
+  edges: [ChatEdge]!
+  aggregate: AggregateChat!
+}
+
+input ChatCreateInput {
+  party: PartyCreateOneInput!
+  members: UserCreateManyWithoutChatsInput
+  messages: MessageCreateManyWithoutChatInput
+}
+
+input ChatCreateManyWithoutMembersInput {
+  create: [ChatCreateWithoutMembersInput!]
+  connect: [ChatWhereUniqueInput!]
+}
+
+input ChatCreateOneWithoutMessagesInput {
+  create: ChatCreateWithoutMessagesInput
+  connect: ChatWhereUniqueInput
+}
+
+input ChatCreateWithoutMembersInput {
+  party: PartyCreateOneInput!
+  messages: MessageCreateManyWithoutChatInput
+}
+
+input ChatCreateWithoutMessagesInput {
+  party: PartyCreateOneInput!
+  members: UserCreateManyWithoutChatsInput
+}
+
+type ChatEdge {
+  node: Chat!
+  cursor: String!
+}
+
+enum ChatOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ChatPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ChatScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ChatScalarWhereInput!]
+  OR: [ChatScalarWhereInput!]
+  NOT: [ChatScalarWhereInput!]
+}
+
+type ChatSubscriptionPayload {
+  mutation: MutationType!
+  node: Chat
+  updatedFields: [String!]
+  previousValues: ChatPreviousValues
+}
+
+input ChatSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ChatWhereInput
+  AND: [ChatSubscriptionWhereInput!]
+  OR: [ChatSubscriptionWhereInput!]
+  NOT: [ChatSubscriptionWhereInput!]
+}
+
+input ChatUpdateInput {
+  party: PartyUpdateOneRequiredInput
+  members: UserUpdateManyWithoutChatsInput
+  messages: MessageUpdateManyWithoutChatInput
+}
+
+input ChatUpdateManyWithoutMembersInput {
+  create: [ChatCreateWithoutMembersInput!]
+  delete: [ChatWhereUniqueInput!]
+  connect: [ChatWhereUniqueInput!]
+  set: [ChatWhereUniqueInput!]
+  disconnect: [ChatWhereUniqueInput!]
+  update: [ChatUpdateWithWhereUniqueWithoutMembersInput!]
+  upsert: [ChatUpsertWithWhereUniqueWithoutMembersInput!]
+  deleteMany: [ChatScalarWhereInput!]
+}
+
+input ChatUpdateOneRequiredWithoutMessagesInput {
+  create: ChatCreateWithoutMessagesInput
+  update: ChatUpdateWithoutMessagesDataInput
+  upsert: ChatUpsertWithoutMessagesInput
+  connect: ChatWhereUniqueInput
+}
+
+input ChatUpdateWithoutMembersDataInput {
+  party: PartyUpdateOneRequiredInput
+  messages: MessageUpdateManyWithoutChatInput
+}
+
+input ChatUpdateWithoutMessagesDataInput {
+  party: PartyUpdateOneRequiredInput
+  members: UserUpdateManyWithoutChatsInput
+}
+
+input ChatUpdateWithWhereUniqueWithoutMembersInput {
+  where: ChatWhereUniqueInput!
+  data: ChatUpdateWithoutMembersDataInput!
+}
+
+input ChatUpsertWithoutMessagesInput {
+  update: ChatUpdateWithoutMessagesDataInput!
+  create: ChatCreateWithoutMessagesInput!
+}
+
+input ChatUpsertWithWhereUniqueWithoutMembersInput {
+  where: ChatWhereUniqueInput!
+  update: ChatUpdateWithoutMembersDataInput!
+  create: ChatCreateWithoutMembersInput!
+}
+
+input ChatWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  party: PartyWhereInput
+  members_every: UserWhereInput
+  members_some: UserWhereInput
+  members_none: UserWhereInput
+  messages_every: MessageWhereInput
+  messages_some: MessageWhereInput
+  messages_none: MessageWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ChatWhereInput!]
+  OR: [ChatWhereInput!]
+  NOT: [ChatWhereInput!]
+}
+
+input ChatWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+type Game {
+  id: ID!
+  title: String!
+  cover: String
+  type: GameType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GameConnection {
+  pageInfo: PageInfo!
+  edges: [GameEdge]!
+  aggregate: AggregateGame!
+}
+
+input GameCreateInput {
+  title: String!
+  cover: String
+  type: GameType!
+}
+
+input GameCreateManyInput {
+  create: [GameCreateInput!]
+  connect: [GameWhereUniqueInput!]
+}
+
+type GameEdge {
+  node: Game!
+  cursor: String!
+}
+
+enum GameOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  cover_ASC
+  cover_DESC
+  type_ASC
+  type_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type GamePreviousValues {
+  id: ID!
+  title: String!
+  cover: String
+  type: GameType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input GameScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  cover: String
+  cover_not: String
+  cover_in: [String!]
+  cover_not_in: [String!]
+  cover_lt: String
+  cover_lte: String
+  cover_gt: String
+  cover_gte: String
+  cover_contains: String
+  cover_not_contains: String
+  cover_starts_with: String
+  cover_not_starts_with: String
+  cover_ends_with: String
+  cover_not_ends_with: String
+  type: GameType
+  type_not: GameType
+  type_in: [GameType!]
+  type_not_in: [GameType!]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [GameScalarWhereInput!]
+  OR: [GameScalarWhereInput!]
+  NOT: [GameScalarWhereInput!]
+}
+
+type GameSubscriptionPayload {
+  mutation: MutationType!
+  node: Game
+  updatedFields: [String!]
+  previousValues: GamePreviousValues
+}
+
+input GameSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: GameWhereInput
+  AND: [GameSubscriptionWhereInput!]
+  OR: [GameSubscriptionWhereInput!]
+  NOT: [GameSubscriptionWhereInput!]
+}
+
+enum GameType {
+  BOARD
+  PC
+  CONSOLE
+}
+
+input GameUpdateDataInput {
+  title: String
+  cover: String
+  type: GameType
+}
+
+input GameUpdateInput {
+  title: String
+  cover: String
+  type: GameType
+}
+
+input GameUpdateManyDataInput {
+  title: String
+  cover: String
+  type: GameType
+}
+
+input GameUpdateManyInput {
+  create: [GameCreateInput!]
+  update: [GameUpdateWithWhereUniqueNestedInput!]
+  upsert: [GameUpsertWithWhereUniqueNestedInput!]
+  delete: [GameWhereUniqueInput!]
+  connect: [GameWhereUniqueInput!]
+  set: [GameWhereUniqueInput!]
+  disconnect: [GameWhereUniqueInput!]
+  deleteMany: [GameScalarWhereInput!]
+  updateMany: [GameUpdateManyWithWhereNestedInput!]
+}
+
+input GameUpdateManyMutationInput {
+  title: String
+  cover: String
+  type: GameType
+}
+
+input GameUpdateManyWithWhereNestedInput {
+  where: GameScalarWhereInput!
+  data: GameUpdateManyDataInput!
+}
+
+input GameUpdateWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput!
+  data: GameUpdateDataInput!
+}
+
+input GameUpsertWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput!
+  update: GameUpdateDataInput!
+  create: GameCreateInput!
+}
+
+input GameWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  cover: String
+  cover_not: String
+  cover_in: [String!]
+  cover_not_in: [String!]
+  cover_lt: String
+  cover_lte: String
+  cover_gt: String
+  cover_gte: String
+  cover_contains: String
+  cover_not_contains: String
+  cover_starts_with: String
+  cover_not_starts_with: String
+  cover_ends_with: String
+  cover_not_ends_with: String
+  type: GameType
+  type_not: GameType
+  type_in: [GameType!]
+  type_not_in: [GameType!]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [GameWhereInput!]
+  OR: [GameWhereInput!]
+  NOT: [GameWhereInput!]
+}
+
+input GameWhereUniqueInput {
+  id: ID
+  title: String
+}
+
+type Location {
+  id: ID!
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+type LocationConnection {
+  pageInfo: PageInfo!
+  edges: [LocationEdge]!
+  aggregate: AggregateLocation!
+}
+
+input LocationCreateInput {
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+input LocationCreateOneInput {
+  create: LocationCreateInput
+  connect: LocationWhereUniqueInput
+}
+
+type LocationEdge {
+  node: Location!
+  cursor: String!
+}
+
+enum LocationOrderByInput {
+  id_ASC
+  id_DESC
+  placeName_ASC
+  placeName_DESC
+  latitude_ASC
+  latitude_DESC
+  longitude_ASC
+  longitude_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type LocationPreviousValues {
+  id: ID!
+  placeName: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+type LocationSubscriptionPayload {
+  mutation: MutationType!
+  node: Location
+  updatedFields: [String!]
+  previousValues: LocationPreviousValues
+}
+
+input LocationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: LocationWhereInput
+  AND: [LocationSubscriptionWhereInput!]
+  OR: [LocationSubscriptionWhereInput!]
+  NOT: [LocationSubscriptionWhereInput!]
+}
+
+input LocationUpdateDataInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateManyMutationInput {
+  placeName: String
+  latitude: Float
+  longitude: Float
+}
+
+input LocationUpdateOneRequiredInput {
+  create: LocationCreateInput
+  update: LocationUpdateDataInput
+  upsert: LocationUpsertNestedInput
+  connect: LocationWhereUniqueInput
+}
+
+input LocationUpsertNestedInput {
+  update: LocationUpdateDataInput!
+  create: LocationCreateInput!
+}
+
+input LocationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  placeName: String
+  placeName_not: String
+  placeName_in: [String!]
+  placeName_not_in: [String!]
+  placeName_lt: String
+  placeName_lte: String
+  placeName_gt: String
+  placeName_gte: String
+  placeName_contains: String
+  placeName_not_contains: String
+  placeName_starts_with: String
+  placeName_not_starts_with: String
+  placeName_ends_with: String
+  placeName_not_ends_with: String
+  latitude: Float
+  latitude_not: Float
+  latitude_in: [Float!]
+  latitude_not_in: [Float!]
+  latitude_lt: Float
+  latitude_lte: Float
+  latitude_gt: Float
+  latitude_gte: Float
+  longitude: Float
+  longitude_not: Float
+  longitude_in: [Float!]
+  longitude_not_in: [Float!]
+  longitude_lt: Float
+  longitude_lte: Float
+  longitude_gt: Float
+  longitude_gte: Float
+  AND: [LocationWhereInput!]
+  OR: [LocationWhereInput!]
+  NOT: [LocationWhereInput!]
+}
+
+input LocationWhereUniqueInput {
+  id: ID
+}
+
+scalar Long
+
+type Message {
+  id: ID!
+  author: User!
+  chat: Chat!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type MessageConnection {
+  pageInfo: PageInfo!
+  edges: [MessageEdge]!
+  aggregate: AggregateMessage!
+}
+
+input MessageCreateInput {
+  author: UserCreateOneInput!
+  chat: ChatCreateOneWithoutMessagesInput!
+  content: String!
+}
+
+input MessageCreateManyWithoutChatInput {
+  create: [MessageCreateWithoutChatInput!]
+  connect: [MessageWhereUniqueInput!]
+}
+
+input MessageCreateWithoutChatInput {
+  author: UserCreateOneInput!
+  content: String!
+}
+
+type MessageEdge {
+  node: Message!
+  cursor: String!
+}
+
+enum MessageOrderByInput {
+  id_ASC
+  id_DESC
+  content_ASC
+  content_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type MessagePreviousValues {
+  id: ID!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input MessageScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [MessageScalarWhereInput!]
+  OR: [MessageScalarWhereInput!]
+  NOT: [MessageScalarWhereInput!]
+}
+
+type MessageSubscriptionPayload {
+  mutation: MutationType!
+  node: Message
+  updatedFields: [String!]
+  previousValues: MessagePreviousValues
+}
+
+input MessageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MessageWhereInput
+  AND: [MessageSubscriptionWhereInput!]
+  OR: [MessageSubscriptionWhereInput!]
+  NOT: [MessageSubscriptionWhereInput!]
+}
+
+input MessageUpdateInput {
+  author: UserUpdateOneRequiredInput
+  chat: ChatUpdateOneRequiredWithoutMessagesInput
+  content: String
+}
+
+input MessageUpdateManyDataInput {
+  content: String
+}
+
+input MessageUpdateManyMutationInput {
+  content: String
+}
+
+input MessageUpdateManyWithoutChatInput {
+  create: [MessageCreateWithoutChatInput!]
+  delete: [MessageWhereUniqueInput!]
+  connect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutChatInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutChatInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  updateMany: [MessageUpdateManyWithWhereNestedInput!]
+}
+
+input MessageUpdateManyWithWhereNestedInput {
+  where: MessageScalarWhereInput!
+  data: MessageUpdateManyDataInput!
+}
+
+input MessageUpdateWithoutChatDataInput {
+  author: UserUpdateOneRequiredInput
+  content: String
+}
+
+input MessageUpdateWithWhereUniqueWithoutChatInput {
+  where: MessageWhereUniqueInput!
+  data: MessageUpdateWithoutChatDataInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutChatInput {
+  where: MessageWhereUniqueInput!
+  update: MessageUpdateWithoutChatDataInput!
+  create: MessageCreateWithoutChatInput!
+}
+
+input MessageWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  author: UserWhereInput
+  chat: ChatWhereInput
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [MessageWhereInput!]
+  OR: [MessageWhereInput!]
+  NOT: [MessageWhereInput!]
+}
+
+input MessageWhereUniqueInput {
+  id: ID
+}
+
+type Mutation {
+  createChat(data: ChatCreateInput!): Chat!
+  updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
+  upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
+  deleteChat(where: ChatWhereUniqueInput!): Chat
+  deleteManyChats(where: ChatWhereInput): BatchPayload!
+  createGame(data: GameCreateInput!): Game!
+  updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
+  updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
+  upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
+  deleteGame(where: GameWhereUniqueInput!): Game
+  deleteManyGames(where: GameWhereInput): BatchPayload!
+  createLocation(data: LocationCreateInput!): Location!
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
+  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
+  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
+  deleteLocation(where: LocationWhereUniqueInput!): Location
+  deleteManyLocations(where: LocationWhereInput): BatchPayload!
+  createMessage(data: MessageCreateInput!): Message!
+  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
+  upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
+  deleteMessage(where: MessageWhereUniqueInput!): Message
+  deleteManyMessages(where: MessageWhereInput): BatchPayload!
+  createParty(data: PartyCreateInput!): Party!
+  updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
+  updateManyParties(data: PartyUpdateManyMutationInput!, where: PartyWhereInput): BatchPayload!
+  upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
+  deleteParty(where: PartyWhereUniqueInput!): Party
+  deleteManyParties(where: PartyWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Party {
+  id: ID!
+  title: String!
+  description: String!
+  author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  location: Location!
+  games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
+  colorTint: String!
+  isPublic: Boolean
+  members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  start: DateTime!
+  end: DateTime!
+}
+
+type PartyConnection {
+  pageInfo: PageInfo!
+  edges: [PartyEdge]!
+  aggregate: AggregateParty!
+}
+
+input PartyCreateInput {
+  title: String!
+  description: String!
+  author: UserCreateOneInput!
+  location: LocationCreateOneInput!
+  games: GameCreateManyInput
+  colorTint: String!
+  isPublic: Boolean
+  members: UserCreateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
+}
+
+input PartyCreateManyWithoutMembersInput {
+  create: [PartyCreateWithoutMembersInput!]
+  connect: [PartyWhereUniqueInput!]
+}
+
+input PartyCreateOneInput {
+  create: PartyCreateInput
+  connect: PartyWhereUniqueInput
+}
+
+input PartyCreateWithoutMembersInput {
+  title: String!
+  description: String!
+  author: UserCreateOneInput!
+  location: LocationCreateOneInput!
+  games: GameCreateManyInput
+  colorTint: String!
+  isPublic: Boolean
+  start: DateTime
+  end: DateTime
+}
+
+type PartyEdge {
+  node: Party!
+  cursor: String!
+}
+
+enum PartyOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  colorTint_ASC
+  colorTint_DESC
+  isPublic_ASC
+  isPublic_DESC
+  start_ASC
+  start_DESC
+  end_ASC
+  end_DESC
+}
+
+type PartyPreviousValues {
+  id: ID!
+  title: String!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  colorTint: String!
+  isPublic: Boolean
+  start: DateTime!
+  end: DateTime!
+}
+
+input PartyScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  colorTint: String
+  colorTint_not: String
+  colorTint_in: [String!]
+  colorTint_not_in: [String!]
+  colorTint_lt: String
+  colorTint_lte: String
+  colorTint_gt: String
+  colorTint_gte: String
+  colorTint_contains: String
+  colorTint_not_contains: String
+  colorTint_starts_with: String
+  colorTint_not_starts_with: String
+  colorTint_ends_with: String
+  colorTint_not_ends_with: String
+  isPublic: Boolean
+  isPublic_not: Boolean
+  start: DateTime
+  start_not: DateTime
+  start_in: [DateTime!]
+  start_not_in: [DateTime!]
+  start_lt: DateTime
+  start_lte: DateTime
+  start_gt: DateTime
+  start_gte: DateTime
+  end: DateTime
+  end_not: DateTime
+  end_in: [DateTime!]
+  end_not_in: [DateTime!]
+  end_lt: DateTime
+  end_lte: DateTime
+  end_gt: DateTime
+  end_gte: DateTime
+  AND: [PartyScalarWhereInput!]
+  OR: [PartyScalarWhereInput!]
+  NOT: [PartyScalarWhereInput!]
+}
+
+type PartySubscriptionPayload {
+  mutation: MutationType!
+  node: Party
+  updatedFields: [String!]
+  previousValues: PartyPreviousValues
+}
+
+input PartySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PartyWhereInput
+  AND: [PartySubscriptionWhereInput!]
+  OR: [PartySubscriptionWhereInput!]
+  NOT: [PartySubscriptionWhereInput!]
+}
+
+input PartyUpdateDataInput {
+  title: String
+  description: String
+  author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
+  games: GameUpdateManyInput
+  colorTint: String
+  isPublic: Boolean
+  members: UserUpdateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
+}
+
+input PartyUpdateInput {
+  title: String
+  description: String
+  author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
+  games: GameUpdateManyInput
+  colorTint: String
+  isPublic: Boolean
+  members: UserUpdateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
+}
+
+input PartyUpdateManyDataInput {
+  title: String
+  description: String
+  colorTint: String
+  isPublic: Boolean
+  start: DateTime
+  end: DateTime
+}
+
+input PartyUpdateManyMutationInput {
+  title: String
+  description: String
+  colorTint: String
+  isPublic: Boolean
+  start: DateTime
+  end: DateTime
+}
+
+input PartyUpdateManyWithoutMembersInput {
+  create: [PartyCreateWithoutMembersInput!]
+  delete: [PartyWhereUniqueInput!]
+  connect: [PartyWhereUniqueInput!]
+  set: [PartyWhereUniqueInput!]
+  disconnect: [PartyWhereUniqueInput!]
+  update: [PartyUpdateWithWhereUniqueWithoutMembersInput!]
+  upsert: [PartyUpsertWithWhereUniqueWithoutMembersInput!]
+  deleteMany: [PartyScalarWhereInput!]
+  updateMany: [PartyUpdateManyWithWhereNestedInput!]
+}
+
+input PartyUpdateManyWithWhereNestedInput {
+  where: PartyScalarWhereInput!
+  data: PartyUpdateManyDataInput!
+}
+
+input PartyUpdateOneRequiredInput {
+  create: PartyCreateInput
+  update: PartyUpdateDataInput
+  upsert: PartyUpsertNestedInput
+  connect: PartyWhereUniqueInput
+}
+
+input PartyUpdateWithoutMembersDataInput {
+  title: String
+  description: String
+  author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
+  games: GameUpdateManyInput
+  colorTint: String
+  isPublic: Boolean
+  start: DateTime
+  end: DateTime
+}
+
+input PartyUpdateWithWhereUniqueWithoutMembersInput {
+  where: PartyWhereUniqueInput!
+  data: PartyUpdateWithoutMembersDataInput!
+}
+
+input PartyUpsertNestedInput {
+  update: PartyUpdateDataInput!
+  create: PartyCreateInput!
+}
+
+input PartyUpsertWithWhereUniqueWithoutMembersInput {
+  where: PartyWhereUniqueInput!
+  update: PartyUpdateWithoutMembersDataInput!
+  create: PartyCreateWithoutMembersInput!
+}
+
+input PartyWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  author: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  location: LocationWhereInput
+  games_every: GameWhereInput
+  games_some: GameWhereInput
+  games_none: GameWhereInput
+  colorTint: String
+  colorTint_not: String
+  colorTint_in: [String!]
+  colorTint_not_in: [String!]
+  colorTint_lt: String
+  colorTint_lte: String
+  colorTint_gt: String
+  colorTint_gte: String
+  colorTint_contains: String
+  colorTint_not_contains: String
+  colorTint_starts_with: String
+  colorTint_not_starts_with: String
+  colorTint_ends_with: String
+  colorTint_not_ends_with: String
+  isPublic: Boolean
+  isPublic_not: Boolean
+  members_every: UserWhereInput
+  members_some: UserWhereInput
+  members_none: UserWhereInput
+  start: DateTime
+  start_not: DateTime
+  start_in: [DateTime!]
+  start_not_in: [DateTime!]
+  start_lt: DateTime
+  start_lte: DateTime
+  start_gt: DateTime
+  start_gte: DateTime
+  end: DateTime
+  end_not: DateTime
+  end_in: [DateTime!]
+  end_not_in: [DateTime!]
+  end_lt: DateTime
+  end_lte: DateTime
+  end_gt: DateTime
+  end_gte: DateTime
+  AND: [PartyWhereInput!]
+  OR: [PartyWhereInput!]
+  NOT: [PartyWhereInput!]
+}
+
+input PartyWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  chat(where: ChatWhereUniqueInput!): Chat
+  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
+  chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
+  game(where: GameWhereUniqueInput!): Game
+  games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
+  gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
+  location(where: LocationWhereUniqueInput!): Location
+  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
+  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
+  message(where: MessageWhereUniqueInput!): Message
+  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
+  messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
+  party(where: PartyWhereUniqueInput!): Party
+  parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
+  partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  node(id: ID!): Node
+}
+
+enum SocialMediaType {
+  FACEBOOK
+  SPOTIFY
+  TWITTER
+}
+
+type Subscription {
+  chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
+  game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
+  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
+  message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+  party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
+  friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  pendingInvitations(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deleted: Boolean!
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyWithoutFriendsInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  chats: ChatCreateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserCreateManyWithoutChatsInput {
+  create: [UserCreateWithoutChatsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutFriendsInput {
+  create: [UserCreateWithoutFriendsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutPartiesInput {
+  create: [UserCreateWithoutPartiesInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutPendingInvitationsInput {
+  create: [UserCreateWithoutPendingInvitationsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutChatsInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyWithoutFriendsInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserCreateWithoutFriendsInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  parties: PartyCreateManyWithoutMembersInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  chats: ChatCreateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserCreateWithoutPartiesInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  friends: UserCreateManyWithoutFriendsInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  chats: ChatCreateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserCreateWithoutPendingInvitationsInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyWithoutFriendsInput
+  chats: ChatCreateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
+  password_ASC
+  password_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deleted_ASC
+  deleted_DESC
+  provider_ASC
+  provider_DESC
+  avatar_ASC
+  avatar_DESC
+  thirdPartyId_ASC
+  thirdPartyId_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deleted: Boolean!
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  deleted: Boolean
+  deleted_not: Boolean
+  provider: SocialMediaType
+  provider_not: SocialMediaType
+  provider_in: [SocialMediaType!]
+  provider_not_in: [SocialMediaType!]
+  avatar: String
+  avatar_not: String
+  avatar_in: [String!]
+  avatar_not_in: [String!]
+  avatar_lt: String
+  avatar_lte: String
+  avatar_gt: String
+  avatar_gte: String
+  avatar_contains: String
+  avatar_not_contains: String
+  avatar_starts_with: String
+  avatar_not_starts_with: String
+  avatar_ends_with: String
+  avatar_not_ends_with: String
+  thirdPartyId: String
+  thirdPartyId_not: String
+  thirdPartyId_in: [String!]
+  thirdPartyId_not_in: [String!]
+  thirdPartyId_lt: String
+  thirdPartyId_lte: String
+  thirdPartyId_gt: String
+  thirdPartyId_gte: String
+  thirdPartyId_contains: String
+  thirdPartyId_not_contains: String
+  thirdPartyId_starts_with: String
+  thirdPartyId_not_starts_with: String
+  thirdPartyId_ends_with: String
+  thirdPartyId_not_ends_with: String
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateManyDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateManyMutationInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateManyWithoutChatsInput {
+  create: [UserCreateWithoutChatsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutChatsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutChatsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutFriendsInput {
+  create: [UserCreateWithoutFriendsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFriendsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFriendsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutPartiesInput {
+  create: [UserCreateWithoutPartiesInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutPartiesInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutPartiesInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutPendingInvitationsInput {
+  create: [UserCreateWithoutPendingInvitationsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutPendingInvitationsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutPendingInvitationsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutChatsDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateWithoutFriendsDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateWithoutPartiesDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateWithoutPendingInvitationsDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateWithWhereUniqueWithoutChatsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutChatsDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutFriendsDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutPartiesDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutPendingInvitationsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutPendingInvitationsDataInput!
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutChatsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutChatsDataInput!
+  create: UserCreateWithoutChatsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutFriendsDataInput!
+  create: UserCreateWithoutFriendsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutPartiesDataInput!
+  create: UserCreateWithoutPartiesInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutPendingInvitationsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutPendingInvitationsDataInput!
+  create: UserCreateWithoutPendingInvitationsInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  parties_every: PartyWhereInput
+  parties_some: PartyWhereInput
+  parties_none: PartyWhereInput
+  friends_every: UserWhereInput
+  friends_some: UserWhereInput
+  friends_none: UserWhereInput
+  pendingInvitations_every: UserWhereInput
+  pendingInvitations_some: UserWhereInput
+  pendingInvitations_none: UserWhereInput
+  chats_every: ChatWhereInput
+  chats_some: ChatWhereInput
+  chats_none: ChatWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  deleted: Boolean
+  deleted_not: Boolean
+  provider: SocialMediaType
+  provider_not: SocialMediaType
+  provider_in: [SocialMediaType!]
+  provider_not_in: [SocialMediaType!]
+  avatar: String
+  avatar_not: String
+  avatar_in: [String!]
+  avatar_not_in: [String!]
+  avatar_lt: String
+  avatar_lte: String
+  avatar_gt: String
+  avatar_gte: String
+  avatar_contains: String
+  avatar_not_contains: String
+  avatar_starts_with: String
+  avatar_not_starts_with: String
+  avatar_ends_with: String
+  avatar_not_ends_with: String
+  thirdPartyId: String
+  thirdPartyId_not: String
+  thirdPartyId_in: [String!]
+  thirdPartyId_not_in: [String!]
+  thirdPartyId_lt: String
+  thirdPartyId_lte: String
+  thirdPartyId_gt: String
+  thirdPartyId_gte: String
+  thirdPartyId_contains: String
+  thirdPartyId_not_contains: String
+  thirdPartyId_starts_with: String
+  thirdPartyId_not_starts_with: String
+  thirdPartyId_ends_with: String
+  thirdPartyId_not_ends_with: String
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}

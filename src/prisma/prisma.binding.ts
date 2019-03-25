@@ -4,81 +4,81 @@ import { Options } from 'graphql-binding'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-    chats: <T = Array<Chat | null>>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    messages: <T = Array<Message | null>>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    locations: <T = Array<Location | null>>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    parties: <T = Array<Party | null>>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    games: <T = Array<Game | null>>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     chat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    message: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    party: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    game: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    chats: <T = Array<Chat | null>>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     chatsConnection: <T = ChatConnection>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    messagesConnection: <T = MessageConnection>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    locationsConnection: <T = LocationConnection>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    partiesConnection: <T = PartyConnection>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    game: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    games: <T = Array<Game | null>>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     gamesConnection: <T = GameConnection>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    locations: <T = Array<Location | null>>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    locationsConnection: <T = LocationConnection>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    message: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    messages: <T = Array<Message | null>>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    messagesConnection: <T = MessageConnection>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    party: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    parties: <T = Array<Party | null>>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    partiesConnection: <T = PartyConnection>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
 
 export interface Mutation {
     createChat: <T = Chat>(args: { data: ChatCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createMessage: <T = Message>(args: { data: MessageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createParty: <T = Party>(args: { data: PartyCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createGame: <T = Game>(args: { data: GameCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateChat: <T = Chat | null>(args: { data: ChatUpdateInput, where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateMessage: <T = Message | null>(args: { data: MessageUpdateInput, where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateParty: <T = Party | null>(args: { data: PartyUpdateInput, where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateGame: <T = Game | null>(args: { data: GameUpdateInput, where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteChat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteMessage: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteLocation: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteParty: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteGame: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertChat: <T = Chat>(args: { where: ChatWhereUniqueInput, create: ChatCreateInput, update: ChatUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertMessage: <T = Message>(args: { where: MessageWhereUniqueInput, create: MessageCreateInput, update: MessageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertLocation: <T = Location>(args: { where: LocationWhereUniqueInput, create: LocationCreateInput, update: LocationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertParty: <T = Party>(args: { where: PartyWhereUniqueInput, create: PartyCreateInput, update: PartyUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertGame: <T = Game>(args: { where: GameWhereUniqueInput, create: GameCreateInput, update: GameUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyMessages: <T = BatchPayload>(args: { data: MessageUpdateManyMutationInput, where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyLocations: <T = BatchPayload>(args: { data: LocationUpdateManyMutationInput, where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyParties: <T = BatchPayload>(args: { data: PartyUpdateManyMutationInput, where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyGames: <T = BatchPayload>(args: { data: GameUpdateManyMutationInput, where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteChat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteManyChats: <T = BatchPayload>(args: { where?: ChatWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyMessages: <T = BatchPayload>(args: { where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createGame: <T = Game>(args: { data: GameCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateGame: <T = Game | null>(args: { data: GameUpdateInput, where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyGames: <T = BatchPayload>(args: { data: GameUpdateManyMutationInput, where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertGame: <T = Game>(args: { where: GameWhereUniqueInput, create: GameCreateInput, update: GameUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteGame: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteManyGames: <T = BatchPayload>(args: { where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyLocations: <T = BatchPayload>(args: { data: LocationUpdateManyMutationInput, where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertLocation: <T = Location>(args: { where: LocationWhereUniqueInput, create: LocationCreateInput, update: LocationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteLocation: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteManyLocations: <T = BatchPayload>(args: { where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createMessage: <T = Message>(args: { data: MessageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateMessage: <T = Message | null>(args: { data: MessageUpdateInput, where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyMessages: <T = BatchPayload>(args: { data: MessageUpdateManyMutationInput, where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertMessage: <T = Message>(args: { where: MessageWhereUniqueInput, create: MessageCreateInput, update: MessageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteMessage: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteManyMessages: <T = BatchPayload>(args: { where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createParty: <T = Party>(args: { data: PartyCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateParty: <T = Party | null>(args: { data: PartyUpdateInput, where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyParties: <T = BatchPayload>(args: { data: PartyUpdateManyMutationInput, where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertParty: <T = Party>(args: { where: PartyWhereUniqueInput, create: PartyCreateInput, update: PartyUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteParty: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteManyParties: <T = BatchPayload>(args: { where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyGames: <T = BatchPayload>(args: { where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
     chat: <T = ChatSubscriptionPayload | null>(args: { where?: ChatSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    message: <T = MessageSubscriptionPayload | null>(args: { where?: MessageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    game: <T = GameSubscriptionPayload | null>(args: { where?: GameSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     location: <T = LocationSubscriptionPayload | null>(args: { where?: LocationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    message: <T = MessageSubscriptionPayload | null>(args: { where?: MessageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     party: <T = PartySubscriptionPayload | null>(args: { where?: PartySubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    game: <T = GameSubscriptionPayload | null>(args: { where?: GameSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
+    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
   Chat: (where?: ChatWhereInput) => Promise<boolean>
-  Message: (where?: MessageWhereInput) => Promise<boolean>
+  Game: (where?: GameWhereInput) => Promise<boolean>
   Location: (where?: LocationWhereInput) => Promise<boolean>
+  Message: (where?: MessageWhereInput) => Promise<boolean>
   Party: (where?: PartyWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
-  Game: (where?: GameWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -128,11 +128,10 @@ type AggregateUser {
 }
 
 type BatchPayload {
-  """The number of nodes that have been affected by the Batch operation."""
   count: Long!
 }
 
-type Chat implements Node {
+type Chat {
   id: ID!
   party: Party!
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -141,18 +140,13 @@ type Chat implements Node {
   updatedAt: DateTime!
 }
 
-"""A connection to a list of items."""
 type ChatConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [ChatEdge]!
   aggregate: AggregateChat!
 }
 
 input ChatCreateInput {
-  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
   messages: MessageCreateManyWithoutChatInput
@@ -169,23 +163,17 @@ input ChatCreateOneWithoutMessagesInput {
 }
 
 input ChatCreateWithoutMembersInput {
-  id: ID
   party: PartyCreateOneInput!
   messages: MessageCreateManyWithoutChatInput
 }
 
 input ChatCreateWithoutMessagesInput {
-  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
 }
 
-"""An edge in a connection."""
 type ChatEdge {
-  """The item at the end of the edge."""
   node: Chat!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -205,98 +193,39 @@ type ChatPreviousValues {
 }
 
 input ChatScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ChatScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ChatScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ChatScalarWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   createdAt: DateTime
-
-  """All values that are not equal to given value."""
   createdAt_not: DateTime
-
-  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   createdAt_lte: DateTime
-
-  """All values greater than the given value."""
   createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
-
-  """All values that are not equal to given value."""
   updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
   updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  AND: [ChatScalarWhereInput!]
+  OR: [ChatScalarWhereInput!]
+  NOT: [ChatScalarWhereInput!]
 }
 
 type ChatSubscriptionPayload {
@@ -307,35 +236,14 @@ type ChatSubscriptionPayload {
 }
 
 input ChatSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ChatSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ChatSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ChatSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: ChatWhereInput
+  AND: [ChatSubscriptionWhereInput!]
+  OR: [ChatSubscriptionWhereInput!]
+  NOT: [ChatSubscriptionWhereInput!]
 }
 
 input ChatUpdateInput {
@@ -346,20 +254,20 @@ input ChatUpdateInput {
 
 input ChatUpdateManyWithoutMembersInput {
   create: [ChatCreateWithoutMembersInput!]
+  delete: [ChatWhereUniqueInput!]
   connect: [ChatWhereUniqueInput!]
   set: [ChatWhereUniqueInput!]
   disconnect: [ChatWhereUniqueInput!]
-  delete: [ChatWhereUniqueInput!]
   update: [ChatUpdateWithWhereUniqueWithoutMembersInput!]
-  deleteMany: [ChatScalarWhereInput!]
   upsert: [ChatUpsertWithWhereUniqueWithoutMembersInput!]
+  deleteMany: [ChatScalarWhereInput!]
 }
 
 input ChatUpdateOneRequiredWithoutMessagesInput {
   create: ChatCreateWithoutMessagesInput
-  connect: ChatWhereUniqueInput
   update: ChatUpdateWithoutMessagesDataInput
   upsert: ChatUpsertWithoutMessagesInput
+  connect: ChatWhereUniqueInput
 }
 
 input ChatUpdateWithoutMembersDataInput {
@@ -389,98 +297,20 @@ input ChatUpsertWithWhereUniqueWithoutMembersInput {
 }
 
 input ChatWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ChatWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ChatWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ChatWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
   party: PartyWhereInput
   members_every: UserWhereInput
   members_some: UserWhereInput
@@ -488,6 +318,25 @@ input ChatWhereInput {
   messages_every: MessageWhereInput
   messages_some: MessageWhereInput
   messages_none: MessageWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ChatWhereInput!]
+  OR: [ChatWhereInput!]
+  NOT: [ChatWhereInput!]
 }
 
 input ChatWhereUniqueInput {
@@ -496,7 +345,7 @@ input ChatWhereUniqueInput {
 
 scalar DateTime
 
-type Game implements Node {
+type Game {
   id: ID!
   title: String!
   cover: String
@@ -505,18 +354,13 @@ type Game implements Node {
   updatedAt: DateTime!
 }
 
-"""A connection to a list of items."""
 type GameConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [GameEdge]!
   aggregate: AggregateGame!
 }
 
 input GameCreateInput {
-  id: ID
   title: String!
   cover: String
   type: GameType!
@@ -527,12 +371,8 @@ input GameCreateManyInput {
   connect: [GameWhereUniqueInput!]
 }
 
-"""An edge in a connection."""
 type GameEdge {
-  """The item at the end of the edge."""
   node: Game!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -561,188 +401,71 @@ type GamePreviousValues {
 }
 
 input GameScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [GameScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [GameScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [GameScalarWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   title: String
-
-  """All values that are not equal to given value."""
   title_not: String
-
-  """All values that are contained in given list."""
   title_in: [String!]
-
-  """All values that are not contained in given list."""
   title_not_in: [String!]
-
-  """All values less than the given value."""
   title_lt: String
-
-  """All values less than or equal the given value."""
   title_lte: String
-
-  """All values greater than the given value."""
   title_gt: String
-
-  """All values greater than or equal the given value."""
   title_gte: String
-
-  """All values containing the given string."""
   title_contains: String
-
-  """All values not containing the given string."""
   title_not_contains: String
-
-  """All values starting with the given string."""
   title_starts_with: String
-
-  """All values not starting with the given string."""
   title_not_starts_with: String
-
-  """All values ending with the given string."""
   title_ends_with: String
-
-  """All values not ending with the given string."""
   title_not_ends_with: String
   cover: String
-
-  """All values that are not equal to given value."""
   cover_not: String
-
-  """All values that are contained in given list."""
   cover_in: [String!]
-
-  """All values that are not contained in given list."""
   cover_not_in: [String!]
-
-  """All values less than the given value."""
   cover_lt: String
-
-  """All values less than or equal the given value."""
   cover_lte: String
-
-  """All values greater than the given value."""
   cover_gt: String
-
-  """All values greater than or equal the given value."""
   cover_gte: String
-
-  """All values containing the given string."""
   cover_contains: String
-
-  """All values not containing the given string."""
   cover_not_contains: String
-
-  """All values starting with the given string."""
   cover_starts_with: String
-
-  """All values not starting with the given string."""
   cover_not_starts_with: String
-
-  """All values ending with the given string."""
   cover_ends_with: String
-
-  """All values not ending with the given string."""
   cover_not_ends_with: String
   type: GameType
-
-  """All values that are not equal to given value."""
   type_not: GameType
-
-  """All values that are contained in given list."""
   type_in: [GameType!]
-
-  """All values that are not contained in given list."""
   type_not_in: [GameType!]
   createdAt: DateTime
-
-  """All values that are not equal to given value."""
   createdAt_not: DateTime
-
-  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   createdAt_lte: DateTime
-
-  """All values greater than the given value."""
   createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
-
-  """All values that are not equal to given value."""
   updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
   updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  AND: [GameScalarWhereInput!]
+  OR: [GameScalarWhereInput!]
+  NOT: [GameScalarWhereInput!]
 }
 
 type GameSubscriptionPayload {
@@ -753,35 +476,14 @@ type GameSubscriptionPayload {
 }
 
 input GameSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [GameSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [GameSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [GameSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: GameWhereInput
+  AND: [GameSubscriptionWhereInput!]
+  OR: [GameSubscriptionWhereInput!]
+  NOT: [GameSubscriptionWhereInput!]
 }
 
 enum GameType {
@@ -810,14 +512,14 @@ input GameUpdateManyDataInput {
 
 input GameUpdateManyInput {
   create: [GameCreateInput!]
+  update: [GameUpdateWithWhereUniqueNestedInput!]
+  upsert: [GameUpsertWithWhereUniqueNestedInput!]
+  delete: [GameWhereUniqueInput!]
   connect: [GameWhereUniqueInput!]
   set: [GameWhereUniqueInput!]
   disconnect: [GameWhereUniqueInput!]
-  delete: [GameWhereUniqueInput!]
-  update: [GameUpdateWithWhereUniqueNestedInput!]
-  updateMany: [GameUpdateManyWithWhereNestedInput!]
   deleteMany: [GameScalarWhereInput!]
-  upsert: [GameUpsertWithWhereUniqueNestedInput!]
+  updateMany: [GameUpdateManyWithWhereNestedInput!]
 }
 
 input GameUpdateManyMutationInput {
@@ -843,188 +545,71 @@ input GameUpsertWithWhereUniqueNestedInput {
 }
 
 input GameWhereInput {
-  """Logical AND on all given filters."""
-  AND: [GameWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [GameWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [GameWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   title: String
-
-  """All values that are not equal to given value."""
   title_not: String
-
-  """All values that are contained in given list."""
   title_in: [String!]
-
-  """All values that are not contained in given list."""
   title_not_in: [String!]
-
-  """All values less than the given value."""
   title_lt: String
-
-  """All values less than or equal the given value."""
   title_lte: String
-
-  """All values greater than the given value."""
   title_gt: String
-
-  """All values greater than or equal the given value."""
   title_gte: String
-
-  """All values containing the given string."""
   title_contains: String
-
-  """All values not containing the given string."""
   title_not_contains: String
-
-  """All values starting with the given string."""
   title_starts_with: String
-
-  """All values not starting with the given string."""
   title_not_starts_with: String
-
-  """All values ending with the given string."""
   title_ends_with: String
-
-  """All values not ending with the given string."""
   title_not_ends_with: String
   cover: String
-
-  """All values that are not equal to given value."""
   cover_not: String
-
-  """All values that are contained in given list."""
   cover_in: [String!]
-
-  """All values that are not contained in given list."""
   cover_not_in: [String!]
-
-  """All values less than the given value."""
   cover_lt: String
-
-  """All values less than or equal the given value."""
   cover_lte: String
-
-  """All values greater than the given value."""
   cover_gt: String
-
-  """All values greater than or equal the given value."""
   cover_gte: String
-
-  """All values containing the given string."""
   cover_contains: String
-
-  """All values not containing the given string."""
   cover_not_contains: String
-
-  """All values starting with the given string."""
   cover_starts_with: String
-
-  """All values not starting with the given string."""
   cover_not_starts_with: String
-
-  """All values ending with the given string."""
   cover_ends_with: String
-
-  """All values not ending with the given string."""
   cover_not_ends_with: String
   type: GameType
-
-  """All values that are not equal to given value."""
   type_not: GameType
-
-  """All values that are contained in given list."""
   type_in: [GameType!]
-
-  """All values that are not contained in given list."""
   type_not_in: [GameType!]
   createdAt: DateTime
-
-  """All values that are not equal to given value."""
   createdAt_not: DateTime
-
-  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   createdAt_lte: DateTime
-
-  """All values greater than the given value."""
   createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
-
-  """All values that are not equal to given value."""
   updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
   updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  AND: [GameWhereInput!]
+  OR: [GameWhereInput!]
+  NOT: [GameWhereInput!]
 }
 
 input GameWhereUniqueInput {
@@ -1032,25 +617,20 @@ input GameWhereUniqueInput {
   title: String
 }
 
-type Location implements Node {
+type Location {
   id: ID!
   placeName: String!
   latitude: Float!
   longitude: Float!
 }
 
-"""A connection to a list of items."""
 type LocationConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [LocationEdge]!
   aggregate: AggregateLocation!
 }
 
 input LocationCreateInput {
-  id: ID
   placeName: String!
   latitude: Float!
   longitude: Float!
@@ -1061,12 +641,8 @@ input LocationCreateOneInput {
   connect: LocationWhereUniqueInput
 }
 
-"""An edge in a connection."""
 type LocationEdge {
-  """The item at the end of the edge."""
   node: Location!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -1079,10 +655,10 @@ enum LocationOrderByInput {
   latitude_DESC
   longitude_ASC
   longitude_DESC
-  updatedAt_ASC
-  updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type LocationPreviousValues {
@@ -1100,35 +676,14 @@ type LocationSubscriptionPayload {
 }
 
 input LocationSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LocationSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [LocationSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [LocationSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: LocationWhereInput
+  AND: [LocationSubscriptionWhereInput!]
+  OR: [LocationSubscriptionWhereInput!]
+  NOT: [LocationSubscriptionWhereInput!]
 }
 
 input LocationUpdateDataInput {
@@ -1151,9 +706,9 @@ input LocationUpdateManyMutationInput {
 
 input LocationUpdateOneRequiredInput {
   create: LocationCreateInput
-  connect: LocationWhereUniqueInput
   update: LocationUpdateDataInput
   upsert: LocationUpsertNestedInput
+  connect: LocationWhereUniqueInput
 }
 
 input LocationUpsertNestedInput {
@@ -1162,151 +717,62 @@ input LocationUpsertNestedInput {
 }
 
 input LocationWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LocationWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [LocationWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [LocationWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   placeName: String
-
-  """All values that are not equal to given value."""
   placeName_not: String
-
-  """All values that are contained in given list."""
   placeName_in: [String!]
-
-  """All values that are not contained in given list."""
   placeName_not_in: [String!]
-
-  """All values less than the given value."""
   placeName_lt: String
-
-  """All values less than or equal the given value."""
   placeName_lte: String
-
-  """All values greater than the given value."""
   placeName_gt: String
-
-  """All values greater than or equal the given value."""
   placeName_gte: String
-
-  """All values containing the given string."""
   placeName_contains: String
-
-  """All values not containing the given string."""
   placeName_not_contains: String
-
-  """All values starting with the given string."""
   placeName_starts_with: String
-
-  """All values not starting with the given string."""
   placeName_not_starts_with: String
-
-  """All values ending with the given string."""
   placeName_ends_with: String
-
-  """All values not ending with the given string."""
   placeName_not_ends_with: String
   latitude: Float
-
-  """All values that are not equal to given value."""
   latitude_not: Float
-
-  """All values that are contained in given list."""
   latitude_in: [Float!]
-
-  """All values that are not contained in given list."""
   latitude_not_in: [Float!]
-
-  """All values less than the given value."""
   latitude_lt: Float
-
-  """All values less than or equal the given value."""
   latitude_lte: Float
-
-  """All values greater than the given value."""
   latitude_gt: Float
-
-  """All values greater than or equal the given value."""
   latitude_gte: Float
   longitude: Float
-
-  """All values that are not equal to given value."""
   longitude_not: Float
-
-  """All values that are contained in given list."""
   longitude_in: [Float!]
-
-  """All values that are not contained in given list."""
   longitude_not_in: [Float!]
-
-  """All values less than the given value."""
   longitude_lt: Float
-
-  """All values less than or equal the given value."""
   longitude_lte: Float
-
-  """All values greater than the given value."""
   longitude_gt: Float
-
-  """All values greater than or equal the given value."""
   longitude_gte: Float
+  AND: [LocationWhereInput!]
+  OR: [LocationWhereInput!]
+  NOT: [LocationWhereInput!]
 }
 
 input LocationWhereUniqueInput {
   id: ID
 }
 
-"""
-The \`Long\` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
 scalar Long
 
-type Message implements Node {
+type Message {
   id: ID!
   author: User!
   chat: Chat!
@@ -1315,21 +781,16 @@ type Message implements Node {
   updatedAt: DateTime!
 }
 
-"""A connection to a list of items."""
 type MessageConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [MessageEdge]!
   aggregate: AggregateMessage!
 }
 
 input MessageCreateInput {
-  id: ID
-  content: String!
   author: UserCreateOneInput!
   chat: ChatCreateOneWithoutMessagesInput!
+  content: String!
 }
 
 input MessageCreateManyWithoutChatInput {
@@ -1338,17 +799,12 @@ input MessageCreateManyWithoutChatInput {
 }
 
 input MessageCreateWithoutChatInput {
-  id: ID
-  content: String!
   author: UserCreateOneInput!
+  content: String!
 }
 
-"""An edge in a connection."""
 type MessageEdge {
-  """The item at the end of the edge."""
   node: Message!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -1371,138 +827,53 @@ type MessagePreviousValues {
 }
 
 input MessageScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [MessageScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [MessageScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [MessageScalarWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   content: String
-
-  """All values that are not equal to given value."""
   content_not: String
-
-  """All values that are contained in given list."""
   content_in: [String!]
-
-  """All values that are not contained in given list."""
   content_not_in: [String!]
-
-  """All values less than the given value."""
   content_lt: String
-
-  """All values less than or equal the given value."""
   content_lte: String
-
-  """All values greater than the given value."""
   content_gt: String
-
-  """All values greater than or equal the given value."""
   content_gte: String
-
-  """All values containing the given string."""
   content_contains: String
-
-  """All values not containing the given string."""
   content_not_contains: String
-
-  """All values starting with the given string."""
   content_starts_with: String
-
-  """All values not starting with the given string."""
   content_not_starts_with: String
-
-  """All values ending with the given string."""
   content_ends_with: String
-
-  """All values not ending with the given string."""
   content_not_ends_with: String
   createdAt: DateTime
-
-  """All values that are not equal to given value."""
   createdAt_not: DateTime
-
-  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   createdAt_lte: DateTime
-
-  """All values greater than the given value."""
   createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
-
-  """All values that are not equal to given value."""
   updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
   updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  AND: [MessageScalarWhereInput!]
+  OR: [MessageScalarWhereInput!]
+  NOT: [MessageScalarWhereInput!]
 }
 
 type MessageSubscriptionPayload {
@@ -1513,41 +884,20 @@ type MessageSubscriptionPayload {
 }
 
 input MessageSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [MessageSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [MessageSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [MessageSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: MessageWhereInput
+  AND: [MessageSubscriptionWhereInput!]
+  OR: [MessageSubscriptionWhereInput!]
+  NOT: [MessageSubscriptionWhereInput!]
 }
 
 input MessageUpdateInput {
-  content: String
   author: UserUpdateOneRequiredInput
   chat: ChatUpdateOneRequiredWithoutMessagesInput
+  content: String
 }
 
 input MessageUpdateManyDataInput {
@@ -1560,14 +910,14 @@ input MessageUpdateManyMutationInput {
 
 input MessageUpdateManyWithoutChatInput {
   create: [MessageCreateWithoutChatInput!]
+  delete: [MessageWhereUniqueInput!]
   connect: [MessageWhereUniqueInput!]
   set: [MessageWhereUniqueInput!]
   disconnect: [MessageWhereUniqueInput!]
-  delete: [MessageWhereUniqueInput!]
   update: [MessageUpdateWithWhereUniqueWithoutChatInput!]
-  updateMany: [MessageUpdateManyWithWhereNestedInput!]
-  deleteMany: [MessageScalarWhereInput!]
   upsert: [MessageUpsertWithWhereUniqueWithoutChatInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  updateMany: [MessageUpdateManyWithWhereNestedInput!]
 }
 
 input MessageUpdateManyWithWhereNestedInput {
@@ -1576,8 +926,8 @@ input MessageUpdateManyWithWhereNestedInput {
 }
 
 input MessageUpdateWithoutChatDataInput {
-  content: String
   author: UserUpdateOneRequiredInput
+  content: String
 }
 
 input MessageUpdateWithWhereUniqueWithoutChatInput {
@@ -1592,140 +942,55 @@ input MessageUpsertWithWhereUniqueWithoutChatInput {
 }
 
 input MessageWhereInput {
-  """Logical AND on all given filters."""
-  AND: [MessageWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [MessageWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [MessageWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
-  content: String
-
-  """All values that are not equal to given value."""
-  content_not: String
-
-  """All values that are contained in given list."""
-  content_in: [String!]
-
-  """All values that are not contained in given list."""
-  content_not_in: [String!]
-
-  """All values less than the given value."""
-  content_lt: String
-
-  """All values less than or equal the given value."""
-  content_lte: String
-
-  """All values greater than the given value."""
-  content_gt: String
-
-  """All values greater than or equal the given value."""
-  content_gte: String
-
-  """All values containing the given string."""
-  content_contains: String
-
-  """All values not containing the given string."""
-  content_not_contains: String
-
-  """All values starting with the given string."""
-  content_starts_with: String
-
-  """All values not starting with the given string."""
-  content_not_starts_with: String
-
-  """All values ending with the given string."""
-  content_ends_with: String
-
-  """All values not ending with the given string."""
-  content_not_ends_with: String
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
   author: UserWhereInput
   chat: ChatWhereInput
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [MessageWhereInput!]
+  OR: [MessageWhereInput!]
+  NOT: [MessageWhereInput!]
 }
 
 input MessageWhereUniqueInput {
@@ -1734,40 +999,40 @@ input MessageWhereUniqueInput {
 
 type Mutation {
   createChat(data: ChatCreateInput!): Chat!
-  createMessage(data: MessageCreateInput!): Message!
-  createLocation(data: LocationCreateInput!): Location!
-  createParty(data: PartyCreateInput!): Party!
-  createUser(data: UserCreateInput!): User!
-  createGame(data: GameCreateInput!): Game!
   updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
-  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
-  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
-  updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
-  deleteChat(where: ChatWhereUniqueInput!): Chat
-  deleteMessage(where: MessageWhereUniqueInput!): Message
-  deleteLocation(where: LocationWhereUniqueInput!): Location
-  deleteParty(where: PartyWhereUniqueInput!): Party
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteGame(where: GameWhereUniqueInput!): Game
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
-  upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
-  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
-  upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
-  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
-  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
-  updateManyParties(data: PartyUpdateManyMutationInput!, where: PartyWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
+  deleteChat(where: ChatWhereUniqueInput!): Chat
   deleteManyChats(where: ChatWhereInput): BatchPayload!
-  deleteManyMessages(where: MessageWhereInput): BatchPayload!
-  deleteManyLocations(where: LocationWhereInput): BatchPayload!
-  deleteManyParties(where: PartyWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createGame(data: GameCreateInput!): Game!
+  updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
+  updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
+  upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
+  deleteGame(where: GameWhereUniqueInput!): Game
   deleteManyGames(where: GameWhereInput): BatchPayload!
+  createLocation(data: LocationCreateInput!): Location!
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
+  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
+  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
+  deleteLocation(where: LocationWhereUniqueInput!): Location
+  deleteManyLocations(where: LocationWhereInput): BatchPayload!
+  createMessage(data: MessageCreateInput!): Message!
+  updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
+  updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
+  upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
+  deleteMessage(where: MessageWhereUniqueInput!): Message
+  deleteManyMessages(where: MessageWhereInput): BatchPayload!
+  createParty(data: PartyCreateInput!): Party!
+  updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
+  updateManyParties(data: PartyUpdateManyMutationInput!, where: PartyWhereInput): BatchPayload!
+  upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
+  deleteParty(where: PartyWhereUniqueInput!): Party
+  deleteManyParties(where: PartyWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1776,28 +1041,18 @@ enum MutationType {
   DELETED
 }
 
-"""An object with an ID"""
 interface Node {
-  """The id of the object."""
   id: ID!
 }
 
-"""Information about pagination in a connection."""
 type PageInfo {
-  """When paginating forwards, are there more items?"""
   hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
   hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
   startCursor: String
-
-  """When paginating forwards, the cursor to continue."""
   endCursor: String
 }
 
-type Party implements Node {
+type Party {
   id: ID!
   title: String!
   description: String!
@@ -1813,28 +1068,23 @@ type Party implements Node {
   end: DateTime!
 }
 
-"""A connection to a list of items."""
 type PartyConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [PartyEdge]!
   aggregate: AggregateParty!
 }
 
 input PartyCreateInput {
-  id: ID
   title: String!
   description: String!
-  colorTint: String!
-  isPublic: Boolean
-  start: DateTime
-  end: DateTime
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
+  colorTint: String!
+  isPublic: Boolean
   members: UserCreateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
 }
 
 input PartyCreateManyWithoutMembersInput {
@@ -1848,24 +1098,19 @@ input PartyCreateOneInput {
 }
 
 input PartyCreateWithoutMembersInput {
-  id: ID
   title: String!
   description: String!
+  author: UserCreateOneInput!
+  location: LocationCreateOneInput!
+  games: GameCreateManyInput
   colorTint: String!
   isPublic: Boolean
   start: DateTime
   end: DateTime
-  author: UserCreateOneInput!
-  location: LocationCreateOneInput!
-  games: GameCreateManyInput
 }
 
-"""An edge in a connection."""
 type PartyEdge {
-  """The item at the end of the edge."""
   node: Party!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -1903,266 +1148,99 @@ type PartyPreviousValues {
 }
 
 input PartyScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PartyScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PartyScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PartyScalarWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   title: String
-
-  """All values that are not equal to given value."""
   title_not: String
-
-  """All values that are contained in given list."""
   title_in: [String!]
-
-  """All values that are not contained in given list."""
   title_not_in: [String!]
-
-  """All values less than the given value."""
   title_lt: String
-
-  """All values less than or equal the given value."""
   title_lte: String
-
-  """All values greater than the given value."""
   title_gt: String
-
-  """All values greater than or equal the given value."""
   title_gte: String
-
-  """All values containing the given string."""
   title_contains: String
-
-  """All values not containing the given string."""
   title_not_contains: String
-
-  """All values starting with the given string."""
   title_starts_with: String
-
-  """All values not starting with the given string."""
   title_not_starts_with: String
-
-  """All values ending with the given string."""
   title_ends_with: String
-
-  """All values not ending with the given string."""
   title_not_ends_with: String
   description: String
-
-  """All values that are not equal to given value."""
   description_not: String
-
-  """All values that are contained in given list."""
   description_in: [String!]
-
-  """All values that are not contained in given list."""
   description_not_in: [String!]
-
-  """All values less than the given value."""
   description_lt: String
-
-  """All values less than or equal the given value."""
   description_lte: String
-
-  """All values greater than the given value."""
   description_gt: String
-
-  """All values greater than or equal the given value."""
   description_gte: String
-
-  """All values containing the given string."""
   description_contains: String
-
-  """All values not containing the given string."""
   description_not_contains: String
-
-  """All values starting with the given string."""
   description_starts_with: String
-
-  """All values not starting with the given string."""
   description_not_starts_with: String
-
-  """All values ending with the given string."""
   description_ends_with: String
-
-  """All values not ending with the given string."""
   description_not_ends_with: String
   createdAt: DateTime
-
-  """All values that are not equal to given value."""
   createdAt_not: DateTime
-
-  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   createdAt_lte: DateTime
-
-  """All values greater than the given value."""
   createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
-
-  """All values that are not equal to given value."""
   updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
   updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
   colorTint: String
-
-  """All values that are not equal to given value."""
   colorTint_not: String
-
-  """All values that are contained in given list."""
   colorTint_in: [String!]
-
-  """All values that are not contained in given list."""
   colorTint_not_in: [String!]
-
-  """All values less than the given value."""
   colorTint_lt: String
-
-  """All values less than or equal the given value."""
   colorTint_lte: String
-
-  """All values greater than the given value."""
   colorTint_gt: String
-
-  """All values greater than or equal the given value."""
   colorTint_gte: String
-
-  """All values containing the given string."""
   colorTint_contains: String
-
-  """All values not containing the given string."""
   colorTint_not_contains: String
-
-  """All values starting with the given string."""
   colorTint_starts_with: String
-
-  """All values not starting with the given string."""
   colorTint_not_starts_with: String
-
-  """All values ending with the given string."""
   colorTint_ends_with: String
-
-  """All values not ending with the given string."""
   colorTint_not_ends_with: String
   isPublic: Boolean
-
-  """All values that are not equal to given value."""
   isPublic_not: Boolean
   start: DateTime
-
-  """All values that are not equal to given value."""
   start_not: DateTime
-
-  """All values that are contained in given list."""
   start_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   start_not_in: [DateTime!]
-
-  """All values less than the given value."""
   start_lt: DateTime
-
-  """All values less than or equal the given value."""
   start_lte: DateTime
-
-  """All values greater than the given value."""
   start_gt: DateTime
-
-  """All values greater than or equal the given value."""
   start_gte: DateTime
   end: DateTime
-
-  """All values that are not equal to given value."""
   end_not: DateTime
-
-  """All values that are contained in given list."""
   end_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   end_not_in: [DateTime!]
-
-  """All values less than the given value."""
   end_lt: DateTime
-
-  """All values less than or equal the given value."""
   end_lte: DateTime
-
-  """All values greater than the given value."""
   end_gt: DateTime
-
-  """All values greater than or equal the given value."""
   end_gte: DateTime
+  AND: [PartyScalarWhereInput!]
+  OR: [PartyScalarWhereInput!]
+  NOT: [PartyScalarWhereInput!]
 }
 
 type PartySubscriptionPayload {
@@ -2173,61 +1251,40 @@ type PartySubscriptionPayload {
 }
 
 input PartySubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PartySubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PartySubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PartySubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: PartyWhereInput
+  AND: [PartySubscriptionWhereInput!]
+  OR: [PartySubscriptionWhereInput!]
+  NOT: [PartySubscriptionWhereInput!]
 }
 
 input PartyUpdateDataInput {
   title: String
   description: String
-  colorTint: String
-  isPublic: Boolean
-  start: DateTime
-  end: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
+  colorTint: String
+  isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateInput {
   title: String
   description: String
-  colorTint: String
-  isPublic: Boolean
-  start: DateTime
-  end: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
+  colorTint: String
+  isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateManyDataInput {
@@ -2250,14 +1307,14 @@ input PartyUpdateManyMutationInput {
 
 input PartyUpdateManyWithoutMembersInput {
   create: [PartyCreateWithoutMembersInput!]
+  delete: [PartyWhereUniqueInput!]
   connect: [PartyWhereUniqueInput!]
   set: [PartyWhereUniqueInput!]
   disconnect: [PartyWhereUniqueInput!]
-  delete: [PartyWhereUniqueInput!]
   update: [PartyUpdateWithWhereUniqueWithoutMembersInput!]
-  updateMany: [PartyUpdateManyWithWhereNestedInput!]
-  deleteMany: [PartyScalarWhereInput!]
   upsert: [PartyUpsertWithWhereUniqueWithoutMembersInput!]
+  deleteMany: [PartyScalarWhereInput!]
+  updateMany: [PartyUpdateManyWithWhereNestedInput!]
 }
 
 input PartyUpdateManyWithWhereNestedInput {
@@ -2267,21 +1324,21 @@ input PartyUpdateManyWithWhereNestedInput {
 
 input PartyUpdateOneRequiredInput {
   create: PartyCreateInput
-  connect: PartyWhereUniqueInput
   update: PartyUpdateDataInput
   upsert: PartyUpsertNestedInput
+  connect: PartyWhereUniqueInput
 }
 
 input PartyUpdateWithoutMembersDataInput {
   title: String
   description: String
+  author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
+  games: GameUpdateManyInput
   colorTint: String
   isPublic: Boolean
   start: DateTime
   end: DateTime
-  author: UserUpdateOneRequiredInput
-  location: LocationUpdateOneRequiredInput
-  games: GameUpdateManyInput
 }
 
 input PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -2301,274 +1358,107 @@ input PartyUpsertWithWhereUniqueWithoutMembersInput {
 }
 
 input PartyWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PartyWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PartyWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PartyWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   title: String
-
-  """All values that are not equal to given value."""
   title_not: String
-
-  """All values that are contained in given list."""
   title_in: [String!]
-
-  """All values that are not contained in given list."""
   title_not_in: [String!]
-
-  """All values less than the given value."""
   title_lt: String
-
-  """All values less than or equal the given value."""
   title_lte: String
-
-  """All values greater than the given value."""
   title_gt: String
-
-  """All values greater than or equal the given value."""
   title_gte: String
-
-  """All values containing the given string."""
   title_contains: String
-
-  """All values not containing the given string."""
   title_not_contains: String
-
-  """All values starting with the given string."""
   title_starts_with: String
-
-  """All values not starting with the given string."""
   title_not_starts_with: String
-
-  """All values ending with the given string."""
   title_ends_with: String
-
-  """All values not ending with the given string."""
   title_not_ends_with: String
   description: String
-
-  """All values that are not equal to given value."""
   description_not: String
-
-  """All values that are contained in given list."""
   description_in: [String!]
-
-  """All values that are not contained in given list."""
   description_not_in: [String!]
-
-  """All values less than the given value."""
   description_lt: String
-
-  """All values less than or equal the given value."""
   description_lte: String
-
-  """All values greater than the given value."""
   description_gt: String
-
-  """All values greater than or equal the given value."""
   description_gte: String
-
-  """All values containing the given string."""
   description_contains: String
-
-  """All values not containing the given string."""
   description_not_contains: String
-
-  """All values starting with the given string."""
   description_starts_with: String
-
-  """All values not starting with the given string."""
   description_not_starts_with: String
-
-  """All values ending with the given string."""
   description_ends_with: String
-
-  """All values not ending with the given string."""
   description_not_ends_with: String
+  author: UserWhereInput
   createdAt: DateTime
-
-  """All values that are not equal to given value."""
   createdAt_not: DateTime
-
-  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   createdAt_lte: DateTime
-
-  """All values greater than the given value."""
   createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
-
-  """All values that are not equal to given value."""
   updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
   updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  colorTint: String
-
-  """All values that are not equal to given value."""
-  colorTint_not: String
-
-  """All values that are contained in given list."""
-  colorTint_in: [String!]
-
-  """All values that are not contained in given list."""
-  colorTint_not_in: [String!]
-
-  """All values less than the given value."""
-  colorTint_lt: String
-
-  """All values less than or equal the given value."""
-  colorTint_lte: String
-
-  """All values greater than the given value."""
-  colorTint_gt: String
-
-  """All values greater than or equal the given value."""
-  colorTint_gte: String
-
-  """All values containing the given string."""
-  colorTint_contains: String
-
-  """All values not containing the given string."""
-  colorTint_not_contains: String
-
-  """All values starting with the given string."""
-  colorTint_starts_with: String
-
-  """All values not starting with the given string."""
-  colorTint_not_starts_with: String
-
-  """All values ending with the given string."""
-  colorTint_ends_with: String
-
-  """All values not ending with the given string."""
-  colorTint_not_ends_with: String
-  isPublic: Boolean
-
-  """All values that are not equal to given value."""
-  isPublic_not: Boolean
-  start: DateTime
-
-  """All values that are not equal to given value."""
-  start_not: DateTime
-
-  """All values that are contained in given list."""
-  start_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  start_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  start_lt: DateTime
-
-  """All values less than or equal the given value."""
-  start_lte: DateTime
-
-  """All values greater than the given value."""
-  start_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  start_gte: DateTime
-  end: DateTime
-
-  """All values that are not equal to given value."""
-  end_not: DateTime
-
-  """All values that are contained in given list."""
-  end_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  end_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  end_lt: DateTime
-
-  """All values less than or equal the given value."""
-  end_lte: DateTime
-
-  """All values greater than the given value."""
-  end_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  end_gte: DateTime
-  author: UserWhereInput
   location: LocationWhereInput
   games_every: GameWhereInput
   games_some: GameWhereInput
   games_none: GameWhereInput
+  colorTint: String
+  colorTint_not: String
+  colorTint_in: [String!]
+  colorTint_not_in: [String!]
+  colorTint_lt: String
+  colorTint_lte: String
+  colorTint_gt: String
+  colorTint_gte: String
+  colorTint_contains: String
+  colorTint_not_contains: String
+  colorTint_starts_with: String
+  colorTint_not_starts_with: String
+  colorTint_ends_with: String
+  colorTint_not_ends_with: String
+  isPublic: Boolean
+  isPublic_not: Boolean
   members_every: UserWhereInput
   members_some: UserWhereInput
   members_none: UserWhereInput
+  start: DateTime
+  start_not: DateTime
+  start_in: [DateTime!]
+  start_not_in: [DateTime!]
+  start_lt: DateTime
+  start_lte: DateTime
+  start_gt: DateTime
+  start_gte: DateTime
+  end: DateTime
+  end_not: DateTime
+  end_in: [DateTime!]
+  end_not_in: [DateTime!]
+  end_lt: DateTime
+  end_lte: DateTime
+  end_gt: DateTime
+  end_gte: DateTime
+  AND: [PartyWhereInput!]
+  OR: [PartyWhereInput!]
+  NOT: [PartyWhereInput!]
 }
 
 input PartyWhereUniqueInput {
@@ -2576,30 +1466,25 @@ input PartyWhereUniqueInput {
 }
 
 type Query {
-  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
-  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
-  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
-  parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
   chat(where: ChatWhereUniqueInput!): Chat
-  message(where: MessageWhereUniqueInput!): Message
-  location(where: LocationWhereUniqueInput!): Location
-  party(where: PartyWhereUniqueInput!): Party
-  user(where: UserWhereUniqueInput!): User
-  game(where: GameWhereUniqueInput!): Game
+  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
-  messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
-  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
-  partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  game(where: GameWhereUniqueInput!): Game
+  games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
-
-  """Fetches an object given its ID"""
-  node(
-    """The ID of an object"""
-    id: ID!
-  ): Node
+  location(where: LocationWhereUniqueInput!): Location
+  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
+  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
+  message(where: MessageWhereUniqueInput!): Message
+  messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
+  messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
+  party(where: PartyWhereUniqueInput!): Party
+  parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
+  partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  node(id: ID!): Node
 }
 
 enum SocialMediaType {
@@ -2610,14 +1495,14 @@ enum SocialMediaType {
 
 type Subscription {
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
-  message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+  game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
+  message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
 }
 
-type User implements Node {
+type User {
   id: ID!
   email: String!
   firstName: String!
@@ -2635,35 +1520,25 @@ type User implements Node {
   thirdPartyId: String
 }
 
-"""A connection to a list of items."""
 type UserConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [UserEdge]!
   aggregate: AggregateUser!
 }
 
 input UserCreateInput {
-  id: ID
   email: String!
   firstName: String!
   lastName: String!
   password: String!
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyWithoutFriendsInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  chats: ChatCreateManyWithoutMembersInput
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
-  parties: PartyCreateManyWithoutMembersInput
-  friends: UserCreateManyInput
-  pendingInvitations: UserCreateManyInput
-  chats: ChatCreateManyWithoutMembersInput
-}
-
-input UserCreateManyInput {
-  create: [UserCreateInput!]
-  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateManyWithoutChatsInput {
@@ -2671,8 +1546,18 @@ input UserCreateManyWithoutChatsInput {
   connect: [UserWhereUniqueInput!]
 }
 
+input UserCreateManyWithoutFriendsInput {
+  create: [UserCreateWithoutFriendsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
 input UserCreateManyWithoutPartiesInput {
   create: [UserCreateWithoutPartiesInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutPendingInvitationsInput {
+  create: [UserCreateWithoutPendingInvitationsInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -2682,41 +1567,63 @@ input UserCreateOneInput {
 }
 
 input UserCreateWithoutChatsInput {
-  id: ID
   email: String!
   firstName: String!
   lastName: String!
   password: String!
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyWithoutFriendsInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+}
+
+input UserCreateWithoutFriendsInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
   parties: PartyCreateManyWithoutMembersInput
-  friends: UserCreateManyInput
-  pendingInvitations: UserCreateManyInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  chats: ChatCreateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
 }
 
 input UserCreateWithoutPartiesInput {
-  id: ID
   email: String!
   firstName: String!
   lastName: String!
   password: String!
+  friends: UserCreateManyWithoutFriendsInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  chats: ChatCreateManyWithoutMembersInput
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
-  friends: UserCreateManyInput
-  pendingInvitations: UserCreateManyInput
-  chats: ChatCreateManyWithoutMembersInput
 }
 
-"""An edge in a connection."""
-type UserEdge {
-  """The item at the end of the edge."""
-  node: User!
+input UserCreateWithoutPendingInvitationsInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyWithoutFriendsInput
+  chats: ChatCreateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
 
-  """A cursor for use in pagination."""
+type UserEdge {
+  node: User!
   cursor: String!
 }
 
@@ -2760,352 +1667,129 @@ type UserPreviousValues {
 }
 
 input UserScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [UserScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [UserScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [UserScalarWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   email: String
-
-  """All values that are not equal to given value."""
   email_not: String
-
-  """All values that are contained in given list."""
   email_in: [String!]
-
-  """All values that are not contained in given list."""
   email_not_in: [String!]
-
-  """All values less than the given value."""
   email_lt: String
-
-  """All values less than or equal the given value."""
   email_lte: String
-
-  """All values greater than the given value."""
   email_gt: String
-
-  """All values greater than or equal the given value."""
   email_gte: String
-
-  """All values containing the given string."""
   email_contains: String
-
-  """All values not containing the given string."""
   email_not_contains: String
-
-  """All values starting with the given string."""
   email_starts_with: String
-
-  """All values not starting with the given string."""
   email_not_starts_with: String
-
-  """All values ending with the given string."""
   email_ends_with: String
-
-  """All values not ending with the given string."""
   email_not_ends_with: String
   firstName: String
-
-  """All values that are not equal to given value."""
   firstName_not: String
-
-  """All values that are contained in given list."""
   firstName_in: [String!]
-
-  """All values that are not contained in given list."""
   firstName_not_in: [String!]
-
-  """All values less than the given value."""
   firstName_lt: String
-
-  """All values less than or equal the given value."""
   firstName_lte: String
-
-  """All values greater than the given value."""
   firstName_gt: String
-
-  """All values greater than or equal the given value."""
   firstName_gte: String
-
-  """All values containing the given string."""
   firstName_contains: String
-
-  """All values not containing the given string."""
   firstName_not_contains: String
-
-  """All values starting with the given string."""
   firstName_starts_with: String
-
-  """All values not starting with the given string."""
   firstName_not_starts_with: String
-
-  """All values ending with the given string."""
   firstName_ends_with: String
-
-  """All values not ending with the given string."""
   firstName_not_ends_with: String
   lastName: String
-
-  """All values that are not equal to given value."""
   lastName_not: String
-
-  """All values that are contained in given list."""
   lastName_in: [String!]
-
-  """All values that are not contained in given list."""
   lastName_not_in: [String!]
-
-  """All values less than the given value."""
   lastName_lt: String
-
-  """All values less than or equal the given value."""
   lastName_lte: String
-
-  """All values greater than the given value."""
   lastName_gt: String
-
-  """All values greater than or equal the given value."""
   lastName_gte: String
-
-  """All values containing the given string."""
   lastName_contains: String
-
-  """All values not containing the given string."""
   lastName_not_contains: String
-
-  """All values starting with the given string."""
   lastName_starts_with: String
-
-  """All values not starting with the given string."""
   lastName_not_starts_with: String
-
-  """All values ending with the given string."""
   lastName_ends_with: String
-
-  """All values not ending with the given string."""
   lastName_not_ends_with: String
   password: String
-
-  """All values that are not equal to given value."""
   password_not: String
-
-  """All values that are contained in given list."""
   password_in: [String!]
-
-  """All values that are not contained in given list."""
   password_not_in: [String!]
-
-  """All values less than the given value."""
   password_lt: String
-
-  """All values less than or equal the given value."""
   password_lte: String
-
-  """All values greater than the given value."""
   password_gt: String
-
-  """All values greater than or equal the given value."""
   password_gte: String
-
-  """All values containing the given string."""
   password_contains: String
-
-  """All values not containing the given string."""
   password_not_contains: String
-
-  """All values starting with the given string."""
   password_starts_with: String
-
-  """All values not starting with the given string."""
   password_not_starts_with: String
-
-  """All values ending with the given string."""
   password_ends_with: String
-
-  """All values not ending with the given string."""
   password_not_ends_with: String
   createdAt: DateTime
-
-  """All values that are not equal to given value."""
   createdAt_not: DateTime
-
-  """All values that are contained in given list."""
   createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   createdAt_lte: DateTime
-
-  """All values greater than the given value."""
   createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   updatedAt: DateTime
-
-  """All values that are not equal to given value."""
   updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
   updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
   updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
   updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
   updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
   updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
   deleted: Boolean
-
-  """All values that are not equal to given value."""
   deleted_not: Boolean
   provider: SocialMediaType
-
-  """All values that are not equal to given value."""
   provider_not: SocialMediaType
-
-  """All values that are contained in given list."""
   provider_in: [SocialMediaType!]
-
-  """All values that are not contained in given list."""
   provider_not_in: [SocialMediaType!]
   avatar: String
-
-  """All values that are not equal to given value."""
   avatar_not: String
-
-  """All values that are contained in given list."""
   avatar_in: [String!]
-
-  """All values that are not contained in given list."""
   avatar_not_in: [String!]
-
-  """All values less than the given value."""
   avatar_lt: String
-
-  """All values less than or equal the given value."""
   avatar_lte: String
-
-  """All values greater than the given value."""
   avatar_gt: String
-
-  """All values greater than or equal the given value."""
   avatar_gte: String
-
-  """All values containing the given string."""
   avatar_contains: String
-
-  """All values not containing the given string."""
   avatar_not_contains: String
-
-  """All values starting with the given string."""
   avatar_starts_with: String
-
-  """All values not starting with the given string."""
   avatar_not_starts_with: String
-
-  """All values ending with the given string."""
   avatar_ends_with: String
-
-  """All values not ending with the given string."""
   avatar_not_ends_with: String
   thirdPartyId: String
-
-  """All values that are not equal to given value."""
   thirdPartyId_not: String
-
-  """All values that are contained in given list."""
   thirdPartyId_in: [String!]
-
-  """All values that are not contained in given list."""
   thirdPartyId_not_in: [String!]
-
-  """All values less than the given value."""
   thirdPartyId_lt: String
-
-  """All values less than or equal the given value."""
   thirdPartyId_lte: String
-
-  """All values greater than the given value."""
   thirdPartyId_gt: String
-
-  """All values greater than or equal the given value."""
   thirdPartyId_gte: String
-
-  """All values containing the given string."""
   thirdPartyId_contains: String
-
-  """All values not containing the given string."""
   thirdPartyId_not_contains: String
-
-  """All values starting with the given string."""
   thirdPartyId_starts_with: String
-
-  """All values not starting with the given string."""
   thirdPartyId_not_starts_with: String
-
-  """All values ending with the given string."""
   thirdPartyId_ends_with: String
-
-  """All values not ending with the given string."""
   thirdPartyId_not_ends_with: String
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
 }
 
 type UserSubscriptionPayload {
@@ -3116,35 +1800,14 @@ type UserSubscriptionPayload {
 }
 
 input UserSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [UserSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [UserSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [UserSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
 }
 
 input UserUpdateDataInput {
@@ -3152,14 +1815,14 @@ input UserUpdateDataInput {
   firstName: String
   lastName: String
   password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
-  parties: PartyUpdateManyWithoutMembersInput
-  friends: UserUpdateManyInput
-  pendingInvitations: UserUpdateManyInput
-  chats: ChatUpdateManyWithoutMembersInput
 }
 
 input UserUpdateInput {
@@ -3167,14 +1830,14 @@ input UserUpdateInput {
   firstName: String
   lastName: String
   password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
-  parties: PartyUpdateManyWithoutMembersInput
-  friends: UserUpdateManyInput
-  pendingInvitations: UserUpdateManyInput
-  chats: ChatUpdateManyWithoutMembersInput
 }
 
 input UserUpdateManyDataInput {
@@ -3186,18 +1849,6 @@ input UserUpdateManyDataInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
-}
-
-input UserUpdateManyInput {
-  create: [UserCreateInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueNestedInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserScalarWhereInput!]
-  upsert: [UserUpsertWithWhereUniqueNestedInput!]
 }
 
 input UserUpdateManyMutationInput {
@@ -3213,26 +1864,50 @@ input UserUpdateManyMutationInput {
 
 input UserUpdateManyWithoutChatsInput {
   create: [UserCreateWithoutChatsInput!]
+  delete: [UserWhereUniqueInput!]
   connect: [UserWhereUniqueInput!]
   set: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
   update: [UserUpdateWithWhereUniqueWithoutChatsInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserScalarWhereInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutChatsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutFriendsInput {
+  create: [UserCreateWithoutFriendsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFriendsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFriendsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
 input UserUpdateManyWithoutPartiesInput {
   create: [UserCreateWithoutPartiesInput!]
+  delete: [UserWhereUniqueInput!]
   connect: [UserWhereUniqueInput!]
   set: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
   update: [UserUpdateWithWhereUniqueWithoutPartiesInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserScalarWhereInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutPartiesInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutPendingInvitationsInput {
+  create: [UserCreateWithoutPendingInvitationsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutPendingInvitationsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutPendingInvitationsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
 input UserUpdateManyWithWhereNestedInput {
@@ -3242,9 +1917,9 @@ input UserUpdateManyWithWhereNestedInput {
 
 input UserUpdateOneRequiredInput {
   create: UserCreateInput
-  connect: UserWhereUniqueInput
   update: UserUpdateDataInput
   upsert: UserUpsertNestedInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateWithoutChatsDataInput {
@@ -3252,13 +1927,27 @@ input UserUpdateWithoutChatsDataInput {
   firstName: String
   lastName: String
   password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+}
+
+input UserUpdateWithoutFriendsDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
   parties: PartyUpdateManyWithoutMembersInput
-  friends: UserUpdateManyInput
-  pendingInvitations: UserUpdateManyInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -3266,18 +1955,27 @@ input UserUpdateWithoutPartiesDataInput {
   firstName: String
   lastName: String
   password: String
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
-  friends: UserUpdateManyInput
-  pendingInvitations: UserUpdateManyInput
-  chats: ChatUpdateManyWithoutMembersInput
 }
 
-input UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateDataInput!
+input UserUpdateWithoutPendingInvitationsDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  chats: ChatUpdateManyWithoutMembersInput
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
 }
 
 input UserUpdateWithWhereUniqueWithoutChatsInput {
@@ -3285,18 +1983,22 @@ input UserUpdateWithWhereUniqueWithoutChatsInput {
   data: UserUpdateWithoutChatsDataInput!
 }
 
+input UserUpdateWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutFriendsDataInput!
+}
+
 input UserUpdateWithWhereUniqueWithoutPartiesInput {
   where: UserWhereUniqueInput!
   data: UserUpdateWithoutPartiesDataInput!
 }
 
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+input UserUpdateWithWhereUniqueWithoutPendingInvitationsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutPendingInvitationsDataInput!
 }
 
-input UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
+input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
 }
@@ -3307,359 +2009,95 @@ input UserUpsertWithWhereUniqueWithoutChatsInput {
   create: UserCreateWithoutChatsInput!
 }
 
+input UserUpsertWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutFriendsDataInput!
+  create: UserCreateWithoutFriendsInput!
+}
+
 input UserUpsertWithWhereUniqueWithoutPartiesInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutPartiesDataInput!
   create: UserCreateWithoutPartiesInput!
 }
 
+input UserUpsertWithWhereUniqueWithoutPendingInvitationsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutPendingInvitationsDataInput!
+  create: UserCreateWithoutPendingInvitationsInput!
+}
+
 input UserWhereInput {
-  """Logical AND on all given filters."""
-  AND: [UserWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [UserWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [UserWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   email: String
-
-  """All values that are not equal to given value."""
   email_not: String
-
-  """All values that are contained in given list."""
   email_in: [String!]
-
-  """All values that are not contained in given list."""
   email_not_in: [String!]
-
-  """All values less than the given value."""
   email_lt: String
-
-  """All values less than or equal the given value."""
   email_lte: String
-
-  """All values greater than the given value."""
   email_gt: String
-
-  """All values greater than or equal the given value."""
   email_gte: String
-
-  """All values containing the given string."""
   email_contains: String
-
-  """All values not containing the given string."""
   email_not_contains: String
-
-  """All values starting with the given string."""
   email_starts_with: String
-
-  """All values not starting with the given string."""
   email_not_starts_with: String
-
-  """All values ending with the given string."""
   email_ends_with: String
-
-  """All values not ending with the given string."""
   email_not_ends_with: String
   firstName: String
-
-  """All values that are not equal to given value."""
   firstName_not: String
-
-  """All values that are contained in given list."""
   firstName_in: [String!]
-
-  """All values that are not contained in given list."""
   firstName_not_in: [String!]
-
-  """All values less than the given value."""
   firstName_lt: String
-
-  """All values less than or equal the given value."""
   firstName_lte: String
-
-  """All values greater than the given value."""
   firstName_gt: String
-
-  """All values greater than or equal the given value."""
   firstName_gte: String
-
-  """All values containing the given string."""
   firstName_contains: String
-
-  """All values not containing the given string."""
   firstName_not_contains: String
-
-  """All values starting with the given string."""
   firstName_starts_with: String
-
-  """All values not starting with the given string."""
   firstName_not_starts_with: String
-
-  """All values ending with the given string."""
   firstName_ends_with: String
-
-  """All values not ending with the given string."""
   firstName_not_ends_with: String
   lastName: String
-
-  """All values that are not equal to given value."""
   lastName_not: String
-
-  """All values that are contained in given list."""
   lastName_in: [String!]
-
-  """All values that are not contained in given list."""
   lastName_not_in: [String!]
-
-  """All values less than the given value."""
   lastName_lt: String
-
-  """All values less than or equal the given value."""
   lastName_lte: String
-
-  """All values greater than the given value."""
   lastName_gt: String
-
-  """All values greater than or equal the given value."""
   lastName_gte: String
-
-  """All values containing the given string."""
   lastName_contains: String
-
-  """All values not containing the given string."""
   lastName_not_contains: String
-
-  """All values starting with the given string."""
   lastName_starts_with: String
-
-  """All values not starting with the given string."""
   lastName_not_starts_with: String
-
-  """All values ending with the given string."""
   lastName_ends_with: String
-
-  """All values not ending with the given string."""
   lastName_not_ends_with: String
   password: String
-
-  """All values that are not equal to given value."""
   password_not: String
-
-  """All values that are contained in given list."""
   password_in: [String!]
-
-  """All values that are not contained in given list."""
   password_not_in: [String!]
-
-  """All values less than the given value."""
   password_lt: String
-
-  """All values less than or equal the given value."""
   password_lte: String
-
-  """All values greater than the given value."""
   password_gt: String
-
-  """All values greater than or equal the given value."""
   password_gte: String
-
-  """All values containing the given string."""
   password_contains: String
-
-  """All values not containing the given string."""
   password_not_contains: String
-
-  """All values starting with the given string."""
   password_starts_with: String
-
-  """All values not starting with the given string."""
   password_not_starts_with: String
-
-  """All values ending with the given string."""
   password_ends_with: String
-
-  """All values not ending with the given string."""
   password_not_ends_with: String
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  deleted: Boolean
-
-  """All values that are not equal to given value."""
-  deleted_not: Boolean
-  provider: SocialMediaType
-
-  """All values that are not equal to given value."""
-  provider_not: SocialMediaType
-
-  """All values that are contained in given list."""
-  provider_in: [SocialMediaType!]
-
-  """All values that are not contained in given list."""
-  provider_not_in: [SocialMediaType!]
-  avatar: String
-
-  """All values that are not equal to given value."""
-  avatar_not: String
-
-  """All values that are contained in given list."""
-  avatar_in: [String!]
-
-  """All values that are not contained in given list."""
-  avatar_not_in: [String!]
-
-  """All values less than the given value."""
-  avatar_lt: String
-
-  """All values less than or equal the given value."""
-  avatar_lte: String
-
-  """All values greater than the given value."""
-  avatar_gt: String
-
-  """All values greater than or equal the given value."""
-  avatar_gte: String
-
-  """All values containing the given string."""
-  avatar_contains: String
-
-  """All values not containing the given string."""
-  avatar_not_contains: String
-
-  """All values starting with the given string."""
-  avatar_starts_with: String
-
-  """All values not starting with the given string."""
-  avatar_not_starts_with: String
-
-  """All values ending with the given string."""
-  avatar_ends_with: String
-
-  """All values not ending with the given string."""
-  avatar_not_ends_with: String
-  thirdPartyId: String
-
-  """All values that are not equal to given value."""
-  thirdPartyId_not: String
-
-  """All values that are contained in given list."""
-  thirdPartyId_in: [String!]
-
-  """All values that are not contained in given list."""
-  thirdPartyId_not_in: [String!]
-
-  """All values less than the given value."""
-  thirdPartyId_lt: String
-
-  """All values less than or equal the given value."""
-  thirdPartyId_lte: String
-
-  """All values greater than the given value."""
-  thirdPartyId_gt: String
-
-  """All values greater than or equal the given value."""
-  thirdPartyId_gte: String
-
-  """All values containing the given string."""
-  thirdPartyId_contains: String
-
-  """All values not containing the given string."""
-  thirdPartyId_not_contains: String
-
-  """All values starting with the given string."""
-  thirdPartyId_starts_with: String
-
-  """All values not starting with the given string."""
-  thirdPartyId_not_starts_with: String
-
-  """All values ending with the given string."""
-  thirdPartyId_ends_with: String
-
-  """All values not ending with the given string."""
-  thirdPartyId_not_ends_with: String
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput
@@ -3672,6 +2110,59 @@ input UserWhereInput {
   chats_every: ChatWhereInput
   chats_some: ChatWhereInput
   chats_none: ChatWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  deleted: Boolean
+  deleted_not: Boolean
+  provider: SocialMediaType
+  provider_not: SocialMediaType
+  provider_in: [SocialMediaType!]
+  provider_not_in: [SocialMediaType!]
+  avatar: String
+  avatar_not: String
+  avatar_in: [String!]
+  avatar_not_in: [String!]
+  avatar_lt: String
+  avatar_lte: String
+  avatar_gt: String
+  avatar_gte: String
+  avatar_contains: String
+  avatar_not_contains: String
+  avatar_starts_with: String
+  avatar_not_starts_with: String
+  avatar_ends_with: String
+  avatar_not_ends_with: String
+  thirdPartyId: String
+  thirdPartyId_not: String
+  thirdPartyId_in: [String!]
+  thirdPartyId_not_in: [String!]
+  thirdPartyId_lt: String
+  thirdPartyId_lte: String
+  thirdPartyId_gt: String
+  thirdPartyId_gte: String
+  thirdPartyId_contains: String
+  thirdPartyId_not_contains: String
+  thirdPartyId_starts_with: String
+  thirdPartyId_not_starts_with: String
+  thirdPartyId_ends_with: String
+  thirdPartyId_not_ends_with: String
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
@@ -3718,10 +2209,10 @@ export type LocationOrderByInput =   'id_ASC' |
   'latitude_DESC' |
   'longitude_ASC' |
   'longitude_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
   'createdAt_ASC' |
-  'createdAt_DESC'
+  'createdAt_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC'
 
 export type MessageOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -3783,7 +2274,6 @@ export type UserOrderByInput =   'id_ASC' |
   'thirdPartyId_DESC'
 
 export interface ChatCreateInput {
-  id?: ID_Input | null
   party: PartyCreateOneInput
   members?: UserCreateManyWithoutChatsInput | null
   messages?: MessageCreateManyWithoutChatInput | null
@@ -3800,21 +2290,16 @@ export interface ChatCreateOneWithoutMessagesInput {
 }
 
 export interface ChatCreateWithoutMembersInput {
-  id?: ID_Input | null
   party: PartyCreateOneInput
   messages?: MessageCreateManyWithoutChatInput | null
 }
 
 export interface ChatCreateWithoutMessagesInput {
-  id?: ID_Input | null
   party: PartyCreateOneInput
   members?: UserCreateManyWithoutChatsInput | null
 }
 
 export interface ChatScalarWhereInput {
-  AND?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
-  OR?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
-  NOT?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -3845,17 +2330,20 @@ export interface ChatScalarWhereInput {
   updatedAt_lte?: DateTime | null
   updatedAt_gt?: DateTime | null
   updatedAt_gte?: DateTime | null
+  AND?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
+  OR?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
+  NOT?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
 }
 
 export interface ChatSubscriptionWhereInput {
-  AND?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
-  OR?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
-  NOT?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
   mutation_in?: MutationType[] | MutationType | null
   updatedFields_contains?: String | null
   updatedFields_contains_every?: String[] | String | null
   updatedFields_contains_some?: String[] | String | null
   node?: ChatWhereInput | null
+  AND?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
+  OR?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
+  NOT?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
 }
 
 export interface ChatUpdateInput {
@@ -3866,20 +2354,20 @@ export interface ChatUpdateInput {
 
 export interface ChatUpdateManyWithoutMembersInput {
   create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput | null
+  delete?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
   connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
   set?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
   disconnect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
-  delete?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
   update?: ChatUpdateWithWhereUniqueWithoutMembersInput[] | ChatUpdateWithWhereUniqueWithoutMembersInput | null
-  deleteMany?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
   upsert?: ChatUpsertWithWhereUniqueWithoutMembersInput[] | ChatUpsertWithWhereUniqueWithoutMembersInput | null
+  deleteMany?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
 }
 
 export interface ChatUpdateOneRequiredWithoutMessagesInput {
   create?: ChatCreateWithoutMessagesInput | null
-  connect?: ChatWhereUniqueInput | null
   update?: ChatUpdateWithoutMessagesDataInput | null
   upsert?: ChatUpsertWithoutMessagesInput | null
+  connect?: ChatWhereUniqueInput | null
 }
 
 export interface ChatUpdateWithoutMembersDataInput {
@@ -3909,9 +2397,6 @@ export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
 }
 
 export interface ChatWhereInput {
-  AND?: ChatWhereInput[] | ChatWhereInput | null
-  OR?: ChatWhereInput[] | ChatWhereInput | null
-  NOT?: ChatWhereInput[] | ChatWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -3926,6 +2411,13 @@ export interface ChatWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
+  party?: PartyWhereInput | null
+  members_every?: UserWhereInput | null
+  members_some?: UserWhereInput | null
+  members_none?: UserWhereInput | null
+  messages_every?: MessageWhereInput | null
+  messages_some?: MessageWhereInput | null
+  messages_none?: MessageWhereInput | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -3942,13 +2434,9 @@ export interface ChatWhereInput {
   updatedAt_lte?: DateTime | null
   updatedAt_gt?: DateTime | null
   updatedAt_gte?: DateTime | null
-  party?: PartyWhereInput | null
-  members_every?: UserWhereInput | null
-  members_some?: UserWhereInput | null
-  members_none?: UserWhereInput | null
-  messages_every?: MessageWhereInput | null
-  messages_some?: MessageWhereInput | null
-  messages_none?: MessageWhereInput | null
+  AND?: ChatWhereInput[] | ChatWhereInput | null
+  OR?: ChatWhereInput[] | ChatWhereInput | null
+  NOT?: ChatWhereInput[] | ChatWhereInput | null
 }
 
 export interface ChatWhereUniqueInput {
@@ -3956,7 +2444,6 @@ export interface ChatWhereUniqueInput {
 }
 
 export interface GameCreateInput {
-  id?: ID_Input | null
   title: String
   cover?: String | null
   type: GameType
@@ -3968,9 +2455,6 @@ export interface GameCreateManyInput {
 }
 
 export interface GameScalarWhereInput {
-  AND?: GameScalarWhereInput[] | GameScalarWhereInput | null
-  OR?: GameScalarWhereInput[] | GameScalarWhereInput | null
-  NOT?: GameScalarWhereInput[] | GameScalarWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -4033,17 +2517,20 @@ export interface GameScalarWhereInput {
   updatedAt_lte?: DateTime | null
   updatedAt_gt?: DateTime | null
   updatedAt_gte?: DateTime | null
+  AND?: GameScalarWhereInput[] | GameScalarWhereInput | null
+  OR?: GameScalarWhereInput[] | GameScalarWhereInput | null
+  NOT?: GameScalarWhereInput[] | GameScalarWhereInput | null
 }
 
 export interface GameSubscriptionWhereInput {
-  AND?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
-  OR?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
-  NOT?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
   mutation_in?: MutationType[] | MutationType | null
   updatedFields_contains?: String | null
   updatedFields_contains_every?: String[] | String | null
   updatedFields_contains_some?: String[] | String | null
   node?: GameWhereInput | null
+  AND?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
+  OR?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
+  NOT?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
 }
 
 export interface GameUpdateDataInput {
@@ -4066,14 +2553,14 @@ export interface GameUpdateManyDataInput {
 
 export interface GameUpdateManyInput {
   create?: GameCreateInput[] | GameCreateInput | null
+  update?: GameUpdateWithWhereUniqueNestedInput[] | GameUpdateWithWhereUniqueNestedInput | null
+  upsert?: GameUpsertWithWhereUniqueNestedInput[] | GameUpsertWithWhereUniqueNestedInput | null
+  delete?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
   connect?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
   set?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
   disconnect?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
-  delete?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
-  update?: GameUpdateWithWhereUniqueNestedInput[] | GameUpdateWithWhereUniqueNestedInput | null
-  updateMany?: GameUpdateManyWithWhereNestedInput[] | GameUpdateManyWithWhereNestedInput | null
   deleteMany?: GameScalarWhereInput[] | GameScalarWhereInput | null
-  upsert?: GameUpsertWithWhereUniqueNestedInput[] | GameUpsertWithWhereUniqueNestedInput | null
+  updateMany?: GameUpdateManyWithWhereNestedInput[] | GameUpdateManyWithWhereNestedInput | null
 }
 
 export interface GameUpdateManyMutationInput {
@@ -4099,9 +2586,6 @@ export interface GameUpsertWithWhereUniqueNestedInput {
 }
 
 export interface GameWhereInput {
-  AND?: GameWhereInput[] | GameWhereInput | null
-  OR?: GameWhereInput[] | GameWhereInput | null
-  NOT?: GameWhereInput[] | GameWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -4164,6 +2648,9 @@ export interface GameWhereInput {
   updatedAt_lte?: DateTime | null
   updatedAt_gt?: DateTime | null
   updatedAt_gte?: DateTime | null
+  AND?: GameWhereInput[] | GameWhereInput | null
+  OR?: GameWhereInput[] | GameWhereInput | null
+  NOT?: GameWhereInput[] | GameWhereInput | null
 }
 
 export interface GameWhereUniqueInput {
@@ -4172,7 +2659,6 @@ export interface GameWhereUniqueInput {
 }
 
 export interface LocationCreateInput {
-  id?: ID_Input | null
   placeName: String
   latitude: Float
   longitude: Float
@@ -4184,14 +2670,14 @@ export interface LocationCreateOneInput {
 }
 
 export interface LocationSubscriptionWhereInput {
-  AND?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
-  OR?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
-  NOT?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
   mutation_in?: MutationType[] | MutationType | null
   updatedFields_contains?: String | null
   updatedFields_contains_every?: String[] | String | null
   updatedFields_contains_some?: String[] | String | null
   node?: LocationWhereInput | null
+  AND?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
+  OR?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
+  NOT?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
 }
 
 export interface LocationUpdateDataInput {
@@ -4214,9 +2700,9 @@ export interface LocationUpdateManyMutationInput {
 
 export interface LocationUpdateOneRequiredInput {
   create?: LocationCreateInput | null
-  connect?: LocationWhereUniqueInput | null
   update?: LocationUpdateDataInput | null
   upsert?: LocationUpsertNestedInput | null
+  connect?: LocationWhereUniqueInput | null
 }
 
 export interface LocationUpsertNestedInput {
@@ -4225,9 +2711,6 @@ export interface LocationUpsertNestedInput {
 }
 
 export interface LocationWhereInput {
-  AND?: LocationWhereInput[] | LocationWhereInput | null
-  OR?: LocationWhereInput[] | LocationWhereInput | null
-  NOT?: LocationWhereInput[] | LocationWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -4272,6 +2755,9 @@ export interface LocationWhereInput {
   longitude_lte?: Float | null
   longitude_gt?: Float | null
   longitude_gte?: Float | null
+  AND?: LocationWhereInput[] | LocationWhereInput | null
+  OR?: LocationWhereInput[] | LocationWhereInput | null
+  NOT?: LocationWhereInput[] | LocationWhereInput | null
 }
 
 export interface LocationWhereUniqueInput {
@@ -4279,10 +2765,9 @@ export interface LocationWhereUniqueInput {
 }
 
 export interface MessageCreateInput {
-  id?: ID_Input | null
-  content: String
   author: UserCreateOneInput
   chat: ChatCreateOneWithoutMessagesInput
+  content: String
 }
 
 export interface MessageCreateManyWithoutChatInput {
@@ -4291,15 +2776,11 @@ export interface MessageCreateManyWithoutChatInput {
 }
 
 export interface MessageCreateWithoutChatInput {
-  id?: ID_Input | null
-  content: String
   author: UserCreateOneInput
+  content: String
 }
 
 export interface MessageScalarWhereInput {
-  AND?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
-  OR?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
-  NOT?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -4344,23 +2825,26 @@ export interface MessageScalarWhereInput {
   updatedAt_lte?: DateTime | null
   updatedAt_gt?: DateTime | null
   updatedAt_gte?: DateTime | null
+  AND?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
+  OR?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
+  NOT?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
 }
 
 export interface MessageSubscriptionWhereInput {
-  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
-  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
-  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
   mutation_in?: MutationType[] | MutationType | null
   updatedFields_contains?: String | null
   updatedFields_contains_every?: String[] | String | null
   updatedFields_contains_some?: String[] | String | null
   node?: MessageWhereInput | null
+  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
+  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
+  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
 }
 
 export interface MessageUpdateInput {
-  content?: String | null
   author?: UserUpdateOneRequiredInput | null
   chat?: ChatUpdateOneRequiredWithoutMessagesInput | null
+  content?: String | null
 }
 
 export interface MessageUpdateManyDataInput {
@@ -4373,14 +2857,14 @@ export interface MessageUpdateManyMutationInput {
 
 export interface MessageUpdateManyWithoutChatInput {
   create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput | null
+  delete?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
   connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
   set?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
   disconnect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
-  delete?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
   update?: MessageUpdateWithWhereUniqueWithoutChatInput[] | MessageUpdateWithWhereUniqueWithoutChatInput | null
-  updateMany?: MessageUpdateManyWithWhereNestedInput[] | MessageUpdateManyWithWhereNestedInput | null
-  deleteMany?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
   upsert?: MessageUpsertWithWhereUniqueWithoutChatInput[] | MessageUpsertWithWhereUniqueWithoutChatInput | null
+  deleteMany?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
+  updateMany?: MessageUpdateManyWithWhereNestedInput[] | MessageUpdateManyWithWhereNestedInput | null
 }
 
 export interface MessageUpdateManyWithWhereNestedInput {
@@ -4389,8 +2873,8 @@ export interface MessageUpdateManyWithWhereNestedInput {
 }
 
 export interface MessageUpdateWithoutChatDataInput {
-  content?: String | null
   author?: UserUpdateOneRequiredInput | null
+  content?: String | null
 }
 
 export interface MessageUpdateWithWhereUniqueWithoutChatInput {
@@ -4405,9 +2889,6 @@ export interface MessageUpsertWithWhereUniqueWithoutChatInput {
 }
 
 export interface MessageWhereInput {
-  AND?: MessageWhereInput[] | MessageWhereInput | null
-  OR?: MessageWhereInput[] | MessageWhereInput | null
-  NOT?: MessageWhereInput[] | MessageWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -4422,6 +2903,8 @@ export interface MessageWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
+  author?: UserWhereInput | null
+  chat?: ChatWhereInput | null
   content?: String | null
   content_not?: String | null
   content_in?: String[] | String | null
@@ -4452,8 +2935,9 @@ export interface MessageWhereInput {
   updatedAt_lte?: DateTime | null
   updatedAt_gt?: DateTime | null
   updatedAt_gte?: DateTime | null
-  author?: UserWhereInput | null
-  chat?: ChatWhereInput | null
+  AND?: MessageWhereInput[] | MessageWhereInput | null
+  OR?: MessageWhereInput[] | MessageWhereInput | null
+  NOT?: MessageWhereInput[] | MessageWhereInput | null
 }
 
 export interface MessageWhereUniqueInput {
@@ -4461,17 +2945,16 @@ export interface MessageWhereUniqueInput {
 }
 
 export interface PartyCreateInput {
-  id?: ID_Input | null
   title: String
   description: String
-  colorTint: String
-  isPublic?: Boolean | null
-  start?: DateTime | null
-  end?: DateTime | null
   author: UserCreateOneInput
   location: LocationCreateOneInput
   games?: GameCreateManyInput | null
+  colorTint: String
+  isPublic?: Boolean | null
   members?: UserCreateManyWithoutPartiesInput | null
+  start?: DateTime | null
+  end?: DateTime | null
 }
 
 export interface PartyCreateManyWithoutMembersInput {
@@ -4485,22 +2968,18 @@ export interface PartyCreateOneInput {
 }
 
 export interface PartyCreateWithoutMembersInput {
-  id?: ID_Input | null
   title: String
   description: String
+  author: UserCreateOneInput
+  location: LocationCreateOneInput
+  games?: GameCreateManyInput | null
   colorTint: String
   isPublic?: Boolean | null
   start?: DateTime | null
   end?: DateTime | null
-  author: UserCreateOneInput
-  location: LocationCreateOneInput
-  games?: GameCreateManyInput | null
 }
 
 export interface PartyScalarWhereInput {
-  AND?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
-  OR?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
-  NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -4591,43 +3070,46 @@ export interface PartyScalarWhereInput {
   end_lte?: DateTime | null
   end_gt?: DateTime | null
   end_gte?: DateTime | null
+  AND?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
+  OR?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
+  NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
 }
 
 export interface PartySubscriptionWhereInput {
-  AND?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
-  OR?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
-  NOT?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
   mutation_in?: MutationType[] | MutationType | null
   updatedFields_contains?: String | null
   updatedFields_contains_every?: String[] | String | null
   updatedFields_contains_some?: String[] | String | null
   node?: PartyWhereInput | null
+  AND?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
+  OR?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
+  NOT?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
 }
 
 export interface PartyUpdateDataInput {
   title?: String | null
   description?: String | null
-  colorTint?: String | null
-  isPublic?: Boolean | null
-  start?: DateTime | null
-  end?: DateTime | null
   author?: UserUpdateOneRequiredInput | null
   location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
+  colorTint?: String | null
+  isPublic?: Boolean | null
   members?: UserUpdateManyWithoutPartiesInput | null
+  start?: DateTime | null
+  end?: DateTime | null
 }
 
 export interface PartyUpdateInput {
   title?: String | null
   description?: String | null
-  colorTint?: String | null
-  isPublic?: Boolean | null
-  start?: DateTime | null
-  end?: DateTime | null
   author?: UserUpdateOneRequiredInput | null
   location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
+  colorTint?: String | null
+  isPublic?: Boolean | null
   members?: UserUpdateManyWithoutPartiesInput | null
+  start?: DateTime | null
+  end?: DateTime | null
 }
 
 export interface PartyUpdateManyDataInput {
@@ -4650,14 +3132,14 @@ export interface PartyUpdateManyMutationInput {
 
 export interface PartyUpdateManyWithoutMembersInput {
   create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput | null
+  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
   connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
   set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
   disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
-  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
   update?: PartyUpdateWithWhereUniqueWithoutMembersInput[] | PartyUpdateWithWhereUniqueWithoutMembersInput | null
-  updateMany?: PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput | null
-  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
   upsert?: PartyUpsertWithWhereUniqueWithoutMembersInput[] | PartyUpsertWithWhereUniqueWithoutMembersInput | null
+  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
+  updateMany?: PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput | null
 }
 
 export interface PartyUpdateManyWithWhereNestedInput {
@@ -4667,21 +3149,21 @@ export interface PartyUpdateManyWithWhereNestedInput {
 
 export interface PartyUpdateOneRequiredInput {
   create?: PartyCreateInput | null
-  connect?: PartyWhereUniqueInput | null
   update?: PartyUpdateDataInput | null
   upsert?: PartyUpsertNestedInput | null
+  connect?: PartyWhereUniqueInput | null
 }
 
 export interface PartyUpdateWithoutMembersDataInput {
   title?: String | null
   description?: String | null
+  author?: UserUpdateOneRequiredInput | null
+  location?: LocationUpdateOneRequiredInput | null
+  games?: GameUpdateManyInput | null
   colorTint?: String | null
   isPublic?: Boolean | null
   start?: DateTime | null
   end?: DateTime | null
-  author?: UserUpdateOneRequiredInput | null
-  location?: LocationUpdateOneRequiredInput | null
-  games?: GameUpdateManyInput | null
 }
 
 export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -4701,9 +3183,6 @@ export interface PartyUpsertWithWhereUniqueWithoutMembersInput {
 }
 
 export interface PartyWhereInput {
-  AND?: PartyWhereInput[] | PartyWhereInput | null
-  OR?: PartyWhereInput[] | PartyWhereInput | null
-  NOT?: PartyWhereInput[] | PartyWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -4746,6 +3225,7 @@ export interface PartyWhereInput {
   description_not_starts_with?: String | null
   description_ends_with?: String | null
   description_not_ends_with?: String | null
+  author?: UserWhereInput | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -4762,6 +3242,10 @@ export interface PartyWhereInput {
   updatedAt_lte?: DateTime | null
   updatedAt_gt?: DateTime | null
   updatedAt_gte?: DateTime | null
+  location?: LocationWhereInput | null
+  games_every?: GameWhereInput | null
+  games_some?: GameWhereInput | null
+  games_none?: GameWhereInput | null
   colorTint?: String | null
   colorTint_not?: String | null
   colorTint_in?: String[] | String | null
@@ -4778,6 +3262,9 @@ export interface PartyWhereInput {
   colorTint_not_ends_with?: String | null
   isPublic?: Boolean | null
   isPublic_not?: Boolean | null
+  members_every?: UserWhereInput | null
+  members_some?: UserWhereInput | null
+  members_none?: UserWhereInput | null
   start?: DateTime | null
   start_not?: DateTime | null
   start_in?: DateTime[] | DateTime | null
@@ -4794,14 +3281,9 @@ export interface PartyWhereInput {
   end_lte?: DateTime | null
   end_gt?: DateTime | null
   end_gte?: DateTime | null
-  author?: UserWhereInput | null
-  location?: LocationWhereInput | null
-  games_every?: GameWhereInput | null
-  games_some?: GameWhereInput | null
-  games_none?: GameWhereInput | null
-  members_every?: UserWhereInput | null
-  members_some?: UserWhereInput | null
-  members_none?: UserWhereInput | null
+  AND?: PartyWhereInput[] | PartyWhereInput | null
+  OR?: PartyWhereInput[] | PartyWhereInput | null
+  NOT?: PartyWhereInput[] | PartyWhereInput | null
 }
 
 export interface PartyWhereUniqueInput {
@@ -4809,24 +3291,18 @@ export interface PartyWhereUniqueInput {
 }
 
 export interface UserCreateInput {
-  id?: ID_Input | null
   email: String
   firstName: String
   lastName: String
   password: String
+  parties?: PartyCreateManyWithoutMembersInput | null
+  friends?: UserCreateManyWithoutFriendsInput | null
+  pendingInvitations?: UserCreateManyWithoutPendingInvitationsInput | null
+  chats?: ChatCreateManyWithoutMembersInput | null
   deleted?: Boolean | null
   provider?: SocialMediaType | null
   avatar?: String | null
   thirdPartyId?: String | null
-  parties?: PartyCreateManyWithoutMembersInput | null
-  friends?: UserCreateManyInput | null
-  pendingInvitations?: UserCreateManyInput | null
-  chats?: ChatCreateManyWithoutMembersInput | null
-}
-
-export interface UserCreateManyInput {
-  create?: UserCreateInput[] | UserCreateInput | null
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
 }
 
 export interface UserCreateManyWithoutChatsInput {
@@ -4834,8 +3310,18 @@ export interface UserCreateManyWithoutChatsInput {
   connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
 }
 
+export interface UserCreateManyWithoutFriendsInput {
+  create?: UserCreateWithoutFriendsInput[] | UserCreateWithoutFriendsInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+}
+
 export interface UserCreateManyWithoutPartiesInput {
   create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+}
+
+export interface UserCreateManyWithoutPendingInvitationsInput {
+  create?: UserCreateWithoutPendingInvitationsInput[] | UserCreateWithoutPendingInvitationsInput | null
   connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
 }
 
@@ -4845,39 +3331,62 @@ export interface UserCreateOneInput {
 }
 
 export interface UserCreateWithoutChatsInput {
-  id?: ID_Input | null
   email: String
   firstName: String
   lastName: String
   password: String
+  parties?: PartyCreateManyWithoutMembersInput | null
+  friends?: UserCreateManyWithoutFriendsInput | null
+  pendingInvitations?: UserCreateManyWithoutPendingInvitationsInput | null
   deleted?: Boolean | null
   provider?: SocialMediaType | null
   avatar?: String | null
   thirdPartyId?: String | null
+}
+
+export interface UserCreateWithoutFriendsInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
   parties?: PartyCreateManyWithoutMembersInput | null
-  friends?: UserCreateManyInput | null
-  pendingInvitations?: UserCreateManyInput | null
+  pendingInvitations?: UserCreateManyWithoutPendingInvitationsInput | null
+  chats?: ChatCreateManyWithoutMembersInput | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
 }
 
 export interface UserCreateWithoutPartiesInput {
-  id?: ID_Input | null
   email: String
   firstName: String
   lastName: String
   password: String
+  friends?: UserCreateManyWithoutFriendsInput | null
+  pendingInvitations?: UserCreateManyWithoutPendingInvitationsInput | null
+  chats?: ChatCreateManyWithoutMembersInput | null
   deleted?: Boolean | null
   provider?: SocialMediaType | null
   avatar?: String | null
   thirdPartyId?: String | null
-  friends?: UserCreateManyInput | null
-  pendingInvitations?: UserCreateManyInput | null
+}
+
+export interface UserCreateWithoutPendingInvitationsInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties?: PartyCreateManyWithoutMembersInput | null
+  friends?: UserCreateManyWithoutFriendsInput | null
   chats?: ChatCreateManyWithoutMembersInput | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
 }
 
 export interface UserScalarWhereInput {
-  AND?: UserScalarWhereInput[] | UserScalarWhereInput | null
-  OR?: UserScalarWhereInput[] | UserScalarWhereInput | null
-  NOT?: UserScalarWhereInput[] | UserScalarWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -4998,17 +3507,20 @@ export interface UserScalarWhereInput {
   thirdPartyId_not_starts_with?: String | null
   thirdPartyId_ends_with?: String | null
   thirdPartyId_not_ends_with?: String | null
+  AND?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  OR?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  NOT?: UserScalarWhereInput[] | UserScalarWhereInput | null
 }
 
 export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
   mutation_in?: MutationType[] | MutationType | null
   updatedFields_contains?: String | null
   updatedFields_contains_every?: String[] | String | null
   updatedFields_contains_some?: String[] | String | null
   node?: UserWhereInput | null
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
 }
 
 export interface UserUpdateDataInput {
@@ -5016,14 +3528,14 @@ export interface UserUpdateDataInput {
   firstName?: String | null
   lastName?: String | null
   password?: String | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyWithoutFriendsInput | null
+  pendingInvitations?: UserUpdateManyWithoutPendingInvitationsInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
   deleted?: Boolean | null
   provider?: SocialMediaType | null
   avatar?: String | null
   thirdPartyId?: String | null
-  parties?: PartyUpdateManyWithoutMembersInput | null
-  friends?: UserUpdateManyInput | null
-  pendingInvitations?: UserUpdateManyInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
 export interface UserUpdateInput {
@@ -5031,14 +3543,14 @@ export interface UserUpdateInput {
   firstName?: String | null
   lastName?: String | null
   password?: String | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyWithoutFriendsInput | null
+  pendingInvitations?: UserUpdateManyWithoutPendingInvitationsInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
   deleted?: Boolean | null
   provider?: SocialMediaType | null
   avatar?: String | null
   thirdPartyId?: String | null
-  parties?: PartyUpdateManyWithoutMembersInput | null
-  friends?: UserUpdateManyInput | null
-  pendingInvitations?: UserUpdateManyInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
 export interface UserUpdateManyDataInput {
@@ -5050,18 +3562,6 @@ export interface UserUpdateManyDataInput {
   provider?: SocialMediaType | null
   avatar?: String | null
   thirdPartyId?: String | null
-}
-
-export interface UserUpdateManyInput {
-  create?: UserCreateInput[] | UserCreateInput | null
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  update?: UserUpdateWithWhereUniqueNestedInput[] | UserUpdateWithWhereUniqueNestedInput | null
-  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
-  upsert?: UserUpsertWithWhereUniqueNestedInput[] | UserUpsertWithWhereUniqueNestedInput | null
 }
 
 export interface UserUpdateManyMutationInput {
@@ -5077,26 +3577,50 @@ export interface UserUpdateManyMutationInput {
 
 export interface UserUpdateManyWithoutChatsInput {
   create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
   connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
   set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
   disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
   update?: UserUpdateWithWhereUniqueWithoutChatsInput[] | UserUpdateWithWhereUniqueWithoutChatsInput | null
-  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
   upsert?: UserUpsertWithWhereUniqueWithoutChatsInput[] | UserUpsertWithWhereUniqueWithoutChatsInput | null
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
+}
+
+export interface UserUpdateManyWithoutFriendsInput {
+  create?: UserCreateWithoutFriendsInput[] | UserCreateWithoutFriendsInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutFriendsInput[] | UserUpdateWithWhereUniqueWithoutFriendsInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutFriendsInput[] | UserUpsertWithWhereUniqueWithoutFriendsInput | null
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
 }
 
 export interface UserUpdateManyWithoutPartiesInput {
   create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
   connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
   set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
   disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
   update?: UserUpdateWithWhereUniqueWithoutPartiesInput[] | UserUpdateWithWhereUniqueWithoutPartiesInput | null
-  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
   upsert?: UserUpsertWithWhereUniqueWithoutPartiesInput[] | UserUpsertWithWhereUniqueWithoutPartiesInput | null
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
+}
+
+export interface UserUpdateManyWithoutPendingInvitationsInput {
+  create?: UserCreateWithoutPendingInvitationsInput[] | UserCreateWithoutPendingInvitationsInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutPendingInvitationsInput[] | UserUpdateWithWhereUniqueWithoutPendingInvitationsInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutPendingInvitationsInput[] | UserUpsertWithWhereUniqueWithoutPendingInvitationsInput | null
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
 }
 
 export interface UserUpdateManyWithWhereNestedInput {
@@ -5106,9 +3630,9 @@ export interface UserUpdateManyWithWhereNestedInput {
 
 export interface UserUpdateOneRequiredInput {
   create?: UserCreateInput | null
-  connect?: UserWhereUniqueInput | null
   update?: UserUpdateDataInput | null
   upsert?: UserUpsertNestedInput | null
+  connect?: UserWhereUniqueInput | null
 }
 
 export interface UserUpdateWithoutChatsDataInput {
@@ -5116,13 +3640,27 @@ export interface UserUpdateWithoutChatsDataInput {
   firstName?: String | null
   lastName?: String | null
   password?: String | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyWithoutFriendsInput | null
+  pendingInvitations?: UserUpdateManyWithoutPendingInvitationsInput | null
   deleted?: Boolean | null
   provider?: SocialMediaType | null
   avatar?: String | null
   thirdPartyId?: String | null
+}
+
+export interface UserUpdateWithoutFriendsDataInput {
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
   parties?: PartyUpdateManyWithoutMembersInput | null
-  friends?: UserUpdateManyInput | null
-  pendingInvitations?: UserUpdateManyInput | null
+  pendingInvitations?: UserUpdateManyWithoutPendingInvitationsInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
 }
 
 export interface UserUpdateWithoutPartiesDataInput {
@@ -5130,18 +3668,27 @@ export interface UserUpdateWithoutPartiesDataInput {
   firstName?: String | null
   lastName?: String | null
   password?: String | null
+  friends?: UserUpdateManyWithoutFriendsInput | null
+  pendingInvitations?: UserUpdateManyWithoutPendingInvitationsInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
   deleted?: Boolean | null
   provider?: SocialMediaType | null
   avatar?: String | null
   thirdPartyId?: String | null
-  friends?: UserUpdateManyInput | null
-  pendingInvitations?: UserUpdateManyInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
-export interface UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateDataInput
+export interface UserUpdateWithoutPendingInvitationsDataInput {
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyWithoutFriendsInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
 }
 
 export interface UserUpdateWithWhereUniqueWithoutChatsInput {
@@ -5149,18 +3696,22 @@ export interface UserUpdateWithWhereUniqueWithoutChatsInput {
   data: UserUpdateWithoutChatsDataInput
 }
 
+export interface UserUpdateWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutFriendsDataInput
+}
+
 export interface UserUpdateWithWhereUniqueWithoutPartiesInput {
   where: UserWhereUniqueInput
   data: UserUpdateWithoutPartiesDataInput
 }
 
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput
-  create: UserCreateInput
+export interface UserUpdateWithWhereUniqueWithoutPendingInvitationsInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutPendingInvitationsDataInput
 }
 
-export interface UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput
+export interface UserUpsertNestedInput {
   update: UserUpdateDataInput
   create: UserCreateInput
 }
@@ -5171,16 +3722,25 @@ export interface UserUpsertWithWhereUniqueWithoutChatsInput {
   create: UserCreateWithoutChatsInput
 }
 
+export interface UserUpsertWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutFriendsDataInput
+  create: UserCreateWithoutFriendsInput
+}
+
 export interface UserUpsertWithWhereUniqueWithoutPartiesInput {
   where: UserWhereUniqueInput
   update: UserUpdateWithoutPartiesDataInput
   create: UserCreateWithoutPartiesInput
 }
 
+export interface UserUpsertWithWhereUniqueWithoutPendingInvitationsInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutPendingInvitationsDataInput
+  create: UserCreateWithoutPendingInvitationsInput
+}
+
 export interface UserWhereInput {
-  AND?: UserWhereInput[] | UserWhereInput | null
-  OR?: UserWhereInput[] | UserWhereInput | null
-  NOT?: UserWhereInput[] | UserWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -5251,6 +3811,18 @@ export interface UserWhereInput {
   password_not_starts_with?: String | null
   password_ends_with?: String | null
   password_not_ends_with?: String | null
+  parties_every?: PartyWhereInput | null
+  parties_some?: PartyWhereInput | null
+  parties_none?: PartyWhereInput | null
+  friends_every?: UserWhereInput | null
+  friends_some?: UserWhereInput | null
+  friends_none?: UserWhereInput | null
+  pendingInvitations_every?: UserWhereInput | null
+  pendingInvitations_some?: UserWhereInput | null
+  pendingInvitations_none?: UserWhereInput | null
+  chats_every?: ChatWhereInput | null
+  chats_some?: ChatWhereInput | null
+  chats_none?: ChatWhereInput | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -5301,18 +3873,9 @@ export interface UserWhereInput {
   thirdPartyId_not_starts_with?: String | null
   thirdPartyId_ends_with?: String | null
   thirdPartyId_not_ends_with?: String | null
-  parties_every?: PartyWhereInput | null
-  parties_some?: PartyWhereInput | null
-  parties_none?: PartyWhereInput | null
-  friends_every?: UserWhereInput | null
-  friends_some?: UserWhereInput | null
-  friends_none?: UserWhereInput | null
-  pendingInvitations_every?: UserWhereInput | null
-  pendingInvitations_some?: UserWhereInput | null
-  pendingInvitations_none?: UserWhereInput | null
-  chats_every?: ChatWhereInput | null
-  chats_some?: ChatWhereInput | null
-  chats_none?: ChatWhereInput | null
+  AND?: UserWhereInput[] | UserWhereInput | null
+  OR?: UserWhereInput[] | UserWhereInput | null
+  NOT?: UserWhereInput[] | UserWhereInput | null
 }
 
 export interface UserWhereUniqueInput {
@@ -5320,10 +3883,6 @@ export interface UserWhereUniqueInput {
   email?: String | null
 }
 
-/*
- * An object with an ID
-
- */
 export interface Node {
   id: ID_Output
 }
@@ -5356,7 +3915,7 @@ export interface BatchPayload {
   count: Long
 }
 
-export interface Chat extends Node {
+export interface Chat {
   id: ID_Output
   party: Party
   members?: Array<User> | null
@@ -5365,20 +3924,12 @@ export interface Chat extends Node {
   updatedAt: DateTime
 }
 
-/*
- * A connection to a list of items.
-
- */
 export interface ChatConnection {
   pageInfo: PageInfo
   edges: Array<ChatEdge | null>
   aggregate: AggregateChat
 }
 
-/*
- * An edge in a connection.
-
- */
 export interface ChatEdge {
   node: Chat
   cursor: String
@@ -5397,7 +3948,7 @@ export interface ChatSubscriptionPayload {
   previousValues?: ChatPreviousValues | null
 }
 
-export interface Game extends Node {
+export interface Game {
   id: ID_Output
   title: String
   cover?: String | null
@@ -5406,20 +3957,12 @@ export interface Game extends Node {
   updatedAt: DateTime
 }
 
-/*
- * A connection to a list of items.
-
- */
 export interface GameConnection {
   pageInfo: PageInfo
   edges: Array<GameEdge | null>
   aggregate: AggregateGame
 }
 
-/*
- * An edge in a connection.
-
- */
 export interface GameEdge {
   node: Game
   cursor: String
@@ -5441,27 +3984,19 @@ export interface GameSubscriptionPayload {
   previousValues?: GamePreviousValues | null
 }
 
-export interface Location extends Node {
+export interface Location {
   id: ID_Output
   placeName: String
   latitude: Float
   longitude: Float
 }
 
-/*
- * A connection to a list of items.
-
- */
 export interface LocationConnection {
   pageInfo: PageInfo
   edges: Array<LocationEdge | null>
   aggregate: AggregateLocation
 }
 
-/*
- * An edge in a connection.
-
- */
 export interface LocationEdge {
   node: Location
   cursor: String
@@ -5481,7 +4016,7 @@ export interface LocationSubscriptionPayload {
   previousValues?: LocationPreviousValues | null
 }
 
-export interface Message extends Node {
+export interface Message {
   id: ID_Output
   author: User
   chat: Chat
@@ -5490,20 +4025,12 @@ export interface Message extends Node {
   updatedAt: DateTime
 }
 
-/*
- * A connection to a list of items.
-
- */
 export interface MessageConnection {
   pageInfo: PageInfo
   edges: Array<MessageEdge | null>
   aggregate: AggregateMessage
 }
 
-/*
- * An edge in a connection.
-
- */
 export interface MessageEdge {
   node: Message
   cursor: String
@@ -5523,10 +4050,6 @@ export interface MessageSubscriptionPayload {
   previousValues?: MessagePreviousValues | null
 }
 
-/*
- * Information about pagination in a connection.
-
- */
 export interface PageInfo {
   hasNextPage: Boolean
   hasPreviousPage: Boolean
@@ -5534,7 +4057,7 @@ export interface PageInfo {
   endCursor?: String | null
 }
 
-export interface Party extends Node {
+export interface Party {
   id: ID_Output
   title: String
   description: String
@@ -5550,20 +4073,12 @@ export interface Party extends Node {
   end: DateTime
 }
 
-/*
- * A connection to a list of items.
-
- */
 export interface PartyConnection {
   pageInfo: PageInfo
   edges: Array<PartyEdge | null>
   aggregate: AggregateParty
 }
 
-/*
- * An edge in a connection.
-
- */
 export interface PartyEdge {
   node: Party
   cursor: String
@@ -5588,7 +4103,7 @@ export interface PartySubscriptionPayload {
   previousValues?: PartyPreviousValues | null
 }
 
-export interface User extends Node {
+export interface User {
   id: ID_Output
   email: String
   firstName: String
@@ -5606,20 +4121,12 @@ export interface User extends Node {
   thirdPartyId?: String | null
 }
 
-/*
- * A connection to a list of items.
-
- */
 export interface UserConnection {
   pageInfo: PageInfo
   edges: Array<UserEdge | null>
   aggregate: AggregateUser
 }
 
-/*
- * An edge in a connection.
-
- */
 export interface UserEdge {
   node: User
   cursor: String
@@ -5669,10 +4176,6 @@ The `Int` scalar type represents non-fractional signed whole numeric values. Int
 */
 export type Int = number
 
-/*
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-*/
 export type Long = string
 
 /*

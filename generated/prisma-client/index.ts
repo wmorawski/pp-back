@@ -334,10 +334,10 @@ export type PartyOrderByInput =
   | "colorTint_DESC"
   | "isPublic_ASC"
   | "isPublic_DESC"
-  | "startDate_ASC"
-  | "startDate_DESC"
-  | "endDate_ASC"
-  | "endDate_DESC";
+  | "start_ASC"
+  | "start_DESC"
+  | "end_ASC"
+  | "end_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -629,22 +629,22 @@ export interface PartyWhereInput {
   members_every?: UserWhereInput;
   members_some?: UserWhereInput;
   members_none?: UserWhereInput;
-  startDate?: DateTimeInput;
-  startDate_not?: DateTimeInput;
-  startDate_in?: DateTimeInput[] | DateTimeInput;
-  startDate_not_in?: DateTimeInput[] | DateTimeInput;
-  startDate_lt?: DateTimeInput;
-  startDate_lte?: DateTimeInput;
-  startDate_gt?: DateTimeInput;
-  startDate_gte?: DateTimeInput;
-  endDate?: DateTimeInput;
-  endDate_not?: DateTimeInput;
-  endDate_in?: DateTimeInput[] | DateTimeInput;
-  endDate_not_in?: DateTimeInput[] | DateTimeInput;
-  endDate_lt?: DateTimeInput;
-  endDate_lte?: DateTimeInput;
-  endDate_gt?: DateTimeInput;
-  endDate_gte?: DateTimeInput;
+  start?: DateTimeInput;
+  start_not?: DateTimeInput;
+  start_in?: DateTimeInput[] | DateTimeInput;
+  start_not_in?: DateTimeInput[] | DateTimeInput;
+  start_lt?: DateTimeInput;
+  start_lte?: DateTimeInput;
+  start_gt?: DateTimeInput;
+  start_gte?: DateTimeInput;
+  end?: DateTimeInput;
+  end_not?: DateTimeInput;
+  end_in?: DateTimeInput[] | DateTimeInput;
+  end_not_in?: DateTimeInput[] | DateTimeInput;
+  end_lt?: DateTimeInput;
+  end_lte?: DateTimeInput;
+  end_gt?: DateTimeInput;
+  end_gte?: DateTimeInput;
   AND?: PartyWhereInput[] | PartyWhereInput;
   OR?: PartyWhereInput[] | PartyWhereInput;
   NOT?: PartyWhereInput[] | PartyWhereInput;
@@ -728,8 +728,8 @@ export interface PartyUpdateInput {
   colorTint?: String;
   isPublic?: Boolean;
   members?: UserUpdateManyWithoutPartiesInput;
-  startDate?: DateTimeInput;
-  endDate?: DateTimeInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
 }
 
 export interface PartyUpdateDataInput {
@@ -741,8 +741,8 @@ export interface PartyUpdateDataInput {
   colorTint?: String;
   isPublic?: Boolean;
   members?: UserUpdateManyWithoutPartiesInput;
-  startDate?: DateTimeInput;
-  endDate?: DateTimeInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
 }
 
 export type GameWhereUniqueInput = AtLeastOne<{
@@ -823,8 +823,8 @@ export interface PartyUpdateWithoutMembersDataInput {
   games?: GameUpdateManyInput;
   colorTint?: String;
   isPublic?: Boolean;
-  startDate?: DateTimeInput;
-  endDate?: DateTimeInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
 }
 
 export interface LocationUpdateManyMutationInput {
@@ -944,8 +944,8 @@ export interface PartyCreateInput {
   colorTint: String;
   isPublic?: Boolean;
   members?: UserCreateManyWithoutPartiesInput;
-  startDate?: DateTimeInput;
-  endDate?: DateTimeInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
 }
 
 export interface GameScalarWhereInput {
@@ -1044,8 +1044,8 @@ export interface PartyCreateWithoutMembersInput {
   games?: GameCreateManyInput;
   colorTint: String;
   isPublic?: Boolean;
-  startDate?: DateTimeInput;
-  endDate?: DateTimeInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
 }
 
 export interface GameUpdateManyDataInput {
@@ -1147,22 +1147,22 @@ export interface PartyScalarWhereInput {
   colorTint_not_ends_with?: String;
   isPublic?: Boolean;
   isPublic_not?: Boolean;
-  startDate?: DateTimeInput;
-  startDate_not?: DateTimeInput;
-  startDate_in?: DateTimeInput[] | DateTimeInput;
-  startDate_not_in?: DateTimeInput[] | DateTimeInput;
-  startDate_lt?: DateTimeInput;
-  startDate_lte?: DateTimeInput;
-  startDate_gt?: DateTimeInput;
-  startDate_gte?: DateTimeInput;
-  endDate?: DateTimeInput;
-  endDate_not?: DateTimeInput;
-  endDate_in?: DateTimeInput[] | DateTimeInput;
-  endDate_not_in?: DateTimeInput[] | DateTimeInput;
-  endDate_lt?: DateTimeInput;
-  endDate_lte?: DateTimeInput;
-  endDate_gt?: DateTimeInput;
-  endDate_gte?: DateTimeInput;
+  start?: DateTimeInput;
+  start_not?: DateTimeInput;
+  start_in?: DateTimeInput[] | DateTimeInput;
+  start_not_in?: DateTimeInput[] | DateTimeInput;
+  start_lt?: DateTimeInput;
+  start_lte?: DateTimeInput;
+  start_gt?: DateTimeInput;
+  start_gte?: DateTimeInput;
+  end?: DateTimeInput;
+  end_not?: DateTimeInput;
+  end_in?: DateTimeInput[] | DateTimeInput;
+  end_not_in?: DateTimeInput[] | DateTimeInput;
+  end_lt?: DateTimeInput;
+  end_lte?: DateTimeInput;
+  end_gt?: DateTimeInput;
+  end_gte?: DateTimeInput;
   AND?: PartyScalarWhereInput[] | PartyScalarWhereInput;
   OR?: PartyScalarWhereInput[] | PartyScalarWhereInput;
   NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput;
@@ -1206,8 +1206,8 @@ export interface PartyUpdateManyDataInput {
   description?: String;
   colorTint?: String;
   isPublic?: Boolean;
-  startDate?: DateTimeInput;
-  endDate?: DateTimeInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
 }
 
 export interface GameWhereInput {
@@ -1469,8 +1469,8 @@ export interface PartyUpdateManyMutationInput {
   description?: String;
   colorTint?: String;
   isPublic?: Boolean;
-  startDate?: DateTimeInput;
-  endDate?: DateTimeInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
 }
 
 export interface UserUpdateManyWithoutPendingInvitationsInput {
@@ -2248,8 +2248,8 @@ export interface PartyPreviousValues {
   updatedAt: DateTimeOutput;
   colorTint: String;
   isPublic?: Boolean;
-  startDate: DateTimeOutput;
-  endDate: DateTimeOutput;
+  start: DateTimeOutput;
+  end: DateTimeOutput;
 }
 
 export interface PartyPreviousValuesPromise
@@ -2262,8 +2262,8 @@ export interface PartyPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
   colorTint: () => Promise<String>;
   isPublic: () => Promise<Boolean>;
-  startDate: () => Promise<DateTimeOutput>;
-  endDate: () => Promise<DateTimeOutput>;
+  start: () => Promise<DateTimeOutput>;
+  end: () => Promise<DateTimeOutput>;
 }
 
 export interface PartyPreviousValuesSubscription
@@ -2276,8 +2276,8 @@ export interface PartyPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   colorTint: () => Promise<AsyncIterator<String>>;
   isPublic: () => Promise<AsyncIterator<Boolean>>;
-  startDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  endDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  start: () => Promise<AsyncIterator<DateTimeOutput>>;
+  end: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface AggregateParty {
@@ -3018,8 +3018,8 @@ export interface Party {
   updatedAt: DateTimeOutput;
   colorTint: String;
   isPublic?: Boolean;
-  startDate: DateTimeOutput;
-  endDate: DateTimeOutput;
+  start: DateTimeOutput;
+  end: DateTimeOutput;
 }
 
 export interface PartyPromise extends Promise<Party>, Fragmentable {
@@ -3054,8 +3054,8 @@ export interface PartyPromise extends Promise<Party>, Fragmentable {
       last?: Int;
     }
   ) => T;
-  startDate: () => Promise<DateTimeOutput>;
-  endDate: () => Promise<DateTimeOutput>;
+  start: () => Promise<DateTimeOutput>;
+  end: () => Promise<DateTimeOutput>;
 }
 
 export interface PartySubscription
@@ -3092,8 +3092,8 @@ export interface PartySubscription
       last?: Int;
     }
   ) => T;
-  startDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  endDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  start: () => Promise<AsyncIterator<DateTimeOutput>>;
+  end: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface MessageConnection {

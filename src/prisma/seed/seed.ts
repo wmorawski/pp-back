@@ -1,7 +1,7 @@
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { prisma } from '../../../generated/prisma-client';
-import { compose, filter, map } from 'ramda';
+import { compose, filter } from 'ramda';
 import { parse, addHours } from 'date-fns';
 
 const USERS_NUM = 50;
@@ -61,8 +61,8 @@ const createFakeParty = (author: any, members: any[]) => {
         longitude: parseFloat(faker.address.longitude()),
       },
     },
-    startDate: partyStartDate,
-    endDate: partyEndDate,
+    start: partyStartDate,
+    end: partyEndDate,
     colorTint: faker.random.arrayElement(calendarTintsHexArray),
   };
 };

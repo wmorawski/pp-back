@@ -963,8 +963,8 @@ type Party {
   colorTint: String!
   isPublic: Boolean
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  startDate: DateTime!
-  endDate: DateTime!
+  start: DateTime!
+  end: DateTime!
 }
 
 type PartyConnection {
@@ -982,8 +982,8 @@ input PartyCreateInput {
   colorTint: String!
   isPublic: Boolean
   members: UserCreateManyWithoutPartiesInput
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyCreateManyWithoutMembersInput {
@@ -1004,8 +1004,8 @@ input PartyCreateWithoutMembersInput {
   games: GameCreateManyInput
   colorTint: String!
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 type PartyEdge {
@@ -1028,10 +1028,10 @@ enum PartyOrderByInput {
   colorTint_DESC
   isPublic_ASC
   isPublic_DESC
-  startDate_ASC
-  startDate_DESC
-  endDate_ASC
-  endDate_DESC
+  start_ASC
+  start_DESC
+  end_ASC
+  end_DESC
 }
 
 type PartyPreviousValues {
@@ -1042,8 +1042,8 @@ type PartyPreviousValues {
   updatedAt: DateTime!
   colorTint: String!
   isPublic: Boolean
-  startDate: DateTime!
-  endDate: DateTime!
+  start: DateTime!
+  end: DateTime!
 }
 
 input PartyScalarWhereInput {
@@ -1121,22 +1121,22 @@ input PartyScalarWhereInput {
   colorTint_not_ends_with: String
   isPublic: Boolean
   isPublic_not: Boolean
-  startDate: DateTime
-  startDate_not: DateTime
-  startDate_in: [DateTime!]
-  startDate_not_in: [DateTime!]
-  startDate_lt: DateTime
-  startDate_lte: DateTime
-  startDate_gt: DateTime
-  startDate_gte: DateTime
-  endDate: DateTime
-  endDate_not: DateTime
-  endDate_in: [DateTime!]
-  endDate_not_in: [DateTime!]
-  endDate_lt: DateTime
-  endDate_lte: DateTime
-  endDate_gt: DateTime
-  endDate_gte: DateTime
+  start: DateTime
+  start_not: DateTime
+  start_in: [DateTime!]
+  start_not_in: [DateTime!]
+  start_lt: DateTime
+  start_lte: DateTime
+  start_gt: DateTime
+  start_gte: DateTime
+  end: DateTime
+  end_not: DateTime
+  end_in: [DateTime!]
+  end_not_in: [DateTime!]
+  end_lt: DateTime
+  end_lte: DateTime
+  end_gt: DateTime
+  end_gte: DateTime
   AND: [PartyScalarWhereInput!]
   OR: [PartyScalarWhereInput!]
   NOT: [PartyScalarWhereInput!]
@@ -1169,8 +1169,8 @@ input PartyUpdateDataInput {
   colorTint: String
   isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateInput {
@@ -1182,8 +1182,8 @@ input PartyUpdateInput {
   colorTint: String
   isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateManyDataInput {
@@ -1191,8 +1191,8 @@ input PartyUpdateManyDataInput {
   description: String
   colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateManyMutationInput {
@@ -1200,8 +1200,8 @@ input PartyUpdateManyMutationInput {
   description: String
   colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateManyWithoutMembersInput {
@@ -1236,8 +1236,8 @@ input PartyUpdateWithoutMembersDataInput {
   games: GameUpdateManyInput
   colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -1339,22 +1339,22 @@ input PartyWhereInput {
   members_every: UserWhereInput
   members_some: UserWhereInput
   members_none: UserWhereInput
-  startDate: DateTime
-  startDate_not: DateTime
-  startDate_in: [DateTime!]
-  startDate_not_in: [DateTime!]
-  startDate_lt: DateTime
-  startDate_lte: DateTime
-  startDate_gt: DateTime
-  startDate_gte: DateTime
-  endDate: DateTime
-  endDate_not: DateTime
-  endDate_in: [DateTime!]
-  endDate_not_in: [DateTime!]
-  endDate_lt: DateTime
-  endDate_lte: DateTime
-  endDate_gt: DateTime
-  endDate_gte: DateTime
+  start: DateTime
+  start_not: DateTime
+  start_in: [DateTime!]
+  start_not_in: [DateTime!]
+  start_lt: DateTime
+  start_lte: DateTime
+  start_gt: DateTime
+  start_gte: DateTime
+  end: DateTime
+  end_not: DateTime
+  end_in: [DateTime!]
+  end_not_in: [DateTime!]
+  end_lt: DateTime
+  end_lte: DateTime
+  end_gt: DateTime
+  end_gte: DateTime
   AND: [PartyWhereInput!]
   OR: [PartyWhereInput!]
   NOT: [PartyWhereInput!]

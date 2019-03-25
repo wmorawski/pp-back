@@ -1809,8 +1809,8 @@ type Party implements Node {
   colorTint: String!
   isPublic: Boolean
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  startDate: DateTime!
-  endDate: DateTime!
+  start: DateTime!
+  end: DateTime!
 }
 
 """A connection to a list of items."""
@@ -1829,8 +1829,8 @@ input PartyCreateInput {
   description: String!
   colorTint: String!
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -1853,8 +1853,8 @@ input PartyCreateWithoutMembersInput {
   description: String!
   colorTint: String!
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -1884,10 +1884,10 @@ enum PartyOrderByInput {
   colorTint_DESC
   isPublic_ASC
   isPublic_DESC
-  startDate_ASC
-  startDate_DESC
-  endDate_ASC
-  endDate_DESC
+  start_ASC
+  start_DESC
+  end_ASC
+  end_DESC
 }
 
 type PartyPreviousValues {
@@ -1898,8 +1898,8 @@ type PartyPreviousValues {
   updatedAt: DateTime!
   colorTint: String!
   isPublic: Boolean
-  startDate: DateTime!
-  endDate: DateTime!
+  start: DateTime!
+  end: DateTime!
 }
 
 input PartyScalarWhereInput {
@@ -2119,50 +2119,50 @@ input PartyScalarWhereInput {
 
   """All values that are not equal to given value."""
   isPublic_not: Boolean
-  startDate: DateTime
+  start: DateTime
 
   """All values that are not equal to given value."""
-  startDate_not: DateTime
+  start_not: DateTime
 
   """All values that are contained in given list."""
-  startDate_in: [DateTime!]
+  start_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  startDate_not_in: [DateTime!]
+  start_not_in: [DateTime!]
 
   """All values less than the given value."""
-  startDate_lt: DateTime
+  start_lt: DateTime
 
   """All values less than or equal the given value."""
-  startDate_lte: DateTime
+  start_lte: DateTime
 
   """All values greater than the given value."""
-  startDate_gt: DateTime
+  start_gt: DateTime
 
   """All values greater than or equal the given value."""
-  startDate_gte: DateTime
-  endDate: DateTime
+  start_gte: DateTime
+  end: DateTime
 
   """All values that are not equal to given value."""
-  endDate_not: DateTime
+  end_not: DateTime
 
   """All values that are contained in given list."""
-  endDate_in: [DateTime!]
+  end_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  endDate_not_in: [DateTime!]
+  end_not_in: [DateTime!]
 
   """All values less than the given value."""
-  endDate_lt: DateTime
+  end_lt: DateTime
 
   """All values less than or equal the given value."""
-  endDate_lte: DateTime
+  end_lte: DateTime
 
   """All values greater than the given value."""
-  endDate_gt: DateTime
+  end_gt: DateTime
 
   """All values greater than or equal the given value."""
-  endDate_gte: DateTime
+  end_gte: DateTime
 }
 
 type PartySubscriptionPayload {
@@ -2209,8 +2209,8 @@ input PartyUpdateDataInput {
   description: String
   colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2222,8 +2222,8 @@ input PartyUpdateInput {
   description: String
   colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2235,8 +2235,8 @@ input PartyUpdateManyDataInput {
   description: String
   colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateManyMutationInput {
@@ -2244,8 +2244,8 @@ input PartyUpdateManyMutationInput {
   description: String
   colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 input PartyUpdateManyWithoutMembersInput {
@@ -2277,8 +2277,8 @@ input PartyUpdateWithoutMembersDataInput {
   description: String
   colorTint: String
   isPublic: Boolean
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
   games: GameUpdateManyInput
@@ -2517,50 +2517,50 @@ input PartyWhereInput {
 
   """All values that are not equal to given value."""
   isPublic_not: Boolean
-  startDate: DateTime
+  start: DateTime
 
   """All values that are not equal to given value."""
-  startDate_not: DateTime
+  start_not: DateTime
 
   """All values that are contained in given list."""
-  startDate_in: [DateTime!]
+  start_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  startDate_not_in: [DateTime!]
+  start_not_in: [DateTime!]
 
   """All values less than the given value."""
-  startDate_lt: DateTime
+  start_lt: DateTime
 
   """All values less than or equal the given value."""
-  startDate_lte: DateTime
+  start_lte: DateTime
 
   """All values greater than the given value."""
-  startDate_gt: DateTime
+  start_gt: DateTime
 
   """All values greater than or equal the given value."""
-  startDate_gte: DateTime
-  endDate: DateTime
+  start_gte: DateTime
+  end: DateTime
 
   """All values that are not equal to given value."""
-  endDate_not: DateTime
+  end_not: DateTime
 
   """All values that are contained in given list."""
-  endDate_in: [DateTime!]
+  end_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  endDate_not_in: [DateTime!]
+  end_not_in: [DateTime!]
 
   """All values less than the given value."""
-  endDate_lt: DateTime
+  end_lt: DateTime
 
   """All values less than or equal the given value."""
-  endDate_lte: DateTime
+  end_lte: DateTime
 
   """All values greater than the given value."""
-  endDate_gt: DateTime
+  end_gt: DateTime
 
   """All values greater than or equal the given value."""
-  endDate_gte: DateTime
+  end_gte: DateTime
   author: UserWhereInput
   location: LocationWhereInput
   games_every: GameWhereInput
@@ -3750,10 +3750,10 @@ export type PartyOrderByInput =   'id_ASC' |
   'colorTint_DESC' |
   'isPublic_ASC' |
   'isPublic_DESC' |
-  'startDate_ASC' |
-  'startDate_DESC' |
-  'endDate_ASC' |
-  'endDate_DESC'
+  'start_ASC' |
+  'start_DESC' |
+  'end_ASC' |
+  'end_DESC'
 
 export type SocialMediaType =   'FACEBOOK' |
   'SPOTIFY' |
@@ -4466,8 +4466,8 @@ export interface PartyCreateInput {
   description: String
   colorTint: String
   isPublic?: Boolean | null
-  startDate?: DateTime | null
-  endDate?: DateTime | null
+  start?: DateTime | null
+  end?: DateTime | null
   author: UserCreateOneInput
   location: LocationCreateOneInput
   games?: GameCreateManyInput | null
@@ -4490,8 +4490,8 @@ export interface PartyCreateWithoutMembersInput {
   description: String
   colorTint: String
   isPublic?: Boolean | null
-  startDate?: DateTime | null
-  endDate?: DateTime | null
+  start?: DateTime | null
+  end?: DateTime | null
   author: UserCreateOneInput
   location: LocationCreateOneInput
   games?: GameCreateManyInput | null
@@ -4575,22 +4575,22 @@ export interface PartyScalarWhereInput {
   colorTint_not_ends_with?: String | null
   isPublic?: Boolean | null
   isPublic_not?: Boolean | null
-  startDate?: DateTime | null
-  startDate_not?: DateTime | null
-  startDate_in?: DateTime[] | DateTime | null
-  startDate_not_in?: DateTime[] | DateTime | null
-  startDate_lt?: DateTime | null
-  startDate_lte?: DateTime | null
-  startDate_gt?: DateTime | null
-  startDate_gte?: DateTime | null
-  endDate?: DateTime | null
-  endDate_not?: DateTime | null
-  endDate_in?: DateTime[] | DateTime | null
-  endDate_not_in?: DateTime[] | DateTime | null
-  endDate_lt?: DateTime | null
-  endDate_lte?: DateTime | null
-  endDate_gt?: DateTime | null
-  endDate_gte?: DateTime | null
+  start?: DateTime | null
+  start_not?: DateTime | null
+  start_in?: DateTime[] | DateTime | null
+  start_not_in?: DateTime[] | DateTime | null
+  start_lt?: DateTime | null
+  start_lte?: DateTime | null
+  start_gt?: DateTime | null
+  start_gte?: DateTime | null
+  end?: DateTime | null
+  end_not?: DateTime | null
+  end_in?: DateTime[] | DateTime | null
+  end_not_in?: DateTime[] | DateTime | null
+  end_lt?: DateTime | null
+  end_lte?: DateTime | null
+  end_gt?: DateTime | null
+  end_gte?: DateTime | null
 }
 
 export interface PartySubscriptionWhereInput {
@@ -4609,8 +4609,8 @@ export interface PartyUpdateDataInput {
   description?: String | null
   colorTint?: String | null
   isPublic?: Boolean | null
-  startDate?: DateTime | null
-  endDate?: DateTime | null
+  start?: DateTime | null
+  end?: DateTime | null
   author?: UserUpdateOneRequiredInput | null
   location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
@@ -4622,8 +4622,8 @@ export interface PartyUpdateInput {
   description?: String | null
   colorTint?: String | null
   isPublic?: Boolean | null
-  startDate?: DateTime | null
-  endDate?: DateTime | null
+  start?: DateTime | null
+  end?: DateTime | null
   author?: UserUpdateOneRequiredInput | null
   location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
@@ -4635,8 +4635,8 @@ export interface PartyUpdateManyDataInput {
   description?: String | null
   colorTint?: String | null
   isPublic?: Boolean | null
-  startDate?: DateTime | null
-  endDate?: DateTime | null
+  start?: DateTime | null
+  end?: DateTime | null
 }
 
 export interface PartyUpdateManyMutationInput {
@@ -4644,8 +4644,8 @@ export interface PartyUpdateManyMutationInput {
   description?: String | null
   colorTint?: String | null
   isPublic?: Boolean | null
-  startDate?: DateTime | null
-  endDate?: DateTime | null
+  start?: DateTime | null
+  end?: DateTime | null
 }
 
 export interface PartyUpdateManyWithoutMembersInput {
@@ -4677,8 +4677,8 @@ export interface PartyUpdateWithoutMembersDataInput {
   description?: String | null
   colorTint?: String | null
   isPublic?: Boolean | null
-  startDate?: DateTime | null
-  endDate?: DateTime | null
+  start?: DateTime | null
+  end?: DateTime | null
   author?: UserUpdateOneRequiredInput | null
   location?: LocationUpdateOneRequiredInput | null
   games?: GameUpdateManyInput | null
@@ -4778,22 +4778,22 @@ export interface PartyWhereInput {
   colorTint_not_ends_with?: String | null
   isPublic?: Boolean | null
   isPublic_not?: Boolean | null
-  startDate?: DateTime | null
-  startDate_not?: DateTime | null
-  startDate_in?: DateTime[] | DateTime | null
-  startDate_not_in?: DateTime[] | DateTime | null
-  startDate_lt?: DateTime | null
-  startDate_lte?: DateTime | null
-  startDate_gt?: DateTime | null
-  startDate_gte?: DateTime | null
-  endDate?: DateTime | null
-  endDate_not?: DateTime | null
-  endDate_in?: DateTime[] | DateTime | null
-  endDate_not_in?: DateTime[] | DateTime | null
-  endDate_lt?: DateTime | null
-  endDate_lte?: DateTime | null
-  endDate_gt?: DateTime | null
-  endDate_gte?: DateTime | null
+  start?: DateTime | null
+  start_not?: DateTime | null
+  start_in?: DateTime[] | DateTime | null
+  start_not_in?: DateTime[] | DateTime | null
+  start_lt?: DateTime | null
+  start_lte?: DateTime | null
+  start_gt?: DateTime | null
+  start_gte?: DateTime | null
+  end?: DateTime | null
+  end_not?: DateTime | null
+  end_in?: DateTime[] | DateTime | null
+  end_not_in?: DateTime[] | DateTime | null
+  end_lt?: DateTime | null
+  end_lte?: DateTime | null
+  end_gt?: DateTime | null
+  end_gte?: DateTime | null
   author?: UserWhereInput | null
   location?: LocationWhereInput | null
   games_every?: GameWhereInput | null
@@ -5546,8 +5546,8 @@ export interface Party extends Node {
   colorTint: String
   isPublic?: Boolean | null
   members?: Array<User> | null
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 /*
@@ -5577,8 +5577,8 @@ export interface PartyPreviousValues {
   updatedAt: DateTime
   colorTint: String
   isPublic?: Boolean | null
-  startDate: DateTime
-  endDate: DateTime
+  start: DateTime
+  end: DateTime
 }
 
 export interface PartySubscriptionPayload {

@@ -2,7 +2,18 @@
   "name": "partyplannerio-backend",
   "version": "0.1.0",
   "description": "REST and GraphQL API for PartyPlanner.io",
-  "license": "BSD",
+  "license": "SEE LICENSE IN LICENSE.MD",
+  "contributors": [
+      {
+          "name": "Wiktor Morawski"
+      },
+      {
+          "name": "Eryk Miszczuk"
+      },
+      {
+          "name": "Wojciech Matuszewski"
+      }
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

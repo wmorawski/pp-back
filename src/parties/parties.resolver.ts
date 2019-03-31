@@ -37,4 +37,11 @@ export class PartiesResolver {
   async Parties(@Args() args, @Info() info): Promise<Party[]> {
     return await this.prisma.query.parties(args, info);
   }
+  @Query('partiesConnection')
+  async PartiesConnection(
+    @Args() args,
+    @Info() info,
+  ): Promise<PartyConnection> {
+    return await this.prisma.query.partiesConnection(args, info);
+  }
 }

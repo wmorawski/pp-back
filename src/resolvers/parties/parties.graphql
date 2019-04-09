@@ -8,6 +8,15 @@ type Query {
     first: Int
     last: Int
   ): [Party]!
+  partiesConnection(
+    where: PartyWhereInput
+    orderBy: PartyOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PartyConnection!
 }
 
 type Mutation {

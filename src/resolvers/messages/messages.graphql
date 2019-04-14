@@ -9,3 +9,7 @@ type Query {
     last: Int
   ): MessageConnection!
 }
+
+type Mutation {
+  createMessage(data: MessageCreateInput!): Message!
+}

@@ -18,6 +18,10 @@ import { PrismaModule } from './prisma/prisma.module';
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
       context: ({ req }) => ({ req }),
+      installSubscriptionHandlers: true,
+      resolverValidationOptions: {
+        requireResolversForResolveType: false,
+      },
     }),
     PrismaModule,
     PartiesModule,

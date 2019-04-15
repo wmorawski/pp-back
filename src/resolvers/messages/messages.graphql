@@ -13,3 +13,7 @@ type Query {
 type Mutation {
   createMessage(data: MessageCreateInput!): Message!
 }
+
+type Subscription {
+  message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+}

@@ -1,0 +1,19 @@
+type Query {
+  messagesConnection(
+    where: MessageWhereInput
+    orderBy: MessageOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): MessageConnection!
+}
+
+type Mutation {
+  createMessage(data: MessageCreateInput!): Message!
+}
+
+type Subscription {
+  message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
+}

@@ -9,14 +9,11 @@ import { UsersService } from '../users/users.service';
 import { AuthenticationError } from 'apollo-server-core';
 import { PartiesService } from './parties.service';
 import { CreatePartyPayload } from './parties.types';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Resolver()
 export class PartiesResolver {
-  constructor(
-    private readonly parties: PartiesService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Mutation('createParty')
   async createParty(

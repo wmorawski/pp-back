@@ -24,7 +24,7 @@ export class PartiesResolver {
     await this.prisma.mutation.createChat({
       data: {
         party: { connect: { id: createdParty.id } },
-        members: { connect: args.data!.members.connect },
+        members: { connect: args.data.members.connect },
       },
     });
     return createdParty;

@@ -1,5 +1,5 @@
 import { UserConnection } from './../../generated/prisma-client/index';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import {
   Query,
   Resolver,
@@ -11,7 +11,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
+import { GqlAuthGuard } from '../guards/GqlAuthGuard.guard';
 
 @Resolver()
 export class UsersResolver {

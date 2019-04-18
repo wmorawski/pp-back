@@ -1,22 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-facebook';
 import { ConfigService } from '../../config/config.service';
 import { AuthService, Provider } from '../auth.service';
-import faker = require('faker');
+import { Strategy } from 'passport-twitter';
+import * as faker from 'faker';
 
 @Injectable()
-export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
+export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
   constructor(
     private readonly config: ConfigService,
     private readonly authService: AuthService,
   ) {
     super({
-      clientID: config.getFromEnv('FACEBOOK_APP_ID'), // <- Replace this with your client id
-      clientSecret: config.getFromEnv('FACEBOOK_APP_SECRET'), // <- Replace this with your client secret
-      callbackURL: '/auth/facebook/callback',
+      consumerKey: config.getFromEnv('TWITTER_API_KEY'), // <- Replace this with your client id
+      consumerSecret: config.getFromEnv('TWITTER_API_SECRET'), // <- Replace this with your client secret
+      callbackURL: '/auth/twitter/callback',
       passReqToCallback: true,
-      profileFields: ['id', 'email', 'name', 'photos'],
+      includeEmail: true,
     });
   }
 
@@ -29,17 +29,18 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
   ) {
     try {
       const jwt: string = await this.authService.validateOAuthLogin({
-        thirdPartyId: profile.id,
         email: profile.emails[0].value,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        provider: 'FACEBOOK',
+        lastName: profile.displayName.split(' ')[1],
+        firstName: profile.displayName.split(' ')[0],
+        provider: 'TWITTER',
         password: faker.internet.password(),
         avatar: profile.photos[0].value || null,
+        thirdPartyId: profile.id,
       });
       const user = {
         jwt,
       };
+
       done(null, user);
     } catch (err) {
       // console.log(err)

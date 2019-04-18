@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { ConfigService } from 'src/config/config.service';
+import { ConfigService } from '../../config/config.service';
 import { AuthService, Provider } from '../auth.service';
 import { Strategy } from 'passport-spotify';
 import * as faker from 'faker';
@@ -35,7 +35,7 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
         firstName: profile.displayName.split(' ')[0],
         provider: 'SPOTIFY',
         password: faker.internet.password(),
-        avatar: profile.photos[0] || null,
+        avatar: profile.photos[0].value || null,
         thirdPartyId: profile.id,
       });
       const user = {

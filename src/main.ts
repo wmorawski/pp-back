@@ -2,6 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { join } from 'path';
+import { initialize, serializeUser, deserializeUser} from 'passport';
+import * as session from 'express-session';
+
+require('dotenv').config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +20,18 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
-  await app.listen(4000);
+  app.use(session({
+    secret: '5ed909234ed04409ba2c0034664815b3',
+    resave: true,
+    saveUninitialized: true,
+  }));
+  app.use(initialize());
+  serializeUser((user, done) => {
+    done(null, user);
+  });
+  deserializeUser((user, done) => {
+    done(null, user);
+  });
+  await app.listen(process.env.PORT || 4000);
 }
 bootstrap();

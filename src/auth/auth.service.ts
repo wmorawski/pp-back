@@ -12,9 +12,9 @@ import {
   SignupPayload,
 } from './auth.types';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { User } from 'src/prisma/prisma.binding';
-import { ConfigService } from 'src/config/config.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { User } from '../prisma/prisma.binding';
+import { ConfigService } from '../config/config.service';
 import faker = require('faker');
 
 export enum Provider {
@@ -81,17 +81,13 @@ export class AuthService {
   }
   async validateOAuthLogin(payload: SignupPayload): Promise<string> {
     try {
-      // You can add some registration logic here,
-      // to register the user using their thirdPartyId (in this case their googleId)
-      // let user: IUser = await this.usersService.findOneByThirdPartyId(thirdPartyId, provider);
+      // Something there token doesn't works.
       let user = await this.prisma.query.user({
         where: { email: payload.email },
       });
       if (!user) {
         user = await this.usersService.createUser(payload);
       }
-      // if (!user)
-      // user = await this.usersService.registerOAuthUser(thirdPartyId, provider);
       return this.createToken(user.id);
     } catch (err) {
       throw new InternalServerErrorException('validateOAuthLogin', err.message);

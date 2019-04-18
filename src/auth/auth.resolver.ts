@@ -4,7 +4,7 @@ import { CreateUserDto } from './../users/create-user.dto';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { AuthPayload, LoginPayload, SignupPayload } from './auth.types';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { AuthenticationError } from 'apollo-server-core';
 
 @Resolver()

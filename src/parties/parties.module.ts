@@ -6,6 +6,6 @@ import { PrismaModule } from '../prisma/prisma.module';
 @Module({
   imports: [PrismaModule],
   providers: [PartiesService, PartiesResolver],
-  exports: [PartiesService],
+  exports: [PartiesService, PartiesResolver],
 })
 export class PartiesModule {}

@@ -42,6 +42,7 @@ type ChatConnection {
 }
 
 input ChatCreateInput {
+  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
   messages: MessageCreateManyWithoutChatInput
@@ -58,11 +59,13 @@ input ChatCreateOneWithoutMessagesInput {
 }
 
 input ChatCreateWithoutMembersInput {
+  id: ID
   party: PartyCreateOneInput!
   messages: MessageCreateManyWithoutChatInput
 }
 
 input ChatCreateWithoutMessagesInput {
+  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
 }
@@ -256,6 +259,7 @@ type GameConnection {
 }
 
 input GameCreateInput {
+  id: ID
   title: String!
   cover: String
   type: GameType!
@@ -517,6 +521,8 @@ type Location {
   placeName: String!
   latitude: Float!
   longitude: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type LocationConnection {
@@ -526,6 +532,7 @@ type LocationConnection {
 }
 
 input LocationCreateInput {
+  id: ID
   placeName: String!
   latitude: Float!
   longitude: Float!
@@ -561,6 +568,8 @@ type LocationPreviousValues {
   placeName: String!
   latitude: Float!
   longitude: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type LocationSubscriptionPayload {
@@ -656,6 +665,22 @@ input LocationWhereInput {
   longitude_lte: Float
   longitude_gt: Float
   longitude_gte: Float
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [LocationWhereInput!]
   OR: [LocationWhereInput!]
   NOT: [LocationWhereInput!]
@@ -683,9 +708,15 @@ type MessageConnection {
 }
 
 input MessageCreateInput {
-  author: UserCreateOneInput!
+  id: ID
+  author: UserCreateOneWithoutUnreadMessagesInput!
   chat: ChatCreateOneWithoutMessagesInput!
   content: String!
+}
+
+input MessageCreateManyWithoutAuthorInput {
+  create: [MessageCreateWithoutAuthorInput!]
+  connect: [MessageWhereUniqueInput!]
 }
 
 input MessageCreateManyWithoutChatInput {
@@ -693,8 +724,15 @@ input MessageCreateManyWithoutChatInput {
   connect: [MessageWhereUniqueInput!]
 }
 
+input MessageCreateWithoutAuthorInput {
+  id: ID
+  chat: ChatCreateOneWithoutMessagesInput!
+  content: String!
+}
+
 input MessageCreateWithoutChatInput {
-  author: UserCreateOneInput!
+  id: ID
+  author: UserCreateOneWithoutUnreadMessagesInput!
   content: String!
 }
 
@@ -790,7 +828,7 @@ input MessageSubscriptionWhereInput {
 }
 
 input MessageUpdateInput {
-  author: UserUpdateOneRequiredInput
+  author: UserUpdateOneRequiredWithoutUnreadMessagesInput
   chat: ChatUpdateOneRequiredWithoutMessagesInput
   content: String
 }
@@ -801,6 +839,18 @@ input MessageUpdateManyDataInput {
 
 input MessageUpdateManyMutationInput {
   content: String
+}
+
+input MessageUpdateManyWithoutAuthorInput {
+  create: [MessageCreateWithoutAuthorInput!]
+  delete: [MessageWhereUniqueInput!]
+  connect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutAuthorInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  updateMany: [MessageUpdateManyWithWhereNestedInput!]
 }
 
 input MessageUpdateManyWithoutChatInput {
@@ -820,14 +870,30 @@ input MessageUpdateManyWithWhereNestedInput {
   data: MessageUpdateManyDataInput!
 }
 
-input MessageUpdateWithoutChatDataInput {
-  author: UserUpdateOneRequiredInput
+input MessageUpdateWithoutAuthorDataInput {
+  chat: ChatUpdateOneRequiredWithoutMessagesInput
   content: String
+}
+
+input MessageUpdateWithoutChatDataInput {
+  author: UserUpdateOneRequiredWithoutUnreadMessagesInput
+  content: String
+}
+
+input MessageUpdateWithWhereUniqueWithoutAuthorInput {
+  where: MessageWhereUniqueInput!
+  data: MessageUpdateWithoutAuthorDataInput!
 }
 
 input MessageUpdateWithWhereUniqueWithoutChatInput {
   where: MessageWhereUniqueInput!
   data: MessageUpdateWithoutChatDataInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutAuthorInput {
+  where: MessageWhereUniqueInput!
+  update: MessageUpdateWithoutAuthorDataInput!
+  create: MessageCreateWithoutAuthorInput!
 }
 
 input MessageUpsertWithWhereUniqueWithoutChatInput {
@@ -970,6 +1036,7 @@ type PartyConnection {
 }
 
 input PartyCreateInput {
+  id: ID
   title: String!
   description: String!
   author: UserCreateOneInput!
@@ -993,6 +1060,7 @@ input PartyCreateOneInput {
 }
 
 input PartyCreateWithoutMembersInput {
+  id: ID
   title: String!
   description: String!
   author: UserCreateOneInput!
@@ -1406,9 +1474,11 @@ type User {
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   pendingInvitations(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  unreadMessages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message!]
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
   createdAt: DateTime!
   updatedAt: DateTime!
+  lastOnline: DateTime
   deleted: Boolean!
   provider: SocialMediaType
   avatar: String
@@ -1422,6 +1492,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -1429,7 +1500,9 @@ input UserCreateInput {
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyWithoutFriendsInput
   pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageCreateManyWithoutAuthorInput
   chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1461,7 +1534,13 @@ input UserCreateOneInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutUnreadMessagesInput {
+  create: UserCreateWithoutUnreadMessagesInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateWithoutChatsInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -1469,6 +1548,8 @@ input UserCreateWithoutChatsInput {
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyWithoutFriendsInput
   pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageCreateManyWithoutAuthorInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1476,13 +1557,16 @@ input UserCreateWithoutChatsInput {
 }
 
 input UserCreateWithoutFriendsInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
   password: String!
   parties: PartyCreateManyWithoutMembersInput
   pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageCreateManyWithoutAuthorInput
   chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1490,13 +1574,16 @@ input UserCreateWithoutFriendsInput {
 }
 
 input UserCreateWithoutPartiesInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
   password: String!
   friends: UserCreateManyWithoutFriendsInput
   pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageCreateManyWithoutAuthorInput
   chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1504,13 +1591,33 @@ input UserCreateWithoutPartiesInput {
 }
 
 input UserCreateWithoutPendingInvitationsInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
   password: String!
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyWithoutFriendsInput
+  unreadMessages: MessageCreateManyWithoutAuthorInput
   chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserCreateWithoutUnreadMessagesInput {
+  id: ID
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyWithoutFriendsInput
+  pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1537,6 +1644,8 @@ enum UserOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  lastOnline_ASC
+  lastOnline_DESC
   deleted_ASC
   deleted_DESC
   provider_ASC
@@ -1555,6 +1664,7 @@ type UserPreviousValues {
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  lastOnline: DateTime
   deleted: Boolean!
   provider: SocialMediaType
   avatar: String
@@ -1648,6 +1758,14 @@ input UserScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  lastOnline: DateTime
+  lastOnline_not: DateTime
+  lastOnline_in: [DateTime!]
+  lastOnline_not_in: [DateTime!]
+  lastOnline_lt: DateTime
+  lastOnline_lte: DateTime
+  lastOnline_gt: DateTime
+  lastOnline_gte: DateTime
   deleted: Boolean
   deleted_not: Boolean
   provider: SocialMediaType
@@ -1713,7 +1831,9 @@ input UserUpdateDataInput {
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyWithoutFriendsInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageUpdateManyWithoutAuthorInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1728,7 +1848,9 @@ input UserUpdateInput {
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyWithoutFriendsInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageUpdateManyWithoutAuthorInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1740,6 +1862,7 @@ input UserUpdateManyDataInput {
   firstName: String
   lastName: String
   password: String
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1751,6 +1874,7 @@ input UserUpdateManyMutationInput {
   firstName: String
   lastName: String
   password: String
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1817,6 +1941,13 @@ input UserUpdateOneRequiredInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateOneRequiredWithoutUnreadMessagesInput {
+  create: UserCreateWithoutUnreadMessagesInput
+  update: UserUpdateWithoutUnreadMessagesDataInput
+  upsert: UserUpsertWithoutUnreadMessagesInput
+  connect: UserWhereUniqueInput
+}
+
 input UserUpdateWithoutChatsDataInput {
   email: String
   firstName: String
@@ -1825,6 +1956,8 @@ input UserUpdateWithoutChatsDataInput {
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyWithoutFriendsInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageUpdateManyWithoutAuthorInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1838,7 +1971,9 @@ input UserUpdateWithoutFriendsDataInput {
   password: String
   parties: PartyUpdateManyWithoutMembersInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageUpdateManyWithoutAuthorInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1852,7 +1987,9 @@ input UserUpdateWithoutPartiesDataInput {
   password: String
   friends: UserUpdateManyWithoutFriendsInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  unreadMessages: MessageUpdateManyWithoutAuthorInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1866,7 +2003,25 @@ input UserUpdateWithoutPendingInvitationsDataInput {
   password: String
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyWithoutFriendsInput
+  unreadMessages: MessageUpdateManyWithoutAuthorInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+}
+
+input UserUpdateWithoutUnreadMessagesDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyWithoutFriendsInput
+  pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
@@ -1896,6 +2051,11 @@ input UserUpdateWithWhereUniqueWithoutPendingInvitationsInput {
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
+}
+
+input UserUpsertWithoutUnreadMessagesInput {
+  update: UserUpdateWithoutUnreadMessagesDataInput!
+  create: UserCreateWithoutUnreadMessagesInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutChatsInput {
@@ -2002,6 +2162,9 @@ input UserWhereInput {
   pendingInvitations_every: UserWhereInput
   pendingInvitations_some: UserWhereInput
   pendingInvitations_none: UserWhereInput
+  unreadMessages_every: MessageWhereInput
+  unreadMessages_some: MessageWhereInput
+  unreadMessages_none: MessageWhereInput
   chats_every: ChatWhereInput
   chats_some: ChatWhereInput
   chats_none: ChatWhereInput
@@ -2021,6 +2184,14 @@ input UserWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  lastOnline: DateTime
+  lastOnline_not: DateTime
+  lastOnline_in: [DateTime!]
+  lastOnline_not_in: [DateTime!]
+  lastOnline_lt: DateTime
+  lastOnline_lte: DateTime
+  lastOnline_gt: DateTime
+  lastOnline_gte: DateTime
   deleted: Boolean
   deleted_not: Boolean
   provider: SocialMediaType

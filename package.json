@@ -4,15 +4,15 @@
   "description": "REST and GraphQL API for PartyPlanner.io",
   "license": "SEE LICENSE IN LICENSE.MD",
   "contributors": [
-      {
-          "name": "Wiktor Morawski"
-      },
-      {
-          "name": "Eryk Miszczuk"
-      },
-      {
-          "name": "Wojciech Matuszewski"
-      }
+    {
+      "name": "Wiktor Morawski"
+    },
+    {
+      "name": "Eryk Miszczuk"
+    },
+    {
+      "name": "Wojciech Matuszewski"
+    }
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",

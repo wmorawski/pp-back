@@ -1,9 +1,5 @@
 endpoint: ${env:PRISMA_ENDPOINT}
-# endpoint: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev/pp-back/dev
 datamodel: datamodel.prisma
-# ${env:PRISMA_SECRET} => 5ed909234ed04409ba2c0034664815b3
-# env:PRISMA_SECRET always returned null or undefined
-# ^ have u added it do env variables on your Mac?
 secret: ${env:PRISMA_SECRET}
 
 hooks:
@@ -12,9 +8,7 @@ hooks:
     - graphql codegen --project database
 
 generate:
-  - generator: typescript-client
-    output: ./generated/prisma-client/
   - generator: graphql-schema
-    output: ./src/prisma/
+    output: ./src/prisma/prisma.graphql
 seed:
   run: ts-node ./src/prisma/seed/seed.ts

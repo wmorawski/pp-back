@@ -42,4 +42,8 @@ export class UsersResolver {
   async inviteToFriends(@Args() args, @Info() info): Promise<any> {
     return await this.usersService.inviteToFriends(args, info);
   }
+  @Mutation('updateUser')
+  async updateUser(@Args() args, @Info() info): Promise<User> {
+    return this.prisma.mutation.updateUser(args, info);
+  }
 }

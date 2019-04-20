@@ -29,6 +29,7 @@ type Mutation {
   ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   updateMe(name: String): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   inviteToFriends(sender: ID!, receiver: ID!): User!
 }
 

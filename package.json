@@ -54,6 +54,7 @@
     "fastify": "^2.1.0",
     "google-auth-library": "^3.1.1",
     "graphql": "^14.1.1",
+    "graphql-binding": "^2.5.1",
     "graphql-tools": "^4.0.4",
     "handlebars": "^4.1.1",
     "hbs": "^4.0.3",

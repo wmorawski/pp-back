@@ -12,7 +12,7 @@ import {
   Message,
   UserUpdateManyMutationInput,
 } from 'src/prisma/prisma.binding';
-import { GraphQLResolveInfo } from 'graphql';
+import { addFragmentToInfo } from 'graphql-binding';
 
 @Resolver()
 export class MessagesResolver {
@@ -26,14 +26,11 @@ export class MessagesResolver {
   // TODO: Works but need refactor, send notifications over FireBase
   @Mutation('createMessage')
   async createMessage(@Args() args, @Info() info) {
-    const messageId: Partial<
-      Message
-    > = await this.prisma.mutation.createMessage(
+    const messageWithId = await this.prisma.mutation.createMessage(
       args,
-      `{
-        id
-      }`,
+      addFragmentToInfo(info, 'fragment EnsureId on Message {id}'),
     );
+
     const date = new Date(Date.now() - 60000).toISOString();
     const offline = await this.prisma.query.chat(
       {
@@ -52,7 +49,7 @@ export class MessagesResolver {
         data: {
           unreadMessages: {
             connect: {
-              id: messageId.id,
+              id: messageWithId.id,
             },
           },
         },
@@ -62,18 +59,7 @@ export class MessagesResolver {
       });
     });
 
-    // await this.prisma.mutation.updateManyUsers({
-    //   data: {
-
-    //   },
-    //   where: {
-    //     id_in: offline.members.map(member => member.id)
-    //   }
-    // });
-    return await this.prisma.query.message(
-      { where: { id: messageId.id } },
-      info,
-    );
+    return messageWithId;
   }
   @Subscription('message')
   onUserMutation() {

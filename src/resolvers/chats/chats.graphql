@@ -8,4 +8,5 @@ type Query {
     first: Int
     last: Int
   ): ChatConnection!
+  hasParties: Boolean!
 }

@@ -1,4 +1,3 @@
-import { ID_Input } from './../../generated/prisma-client/index';
 import {
   Resolver,
   Query,
@@ -31,33 +30,7 @@ export class MessagesResolver {
       addFragmentToInfo(info, 'fragment EnsureId on Message {id}'),
     );
 
-    const date = new Date(Date.now() - 60000).toISOString();
-    const offline = await this.prisma.query.chat(
-      {
-        where: {
-          id: args.data.chat.connect.id,
-        },
-      },
-      `{
-      members(where: {lastOnline_lt: "${date}"} ){
-        id
-      }
-    }`,
-    );
-    offline.members.map(async member => {
-      await this.prisma.mutation.updateUser({
-        data: {
-          unreadMessages: {
-            connect: {
-              id: messageWithId.id,
-            },
-          },
-        },
-        where: {
-          id: member.id,
-        },
-      });
-    });
+    // const date = new Date(Date.now() - 60000).toISOString();
 
     return messageWithId;
   }

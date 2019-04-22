@@ -7,7 +7,6 @@ type User {
   parties: [Party!]! @relation(name: "UserParties")
   friends: [User!]! @relation(name: "UserFriends")
   pendingInvitations: [User!]! @relation(name: "PendingFriendInvitations")
-  unreadMessages: [Message!]!
   chats: [Chat!]!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -18,9 +17,19 @@ type User {
   thirdPartyId: String
 }
 
+type Message {
+  id: ID! @id
+  author: User! @relation(name: "MessageAuthor")
+  chat: Chat! @relation(name: "MessagesInChat")
+  content: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
 type Party {
   id: ID! @id
   title: String!
+  normalizedTitle: String!
   description: String!
   author: User! @relation(name: "PartiesByUser")
   createdAt: DateTime! @createdAt
@@ -38,16 +47,7 @@ type Chat {
   id: ID! @id
   party: Party!
   members: [User!]!
-  messages: [Message!]!
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
-
-type Message {
-  id: ID! @id
-  author: User!
-  chat: Chat!
-  content: String!
+  messages: [Message!] @relation(name: "MessagesInChat")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

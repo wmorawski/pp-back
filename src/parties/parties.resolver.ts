@@ -4,12 +4,21 @@ import {
   PartyCreateInput,
 } from '../prisma/prisma.binding';
 import { AuthGuard } from '@nestjs/passport';
-import { Resolver, Args, Mutation, Info, Query } from '@nestjs/graphql';
+import {
+  Resolver,
+  Args,
+  Mutation,
+  Info,
+  Query,
+  Context,
+} from '@nestjs/graphql';
 import { UsersService } from '../users/users.service';
 import { AuthenticationError } from 'apollo-server-core';
 import { PartiesService } from './parties.service';
 import { CreatePartyPayload } from './parties.types';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { GqlAuthGuard } from 'dist/src/guards/GqlAuthGuard.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver()
 export class PartiesResolver {
@@ -33,6 +42,12 @@ export class PartiesResolver {
   @Query('parties')
   async Parties(@Args() args, @Info() info): Promise<Party[]> {
     return await this.prisma.query.parties(args, info);
+  }
+
+  @Query('hasParties')
+  @UseGuards(GqlAuthGuard)
+  async hasParties(@Context() { req }): Promise<boolean> {
+    return this.prisma.exists.Chat({ members_some: { id: req.user.userId } });
   }
   @Query('partiesConnection')
   async PartiesConnection(

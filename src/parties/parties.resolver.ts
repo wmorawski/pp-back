@@ -12,17 +12,15 @@ import {
   Query,
   Context,
 } from '@nestjs/graphql';
-import { UsersService } from '../users/users.service';
-import { AuthenticationError } from 'apollo-server-core';
-import { PartiesService } from './parties.service';
-import { CreatePartyPayload } from './parties.types';
+``;
 import { PrismaService } from 'src/prisma/prisma.service';
-import { GqlAuthGuard } from 'dist/src/guards/GqlAuthGuard.guard';
+
 import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
 
 @Resolver()
 export class PartiesResolver {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   @Mutation('createParty')
   async createParty(
@@ -54,6 +52,7 @@ export class PartiesResolver {
     @Args() args,
     @Info() info,
   ): Promise<PartyConnection> {
+    // throw new Error('something');
     return await this.prisma.query.partiesConnection(args, info);
   }
 }

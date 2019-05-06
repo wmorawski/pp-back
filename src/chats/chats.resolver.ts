@@ -9,4 +9,8 @@ export class ChatsResolver {
   async chatsConnection(@Args() args, @Info() info) {
     return this.prisma.query.chatsConnection(args, info);
   }
+  @Query('chat')
+  async chat(@Args() args, @Info() info) {
+    return this.prisma.query.chat(args, info);
+  }
 }

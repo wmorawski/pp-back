@@ -7,6 +7,11 @@ import {
   Subscription,
 } from '@nestjs/graphql';
 import { PrismaService } from 'src/prisma/prisma.service';
+import {
+  Message,
+  UserUpdateManyMutationInput,
+} from 'src/prisma/prisma.binding';
+import { addFragmentToInfo } from 'graphql-binding';
 
 @Resolver()
 export class MessagesResolver {
@@ -17,9 +22,17 @@ export class MessagesResolver {
     return this.prisma.query.messagesConnection(args, info);
   }
 
+  // TODO: Works but need refactor, send notifications over FireBase
   @Mutation('createMessage')
   async createMessage(@Args() args, @Info() info) {
-    return this.prisma.mutation.createMessage(args, info);
+    const messageWithId = await this.prisma.mutation.createMessage(
+      args,
+      addFragmentToInfo(info, 'fragment EnsureId on Message {id}'),
+    );
+
+    // const date = new Date(Date.now() - 60000).toISOString();
+
+    return messageWithId;
   }
   @Subscription('message')
   onUserMutation() {

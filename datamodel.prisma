@@ -1,5 +1,5 @@
 type User {
-  id: ID! @unique
+  id: ID! @id
   email: String! @unique
   firstName: String!
   lastName: String!
@@ -8,62 +8,66 @@ type User {
   friends: [User!]! @relation(name: "UserFriends")
   pendingInvitations: [User!]! @relation(name: "PendingFriendInvitations")
   chats: [Chat!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deleted: Boolean! @default(value: "false")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  lastOnline: DateTime @default(value: "1970-01-01T00:00:01")
+  deleted: Boolean! @default(value: false)
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
 }
 
+type Message {
+  id: ID! @id
+  author: User! @relation(name: "MessageAuthor")
+  chat: Chat! @relation(name: "MessagesInChat")
+  content: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
 type Party {
-  id: ID! @unique
+  id: ID! @id
   title: String!
+  normalizedTitle: String!
   description: String!
   author: User! @relation(name: "PartiesByUser")
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   location: Location!
   games: [Game!]
   colorTint: String!
-  isPublic: Boolean @default(value: "false")
+  isPublic: Boolean @default(value: false)
   members: [User!]! @relation(name: "UserParties")
   start: DateTime! @default(value: "1970-01-01T00:00:01")
   end: DateTime! @default(value: "1970-01-01T00:00:01")
 }
 
 type Chat {
-  id: ID! @unique
+  id: ID! @id
   party: Party!
   members: [User!]!
-  messages: [Message!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type Message {
-  id: ID! @unique
-  author: User!
-  chat: Chat!
-  content: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  messages: [Message!] @relation(name: "MessagesInChat")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Game {
-  id: ID! @unique
+  id: ID! @id
   title: String! @unique
   cover: String
   type: GameType!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Location {
-  id: ID! @unique
+  id: ID! @id
   placeName: String!
   latitude: Float!
   longitude: Float!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 enum GameType {

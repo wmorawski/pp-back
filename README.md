@@ -24,6 +24,8 @@ $ prisma token # create JWT from secret
 $ prisma generate # generates prisma client with secret
 $ graphql get-schema --project database # downloads schema from prisma servers
 $ graphql codegen --project database # generates prisma-bindings
+$ source development.env
+$ export $(cut -d= -f1 development.env)
 ```
 
 ## Running the app

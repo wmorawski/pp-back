@@ -1,8 +1,10 @@
+import { UserCreateInput } from './../../../dist/generated/prisma-client/index.d';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { prisma } from '../../../generated/prisma-client';
 import { compose, filter } from 'ramda';
 import { parse, addHours } from 'date-fns';
+import { PartyCreateInput } from '../prisma.binding';
 
 const USERS_NUM = 50;
 const PARTIES_NUM = 10;
@@ -39,12 +41,14 @@ const createFakeUser = () => ({
   // same password is better you can always log in on this account :)
   password: bcrypt.hashSync('password', 10),
 });
-const createFakeParty = (author: any, members: any[]) => {
+const createFakeParty = (author: any, members: any[]): PartyCreateInput => {
   const partyStartDate = faker.date.recent();
   // date-fns please write functions that allow curring or composition :C
   const partyEndDate = addHours(parse(partyStartDate), 6);
+  const partyTitle = faker.lorem.slug();
   return {
-    title: faker.lorem.slug(),
+    title: partyTitle,
+    normalizedTitle: partyTitle.toLowerCase(),
     author: {
       connect: {
         id: author.id,
@@ -94,14 +98,14 @@ const getRandomPartyAuthor = (arr: any[]): any =>
 const createFakeChat = (party: any) => ({
   members: party.members,
   messages: {
-    create: Array.from({ length: faker.random.number({ min: 1, max: 3 }) }).map(
-      () => ({
-        author: {
-          connect: faker.random.arrayElement(party.members.connect) as any,
-        },
-        content: faker.lorem.sentences(),
-      }),
-    ),
+    create: Array.from({
+      length: faker.random.number({ min: 20, max: 50 }),
+    }).map(() => ({
+      author: {
+        connect: faker.random.arrayElement(party.members.connect) as any,
+      },
+      content: faker.lorem.sentences(),
+    })),
   },
   party: {
     create: party,

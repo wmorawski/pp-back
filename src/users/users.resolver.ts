@@ -34,12 +34,16 @@ export class UsersResolver {
 
   @Query('me')
   @UseGuards(GqlAuthGuard)
-  async me(@Context() { req }): Promise<User> {
-    return await this.usersService.findOne({ id: req.user.userId });
+  async me(@Context() { req }, @Info() info): Promise<User> {
+    return this.prisma.query.user({ where: { id: req.user.userId } }, info);
   }
   @Mutation('inviteToFriends')
   @UseGuards(GqlAuthGuard)
   async inviteToFriends(@Args() args, @Info() info): Promise<any> {
     return await this.usersService.inviteToFriends(args, info);
+  }
+  @Mutation('updateUser')
+  async updateUser(@Args() args, @Info() info): Promise<User> {
+    return this.prisma.mutation.updateUser(args, info);
   }
 }

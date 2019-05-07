@@ -1,0 +1,12 @@
+type Query {
+  chatsConnection(
+    where: ChatWhereInput
+    orderBy: ChatOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): ChatConnection!
+  hasParties: Boolean!
+}

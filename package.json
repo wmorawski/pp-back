@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "description": "REST and GraphQL API for PartyPlanner.io",
   "license": "SEE LICENSE IN LICENSE.MD",
+  "author": {
+    "name": "Wiktor Morawski"
+  },
   "contributors": [
-    {
-      "name": "Wiktor Morawski"
-    },
     {
       "name": "Eryk Miszczuk"
     },

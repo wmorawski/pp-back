@@ -1,8 +1,8 @@
-Copyright 2019 Wojtek Matuszewski, Wiktor Morawski, Eryk Miszczuk
+Copyright 2019 Wojciech Matuszewski, Wiktor Morawski, Eryk Miszczuk
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
-1. Redistribution in commercial products are prohibited unless copyright owners (Wojtek Matuszewski, Wiktor Morawski, Eryk Miszczuk) gave you written permission.
+1. Redistribution in commercial products are prohibited unless copyright owners (Wojciech Matuszewski, Wiktor Morawski, Eryk Miszczuk) gave you written permission.
 
 2. By leaving the project, the authors hereby transfer all copyrights of the remaining part of the team. They also undertake not to block further work on the project, including the transfer of proprietary copyrights.
 

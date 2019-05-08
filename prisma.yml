@@ -4,7 +4,6 @@ secret: ${env:PRISMA_SECRET}
 
 hooks:
   post-deploy:
-    - prisma generate
     - graphql codegen --project database
 
 generate:

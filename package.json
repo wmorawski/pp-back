@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "description": "REST and GraphQL API for PartyPlanner.io",
   "license": "SEE LICENSE IN LICENSE.MD",
+  "author": {
+    "name": "Wiktor Morawski"
+  },
   "contributors": [
-    {
-      "name": "Wiktor Morawski"
-    },
     {
       "name": "Eryk Miszczuk"
     },
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@nest-middlewares/express-session": "^5.1.1",
+    "@nest-modules/mailer": "^1.1.3",
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
     "@nestjs/graphql": "^5.5.4",

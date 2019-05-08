@@ -1,4 +1,4 @@
-import { UserConnection, prisma } from './../../generated/prisma-client/index';
+import { UserConnection } from './../../generated/prisma-client/index';
 import { UsersService } from '../users/users.service';
 import {
   Query,
@@ -18,6 +18,11 @@ import { promisify } from 'util';
 import { AuthPayload } from 'src/auth/auth.types';
 import { AuthService } from 'src/auth/auth.service';
 import { MailerService } from '@nest-modules/mailer';
+import { GraphQLError } from 'graphql';
+
+function getResetPasswordRoute(resetToken: string) {
+  return `${process.env.WEB_URL}/reset-password?token=${resetToken}`;
+}
 
 @Resolver()
 export class UsersResolver {
@@ -66,63 +71,78 @@ export class UsersResolver {
     }
     const resetToken = (await promisify(randomBytes)(20)).toString('hex');
     const resetTokenExpiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
-    const res = await this.prisma.mutation.updateUser({
+
+    await this.prisma.mutation.updateUser({
       where: {
         email: args.email,
       },
+
       data: {
         resetToken,
         resetTokenExpiry,
       },
     });
+
     try {
       await this.mailerService.sendMail({
         to: args.email,
         from: 'noreply@partyplanner.io',
         subject: 'Party Planner password reset',
-        template: 'resetToken', // The `.pug` or `.hbs` extension is appended automatically.
-        context: {  // Data to be sent to template engine.
-          resetToken,
+        template: 'resetToken',
+        context: {
+          resetPasswordRoute: getResetPasswordRoute(resetToken),
           user,
         },
       });
     } catch (e) {
-      console.log(e);
+      throw new GraphQLError('Could not send e-mail to a given address');
     }
 
     return {
       message: 'Yay!',
     };
+
   }
   @Mutation('resetPassword')
-  async resetPassword(@Args() args, @Info() info): Promise<AuthPayload> {
-    if (args.password != args.confirmPassword) {
+  async resetPassword(@Args() args): Promise<AuthPayload> {
+
+    if (args.password !== args.confirmPassword) {
       throw new Error('Your passwords don\'t match!');
     }
+
     const [user] = await this.prisma.query.users({
       where: {
         resetToken: args.resetToken,
         resetTokenExpiry_gte: new Date(Date.now() - 1000 * 60 * 60 * 24),
       },
     });
+
     if (!user) {
       throw new Error('This token is either invalid or expired');
     }
+
     const password = await this.usersService.getHash(args.password);
-    const updatedUser = await this.prisma.mutation.updateUser({
-      where: {
-        email: user.email,
-      },
-      data: {
-        password,
-        resetToken: null,
-        resetTokenExpiry: null,
-      },
-    });
-    const token = await this.auth.createToken(user.id);
-    return {
-      token,
-      user: updatedUser,
-    };
+
+    try {
+      const updatedUser = await this.prisma.mutation.updateUser({
+        where: {
+          email: user.email,
+        },
+        data: {
+          password,
+          resetToken: null,
+          resetTokenExpiry: null,
+        },
+      });
+      const token = await this.auth.createToken(user.id);
+
+      return {
+        token,
+        user: updatedUser,
+      };
+    } catch (e) {
+      throw new GraphQLError('Could not reset the password');
+    }
+
   }
 }

@@ -8,9 +8,7 @@ import { UsersModule } from './users/users.module';
 import { ChatsModule } from './chats/chats.module';
 import { ConfigService } from './config/config.service';
 import { ConfigModule } from './config/config.module';
-
 import { AuthModule } from './auth/auth.module';
-
 import { PrismaModule } from './prisma/prisma.module';
 import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
 

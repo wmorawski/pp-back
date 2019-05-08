@@ -7,7 +7,9 @@ const TOKEN_EXPIRATION = '2 days';
 export class ConfigService {
   private readonly envConfig: { [key: string]: string };
   private readonly filePath: string;
+
   constructor(filePath: string) {
+
     this.filePath = filePath;
     this.envConfig = fs.existsSync(this.filePath) ? dotenv.parse(fs.readFileSync(filePath)) : {};
   }

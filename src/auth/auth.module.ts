@@ -3,7 +3,7 @@ import { SpotifyStrategy } from './passport/spotify.strategy';
 import { ConfigModule } from './../config/config.module';
 import { GoogleStrategy } from './passport/google.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { Module, MiddlewareConsumer, forwardRef } from '@nestjs/common';
 import { AuthService, Provider } from './auth.service';
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
@@ -26,8 +26,7 @@ import passport = require('passport');
       }),
       inject: [ConfigService],
     }),
-    UsersModule,
-    UsersModule,
+    forwardRef(() => UsersModule),
     ConfigModule,
   ],
   providers: [
@@ -40,5 +39,6 @@ import passport = require('passport');
     TwitterStrategy,
   ],
   controllers: [AuthController],
+  exports: [AuthService],
 })
-export class AuthModule {}
+export class AuthModule { }

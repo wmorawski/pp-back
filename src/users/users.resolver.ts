@@ -1,4 +1,4 @@
-import { UserConnection } from './../../generated/prisma-client/index';
+import { UserConnection, prisma } from './../../generated/prisma-client/index';
 import { UsersService } from '../users/users.service';
 import {
   Query,
@@ -10,15 +10,21 @@ import {
 } from '@nestjs/graphql';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UnauthorizedException } from '@nestjs/common';
 import { GqlAuthGuard } from '../guards/GqlAuthGuard.guard';
+import { SuccessMessage } from './user.types';
+import { randomBytes } from 'crypto';
+import { promisify } from 'util';
+import { AuthPayload } from 'src/auth/auth.types';
+import { AuthService } from 'src/auth/auth.service';
 
 @Resolver()
 export class UsersResolver {
   constructor(
     private readonly prisma: PrismaService,
     private readonly usersService: UsersService,
-  ) {}
+    private readonly auth: AuthService,
+  ) { }
 
   @Query('getUsers')
   @UseGuards(GqlAuthGuard)
@@ -43,7 +49,60 @@ export class UsersResolver {
     return await this.usersService.inviteToFriends(args, info);
   }
   @Mutation('updateUser')
+  @UseGuards(GqlAuthGuard)
   async updateUser(@Args() args, @Info() info): Promise<User> {
     return this.prisma.mutation.updateUser(args, info);
+  }
+  @Mutation('requestReset')
+  async requestReset(@Args() args, @Info() info): Promise<SuccessMessage> {
+    const user = await this.usersService.findOne({ email: args.email });
+    if (!user) {
+      throw new UnauthorizedException(`No such user found for email ${args.email}`);
+    }
+    const resetToken = (await promisify(randomBytes)(20)).toString('hex');
+    const resetTokenExpiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
+    const res = await this.prisma.mutation.updateUser({
+      where: {
+        email: args.email,
+      },
+      data: {
+        resetToken,
+        resetTokenExpiry,
+      },
+    });
+    return {
+      message: 'Yay!',
+    };
+  }
+  @Mutation('resetPassword')
+  async resetPassword(@Args() args, @Info() info): Promise<AuthPayload> {
+    if (args.password != args.confirmPassword) {
+      throw new Error('Your passwords don\'t match!');
+    }
+    const [user] = await this.prisma.query.users({
+      where: {
+        resetToken: args.resetToken,
+        resetTokenExpiry_gte: new Date(Date.now() - 1000 * 60 * 60 * 24),
+      },
+    });
+    if (!user) {
+      throw new Error('This token is either invalid or expired');
+    }
+    const password = await this.usersService.getHash(args.password);
+    const updatedUser = await this.prisma.mutation.updateUser({
+      where: {
+        email: user.email,
+      },
+      data: {
+        password,
+        resetToken: null,
+        resetTokenExpiry: null,
+      },
+    });
+    const token = await this.auth.createToken(user.id);
+    return {
+      token,
+      user: updatedUser,
+    };
   }
 }

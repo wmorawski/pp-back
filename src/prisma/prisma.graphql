@@ -1482,6 +1482,8 @@ type User {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 type UserConnection {
@@ -1505,6 +1507,8 @@ input UserCreateInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserCreateManyWithoutChatsInput {
@@ -1546,6 +1550,8 @@ input UserCreateWithoutChatsInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserCreateWithoutFriendsInput {
@@ -1562,6 +1568,8 @@ input UserCreateWithoutFriendsInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserCreateWithoutPartiesInput {
@@ -1578,6 +1586,8 @@ input UserCreateWithoutPartiesInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserCreateWithoutPendingInvitationsInput {
@@ -1594,6 +1604,8 @@ input UserCreateWithoutPendingInvitationsInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 type UserEdge {
@@ -1626,6 +1638,10 @@ enum UserOrderByInput {
   avatar_DESC
   thirdPartyId_ASC
   thirdPartyId_DESC
+  resetToken_ASC
+  resetToken_DESC
+  resetTokenExpiry_ASC
+  resetTokenExpiry_DESC
 }
 
 type UserPreviousValues {
@@ -1641,6 +1657,8 @@ type UserPreviousValues {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserScalarWhereInput {
@@ -1772,6 +1790,28 @@ input UserScalarWhereInput {
   thirdPartyId_not_starts_with: String
   thirdPartyId_ends_with: String
   thirdPartyId_not_ends_with: String
+  resetToken: String
+  resetToken_not: String
+  resetToken_in: [String!]
+  resetToken_not_in: [String!]
+  resetToken_lt: String
+  resetToken_lte: String
+  resetToken_gt: String
+  resetToken_gte: String
+  resetToken_contains: String
+  resetToken_not_contains: String
+  resetToken_starts_with: String
+  resetToken_not_starts_with: String
+  resetToken_ends_with: String
+  resetToken_not_ends_with: String
+  resetTokenExpiry: DateTime
+  resetTokenExpiry_not: DateTime
+  resetTokenExpiry_in: [DateTime!]
+  resetTokenExpiry_not_in: [DateTime!]
+  resetTokenExpiry_lt: DateTime
+  resetTokenExpiry_lte: DateTime
+  resetTokenExpiry_gt: DateTime
+  resetTokenExpiry_gte: DateTime
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
@@ -1809,6 +1849,8 @@ input UserUpdateDataInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateInput {
@@ -1825,6 +1867,8 @@ input UserUpdateInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateManyDataInput {
@@ -1837,6 +1881,8 @@ input UserUpdateManyDataInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateManyMutationInput {
@@ -1849,6 +1895,8 @@ input UserUpdateManyMutationInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -1924,6 +1972,8 @@ input UserUpdateWithoutChatsDataInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateWithoutFriendsDataInput {
@@ -1939,6 +1989,8 @@ input UserUpdateWithoutFriendsDataInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -1954,6 +2006,8 @@ input UserUpdateWithoutPartiesDataInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateWithoutPendingInvitationsDataInput {
@@ -1969,6 +2023,8 @@ input UserUpdateWithoutPendingInvitationsDataInput {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateWithWhereUniqueWithoutChatsInput {
@@ -2161,6 +2217,28 @@ input UserWhereInput {
   thirdPartyId_not_starts_with: String
   thirdPartyId_ends_with: String
   thirdPartyId_not_ends_with: String
+  resetToken: String
+  resetToken_not: String
+  resetToken_in: [String!]
+  resetToken_not_in: [String!]
+  resetToken_lt: String
+  resetToken_lte: String
+  resetToken_gt: String
+  resetToken_gte: String
+  resetToken_contains: String
+  resetToken_not_contains: String
+  resetToken_starts_with: String
+  resetToken_not_starts_with: String
+  resetToken_ends_with: String
+  resetToken_not_ends_with: String
+  resetTokenExpiry: DateTime
+  resetTokenExpiry_not: DateTime
+  resetTokenExpiry_in: [DateTime!]
+  resetTokenExpiry_not_in: [DateTime!]
+  resetTokenExpiry_lt: DateTime
+  resetTokenExpiry_lte: DateTime
+  resetTokenExpiry_gt: DateTime
+  resetTokenExpiry_gte: DateTime
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

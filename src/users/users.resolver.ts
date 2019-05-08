@@ -17,6 +17,7 @@ import { randomBytes } from 'crypto';
 import { promisify } from 'util';
 import { AuthPayload } from 'src/auth/auth.types';
 import { AuthService } from 'src/auth/auth.service';
+import { MailerService } from '@nest-modules/mailer';
 
 @Resolver()
 export class UsersResolver {
@@ -24,6 +25,7 @@ export class UsersResolver {
     private readonly prisma: PrismaService,
     private readonly usersService: UsersService,
     private readonly auth: AuthService,
+    private readonly mailerService: MailerService,
   ) { }
 
   @Query('getUsers')
@@ -59,6 +61,9 @@ export class UsersResolver {
     if (!user) {
       throw new UnauthorizedException(`No such user found for email ${args.email}`);
     }
+    if (user.thirdPartyId) {
+      throw new Error(`User has been created with third party provider: ${user.thirdPartyId}`);
+    }
     const resetToken = (await promisify(randomBytes)(20)).toString('hex');
     const resetTokenExpiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
     const res = await this.prisma.mutation.updateUser({
@@ -70,6 +75,21 @@ export class UsersResolver {
         resetTokenExpiry,
       },
     });
+    try {
+      await this.mailerService.sendMail({
+        to: args.email,
+        from: 'noreply@partyplanner.io',
+        subject: 'Party Planner password reset',
+        template: 'resetToken', // The `.pug` or `.hbs` extension is appended automatically.
+        context: {  // Data to be sent to template engine.
+          resetToken,
+          user,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+
     return {
       message: 'Yay!',
     };

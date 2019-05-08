@@ -8,8 +8,10 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+
+  constructor(private readonly prisma: PrismaService) { }
   private saltRounds = 10;
+
   async getUsers(): Promise<User[]> {
     const users = await this.prisma.query.users({});
     return users.map((user: User) => ({
@@ -39,7 +41,7 @@ export class UsersService {
   ): Promise<boolean> {
     return bcrypt.compare(password, hash);
   }
-  async inviteToFriends(args, info): Promise<any> {
+  async inviteToFriends(args, info): Promise<User> {
     return await this.prisma.mutation.updateUser({
       data: {
         pendingInvitations: {

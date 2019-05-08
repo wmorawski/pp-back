@@ -15,6 +15,8 @@ type User {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String,
+  resetTokenExpiry: DateTime
 }
 
 type Message {

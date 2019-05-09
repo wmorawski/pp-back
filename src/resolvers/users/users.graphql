@@ -1,3 +1,4 @@
+#import * from './src/prisma/prisma.graphql'
 type Query {
   me: User
   getUsers(
@@ -29,10 +30,35 @@ type Mutation {
   ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   updateMe(name: String): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   inviteToFriends(sender: ID!, receiver: ID!): User!
+  requestReset(email: String!): SuccessMessage
+  resetPassword(resetToken: String!, password: String!, confirmPassword: String!): AuthPayload
 }
 
 type AuthPayload {
   token: String!
   user: User!
+}
+
+type SuccessMessage {
+  message: String!
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
+  friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  pendingInvitations(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  lastOnline: DateTime
+  deleted: Boolean!
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
 }

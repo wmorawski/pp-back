@@ -8,10 +8,9 @@ import { UsersModule } from './users/users.module';
 import { ChatsModule } from './chats/chats.module';
 import { ConfigService } from './config/config.service';
 import { ConfigModule } from './config/config.module';
-
 import { AuthModule } from './auth/auth.module';
-
 import { PrismaModule } from './prisma/prisma.module';
+import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
 
 @Module({
   imports: [
@@ -30,6 +29,19 @@ import { PrismaModule } from './prisma/prisma.module';
     ConfigModule,
     AuthModule,
     MessagesModule,
+    MailerModule.forRoot({
+      transport: `smtp://${process.env.MAILTRAP_USER}:${process.env.MAILTRAP_PASSWORD}@${process.env.MAILTRAP_HOST}`,
+      defaults: {
+        from: '"PartyPlanner" <noreply@partyplanner.io>',
+      },
+      template: {
+        dir: __dirname + '/templates',
+        adapter: new HandlebarsAdapter(), // or new PugAdapter()
+        options: {
+          strict: true,
+        },
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [
@@ -42,4 +54,4 @@ import { PrismaModule } from './prisma/prisma.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }

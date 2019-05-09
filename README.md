@@ -24,8 +24,28 @@ $ prisma token # create JWT from secret
 $ prisma generate # generates prisma client with secret
 $ graphql get-schema --project database # downloads schema from prisma servers
 $ graphql codegen --project database # generates prisma-bindings
+$ source development.env
+$ export $(cut -d= -f1 development.env)
 ```
 
+## Neccessary .env:
+```bash
+$ PRISMA_ENDPOINT=
+$ PRISMA_SECRET=
+$ PRISMA_TOKEN=
+$ GOOGLE_CLIENT_ID=""
+$ GOOGLE_SECRET=""
+$ FACEBOOK_APP_ID=""
+$ FACEBOOK_APP_SECRET=""
+$ SPOTIFY_CLIENT_ID=""
+$ SPOTIFY_SECRET=""
+$ TWITTER_API_KEY=""
+$ TWITTER_API_SECRET=""
+$ WEB_URL=""
+$ MAILTRAP_USER=""
+$ MAILTRAP_PASSWORD=""
+$ MAILTRAP_HOST=""
+```
 ## Running the app
 
 ```bash

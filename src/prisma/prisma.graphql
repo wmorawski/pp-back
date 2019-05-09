@@ -42,6 +42,7 @@ type ChatConnection {
 }
 
 input ChatCreateInput {
+  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
   messages: MessageCreateManyWithoutChatInput
@@ -58,11 +59,13 @@ input ChatCreateOneWithoutMessagesInput {
 }
 
 input ChatCreateWithoutMembersInput {
+  id: ID
   party: PartyCreateOneInput!
   messages: MessageCreateManyWithoutChatInput
 }
 
 input ChatCreateWithoutMessagesInput {
+  id: ID
   party: PartyCreateOneInput!
   members: UserCreateManyWithoutChatsInput
 }
@@ -256,6 +259,7 @@ type GameConnection {
 }
 
 input GameCreateInput {
+  id: ID
   title: String!
   cover: String
   type: GameType!
@@ -517,6 +521,8 @@ type Location {
   placeName: String!
   latitude: Float!
   longitude: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type LocationConnection {
@@ -526,6 +532,7 @@ type LocationConnection {
 }
 
 input LocationCreateInput {
+  id: ID
   placeName: String!
   latitude: Float!
   longitude: Float!
@@ -561,6 +568,8 @@ type LocationPreviousValues {
   placeName: String!
   latitude: Float!
   longitude: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type LocationSubscriptionPayload {
@@ -656,6 +665,22 @@ input LocationWhereInput {
   longitude_lte: Float
   longitude_gt: Float
   longitude_gte: Float
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [LocationWhereInput!]
   OR: [LocationWhereInput!]
   NOT: [LocationWhereInput!]
@@ -683,6 +708,7 @@ type MessageConnection {
 }
 
 input MessageCreateInput {
+  id: ID
   author: UserCreateOneInput!
   chat: ChatCreateOneWithoutMessagesInput!
   content: String!
@@ -694,6 +720,7 @@ input MessageCreateManyWithoutChatInput {
 }
 
 input MessageCreateWithoutChatInput {
+  id: ID
   author: UserCreateOneInput!
   content: String!
 }
@@ -950,6 +977,7 @@ type PageInfo {
 type Party {
   id: ID!
   title: String!
+  normalizedTitle: String!
   description: String!
   author: User!
   createdAt: DateTime!
@@ -970,7 +998,9 @@ type PartyConnection {
 }
 
 input PartyCreateInput {
+  id: ID
   title: String!
+  normalizedTitle: String!
   description: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
@@ -993,7 +1023,9 @@ input PartyCreateOneInput {
 }
 
 input PartyCreateWithoutMembersInput {
+  id: ID
   title: String!
+  normalizedTitle: String!
   description: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
@@ -1014,6 +1046,8 @@ enum PartyOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  normalizedTitle_ASC
+  normalizedTitle_DESC
   description_ASC
   description_DESC
   createdAt_ASC
@@ -1033,6 +1067,7 @@ enum PartyOrderByInput {
 type PartyPreviousValues {
   id: ID!
   title: String!
+  normalizedTitle: String!
   description: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -1071,6 +1106,20 @@ input PartyScalarWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  normalizedTitle: String
+  normalizedTitle_not: String
+  normalizedTitle_in: [String!]
+  normalizedTitle_not_in: [String!]
+  normalizedTitle_lt: String
+  normalizedTitle_lte: String
+  normalizedTitle_gt: String
+  normalizedTitle_gte: String
+  normalizedTitle_contains: String
+  normalizedTitle_not_contains: String
+  normalizedTitle_starts_with: String
+  normalizedTitle_not_starts_with: String
+  normalizedTitle_ends_with: String
+  normalizedTitle_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -1158,6 +1207,7 @@ input PartySubscriptionWhereInput {
 
 input PartyUpdateDataInput {
   title: String
+  normalizedTitle: String
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
@@ -1171,6 +1221,7 @@ input PartyUpdateDataInput {
 
 input PartyUpdateInput {
   title: String
+  normalizedTitle: String
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
@@ -1184,6 +1235,7 @@ input PartyUpdateInput {
 
 input PartyUpdateManyDataInput {
   title: String
+  normalizedTitle: String
   description: String
   colorTint: String
   isPublic: Boolean
@@ -1193,6 +1245,7 @@ input PartyUpdateManyDataInput {
 
 input PartyUpdateManyMutationInput {
   title: String
+  normalizedTitle: String
   description: String
   colorTint: String
   isPublic: Boolean
@@ -1226,6 +1279,7 @@ input PartyUpdateOneRequiredInput {
 
 input PartyUpdateWithoutMembersDataInput {
   title: String
+  normalizedTitle: String
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
@@ -1281,6 +1335,20 @@ input PartyWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  normalizedTitle: String
+  normalizedTitle_not: String
+  normalizedTitle_in: [String!]
+  normalizedTitle_not_in: [String!]
+  normalizedTitle_lt: String
+  normalizedTitle_lte: String
+  normalizedTitle_gt: String
+  normalizedTitle_gte: String
+  normalizedTitle_contains: String
+  normalizedTitle_not_contains: String
+  normalizedTitle_starts_with: String
+  normalizedTitle_not_starts_with: String
+  normalizedTitle_ends_with: String
+  normalizedTitle_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -1409,10 +1477,13 @@ type User {
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
   createdAt: DateTime!
   updatedAt: DateTime!
+  lastOnline: DateTime
   deleted: Boolean!
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 type UserConnection {
@@ -1422,6 +1493,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -1430,10 +1502,13 @@ input UserCreateInput {
   friends: UserCreateManyWithoutFriendsInput
   pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
   chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserCreateManyWithoutChatsInput {
@@ -1462,6 +1537,7 @@ input UserCreateOneInput {
 }
 
 input UserCreateWithoutChatsInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -1469,13 +1545,17 @@ input UserCreateWithoutChatsInput {
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyWithoutFriendsInput
   pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserCreateWithoutFriendsInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -1483,13 +1563,17 @@ input UserCreateWithoutFriendsInput {
   parties: PartyCreateManyWithoutMembersInput
   pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
   chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserCreateWithoutPartiesInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -1497,13 +1581,17 @@ input UserCreateWithoutPartiesInput {
   friends: UserCreateManyWithoutFriendsInput
   pendingInvitations: UserCreateManyWithoutPendingInvitationsInput
   chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserCreateWithoutPendingInvitationsInput {
+  id: ID
   email: String!
   firstName: String!
   lastName: String!
@@ -1511,10 +1599,13 @@ input UserCreateWithoutPendingInvitationsInput {
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyWithoutFriendsInput
   chats: ChatCreateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 type UserEdge {
@@ -1537,6 +1628,8 @@ enum UserOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  lastOnline_ASC
+  lastOnline_DESC
   deleted_ASC
   deleted_DESC
   provider_ASC
@@ -1545,6 +1638,10 @@ enum UserOrderByInput {
   avatar_DESC
   thirdPartyId_ASC
   thirdPartyId_DESC
+  resetToken_ASC
+  resetToken_DESC
+  resetTokenExpiry_ASC
+  resetTokenExpiry_DESC
 }
 
 type UserPreviousValues {
@@ -1555,10 +1652,13 @@ type UserPreviousValues {
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  lastOnline: DateTime
   deleted: Boolean!
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserScalarWhereInput {
@@ -1648,6 +1748,14 @@ input UserScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  lastOnline: DateTime
+  lastOnline_not: DateTime
+  lastOnline_in: [DateTime!]
+  lastOnline_not_in: [DateTime!]
+  lastOnline_lt: DateTime
+  lastOnline_lte: DateTime
+  lastOnline_gt: DateTime
+  lastOnline_gte: DateTime
   deleted: Boolean
   deleted_not: Boolean
   provider: SocialMediaType
@@ -1682,6 +1790,28 @@ input UserScalarWhereInput {
   thirdPartyId_not_starts_with: String
   thirdPartyId_ends_with: String
   thirdPartyId_not_ends_with: String
+  resetToken: String
+  resetToken_not: String
+  resetToken_in: [String!]
+  resetToken_not_in: [String!]
+  resetToken_lt: String
+  resetToken_lte: String
+  resetToken_gt: String
+  resetToken_gte: String
+  resetToken_contains: String
+  resetToken_not_contains: String
+  resetToken_starts_with: String
+  resetToken_not_starts_with: String
+  resetToken_ends_with: String
+  resetToken_not_ends_with: String
+  resetTokenExpiry: DateTime
+  resetTokenExpiry_not: DateTime
+  resetTokenExpiry_in: [DateTime!]
+  resetTokenExpiry_not_in: [DateTime!]
+  resetTokenExpiry_lt: DateTime
+  resetTokenExpiry_lte: DateTime
+  resetTokenExpiry_gt: DateTime
+  resetTokenExpiry_gte: DateTime
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
@@ -1714,10 +1844,13 @@ input UserUpdateDataInput {
   friends: UserUpdateManyWithoutFriendsInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateInput {
@@ -1729,10 +1862,13 @@ input UserUpdateInput {
   friends: UserUpdateManyWithoutFriendsInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateManyDataInput {
@@ -1740,10 +1876,13 @@ input UserUpdateManyDataInput {
   firstName: String
   lastName: String
   password: String
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateManyMutationInput {
@@ -1751,10 +1890,13 @@ input UserUpdateManyMutationInput {
   firstName: String
   lastName: String
   password: String
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -1825,10 +1967,13 @@ input UserUpdateWithoutChatsDataInput {
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyWithoutFriendsInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateWithoutFriendsDataInput {
@@ -1839,10 +1984,13 @@ input UserUpdateWithoutFriendsDataInput {
   parties: PartyUpdateManyWithoutMembersInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -1853,10 +2001,13 @@ input UserUpdateWithoutPartiesDataInput {
   friends: UserUpdateManyWithoutFriendsInput
   pendingInvitations: UserUpdateManyWithoutPendingInvitationsInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateWithoutPendingInvitationsDataInput {
@@ -1867,10 +2018,13 @@ input UserUpdateWithoutPendingInvitationsDataInput {
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyWithoutFriendsInput
   chats: ChatUpdateManyWithoutMembersInput
+  lastOnline: DateTime
   deleted: Boolean
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
 }
 
 input UserUpdateWithWhereUniqueWithoutChatsInput {
@@ -2021,6 +2175,14 @@ input UserWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  lastOnline: DateTime
+  lastOnline_not: DateTime
+  lastOnline_in: [DateTime!]
+  lastOnline_not_in: [DateTime!]
+  lastOnline_lt: DateTime
+  lastOnline_lte: DateTime
+  lastOnline_gt: DateTime
+  lastOnline_gte: DateTime
   deleted: Boolean
   deleted_not: Boolean
   provider: SocialMediaType
@@ -2055,6 +2217,28 @@ input UserWhereInput {
   thirdPartyId_not_starts_with: String
   thirdPartyId_ends_with: String
   thirdPartyId_not_ends_with: String
+  resetToken: String
+  resetToken_not: String
+  resetToken_in: [String!]
+  resetToken_not_in: [String!]
+  resetToken_lt: String
+  resetToken_lte: String
+  resetToken_gt: String
+  resetToken_gte: String
+  resetToken_contains: String
+  resetToken_not_contains: String
+  resetToken_starts_with: String
+  resetToken_not_starts_with: String
+  resetToken_ends_with: String
+  resetToken_not_ends_with: String
+  resetTokenExpiry: DateTime
+  resetTokenExpiry_not: DateTime
+  resetTokenExpiry_in: [DateTime!]
+  resetTokenExpiry_not_in: [DateTime!]
+  resetTokenExpiry_lt: DateTime
+  resetTokenExpiry_lte: DateTime
+  resetTokenExpiry_gt: DateTime
+  resetTokenExpiry_gte: DateTime
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

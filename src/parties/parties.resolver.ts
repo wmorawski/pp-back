@@ -3,7 +3,6 @@ import {
   PartyConnection,
   PartyCreateInput,
 } from '../prisma/prisma.binding';
-import { AuthGuard } from '@nestjs/passport';
 import {
   Resolver,
   Args,
@@ -18,9 +17,9 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
 
-@Resolver()
+@Resolver('parties')
 export class PartiesResolver {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   @Mutation('createParty')
   async createParty(

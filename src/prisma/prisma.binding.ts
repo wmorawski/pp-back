@@ -4,12 +4,21 @@ import { Options } from 'graphql-binding'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
+    album: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    albums: <T = Array<Album | null>>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    albumsConnection: <T = AlbumConnection>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    artist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    artists: <T = Array<Artist | null>>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    artistsConnection: <T = ArtistConnection>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     chat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     chats: <T = Array<Chat | null>>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     chatsConnection: <T = ChatConnection>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     game: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     games: <T = Array<Game | null>>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     gamesConnection: <T = GameConnection>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    image: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    images: <T = Array<Image | null>>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    imagesConnection: <T = ImageConnection>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     locations: <T = Array<Location | null>>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     locationsConnection: <T = LocationConnection>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -19,6 +28,12 @@ export interface Query {
     party: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     parties: <T = Array<Party | null>>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partiesConnection: <T = PartyConnection>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    playlist: <T = Playlist | null>(args: { where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    playlists: <T = Array<Playlist | null>>(args: { where?: PlaylistWhereInput | null, orderBy?: PlaylistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    playlistsConnection: <T = PlaylistConnection>(args: { where?: PlaylistWhereInput | null, orderBy?: PlaylistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    track: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    tracks: <T = Array<Track | null>>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    tracksConnection: <T = TrackConnection>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -26,6 +41,18 @@ export interface Query {
   }
 
 export interface Mutation {
+    createAlbum: <T = Album>(args: { data: AlbumCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateAlbum: <T = Album | null>(args: { data: AlbumUpdateInput, where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyAlbums: <T = BatchPayload>(args: { data: AlbumUpdateManyMutationInput, where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertAlbum: <T = Album>(args: { where: AlbumWhereUniqueInput, create: AlbumCreateInput, update: AlbumUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteAlbum: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteManyAlbums: <T = BatchPayload>(args: { where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createArtist: <T = Artist>(args: { data: ArtistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateArtist: <T = Artist | null>(args: { data: ArtistUpdateInput, where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyArtists: <T = BatchPayload>(args: { data: ArtistUpdateManyMutationInput, where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertArtist: <T = Artist>(args: { where: ArtistWhereUniqueInput, create: ArtistCreateInput, update: ArtistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteArtist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteManyArtists: <T = BatchPayload>(args: { where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createChat: <T = Chat>(args: { data: ChatCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateChat: <T = Chat | null>(args: { data: ChatUpdateInput, where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertChat: <T = Chat>(args: { where: ChatWhereUniqueInput, create: ChatCreateInput, update: ChatUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -37,6 +64,12 @@ export interface Mutation {
     upsertGame: <T = Game>(args: { where: GameWhereUniqueInput, create: GameCreateInput, update: GameUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteGame: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteManyGames: <T = BatchPayload>(args: { where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createImage: <T = Image>(args: { data: ImageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateImage: <T = Image | null>(args: { data: ImageUpdateInput, where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyImages: <T = BatchPayload>(args: { data: ImageUpdateManyMutationInput, where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertImage: <T = Image>(args: { where: ImageWhereUniqueInput, create: ImageCreateInput, update: ImageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteImage: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteManyImages: <T = BatchPayload>(args: { where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateManyLocations: <T = BatchPayload>(args: { data: LocationUpdateManyMutationInput, where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -55,6 +88,18 @@ export interface Mutation {
     upsertParty: <T = Party>(args: { where: PartyWhereUniqueInput, create: PartyCreateInput, update: PartyUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteParty: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteManyParties: <T = BatchPayload>(args: { where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createPlaylist: <T = Playlist>(args: { data: PlaylistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updatePlaylist: <T = Playlist | null>(args: { data: PlaylistUpdateInput, where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyPlaylists: <T = BatchPayload>(args: { data: PlaylistUpdateManyMutationInput, where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertPlaylist: <T = Playlist>(args: { where: PlaylistWhereUniqueInput, create: PlaylistCreateInput, update: PlaylistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deletePlaylist: <T = Playlist | null>(args: { where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteManyPlaylists: <T = BatchPayload>(args: { where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createTrack: <T = Track>(args: { data: TrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateTrack: <T = Track | null>(args: { data: TrackUpdateInput, where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateManyTracks: <T = BatchPayload>(args: { data: TrackUpdateManyMutationInput, where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertTrack: <T = Track>(args: { where: TrackWhereUniqueInput, create: TrackCreateInput, update: TrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteTrack: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteManyTracks: <T = BatchPayload>(args: { where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -64,20 +109,30 @@ export interface Mutation {
   }
 
 export interface Subscription {
+    album: <T = AlbumSubscriptionPayload | null>(args: { where?: AlbumSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    artist: <T = ArtistSubscriptionPayload | null>(args: { where?: ArtistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     chat: <T = ChatSubscriptionPayload | null>(args: { where?: ChatSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     game: <T = GameSubscriptionPayload | null>(args: { where?: GameSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    image: <T = ImageSubscriptionPayload | null>(args: { where?: ImageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     location: <T = LocationSubscriptionPayload | null>(args: { where?: LocationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     message: <T = MessageSubscriptionPayload | null>(args: { where?: MessageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     party: <T = PartySubscriptionPayload | null>(args: { where?: PartySubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    playlist: <T = PlaylistSubscriptionPayload | null>(args: { where?: PlaylistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    track: <T = TrackSubscriptionPayload | null>(args: { where?: TrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
+  Album: (where?: AlbumWhereInput) => Promise<boolean>
+  Artist: (where?: ArtistWhereInput) => Promise<boolean>
   Chat: (where?: ChatWhereInput) => Promise<boolean>
   Game: (where?: GameWhereInput) => Promise<boolean>
+  Image: (where?: ImageWhereInput) => Promise<boolean>
   Location: (where?: LocationWhereInput) => Promise<boolean>
   Message: (where?: MessageWhereInput) => Promise<boolean>
   Party: (where?: PartyWhereInput) => Promise<boolean>
+  Playlist: (where?: PlaylistWhereInput) => Promise<boolean>
+  Track: (where?: TrackWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
 }
 
@@ -103,11 +158,23 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AggregateChat {
+const typeDefs = `type AggregateAlbum {
+  count: Int!
+}
+
+type AggregateArtist {
+  count: Int!
+}
+
+type AggregateChat {
   count: Int!
 }
 
 type AggregateGame {
+  count: Int!
+}
+
+type AggregateImage {
   count: Int!
 }
 
@@ -123,8 +190,359 @@ type AggregateParty {
   count: Int!
 }
 
+type AggregatePlaylist {
+  count: Int!
+}
+
+type AggregateTrack {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
+}
+
+type Album {
+  id: ID!
+  album_id: String!
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
+  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
+}
+
+type AlbumConnection {
+  pageInfo: PageInfo!
+  edges: [AlbumEdge]!
+  aggregate: AggregateAlbum!
+}
+
+input AlbumCreateInput {
+  id: ID
+  album_id: String!
+  images: ImageCreateManyInput
+  artists: ArtistCreateManyInput
+}
+
+input AlbumCreateOneInput {
+  create: AlbumCreateInput
+  connect: AlbumWhereUniqueInput
+}
+
+type AlbumEdge {
+  node: Album!
+  cursor: String!
+}
+
+enum AlbumOrderByInput {
+  id_ASC
+  id_DESC
+  album_id_ASC
+  album_id_DESC
+}
+
+type AlbumPreviousValues {
+  id: ID!
+  album_id: String!
+}
+
+type AlbumSubscriptionPayload {
+  mutation: MutationType!
+  node: Album
+  updatedFields: [String!]
+  previousValues: AlbumPreviousValues
+}
+
+input AlbumSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: AlbumWhereInput
+  AND: [AlbumSubscriptionWhereInput!]
+  OR: [AlbumSubscriptionWhereInput!]
+  NOT: [AlbumSubscriptionWhereInput!]
+}
+
+input AlbumUpdateDataInput {
+  album_id: String
+  images: ImageUpdateManyInput
+  artists: ArtistUpdateManyInput
+}
+
+input AlbumUpdateInput {
+  album_id: String
+  images: ImageUpdateManyInput
+  artists: ArtistUpdateManyInput
+}
+
+input AlbumUpdateManyMutationInput {
+  album_id: String
+}
+
+input AlbumUpdateOneRequiredInput {
+  create: AlbumCreateInput
+  update: AlbumUpdateDataInput
+  upsert: AlbumUpsertNestedInput
+  connect: AlbumWhereUniqueInput
+}
+
+input AlbumUpsertNestedInput {
+  update: AlbumUpdateDataInput!
+  create: AlbumCreateInput!
+}
+
+input AlbumWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  album_id: String
+  album_id_not: String
+  album_id_in: [String!]
+  album_id_not_in: [String!]
+  album_id_lt: String
+  album_id_lte: String
+  album_id_gt: String
+  album_id_gte: String
+  album_id_contains: String
+  album_id_not_contains: String
+  album_id_starts_with: String
+  album_id_not_starts_with: String
+  album_id_ends_with: String
+  album_id_not_ends_with: String
+  images_every: ImageWhereInput
+  images_some: ImageWhereInput
+  images_none: ImageWhereInput
+  artists_every: ArtistWhereInput
+  artists_some: ArtistWhereInput
+  artists_none: ArtistWhereInput
+  AND: [AlbumWhereInput!]
+  OR: [AlbumWhereInput!]
+  NOT: [AlbumWhereInput!]
+}
+
+input AlbumWhereUniqueInput {
+  id: ID
+  album_id: String
+}
+
+type Artist {
+  id: ID!
+  artist_id: String!
+  name: String!
+}
+
+type ArtistConnection {
+  pageInfo: PageInfo!
+  edges: [ArtistEdge]!
+  aggregate: AggregateArtist!
+}
+
+input ArtistCreateInput {
+  id: ID
+  artist_id: String!
+  name: String!
+}
+
+input ArtistCreateManyInput {
+  create: [ArtistCreateInput!]
+  connect: [ArtistWhereUniqueInput!]
+}
+
+type ArtistEdge {
+  node: Artist!
+  cursor: String!
+}
+
+enum ArtistOrderByInput {
+  id_ASC
+  id_DESC
+  artist_id_ASC
+  artist_id_DESC
+  name_ASC
+  name_DESC
+}
+
+type ArtistPreviousValues {
+  id: ID!
+  artist_id: String!
+  name: String!
+}
+
+input ArtistScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  artist_id: String
+  artist_id_not: String
+  artist_id_in: [String!]
+  artist_id_not_in: [String!]
+  artist_id_lt: String
+  artist_id_lte: String
+  artist_id_gt: String
+  artist_id_gte: String
+  artist_id_contains: String
+  artist_id_not_contains: String
+  artist_id_starts_with: String
+  artist_id_not_starts_with: String
+  artist_id_ends_with: String
+  artist_id_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [ArtistScalarWhereInput!]
+  OR: [ArtistScalarWhereInput!]
+  NOT: [ArtistScalarWhereInput!]
+}
+
+type ArtistSubscriptionPayload {
+  mutation: MutationType!
+  node: Artist
+  updatedFields: [String!]
+  previousValues: ArtistPreviousValues
+}
+
+input ArtistSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ArtistWhereInput
+  AND: [ArtistSubscriptionWhereInput!]
+  OR: [ArtistSubscriptionWhereInput!]
+  NOT: [ArtistSubscriptionWhereInput!]
+}
+
+input ArtistUpdateDataInput {
+  artist_id: String
+  name: String
+}
+
+input ArtistUpdateInput {
+  artist_id: String
+  name: String
+}
+
+input ArtistUpdateManyDataInput {
+  artist_id: String
+  name: String
+}
+
+input ArtistUpdateManyInput {
+  create: [ArtistCreateInput!]
+  update: [ArtistUpdateWithWhereUniqueNestedInput!]
+  upsert: [ArtistUpsertWithWhereUniqueNestedInput!]
+  delete: [ArtistWhereUniqueInput!]
+  connect: [ArtistWhereUniqueInput!]
+  set: [ArtistWhereUniqueInput!]
+  disconnect: [ArtistWhereUniqueInput!]
+  deleteMany: [ArtistScalarWhereInput!]
+  updateMany: [ArtistUpdateManyWithWhereNestedInput!]
+}
+
+input ArtistUpdateManyMutationInput {
+  artist_id: String
+  name: String
+}
+
+input ArtistUpdateManyWithWhereNestedInput {
+  where: ArtistScalarWhereInput!
+  data: ArtistUpdateManyDataInput!
+}
+
+input ArtistUpdateWithWhereUniqueNestedInput {
+  where: ArtistWhereUniqueInput!
+  data: ArtistUpdateDataInput!
+}
+
+input ArtistUpsertWithWhereUniqueNestedInput {
+  where: ArtistWhereUniqueInput!
+  update: ArtistUpdateDataInput!
+  create: ArtistCreateInput!
+}
+
+input ArtistWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  artist_id: String
+  artist_id_not: String
+  artist_id_in: [String!]
+  artist_id_not_in: [String!]
+  artist_id_lt: String
+  artist_id_lte: String
+  artist_id_gt: String
+  artist_id_gte: String
+  artist_id_contains: String
+  artist_id_not_contains: String
+  artist_id_starts_with: String
+  artist_id_not_starts_with: String
+  artist_id_ends_with: String
+  artist_id_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [ArtistWhereInput!]
+  OR: [ArtistWhereInput!]
+  NOT: [ArtistWhereInput!]
+}
+
+input ArtistWhereUniqueInput {
+  id: ID
+  artist_id: String
 }
 
 type BatchPayload {
@@ -621,6 +1039,228 @@ input GameWhereUniqueInput {
   title: String
 }
 
+type Image {
+  id: ID!
+  height: Int!
+  width: Int!
+  url: String!
+}
+
+type ImageConnection {
+  pageInfo: PageInfo!
+  edges: [ImageEdge]!
+  aggregate: AggregateImage!
+}
+
+input ImageCreateInput {
+  id: ID
+  height: Int!
+  width: Int!
+  url: String!
+}
+
+input ImageCreateManyInput {
+  create: [ImageCreateInput!]
+  connect: [ImageWhereUniqueInput!]
+}
+
+type ImageEdge {
+  node: Image!
+  cursor: String!
+}
+
+enum ImageOrderByInput {
+  id_ASC
+  id_DESC
+  height_ASC
+  height_DESC
+  width_ASC
+  width_DESC
+  url_ASC
+  url_DESC
+}
+
+type ImagePreviousValues {
+  id: ID!
+  height: Int!
+  width: Int!
+  url: String!
+}
+
+input ImageScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  height: Int
+  height_not: Int
+  height_in: [Int!]
+  height_not_in: [Int!]
+  height_lt: Int
+  height_lte: Int
+  height_gt: Int
+  height_gte: Int
+  width: Int
+  width_not: Int
+  width_in: [Int!]
+  width_not_in: [Int!]
+  width_lt: Int
+  width_lte: Int
+  width_gt: Int
+  width_gte: Int
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  AND: [ImageScalarWhereInput!]
+  OR: [ImageScalarWhereInput!]
+  NOT: [ImageScalarWhereInput!]
+}
+
+type ImageSubscriptionPayload {
+  mutation: MutationType!
+  node: Image
+  updatedFields: [String!]
+  previousValues: ImagePreviousValues
+}
+
+input ImageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ImageWhereInput
+  AND: [ImageSubscriptionWhereInput!]
+  OR: [ImageSubscriptionWhereInput!]
+  NOT: [ImageSubscriptionWhereInput!]
+}
+
+input ImageUpdateDataInput {
+  height: Int
+  width: Int
+  url: String
+}
+
+input ImageUpdateInput {
+  height: Int
+  width: Int
+  url: String
+}
+
+input ImageUpdateManyDataInput {
+  height: Int
+  width: Int
+  url: String
+}
+
+input ImageUpdateManyInput {
+  create: [ImageCreateInput!]
+  update: [ImageUpdateWithWhereUniqueNestedInput!]
+  upsert: [ImageUpsertWithWhereUniqueNestedInput!]
+  delete: [ImageWhereUniqueInput!]
+  connect: [ImageWhereUniqueInput!]
+  set: [ImageWhereUniqueInput!]
+  disconnect: [ImageWhereUniqueInput!]
+  deleteMany: [ImageScalarWhereInput!]
+  updateMany: [ImageUpdateManyWithWhereNestedInput!]
+}
+
+input ImageUpdateManyMutationInput {
+  height: Int
+  width: Int
+  url: String
+}
+
+input ImageUpdateManyWithWhereNestedInput {
+  where: ImageScalarWhereInput!
+  data: ImageUpdateManyDataInput!
+}
+
+input ImageUpdateWithWhereUniqueNestedInput {
+  where: ImageWhereUniqueInput!
+  data: ImageUpdateDataInput!
+}
+
+input ImageUpsertWithWhereUniqueNestedInput {
+  where: ImageWhereUniqueInput!
+  update: ImageUpdateDataInput!
+  create: ImageCreateInput!
+}
+
+input ImageWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  height: Int
+  height_not: Int
+  height_in: [Int!]
+  height_not_in: [Int!]
+  height_lt: Int
+  height_lte: Int
+  height_gt: Int
+  height_gte: Int
+  width: Int
+  width_not: Int
+  width_in: [Int!]
+  width_not_in: [Int!]
+  width_lt: Int
+  width_lte: Int
+  width_gt: Int
+  width_gte: Int
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  AND: [ImageWhereInput!]
+  OR: [ImageWhereInput!]
+  NOT: [ImageWhereInput!]
+}
+
+input ImageWhereUniqueInput {
+  id: ID
+}
+
 type Location {
   id: ID!
   placeName: String!
@@ -1025,6 +1665,18 @@ input MessageWhereUniqueInput {
 }
 
 type Mutation {
+  createAlbum(data: AlbumCreateInput!): Album!
+  updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
+  updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
+  upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
+  deleteAlbum(where: AlbumWhereUniqueInput!): Album
+  deleteManyAlbums(where: AlbumWhereInput): BatchPayload!
+  createArtist(data: ArtistCreateInput!): Artist!
+  updateArtist(data: ArtistUpdateInput!, where: ArtistWhereUniqueInput!): Artist
+  updateManyArtists(data: ArtistUpdateManyMutationInput!, where: ArtistWhereInput): BatchPayload!
+  upsertArtist(where: ArtistWhereUniqueInput!, create: ArtistCreateInput!, update: ArtistUpdateInput!): Artist!
+  deleteArtist(where: ArtistWhereUniqueInput!): Artist
+  deleteManyArtists(where: ArtistWhereInput): BatchPayload!
   createChat(data: ChatCreateInput!): Chat!
   updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
@@ -1036,6 +1688,12 @@ type Mutation {
   upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
   deleteGame(where: GameWhereUniqueInput!): Game
   deleteManyGames(where: GameWhereInput): BatchPayload!
+  createImage(data: ImageCreateInput!): Image!
+  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
+  updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
+  upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
+  deleteImage(where: ImageWhereUniqueInput!): Image
+  deleteManyImages(where: ImageWhereInput): BatchPayload!
   createLocation(data: LocationCreateInput!): Location!
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
@@ -1054,6 +1712,18 @@ type Mutation {
   upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
   deleteParty(where: PartyWhereUniqueInput!): Party
   deleteManyParties(where: PartyWhereInput): BatchPayload!
+  createPlaylist(data: PlaylistCreateInput!): Playlist!
+  updatePlaylist(data: PlaylistUpdateInput!, where: PlaylistWhereUniqueInput!): Playlist
+  updateManyPlaylists(data: PlaylistUpdateManyMutationInput!, where: PlaylistWhereInput): BatchPayload!
+  upsertPlaylist(where: PlaylistWhereUniqueInput!, create: PlaylistCreateInput!, update: PlaylistUpdateInput!): Playlist!
+  deletePlaylist(where: PlaylistWhereUniqueInput!): Playlist
+  deleteManyPlaylists(where: PlaylistWhereInput): BatchPayload!
+  createTrack(data: TrackCreateInput!): Track!
+  updateTrack(data: TrackUpdateInput!, where: TrackWhereUniqueInput!): Track
+  updateManyTracks(data: TrackUpdateManyMutationInput!, where: TrackWhereInput): BatchPayload!
+  upsertTrack(where: TrackWhereUniqueInput!, create: TrackCreateInput!, update: TrackUpdateInput!): Track!
+  deleteTrack(where: TrackWhereUniqueInput!): Track
+  deleteManyTracks(where: TrackWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -1533,13 +2203,156 @@ input PartyWhereUniqueInput {
   id: ID
 }
 
+type Playlist {
+  id: ID!
+  playlist_id: String
+  name: String!
+  tracks(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Track!]
+  isTemporary: Boolean
+}
+
+type PlaylistConnection {
+  pageInfo: PageInfo!
+  edges: [PlaylistEdge]!
+  aggregate: AggregatePlaylist!
+}
+
+input PlaylistCreateInput {
+  id: ID
+  playlist_id: String
+  name: String!
+  tracks: TrackCreateManyInput
+  isTemporary: Boolean
+}
+
+type PlaylistEdge {
+  node: Playlist!
+  cursor: String!
+}
+
+enum PlaylistOrderByInput {
+  id_ASC
+  id_DESC
+  playlist_id_ASC
+  playlist_id_DESC
+  name_ASC
+  name_DESC
+  isTemporary_ASC
+  isTemporary_DESC
+}
+
+type PlaylistPreviousValues {
+  id: ID!
+  playlist_id: String
+  name: String!
+  isTemporary: Boolean
+}
+
+type PlaylistSubscriptionPayload {
+  mutation: MutationType!
+  node: Playlist
+  updatedFields: [String!]
+  previousValues: PlaylistPreviousValues
+}
+
+input PlaylistSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: PlaylistWhereInput
+  AND: [PlaylistSubscriptionWhereInput!]
+  OR: [PlaylistSubscriptionWhereInput!]
+  NOT: [PlaylistSubscriptionWhereInput!]
+}
+
+input PlaylistUpdateInput {
+  playlist_id: String
+  name: String
+  tracks: TrackUpdateManyInput
+  isTemporary: Boolean
+}
+
+input PlaylistUpdateManyMutationInput {
+  playlist_id: String
+  name: String
+  isTemporary: Boolean
+}
+
+input PlaylistWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  playlist_id: String
+  playlist_id_not: String
+  playlist_id_in: [String!]
+  playlist_id_not_in: [String!]
+  playlist_id_lt: String
+  playlist_id_lte: String
+  playlist_id_gt: String
+  playlist_id_gte: String
+  playlist_id_contains: String
+  playlist_id_not_contains: String
+  playlist_id_starts_with: String
+  playlist_id_not_starts_with: String
+  playlist_id_ends_with: String
+  playlist_id_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  tracks_every: TrackWhereInput
+  tracks_some: TrackWhereInput
+  tracks_none: TrackWhereInput
+  isTemporary: Boolean
+  isTemporary_not: Boolean
+  AND: [PlaylistWhereInput!]
+  OR: [PlaylistWhereInput!]
+  NOT: [PlaylistWhereInput!]
+}
+
+input PlaylistWhereUniqueInput {
+  id: ID
+  playlist_id: String
+}
+
 type Query {
+  album(where: AlbumWhereUniqueInput!): Album
+  albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
+  albumsConnection(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlbumConnection!
+  artist(where: ArtistWhereUniqueInput!): Artist
+  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist]!
+  artistsConnection(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ArtistConnection!
   chat(where: ChatWhereUniqueInput!): Chat
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
   game(where: GameWhereUniqueInput!): Game
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
+  image(where: ImageWhereUniqueInput!): Image
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
+  imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
   location(where: LocationWhereUniqueInput!): Location
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
@@ -1549,6 +2362,12 @@ type Query {
   party(where: PartyWhereUniqueInput!): Party
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
   partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
+  playlist(where: PlaylistWhereUniqueInput!): Playlist
+  playlists(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Playlist]!
+  playlistsConnection(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaylistConnection!
+  track(where: TrackWhereUniqueInput!): Track
+  tracks(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Track]!
+  tracksConnection(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TrackConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -1562,12 +2381,301 @@ enum SocialMediaType {
 }
 
 type Subscription {
+  album(where: AlbumSubscriptionWhereInput): AlbumSubscriptionPayload
+  artist(where: ArtistSubscriptionWhereInput): ArtistSubscriptionPayload
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
+  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
+  playlist(where: PlaylistSubscriptionWhereInput): PlaylistSubscriptionPayload
+  track(where: TrackSubscriptionWhereInput): TrackSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type Track {
+  id: ID!
+  track_id: String!
+  name: String!
+  album: Album!
+  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
+  duration: Int!
+  preview_url: String!
+}
+
+type TrackConnection {
+  pageInfo: PageInfo!
+  edges: [TrackEdge]!
+  aggregate: AggregateTrack!
+}
+
+input TrackCreateInput {
+  id: ID
+  track_id: String!
+  name: String!
+  album: AlbumCreateOneInput!
+  artists: ArtistCreateManyInput
+  duration: Int!
+  preview_url: String!
+}
+
+input TrackCreateManyInput {
+  create: [TrackCreateInput!]
+  connect: [TrackWhereUniqueInput!]
+}
+
+type TrackEdge {
+  node: Track!
+  cursor: String!
+}
+
+enum TrackOrderByInput {
+  id_ASC
+  id_DESC
+  track_id_ASC
+  track_id_DESC
+  name_ASC
+  name_DESC
+  duration_ASC
+  duration_DESC
+  preview_url_ASC
+  preview_url_DESC
+}
+
+type TrackPreviousValues {
+  id: ID!
+  track_id: String!
+  name: String!
+  duration: Int!
+  preview_url: String!
+}
+
+input TrackScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  track_id: String
+  track_id_not: String
+  track_id_in: [String!]
+  track_id_not_in: [String!]
+  track_id_lt: String
+  track_id_lte: String
+  track_id_gt: String
+  track_id_gte: String
+  track_id_contains: String
+  track_id_not_contains: String
+  track_id_starts_with: String
+  track_id_not_starts_with: String
+  track_id_ends_with: String
+  track_id_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  duration: Int
+  duration_not: Int
+  duration_in: [Int!]
+  duration_not_in: [Int!]
+  duration_lt: Int
+  duration_lte: Int
+  duration_gt: Int
+  duration_gte: Int
+  preview_url: String
+  preview_url_not: String
+  preview_url_in: [String!]
+  preview_url_not_in: [String!]
+  preview_url_lt: String
+  preview_url_lte: String
+  preview_url_gt: String
+  preview_url_gte: String
+  preview_url_contains: String
+  preview_url_not_contains: String
+  preview_url_starts_with: String
+  preview_url_not_starts_with: String
+  preview_url_ends_with: String
+  preview_url_not_ends_with: String
+  AND: [TrackScalarWhereInput!]
+  OR: [TrackScalarWhereInput!]
+  NOT: [TrackScalarWhereInput!]
+}
+
+type TrackSubscriptionPayload {
+  mutation: MutationType!
+  node: Track
+  updatedFields: [String!]
+  previousValues: TrackPreviousValues
+}
+
+input TrackSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TrackWhereInput
+  AND: [TrackSubscriptionWhereInput!]
+  OR: [TrackSubscriptionWhereInput!]
+  NOT: [TrackSubscriptionWhereInput!]
+}
+
+input TrackUpdateDataInput {
+  track_id: String
+  name: String
+  album: AlbumUpdateOneRequiredInput
+  artists: ArtistUpdateManyInput
+  duration: Int
+  preview_url: String
+}
+
+input TrackUpdateInput {
+  track_id: String
+  name: String
+  album: AlbumUpdateOneRequiredInput
+  artists: ArtistUpdateManyInput
+  duration: Int
+  preview_url: String
+}
+
+input TrackUpdateManyDataInput {
+  track_id: String
+  name: String
+  duration: Int
+  preview_url: String
+}
+
+input TrackUpdateManyInput {
+  create: [TrackCreateInput!]
+  update: [TrackUpdateWithWhereUniqueNestedInput!]
+  upsert: [TrackUpsertWithWhereUniqueNestedInput!]
+  delete: [TrackWhereUniqueInput!]
+  connect: [TrackWhereUniqueInput!]
+  set: [TrackWhereUniqueInput!]
+  disconnect: [TrackWhereUniqueInput!]
+  deleteMany: [TrackScalarWhereInput!]
+  updateMany: [TrackUpdateManyWithWhereNestedInput!]
+}
+
+input TrackUpdateManyMutationInput {
+  track_id: String
+  name: String
+  duration: Int
+  preview_url: String
+}
+
+input TrackUpdateManyWithWhereNestedInput {
+  where: TrackScalarWhereInput!
+  data: TrackUpdateManyDataInput!
+}
+
+input TrackUpdateWithWhereUniqueNestedInput {
+  where: TrackWhereUniqueInput!
+  data: TrackUpdateDataInput!
+}
+
+input TrackUpsertWithWhereUniqueNestedInput {
+  where: TrackWhereUniqueInput!
+  update: TrackUpdateDataInput!
+  create: TrackCreateInput!
+}
+
+input TrackWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  track_id: String
+  track_id_not: String
+  track_id_in: [String!]
+  track_id_not_in: [String!]
+  track_id_lt: String
+  track_id_lte: String
+  track_id_gt: String
+  track_id_gte: String
+  track_id_contains: String
+  track_id_not_contains: String
+  track_id_starts_with: String
+  track_id_not_starts_with: String
+  track_id_ends_with: String
+  track_id_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  album: AlbumWhereInput
+  artists_every: ArtistWhereInput
+  artists_some: ArtistWhereInput
+  artists_none: ArtistWhereInput
+  duration: Int
+  duration_not: Int
+  duration_in: [Int!]
+  duration_not_in: [Int!]
+  duration_lt: Int
+  duration_lte: Int
+  duration_gt: Int
+  duration_gte: Int
+  preview_url: String
+  preview_url_not: String
+  preview_url_in: [String!]
+  preview_url_not_in: [String!]
+  preview_url_lt: String
+  preview_url_lte: String
+  preview_url_gt: String
+  preview_url_gte: String
+  preview_url_contains: String
+  preview_url_not_contains: String
+  preview_url_starts_with: String
+  preview_url_not_starts_with: String
+  preview_url_ends_with: String
+  preview_url_not_ends_with: String
+  AND: [TrackWhereInput!]
+  OR: [TrackWhereInput!]
+  NOT: [TrackWhereInput!]
+}
+
+input TrackWhereUniqueInput {
+  id: ID
+  track_id: String
 }
 
 type User {
@@ -2361,6 +3469,18 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
+export type AlbumOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'album_id_ASC' |
+  'album_id_DESC'
+
+export type ArtistOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'artist_id_ASC' |
+  'artist_id_DESC' |
+  'name_ASC' |
+  'name_DESC'
+
 export type ChatOrderByInput =   'id_ASC' |
   'id_DESC' |
   'createdAt_ASC' |
@@ -2384,6 +3504,15 @@ export type GameOrderByInput =   'id_ASC' |
 export type GameType =   'BOARD' |
   'PC' |
   'CONSOLE'
+
+export type ImageOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'height_ASC' |
+  'height_DESC' |
+  'width_ASC' |
+  'width_DESC' |
+  'url_ASC' |
+  'url_DESC'
 
 export type LocationOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -2432,9 +3561,29 @@ export type PartyOrderByInput =   'id_ASC' |
   'end_ASC' |
   'end_DESC'
 
+export type PlaylistOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'playlist_id_ASC' |
+  'playlist_id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'isTemporary_ASC' |
+  'isTemporary_DESC'
+
 export type SocialMediaType =   'FACEBOOK' |
   'SPOTIFY' |
   'TWITTER'
+
+export type TrackOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'track_id_ASC' |
+  'track_id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'duration_ASC' |
+  'duration_DESC' |
+  'preview_url_ASC' |
+  'preview_url_DESC'
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -2464,6 +3613,273 @@ export type UserOrderByInput =   'id_ASC' |
   'resetToken_DESC' |
   'resetTokenExpiry_ASC' |
   'resetTokenExpiry_DESC'
+
+export interface AlbumCreateInput {
+  id?: ID_Input | null
+  album_id: String
+  images?: ImageCreateManyInput | null
+  artists?: ArtistCreateManyInput | null
+}
+
+export interface AlbumCreateOneInput {
+  create?: AlbumCreateInput | null
+  connect?: AlbumWhereUniqueInput | null
+}
+
+export interface AlbumSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: AlbumWhereInput | null
+  AND?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null
+  OR?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null
+  NOT?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null
+}
+
+export interface AlbumUpdateDataInput {
+  album_id?: String | null
+  images?: ImageUpdateManyInput | null
+  artists?: ArtistUpdateManyInput | null
+}
+
+export interface AlbumUpdateInput {
+  album_id?: String | null
+  images?: ImageUpdateManyInput | null
+  artists?: ArtistUpdateManyInput | null
+}
+
+export interface AlbumUpdateManyMutationInput {
+  album_id?: String | null
+}
+
+export interface AlbumUpdateOneRequiredInput {
+  create?: AlbumCreateInput | null
+  update?: AlbumUpdateDataInput | null
+  upsert?: AlbumUpsertNestedInput | null
+  connect?: AlbumWhereUniqueInput | null
+}
+
+export interface AlbumUpsertNestedInput {
+  update: AlbumUpdateDataInput
+  create: AlbumCreateInput
+}
+
+export interface AlbumWhereInput {
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  album_id?: String | null
+  album_id_not?: String | null
+  album_id_in?: String[] | String | null
+  album_id_not_in?: String[] | String | null
+  album_id_lt?: String | null
+  album_id_lte?: String | null
+  album_id_gt?: String | null
+  album_id_gte?: String | null
+  album_id_contains?: String | null
+  album_id_not_contains?: String | null
+  album_id_starts_with?: String | null
+  album_id_not_starts_with?: String | null
+  album_id_ends_with?: String | null
+  album_id_not_ends_with?: String | null
+  images_every?: ImageWhereInput | null
+  images_some?: ImageWhereInput | null
+  images_none?: ImageWhereInput | null
+  artists_every?: ArtistWhereInput | null
+  artists_some?: ArtistWhereInput | null
+  artists_none?: ArtistWhereInput | null
+  AND?: AlbumWhereInput[] | AlbumWhereInput | null
+  OR?: AlbumWhereInput[] | AlbumWhereInput | null
+  NOT?: AlbumWhereInput[] | AlbumWhereInput | null
+}
+
+export interface AlbumWhereUniqueInput {
+  id?: ID_Input | null
+  album_id?: String | null
+}
+
+export interface ArtistCreateInput {
+  id?: ID_Input | null
+  artist_id: String
+  name: String
+}
+
+export interface ArtistCreateManyInput {
+  create?: ArtistCreateInput[] | ArtistCreateInput | null
+  connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+}
+
+export interface ArtistScalarWhereInput {
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  artist_id?: String | null
+  artist_id_not?: String | null
+  artist_id_in?: String[] | String | null
+  artist_id_not_in?: String[] | String | null
+  artist_id_lt?: String | null
+  artist_id_lte?: String | null
+  artist_id_gt?: String | null
+  artist_id_gte?: String | null
+  artist_id_contains?: String | null
+  artist_id_not_contains?: String | null
+  artist_id_starts_with?: String | null
+  artist_id_not_starts_with?: String | null
+  artist_id_ends_with?: String | null
+  artist_id_not_ends_with?: String | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  AND?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null
+  OR?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null
+  NOT?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null
+}
+
+export interface ArtistSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: ArtistWhereInput | null
+  AND?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null
+  OR?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null
+  NOT?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null
+}
+
+export interface ArtistUpdateDataInput {
+  artist_id?: String | null
+  name?: String | null
+}
+
+export interface ArtistUpdateInput {
+  artist_id?: String | null
+  name?: String | null
+}
+
+export interface ArtistUpdateManyDataInput {
+  artist_id?: String | null
+  name?: String | null
+}
+
+export interface ArtistUpdateManyInput {
+  create?: ArtistCreateInput[] | ArtistCreateInput | null
+  update?: ArtistUpdateWithWhereUniqueNestedInput[] | ArtistUpdateWithWhereUniqueNestedInput | null
+  upsert?: ArtistUpsertWithWhereUniqueNestedInput[] | ArtistUpsertWithWhereUniqueNestedInput | null
+  delete?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+  connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+  set?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+  disconnect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+  deleteMany?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null
+  updateMany?: ArtistUpdateManyWithWhereNestedInput[] | ArtistUpdateManyWithWhereNestedInput | null
+}
+
+export interface ArtistUpdateManyMutationInput {
+  artist_id?: String | null
+  name?: String | null
+}
+
+export interface ArtistUpdateManyWithWhereNestedInput {
+  where: ArtistScalarWhereInput
+  data: ArtistUpdateManyDataInput
+}
+
+export interface ArtistUpdateWithWhereUniqueNestedInput {
+  where: ArtistWhereUniqueInput
+  data: ArtistUpdateDataInput
+}
+
+export interface ArtistUpsertWithWhereUniqueNestedInput {
+  where: ArtistWhereUniqueInput
+  update: ArtistUpdateDataInput
+  create: ArtistCreateInput
+}
+
+export interface ArtistWhereInput {
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  artist_id?: String | null
+  artist_id_not?: String | null
+  artist_id_in?: String[] | String | null
+  artist_id_not_in?: String[] | String | null
+  artist_id_lt?: String | null
+  artist_id_lte?: String | null
+  artist_id_gt?: String | null
+  artist_id_gte?: String | null
+  artist_id_contains?: String | null
+  artist_id_not_contains?: String | null
+  artist_id_starts_with?: String | null
+  artist_id_not_starts_with?: String | null
+  artist_id_ends_with?: String | null
+  artist_id_not_ends_with?: String | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  AND?: ArtistWhereInput[] | ArtistWhereInput | null
+  OR?: ArtistWhereInput[] | ArtistWhereInput | null
+  NOT?: ArtistWhereInput[] | ArtistWhereInput | null
+}
+
+export interface ArtistWhereUniqueInput {
+  id?: ID_Input | null
+  artist_id?: String | null
+}
 
 export interface ChatCreateInput {
   id?: ID_Input | null
@@ -2852,6 +4268,185 @@ export interface GameWhereInput {
 export interface GameWhereUniqueInput {
   id?: ID_Input | null
   title?: String | null
+}
+
+export interface ImageCreateInput {
+  id?: ID_Input | null
+  height: Int
+  width: Int
+  url: String
+}
+
+export interface ImageCreateManyInput {
+  create?: ImageCreateInput[] | ImageCreateInput | null
+  connect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+}
+
+export interface ImageScalarWhereInput {
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  height?: Int | null
+  height_not?: Int | null
+  height_in?: Int[] | Int | null
+  height_not_in?: Int[] | Int | null
+  height_lt?: Int | null
+  height_lte?: Int | null
+  height_gt?: Int | null
+  height_gte?: Int | null
+  width?: Int | null
+  width_not?: Int | null
+  width_in?: Int[] | Int | null
+  width_not_in?: Int[] | Int | null
+  width_lt?: Int | null
+  width_lte?: Int | null
+  width_gt?: Int | null
+  width_gte?: Int | null
+  url?: String | null
+  url_not?: String | null
+  url_in?: String[] | String | null
+  url_not_in?: String[] | String | null
+  url_lt?: String | null
+  url_lte?: String | null
+  url_gt?: String | null
+  url_gte?: String | null
+  url_contains?: String | null
+  url_not_contains?: String | null
+  url_starts_with?: String | null
+  url_not_starts_with?: String | null
+  url_ends_with?: String | null
+  url_not_ends_with?: String | null
+  AND?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
+  OR?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
+  NOT?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
+}
+
+export interface ImageSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: ImageWhereInput | null
+  AND?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null
+  OR?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null
+  NOT?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null
+}
+
+export interface ImageUpdateDataInput {
+  height?: Int | null
+  width?: Int | null
+  url?: String | null
+}
+
+export interface ImageUpdateInput {
+  height?: Int | null
+  width?: Int | null
+  url?: String | null
+}
+
+export interface ImageUpdateManyDataInput {
+  height?: Int | null
+  width?: Int | null
+  url?: String | null
+}
+
+export interface ImageUpdateManyInput {
+  create?: ImageCreateInput[] | ImageCreateInput | null
+  update?: ImageUpdateWithWhereUniqueNestedInput[] | ImageUpdateWithWhereUniqueNestedInput | null
+  upsert?: ImageUpsertWithWhereUniqueNestedInput[] | ImageUpsertWithWhereUniqueNestedInput | null
+  delete?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+  connect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+  set?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+  disconnect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+  deleteMany?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
+  updateMany?: ImageUpdateManyWithWhereNestedInput[] | ImageUpdateManyWithWhereNestedInput | null
+}
+
+export interface ImageUpdateManyMutationInput {
+  height?: Int | null
+  width?: Int | null
+  url?: String | null
+}
+
+export interface ImageUpdateManyWithWhereNestedInput {
+  where: ImageScalarWhereInput
+  data: ImageUpdateManyDataInput
+}
+
+export interface ImageUpdateWithWhereUniqueNestedInput {
+  where: ImageWhereUniqueInput
+  data: ImageUpdateDataInput
+}
+
+export interface ImageUpsertWithWhereUniqueNestedInput {
+  where: ImageWhereUniqueInput
+  update: ImageUpdateDataInput
+  create: ImageCreateInput
+}
+
+export interface ImageWhereInput {
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  height?: Int | null
+  height_not?: Int | null
+  height_in?: Int[] | Int | null
+  height_not_in?: Int[] | Int | null
+  height_lt?: Int | null
+  height_lte?: Int | null
+  height_gt?: Int | null
+  height_gte?: Int | null
+  width?: Int | null
+  width_not?: Int | null
+  width_in?: Int[] | Int | null
+  width_not_in?: Int[] | Int | null
+  width_lt?: Int | null
+  width_lte?: Int | null
+  width_gt?: Int | null
+  width_gte?: Int | null
+  url?: String | null
+  url_not?: String | null
+  url_in?: String[] | String | null
+  url_not_in?: String[] | String | null
+  url_lt?: String | null
+  url_lte?: String | null
+  url_gt?: String | null
+  url_gte?: String | null
+  url_contains?: String | null
+  url_not_contains?: String | null
+  url_starts_with?: String | null
+  url_not_starts_with?: String | null
+  url_ends_with?: String | null
+  url_not_ends_with?: String | null
+  AND?: ImageWhereInput[] | ImageWhereInput | null
+  OR?: ImageWhereInput[] | ImageWhereInput | null
+  NOT?: ImageWhereInput[] | ImageWhereInput | null
+}
+
+export interface ImageWhereUniqueInput {
+  id?: ID_Input | null
 }
 
 export interface LocationCreateInput {
@@ -3540,6 +5135,331 @@ export interface PartyWhereInput {
 
 export interface PartyWhereUniqueInput {
   id?: ID_Input | null
+}
+
+export interface PlaylistCreateInput {
+  id?: ID_Input | null
+  playlist_id?: String | null
+  name: String
+  tracks?: TrackCreateManyInput | null
+  isTemporary?: Boolean | null
+}
+
+export interface PlaylistSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: PlaylistWhereInput | null
+  AND?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null
+  OR?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null
+  NOT?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null
+}
+
+export interface PlaylistUpdateInput {
+  playlist_id?: String | null
+  name?: String | null
+  tracks?: TrackUpdateManyInput | null
+  isTemporary?: Boolean | null
+}
+
+export interface PlaylistUpdateManyMutationInput {
+  playlist_id?: String | null
+  name?: String | null
+  isTemporary?: Boolean | null
+}
+
+export interface PlaylistWhereInput {
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  playlist_id?: String | null
+  playlist_id_not?: String | null
+  playlist_id_in?: String[] | String | null
+  playlist_id_not_in?: String[] | String | null
+  playlist_id_lt?: String | null
+  playlist_id_lte?: String | null
+  playlist_id_gt?: String | null
+  playlist_id_gte?: String | null
+  playlist_id_contains?: String | null
+  playlist_id_not_contains?: String | null
+  playlist_id_starts_with?: String | null
+  playlist_id_not_starts_with?: String | null
+  playlist_id_ends_with?: String | null
+  playlist_id_not_ends_with?: String | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  tracks_every?: TrackWhereInput | null
+  tracks_some?: TrackWhereInput | null
+  tracks_none?: TrackWhereInput | null
+  isTemporary?: Boolean | null
+  isTemporary_not?: Boolean | null
+  AND?: PlaylistWhereInput[] | PlaylistWhereInput | null
+  OR?: PlaylistWhereInput[] | PlaylistWhereInput | null
+  NOT?: PlaylistWhereInput[] | PlaylistWhereInput | null
+}
+
+export interface PlaylistWhereUniqueInput {
+  id?: ID_Input | null
+  playlist_id?: String | null
+}
+
+export interface TrackCreateInput {
+  id?: ID_Input | null
+  track_id: String
+  name: String
+  album: AlbumCreateOneInput
+  artists?: ArtistCreateManyInput | null
+  duration: Int
+  preview_url: String
+}
+
+export interface TrackCreateManyInput {
+  create?: TrackCreateInput[] | TrackCreateInput | null
+  connect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+}
+
+export interface TrackScalarWhereInput {
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  track_id?: String | null
+  track_id_not?: String | null
+  track_id_in?: String[] | String | null
+  track_id_not_in?: String[] | String | null
+  track_id_lt?: String | null
+  track_id_lte?: String | null
+  track_id_gt?: String | null
+  track_id_gte?: String | null
+  track_id_contains?: String | null
+  track_id_not_contains?: String | null
+  track_id_starts_with?: String | null
+  track_id_not_starts_with?: String | null
+  track_id_ends_with?: String | null
+  track_id_not_ends_with?: String | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  duration?: Int | null
+  duration_not?: Int | null
+  duration_in?: Int[] | Int | null
+  duration_not_in?: Int[] | Int | null
+  duration_lt?: Int | null
+  duration_lte?: Int | null
+  duration_gt?: Int | null
+  duration_gte?: Int | null
+  preview_url?: String | null
+  preview_url_not?: String | null
+  preview_url_in?: String[] | String | null
+  preview_url_not_in?: String[] | String | null
+  preview_url_lt?: String | null
+  preview_url_lte?: String | null
+  preview_url_gt?: String | null
+  preview_url_gte?: String | null
+  preview_url_contains?: String | null
+  preview_url_not_contains?: String | null
+  preview_url_starts_with?: String | null
+  preview_url_not_starts_with?: String | null
+  preview_url_ends_with?: String | null
+  preview_url_not_ends_with?: String | null
+  AND?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
+  OR?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
+  NOT?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
+}
+
+export interface TrackSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: TrackWhereInput | null
+  AND?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null
+  OR?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null
+  NOT?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null
+}
+
+export interface TrackUpdateDataInput {
+  track_id?: String | null
+  name?: String | null
+  album?: AlbumUpdateOneRequiredInput | null
+  artists?: ArtistUpdateManyInput | null
+  duration?: Int | null
+  preview_url?: String | null
+}
+
+export interface TrackUpdateInput {
+  track_id?: String | null
+  name?: String | null
+  album?: AlbumUpdateOneRequiredInput | null
+  artists?: ArtistUpdateManyInput | null
+  duration?: Int | null
+  preview_url?: String | null
+}
+
+export interface TrackUpdateManyDataInput {
+  track_id?: String | null
+  name?: String | null
+  duration?: Int | null
+  preview_url?: String | null
+}
+
+export interface TrackUpdateManyInput {
+  create?: TrackCreateInput[] | TrackCreateInput | null
+  update?: TrackUpdateWithWhereUniqueNestedInput[] | TrackUpdateWithWhereUniqueNestedInput | null
+  upsert?: TrackUpsertWithWhereUniqueNestedInput[] | TrackUpsertWithWhereUniqueNestedInput | null
+  delete?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+  connect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+  set?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+  disconnect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+  deleteMany?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
+  updateMany?: TrackUpdateManyWithWhereNestedInput[] | TrackUpdateManyWithWhereNestedInput | null
+}
+
+export interface TrackUpdateManyMutationInput {
+  track_id?: String | null
+  name?: String | null
+  duration?: Int | null
+  preview_url?: String | null
+}
+
+export interface TrackUpdateManyWithWhereNestedInput {
+  where: TrackScalarWhereInput
+  data: TrackUpdateManyDataInput
+}
+
+export interface TrackUpdateWithWhereUniqueNestedInput {
+  where: TrackWhereUniqueInput
+  data: TrackUpdateDataInput
+}
+
+export interface TrackUpsertWithWhereUniqueNestedInput {
+  where: TrackWhereUniqueInput
+  update: TrackUpdateDataInput
+  create: TrackCreateInput
+}
+
+export interface TrackWhereInput {
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  track_id?: String | null
+  track_id_not?: String | null
+  track_id_in?: String[] | String | null
+  track_id_not_in?: String[] | String | null
+  track_id_lt?: String | null
+  track_id_lte?: String | null
+  track_id_gt?: String | null
+  track_id_gte?: String | null
+  track_id_contains?: String | null
+  track_id_not_contains?: String | null
+  track_id_starts_with?: String | null
+  track_id_not_starts_with?: String | null
+  track_id_ends_with?: String | null
+  track_id_not_ends_with?: String | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  album?: AlbumWhereInput | null
+  artists_every?: ArtistWhereInput | null
+  artists_some?: ArtistWhereInput | null
+  artists_none?: ArtistWhereInput | null
+  duration?: Int | null
+  duration_not?: Int | null
+  duration_in?: Int[] | Int | null
+  duration_not_in?: Int[] | Int | null
+  duration_lt?: Int | null
+  duration_lte?: Int | null
+  duration_gt?: Int | null
+  duration_gte?: Int | null
+  preview_url?: String | null
+  preview_url_not?: String | null
+  preview_url_in?: String[] | String | null
+  preview_url_not_in?: String[] | String | null
+  preview_url_lt?: String | null
+  preview_url_lte?: String | null
+  preview_url_gt?: String | null
+  preview_url_gte?: String | null
+  preview_url_contains?: String | null
+  preview_url_not_contains?: String | null
+  preview_url_starts_with?: String | null
+  preview_url_not_starts_with?: String | null
+  preview_url_ends_with?: String | null
+  preview_url_not_ends_with?: String | null
+  AND?: TrackWhereInput[] | TrackWhereInput | null
+  OR?: TrackWhereInput[] | TrackWhereInput | null
+  NOT?: TrackWhereInput[] | TrackWhereInput | null
+}
+
+export interface TrackWhereUniqueInput {
+  id?: ID_Input | null
+  track_id?: String | null
 }
 
 export interface UserCreateInput {
@@ -4243,11 +6163,23 @@ export interface Node {
   id: ID_Output
 }
 
+export interface AggregateAlbum {
+  count: Int
+}
+
+export interface AggregateArtist {
+  count: Int
+}
+
 export interface AggregateChat {
   count: Int
 }
 
 export interface AggregateGame {
+  count: Int
+}
+
+export interface AggregateImage {
   count: Int
 }
 
@@ -4263,8 +6195,76 @@ export interface AggregateParty {
   count: Int
 }
 
+export interface AggregatePlaylist {
+  count: Int
+}
+
+export interface AggregateTrack {
+  count: Int
+}
+
 export interface AggregateUser {
   count: Int
+}
+
+export interface Album {
+  id: ID_Output
+  album_id: String
+  images?: Array<Image> | null
+  artists?: Array<Artist> | null
+}
+
+export interface AlbumConnection {
+  pageInfo: PageInfo
+  edges: Array<AlbumEdge | null>
+  aggregate: AggregateAlbum
+}
+
+export interface AlbumEdge {
+  node: Album
+  cursor: String
+}
+
+export interface AlbumPreviousValues {
+  id: ID_Output
+  album_id: String
+}
+
+export interface AlbumSubscriptionPayload {
+  mutation: MutationType
+  node?: Album | null
+  updatedFields?: Array<String> | null
+  previousValues?: AlbumPreviousValues | null
+}
+
+export interface Artist {
+  id: ID_Output
+  artist_id: String
+  name: String
+}
+
+export interface ArtistConnection {
+  pageInfo: PageInfo
+  edges: Array<ArtistEdge | null>
+  aggregate: AggregateArtist
+}
+
+export interface ArtistEdge {
+  node: Artist
+  cursor: String
+}
+
+export interface ArtistPreviousValues {
+  id: ID_Output
+  artist_id: String
+  name: String
+}
+
+export interface ArtistSubscriptionPayload {
+  mutation: MutationType
+  node?: Artist | null
+  updatedFields?: Array<String> | null
+  previousValues?: ArtistPreviousValues | null
 }
 
 export interface BatchPayload {
@@ -4338,6 +6338,38 @@ export interface GameSubscriptionPayload {
   node?: Game | null
   updatedFields?: Array<String> | null
   previousValues?: GamePreviousValues | null
+}
+
+export interface Image {
+  id: ID_Output
+  height: Int
+  width: Int
+  url: String
+}
+
+export interface ImageConnection {
+  pageInfo: PageInfo
+  edges: Array<ImageEdge | null>
+  aggregate: AggregateImage
+}
+
+export interface ImageEdge {
+  node: Image
+  cursor: String
+}
+
+export interface ImagePreviousValues {
+  id: ID_Output
+  height: Int
+  width: Int
+  url: String
+}
+
+export interface ImageSubscriptionPayload {
+  mutation: MutationType
+  node?: Image | null
+  updatedFields?: Array<String> | null
+  previousValues?: ImagePreviousValues | null
 }
 
 export interface Location {
@@ -4463,6 +6495,75 @@ export interface PartySubscriptionPayload {
   node?: Party | null
   updatedFields?: Array<String> | null
   previousValues?: PartyPreviousValues | null
+}
+
+export interface Playlist {
+  id: ID_Output
+  playlist_id?: String | null
+  name: String
+  tracks?: Array<Track> | null
+  isTemporary?: Boolean | null
+}
+
+export interface PlaylistConnection {
+  pageInfo: PageInfo
+  edges: Array<PlaylistEdge | null>
+  aggregate: AggregatePlaylist
+}
+
+export interface PlaylistEdge {
+  node: Playlist
+  cursor: String
+}
+
+export interface PlaylistPreviousValues {
+  id: ID_Output
+  playlist_id?: String | null
+  name: String
+  isTemporary?: Boolean | null
+}
+
+export interface PlaylistSubscriptionPayload {
+  mutation: MutationType
+  node?: Playlist | null
+  updatedFields?: Array<String> | null
+  previousValues?: PlaylistPreviousValues | null
+}
+
+export interface Track {
+  id: ID_Output
+  track_id: String
+  name: String
+  album: Album
+  artists?: Array<Artist> | null
+  duration: Int
+  preview_url: String
+}
+
+export interface TrackConnection {
+  pageInfo: PageInfo
+  edges: Array<TrackEdge | null>
+  aggregate: AggregateTrack
+}
+
+export interface TrackEdge {
+  node: Track
+  cursor: String
+}
+
+export interface TrackPreviousValues {
+  id: ID_Output
+  track_id: String
+  name: String
+  duration: Int
+  preview_url: String
+}
+
+export interface TrackSubscriptionPayload {
+  mutation: MutationType
+  node?: Track | null
+  updatedFields?: Array<String> | null
+  previousValues?: TrackPreviousValues | null
 }
 
 export interface User {

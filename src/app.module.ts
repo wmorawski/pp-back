@@ -11,6 +11,7 @@ import { ConfigModule } from './config/config.module';
 import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
+import { MusicModule } from './music/music.module';
 
 @Module({
   imports: [
@@ -30,7 +31,9 @@ import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
     AuthModule,
     MessagesModule,
     MailerModule.forRoot({
-      transport: `smtp://${process.env.MAILTRAP_USER}:${process.env.MAILTRAP_PASSWORD}@${process.env.MAILTRAP_HOST}`,
+      transport: `smtp://${process.env.MAILTRAP_USER}:${
+        process.env.MAILTRAP_PASSWORD
+      }@${process.env.MAILTRAP_HOST}`,
       defaults: {
         from: '"PartyPlanner" <noreply@partyplanner.io>',
       },
@@ -42,6 +45,7 @@ import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
         },
       },
     }),
+    MusicModule,
   ],
   controllers: [AppController],
   providers: [
@@ -54,4 +58,4 @@ import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

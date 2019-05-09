@@ -64,10 +64,10 @@ export class UsersResolver {
   async requestReset(@Args() args, @Info() info): Promise<SuccessMessage> {
     const user = await this.usersService.findOne({ email: args.email });
     if (!user) {
-      throw new UnauthorizedException(`No such user found for email ${args.email}`);
+      throw new GraphQLError(`No such user found for email ${args.email}`);
     }
     if (user.thirdPartyId) {
-      throw new Error(`User has been created with third party provider: ${user.thirdPartyId}`);
+      throw new GraphQLError(`User has been created with third party provider: ${user.thirdPartyId}`);
     }
     const resetToken = (await promisify(randomBytes)(20)).toString('hex');
     const resetTokenExpiry = new Date(Date.now() + 1000 * 60 * 60 * 24);

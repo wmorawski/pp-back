@@ -9,5 +9,7 @@ hooks:
 generate:
   - generator: graphql-schema
     output: ./src/prisma/prisma.graphql
+  - generator: typescript-client
+    output: ./generated/prisma
 seed:
   run: ts-node ./src/prisma/seed/seed.ts

@@ -1,4 +1,3 @@
-import { UserCreateInput } from './../../../dist/generated/prisma-client/index.d';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { prisma } from '../../../generated/prisma-client';

@@ -15,7 +15,7 @@ type User {
   provider: SocialMediaType
   avatar: String
   thirdPartyId: String
-  resetToken: String,
+  resetToken: String
   resetTokenExpiry: DateTime
 }
 
@@ -72,6 +72,37 @@ type Location {
   updatedAt: DateTime! @updatedAt
 }
 
+type Playlist {
+  id: ID! @id
+  playlist_id: String @unique
+  name: String!
+  tracks: [Track!]!
+  isTemporary: Boolean @default(value: true)
+}
+type Track {
+  id: ID! @id
+  name: String!
+  album: Album!
+  artists: [Artist!]!
+  duration: Int!
+  preview_url: String!
+}
+type Album {
+  id: ID! @id
+  images: [Image!]!
+  artists: [Artist!]!
+}
+type Artist {
+  id: ID! @id
+  name: String!
+}
+
+type Image {
+  id: ID! @id
+  height: Int!
+  width: Int!
+  url: String!
+}
 enum GameType {
   BOARD
   PC

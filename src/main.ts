@@ -9,6 +9,8 @@ import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = process.env.PORT || 4000;
+  console.log(port);
   const options = new DocumentBuilder()
     .setTitle('Party Planner Documentation')
     .setDescription('Documentation of the engineering project API')
@@ -35,6 +37,8 @@ async function bootstrap() {
   deserializeUser((user, done) => {
     done(null, user);
   });
-  await app.listen(process.env.PORT || 4000);
+  await app.listen(port, () => {
+    console.log(`Server listen on port ${port}`);
+  });
 }
 bootstrap();

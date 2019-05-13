@@ -43,7 +43,6 @@ export interface Query {
 export interface Mutation {
     createAlbum: <T = Album>(args: { data: AlbumCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateAlbum: <T = Album | null>(args: { data: AlbumUpdateInput, where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateManyAlbums: <T = BatchPayload>(args: { data: AlbumUpdateManyMutationInput, where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertAlbum: <T = Album>(args: { where: AlbumWhereUniqueInput, create: AlbumCreateInput, update: AlbumUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteAlbum: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteManyAlbums: <T = BatchPayload>(args: { where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -204,7 +203,6 @@ type AggregateUser {
 
 type Album {
   id: ID!
-  album_id: String!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
   artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
 }
@@ -217,7 +215,6 @@ type AlbumConnection {
 
 input AlbumCreateInput {
   id: ID
-  album_id: String!
   images: ImageCreateManyInput
   artists: ArtistCreateManyInput
 }
@@ -235,13 +232,10 @@ type AlbumEdge {
 enum AlbumOrderByInput {
   id_ASC
   id_DESC
-  album_id_ASC
-  album_id_DESC
 }
 
 type AlbumPreviousValues {
   id: ID!
-  album_id: String!
 }
 
 type AlbumSubscriptionPayload {
@@ -263,19 +257,13 @@ input AlbumSubscriptionWhereInput {
 }
 
 input AlbumUpdateDataInput {
-  album_id: String
   images: ImageUpdateManyInput
   artists: ArtistUpdateManyInput
 }
 
 input AlbumUpdateInput {
-  album_id: String
   images: ImageUpdateManyInput
   artists: ArtistUpdateManyInput
-}
-
-input AlbumUpdateManyMutationInput {
-  album_id: String
 }
 
 input AlbumUpdateOneRequiredInput {
@@ -305,20 +293,6 @@ input AlbumWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  album_id: String
-  album_id_not: String
-  album_id_in: [String!]
-  album_id_not_in: [String!]
-  album_id_lt: String
-  album_id_lte: String
-  album_id_gt: String
-  album_id_gte: String
-  album_id_contains: String
-  album_id_not_contains: String
-  album_id_starts_with: String
-  album_id_not_starts_with: String
-  album_id_ends_with: String
-  album_id_not_ends_with: String
   images_every: ImageWhereInput
   images_some: ImageWhereInput
   images_none: ImageWhereInput
@@ -332,12 +306,10 @@ input AlbumWhereInput {
 
 input AlbumWhereUniqueInput {
   id: ID
-  album_id: String
 }
 
 type Artist {
   id: ID!
-  artist_id: String!
   name: String!
 }
 
@@ -349,7 +321,6 @@ type ArtistConnection {
 
 input ArtistCreateInput {
   id: ID
-  artist_id: String!
   name: String!
 }
 
@@ -366,15 +337,12 @@ type ArtistEdge {
 enum ArtistOrderByInput {
   id_ASC
   id_DESC
-  artist_id_ASC
-  artist_id_DESC
   name_ASC
   name_DESC
 }
 
 type ArtistPreviousValues {
   id: ID!
-  artist_id: String!
   name: String!
 }
 
@@ -393,20 +361,6 @@ input ArtistScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  artist_id: String
-  artist_id_not: String
-  artist_id_in: [String!]
-  artist_id_not_in: [String!]
-  artist_id_lt: String
-  artist_id_lte: String
-  artist_id_gt: String
-  artist_id_gte: String
-  artist_id_contains: String
-  artist_id_not_contains: String
-  artist_id_starts_with: String
-  artist_id_not_starts_with: String
-  artist_id_ends_with: String
-  artist_id_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -445,17 +399,14 @@ input ArtistSubscriptionWhereInput {
 }
 
 input ArtistUpdateDataInput {
-  artist_id: String
   name: String
 }
 
 input ArtistUpdateInput {
-  artist_id: String
   name: String
 }
 
 input ArtistUpdateManyDataInput {
-  artist_id: String
   name: String
 }
 
@@ -472,7 +423,6 @@ input ArtistUpdateManyInput {
 }
 
 input ArtistUpdateManyMutationInput {
-  artist_id: String
   name: String
 }
 
@@ -507,20 +457,6 @@ input ArtistWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  artist_id: String
-  artist_id_not: String
-  artist_id_in: [String!]
-  artist_id_not_in: [String!]
-  artist_id_lt: String
-  artist_id_lte: String
-  artist_id_gt: String
-  artist_id_gte: String
-  artist_id_contains: String
-  artist_id_not_contains: String
-  artist_id_starts_with: String
-  artist_id_not_starts_with: String
-  artist_id_ends_with: String
-  artist_id_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -542,7 +478,6 @@ input ArtistWhereInput {
 
 input ArtistWhereUniqueInput {
   id: ID
-  artist_id: String
 }
 
 type BatchPayload {
@@ -1667,7 +1602,6 @@ input MessageWhereUniqueInput {
 type Mutation {
   createAlbum(data: AlbumCreateInput!): Album!
   updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
-  updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
   upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
   deleteAlbum(where: AlbumWhereUniqueInput!): Album
   deleteManyAlbums(where: AlbumWhereInput): BatchPayload!
@@ -2396,7 +2330,6 @@ type Subscription {
 
 type Track {
   id: ID!
-  track_id: String!
   name: String!
   album: Album!
   artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
@@ -2412,7 +2345,6 @@ type TrackConnection {
 
 input TrackCreateInput {
   id: ID
-  track_id: String!
   name: String!
   album: AlbumCreateOneInput!
   artists: ArtistCreateManyInput
@@ -2433,8 +2365,6 @@ type TrackEdge {
 enum TrackOrderByInput {
   id_ASC
   id_DESC
-  track_id_ASC
-  track_id_DESC
   name_ASC
   name_DESC
   duration_ASC
@@ -2445,7 +2375,6 @@ enum TrackOrderByInput {
 
 type TrackPreviousValues {
   id: ID!
-  track_id: String!
   name: String!
   duration: Int!
   preview_url: String!
@@ -2466,20 +2395,6 @@ input TrackScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  track_id: String
-  track_id_not: String
-  track_id_in: [String!]
-  track_id_not_in: [String!]
-  track_id_lt: String
-  track_id_lte: String
-  track_id_gt: String
-  track_id_gte: String
-  track_id_contains: String
-  track_id_not_contains: String
-  track_id_starts_with: String
-  track_id_not_starts_with: String
-  track_id_ends_with: String
-  track_id_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -2540,7 +2455,6 @@ input TrackSubscriptionWhereInput {
 }
 
 input TrackUpdateDataInput {
-  track_id: String
   name: String
   album: AlbumUpdateOneRequiredInput
   artists: ArtistUpdateManyInput
@@ -2549,7 +2463,6 @@ input TrackUpdateDataInput {
 }
 
 input TrackUpdateInput {
-  track_id: String
   name: String
   album: AlbumUpdateOneRequiredInput
   artists: ArtistUpdateManyInput
@@ -2558,7 +2471,6 @@ input TrackUpdateInput {
 }
 
 input TrackUpdateManyDataInput {
-  track_id: String
   name: String
   duration: Int
   preview_url: String
@@ -2577,7 +2489,6 @@ input TrackUpdateManyInput {
 }
 
 input TrackUpdateManyMutationInput {
-  track_id: String
   name: String
   duration: Int
   preview_url: String
@@ -2614,20 +2525,6 @@ input TrackWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  track_id: String
-  track_id_not: String
-  track_id_in: [String!]
-  track_id_not_in: [String!]
-  track_id_lt: String
-  track_id_lte: String
-  track_id_gt: String
-  track_id_gte: String
-  track_id_contains: String
-  track_id_not_contains: String
-  track_id_starts_with: String
-  track_id_not_starts_with: String
-  track_id_ends_with: String
-  track_id_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -2675,7 +2572,6 @@ input TrackWhereInput {
 
 input TrackWhereUniqueInput {
   id: ID
-  track_id: String
 }
 
 type User {
@@ -3470,14 +3366,10 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
 */
 
 export type AlbumOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'album_id_ASC' |
-  'album_id_DESC'
+  'id_DESC'
 
 export type ArtistOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'artist_id_ASC' |
-  'artist_id_DESC' |
   'name_ASC' |
   'name_DESC'
 
@@ -3576,8 +3468,6 @@ export type SocialMediaType =   'FACEBOOK' |
 
 export type TrackOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'track_id_ASC' |
-  'track_id_DESC' |
   'name_ASC' |
   'name_DESC' |
   'duration_ASC' |
@@ -3616,7 +3506,6 @@ export type UserOrderByInput =   'id_ASC' |
 
 export interface AlbumCreateInput {
   id?: ID_Input | null
-  album_id: String
   images?: ImageCreateManyInput | null
   artists?: ArtistCreateManyInput | null
 }
@@ -3638,19 +3527,13 @@ export interface AlbumSubscriptionWhereInput {
 }
 
 export interface AlbumUpdateDataInput {
-  album_id?: String | null
   images?: ImageUpdateManyInput | null
   artists?: ArtistUpdateManyInput | null
 }
 
 export interface AlbumUpdateInput {
-  album_id?: String | null
   images?: ImageUpdateManyInput | null
   artists?: ArtistUpdateManyInput | null
-}
-
-export interface AlbumUpdateManyMutationInput {
-  album_id?: String | null
 }
 
 export interface AlbumUpdateOneRequiredInput {
@@ -3680,20 +3563,6 @@ export interface AlbumWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
-  album_id?: String | null
-  album_id_not?: String | null
-  album_id_in?: String[] | String | null
-  album_id_not_in?: String[] | String | null
-  album_id_lt?: String | null
-  album_id_lte?: String | null
-  album_id_gt?: String | null
-  album_id_gte?: String | null
-  album_id_contains?: String | null
-  album_id_not_contains?: String | null
-  album_id_starts_with?: String | null
-  album_id_not_starts_with?: String | null
-  album_id_ends_with?: String | null
-  album_id_not_ends_with?: String | null
   images_every?: ImageWhereInput | null
   images_some?: ImageWhereInput | null
   images_none?: ImageWhereInput | null
@@ -3707,12 +3576,10 @@ export interface AlbumWhereInput {
 
 export interface AlbumWhereUniqueInput {
   id?: ID_Input | null
-  album_id?: String | null
 }
 
 export interface ArtistCreateInput {
   id?: ID_Input | null
-  artist_id: String
   name: String
 }
 
@@ -3736,20 +3603,6 @@ export interface ArtistScalarWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
-  artist_id?: String | null
-  artist_id_not?: String | null
-  artist_id_in?: String[] | String | null
-  artist_id_not_in?: String[] | String | null
-  artist_id_lt?: String | null
-  artist_id_lte?: String | null
-  artist_id_gt?: String | null
-  artist_id_gte?: String | null
-  artist_id_contains?: String | null
-  artist_id_not_contains?: String | null
-  artist_id_starts_with?: String | null
-  artist_id_not_starts_with?: String | null
-  artist_id_ends_with?: String | null
-  artist_id_not_ends_with?: String | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -3781,17 +3634,14 @@ export interface ArtistSubscriptionWhereInput {
 }
 
 export interface ArtistUpdateDataInput {
-  artist_id?: String | null
   name?: String | null
 }
 
 export interface ArtistUpdateInput {
-  artist_id?: String | null
   name?: String | null
 }
 
 export interface ArtistUpdateManyDataInput {
-  artist_id?: String | null
   name?: String | null
 }
 
@@ -3808,7 +3658,6 @@ export interface ArtistUpdateManyInput {
 }
 
 export interface ArtistUpdateManyMutationInput {
-  artist_id?: String | null
   name?: String | null
 }
 
@@ -3843,20 +3692,6 @@ export interface ArtistWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
-  artist_id?: String | null
-  artist_id_not?: String | null
-  artist_id_in?: String[] | String | null
-  artist_id_not_in?: String[] | String | null
-  artist_id_lt?: String | null
-  artist_id_lte?: String | null
-  artist_id_gt?: String | null
-  artist_id_gte?: String | null
-  artist_id_contains?: String | null
-  artist_id_not_contains?: String | null
-  artist_id_starts_with?: String | null
-  artist_id_not_starts_with?: String | null
-  artist_id_ends_with?: String | null
-  artist_id_not_ends_with?: String | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -3878,7 +3713,6 @@ export interface ArtistWhereInput {
 
 export interface ArtistWhereUniqueInput {
   id?: ID_Input | null
-  artist_id?: String | null
 }
 
 export interface ChatCreateInput {
@@ -5229,7 +5063,6 @@ export interface PlaylistWhereUniqueInput {
 
 export interface TrackCreateInput {
   id?: ID_Input | null
-  track_id: String
   name: String
   album: AlbumCreateOneInput
   artists?: ArtistCreateManyInput | null
@@ -5257,20 +5090,6 @@ export interface TrackScalarWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
-  track_id?: String | null
-  track_id_not?: String | null
-  track_id_in?: String[] | String | null
-  track_id_not_in?: String[] | String | null
-  track_id_lt?: String | null
-  track_id_lte?: String | null
-  track_id_gt?: String | null
-  track_id_gte?: String | null
-  track_id_contains?: String | null
-  track_id_not_contains?: String | null
-  track_id_starts_with?: String | null
-  track_id_not_starts_with?: String | null
-  track_id_ends_with?: String | null
-  track_id_not_ends_with?: String | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -5324,7 +5143,6 @@ export interface TrackSubscriptionWhereInput {
 }
 
 export interface TrackUpdateDataInput {
-  track_id?: String | null
   name?: String | null
   album?: AlbumUpdateOneRequiredInput | null
   artists?: ArtistUpdateManyInput | null
@@ -5333,7 +5151,6 @@ export interface TrackUpdateDataInput {
 }
 
 export interface TrackUpdateInput {
-  track_id?: String | null
   name?: String | null
   album?: AlbumUpdateOneRequiredInput | null
   artists?: ArtistUpdateManyInput | null
@@ -5342,7 +5159,6 @@ export interface TrackUpdateInput {
 }
 
 export interface TrackUpdateManyDataInput {
-  track_id?: String | null
   name?: String | null
   duration?: Int | null
   preview_url?: String | null
@@ -5361,7 +5177,6 @@ export interface TrackUpdateManyInput {
 }
 
 export interface TrackUpdateManyMutationInput {
-  track_id?: String | null
   name?: String | null
   duration?: Int | null
   preview_url?: String | null
@@ -5398,20 +5213,6 @@ export interface TrackWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
-  track_id?: String | null
-  track_id_not?: String | null
-  track_id_in?: String[] | String | null
-  track_id_not_in?: String[] | String | null
-  track_id_lt?: String | null
-  track_id_lte?: String | null
-  track_id_gt?: String | null
-  track_id_gte?: String | null
-  track_id_contains?: String | null
-  track_id_not_contains?: String | null
-  track_id_starts_with?: String | null
-  track_id_not_starts_with?: String | null
-  track_id_ends_with?: String | null
-  track_id_not_ends_with?: String | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -5459,7 +5260,6 @@ export interface TrackWhereInput {
 
 export interface TrackWhereUniqueInput {
   id?: ID_Input | null
-  track_id?: String | null
 }
 
 export interface UserCreateInput {
@@ -6209,7 +6009,6 @@ export interface AggregateUser {
 
 export interface Album {
   id: ID_Output
-  album_id: String
   images?: Array<Image> | null
   artists?: Array<Artist> | null
 }
@@ -6227,7 +6026,6 @@ export interface AlbumEdge {
 
 export interface AlbumPreviousValues {
   id: ID_Output
-  album_id: String
 }
 
 export interface AlbumSubscriptionPayload {
@@ -6239,7 +6037,6 @@ export interface AlbumSubscriptionPayload {
 
 export interface Artist {
   id: ID_Output
-  artist_id: String
   name: String
 }
 
@@ -6256,7 +6053,6 @@ export interface ArtistEdge {
 
 export interface ArtistPreviousValues {
   id: ID_Output
-  artist_id: String
   name: String
 }
 
@@ -6532,7 +6328,6 @@ export interface PlaylistSubscriptionPayload {
 
 export interface Track {
   id: ID_Output
-  track_id: String
   name: String
   album: Album
   artists?: Array<Artist> | null
@@ -6553,7 +6348,6 @@ export interface TrackEdge {
 
 export interface TrackPreviousValues {
   id: ID_Output
-  track_id: String
   name: String
   duration: Int
   preview_url: String

@@ -30,7 +30,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "update:prisma": "prisma deploy",
     "update:graphql": "graphql get-schema --project database; graphql codegen --project database",
-    "update": "npm run update:prisma; npm run update:graphql"
+    "update": "npm run update:prisma; npm run update:graphql",
+    "postinstall": "npm run prestart:prod"
   },
   "dependencies": {
     "@nest-middlewares/express-session": "^5.1.1",

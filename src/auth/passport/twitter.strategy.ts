@@ -14,7 +14,11 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
     super({
       consumerKey: config.getFromEnv('TWITTER_API_KEY'), // <- Replace this with your client id
       consumerSecret: config.getFromEnv('TWITTER_API_SECRET'), // <- Replace this with your client secret
-      callbackURL: '/auth/twitter/callback',
+      callbackURL: `${
+        process.env.NODE_ENV === 'production'
+          ? 'https://partyplannerio.herokuapp.com'
+          : ''
+      }/auth/twitter/callback`,
       passReqToCallback: true,
       includeEmail: true,
     });

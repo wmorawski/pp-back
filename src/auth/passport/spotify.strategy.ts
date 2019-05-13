@@ -14,7 +14,11 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
     super({
       clientID: config.getFromEnv('SPOTIFY_CLIENT_ID'), // <- Replace this with your client id
       clientSecret: config.getFromEnv('SPOTIFY_SECRET'), // <- Replace this with your client secret
-      callbackURL: '/auth/spotify/callback',
+      callbackURL: `${
+        process.env.NODE_ENV === 'production'
+          ? 'https://partyplannerio.herokuapp.com'
+          : ''
+      }/auth/spotify/callback`,
       passReqToCallback: true,
       scope: ['user-read-email', 'user-read-private'],
       showDialog: true,

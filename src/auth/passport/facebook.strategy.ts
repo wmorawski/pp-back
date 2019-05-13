@@ -14,7 +14,7 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
     super({
       clientID: config.getFromEnv('FACEBOOK_APP_ID'), // <- Replace this with your client id
       clientSecret: config.getFromEnv('FACEBOOK_APP_SECRET'), // <- Replace this with your client secret
-      callbackURL: '/auth/facebook/callback',
+      callbackURL: `/auth/facebook/callback`,
       passReqToCallback: true,
       profileFields: ['id', 'email', 'name', 'photos'],
     });
@@ -28,6 +28,7 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
     done: Function,
   ) {
     try {
+      console.log(process.env.HOST, process.env.NODE_ENV);
       const jwt: string = await this.authService.validateOAuthLogin({
         thirdPartyId: profile.id,
         email: profile.emails[0].value,

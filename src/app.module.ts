@@ -22,6 +22,7 @@ import { MusicModule } from './music/music.module';
       resolverValidationOptions: {
         requireResolversForResolveType: false,
       },
+      playground: true,
     }),
     PrismaModule,
     PartiesModule,

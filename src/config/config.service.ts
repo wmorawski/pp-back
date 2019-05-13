@@ -9,13 +9,16 @@ export class ConfigService {
   private readonly filePath: string;
 
   constructor(filePath: string) {
-
     this.filePath = filePath;
-    this.envConfig = fs.existsSync(this.filePath) ? dotenv.parse(fs.readFileSync(filePath)) : {};
+    this.envConfig = fs.existsSync(this.filePath)
+      ? dotenv.parse(fs.readFileSync(filePath))
+      : process.env;
   }
 
   getFromEnv(key: string): string {
-    return fs.existsSync(this.filePath) ? this.envConfig[key] : '';
+    return fs.existsSync(this.filePath)
+      ? this.envConfig[key]
+      : process.env[key];
   }
 
   public static getJwtExpiration() {

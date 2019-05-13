@@ -14,7 +14,11 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
     super({
       clientID: config.getFromEnv('FACEBOOK_APP_ID'), // <- Replace this with your client id
       clientSecret: config.getFromEnv('FACEBOOK_APP_SECRET'), // <- Replace this with your client secret
-      callbackURL: `/auth/facebook/callback`,
+      callbackURL: `${
+        process.env.NODE_ENV === 'production'
+          ? 'https://partyplannerio.herokuapp.com'
+          : ''
+      }/auth/facebook/callback`,
       passReqToCallback: true,
       profileFields: ['id', 'email', 'name', 'photos'],
     });

@@ -15,7 +15,7 @@
     }
   ],
   "scripts": {
-    "build": "npm i --save --save-exact graphql-cli && npm install --save --save-exact prisma && prisma deploy && tsc -p tsconfig.build.json",
+    "build": "npm i --save --save-exact graphql-cli && npm install --save --save-exact prisma && prisma login --key eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjanNubXRxeTJpYm1nMDg2MTc0Z2tiZWZ1IiwiaWF0IjoxNTU1MjQwNjM5LCJleHAiOjE1NTc4MzI2Mzl9.iaiF26t-kB6yKipaIh7kh-J7s0moJ9kzxP9feKL8Tg0 && prisma deploy && tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",

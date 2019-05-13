@@ -23,6 +23,7 @@ import { MusicModule } from './music/music.module';
         requireResolversForResolveType: false,
       },
       playground: true,
+      introspection: true,
     }),
     PrismaModule,
     PartiesModule,

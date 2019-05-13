@@ -7,10 +7,6 @@ import {
   Subscription,
 } from '@nestjs/graphql';
 import { PrismaService } from 'src/prisma/prisma.service';
-import {
-  Message,
-  UserUpdateManyMutationInput,
-} from 'src/prisma/prisma.binding';
 import { addFragmentToInfo } from 'graphql-binding';
 
 @Resolver()

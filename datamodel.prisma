@@ -6,7 +6,8 @@ type User {
   password: String!
   parties: [Party!]! @relation(name: "UserParties")
   friends: [User!]! @relation(name: "UserFriends")
-  pendingInvitations: [User!]! @relation(name: "PendingFriendInvitations")
+  pendingFriendInvitations: [User!]! @relation(name: "PendingFriendInvitations")
+  pendingPartyInvitations: [Party!]! @relation(name: "PendingPartyInvitations")
   chats: [Chat!]!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -41,8 +42,10 @@ type Party {
   colorTint: String!
   isPublic: Boolean @default(value: false)
   members: [User!]! @relation(name: "UserParties")
+  invitedMembers: [User!]! @relation(name: "PendingPartyInvitations")
   start: DateTime! @default(value: "1970-01-01T00:00:01")
   end: DateTime! @default(value: "1970-01-01T00:00:01")
+  inviteSecret: String! @unique
 }
 
 type Chat {

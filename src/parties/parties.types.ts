@@ -7,3 +7,8 @@ export interface CreatePartyPayload {
   location: Location;
   members: [User];
 }
+
+export interface PartyUserInviteInput {
+  inviteSecret: string;
+  user: User;
+}

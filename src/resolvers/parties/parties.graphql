@@ -18,7 +18,12 @@ type Query {
     last: Int
   ): PartyConnection!
 }
+type PartyUserInviteInput {
+  inviteSecret: String!
+  user: User!
+}
 
 type Mutation {
   createParty(data: PartyCreateInput!): Party!
+  inviteUser(data: PartyUserInviteInput!): Party!
 }

@@ -25,5 +25,6 @@ type PartyUserInviteInput {
 
 type Mutation {
   createParty(data: PartyCreateInput!): Party!
-  inviteUser(data: PartyUserInviteInput!): Party!
+  # inviteUser(data: PartyUserInviteInput!): Party!
+  createPartyInvitation(data: PartyInvitationCreateInput!): PartyInvitation!
 }

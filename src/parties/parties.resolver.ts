@@ -13,10 +13,8 @@ import {
 } from '@nestjs/graphql';
 ``;
 import { PrismaService } from 'src/prisma/prisma.service';
-
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
-import { PartyUserInviteInput } from './parties.types';
 
 @Resolver('parties')
 export class PartiesResolver {
@@ -36,20 +34,26 @@ export class PartiesResolver {
     });
     return createdParty;
   }
-  @Mutation('inviteUser')
-  async inviteUser(
-    @Args() args: { data: PartyUserInviteInput },
-    @Info() info,
-  ): Promise<Party> {
-    const party = await this.prisma.query.party(
-      { where: { inviteSecret: args.data.inviteSecret } },
-      info,
-    );
-    if (party) {
-      // TODO: Add to invitedMembers
-    }
-    return party;
+
+  @Mutation('createPartyInvitation')
+  async createPartyInvitation(@Args() args, @Info() info) {
+    return this.prisma.mutation.createPartyInvitation(args, info);
   }
+
+  // @Mutation('inviteUser')
+  // async inviteUser(
+  //   @Args() args: { data: PartyUserInviteInput },
+  //   @Info() info,
+  // ): Promise<Party> {
+  //   const party = await this.prisma.query.party(
+  //     { where: { inviteSecret: args.data.inviteSecret } },
+  //     info,
+  //   );
+  //   if (party) {
+  //     // TODO: Add to invitedMembers
+  //   }
+  //   return party;
+  // }
   @Query('parties')
   async Parties(@Args() args, @Info() info): Promise<Party[]> {
     return await this.prisma.query.parties(args, info);

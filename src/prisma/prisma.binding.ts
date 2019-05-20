@@ -2948,8 +2948,8 @@ type PartyEdge {
   cursor: String!
 }
 
-type PartyInvitation {
-  od: ID!
+type PartyInvitation implements Node {
+  id: ID!
   invitedBy: User!
   user: User!
   party: Party!
@@ -2967,7 +2967,7 @@ type PartyInvitationConnection {
 }
 
 input PartyInvitationCreateInput {
-  od: ID
+  id: ID
   invitedBy: UserCreateOneInput!
   user: UserCreateOneInput!
   party: PartyCreateOneInput!
@@ -2988,14 +2988,14 @@ type PartyInvitationEdge {
 }
 
 enum PartyInvitationOrderByInput {
-  od_ASC
-  od_DESC
+  id_ASC
+  id_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
 type PartyInvitationPreviousValues {
-  od: ID!
+  id: ID!
   createdAt: DateTime!
 }
 
@@ -3008,46 +3008,46 @@ input PartyInvitationScalarWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [PartyInvitationScalarWhereInput!]
-  od: ID
+  id: ID
 
   """All values that are not equal to given value."""
-  od_not: ID
+  id_not: ID
 
   """All values that are contained in given list."""
-  od_in: [ID!]
+  id_in: [ID!]
 
   """All values that are not contained in given list."""
-  od_not_in: [ID!]
+  id_not_in: [ID!]
 
   """All values less than the given value."""
-  od_lt: ID
+  id_lt: ID
 
   """All values less than or equal the given value."""
-  od_lte: ID
+  id_lte: ID
 
   """All values greater than the given value."""
-  od_gt: ID
+  id_gt: ID
 
   """All values greater than or equal the given value."""
-  od_gte: ID
+  id_gte: ID
 
   """All values containing the given string."""
-  od_contains: ID
+  id_contains: ID
 
   """All values not containing the given string."""
-  od_not_contains: ID
+  id_not_contains: ID
 
   """All values starting with the given string."""
-  od_starts_with: ID
+  id_starts_with: ID
 
   """All values not starting with the given string."""
-  od_not_starts_with: ID
+  id_not_starts_with: ID
 
   """All values ending with the given string."""
-  od_ends_with: ID
+  id_ends_with: ID
 
   """All values not ending with the given string."""
-  od_not_ends_with: ID
+  id_not_ends_with: ID
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3154,46 +3154,46 @@ input PartyInvitationWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [PartyInvitationWhereInput!]
-  od: ID
+  id: ID
 
   """All values that are not equal to given value."""
-  od_not: ID
+  id_not: ID
 
   """All values that are contained in given list."""
-  od_in: [ID!]
+  id_in: [ID!]
 
   """All values that are not contained in given list."""
-  od_not_in: [ID!]
+  id_not_in: [ID!]
 
   """All values less than the given value."""
-  od_lt: ID
+  id_lt: ID
 
   """All values less than or equal the given value."""
-  od_lte: ID
+  id_lte: ID
 
   """All values greater than the given value."""
-  od_gt: ID
+  id_gt: ID
 
   """All values greater than or equal the given value."""
-  od_gte: ID
+  id_gte: ID
 
   """All values containing the given string."""
-  od_contains: ID
+  id_contains: ID
 
   """All values not containing the given string."""
-  od_not_contains: ID
+  id_not_contains: ID
 
   """All values starting with the given string."""
-  od_starts_with: ID
+  id_starts_with: ID
 
   """All values not starting with the given string."""
-  od_not_starts_with: ID
+  id_not_starts_with: ID
 
   """All values ending with the given string."""
-  od_ends_with: ID
+  id_ends_with: ID
 
   """All values not ending with the given string."""
-  od_not_ends_with: ID
+  id_not_ends_with: ID
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3222,7 +3222,7 @@ input PartyInvitationWhereInput {
 }
 
 input PartyInvitationWhereUniqueInput {
-  od: ID
+  id: ID
 }
 
 enum PartyOrderByInput {
@@ -6245,8 +6245,8 @@ export type MutationType =   'CREATED' |
   'UPDATED' |
   'DELETED'
 
-export type PartyInvitationOrderByInput =   'od_ASC' |
-  'od_DESC' |
+export type PartyInvitationOrderByInput =   'id_ASC' |
+  'id_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
@@ -7450,7 +7450,7 @@ export interface PartyCreateWithoutMembersInput {
 }
 
 export interface PartyInvitationCreateInput {
-  od?: ID_Input | null
+  id?: ID_Input | null
   invitedBy: UserCreateOneInput
   user: UserCreateOneInput
   party: PartyCreateOneInput
@@ -7465,20 +7465,20 @@ export interface PartyInvitationScalarWhereInput {
   AND?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null
   OR?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null
   NOT?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null
-  od?: ID_Input | null
-  od_not?: ID_Input | null
-  od_in?: ID_Output[] | ID_Output | null
-  od_not_in?: ID_Output[] | ID_Output | null
-  od_lt?: ID_Input | null
-  od_lte?: ID_Input | null
-  od_gt?: ID_Input | null
-  od_gte?: ID_Input | null
-  od_contains?: ID_Input | null
-  od_not_contains?: ID_Input | null
-  od_starts_with?: ID_Input | null
-  od_not_starts_with?: ID_Input | null
-  od_ends_with?: ID_Input | null
-  od_not_ends_with?: ID_Input | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -7538,20 +7538,20 @@ export interface PartyInvitationWhereInput {
   AND?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null
   OR?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null
   NOT?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null
-  od?: ID_Input | null
-  od_not?: ID_Input | null
-  od_in?: ID_Output[] | ID_Output | null
-  od_not_in?: ID_Output[] | ID_Output | null
-  od_lt?: ID_Input | null
-  od_lte?: ID_Input | null
-  od_gt?: ID_Input | null
-  od_gte?: ID_Input | null
-  od_contains?: ID_Input | null
-  od_not_contains?: ID_Input | null
-  od_starts_with?: ID_Input | null
-  od_not_starts_with?: ID_Input | null
-  od_ends_with?: ID_Input | null
-  od_not_ends_with?: ID_Input | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -7566,7 +7566,7 @@ export interface PartyInvitationWhereInput {
 }
 
 export interface PartyInvitationWhereUniqueInput {
-  od?: ID_Input | null
+  id?: ID_Input | null
 }
 
 export interface PartyScalarWhereInput {
@@ -9238,8 +9238,8 @@ export interface PartyEdge {
   cursor: String
 }
 
-export interface PartyInvitation {
-  od: ID_Output
+export interface PartyInvitation extends Node {
+  id: ID_Output
   invitedBy: User
   user: User
   party: Party
@@ -9266,7 +9266,7 @@ export interface PartyInvitationEdge {
 }
 
 export interface PartyInvitationPreviousValues {
-  od: ID_Output
+  id: ID_Output
   createdAt: DateTime
 }
 

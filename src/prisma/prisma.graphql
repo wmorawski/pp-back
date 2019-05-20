@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Sun May 19 2019 18:08:10 GMT+0200 (Central European Summer Time)
+# timestamp: Mon May 20 2019 06:58:57 GMT+0200 (Central European Summer Time)
 
 type AggregateAlbum {
   count: Int!
@@ -2782,8 +2782,8 @@ type PartyEdge {
   cursor: String!
 }
 
-type PartyInvitation {
-  od: ID!
+type PartyInvitation implements Node {
+  id: ID!
   invitedBy: User!
   user: User!
   party: Party!
@@ -2801,7 +2801,7 @@ type PartyInvitationConnection {
 }
 
 input PartyInvitationCreateInput {
-  od: ID
+  id: ID
   invitedBy: UserCreateOneInput!
   user: UserCreateOneInput!
   party: PartyCreateOneInput!
@@ -2822,14 +2822,14 @@ type PartyInvitationEdge {
 }
 
 enum PartyInvitationOrderByInput {
-  od_ASC
-  od_DESC
+  id_ASC
+  id_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
 type PartyInvitationPreviousValues {
-  od: ID!
+  id: ID!
   createdAt: DateTime!
 }
 
@@ -2842,46 +2842,46 @@ input PartyInvitationScalarWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [PartyInvitationScalarWhereInput!]
-  od: ID
+  id: ID
 
   """All values that are not equal to given value."""
-  od_not: ID
+  id_not: ID
 
   """All values that are contained in given list."""
-  od_in: [ID!]
+  id_in: [ID!]
 
   """All values that are not contained in given list."""
-  od_not_in: [ID!]
+  id_not_in: [ID!]
 
   """All values less than the given value."""
-  od_lt: ID
+  id_lt: ID
 
   """All values less than or equal the given value."""
-  od_lte: ID
+  id_lte: ID
 
   """All values greater than the given value."""
-  od_gt: ID
+  id_gt: ID
 
   """All values greater than or equal the given value."""
-  od_gte: ID
+  id_gte: ID
 
   """All values containing the given string."""
-  od_contains: ID
+  id_contains: ID
 
   """All values not containing the given string."""
-  od_not_contains: ID
+  id_not_contains: ID
 
   """All values starting with the given string."""
-  od_starts_with: ID
+  id_starts_with: ID
 
   """All values not starting with the given string."""
-  od_not_starts_with: ID
+  id_not_starts_with: ID
 
   """All values ending with the given string."""
-  od_ends_with: ID
+  id_ends_with: ID
 
   """All values not ending with the given string."""
-  od_not_ends_with: ID
+  id_not_ends_with: ID
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -2988,46 +2988,46 @@ input PartyInvitationWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [PartyInvitationWhereInput!]
-  od: ID
+  id: ID
 
   """All values that are not equal to given value."""
-  od_not: ID
+  id_not: ID
 
   """All values that are contained in given list."""
-  od_in: [ID!]
+  id_in: [ID!]
 
   """All values that are not contained in given list."""
-  od_not_in: [ID!]
+  id_not_in: [ID!]
 
   """All values less than the given value."""
-  od_lt: ID
+  id_lt: ID
 
   """All values less than or equal the given value."""
-  od_lte: ID
+  id_lte: ID
 
   """All values greater than the given value."""
-  od_gt: ID
+  id_gt: ID
 
   """All values greater than or equal the given value."""
-  od_gte: ID
+  id_gte: ID
 
   """All values containing the given string."""
-  od_contains: ID
+  id_contains: ID
 
   """All values not containing the given string."""
-  od_not_contains: ID
+  id_not_contains: ID
 
   """All values starting with the given string."""
-  od_starts_with: ID
+  id_starts_with: ID
 
   """All values not starting with the given string."""
-  od_not_starts_with: ID
+  id_not_starts_with: ID
 
   """All values ending with the given string."""
-  od_ends_with: ID
+  id_ends_with: ID
 
   """All values not ending with the given string."""
-  od_not_ends_with: ID
+  id_not_ends_with: ID
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3056,7 +3056,7 @@ input PartyInvitationWhereInput {
 }
 
 input PartyInvitationWhereUniqueInput {
-  od: ID
+  id: ID
 }
 
 enum PartyOrderByInput {

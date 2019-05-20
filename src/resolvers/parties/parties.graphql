@@ -17,6 +17,15 @@ type Query {
     first: Int
     last: Int
   ): PartyConnection!
+  partyInvitationsConnection(
+    where: PartyInvitationWhereInput
+    orderBy: PartyInvitationOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PartyInvitationConnection!
 }
 type PartyUserInviteInput {
   inviteSecret: String!
@@ -25,6 +34,13 @@ type PartyUserInviteInput {
 
 type Mutation {
   createParty(data: PartyCreateInput!): Party!
+  deleteManyPartyInvitations(where: PartyInvitationWhereInput): BatchPayload!
   # inviteUser(data: PartyUserInviteInput!): Party!
   createPartyInvitation(data: PartyInvitationCreateInput!): PartyInvitation!
+}
+
+type Subscription {
+  partyInvitation(
+    where: PartyInvitationSubscriptionWhereInput
+  ): PartyInvitationSubscriptionPayload
 }

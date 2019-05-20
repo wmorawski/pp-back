@@ -33,7 +33,7 @@ type Message {
 type PartyInvitation {
   id: ID! @id
   invitedBy: User! @relation(name: "PartyInvitationInvitedBy")
-  user: User! @relation(name: "PartyInvitationUser")
+  user: User! @relation(name: "PendingPartyInvitations")
   party: Party! @relation(name: "PartyInvitationParty")
   createdAt: DateTime! @createdAt
 }

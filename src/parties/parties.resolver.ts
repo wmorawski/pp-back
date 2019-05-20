@@ -10,6 +10,7 @@ import {
   Info,
   Query,
   Context,
+  Subscription,
 } from '@nestjs/graphql';
 ``;
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -38,6 +39,15 @@ export class PartiesResolver {
   @Mutation('createPartyInvitation')
   async createPartyInvitation(@Args() args, @Info() info) {
     return this.prisma.mutation.createPartyInvitation(args, info);
+  }
+
+  @Mutation('deleteManyPartyInvitations')
+  async deleteManyPartyInvitations(@Args() args, @Info() info) {
+    return this.prisma.mutation.deleteManyPartyInvitations(args, info);
+  }
+  @Query('partyInvitationsConnection')
+  async partyInvitationsConnection(@Args() args, @Info() info) {
+    return this.prisma.query.partyInvitationsConnection(args, info);
   }
 
   // @Mutation('inviteUser')
@@ -71,5 +81,14 @@ export class PartiesResolver {
   ): Promise<PartyConnection> {
     // throw new Error('something');
     return await this.prisma.query.partiesConnection(args, info);
+  }
+
+  @Subscription('partyInvitation')
+  onUserMutation() {
+    return {
+      subscribe: (obj, args, ctx, info) => {
+        return this.prisma.subscription.partyInvitation(args, info);
+      },
+    };
   }
 }

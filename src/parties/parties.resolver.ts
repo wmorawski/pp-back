@@ -38,7 +38,7 @@ export class PartiesResolver {
 
   @Mutation('createPartyInvitation')
   async createPartyInvitation(@Args() args, @Info() info) {
-    return this.prisma.mutation.createPartyInvitation(args, info);
+    return await this.prisma.mutation.createPartyInvitation(args, info);
   }
 
   @Mutation('deleteManyPartyInvitations')

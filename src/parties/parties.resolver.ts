@@ -45,6 +45,10 @@ export class PartiesResolver {
   async deleteManyPartyInvitations(@Args() args, @Info() info) {
     return this.prisma.mutation.deleteManyPartyInvitations(args, info);
   }
+  @Mutation('deletePartyInvitation')
+  async deletePartyInvitation(@Args() args, @Info() info) {
+    return this.prisma.mutation.deletePartyInvitation(args, info);
+  }
   @Query('partyInvitationsConnection')
   async partyInvitationsConnection(@Args() args, @Info() info) {
     return this.prisma.query.partyInvitationsConnection(args, info);
@@ -84,7 +88,7 @@ export class PartiesResolver {
   }
 
   @Subscription('partyInvitation')
-  onUserMutation() {
+  onPartyInvitation() {
     return {
       subscribe: (obj, args, ctx, info) => {
         return this.prisma.subscription.partyInvitation(args, info);

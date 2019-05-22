@@ -37,6 +37,9 @@ type Mutation {
   deleteManyPartyInvitations(where: PartyInvitationWhereInput): BatchPayload!
   # inviteUser(data: PartyUserInviteInput!): Party!
   createPartyInvitation(data: PartyInvitationCreateInput!): PartyInvitation!
+  deletePartyInvitation(
+    where: PartyInvitationWhereUniqueInput!
+  ): PartyInvitation
 }
 
 type Subscription {

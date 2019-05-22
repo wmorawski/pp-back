@@ -53,7 +53,7 @@ export class UsersResolver {
   @Mutation('inviteToFriends')
   @UseGuards(GqlAuthGuard)
   async inviteToFriends(@Args() args, @Info() info): Promise<any> {
-    return await this.usersService.inviteToFriends(args, info);
+    // return await this.usersService.inviteToFriends(args, info);
   }
   @Mutation('updateUser')
   @UseGuards(GqlAuthGuard)

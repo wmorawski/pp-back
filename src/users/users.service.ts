@@ -1,6 +1,6 @@
 import { AuthService } from './../auth/auth.service';
 import { SignupPayload } from './../auth/auth.types';
-import { UserWhereInput, UserCreateInput } from './../prisma/prisma.binding';
+import { UserWhereInput } from './../prisma/prisma.binding';
 import { Injectable } from '@nestjs/common';
 import { User } from '../prisma/prisma.binding';
 import * as bcrypt from 'bcrypt';
@@ -8,8 +8,7 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
-
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
   private saltRounds = 10;
 
   async getUsers(): Promise<User[]> {
@@ -41,18 +40,18 @@ export class UsersService {
   ): Promise<boolean> {
     return bcrypt.compare(password, hash);
   }
-  async inviteToFriends(args, info): Promise<User> {
-    return await this.prisma.mutation.updateUser({
-      data: {
-        pendingInvitations: {
-          connect: {
-            id: args.sender,
-          },
-        },
-      },
-      where: {
-        id: args.receiver,
-      },
-    });
-  }
+  // async inviteToFriends(args, info): Promise<User> {
+  //   return await this.prisma.mutation.updateUser({
+  //     data: {
+  //       pendingInvitations: {
+  //         connect: {
+  //           id: args.sender,
+  //         },
+  //       },
+  //     },
+  //     where: {
+  //       id: args.receiver,
+  //     },
+  //   });
+  // }
 }

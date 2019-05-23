@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Wed May 22 2019 10:25:22 GMT+0200 (Central European Summer Time)
+# timestamp: Thu May 23 2019 18:49:06 GMT+0200 (Central European Summer Time)
 
 type AggregateAlbum {
   count: Int!
@@ -2786,9 +2786,10 @@ type PartyEdge {
 type PartyInvitation implements Node {
   id: ID!
   invitedBy: User!
-  userId: String!
   user: User!
   party: Party!
+  invitedUserId: String!
+  partyId: String!
   createdAt: DateTime!
 }
 
@@ -2804,7 +2805,8 @@ type PartyInvitationConnection {
 
 input PartyInvitationCreateInput {
   id: ID
-  userId: String!
+  invitedUserId: String!
+  partyId: String!
   invitedBy: UserCreateOneInput!
   user: UserCreateOneWithoutPendingPartyInvitationsInput!
   party: PartyCreateOneInput!
@@ -2817,7 +2819,8 @@ input PartyInvitationCreateManyWithoutUserInput {
 
 input PartyInvitationCreateWithoutUserInput {
   id: ID
-  userId: String!
+  invitedUserId: String!
+  partyId: String!
   invitedBy: UserCreateOneInput!
   party: PartyCreateOneInput!
 }
@@ -2834,15 +2837,18 @@ type PartyInvitationEdge {
 enum PartyInvitationOrderByInput {
   id_ASC
   id_DESC
-  userId_ASC
-  userId_DESC
+  invitedUserId_ASC
+  invitedUserId_DESC
+  partyId_ASC
+  partyId_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
 type PartyInvitationPreviousValues {
   id: ID!
-  userId: String!
+  invitedUserId: String!
+  partyId: String!
   createdAt: DateTime!
 }
 
@@ -2895,46 +2901,86 @@ input PartyInvitationScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  userId: String
+  invitedUserId: String
 
   """All values that are not equal to given value."""
-  userId_not: String
+  invitedUserId_not: String
 
   """All values that are contained in given list."""
-  userId_in: [String!]
+  invitedUserId_in: [String!]
 
   """All values that are not contained in given list."""
-  userId_not_in: [String!]
+  invitedUserId_not_in: [String!]
 
   """All values less than the given value."""
-  userId_lt: String
+  invitedUserId_lt: String
 
   """All values less than or equal the given value."""
-  userId_lte: String
+  invitedUserId_lte: String
 
   """All values greater than the given value."""
-  userId_gt: String
+  invitedUserId_gt: String
 
   """All values greater than or equal the given value."""
-  userId_gte: String
+  invitedUserId_gte: String
 
   """All values containing the given string."""
-  userId_contains: String
+  invitedUserId_contains: String
 
   """All values not containing the given string."""
-  userId_not_contains: String
+  invitedUserId_not_contains: String
 
   """All values starting with the given string."""
-  userId_starts_with: String
+  invitedUserId_starts_with: String
 
   """All values not starting with the given string."""
-  userId_not_starts_with: String
+  invitedUserId_not_starts_with: String
 
   """All values ending with the given string."""
-  userId_ends_with: String
+  invitedUserId_ends_with: String
 
   """All values not ending with the given string."""
-  userId_not_ends_with: String
+  invitedUserId_not_ends_with: String
+  partyId: String
+
+  """All values that are not equal to given value."""
+  partyId_not: String
+
+  """All values that are contained in given list."""
+  partyId_in: [String!]
+
+  """All values that are not contained in given list."""
+  partyId_not_in: [String!]
+
+  """All values less than the given value."""
+  partyId_lt: String
+
+  """All values less than or equal the given value."""
+  partyId_lte: String
+
+  """All values greater than the given value."""
+  partyId_gt: String
+
+  """All values greater than or equal the given value."""
+  partyId_gte: String
+
+  """All values containing the given string."""
+  partyId_contains: String
+
+  """All values not containing the given string."""
+  partyId_not_contains: String
+
+  """All values starting with the given string."""
+  partyId_starts_with: String
+
+  """All values not starting with the given string."""
+  partyId_not_starts_with: String
+
+  """All values ending with the given string."""
+  partyId_ends_with: String
+
+  """All values not ending with the given string."""
+  partyId_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -2999,18 +3045,21 @@ input PartyInvitationSubscriptionWhereInput {
 }
 
 input PartyInvitationUpdateInput {
-  userId: String
+  invitedUserId: String
+  partyId: String
   invitedBy: UserUpdateOneRequiredInput
   user: UserUpdateOneRequiredWithoutPendingPartyInvitationsInput
   party: PartyUpdateOneRequiredInput
 }
 
 input PartyInvitationUpdateManyDataInput {
-  userId: String
+  invitedUserId: String
+  partyId: String
 }
 
 input PartyInvitationUpdateManyMutationInput {
-  userId: String
+  invitedUserId: String
+  partyId: String
 }
 
 input PartyInvitationUpdateManyWithoutUserInput {
@@ -3031,7 +3080,8 @@ input PartyInvitationUpdateManyWithWhereNestedInput {
 }
 
 input PartyInvitationUpdateWithoutUserDataInput {
-  userId: String
+  invitedUserId: String
+  partyId: String
   invitedBy: UserUpdateOneRequiredInput
   party: PartyUpdateOneRequiredInput
 }
@@ -3096,46 +3146,86 @@ input PartyInvitationWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  userId: String
+  invitedUserId: String
 
   """All values that are not equal to given value."""
-  userId_not: String
+  invitedUserId_not: String
 
   """All values that are contained in given list."""
-  userId_in: [String!]
+  invitedUserId_in: [String!]
 
   """All values that are not contained in given list."""
-  userId_not_in: [String!]
+  invitedUserId_not_in: [String!]
 
   """All values less than the given value."""
-  userId_lt: String
+  invitedUserId_lt: String
 
   """All values less than or equal the given value."""
-  userId_lte: String
+  invitedUserId_lte: String
 
   """All values greater than the given value."""
-  userId_gt: String
+  invitedUserId_gt: String
 
   """All values greater than or equal the given value."""
-  userId_gte: String
+  invitedUserId_gte: String
 
   """All values containing the given string."""
-  userId_contains: String
+  invitedUserId_contains: String
 
   """All values not containing the given string."""
-  userId_not_contains: String
+  invitedUserId_not_contains: String
 
   """All values starting with the given string."""
-  userId_starts_with: String
+  invitedUserId_starts_with: String
 
   """All values not starting with the given string."""
-  userId_not_starts_with: String
+  invitedUserId_not_starts_with: String
 
   """All values ending with the given string."""
-  userId_ends_with: String
+  invitedUserId_ends_with: String
 
   """All values not ending with the given string."""
-  userId_not_ends_with: String
+  invitedUserId_not_ends_with: String
+  partyId: String
+
+  """All values that are not equal to given value."""
+  partyId_not: String
+
+  """All values that are contained in given list."""
+  partyId_in: [String!]
+
+  """All values that are not contained in given list."""
+  partyId_not_in: [String!]
+
+  """All values less than the given value."""
+  partyId_lt: String
+
+  """All values less than or equal the given value."""
+  partyId_lte: String
+
+  """All values greater than the given value."""
+  partyId_gt: String
+
+  """All values greater than or equal the given value."""
+  partyId_gte: String
+
+  """All values containing the given string."""
+  partyId_contains: String
+
+  """All values not containing the given string."""
+  partyId_not_contains: String
+
+  """All values starting with the given string."""
+  partyId_starts_with: String
+
+  """All values not starting with the given string."""
+  partyId_not_starts_with: String
+
+  """All values ending with the given string."""
+  partyId_ends_with: String
+
+  """All values not ending with the given string."""
+  partyId_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""

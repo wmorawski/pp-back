@@ -2953,9 +2953,10 @@ type PartyEdge {
 type PartyInvitation implements Node {
   id: ID!
   invitedBy: User!
-  userId: String!
   user: User!
   party: Party!
+  invitedUserId: String!
+  partyId: String!
   createdAt: DateTime!
 }
 
@@ -2971,7 +2972,8 @@ type PartyInvitationConnection {
 
 input PartyInvitationCreateInput {
   id: ID
-  userId: String!
+  invitedUserId: String!
+  partyId: String!
   invitedBy: UserCreateOneInput!
   user: UserCreateOneWithoutPendingPartyInvitationsInput!
   party: PartyCreateOneInput!
@@ -2984,7 +2986,8 @@ input PartyInvitationCreateManyWithoutUserInput {
 
 input PartyInvitationCreateWithoutUserInput {
   id: ID
-  userId: String!
+  invitedUserId: String!
+  partyId: String!
   invitedBy: UserCreateOneInput!
   party: PartyCreateOneInput!
 }
@@ -3001,15 +3004,18 @@ type PartyInvitationEdge {
 enum PartyInvitationOrderByInput {
   id_ASC
   id_DESC
-  userId_ASC
-  userId_DESC
+  invitedUserId_ASC
+  invitedUserId_DESC
+  partyId_ASC
+  partyId_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
 type PartyInvitationPreviousValues {
   id: ID!
-  userId: String!
+  invitedUserId: String!
+  partyId: String!
   createdAt: DateTime!
 }
 
@@ -3062,46 +3068,86 @@ input PartyInvitationScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  userId: String
+  invitedUserId: String
 
   """All values that are not equal to given value."""
-  userId_not: String
+  invitedUserId_not: String
 
   """All values that are contained in given list."""
-  userId_in: [String!]
+  invitedUserId_in: [String!]
 
   """All values that are not contained in given list."""
-  userId_not_in: [String!]
+  invitedUserId_not_in: [String!]
 
   """All values less than the given value."""
-  userId_lt: String
+  invitedUserId_lt: String
 
   """All values less than or equal the given value."""
-  userId_lte: String
+  invitedUserId_lte: String
 
   """All values greater than the given value."""
-  userId_gt: String
+  invitedUserId_gt: String
 
   """All values greater than or equal the given value."""
-  userId_gte: String
+  invitedUserId_gte: String
 
   """All values containing the given string."""
-  userId_contains: String
+  invitedUserId_contains: String
 
   """All values not containing the given string."""
-  userId_not_contains: String
+  invitedUserId_not_contains: String
 
   """All values starting with the given string."""
-  userId_starts_with: String
+  invitedUserId_starts_with: String
 
   """All values not starting with the given string."""
-  userId_not_starts_with: String
+  invitedUserId_not_starts_with: String
 
   """All values ending with the given string."""
-  userId_ends_with: String
+  invitedUserId_ends_with: String
 
   """All values not ending with the given string."""
-  userId_not_ends_with: String
+  invitedUserId_not_ends_with: String
+  partyId: String
+
+  """All values that are not equal to given value."""
+  partyId_not: String
+
+  """All values that are contained in given list."""
+  partyId_in: [String!]
+
+  """All values that are not contained in given list."""
+  partyId_not_in: [String!]
+
+  """All values less than the given value."""
+  partyId_lt: String
+
+  """All values less than or equal the given value."""
+  partyId_lte: String
+
+  """All values greater than the given value."""
+  partyId_gt: String
+
+  """All values greater than or equal the given value."""
+  partyId_gte: String
+
+  """All values containing the given string."""
+  partyId_contains: String
+
+  """All values not containing the given string."""
+  partyId_not_contains: String
+
+  """All values starting with the given string."""
+  partyId_starts_with: String
+
+  """All values not starting with the given string."""
+  partyId_not_starts_with: String
+
+  """All values ending with the given string."""
+  partyId_ends_with: String
+
+  """All values not ending with the given string."""
+  partyId_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3166,18 +3212,21 @@ input PartyInvitationSubscriptionWhereInput {
 }
 
 input PartyInvitationUpdateInput {
-  userId: String
+  invitedUserId: String
+  partyId: String
   invitedBy: UserUpdateOneRequiredInput
   user: UserUpdateOneRequiredWithoutPendingPartyInvitationsInput
   party: PartyUpdateOneRequiredInput
 }
 
 input PartyInvitationUpdateManyDataInput {
-  userId: String
+  invitedUserId: String
+  partyId: String
 }
 
 input PartyInvitationUpdateManyMutationInput {
-  userId: String
+  invitedUserId: String
+  partyId: String
 }
 
 input PartyInvitationUpdateManyWithoutUserInput {
@@ -3198,7 +3247,8 @@ input PartyInvitationUpdateManyWithWhereNestedInput {
 }
 
 input PartyInvitationUpdateWithoutUserDataInput {
-  userId: String
+  invitedUserId: String
+  partyId: String
   invitedBy: UserUpdateOneRequiredInput
   party: PartyUpdateOneRequiredInput
 }
@@ -3263,46 +3313,86 @@ input PartyInvitationWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  userId: String
+  invitedUserId: String
 
   """All values that are not equal to given value."""
-  userId_not: String
+  invitedUserId_not: String
 
   """All values that are contained in given list."""
-  userId_in: [String!]
+  invitedUserId_in: [String!]
 
   """All values that are not contained in given list."""
-  userId_not_in: [String!]
+  invitedUserId_not_in: [String!]
 
   """All values less than the given value."""
-  userId_lt: String
+  invitedUserId_lt: String
 
   """All values less than or equal the given value."""
-  userId_lte: String
+  invitedUserId_lte: String
 
   """All values greater than the given value."""
-  userId_gt: String
+  invitedUserId_gt: String
 
   """All values greater than or equal the given value."""
-  userId_gte: String
+  invitedUserId_gte: String
 
   """All values containing the given string."""
-  userId_contains: String
+  invitedUserId_contains: String
 
   """All values not containing the given string."""
-  userId_not_contains: String
+  invitedUserId_not_contains: String
 
   """All values starting with the given string."""
-  userId_starts_with: String
+  invitedUserId_starts_with: String
 
   """All values not starting with the given string."""
-  userId_not_starts_with: String
+  invitedUserId_not_starts_with: String
 
   """All values ending with the given string."""
-  userId_ends_with: String
+  invitedUserId_ends_with: String
 
   """All values not ending with the given string."""
-  userId_not_ends_with: String
+  invitedUserId_not_ends_with: String
+  partyId: String
+
+  """All values that are not equal to given value."""
+  partyId_not: String
+
+  """All values that are contained in given list."""
+  partyId_in: [String!]
+
+  """All values that are not contained in given list."""
+  partyId_not_in: [String!]
+
+  """All values less than the given value."""
+  partyId_lt: String
+
+  """All values less than or equal the given value."""
+  partyId_lte: String
+
+  """All values greater than the given value."""
+  partyId_gt: String
+
+  """All values greater than or equal the given value."""
+  partyId_gte: String
+
+  """All values containing the given string."""
+  partyId_contains: String
+
+  """All values not containing the given string."""
+  partyId_not_contains: String
+
+  """All values starting with the given string."""
+  partyId_starts_with: String
+
+  """All values not starting with the given string."""
+  partyId_not_starts_with: String
+
+  """All values ending with the given string."""
+  partyId_ends_with: String
+
+  """All values not ending with the given string."""
+  partyId_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -6410,8 +6500,10 @@ export type MutationType =   'CREATED' |
 
 export type PartyInvitationOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'userId_ASC' |
-  'userId_DESC' |
+  'invitedUserId_ASC' |
+  'invitedUserId_DESC' |
+  'partyId_ASC' |
+  'partyId_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
@@ -7616,7 +7708,8 @@ export interface PartyCreateWithoutMembersInput {
 
 export interface PartyInvitationCreateInput {
   id?: ID_Input | null
-  userId: String
+  invitedUserId: String
+  partyId: String
   invitedBy: UserCreateOneInput
   user: UserCreateOneWithoutPendingPartyInvitationsInput
   party: PartyCreateOneInput
@@ -7629,7 +7722,8 @@ export interface PartyInvitationCreateManyWithoutUserInput {
 
 export interface PartyInvitationCreateWithoutUserInput {
   id?: ID_Input | null
-  userId: String
+  invitedUserId: String
+  partyId: String
   invitedBy: UserCreateOneInput
   party: PartyCreateOneInput
 }
@@ -7652,20 +7746,34 @@ export interface PartyInvitationScalarWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
-  userId?: String | null
-  userId_not?: String | null
-  userId_in?: String[] | String | null
-  userId_not_in?: String[] | String | null
-  userId_lt?: String | null
-  userId_lte?: String | null
-  userId_gt?: String | null
-  userId_gte?: String | null
-  userId_contains?: String | null
-  userId_not_contains?: String | null
-  userId_starts_with?: String | null
-  userId_not_starts_with?: String | null
-  userId_ends_with?: String | null
-  userId_not_ends_with?: String | null
+  invitedUserId?: String | null
+  invitedUserId_not?: String | null
+  invitedUserId_in?: String[] | String | null
+  invitedUserId_not_in?: String[] | String | null
+  invitedUserId_lt?: String | null
+  invitedUserId_lte?: String | null
+  invitedUserId_gt?: String | null
+  invitedUserId_gte?: String | null
+  invitedUserId_contains?: String | null
+  invitedUserId_not_contains?: String | null
+  invitedUserId_starts_with?: String | null
+  invitedUserId_not_starts_with?: String | null
+  invitedUserId_ends_with?: String | null
+  invitedUserId_not_ends_with?: String | null
+  partyId?: String | null
+  partyId_not?: String | null
+  partyId_in?: String[] | String | null
+  partyId_not_in?: String[] | String | null
+  partyId_lt?: String | null
+  partyId_lte?: String | null
+  partyId_gt?: String | null
+  partyId_gte?: String | null
+  partyId_contains?: String | null
+  partyId_not_contains?: String | null
+  partyId_starts_with?: String | null
+  partyId_not_starts_with?: String | null
+  partyId_ends_with?: String | null
+  partyId_not_ends_with?: String | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -7688,18 +7796,21 @@ export interface PartyInvitationSubscriptionWhereInput {
 }
 
 export interface PartyInvitationUpdateInput {
-  userId?: String | null
+  invitedUserId?: String | null
+  partyId?: String | null
   invitedBy?: UserUpdateOneRequiredInput | null
   user?: UserUpdateOneRequiredWithoutPendingPartyInvitationsInput | null
   party?: PartyUpdateOneRequiredInput | null
 }
 
 export interface PartyInvitationUpdateManyDataInput {
-  userId?: String | null
+  invitedUserId?: String | null
+  partyId?: String | null
 }
 
 export interface PartyInvitationUpdateManyMutationInput {
-  userId?: String | null
+  invitedUserId?: String | null
+  partyId?: String | null
 }
 
 export interface PartyInvitationUpdateManyWithoutUserInput {
@@ -7720,7 +7831,8 @@ export interface PartyInvitationUpdateManyWithWhereNestedInput {
 }
 
 export interface PartyInvitationUpdateWithoutUserDataInput {
-  userId?: String | null
+  invitedUserId?: String | null
+  partyId?: String | null
   invitedBy?: UserUpdateOneRequiredInput | null
   party?: PartyUpdateOneRequiredInput | null
 }
@@ -7754,20 +7866,34 @@ export interface PartyInvitationWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
-  userId?: String | null
-  userId_not?: String | null
-  userId_in?: String[] | String | null
-  userId_not_in?: String[] | String | null
-  userId_lt?: String | null
-  userId_lte?: String | null
-  userId_gt?: String | null
-  userId_gte?: String | null
-  userId_contains?: String | null
-  userId_not_contains?: String | null
-  userId_starts_with?: String | null
-  userId_not_starts_with?: String | null
-  userId_ends_with?: String | null
-  userId_not_ends_with?: String | null
+  invitedUserId?: String | null
+  invitedUserId_not?: String | null
+  invitedUserId_in?: String[] | String | null
+  invitedUserId_not_in?: String[] | String | null
+  invitedUserId_lt?: String | null
+  invitedUserId_lte?: String | null
+  invitedUserId_gt?: String | null
+  invitedUserId_gte?: String | null
+  invitedUserId_contains?: String | null
+  invitedUserId_not_contains?: String | null
+  invitedUserId_starts_with?: String | null
+  invitedUserId_not_starts_with?: String | null
+  invitedUserId_ends_with?: String | null
+  invitedUserId_not_ends_with?: String | null
+  partyId?: String | null
+  partyId_not?: String | null
+  partyId_in?: String[] | String | null
+  partyId_not_in?: String[] | String | null
+  partyId_lt?: String | null
+  partyId_lte?: String | null
+  partyId_gt?: String | null
+  partyId_gte?: String | null
+  partyId_contains?: String | null
+  partyId_not_contains?: String | null
+  partyId_starts_with?: String | null
+  partyId_not_starts_with?: String | null
+  partyId_ends_with?: String | null
+  partyId_not_ends_with?: String | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -9511,9 +9637,10 @@ export interface PartyEdge {
 export interface PartyInvitation extends Node {
   id: ID_Output
   invitedBy: User
-  userId: String
   user: User
   party: Party
+  invitedUserId: String
+  partyId: String
   createdAt: DateTime
 }
 
@@ -9538,7 +9665,8 @@ export interface PartyInvitationEdge {
 
 export interface PartyInvitationPreviousValues {
   id: ID_Output
-  userId: String
+  invitedUserId: String
+  partyId: String
   createdAt: DateTime
 }
 

@@ -8,7 +8,7 @@ type User {
   friends: [User!]! @relation(name: "UserFriends")
   pendingFriendInvitations: [User!]! @relation(name: "PendingFriendInvitations")
   pendingPartyInvitations: [PartyInvitation!]!
-    @relation(name: "PartyInvitationUser")
+    @relation(name: "PendingPartyInvitations")
   chats: [Chat!]!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -35,6 +35,8 @@ type PartyInvitation {
   invitedBy: User! @relation(name: "PartyInvitationInvitedBy")
   user: User! @relation(name: "PendingPartyInvitations")
   party: Party! @relation(name: "PartyInvitationParty")
+  invitedUserId: String!
+  partyId: String!
   createdAt: DateTime! @createdAt
 }
 

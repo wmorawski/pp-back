@@ -1,9 +1,11 @@
+import { UserCreateInput } from './../../../generated/prisma-client/index';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { prisma } from '../../../generated/prisma-client';
 import { compose, filter } from 'ramda';
 import { parse, addHours } from 'date-fns';
 import { PartyCreateInput } from '../prisma.binding';
+import uuid from 'uuid/v4';
 
 const USERS_NUM = 50;
 const PARTIES_NUM = 10;
@@ -29,13 +31,10 @@ const calendarTintsHexArray = [
   '#607d8b',
 ];
 
-const createFakeUser = () => ({
+const createFakeUser = (): UserCreateInput => ({
   email: faker.internet.email(),
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
-  friends: {
-    connect: [],
-  },
   avatar: faker.image.avatar(),
   // same password is better you can always log in on this account :)
   password: bcrypt.hashSync('password', 10),
@@ -67,9 +66,7 @@ const createFakeParty = (author: any, members: any[]): PartyCreateInput => {
     start: partyStartDate,
     end: partyEndDate,
     colorTint: faker.random.arrayElement(calendarTintsHexArray),
-    inviteSecret: Math.random()
-      .toString(36)
-      .substring(2, 15),
+    inviteSecret: uuid(),
   };
 };
 const getRandomElementsFromArray = (arr: any[]) => {

@@ -97,6 +97,7 @@ export class UsersResolver {
         },
       });
     } catch (e) {
+      console.log(e);
       throw new GraphQLError('Could not send e-mail to a given address');
     }
 

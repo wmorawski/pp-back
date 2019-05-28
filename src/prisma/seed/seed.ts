@@ -1,11 +1,10 @@
-import { UserCreateInput } from './../../../generated/prisma-client/index';
+import * as uuid from 'uuid/v4';
+import { prisma } from './../../../generated/prisma-client/index';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
-import { prisma } from '../../../generated/prisma-client';
 import { compose, filter } from 'ramda';
 import { parse, addHours } from 'date-fns';
-import { PartyCreateInput } from '../prisma.binding';
-import uuid from 'uuid/v4';
+import { PartyCreateInput, UserCreateInput } from '../prisma.binding';
 
 const USERS_NUM = 50;
 const PARTIES_NUM = 10;
@@ -159,12 +158,16 @@ async function main() {
   );
 
   for (const savedUser of savedUsers) {
-    await prisma.updateUser(
-      getUserFriendsConnectionUpdater(
-        savedUser,
-        usersConnections[savedUser.id],
-      ),
-    );
+    try {
+      await prisma.updateUser(
+        getUserFriendsConnectionUpdater(
+          savedUser,
+          usersConnections[savedUser.id],
+        ),
+      );
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   // parties & chats
@@ -183,7 +186,11 @@ async function main() {
 
   // arr.forEach doesn't respect async/await (it's just like for(i,i<len,i++){callback(arr[i])})
   for (const party of parties) {
-    await prisma.createChat(createFakeChat(party));
+    try {
+      await prisma.createChat(createFakeChat(party));
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 main();

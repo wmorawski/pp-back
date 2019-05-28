@@ -2887,7 +2887,7 @@ type Party implements Node {
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   start: DateTime!
   end: DateTime!
-  inviteSecret: String
+  inviteSecret: String!
 }
 
 """A connection to a list of items."""
@@ -2909,7 +2909,7 @@ input PartyCreateInput {
   isPublic: Boolean
   start: DateTime
   end: DateTime
-  inviteSecret: String
+  inviteSecret: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -2935,7 +2935,7 @@ input PartyCreateWithoutMembersInput {
   isPublic: Boolean
   start: DateTime
   end: DateTime
-  inviteSecret: String
+  inviteSecret: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -3460,7 +3460,7 @@ type PartyPreviousValues {
   isPublic: Boolean
   start: DateTime!
   end: DateTime!
-  inviteSecret: String
+  inviteSecret: String!
 }
 
 input PartyScalarWhereInput {
@@ -7674,7 +7674,7 @@ export interface PartyCreateInput {
   isPublic?: Boolean | null
   start?: DateTime | null
   end?: DateTime | null
-  inviteSecret?: String | null
+  inviteSecret: String
   author: UserCreateOneInput
   location: LocationCreateOneInput
   games?: GameCreateManyInput | null
@@ -7700,7 +7700,7 @@ export interface PartyCreateWithoutMembersInput {
   isPublic?: Boolean | null
   start?: DateTime | null
   end?: DateTime | null
-  inviteSecret?: String | null
+  inviteSecret: String
   author: UserCreateOneInput
   location: LocationCreateOneInput
   games?: GameCreateManyInput | null
@@ -9612,7 +9612,7 @@ export interface Party extends Node {
   members?: Array<User> | null
   start: DateTime
   end: DateTime
-  inviteSecret?: String | null
+  inviteSecret: String
 }
 
 /*
@@ -9688,7 +9688,7 @@ export interface PartyPreviousValues {
   isPublic?: Boolean | null
   start: DateTime
   end: DateTime
-  inviteSecret?: String | null
+  inviteSecret: String
 }
 
 export interface PartySubscriptionPayload {

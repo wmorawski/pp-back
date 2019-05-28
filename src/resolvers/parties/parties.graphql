@@ -62,6 +62,7 @@ type Subscription {
   partyInvitation(
     where: PartyInvitationSubscriptionWhereInput
   ): PartyInvitationSubscriptionPayload
+  party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
 }
 
 input JoinPartyWhereInput {

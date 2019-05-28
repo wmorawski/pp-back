@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Thu May 23 2019 18:49:06 GMT+0200 (Central European Summer Time)
+# timestamp: Tue May 28 2019 11:41:08 GMT+0200 (Central European Summer Time)
 
 type AggregateAlbum {
   count: Int!
@@ -2720,7 +2720,7 @@ type Party implements Node {
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   start: DateTime!
   end: DateTime!
-  inviteSecret: String
+  inviteSecret: String!
 }
 
 """A connection to a list of items."""
@@ -2742,7 +2742,7 @@ input PartyCreateInput {
   isPublic: Boolean
   start: DateTime
   end: DateTime
-  inviteSecret: String
+  inviteSecret: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -2768,7 +2768,7 @@ input PartyCreateWithoutMembersInput {
   isPublic: Boolean
   start: DateTime
   end: DateTime
-  inviteSecret: String
+  inviteSecret: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
   games: GameCreateManyInput
@@ -3293,7 +3293,7 @@ type PartyPreviousValues {
   isPublic: Boolean
   start: DateTime!
   end: DateTime!
-  inviteSecret: String
+  inviteSecret: String!
 }
 
 input PartyScalarWhereInput {

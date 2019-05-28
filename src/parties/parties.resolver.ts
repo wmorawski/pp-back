@@ -92,10 +92,12 @@ export class PartiesResolver {
         throw new GraphQLError('Something went wrong');
       }
     }
+
     await this.prisma.mutation.updateUser({
       where: { id: args.where.userId },
       data: { parties: { connect: { id: args.where.partyId } } },
     });
+
     return true;
   }
   @Query('partyInvitationsConnection')
@@ -140,6 +142,14 @@ export class PartiesResolver {
     return {
       subscribe: (obj, args, ctx, info) => {
         return this.prisma.subscription.partyInvitation(args, info);
+      },
+    };
+  }
+  @Subscription('party')
+  onPartyUpdated() {
+    return {
+      subscribe: (obj, args, ctx, info) => {
+        return this.prisma.subscription.party(args, info);
       },
     };
   }

@@ -39,12 +39,17 @@ export class UsersResolver {
     return await this.prisma.query.users(args, info);
   }
 
+  // LEGACY DO NOT TOUCH!
   @Query('paginateUsers')
   @UseGuards(GqlAuthGuard)
   async paginateUsers(@Args() args, @Info() info): Promise<UserConnection> {
     return await this.prisma.query.usersConnection(args, info);
   }
 
+  @Query('usersConnection')
+  async usersConnection(@Args() args, @Info() info): Promise<UserConnection> {
+    return await this.prisma.query.usersConnection(args, info);
+  }
   @Query('me')
   @UseGuards(GqlAuthGuard)
   async me(@Context() { req }, @Info() info): Promise<User> {
@@ -53,7 +58,7 @@ export class UsersResolver {
   @Mutation('inviteToFriends')
   @UseGuards(GqlAuthGuard)
   async inviteToFriends(@Args() args, @Info() info): Promise<any> {
-    return await this.usersService.inviteToFriends(args, info);
+    // return await this.usersService.inviteToFriends(args, info);
   }
   @Mutation('updateUser')
   @UseGuards(GqlAuthGuard)
@@ -97,6 +102,7 @@ export class UsersResolver {
         },
       });
     } catch (e) {
+      console.log(e);
       throw new GraphQLError('Could not send e-mail to a given address');
     }
 

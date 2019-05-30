@@ -19,6 +19,15 @@ type Query {
     first: Int
     last: Int
   ): UserConnection!
+  usersConnection(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): UserConnection!
 }
 
 type Mutation {
@@ -33,7 +42,11 @@ type Mutation {
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   inviteToFriends(sender: ID!, receiver: ID!): User!
   requestReset(email: String!): SuccessMessage
-  resetPassword(resetToken: String!, password: String!, confirmPassword: String!): AuthPayload
+  resetPassword(
+    resetToken: String!
+    password: String!
+    confirmPassword: String!
+  ): AuthPayload
 }
 
 type AuthPayload {
@@ -50,10 +63,42 @@ type User {
   email: String!
   firstName: String!
   lastName: String!
-  parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
-  friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  pendingInvitations(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
+  parties(
+    where: PartyWhereInput
+    orderBy: PartyOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Party!]
+  friends(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User!]
+  pendingInvitations(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User!]
+  chats(
+    where: ChatWhereInput
+    orderBy: ChatOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Chat!]
   createdAt: DateTime!
   updatedAt: DateTime!
   lastOnline: DateTime

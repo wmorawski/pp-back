@@ -28,7 +28,7 @@ import { authenticate } from 'passport';
 
 function getUrlCallback(jwt: string = '') {
   const state = jwt && jwt.trim().length > 0 ? 'success' : 'error';
-  return `${process.env.WEB_URL}/social-auth?jwt=${jwt}&state=${state}`;
+  return `${process.env.WEB_URL}/auth-social?jwt=${jwt}&state=${state}`;
 }
 
 @ApiUseTags('auth')

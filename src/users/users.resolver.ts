@@ -31,7 +31,7 @@ export class UsersResolver {
     private readonly usersService: UsersService,
     private readonly auth: AuthService,
     private readonly mailerService: MailerService,
-  ) { }
+  ) {}
 
   @Query('getUsers')
   @UseGuards(GqlAuthGuard)
@@ -39,12 +39,17 @@ export class UsersResolver {
     return await this.prisma.query.users(args, info);
   }
 
+  // LEGACY DO NOT TOUCH!
   @Query('paginateUsers')
   @UseGuards(GqlAuthGuard)
   async paginateUsers(@Args() args, @Info() info): Promise<UserConnection> {
     return await this.prisma.query.usersConnection(args, info);
   }
 
+  @Query('usersConnection')
+  async usersConnection(@Args() args, @Info() info): Promise<UserConnection> {
+    return await this.prisma.query.usersConnection(args, info);
+  }
   @Query('me')
   @UseGuards(GqlAuthGuard)
   async me(@Context() { req }, @Info() info): Promise<User> {
@@ -53,7 +58,7 @@ export class UsersResolver {
   @Mutation('inviteToFriends')
   @UseGuards(GqlAuthGuard)
   async inviteToFriends(@Args() args, @Info() info): Promise<any> {
-    return await this.usersService.inviteToFriends(args, info);
+    // return await this.usersService.inviteToFriends(args, info);
   }
   @Mutation('updateUser')
   @UseGuards(GqlAuthGuard)
@@ -67,7 +72,9 @@ export class UsersResolver {
       throw new GraphQLError(`No such user found for email ${args.email}`);
     }
     if (user.thirdPartyId) {
-      throw new GraphQLError(`User has been created with third party provider: ${user.thirdPartyId}`);
+      throw new GraphQLError(
+        `User has been created with third party provider: ${user.thirdPartyId}`,
+      );
     }
     const resetToken = (await promisify(randomBytes)(20)).toString('hex');
     const resetTokenExpiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
@@ -95,19 +102,18 @@ export class UsersResolver {
         },
       });
     } catch (e) {
+      console.log(e);
       throw new GraphQLError('Could not send e-mail to a given address');
     }
 
     return {
       message: 'Yay!',
     };
-
   }
   @Mutation('resetPassword')
   async resetPassword(@Args() args): Promise<AuthPayload> {
-
     if (args.password !== args.confirmPassword) {
-      throw new Error('Your passwords don\'t match!');
+      throw new Error("Your passwords don't match!");
     }
 
     const [user] = await this.prisma.query.users({
@@ -143,6 +149,5 @@ export class UsersResolver {
     } catch (e) {
       throw new GraphQLError('Could not reset the password');
     }
-
   }
 }

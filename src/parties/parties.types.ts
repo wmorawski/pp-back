@@ -7,3 +7,19 @@ export interface CreatePartyPayload {
   location: Location;
   members: [User];
 }
+
+export interface PartyUserInviteInput {
+  inviteSecret: string;
+  user: User;
+}
+
+export interface CanJoinPartyArgs {
+  userId: string;
+  inviteSecret: string;
+  partyId: string;
+}
+
+export interface JoinPartyWhereInput {
+  userId: string;
+  partyId: string;
+}

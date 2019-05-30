@@ -31,7 +31,7 @@ export class MessagesResolver {
     return messageWithId;
   }
   @Subscription('message')
-  onUserMutation() {
+  onUserMessage() {
     return {
       subscribe: (obj, args, ctx, info) => {
         return this.prisma.subscription.message(args, info);

@@ -4,9 +4,11 @@ type User {
   firstName: String!
   lastName: String!
   password: String!
-  parties: [Party!]! @relation(name: "UserParties")
-  friends: [User!]! @relation(name: "UserFriends")
-  pendingInvitations: [User!]! @relation(name: "PendingFriendInvitations")
+  parties: [Party!] @relation(name: "UserParties")
+  friends: [User!] @relation(name: "UserFriends")
+  pendingFriendInvitations: [User!]! @relation(name: "PendingFriendInvitations")
+  pendingPartyInvitations: [PartyInvitation!]!
+    @relation(name: "PendingPartyInvitations")
   chats: [Chat!]!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -28,6 +30,16 @@ type Message {
   updatedAt: DateTime! @updatedAt
 }
 
+type PartyInvitation {
+  id: ID! @id
+  invitedBy: User! @relation(name: "PartyInvitationInvitedBy")
+  user: User! @relation(name: "PendingPartyInvitations")
+  party: Party! @relation(name: "PartyInvitationParty")
+  invitedUserId: String!
+  partyId: String!
+  createdAt: DateTime! @createdAt
+}
+
 type Party {
   id: ID! @id
   title: String!
@@ -43,6 +55,7 @@ type Party {
   members: [User!]! @relation(name: "UserParties")
   start: DateTime! @default(value: "1970-01-01T00:00:01")
   end: DateTime! @default(value: "1970-01-01T00:00:01")
+  inviteSecret: String! @unique
 }
 
 type Chat {

@@ -8,6 +8,7 @@ type Query {
     first: Int
     last: Int
   ): [Party]!
+  hasParties: Boolean!
   partiesConnection(
     where: PartyWhereInput
     orderBy: PartyOrderByInput
@@ -17,8 +18,54 @@ type Query {
     first: Int
     last: Int
   ): PartyConnection!
+  partyInvitationsConnection(
+    where: PartyInvitationWhereInput
+    orderBy: PartyInvitationOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PartyInvitationConnection!
+  partyInvitations(
+    where: PartyInvitationWhereInput
+    orderBy: PartyInvitationOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [PartyInvitation]!
+  canJoinParty(
+    userId: String!
+    inviteSecret: String!
+    partyId: String!
+  ): Boolean
+}
+type PartyUserInviteInput {
+  inviteSecret: String!
+  user: User!
 }
 
 type Mutation {
   createParty(data: PartyCreateInput!): Party!
+  deleteManyPartyInvitations(where: PartyInvitationWhereInput): BatchPayload!
+  # inviteUser(data: PartyUserInviteInput!): Party!
+  createPartyInvitation(data: PartyInvitationCreateInput!): PartyInvitation!
+  deletePartyInvitation(
+    where: PartyInvitationWhereUniqueInput!
+  ): PartyInvitation
+  joinParty(where: JoinPartyWhereInput!): Boolean
+}
+
+type Subscription {
+  partyInvitation(
+    where: PartyInvitationSubscriptionWhereInput
+  ): PartyInvitationSubscriptionPayload
+  party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
+}
+
+input JoinPartyWhereInput {
+  userId: String!
+  partyId: String!
 }

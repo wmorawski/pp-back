@@ -97,7 +97,7 @@ const createFakeChat = (party: any) => ({
   members: party.members,
   messages: {
     create: Array.from({
-      length: faker.random.number({ min: 20, max: 50 }),
+      length: faker.random.number({ min: 200, max: 5000 }),
     }).map(() => ({
       author: {
         connect: faker.random.arrayElement(party.members.connect) as any,

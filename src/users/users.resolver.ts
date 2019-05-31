@@ -102,7 +102,6 @@ export class UsersResolver {
         },
       });
     } catch (e) {
-      console.log(e);
       throw new GraphQLError('Could not send e-mail to a given address');
     }
 
@@ -113,7 +112,7 @@ export class UsersResolver {
   @Mutation('resetPassword')
   async resetPassword(@Args() args): Promise<AuthPayload> {
     if (args.password !== args.confirmPassword) {
-      throw new Error("Your passwords don't match!");
+      throw new Error('Your passwords don\'t match!');
     }
 
     const [user] = await this.prisma.query.users({

@@ -2,13 +2,13 @@
 // Please don't change this file manually but run `prisma generate` to update it.
 // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-import { DocumentNode } from "graphql";
+import { DocumentNode } from 'graphql';
 import {
   makePrismaClientClass,
   BaseClientOptions,
-  Model
-} from "prisma-client-lib";
-import { typeDefs } from "./prisma-schema";
+  Model,
+} from 'prisma-client-lib';
+import { typeDefs } from './prisma-schema';
 
 export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
@@ -30,7 +30,7 @@ export interface Exists {
 
 export interface Node {}
 
-export type FragmentableArray<T> = Promise<Array<T>> & Fragmentable;
+export type FragmentableArray<T> = Promise<T[]> & Fragmentable;
 
 export interface Fragmentable {
   $fragment<T>(fragment: string | DocumentNode): Promise<T>;
@@ -40,7 +40,7 @@ export interface Prisma {
   $exists: Exists;
   $graphql: <T = any>(
     query: string,
-    variables?: { [key: string]: any }
+    variables?: { [key: string]: any },
   ) => Promise<T>;
 
   /**
@@ -200,7 +200,7 @@ export interface Prisma {
     last?: Int;
   }) => PartyConnectionPromise;
   partyInvitation: (
-    where: PartyInvitationWhereUniqueInput
+    where: PartyInvitationWhereUniqueInput,
   ) => PartyInvitationPromise;
   partyInvitations: (args?: {
     where?: PartyInvitationWhereInput;
@@ -404,7 +404,7 @@ export interface Prisma {
   deleteParty: (where: PartyWhereUniqueInput) => PartyPromise;
   deleteManyParties: (where?: PartyWhereInput) => BatchPayloadPromise;
   createPartyInvitation: (
-    data: PartyInvitationCreateInput
+    data: PartyInvitationCreateInput,
   ) => PartyInvitationPromise;
   updatePartyInvitation: (args: {
     data: PartyInvitationUpdateInput;
@@ -420,10 +420,10 @@ export interface Prisma {
     update: PartyInvitationUpdateInput;
   }) => PartyInvitationPromise;
   deletePartyInvitation: (
-    where: PartyInvitationWhereUniqueInput
+    where: PartyInvitationWhereUniqueInput,
   ) => PartyInvitationPromise;
   deleteManyPartyInvitations: (
-    where?: PartyInvitationWhereInput
+    where?: PartyInvitationWhereInput,
   ) => BatchPayloadPromise;
   createPlaylist: (data: PlaylistCreateInput) => PlaylistPromise;
   updatePlaylist: (args: {
@@ -483,204 +483,202 @@ export interface Prisma {
 
 export interface Subscription {
   album: (
-    where?: AlbumSubscriptionWhereInput
+    where?: AlbumSubscriptionWhereInput,
   ) => AlbumSubscriptionPayloadSubscription;
   artist: (
-    where?: ArtistSubscriptionWhereInput
+    where?: ArtistSubscriptionWhereInput,
   ) => ArtistSubscriptionPayloadSubscription;
   chat: (
-    where?: ChatSubscriptionWhereInput
+    where?: ChatSubscriptionWhereInput,
   ) => ChatSubscriptionPayloadSubscription;
   game: (
-    where?: GameSubscriptionWhereInput
+    where?: GameSubscriptionWhereInput,
   ) => GameSubscriptionPayloadSubscription;
   image: (
-    where?: ImageSubscriptionWhereInput
+    where?: ImageSubscriptionWhereInput,
   ) => ImageSubscriptionPayloadSubscription;
   location: (
-    where?: LocationSubscriptionWhereInput
+    where?: LocationSubscriptionWhereInput,
   ) => LocationSubscriptionPayloadSubscription;
   message: (
-    where?: MessageSubscriptionWhereInput
+    where?: MessageSubscriptionWhereInput,
   ) => MessageSubscriptionPayloadSubscription;
   party: (
-    where?: PartySubscriptionWhereInput
+    where?: PartySubscriptionWhereInput,
   ) => PartySubscriptionPayloadSubscription;
   partyInvitation: (
-    where?: PartyInvitationSubscriptionWhereInput
+    where?: PartyInvitationSubscriptionWhereInput,
   ) => PartyInvitationSubscriptionPayloadSubscription;
   playlist: (
-    where?: PlaylistSubscriptionWhereInput
+    where?: PlaylistSubscriptionWhereInput,
   ) => PlaylistSubscriptionPayloadSubscription;
   track: (
-    where?: TrackSubscriptionWhereInput
+    where?: TrackSubscriptionWhereInput,
   ) => TrackSubscriptionPayloadSubscription;
   user: (
-    where?: UserSubscriptionWhereInput
+    where?: UserSubscriptionWhereInput,
   ) => UserSubscriptionPayloadSubscription;
 }
 
-export interface ClientConstructor<T> {
-  new (options?: BaseClientOptions): T;
-}
+export type ClientConstructor<T> = new (options?: BaseClientOptions) => T;
 
 /**
  * Types
  */
 
 export type ArtistOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC';
 
-export type SocialMediaType = "FACEBOOK" | "SPOTIFY" | "TWITTER";
+export type SocialMediaType = 'FACEBOOK' | 'SPOTIFY' | 'TWITTER';
 
 export type ChatOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
 
 export type PlaylistOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "playlist_id_ASC"
-  | "playlist_id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "isTemporary_ASC"
-  | "isTemporary_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'playlist_id_ASC'
+  | 'playlist_id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'isTemporary_ASC'
+  | 'isTemporary_DESC';
 
 export type PartyInvitationOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "invitedUserId_ASC"
-  | "invitedUserId_DESC"
-  | "partyId_ASC"
-  | "partyId_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'invitedUserId_ASC'
+  | 'invitedUserId_DESC'
+  | 'partyId_ASC'
+  | 'partyId_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC';
 
 export type LocationOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "placeName_ASC"
-  | "placeName_DESC"
-  | "latitude_ASC"
-  | "latitude_DESC"
-  | "longitude_ASC"
-  | "longitude_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'placeName_ASC'
+  | 'placeName_DESC'
+  | 'latitude_ASC'
+  | 'latitude_DESC'
+  | 'longitude_ASC'
+  | 'longitude_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
 
-export type GameType = "BOARD" | "PC" | "CONSOLE";
+export type GameType = 'BOARD' | 'PC' | 'CONSOLE';
 
 export type PartyOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "title_ASC"
-  | "title_DESC"
-  | "normalizedTitle_ASC"
-  | "normalizedTitle_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "colorTint_ASC"
-  | "colorTint_DESC"
-  | "isPublic_ASC"
-  | "isPublic_DESC"
-  | "start_ASC"
-  | "start_DESC"
-  | "end_ASC"
-  | "end_DESC"
-  | "inviteSecret_ASC"
-  | "inviteSecret_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'normalizedTitle_ASC'
+  | 'normalizedTitle_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'colorTint_ASC'
+  | 'colorTint_DESC'
+  | 'isPublic_ASC'
+  | 'isPublic_DESC'
+  | 'start_ASC'
+  | 'start_DESC'
+  | 'end_ASC'
+  | 'end_DESC'
+  | 'inviteSecret_ASC'
+  | 'inviteSecret_DESC';
 
 export type UserOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "email_ASC"
-  | "email_DESC"
-  | "firstName_ASC"
-  | "firstName_DESC"
-  | "lastName_ASC"
-  | "lastName_DESC"
-  | "password_ASC"
-  | "password_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "lastOnline_ASC"
-  | "lastOnline_DESC"
-  | "deleted_ASC"
-  | "deleted_DESC"
-  | "provider_ASC"
-  | "provider_DESC"
-  | "avatar_ASC"
-  | "avatar_DESC"
-  | "thirdPartyId_ASC"
-  | "thirdPartyId_DESC"
-  | "resetToken_ASC"
-  | "resetToken_DESC"
-  | "resetTokenExpiry_ASC"
-  | "resetTokenExpiry_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'firstName_ASC'
+  | 'firstName_DESC'
+  | 'lastName_ASC'
+  | 'lastName_DESC'
+  | 'password_ASC'
+  | 'password_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'lastOnline_ASC'
+  | 'lastOnline_DESC'
+  | 'deleted_ASC'
+  | 'deleted_DESC'
+  | 'provider_ASC'
+  | 'provider_DESC'
+  | 'avatar_ASC'
+  | 'avatar_DESC'
+  | 'thirdPartyId_ASC'
+  | 'thirdPartyId_DESC'
+  | 'resetToken_ASC'
+  | 'resetToken_DESC'
+  | 'resetTokenExpiry_ASC'
+  | 'resetTokenExpiry_DESC';
 
-export type AlbumOrderByInput = "id_ASC" | "id_DESC";
+export type AlbumOrderByInput = 'id_ASC' | 'id_DESC';
 
 export type ImageOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "height_ASC"
-  | "height_DESC"
-  | "width_ASC"
-  | "width_DESC"
-  | "url_ASC"
-  | "url_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'height_ASC'
+  | 'height_DESC'
+  | 'width_ASC'
+  | 'width_DESC'
+  | 'url_ASC'
+  | 'url_DESC';
 
 export type TrackOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "duration_ASC"
-  | "duration_DESC"
-  | "preview_url_ASC"
-  | "preview_url_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'duration_ASC'
+  | 'duration_DESC'
+  | 'preview_url_ASC'
+  | 'preview_url_DESC';
 
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+export type MutationType = 'CREATED' | 'UPDATED' | 'DELETED';
 
 export type GameOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "title_ASC"
-  | "title_DESC"
-  | "cover_ASC"
-  | "cover_DESC"
-  | "type_ASC"
-  | "type_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'cover_ASC'
+  | 'cover_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
 
 export type MessageOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "content_ASC"
-  | "content_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'content_ASC'
+  | 'content_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
 
 export interface ChatUpdateInput {
   party?: PartyUpdateOneRequiredInput;
@@ -5474,12 +5472,12 @@ export type String = string;
 export type Long = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 */
 export type Float = number;
 
@@ -5499,61 +5497,61 @@ export type DateTimeOutput = string;
 
 export const models: Model[] = [
   {
-    name: "User",
-    embedded: false
+    name: 'User',
+    embedded: false,
   },
   {
-    name: "Message",
-    embedded: false
+    name: 'Message',
+    embedded: false,
   },
   {
-    name: "PartyInvitation",
-    embedded: false
+    name: 'PartyInvitation',
+    embedded: false,
   },
   {
-    name: "Party",
-    embedded: false
+    name: 'Party',
+    embedded: false,
   },
   {
-    name: "Chat",
-    embedded: false
+    name: 'Chat',
+    embedded: false,
   },
   {
-    name: "Game",
-    embedded: false
+    name: 'Game',
+    embedded: false,
   },
   {
-    name: "Location",
-    embedded: false
+    name: 'Location',
+    embedded: false,
   },
   {
-    name: "Playlist",
-    embedded: false
+    name: 'Playlist',
+    embedded: false,
   },
   {
-    name: "Track",
-    embedded: false
+    name: 'Track',
+    embedded: false,
   },
   {
-    name: "Album",
-    embedded: false
+    name: 'Album',
+    embedded: false,
   },
   {
-    name: "Artist",
-    embedded: false
+    name: 'Artist',
+    embedded: false,
   },
   {
-    name: "Image",
-    embedded: false
+    name: 'Image',
+    embedded: false,
   },
   {
-    name: "GameType",
-    embedded: false
+    name: 'GameType',
+    embedded: false,
   },
   {
-    name: "SocialMediaType",
-    embedded: false
-  }
+    name: 'SocialMediaType',
+    embedded: false,
+  },
 ];
 
 /**
@@ -5563,7 +5561,7 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `${process.env["PRISMA_ENDPOINT"]}`,
-  secret: `${process.env["PRISMA_SECRET"]}`
+  endpoint: `${process.env.PRISMA_ENDPOINT}`,
+  secret: `${process.env.PRISMA_SECRET}`,
 });
 export const prisma = new Prisma();

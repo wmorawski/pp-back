@@ -22,7 +22,7 @@
     "start:debug": "nodemon --config nodemon-debug.json",
     "prestart:prod": "rimraf dist && npm run build",
     "start:prod": "node dist/src/main.js",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint": "tslint -p tsconfig.json -c tslint.json --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -92,7 +92,9 @@
     "@types/ramda": "^0.26.3",
     "@types/supertest": "^2.0.7",
     "graphql-config-extension-prisma": "^0.3.0",
+    "husky": "^2.3.0",
     "jest": "^23.6.0",
+    "lint-staged": "^8.1.7",
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
     "supertest": "^3.4.1",
@@ -115,5 +117,21 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "ignore": [
+      "src/prisma/**"
+    ],
+    "linters": {
+      "src/**/*.{ts,tsx}": [
+        "tslint --fix -p tsconfig.json -c tslint.json",
+        "git add"
+      ]
+    }
   }
 }

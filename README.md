@@ -29,6 +29,7 @@ $ export $(cut -d= -f1 development.env)
 ```
 
 ## Neccessary .env:
+
 ```bash
 $ PRISMA_ENDPOINT=
 $ PRISMA_SECRET=
@@ -45,7 +46,9 @@ $ WEB_URL=""
 $ MAILTRAP_USER=""
 $ MAILTRAP_PASSWORD=""
 $ MAILTRAP_HOST=""
+$ PRISMA_MANAGEMENT_API_SECRET=
 ```
+
 ## Running the app
 
 ```bash
@@ -71,4 +74,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-

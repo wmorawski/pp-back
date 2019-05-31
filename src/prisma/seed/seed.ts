@@ -6,8 +6,8 @@ import { compose, filter } from 'ramda';
 import { parse, addHours } from 'date-fns';
 import { PartyCreateInput, UserCreateInput } from '../prisma.binding';
 
-const USERS_NUM = 2500;
-const PARTIES_NUM = 1250;
+const USERS_NUM = 1500;
+const PARTIES_NUM = 750;
 
 const calendarTintsHexArray = [
   '#f44336',
@@ -97,7 +97,7 @@ const createFakeChat = (party: any) => ({
   members: party.members,
   messages: {
     create: Array.from({
-      length: faker.random.number({ min: 200, max: 5000 }),
+      length: faker.random.number({ min: 200, max: 3000 }),
     }).map(() => ({
       author: {
         connect: faker.random.arrayElement(party.members.connect) as any,

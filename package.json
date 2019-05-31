@@ -29,8 +29,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "update:prisma": "prisma deploy",
-    "update:graphql": "graphql get-schema --project database; graphql codegen --project database",
-    "update": "npm run update:prisma; npm run update:graphql",
+    "update:graphql": "graphql get-schema --project database && graphql codegen --project database",
+    "update": "npm run update:prisma && npm run update:graphql",
     "postinstall": "npm run prestart:prod"
   },
   "dependencies": {

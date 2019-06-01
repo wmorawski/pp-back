@@ -1,5 +1,7 @@
-import { Resolver, Query, Args, Info } from '@nestjs/graphql';
+import { Resolver, Query, Args, Info, Context } from '@nestjs/graphql';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver()
 export class ChatsResolver {
@@ -12,5 +14,13 @@ export class ChatsResolver {
   @Query('chat')
   async chat(@Args() args, @Info() info) {
     return this.prisma.query.chat(args, info);
+  }
+
+  @Query('hasChats')
+  @UseGuards(GqlAuthGuard)
+  async hasChats(@Context() { req }, @Args() args): Promise<boolean> {
+    return this.prisma.exists.Chat({
+      AND: [{ members_some: { id: req.user.userId } }, { ...args.where }],
+    });
   }
 }

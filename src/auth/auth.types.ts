@@ -6,6 +6,18 @@ export interface JwtPayload {
   exp: number;
 }
 
+export interface SocialAuthPayload {
+  provider: SocialMediaType;
+  jwt: string;
+  providerToken: string;
+  providerRefreshToken: string;
+}
+
+export type SocialAuthValidateDoneFn = (
+  error: Error,
+  user: SocialAuthPayload | null,
+) => void;
+
 export interface SignupPayload {
   id?: string;
   avatar?: string;

@@ -4,6 +4,7 @@ import { ConfigService } from '../../config/config.service';
 import { AuthService, Provider } from '../auth.service';
 import { Strategy } from 'passport-spotify';
 import * as faker from 'faker';
+import { SocialAuthPayload, SocialAuthValidateDoneFn } from '../auth.types';
 
 @Injectable()
 export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
@@ -20,7 +21,7 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
           : ''
       }/auth/spotify/callback`,
       passReqToCallback: true,
-      scope: ['user-read-email', 'user-read-private'],
+      scope: ['user-read-email', 'user-read-private', 'user-top-read'],
       showDialog: true,
     });
   }
@@ -30,7 +31,7 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
     accessToken: string,
     refreshToken: string,
     profile,
-    done: Function,
+    done: SocialAuthValidateDoneFn,
   ) {
     try {
       const jwt: string = await this.authService.validateOAuthLogin({
@@ -42,14 +43,15 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
         avatar: profile.photos[0] ? profile.photos[0].value : null,
         thirdPartyId: profile.id,
       });
-      const user = {
+      const user: SocialAuthPayload = {
         jwt,
+        providerToken: accessToken,
+        providerRefreshToken: refreshToken,
+        provider: 'SPOTIFY',
       };
-
       done(null, user);
     } catch (err) {
-      // console.log(err)
-      done(err, false);
+      done(err, null);
     }
   }
 }

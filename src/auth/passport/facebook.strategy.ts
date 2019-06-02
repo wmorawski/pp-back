@@ -4,6 +4,7 @@ import { Strategy } from 'passport-facebook';
 import { ConfigService } from '../../config/config.service';
 import { AuthService, Provider } from '../auth.service';
 import faker = require('faker');
+import { SocialAuthValidateDoneFn, SocialAuthPayload } from '../auth.types';
 
 @Injectable()
 export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
@@ -29,10 +30,9 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
     accessToken: string,
     refreshToken: string,
     profile,
-    done: Function,
+    done: SocialAuthValidateDoneFn,
   ) {
     try {
-      console.log(process.env.HOST, process.env.NODE_ENV);
       const jwt: string = await this.authService.validateOAuthLogin({
         thirdPartyId: profile.id,
         email: profile.emails[0].value,
@@ -42,13 +42,15 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
         password: faker.internet.password(),
         avatar: profile.photos[0].value || null,
       });
-      const user = {
+      const user: SocialAuthPayload = {
         jwt,
+        providerToken: accessToken,
+        providerRefreshToken: refreshToken,
+        provider: 'FACEBOOK',
       };
       done(null, user);
     } catch (err) {
-      // console.log(err)
-      done(err, false);
+      done(err, null);
     }
   }
 }

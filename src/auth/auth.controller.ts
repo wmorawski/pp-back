@@ -1,3 +1,4 @@
+import { SocialAuthAccessDeniedFilter } from './../filters/social-auth.filter';
 import { ConfigService } from '../config/config.service';
 import { LoginUserDto } from './../users/login-user.dto';
 import { UsersService } from '../users/users.service';
@@ -12,6 +13,7 @@ import {
   Req,
   Res,
   Next,
+  UseFilters,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
@@ -25,6 +27,23 @@ import { User } from 'generated/prisma-client';
 
 import { AuthGuard } from '@nestjs/passport';
 import { authenticate } from 'passport';
+import { SocialMediaType } from 'src/prisma/prisma.binding';
+import { SocialAuthPayload } from './auth.types';
+
+function getSuccessSocialCallbackUrl({
+  provider,
+  jwt,
+  providerToken,
+  providerRefreshToken,
+}: SocialAuthPayload) {
+  return `${
+    process.env.WEB_URL
+  }/auth/social/success?provider=${provider}&jwt=${jwt}&providerToken=${providerToken}&providerRefreshToken=${providerRefreshToken}`;
+}
+
+export function getErrorSocialCallbackUrl() {
+  return `${process.env.WEB_URL}/auth/social/error`;
+}
 
 function getUrlCallback(jwt: string = '') {
   const state = jwt && jwt.trim().length > 0 ? 'success' : 'error';
@@ -105,30 +124,26 @@ export class AuthController {
       );
     }
   }
+
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  async googleLogin() {
-    // initiates the Google OAuth2 login flow
-  }
+  async googleLogin() {}
 
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
   async googleLoginCallback(@Req() req, @Res() res) {
-    const jwt: string = req.user.jwt;
-    res.redirect(getUrlCallback(jwt));
+    res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
   @Get('spotify')
   @UseGuards(AuthGuard('spotify'))
-  async spotifyLogin() {
-    // initiates the Spotify login flow
-  }
+  async spotifyLogin() {}
 
   @Get('spotify/callback')
+  @UseFilters(SocialAuthAccessDeniedFilter)
   @UseGuards(AuthGuard('spotify'))
   async spotifyLoginCallback(@Req() req, @Res() res) {
-    const jwt: string = req.user.jwt;
-    res.redirect(getUrlCallback(jwt));
+    res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
   @Get('facebook')
@@ -148,8 +163,7 @@ export class AuthController {
   @Get('facebook/callback')
   @UseGuards(AuthGuard('facebook'))
   facebookLoginCallback(@Req() req, @Res() res) {
-    const jwt: string = req.user.jwt;
-    res.redirect(getUrlCallback(jwt));
+    res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
   @Get('twitter')
@@ -167,7 +181,6 @@ export class AuthController {
   @Get('twitter/callback')
   @UseGuards(AuthGuard('twitter'))
   async twitterLoginCallback(@Req() req, @Res() res) {
-    const jwt: string = req.user.jwt;
-    res.redirect(getUrlCallback(jwt));
+    res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 }

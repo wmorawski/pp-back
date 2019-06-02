@@ -4,6 +4,7 @@ import { ConfigService } from '../../config/config.service';
 import { AuthService, Provider } from '../auth.service';
 import { Strategy } from 'passport-twitter';
 import * as faker from 'faker';
+import { SocialAuthValidateDoneFn, SocialAuthPayload } from '../auth.types';
 
 @Injectable()
 export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
@@ -29,7 +30,7 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
     accessToken: string,
     refreshToken: string,
     profile,
-    done: Function,
+    done: SocialAuthValidateDoneFn,
   ) {
     try {
       const jwt: string = await this.authService.validateOAuthLogin({
@@ -41,14 +42,15 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
         avatar: profile.photos[0].value || null,
         thirdPartyId: profile.id,
       });
-      const user = {
+      const user: SocialAuthPayload = {
         jwt,
+        providerToken: accessToken,
+        providerRefreshToken: refreshToken,
+        provider: 'TWITTER',
       };
-
       done(null, user);
     } catch (err) {
-      // console.log(err)
-      done(err, false);
+      done(err, null);
     }
   }
 }

@@ -1,10 +1,13 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { User, SocialMediaType } from '../prisma/prisma.binding';
+import { Omit } from 'ramda';
 
 export interface JwtPayload {
   userId: string;
   exp: number;
 }
+
+export type SocialReAuthPayload = Omit<SocialAuthPayload, 'jwt'>;
 
 export interface SocialAuthPayload {
   provider: SocialMediaType;
@@ -13,9 +16,9 @@ export interface SocialAuthPayload {
   providerRefreshToken: string;
 }
 
-export type SocialAuthValidateDoneFn = (
+export type SocialAuthDoneFn = (
   error: Error,
-  user: SocialAuthPayload | null,
+  user: SocialAuthPayload | SocialReAuthPayload | null,
 ) => void;
 
 export interface SignupPayload {

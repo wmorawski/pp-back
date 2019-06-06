@@ -27,8 +27,8 @@ import { User } from 'generated/prisma-client';
 
 import { AuthGuard } from '@nestjs/passport';
 import { authenticate } from 'passport';
-import { SocialMediaType } from 'src/prisma/prisma.binding';
-import { SocialAuthPayload } from './auth.types';
+
+import { SocialAuthPayload, SocialReAuthPayload } from './auth.types';
 
 function getSuccessSocialCallbackUrl({
   provider,
@@ -41,13 +41,18 @@ function getSuccessSocialCallbackUrl({
   }/auth/social/success?provider=${provider}&jwt=${jwt}&providerToken=${providerToken}&providerRefreshToken=${providerRefreshToken}`;
 }
 
-export function getErrorSocialCallbackUrl() {
-  return `${process.env.WEB_URL}/auth/social/error`;
+function getSuccessReAuthCallbackUrl({
+  providerToken,
+  providerRefreshToken,
+  provider,
+}: SocialReAuthPayload) {
+  return `${
+    process.env.WEB_URL
+  }/auth/social/reauth/success?provider=${provider}&providerToken=${providerToken}&providerRefreshToken=${providerRefreshToken}`;
 }
 
-function getUrlCallback(jwt: string = '') {
-  const state = jwt && jwt.trim().length > 0 ? 'success' : 'error';
-  return `${process.env.WEB_URL}/auth-social?jwt=${jwt}&state=${state}`;
+export function getErrorSocialCallbackUrl() {
+  return `${process.env.WEB_URL}/auth/social/error`;
 }
 
 @ApiUseTags('auth')
@@ -144,6 +149,17 @@ export class AuthController {
   @UseGuards(AuthGuard('spotify'))
   async spotifyLoginCallback(@Req() req, @Res() res) {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
+  }
+
+  @Get('spotify/reAuth')
+  @UseGuards(AuthGuard('spotify-reauth'))
+  async spotifyReAuth() {}
+
+  @Get('spotify/reAuth/callback')
+  @UseFilters(SocialAuthAccessDeniedFilter)
+  @UseGuards(AuthGuard('spotify-reauth'))
+  async spotifyReAuthCallback(@Req() req, @Res() res) {
+    res.redirect(getSuccessReAuthCallbackUrl(req.user));
   }
 
   @Get('facebook')

@@ -1,3 +1,4 @@
+import { GetNewSpotifyTokenDto } from './dto/get-new-spotify-token.dto';
 import { SocialAuthAccessDeniedFilter } from './../filters/social-auth.filter';
 import { ConfigService } from '../config/config.service';
 import { LoginUserDto } from './../users/login-user.dto';
@@ -14,6 +15,7 @@ import {
   Res,
   Next,
   UseFilters,
+  Header,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
@@ -24,11 +26,13 @@ import {
 } from '@nestjs/swagger';
 import { CreateUserDto } from '../users/create-user.dto';
 import { User } from 'generated/prisma-client';
-
 import { AuthGuard } from '@nestjs/passport';
 import { authenticate } from 'passport';
-
 import { SocialAuthPayload, SocialReAuthPayload } from './auth.types';
+import * as qs from 'qs';
+
+import axios from 'axios';
+import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
 
 function getSuccessSocialCallbackUrl({
   provider,
@@ -61,6 +65,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly usersService: UsersService,
+    private readonly configService: ConfigService,
   ) {}
 
   @Post('signup')
@@ -198,5 +203,29 @@ export class AuthController {
   @UseGuards(AuthGuard('twitter'))
   async twitterLoginCallback(@Req() req, @Res() res) {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
+  }
+
+  @Post('spotify/new-token')
+  @UseGuards(AuthGuard('jwt'))
+  async TestSomething(@Body() { refreshToken }: GetNewSpotifyTokenDto) {
+    const postPayload = {
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken,
+    };
+    const response = await axios.post(
+      'https://accounts.spotify.com/api/token',
+      qs.stringify(postPayload),
+      {
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+          Authorization: `Basic ${Buffer.from(
+            `${this.configService.getFromEnv(
+              'SPOTIFY_CLIENT_ID',
+            )}:${this.configService.getFromEnv('SPOTIFY_SECRET')}`,
+          ).toString('base64')}`,
+        },
+      },
+    );
+    return response.data;
   }
 }

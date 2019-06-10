@@ -1,3 +1,5 @@
+import { GetNewSpotifyTokenDto } from './dto/get-new-spotify-token.dto';
+import { SocialAuthAccessDeniedFilter } from './../filters/social-auth.filter';
 import { ConfigService } from '../config/config.service';
 import { LoginUserDto } from './../users/login-user.dto';
 import { UsersService } from '../users/users.service';
@@ -12,6 +14,8 @@ import {
   Req,
   Res,
   Next,
+  UseFilters,
+  Header,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
@@ -22,13 +26,37 @@ import {
 } from '@nestjs/swagger';
 import { CreateUserDto } from '../users/create-user.dto';
 import { User } from 'generated/prisma-client';
-
 import { AuthGuard } from '@nestjs/passport';
 import { authenticate } from 'passport';
+import { SocialAuthPayload, SocialReAuthPayload } from './auth.types';
+import * as qs from 'qs';
 
-function getUrlCallback(jwt: string = '') {
-  const state = jwt && jwt.trim().length > 0 ? 'success' : 'error';
-  return `${process.env.WEB_URL}/auth-social?jwt=${jwt}&state=${state}`;
+import axios from 'axios';
+import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
+
+function getSuccessSocialCallbackUrl({
+  provider,
+  jwt,
+  providerToken,
+  providerRefreshToken,
+}: SocialAuthPayload) {
+  return `${
+    process.env.WEB_URL
+  }/auth/social/success?provider=${provider}&jwt=${jwt}&providerToken=${providerToken}&providerRefreshToken=${providerRefreshToken}`;
+}
+
+function getSuccessReAuthCallbackUrl({
+  providerToken,
+  providerRefreshToken,
+  provider,
+}: SocialReAuthPayload) {
+  return `${
+    process.env.WEB_URL
+  }/auth/social/reauth/success?provider=${provider}&providerToken=${providerToken}&providerRefreshToken=${providerRefreshToken}`;
+}
+
+export function getErrorSocialCallbackUrl() {
+  return `${process.env.WEB_URL}/auth/social/error`;
 }
 
 @ApiUseTags('auth')
@@ -37,6 +65,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly usersService: UsersService,
+    private readonly configService: ConfigService,
   ) {}
 
   @Post('signup')
@@ -105,30 +134,37 @@ export class AuthController {
       );
     }
   }
+
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  async googleLogin() {
-    // initiates the Google OAuth2 login flow
-  }
+  async googleLogin() {}
 
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
   async googleLoginCallback(@Req() req, @Res() res) {
-    const jwt: string = req.user.jwt;
-    res.redirect(getUrlCallback(jwt));
+    res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
   @Get('spotify')
   @UseGuards(AuthGuard('spotify'))
-  async spotifyLogin() {
-    // initiates the Spotify login flow
-  }
+  async spotifyLogin() {}
 
   @Get('spotify/callback')
+  @UseFilters(SocialAuthAccessDeniedFilter)
   @UseGuards(AuthGuard('spotify'))
   async spotifyLoginCallback(@Req() req, @Res() res) {
-    const jwt: string = req.user.jwt;
-    res.redirect(getUrlCallback(jwt));
+    res.redirect(getSuccessSocialCallbackUrl(req.user));
+  }
+
+  @Get('spotify/reAuth')
+  @UseGuards(AuthGuard('spotify-reauth'))
+  async spotifyReAuth() {}
+
+  @Get('spotify/reAuth/callback')
+  @UseFilters(SocialAuthAccessDeniedFilter)
+  @UseGuards(AuthGuard('spotify-reauth'))
+  async spotifyReAuthCallback(@Req() req, @Res() res) {
+    res.redirect(getSuccessReAuthCallbackUrl(req.user));
   }
 
   @Get('facebook')
@@ -148,8 +184,7 @@ export class AuthController {
   @Get('facebook/callback')
   @UseGuards(AuthGuard('facebook'))
   facebookLoginCallback(@Req() req, @Res() res) {
-    const jwt: string = req.user.jwt;
-    res.redirect(getUrlCallback(jwt));
+    res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
   @Get('twitter')
@@ -167,7 +202,30 @@ export class AuthController {
   @Get('twitter/callback')
   @UseGuards(AuthGuard('twitter'))
   async twitterLoginCallback(@Req() req, @Res() res) {
-    const jwt: string = req.user.jwt;
-    res.redirect(getUrlCallback(jwt));
+    res.redirect(getSuccessSocialCallbackUrl(req.user));
+  }
+
+  @Post('spotify/new-token')
+  @UseGuards(AuthGuard('jwt'))
+  async TestSomething(@Body() { refreshToken }: GetNewSpotifyTokenDto) {
+    const postPayload = {
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken,
+    };
+    const response = await axios.post(
+      'https://accounts.spotify.com/api/token',
+      qs.stringify(postPayload),
+      {
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+          Authorization: `Basic ${Buffer.from(
+            `${this.configService.getFromEnv(
+              'SPOTIFY_CLIENT_ID',
+            )}:${this.configService.getFromEnv('SPOTIFY_SECRET')}`,
+          ).toString('base64')}`,
+        },
+      },
+    );
+    return response.data;
   }
 }

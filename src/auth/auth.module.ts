@@ -1,5 +1,8 @@
 import { ConfigService } from './../config/config.service';
-import { SpotifyStrategy } from './passport/spotify.strategy';
+import {
+  SpotifyStrategy,
+  SpotifyReAuthStrategy,
+} from './passport/spotify.strategy';
 import { ConfigModule } from './../config/config.module';
 import { GoogleStrategy } from './passport/google.strategy';
 import { JwtModule } from '@nestjs/jwt';
@@ -35,10 +38,11 @@ import passport = require('passport');
     AuthResolver,
     GoogleStrategy,
     SpotifyStrategy,
+    SpotifyReAuthStrategy,
     FacebookStrategy,
     TwitterStrategy,
   ],
   controllers: [AuthController],
   exports: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}

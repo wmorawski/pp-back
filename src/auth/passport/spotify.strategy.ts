@@ -4,6 +4,29 @@ import { ConfigService } from '../../config/config.service';
 import { AuthService, Provider } from '../auth.service';
 import { Strategy } from 'passport-spotify';
 import * as faker from 'faker';
+import {
+  SocialAuthPayload,
+  SocialAuthDoneFn,
+  SocialReAuthPayload,
+} from '../auth.types';
+
+function createPassportStrategyConfig(
+  config: ConfigService,
+  callbackURL: string = '/auth/spotify/callback',
+) {
+  return {
+    clientID: config.getFromEnv('SPOTIFY_CLIENT_ID'), // <- Replace this with your client id
+    clientSecret: config.getFromEnv('SPOTIFY_SECRET'), // <- Replace this with your client secret
+    callbackURL: `${
+      process.env.NODE_ENV === 'production'
+        ? 'https://partyplannerio.herokuapp.com'
+        : ''
+    }${callbackURL}`,
+    passReqToCallback: true,
+    scope: ['user-read-email', 'user-read-private', 'user-top-read'],
+    showDialog: true,
+  };
+}
 
 @Injectable()
 export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
@@ -11,18 +34,7 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
     private readonly config: ConfigService,
     private readonly authService: AuthService,
   ) {
-    super({
-      clientID: config.getFromEnv('SPOTIFY_CLIENT_ID'), // <- Replace this with your client id
-      clientSecret: config.getFromEnv('SPOTIFY_SECRET'), // <- Replace this with your client secret
-      callbackURL: `${
-        process.env.NODE_ENV === 'production'
-          ? 'https://partyplannerio.herokuapp.com'
-          : ''
-      }/auth/spotify/callback`,
-      passReqToCallback: true,
-      scope: ['user-read-email', 'user-read-private'],
-      showDialog: true,
-    });
+    super(createPassportStrategyConfig(config));
   }
 
   async validate(
@@ -30,7 +42,7 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
     accessToken: string,
     refreshToken: string,
     profile,
-    done: Function,
+    done: SocialAuthDoneFn,
   ) {
     try {
       const jwt: string = await this.authService.validateOAuthLogin({
@@ -42,14 +54,46 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
         avatar: profile.photos[0] ? profile.photos[0].value : null,
         thirdPartyId: profile.id,
       });
-      const user = {
+      const payload: SocialAuthPayload = {
         jwt,
+        providerToken: accessToken,
+        providerRefreshToken: refreshToken,
+        provider: 'SPOTIFY',
       };
-
-      done(null, user);
+      done(null, payload);
     } catch (err) {
-      // console.log(err)
-      done(err, false);
+      done(err, null);
     }
+  }
+}
+
+// this rule is pure BS LOL!
+// tslint:disable-next-line: max-classes-per-file
+@Injectable()
+export class SpotifyReAuthStrategy extends PassportStrategy(
+  Strategy,
+  'spotify-reauth',
+) {
+  constructor(
+    private readonly config: ConfigService,
+    private readonly authService: AuthService,
+  ) {
+    super(
+      createPassportStrategyConfig(config, '/auth/spotify/reAuth/callback'),
+    );
+  }
+  async validate(
+    request: any,
+    accessToken: string,
+    refreshToken: string,
+    profile,
+    done: SocialAuthDoneFn,
+  ) {
+    const reAuthPayload: SocialReAuthPayload = {
+      providerToken: accessToken,
+      providerRefreshToken: refreshToken,
+      provider: 'SPOTIFY',
+    };
+    done(null, reAuthPayload);
   }
 }

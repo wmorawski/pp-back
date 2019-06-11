@@ -45,9 +45,11 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
     done: SocialAuthDoneFn,
   ) {
     try {
+      const userLastName =
+        profile.lastName != null ? profile.displayName.split(' ')[1] : '';
       const jwt: string = await this.authService.validateOAuthLogin({
         email: profile.emails[0].value,
-        lastName: profile.displayName.split(' ')[1],
+        lastName: userLastName,
         firstName: profile.displayName.split(' ')[0],
         provider: 'SPOTIFY',
         password: faker.internet.password(),

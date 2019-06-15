@@ -55,7 +55,7 @@ type Mutation {
   deletePartyInvitation(
     where: PartyInvitationWhereUniqueInput!
   ): PartyInvitation
-  joinParty(where: JoinPartyWhereInput!): Boolean
+  joinParty(partyId: ID!): Boolean
 }
 
 type Subscription {
@@ -63,9 +63,4 @@ type Subscription {
     where: PartyInvitationSubscriptionWhereInput
   ): PartyInvitationSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
-}
-
-input JoinPartyWhereInput {
-  userId: String!
-  partyId: String!
 }

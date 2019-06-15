@@ -70,6 +70,7 @@ export class PartiesResolver {
       id: args.where.partyId,
       members_some: { id: args.where.userId },
     });
+
     if (isUserAlreadyMemberOfThatParty) {
       throw new GraphQLError('You already are a member of that party.');
     }
@@ -80,9 +81,9 @@ export class PartiesResolver {
       },
     });
 
-    const chatForThatParty = foundChats[0];
+    const [chatForThatParty] = foundChats;
 
-    if (chatForThatParty) {
+    if (chatForThatParty == null) {
       throw new GraphQLError('Could not find Chat for a given Party');
     }
 
@@ -94,6 +95,7 @@ export class PartiesResolver {
         },
       },
     );
+
     if (allPartyInvitesOfUserForThatParty.length > 0) {
       try {
         const promises = compose(

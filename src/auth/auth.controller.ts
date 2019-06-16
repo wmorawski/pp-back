@@ -176,8 +176,19 @@ export class AuthController {
     const params = {
       session: false,
       scope: ['email'],
-      callbackURL: `/auth/facebook/callback`,
+      callbackURL: `${
+        process.env.NODE_ENV === 'production'
+          ? 'https://partyplannerio.herokuapp.com'
+          : ''
+      }/auth/facebook/callback`,
     };
+    console.log(
+      `${
+        process.env.NODE_ENV === 'production'
+          ? 'https://partyplannerio.herokuapp.com'
+          : ''
+      }/auth/facebook/callback`,
+    );
     authenticate('facebook', params)(req, res, next);
   }
 

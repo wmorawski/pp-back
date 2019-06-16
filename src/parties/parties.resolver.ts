@@ -57,7 +57,8 @@ export class PartiesResolver {
   // THIS IS REALLY REALLY BAD, USE RAW DB QUERY HERE OR SOMETHING
   // BUT PLEASE GOD OPTIMIZE IT!
   @Mutation('joinParty')
-  async joinParty(@Args() args: { where: JoinPartyWhereInput }, @Info() info) {
+  @UseGuards(GqlAuthGuard)
+  async joinParty(@Args() args: { partyId: string }, @Context() { req }) {
     // 100 points for someone who tells me why I'm using arrow function here
     // instead of normal function declaration :)
     const makeDeletePartyPromise = (partyId: string) => {
@@ -67,33 +68,35 @@ export class PartiesResolver {
     };
 
     const isUserAlreadyMemberOfThatParty = await this.prisma.exists.Party({
-      id: args.where.partyId,
-      members_some: { id: args.where.userId },
+      id: args.partyId,
+      members_some: { id: req.user.userId },
     });
+
     if (isUserAlreadyMemberOfThatParty) {
       throw new GraphQLError('You already are a member of that party.');
     }
 
     const foundChats = await this.prisma.query.chats({
       where: {
-        party: { id: args.where.partyId },
+        party: { id: args.partyId },
       },
     });
 
-    const chatForThatParty = foundChats[0];
+    const [chatForThatParty] = foundChats;
 
-    if (chatForThatParty) {
+    if (chatForThatParty == null) {
       throw new GraphQLError('Could not find Chat for a given Party');
     }
 
     const allPartyInvitesOfUserForThatParty = await this.prisma.query.partyInvitations(
       {
         where: {
-          invitedUserId: args.where.userId,
-          partyId: args.where.partyId,
+          invitedUserId: req.user.userId,
+          partyId: args.partyId,
         },
       },
     );
+
     if (allPartyInvitesOfUserForThatParty.length > 0) {
       try {
         const promises = compose(
@@ -107,13 +110,13 @@ export class PartiesResolver {
     }
 
     await this.prisma.mutation.updateUser({
-      where: { id: args.where.userId },
-      data: { parties: { connect: { id: args.where.partyId } } },
+      where: { id: req.user.userId },
+      data: { parties: { connect: { id: args.partyId } } },
     });
 
     await this.prisma.mutation.updateChat({
       where: { id: chatForThatParty.id },
-      data: { members: { connect: { id: args.where.userId } } },
+      data: { members: { connect: { id: req.user.userId } } },
     });
 
     return true;

@@ -11,6 +11,7 @@ export class ChatsResolver {
   async chatsConnection(@Args() args, @Info() info) {
     return this.prisma.query.chatsConnection(args, info);
   }
+
   @Query('chat')
   async chat(@Args() args, @Info() info) {
     return this.prisma.query.chat(args, info);
@@ -19,8 +20,10 @@ export class ChatsResolver {
   @Query('hasChats')
   @UseGuards(GqlAuthGuard)
   async hasChats(@Context() { req }, @Args() args): Promise<boolean> {
+    console.log(args, req.user.userId);
     return this.prisma.exists.Chat({
-      AND: [{ members_some: { id: req.user.userId } }, { ...args.where }],
+      ...args.where,
+      members_some: { id: req.user.userId },
     });
   }
 }

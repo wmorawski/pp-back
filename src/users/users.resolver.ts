@@ -10,7 +10,7 @@ import {
 } from '@nestjs/graphql';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
-import { UseGuards, UnauthorizedException } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../guards/GqlAuthGuard.guard';
 import { SuccessMessage } from './user.types';
 import { randomBytes } from 'crypto';
@@ -112,7 +112,7 @@ export class UsersResolver {
   @Mutation('resetPassword')
   async resetPassword(@Args() args): Promise<AuthPayload> {
     if (args.password !== args.confirmPassword) {
-      throw new Error('Your passwords don\'t match!');
+      throw new Error("Your passwords don't match!");
     }
 
     const [user] = await this.prisma.query.users({

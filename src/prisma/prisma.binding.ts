@@ -1,167 +1,169 @@
-import { GraphQLResolveInfo, GraphQLSchema } from 'graphql';
-import { IResolvers } from 'graphql-tools/dist/Interfaces';
-import { Options } from 'graphql-binding';
-import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding';
+import { GraphQLResolveInfo, GraphQLSchema } from 'graphql'
+import { IResolvers } from 'graphql-tools/dist/Interfaces'
+import { Options } from 'graphql-binding'
+import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-    messages: <T = Array<Message | null>>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    partyInvitations: <T = Array<PartyInvitation | null>>(args: { where?: PartyInvitationWhereInput | null, orderBy?: PartyInvitationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    chats: <T = Array<Chat | null>>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    playlists: <T = Array<Playlist | null>>(args: { where?: PlaylistWhereInput | null, orderBy?: PlaylistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    albums: <T = Array<Album | null>>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    images: <T = Array<Image | null>>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    locations: <T = Array<Location | null>>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    games: <T = Array<Game | null>>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    artists: <T = Array<Artist | null>>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    tracks: <T = Array<Track | null>>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    parties: <T = Array<Party | null>>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    message: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    partyInvitation: <T = PartyInvitation | null>(args: { where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    chat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    playlist: <T = Playlist | null>(args: { where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    album: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    image: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    game: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    artist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    track: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    party: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    messagesConnection: <T = MessageConnection>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    partyInvitationsConnection: <T = PartyInvitationConnection>(args: { where?: PartyInvitationWhereInput | null, orderBy?: PartyInvitationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    chatsConnection: <T = ChatConnection>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    playlistsConnection: <T = PlaylistConnection>(args: { where?: PlaylistWhereInput | null, orderBy?: PlaylistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    albumsConnection: <T = AlbumConnection>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    imagesConnection: <T = ImageConnection>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    locationsConnection: <T = LocationConnection>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    gamesConnection: <T = GameConnection>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    artistsConnection: <T = ArtistConnection>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    tracksConnection: <T = TrackConnection>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    partiesConnection: <T = PartyConnection>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null>;
+    messages: <T = Array<Message | null>>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    partyInvitations: <T = Array<PartyInvitation | null>>(args: { where?: PartyInvitationWhereInput | null, orderBy?: PartyInvitationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    chats: <T = Array<Chat | null>>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    playlists: <T = Array<Playlist | null>>(args: { where?: PlaylistWhereInput | null, orderBy?: PlaylistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    albums: <T = Array<Album | null>>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    images: <T = Array<Image | null>>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    locations: <T = Array<Location | null>>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    games: <T = Array<Game | null>>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    artists: <T = Array<Artist | null>>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    tracks: <T = Array<Track | null>>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    parties: <T = Array<Party | null>>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    message: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    partyInvitation: <T = PartyInvitation | null>(args: { where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    chat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    playlist: <T = Playlist | null>(args: { where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    album: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    image: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    game: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    artist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    track: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    party: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    messagesConnection: <T = MessageConnection>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    partyInvitationsConnection: <T = PartyInvitationConnection>(args: { where?: PartyInvitationWhereInput | null, orderBy?: PartyInvitationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    chatsConnection: <T = ChatConnection>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    playlistsConnection: <T = PlaylistConnection>(args: { where?: PlaylistWhereInput | null, orderBy?: PlaylistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    albumsConnection: <T = AlbumConnection>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    imagesConnection: <T = ImageConnection>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    locationsConnection: <T = LocationConnection>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    gamesConnection: <T = GameConnection>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    artistsConnection: <T = ArtistConnection>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    tracksConnection: <T = TrackConnection>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    partiesConnection: <T = PartyConnection>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
 
 export interface Mutation {
-    createMessage: <T = Message>(args: { data: MessageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createPartyInvitation: <T = PartyInvitation>(args: { data: PartyInvitationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createChat: <T = Chat>(args: { data: ChatCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createPlaylist: <T = Playlist>(args: { data: PlaylistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createAlbum: <T = Album>(args: { data: AlbumCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createImage: <T = Image>(args: { data: ImageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createGame: <T = Game>(args: { data: GameCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createArtist: <T = Artist>(args: { data: ArtistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createTrack: <T = Track>(args: { data: TrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    createParty: <T = Party>(args: { data: PartyCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateMessage: <T = Message | null>(args: { data: MessageUpdateInput, where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updatePartyInvitation: <T = PartyInvitation | null>(args: { data: PartyInvitationUpdateInput, where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateChat: <T = Chat | null>(args: { data: ChatUpdateInput, where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updatePlaylist: <T = Playlist | null>(args: { data: PlaylistUpdateInput, where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateAlbum: <T = Album | null>(args: { data: AlbumUpdateInput, where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateImage: <T = Image | null>(args: { data: ImageUpdateInput, where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateGame: <T = Game | null>(args: { data: GameUpdateInput, where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateArtist: <T = Artist | null>(args: { data: ArtistUpdateInput, where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateTrack: <T = Track | null>(args: { data: TrackUpdateInput, where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    updateParty: <T = Party | null>(args: { data: PartyUpdateInput, where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteMessage: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deletePartyInvitation: <T = PartyInvitation | null>(args: { where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteChat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deletePlaylist: <T = Playlist | null>(args: { where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteAlbum: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteImage: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteLocation: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteGame: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteArtist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteTrack: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    deleteParty: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ;
-    upsertMessage: <T = Message>(args: { where: MessageWhereUniqueInput, create: MessageCreateInput, update: MessageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertPartyInvitation: <T = PartyInvitation>(args: { where: PartyInvitationWhereUniqueInput, create: PartyInvitationCreateInput, update: PartyInvitationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertChat: <T = Chat>(args: { where: ChatWhereUniqueInput, create: ChatCreateInput, update: ChatUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertPlaylist: <T = Playlist>(args: { where: PlaylistWhereUniqueInput, create: PlaylistCreateInput, update: PlaylistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertAlbum: <T = Album>(args: { where: AlbumWhereUniqueInput, create: AlbumCreateInput, update: AlbumUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertImage: <T = Image>(args: { where: ImageWhereUniqueInput, create: ImageCreateInput, update: ImageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertLocation: <T = Location>(args: { where: LocationWhereUniqueInput, create: LocationCreateInput, update: LocationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertGame: <T = Game>(args: { where: GameWhereUniqueInput, create: GameCreateInput, update: GameUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertArtist: <T = Artist>(args: { where: ArtistWhereUniqueInput, create: ArtistCreateInput, update: ArtistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertTrack: <T = Track>(args: { where: TrackWhereUniqueInput, create: TrackCreateInput, update: TrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    upsertParty: <T = Party>(args: { where: PartyWhereUniqueInput, create: PartyCreateInput, update: PartyUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyMessages: <T = BatchPayload>(args: { data: MessageUpdateManyMutationInput, where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyPartyInvitations: <T = BatchPayload>(args: { data: PartyInvitationUpdateManyMutationInput, where?: PartyInvitationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyPlaylists: <T = BatchPayload>(args: { data: PlaylistUpdateManyMutationInput, where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyImages: <T = BatchPayload>(args: { data: ImageUpdateManyMutationInput, where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyLocations: <T = BatchPayload>(args: { data: LocationUpdateManyMutationInput, where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyGames: <T = BatchPayload>(args: { data: GameUpdateManyMutationInput, where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyArtists: <T = BatchPayload>(args: { data: ArtistUpdateManyMutationInput, where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyTracks: <T = BatchPayload>(args: { data: TrackUpdateManyMutationInput, where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    updateManyParties: <T = BatchPayload>(args: { data: PartyUpdateManyMutationInput, where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyMessages: <T = BatchPayload>(args: { where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyPartyInvitations: <T = BatchPayload>(args: { where?: PartyInvitationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyChats: <T = BatchPayload>(args: { where?: ChatWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyPlaylists: <T = BatchPayload>(args: { where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyAlbums: <T = BatchPayload>(args: { where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyImages: <T = BatchPayload>(args: { where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyLocations: <T = BatchPayload>(args: { where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyGames: <T = BatchPayload>(args: { where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyArtists: <T = BatchPayload>(args: { where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyTracks: <T = BatchPayload>(args: { where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ;
-    deleteManyParties: <T = BatchPayload>(args: { where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T>;
+    createMessage: <T = Message>(args: { data: MessageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createPartyInvitation: <T = PartyInvitation>(args: { data: PartyInvitationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createChat: <T = Chat>(args: { data: ChatCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createPlaylist: <T = Playlist>(args: { data: PlaylistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createAlbum: <T = Album>(args: { data: AlbumCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createImage: <T = Image>(args: { data: ImageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createGame: <T = Game>(args: { data: GameCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createArtist: <T = Artist>(args: { data: ArtistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createTrack: <T = Track>(args: { data: TrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createParty: <T = Party>(args: { data: PartyCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateMessage: <T = Message | null>(args: { data: MessageUpdateInput, where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updatePartyInvitation: <T = PartyInvitation | null>(args: { data: PartyInvitationUpdateInput, where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateChat: <T = Chat | null>(args: { data: ChatUpdateInput, where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updatePlaylist: <T = Playlist | null>(args: { data: PlaylistUpdateInput, where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateAlbum: <T = Album | null>(args: { data: AlbumUpdateInput, where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateImage: <T = Image | null>(args: { data: ImageUpdateInput, where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateGame: <T = Game | null>(args: { data: GameUpdateInput, where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateArtist: <T = Artist | null>(args: { data: ArtistUpdateInput, where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateTrack: <T = Track | null>(args: { data: TrackUpdateInput, where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateParty: <T = Party | null>(args: { data: PartyUpdateInput, where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteMessage: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deletePartyInvitation: <T = PartyInvitation | null>(args: { where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteChat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deletePlaylist: <T = Playlist | null>(args: { where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteAlbum: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteImage: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteLocation: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteGame: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteArtist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteTrack: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteParty: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    upsertMessage: <T = Message>(args: { where: MessageWhereUniqueInput, create: MessageCreateInput, update: MessageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertPartyInvitation: <T = PartyInvitation>(args: { where: PartyInvitationWhereUniqueInput, create: PartyInvitationCreateInput, update: PartyInvitationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertChat: <T = Chat>(args: { where: ChatWhereUniqueInput, create: ChatCreateInput, update: ChatUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertPlaylist: <T = Playlist>(args: { where: PlaylistWhereUniqueInput, create: PlaylistCreateInput, update: PlaylistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertAlbum: <T = Album>(args: { where: AlbumWhereUniqueInput, create: AlbumCreateInput, update: AlbumUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertImage: <T = Image>(args: { where: ImageWhereUniqueInput, create: ImageCreateInput, update: ImageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertLocation: <T = Location>(args: { where: LocationWhereUniqueInput, create: LocationCreateInput, update: LocationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertGame: <T = Game>(args: { where: GameWhereUniqueInput, create: GameCreateInput, update: GameUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertArtist: <T = Artist>(args: { where: ArtistWhereUniqueInput, create: ArtistCreateInput, update: ArtistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertTrack: <T = Track>(args: { where: TrackWhereUniqueInput, create: TrackCreateInput, update: TrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertParty: <T = Party>(args: { where: PartyWhereUniqueInput, create: PartyCreateInput, update: PartyUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyMessages: <T = BatchPayload>(args: { data: MessageUpdateManyMutationInput, where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyPartyInvitations: <T = BatchPayload>(args: { data: PartyInvitationUpdateManyMutationInput, where?: PartyInvitationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyPlaylists: <T = BatchPayload>(args: { data: PlaylistUpdateManyMutationInput, where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyImages: <T = BatchPayload>(args: { data: ImageUpdateManyMutationInput, where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyLocations: <T = BatchPayload>(args: { data: LocationUpdateManyMutationInput, where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyGames: <T = BatchPayload>(args: { data: GameUpdateManyMutationInput, where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyArtists: <T = BatchPayload>(args: { data: ArtistUpdateManyMutationInput, where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyTracks: <T = BatchPayload>(args: { data: TrackUpdateManyMutationInput, where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyParties: <T = BatchPayload>(args: { data: PartyUpdateManyMutationInput, where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyMessages: <T = BatchPayload>(args: { where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyPartyInvitations: <T = BatchPayload>(args: { where?: PartyInvitationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyChats: <T = BatchPayload>(args: { where?: ChatWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyPlaylists: <T = BatchPayload>(args: { where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyAlbums: <T = BatchPayload>(args: { where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyImages: <T = BatchPayload>(args: { where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyLocations: <T = BatchPayload>(args: { where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyGames: <T = BatchPayload>(args: { where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyArtists: <T = BatchPayload>(args: { where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyTracks: <T = BatchPayload>(args: { where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyParties: <T = BatchPayload>(args: { where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
-    message: <T = MessageSubscriptionPayload | null>(args: { where?: MessageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    partyInvitation: <T = PartyInvitationSubscriptionPayload | null>(args: { where?: PartyInvitationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    chat: <T = ChatSubscriptionPayload | null>(args: { where?: ChatSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    playlist: <T = PlaylistSubscriptionPayload | null>(args: { where?: PlaylistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    album: <T = AlbumSubscriptionPayload | null>(args: { where?: AlbumSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    image: <T = ImageSubscriptionPayload | null>(args: { where?: ImageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    location: <T = LocationSubscriptionPayload | null>(args: { where?: LocationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    game: <T = GameSubscriptionPayload | null>(args: { where?: GameSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    artist: <T = ArtistSubscriptionPayload | null>(args: { where?: ArtistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    track: <T = TrackSubscriptionPayload | null>(args: { where?: TrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ;
-    party: <T = PartySubscriptionPayload | null>(args: { where?: PartySubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>>;
+    message: <T = MessageSubscriptionPayload | null>(args: { where?: MessageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    partyInvitation: <T = PartyInvitationSubscriptionPayload | null>(args: { where?: PartyInvitationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    chat: <T = ChatSubscriptionPayload | null>(args: { where?: ChatSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    playlist: <T = PlaylistSubscriptionPayload | null>(args: { where?: PlaylistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    album: <T = AlbumSubscriptionPayload | null>(args: { where?: AlbumSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    image: <T = ImageSubscriptionPayload | null>(args: { where?: ImageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    location: <T = LocationSubscriptionPayload | null>(args: { where?: LocationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    game: <T = GameSubscriptionPayload | null>(args: { where?: GameSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    artist: <T = ArtistSubscriptionPayload | null>(args: { where?: ArtistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    track: <T = TrackSubscriptionPayload | null>(args: { where?: TrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    party: <T = PartySubscriptionPayload | null>(args: { where?: PartySubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
-  Message: (where?: MessageWhereInput) => Promise<boolean>;
-  PartyInvitation: (where?: PartyInvitationWhereInput) => Promise<boolean>;
-  Chat: (where?: ChatWhereInput) => Promise<boolean>;
-  Playlist: (where?: PlaylistWhereInput) => Promise<boolean>;
-  Album: (where?: AlbumWhereInput) => Promise<boolean>;
-  Image: (where?: ImageWhereInput) => Promise<boolean>;
-  Location: (where?: LocationWhereInput) => Promise<boolean>;
-  Game: (where?: GameWhereInput) => Promise<boolean>;
-  Artist: (where?: ArtistWhereInput) => Promise<boolean>;
-  Track: (where?: TrackWhereInput) => Promise<boolean>;
-  User: (where?: UserWhereInput) => Promise<boolean>;
-  Party: (where?: PartyWhereInput) => Promise<boolean>;
+  Message: (where?: MessageWhereInput) => Promise<boolean>
+  PartyInvitation: (where?: PartyInvitationWhereInput) => Promise<boolean>
+  Chat: (where?: ChatWhereInput) => Promise<boolean>
+  Playlist: (where?: PlaylistWhereInput) => Promise<boolean>
+  Album: (where?: AlbumWhereInput) => Promise<boolean>
+  Image: (where?: ImageWhereInput) => Promise<boolean>
+  Location: (where?: LocationWhereInput) => Promise<boolean>
+  Game: (where?: GameWhereInput) => Promise<boolean>
+  Artist: (where?: ArtistWhereInput) => Promise<boolean>
+  Track: (where?: TrackWhereInput) => Promise<boolean>
+  User: (where?: UserWhereInput) => Promise<boolean>
+  Party: (where?: PartyWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
-  query: Query;
-  mutation: Mutation;
-  subscription: Subscription;
-  exists: Exists;
-  request: <T = any>(query: string, variables?: {[key: string]: any}) => Promise<T>;
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+  exists: Exists
+  request: <T = any>(query: string, variables?: {[key: string]: any}) => Promise<T>
   delegate(operation: 'query' | 'mutation', fieldName: string, args: {
     [key: string]: any;
-},         infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<any>;
+}, infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<any>;
 delegateSubscription(fieldName: string, args?: {
     [key: string]: any;
-},                   infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<any>>;
+}, infoOrQuery?: GraphQLResolveInfo | string, options?: Options): Promise<AsyncIterator<any>>;
 getAbstractResolvers(filterSchema?: GraphQLSchema | string): IResolvers;
 }
 
-export type BindingConstructor<T> = new(options: BasePrismaOptions) => T;
+export interface BindingConstructor<T> {
+  new(options: BasePrismaOptions): T
+}
 /**
  * Type Defs
 */
@@ -6421,28 +6423,28 @@ input UserWhereUniqueInput {
   id: ID
   email: String
 }
-`;
+`
 
-export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDefs});
+export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDefs})
 
 /**
  * Types
 */
 
 export type AlbumOrderByInput =   'id_ASC' |
-  'id_DESC';
+  'id_DESC'
 
 export type ArtistOrderByInput =   'id_ASC' |
   'id_DESC' |
   'name_ASC' |
-  'name_DESC';
+  'name_DESC'
 
 export type ChatOrderByInput =   'id_ASC' |
   'id_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
-  'updatedAt_DESC';
+  'updatedAt_DESC'
 
 export type GameOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6455,11 +6457,11 @@ export type GameOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
-  'updatedAt_DESC';
+  'updatedAt_DESC'
 
 export type GameType =   'BOARD' |
   'PC' |
-  'CONSOLE';
+  'CONSOLE'
 
 export type ImageOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6468,7 +6470,7 @@ export type ImageOrderByInput =   'id_ASC' |
   'width_ASC' |
   'width_DESC' |
   'url_ASC' |
-  'url_DESC';
+  'url_DESC'
 
 export type LocationOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6481,7 +6483,7 @@ export type LocationOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
-  'updatedAt_DESC';
+  'updatedAt_DESC'
 
 export type MessageOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6490,11 +6492,11 @@ export type MessageOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
-  'updatedAt_DESC';
+  'updatedAt_DESC'
 
 export type MutationType =   'CREATED' |
   'UPDATED' |
-  'DELETED';
+  'DELETED'
 
 export type PartyInvitationOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6503,7 +6505,7 @@ export type PartyInvitationOrderByInput =   'id_ASC' |
   'partyId_ASC' |
   'partyId_DESC' |
   'createdAt_ASC' |
-  'createdAt_DESC';
+  'createdAt_DESC'
 
 export type PartyOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6526,7 +6528,7 @@ export type PartyOrderByInput =   'id_ASC' |
   'end_ASC' |
   'end_DESC' |
   'inviteSecret_ASC' |
-  'inviteSecret_DESC';
+  'inviteSecret_DESC'
 
 export type PlaylistOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6535,11 +6537,11 @@ export type PlaylistOrderByInput =   'id_ASC' |
   'name_ASC' |
   'name_DESC' |
   'isTemporary_ASC' |
-  'isTemporary_DESC';
+  'isTemporary_DESC'
 
 export type SocialMediaType =   'FACEBOOK' |
   'SPOTIFY' |
-  'TWITTER';
+  'TWITTER'
 
 export type TrackOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6548,7 +6550,7 @@ export type TrackOrderByInput =   'id_ASC' |
   'duration_ASC' |
   'duration_DESC' |
   'preview_url_ASC' |
-  'preview_url_DESC';
+  'preview_url_DESC'
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6577,2668 +6579,2668 @@ export type UserOrderByInput =   'id_ASC' |
   'resetToken_ASC' |
   'resetToken_DESC' |
   'resetTokenExpiry_ASC' |
-  'resetTokenExpiry_DESC';
+  'resetTokenExpiry_DESC'
 
 export interface AlbumCreateInput {
-  id?: ID_Input | null;
-  images?: ImageCreateManyInput | null;
-  artists?: ArtistCreateManyInput | null;
+  id?: ID_Input | null
+  images?: ImageCreateManyInput | null
+  artists?: ArtistCreateManyInput | null
 }
 
 export interface AlbumCreateOneInput {
-  create?: AlbumCreateInput | null;
-  connect?: AlbumWhereUniqueInput | null;
+  create?: AlbumCreateInput | null
+  connect?: AlbumWhereUniqueInput | null
 }
 
 export interface AlbumSubscriptionWhereInput {
-  AND?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null;
-  OR?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null;
-  NOT?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: AlbumWhereInput | null;
+  AND?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null
+  OR?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null
+  NOT?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: AlbumWhereInput | null
 }
 
 export interface AlbumUpdateDataInput {
-  images?: ImageUpdateManyInput | null;
-  artists?: ArtistUpdateManyInput | null;
+  images?: ImageUpdateManyInput | null
+  artists?: ArtistUpdateManyInput | null
 }
 
 export interface AlbumUpdateInput {
-  images?: ImageUpdateManyInput | null;
-  artists?: ArtistUpdateManyInput | null;
+  images?: ImageUpdateManyInput | null
+  artists?: ArtistUpdateManyInput | null
 }
 
 export interface AlbumUpdateOneRequiredInput {
-  create?: AlbumCreateInput | null;
-  connect?: AlbumWhereUniqueInput | null;
-  update?: AlbumUpdateDataInput | null;
-  upsert?: AlbumUpsertNestedInput | null;
+  create?: AlbumCreateInput | null
+  connect?: AlbumWhereUniqueInput | null
+  update?: AlbumUpdateDataInput | null
+  upsert?: AlbumUpsertNestedInput | null
 }
 
 export interface AlbumUpsertNestedInput {
-  update: AlbumUpdateDataInput;
-  create: AlbumCreateInput;
+  update: AlbumUpdateDataInput
+  create: AlbumCreateInput
 }
 
 export interface AlbumWhereInput {
-  AND?: AlbumWhereInput[] | AlbumWhereInput | null;
-  OR?: AlbumWhereInput[] | AlbumWhereInput | null;
-  NOT?: AlbumWhereInput[] | AlbumWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  images_every?: ImageWhereInput | null;
-  images_some?: ImageWhereInput | null;
-  images_none?: ImageWhereInput | null;
-  artists_every?: ArtistWhereInput | null;
-  artists_some?: ArtistWhereInput | null;
-  artists_none?: ArtistWhereInput | null;
+  AND?: AlbumWhereInput[] | AlbumWhereInput | null
+  OR?: AlbumWhereInput[] | AlbumWhereInput | null
+  NOT?: AlbumWhereInput[] | AlbumWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  images_every?: ImageWhereInput | null
+  images_some?: ImageWhereInput | null
+  images_none?: ImageWhereInput | null
+  artists_every?: ArtistWhereInput | null
+  artists_some?: ArtistWhereInput | null
+  artists_none?: ArtistWhereInput | null
 }
 
 export interface AlbumWhereUniqueInput {
-  id?: ID_Input | null;
+  id?: ID_Input | null
 }
 
 export interface ArtistCreateInput {
-  id?: ID_Input | null;
-  name: String;
+  id?: ID_Input | null
+  name: String
 }
 
 export interface ArtistCreateManyInput {
-  create?: ArtistCreateInput[] | ArtistCreateInput | null;
-  connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null;
+  create?: ArtistCreateInput[] | ArtistCreateInput | null
+  connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
 }
 
 export interface ArtistScalarWhereInput {
-  AND?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null;
-  OR?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null;
-  NOT?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  name?: String | null;
-  name_not?: String | null;
-  name_in?: String[] | String | null;
-  name_not_in?: String[] | String | null;
-  name_lt?: String | null;
-  name_lte?: String | null;
-  name_gt?: String | null;
-  name_gte?: String | null;
-  name_contains?: String | null;
-  name_not_contains?: String | null;
-  name_starts_with?: String | null;
-  name_not_starts_with?: String | null;
-  name_ends_with?: String | null;
-  name_not_ends_with?: String | null;
+  AND?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null
+  OR?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null
+  NOT?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
 }
 
 export interface ArtistSubscriptionWhereInput {
-  AND?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null;
-  OR?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null;
-  NOT?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: ArtistWhereInput | null;
+  AND?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null
+  OR?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null
+  NOT?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: ArtistWhereInput | null
 }
 
 export interface ArtistUpdateDataInput {
-  name?: String | null;
+  name?: String | null
 }
 
 export interface ArtistUpdateInput {
-  name?: String | null;
+  name?: String | null
 }
 
 export interface ArtistUpdateManyDataInput {
-  name?: String | null;
+  name?: String | null
 }
 
 export interface ArtistUpdateManyInput {
-  create?: ArtistCreateInput[] | ArtistCreateInput | null;
-  connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null;
-  set?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null;
-  disconnect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null;
-  delete?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null;
-  update?: ArtistUpdateWithWhereUniqueNestedInput[] | ArtistUpdateWithWhereUniqueNestedInput | null;
-  updateMany?: ArtistUpdateManyWithWhereNestedInput[] | ArtistUpdateManyWithWhereNestedInput | null;
-  deleteMany?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null;
-  upsert?: ArtistUpsertWithWhereUniqueNestedInput[] | ArtistUpsertWithWhereUniqueNestedInput | null;
+  create?: ArtistCreateInput[] | ArtistCreateInput | null
+  connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+  set?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+  disconnect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+  delete?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput | null
+  update?: ArtistUpdateWithWhereUniqueNestedInput[] | ArtistUpdateWithWhereUniqueNestedInput | null
+  updateMany?: ArtistUpdateManyWithWhereNestedInput[] | ArtistUpdateManyWithWhereNestedInput | null
+  deleteMany?: ArtistScalarWhereInput[] | ArtistScalarWhereInput | null
+  upsert?: ArtistUpsertWithWhereUniqueNestedInput[] | ArtistUpsertWithWhereUniqueNestedInput | null
 }
 
 export interface ArtistUpdateManyMutationInput {
-  name?: String | null;
+  name?: String | null
 }
 
 export interface ArtistUpdateManyWithWhereNestedInput {
-  where: ArtistScalarWhereInput;
-  data: ArtistUpdateManyDataInput;
+  where: ArtistScalarWhereInput
+  data: ArtistUpdateManyDataInput
 }
 
 export interface ArtistUpdateWithWhereUniqueNestedInput {
-  where: ArtistWhereUniqueInput;
-  data: ArtistUpdateDataInput;
+  where: ArtistWhereUniqueInput
+  data: ArtistUpdateDataInput
 }
 
 export interface ArtistUpsertWithWhereUniqueNestedInput {
-  where: ArtistWhereUniqueInput;
-  update: ArtistUpdateDataInput;
-  create: ArtistCreateInput;
+  where: ArtistWhereUniqueInput
+  update: ArtistUpdateDataInput
+  create: ArtistCreateInput
 }
 
 export interface ArtistWhereInput {
-  AND?: ArtistWhereInput[] | ArtistWhereInput | null;
-  OR?: ArtistWhereInput[] | ArtistWhereInput | null;
-  NOT?: ArtistWhereInput[] | ArtistWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  name?: String | null;
-  name_not?: String | null;
-  name_in?: String[] | String | null;
-  name_not_in?: String[] | String | null;
-  name_lt?: String | null;
-  name_lte?: String | null;
-  name_gt?: String | null;
-  name_gte?: String | null;
-  name_contains?: String | null;
-  name_not_contains?: String | null;
-  name_starts_with?: String | null;
-  name_not_starts_with?: String | null;
-  name_ends_with?: String | null;
-  name_not_ends_with?: String | null;
+  AND?: ArtistWhereInput[] | ArtistWhereInput | null
+  OR?: ArtistWhereInput[] | ArtistWhereInput | null
+  NOT?: ArtistWhereInput[] | ArtistWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
 }
 
 export interface ArtistWhereUniqueInput {
-  id?: ID_Input | null;
+  id?: ID_Input | null
 }
 
 export interface ChatCreateInput {
-  id?: ID_Input | null;
-  party: PartyCreateOneInput;
-  members?: UserCreateManyWithoutChatsInput | null;
-  messages?: MessageCreateManyWithoutChatInput | null;
+  id?: ID_Input | null
+  party: PartyCreateOneInput
+  members?: UserCreateManyWithoutChatsInput | null
+  messages?: MessageCreateManyWithoutChatInput | null
 }
 
 export interface ChatCreateManyWithoutMembersInput {
-  create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput | null;
-  connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null;
+  create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput | null
+  connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
 }
 
 export interface ChatCreateOneWithoutMessagesInput {
-  create?: ChatCreateWithoutMessagesInput | null;
-  connect?: ChatWhereUniqueInput | null;
+  create?: ChatCreateWithoutMessagesInput | null
+  connect?: ChatWhereUniqueInput | null
 }
 
 export interface ChatCreateWithoutMembersInput {
-  id?: ID_Input | null;
-  party: PartyCreateOneInput;
-  messages?: MessageCreateManyWithoutChatInput | null;
+  id?: ID_Input | null
+  party: PartyCreateOneInput
+  messages?: MessageCreateManyWithoutChatInput | null
 }
 
 export interface ChatCreateWithoutMessagesInput {
-  id?: ID_Input | null;
-  party: PartyCreateOneInput;
-  members?: UserCreateManyWithoutChatsInput | null;
+  id?: ID_Input | null
+  party: PartyCreateOneInput
+  members?: UserCreateManyWithoutChatsInput | null
 }
 
 export interface ChatScalarWhereInput {
-  AND?: ChatScalarWhereInput[] | ChatScalarWhereInput | null;
-  OR?: ChatScalarWhereInput[] | ChatScalarWhereInput | null;
-  NOT?: ChatScalarWhereInput[] | ChatScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
+  AND?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
+  OR?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
+  NOT?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
 }
 
 export interface ChatSubscriptionWhereInput {
-  AND?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null;
-  OR?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null;
-  NOT?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: ChatWhereInput | null;
+  AND?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
+  OR?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
+  NOT?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: ChatWhereInput | null
 }
 
 export interface ChatUpdateInput {
-  party?: PartyUpdateOneRequiredInput | null;
-  members?: UserUpdateManyWithoutChatsInput | null;
-  messages?: MessageUpdateManyWithoutChatInput | null;
+  party?: PartyUpdateOneRequiredInput | null
+  members?: UserUpdateManyWithoutChatsInput | null
+  messages?: MessageUpdateManyWithoutChatInput | null
 }
 
 export interface ChatUpdateManyWithoutMembersInput {
-  create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput | null;
-  connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null;
-  set?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null;
-  disconnect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null;
-  delete?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null;
-  update?: ChatUpdateWithWhereUniqueWithoutMembersInput[] | ChatUpdateWithWhereUniqueWithoutMembersInput | null;
-  deleteMany?: ChatScalarWhereInput[] | ChatScalarWhereInput | null;
-  upsert?: ChatUpsertWithWhereUniqueWithoutMembersInput[] | ChatUpsertWithWhereUniqueWithoutMembersInput | null;
+  create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput | null
+  connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
+  set?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
+  disconnect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
+  delete?: ChatWhereUniqueInput[] | ChatWhereUniqueInput | null
+  update?: ChatUpdateWithWhereUniqueWithoutMembersInput[] | ChatUpdateWithWhereUniqueWithoutMembersInput | null
+  deleteMany?: ChatScalarWhereInput[] | ChatScalarWhereInput | null
+  upsert?: ChatUpsertWithWhereUniqueWithoutMembersInput[] | ChatUpsertWithWhereUniqueWithoutMembersInput | null
 }
 
 export interface ChatUpdateOneRequiredWithoutMessagesInput {
-  create?: ChatCreateWithoutMessagesInput | null;
-  connect?: ChatWhereUniqueInput | null;
-  update?: ChatUpdateWithoutMessagesDataInput | null;
-  upsert?: ChatUpsertWithoutMessagesInput | null;
+  create?: ChatCreateWithoutMessagesInput | null
+  connect?: ChatWhereUniqueInput | null
+  update?: ChatUpdateWithoutMessagesDataInput | null
+  upsert?: ChatUpsertWithoutMessagesInput | null
 }
 
 export interface ChatUpdateWithoutMembersDataInput {
-  party?: PartyUpdateOneRequiredInput | null;
-  messages?: MessageUpdateManyWithoutChatInput | null;
+  party?: PartyUpdateOneRequiredInput | null
+  messages?: MessageUpdateManyWithoutChatInput | null
 }
 
 export interface ChatUpdateWithoutMessagesDataInput {
-  party?: PartyUpdateOneRequiredInput | null;
-  members?: UserUpdateManyWithoutChatsInput | null;
+  party?: PartyUpdateOneRequiredInput | null
+  members?: UserUpdateManyWithoutChatsInput | null
 }
 
 export interface ChatUpdateWithWhereUniqueWithoutMembersInput {
-  where: ChatWhereUniqueInput;
-  data: ChatUpdateWithoutMembersDataInput;
+  where: ChatWhereUniqueInput
+  data: ChatUpdateWithoutMembersDataInput
 }
 
 export interface ChatUpsertWithoutMessagesInput {
-  update: ChatUpdateWithoutMessagesDataInput;
-  create: ChatCreateWithoutMessagesInput;
+  update: ChatUpdateWithoutMessagesDataInput
+  create: ChatCreateWithoutMessagesInput
 }
 
 export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
-  where: ChatWhereUniqueInput;
-  update: ChatUpdateWithoutMembersDataInput;
-  create: ChatCreateWithoutMembersInput;
+  where: ChatWhereUniqueInput
+  update: ChatUpdateWithoutMembersDataInput
+  create: ChatCreateWithoutMembersInput
 }
 
 export interface ChatWhereInput {
-  AND?: ChatWhereInput[] | ChatWhereInput | null;
-  OR?: ChatWhereInput[] | ChatWhereInput | null;
-  NOT?: ChatWhereInput[] | ChatWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
-  party?: PartyWhereInput | null;
-  members_every?: UserWhereInput | null;
-  members_some?: UserWhereInput | null;
-  members_none?: UserWhereInput | null;
-  messages_every?: MessageWhereInput | null;
-  messages_some?: MessageWhereInput | null;
-  messages_none?: MessageWhereInput | null;
+  AND?: ChatWhereInput[] | ChatWhereInput | null
+  OR?: ChatWhereInput[] | ChatWhereInput | null
+  NOT?: ChatWhereInput[] | ChatWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  party?: PartyWhereInput | null
+  members_every?: UserWhereInput | null
+  members_some?: UserWhereInput | null
+  members_none?: UserWhereInput | null
+  messages_every?: MessageWhereInput | null
+  messages_some?: MessageWhereInput | null
+  messages_none?: MessageWhereInput | null
 }
 
 export interface ChatWhereUniqueInput {
-  id?: ID_Input | null;
+  id?: ID_Input | null
 }
 
 export interface GameCreateInput {
-  id?: ID_Input | null;
-  title: String;
-  cover?: String | null;
-  type: GameType;
+  id?: ID_Input | null
+  title: String
+  cover?: String | null
+  type: GameType
 }
 
 export interface GameCreateManyInput {
-  create?: GameCreateInput[] | GameCreateInput | null;
-  connect?: GameWhereUniqueInput[] | GameWhereUniqueInput | null;
+  create?: GameCreateInput[] | GameCreateInput | null
+  connect?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
 }
 
 export interface GameScalarWhereInput {
-  AND?: GameScalarWhereInput[] | GameScalarWhereInput | null;
-  OR?: GameScalarWhereInput[] | GameScalarWhereInput | null;
-  NOT?: GameScalarWhereInput[] | GameScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  title?: String | null;
-  title_not?: String | null;
-  title_in?: String[] | String | null;
-  title_not_in?: String[] | String | null;
-  title_lt?: String | null;
-  title_lte?: String | null;
-  title_gt?: String | null;
-  title_gte?: String | null;
-  title_contains?: String | null;
-  title_not_contains?: String | null;
-  title_starts_with?: String | null;
-  title_not_starts_with?: String | null;
-  title_ends_with?: String | null;
-  title_not_ends_with?: String | null;
-  cover?: String | null;
-  cover_not?: String | null;
-  cover_in?: String[] | String | null;
-  cover_not_in?: String[] | String | null;
-  cover_lt?: String | null;
-  cover_lte?: String | null;
-  cover_gt?: String | null;
-  cover_gte?: String | null;
-  cover_contains?: String | null;
-  cover_not_contains?: String | null;
-  cover_starts_with?: String | null;
-  cover_not_starts_with?: String | null;
-  cover_ends_with?: String | null;
-  cover_not_ends_with?: String | null;
-  type?: GameType | null;
-  type_not?: GameType | null;
-  type_in?: GameType[] | GameType | null;
-  type_not_in?: GameType[] | GameType | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
+  AND?: GameScalarWhereInput[] | GameScalarWhereInput | null
+  OR?: GameScalarWhereInput[] | GameScalarWhereInput | null
+  NOT?: GameScalarWhereInput[] | GameScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  title?: String | null
+  title_not?: String | null
+  title_in?: String[] | String | null
+  title_not_in?: String[] | String | null
+  title_lt?: String | null
+  title_lte?: String | null
+  title_gt?: String | null
+  title_gte?: String | null
+  title_contains?: String | null
+  title_not_contains?: String | null
+  title_starts_with?: String | null
+  title_not_starts_with?: String | null
+  title_ends_with?: String | null
+  title_not_ends_with?: String | null
+  cover?: String | null
+  cover_not?: String | null
+  cover_in?: String[] | String | null
+  cover_not_in?: String[] | String | null
+  cover_lt?: String | null
+  cover_lte?: String | null
+  cover_gt?: String | null
+  cover_gte?: String | null
+  cover_contains?: String | null
+  cover_not_contains?: String | null
+  cover_starts_with?: String | null
+  cover_not_starts_with?: String | null
+  cover_ends_with?: String | null
+  cover_not_ends_with?: String | null
+  type?: GameType | null
+  type_not?: GameType | null
+  type_in?: GameType[] | GameType | null
+  type_not_in?: GameType[] | GameType | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
 }
 
 export interface GameSubscriptionWhereInput {
-  AND?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null;
-  OR?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null;
-  NOT?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: GameWhereInput | null;
+  AND?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
+  OR?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
+  NOT?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: GameWhereInput | null
 }
 
 export interface GameUpdateDataInput {
-  title?: String | null;
-  cover?: String | null;
-  type?: GameType | null;
+  title?: String | null
+  cover?: String | null
+  type?: GameType | null
 }
 
 export interface GameUpdateInput {
-  title?: String | null;
-  cover?: String | null;
-  type?: GameType | null;
+  title?: String | null
+  cover?: String | null
+  type?: GameType | null
 }
 
 export interface GameUpdateManyDataInput {
-  title?: String | null;
-  cover?: String | null;
-  type?: GameType | null;
+  title?: String | null
+  cover?: String | null
+  type?: GameType | null
 }
 
 export interface GameUpdateManyInput {
-  create?: GameCreateInput[] | GameCreateInput | null;
-  connect?: GameWhereUniqueInput[] | GameWhereUniqueInput | null;
-  set?: GameWhereUniqueInput[] | GameWhereUniqueInput | null;
-  disconnect?: GameWhereUniqueInput[] | GameWhereUniqueInput | null;
-  delete?: GameWhereUniqueInput[] | GameWhereUniqueInput | null;
-  update?: GameUpdateWithWhereUniqueNestedInput[] | GameUpdateWithWhereUniqueNestedInput | null;
-  updateMany?: GameUpdateManyWithWhereNestedInput[] | GameUpdateManyWithWhereNestedInput | null;
-  deleteMany?: GameScalarWhereInput[] | GameScalarWhereInput | null;
-  upsert?: GameUpsertWithWhereUniqueNestedInput[] | GameUpsertWithWhereUniqueNestedInput | null;
+  create?: GameCreateInput[] | GameCreateInput | null
+  connect?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
+  set?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
+  disconnect?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
+  delete?: GameWhereUniqueInput[] | GameWhereUniqueInput | null
+  update?: GameUpdateWithWhereUniqueNestedInput[] | GameUpdateWithWhereUniqueNestedInput | null
+  updateMany?: GameUpdateManyWithWhereNestedInput[] | GameUpdateManyWithWhereNestedInput | null
+  deleteMany?: GameScalarWhereInput[] | GameScalarWhereInput | null
+  upsert?: GameUpsertWithWhereUniqueNestedInput[] | GameUpsertWithWhereUniqueNestedInput | null
 }
 
 export interface GameUpdateManyMutationInput {
-  title?: String | null;
-  cover?: String | null;
-  type?: GameType | null;
+  title?: String | null
+  cover?: String | null
+  type?: GameType | null
 }
 
 export interface GameUpdateManyWithWhereNestedInput {
-  where: GameScalarWhereInput;
-  data: GameUpdateManyDataInput;
+  where: GameScalarWhereInput
+  data: GameUpdateManyDataInput
 }
 
 export interface GameUpdateWithWhereUniqueNestedInput {
-  where: GameWhereUniqueInput;
-  data: GameUpdateDataInput;
+  where: GameWhereUniqueInput
+  data: GameUpdateDataInput
 }
 
 export interface GameUpsertWithWhereUniqueNestedInput {
-  where: GameWhereUniqueInput;
-  update: GameUpdateDataInput;
-  create: GameCreateInput;
+  where: GameWhereUniqueInput
+  update: GameUpdateDataInput
+  create: GameCreateInput
 }
 
 export interface GameWhereInput {
-  AND?: GameWhereInput[] | GameWhereInput | null;
-  OR?: GameWhereInput[] | GameWhereInput | null;
-  NOT?: GameWhereInput[] | GameWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  title?: String | null;
-  title_not?: String | null;
-  title_in?: String[] | String | null;
-  title_not_in?: String[] | String | null;
-  title_lt?: String | null;
-  title_lte?: String | null;
-  title_gt?: String | null;
-  title_gte?: String | null;
-  title_contains?: String | null;
-  title_not_contains?: String | null;
-  title_starts_with?: String | null;
-  title_not_starts_with?: String | null;
-  title_ends_with?: String | null;
-  title_not_ends_with?: String | null;
-  cover?: String | null;
-  cover_not?: String | null;
-  cover_in?: String[] | String | null;
-  cover_not_in?: String[] | String | null;
-  cover_lt?: String | null;
-  cover_lte?: String | null;
-  cover_gt?: String | null;
-  cover_gte?: String | null;
-  cover_contains?: String | null;
-  cover_not_contains?: String | null;
-  cover_starts_with?: String | null;
-  cover_not_starts_with?: String | null;
-  cover_ends_with?: String | null;
-  cover_not_ends_with?: String | null;
-  type?: GameType | null;
-  type_not?: GameType | null;
-  type_in?: GameType[] | GameType | null;
-  type_not_in?: GameType[] | GameType | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
+  AND?: GameWhereInput[] | GameWhereInput | null
+  OR?: GameWhereInput[] | GameWhereInput | null
+  NOT?: GameWhereInput[] | GameWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  title?: String | null
+  title_not?: String | null
+  title_in?: String[] | String | null
+  title_not_in?: String[] | String | null
+  title_lt?: String | null
+  title_lte?: String | null
+  title_gt?: String | null
+  title_gte?: String | null
+  title_contains?: String | null
+  title_not_contains?: String | null
+  title_starts_with?: String | null
+  title_not_starts_with?: String | null
+  title_ends_with?: String | null
+  title_not_ends_with?: String | null
+  cover?: String | null
+  cover_not?: String | null
+  cover_in?: String[] | String | null
+  cover_not_in?: String[] | String | null
+  cover_lt?: String | null
+  cover_lte?: String | null
+  cover_gt?: String | null
+  cover_gte?: String | null
+  cover_contains?: String | null
+  cover_not_contains?: String | null
+  cover_starts_with?: String | null
+  cover_not_starts_with?: String | null
+  cover_ends_with?: String | null
+  cover_not_ends_with?: String | null
+  type?: GameType | null
+  type_not?: GameType | null
+  type_in?: GameType[] | GameType | null
+  type_not_in?: GameType[] | GameType | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
 }
 
 export interface GameWhereUniqueInput {
-  id?: ID_Input | null;
-  title?: String | null;
+  id?: ID_Input | null
+  title?: String | null
 }
 
 export interface ImageCreateInput {
-  id?: ID_Input | null;
-  height: Int;
-  width: Int;
-  url: String;
+  id?: ID_Input | null
+  height: Int
+  width: Int
+  url: String
 }
 
 export interface ImageCreateManyInput {
-  create?: ImageCreateInput[] | ImageCreateInput | null;
-  connect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null;
+  create?: ImageCreateInput[] | ImageCreateInput | null
+  connect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
 }
 
 export interface ImageScalarWhereInput {
-  AND?: ImageScalarWhereInput[] | ImageScalarWhereInput | null;
-  OR?: ImageScalarWhereInput[] | ImageScalarWhereInput | null;
-  NOT?: ImageScalarWhereInput[] | ImageScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  height?: Int | null;
-  height_not?: Int | null;
-  height_in?: Int[] | Int | null;
-  height_not_in?: Int[] | Int | null;
-  height_lt?: Int | null;
-  height_lte?: Int | null;
-  height_gt?: Int | null;
-  height_gte?: Int | null;
-  width?: Int | null;
-  width_not?: Int | null;
-  width_in?: Int[] | Int | null;
-  width_not_in?: Int[] | Int | null;
-  width_lt?: Int | null;
-  width_lte?: Int | null;
-  width_gt?: Int | null;
-  width_gte?: Int | null;
-  url?: String | null;
-  url_not?: String | null;
-  url_in?: String[] | String | null;
-  url_not_in?: String[] | String | null;
-  url_lt?: String | null;
-  url_lte?: String | null;
-  url_gt?: String | null;
-  url_gte?: String | null;
-  url_contains?: String | null;
-  url_not_contains?: String | null;
-  url_starts_with?: String | null;
-  url_not_starts_with?: String | null;
-  url_ends_with?: String | null;
-  url_not_ends_with?: String | null;
+  AND?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
+  OR?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
+  NOT?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  height?: Int | null
+  height_not?: Int | null
+  height_in?: Int[] | Int | null
+  height_not_in?: Int[] | Int | null
+  height_lt?: Int | null
+  height_lte?: Int | null
+  height_gt?: Int | null
+  height_gte?: Int | null
+  width?: Int | null
+  width_not?: Int | null
+  width_in?: Int[] | Int | null
+  width_not_in?: Int[] | Int | null
+  width_lt?: Int | null
+  width_lte?: Int | null
+  width_gt?: Int | null
+  width_gte?: Int | null
+  url?: String | null
+  url_not?: String | null
+  url_in?: String[] | String | null
+  url_not_in?: String[] | String | null
+  url_lt?: String | null
+  url_lte?: String | null
+  url_gt?: String | null
+  url_gte?: String | null
+  url_contains?: String | null
+  url_not_contains?: String | null
+  url_starts_with?: String | null
+  url_not_starts_with?: String | null
+  url_ends_with?: String | null
+  url_not_ends_with?: String | null
 }
 
 export interface ImageSubscriptionWhereInput {
-  AND?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null;
-  OR?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null;
-  NOT?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: ImageWhereInput | null;
+  AND?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null
+  OR?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null
+  NOT?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: ImageWhereInput | null
 }
 
 export interface ImageUpdateDataInput {
-  height?: Int | null;
-  width?: Int | null;
-  url?: String | null;
+  height?: Int | null
+  width?: Int | null
+  url?: String | null
 }
 
 export interface ImageUpdateInput {
-  height?: Int | null;
-  width?: Int | null;
-  url?: String | null;
+  height?: Int | null
+  width?: Int | null
+  url?: String | null
 }
 
 export interface ImageUpdateManyDataInput {
-  height?: Int | null;
-  width?: Int | null;
-  url?: String | null;
+  height?: Int | null
+  width?: Int | null
+  url?: String | null
 }
 
 export interface ImageUpdateManyInput {
-  create?: ImageCreateInput[] | ImageCreateInput | null;
-  connect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null;
-  set?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null;
-  disconnect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null;
-  delete?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null;
-  update?: ImageUpdateWithWhereUniqueNestedInput[] | ImageUpdateWithWhereUniqueNestedInput | null;
-  updateMany?: ImageUpdateManyWithWhereNestedInput[] | ImageUpdateManyWithWhereNestedInput | null;
-  deleteMany?: ImageScalarWhereInput[] | ImageScalarWhereInput | null;
-  upsert?: ImageUpsertWithWhereUniqueNestedInput[] | ImageUpsertWithWhereUniqueNestedInput | null;
+  create?: ImageCreateInput[] | ImageCreateInput | null
+  connect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+  set?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+  disconnect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+  delete?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
+  update?: ImageUpdateWithWhereUniqueNestedInput[] | ImageUpdateWithWhereUniqueNestedInput | null
+  updateMany?: ImageUpdateManyWithWhereNestedInput[] | ImageUpdateManyWithWhereNestedInput | null
+  deleteMany?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
+  upsert?: ImageUpsertWithWhereUniqueNestedInput[] | ImageUpsertWithWhereUniqueNestedInput | null
 }
 
 export interface ImageUpdateManyMutationInput {
-  height?: Int | null;
-  width?: Int | null;
-  url?: String | null;
+  height?: Int | null
+  width?: Int | null
+  url?: String | null
 }
 
 export interface ImageUpdateManyWithWhereNestedInput {
-  where: ImageScalarWhereInput;
-  data: ImageUpdateManyDataInput;
+  where: ImageScalarWhereInput
+  data: ImageUpdateManyDataInput
 }
 
 export interface ImageUpdateWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput;
-  data: ImageUpdateDataInput;
+  where: ImageWhereUniqueInput
+  data: ImageUpdateDataInput
 }
 
 export interface ImageUpsertWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput;
-  update: ImageUpdateDataInput;
-  create: ImageCreateInput;
+  where: ImageWhereUniqueInput
+  update: ImageUpdateDataInput
+  create: ImageCreateInput
 }
 
 export interface ImageWhereInput {
-  AND?: ImageWhereInput[] | ImageWhereInput | null;
-  OR?: ImageWhereInput[] | ImageWhereInput | null;
-  NOT?: ImageWhereInput[] | ImageWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  height?: Int | null;
-  height_not?: Int | null;
-  height_in?: Int[] | Int | null;
-  height_not_in?: Int[] | Int | null;
-  height_lt?: Int | null;
-  height_lte?: Int | null;
-  height_gt?: Int | null;
-  height_gte?: Int | null;
-  width?: Int | null;
-  width_not?: Int | null;
-  width_in?: Int[] | Int | null;
-  width_not_in?: Int[] | Int | null;
-  width_lt?: Int | null;
-  width_lte?: Int | null;
-  width_gt?: Int | null;
-  width_gte?: Int | null;
-  url?: String | null;
-  url_not?: String | null;
-  url_in?: String[] | String | null;
-  url_not_in?: String[] | String | null;
-  url_lt?: String | null;
-  url_lte?: String | null;
-  url_gt?: String | null;
-  url_gte?: String | null;
-  url_contains?: String | null;
-  url_not_contains?: String | null;
-  url_starts_with?: String | null;
-  url_not_starts_with?: String | null;
-  url_ends_with?: String | null;
-  url_not_ends_with?: String | null;
+  AND?: ImageWhereInput[] | ImageWhereInput | null
+  OR?: ImageWhereInput[] | ImageWhereInput | null
+  NOT?: ImageWhereInput[] | ImageWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  height?: Int | null
+  height_not?: Int | null
+  height_in?: Int[] | Int | null
+  height_not_in?: Int[] | Int | null
+  height_lt?: Int | null
+  height_lte?: Int | null
+  height_gt?: Int | null
+  height_gte?: Int | null
+  width?: Int | null
+  width_not?: Int | null
+  width_in?: Int[] | Int | null
+  width_not_in?: Int[] | Int | null
+  width_lt?: Int | null
+  width_lte?: Int | null
+  width_gt?: Int | null
+  width_gte?: Int | null
+  url?: String | null
+  url_not?: String | null
+  url_in?: String[] | String | null
+  url_not_in?: String[] | String | null
+  url_lt?: String | null
+  url_lte?: String | null
+  url_gt?: String | null
+  url_gte?: String | null
+  url_contains?: String | null
+  url_not_contains?: String | null
+  url_starts_with?: String | null
+  url_not_starts_with?: String | null
+  url_ends_with?: String | null
+  url_not_ends_with?: String | null
 }
 
 export interface ImageWhereUniqueInput {
-  id?: ID_Input | null;
+  id?: ID_Input | null
 }
 
 export interface LocationCreateInput {
-  id?: ID_Input | null;
-  placeName: String;
-  latitude: Float;
-  longitude: Float;
+  id?: ID_Input | null
+  placeName: String
+  latitude: Float
+  longitude: Float
 }
 
 export interface LocationCreateOneInput {
-  create?: LocationCreateInput | null;
-  connect?: LocationWhereUniqueInput | null;
+  create?: LocationCreateInput | null
+  connect?: LocationWhereUniqueInput | null
 }
 
 export interface LocationSubscriptionWhereInput {
-  AND?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null;
-  OR?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null;
-  NOT?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: LocationWhereInput | null;
+  AND?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
+  OR?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
+  NOT?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: LocationWhereInput | null
 }
 
 export interface LocationUpdateDataInput {
-  placeName?: String | null;
-  latitude?: Float | null;
-  longitude?: Float | null;
+  placeName?: String | null
+  latitude?: Float | null
+  longitude?: Float | null
 }
 
 export interface LocationUpdateInput {
-  placeName?: String | null;
-  latitude?: Float | null;
-  longitude?: Float | null;
+  placeName?: String | null
+  latitude?: Float | null
+  longitude?: Float | null
 }
 
 export interface LocationUpdateManyMutationInput {
-  placeName?: String | null;
-  latitude?: Float | null;
-  longitude?: Float | null;
+  placeName?: String | null
+  latitude?: Float | null
+  longitude?: Float | null
 }
 
 export interface LocationUpdateOneRequiredInput {
-  create?: LocationCreateInput | null;
-  connect?: LocationWhereUniqueInput | null;
-  update?: LocationUpdateDataInput | null;
-  upsert?: LocationUpsertNestedInput | null;
+  create?: LocationCreateInput | null
+  connect?: LocationWhereUniqueInput | null
+  update?: LocationUpdateDataInput | null
+  upsert?: LocationUpsertNestedInput | null
 }
 
 export interface LocationUpsertNestedInput {
-  update: LocationUpdateDataInput;
-  create: LocationCreateInput;
+  update: LocationUpdateDataInput
+  create: LocationCreateInput
 }
 
 export interface LocationWhereInput {
-  AND?: LocationWhereInput[] | LocationWhereInput | null;
-  OR?: LocationWhereInput[] | LocationWhereInput | null;
-  NOT?: LocationWhereInput[] | LocationWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  placeName?: String | null;
-  placeName_not?: String | null;
-  placeName_in?: String[] | String | null;
-  placeName_not_in?: String[] | String | null;
-  placeName_lt?: String | null;
-  placeName_lte?: String | null;
-  placeName_gt?: String | null;
-  placeName_gte?: String | null;
-  placeName_contains?: String | null;
-  placeName_not_contains?: String | null;
-  placeName_starts_with?: String | null;
-  placeName_not_starts_with?: String | null;
-  placeName_ends_with?: String | null;
-  placeName_not_ends_with?: String | null;
-  latitude?: Float | null;
-  latitude_not?: Float | null;
-  latitude_in?: Float[] | Float | null;
-  latitude_not_in?: Float[] | Float | null;
-  latitude_lt?: Float | null;
-  latitude_lte?: Float | null;
-  latitude_gt?: Float | null;
-  latitude_gte?: Float | null;
-  longitude?: Float | null;
-  longitude_not?: Float | null;
-  longitude_in?: Float[] | Float | null;
-  longitude_not_in?: Float[] | Float | null;
-  longitude_lt?: Float | null;
-  longitude_lte?: Float | null;
-  longitude_gt?: Float | null;
-  longitude_gte?: Float | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
+  AND?: LocationWhereInput[] | LocationWhereInput | null
+  OR?: LocationWhereInput[] | LocationWhereInput | null
+  NOT?: LocationWhereInput[] | LocationWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  placeName?: String | null
+  placeName_not?: String | null
+  placeName_in?: String[] | String | null
+  placeName_not_in?: String[] | String | null
+  placeName_lt?: String | null
+  placeName_lte?: String | null
+  placeName_gt?: String | null
+  placeName_gte?: String | null
+  placeName_contains?: String | null
+  placeName_not_contains?: String | null
+  placeName_starts_with?: String | null
+  placeName_not_starts_with?: String | null
+  placeName_ends_with?: String | null
+  placeName_not_ends_with?: String | null
+  latitude?: Float | null
+  latitude_not?: Float | null
+  latitude_in?: Float[] | Float | null
+  latitude_not_in?: Float[] | Float | null
+  latitude_lt?: Float | null
+  latitude_lte?: Float | null
+  latitude_gt?: Float | null
+  latitude_gte?: Float | null
+  longitude?: Float | null
+  longitude_not?: Float | null
+  longitude_in?: Float[] | Float | null
+  longitude_not_in?: Float[] | Float | null
+  longitude_lt?: Float | null
+  longitude_lte?: Float | null
+  longitude_gt?: Float | null
+  longitude_gte?: Float | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
 }
 
 export interface LocationWhereUniqueInput {
-  id?: ID_Input | null;
+  id?: ID_Input | null
 }
 
 export interface MessageCreateInput {
-  id?: ID_Input | null;
-  content: String;
-  author: UserCreateOneInput;
-  chat: ChatCreateOneWithoutMessagesInput;
+  id?: ID_Input | null
+  content: String
+  author: UserCreateOneInput
+  chat: ChatCreateOneWithoutMessagesInput
 }
 
 export interface MessageCreateManyWithoutChatInput {
-  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput | null;
-  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null;
+  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput | null
+  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
 }
 
 export interface MessageCreateWithoutChatInput {
-  id?: ID_Input | null;
-  content: String;
-  author: UserCreateOneInput;
+  id?: ID_Input | null
+  content: String
+  author: UserCreateOneInput
 }
 
 export interface MessageScalarWhereInput {
-  AND?: MessageScalarWhereInput[] | MessageScalarWhereInput | null;
-  OR?: MessageScalarWhereInput[] | MessageScalarWhereInput | null;
-  NOT?: MessageScalarWhereInput[] | MessageScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  content?: String | null;
-  content_not?: String | null;
-  content_in?: String[] | String | null;
-  content_not_in?: String[] | String | null;
-  content_lt?: String | null;
-  content_lte?: String | null;
-  content_gt?: String | null;
-  content_gte?: String | null;
-  content_contains?: String | null;
-  content_not_contains?: String | null;
-  content_starts_with?: String | null;
-  content_not_starts_with?: String | null;
-  content_ends_with?: String | null;
-  content_not_ends_with?: String | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
+  AND?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
+  OR?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
+  NOT?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  content?: String | null
+  content_not?: String | null
+  content_in?: String[] | String | null
+  content_not_in?: String[] | String | null
+  content_lt?: String | null
+  content_lte?: String | null
+  content_gt?: String | null
+  content_gte?: String | null
+  content_contains?: String | null
+  content_not_contains?: String | null
+  content_starts_with?: String | null
+  content_not_starts_with?: String | null
+  content_ends_with?: String | null
+  content_not_ends_with?: String | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
 }
 
 export interface MessageSubscriptionWhereInput {
-  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null;
-  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null;
-  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: MessageWhereInput | null;
+  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
+  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
+  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: MessageWhereInput | null
 }
 
 export interface MessageUpdateInput {
-  content?: String | null;
-  author?: UserUpdateOneRequiredInput | null;
-  chat?: ChatUpdateOneRequiredWithoutMessagesInput | null;
+  content?: String | null
+  author?: UserUpdateOneRequiredInput | null
+  chat?: ChatUpdateOneRequiredWithoutMessagesInput | null
 }
 
 export interface MessageUpdateManyDataInput {
-  content?: String | null;
+  content?: String | null
 }
 
 export interface MessageUpdateManyMutationInput {
-  content?: String | null;
+  content?: String | null
 }
 
 export interface MessageUpdateManyWithoutChatInput {
-  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput | null;
-  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null;
-  set?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null;
-  disconnect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null;
-  delete?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null;
-  update?: MessageUpdateWithWhereUniqueWithoutChatInput[] | MessageUpdateWithWhereUniqueWithoutChatInput | null;
-  updateMany?: MessageUpdateManyWithWhereNestedInput[] | MessageUpdateManyWithWhereNestedInput | null;
-  deleteMany?: MessageScalarWhereInput[] | MessageScalarWhereInput | null;
-  upsert?: MessageUpsertWithWhereUniqueWithoutChatInput[] | MessageUpsertWithWhereUniqueWithoutChatInput | null;
+  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput | null
+  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
+  set?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
+  disconnect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
+  delete?: MessageWhereUniqueInput[] | MessageWhereUniqueInput | null
+  update?: MessageUpdateWithWhereUniqueWithoutChatInput[] | MessageUpdateWithWhereUniqueWithoutChatInput | null
+  updateMany?: MessageUpdateManyWithWhereNestedInput[] | MessageUpdateManyWithWhereNestedInput | null
+  deleteMany?: MessageScalarWhereInput[] | MessageScalarWhereInput | null
+  upsert?: MessageUpsertWithWhereUniqueWithoutChatInput[] | MessageUpsertWithWhereUniqueWithoutChatInput | null
 }
 
 export interface MessageUpdateManyWithWhereNestedInput {
-  where: MessageScalarWhereInput;
-  data: MessageUpdateManyDataInput;
+  where: MessageScalarWhereInput
+  data: MessageUpdateManyDataInput
 }
 
 export interface MessageUpdateWithoutChatDataInput {
-  content?: String | null;
-  author?: UserUpdateOneRequiredInput | null;
+  content?: String | null
+  author?: UserUpdateOneRequiredInput | null
 }
 
 export interface MessageUpdateWithWhereUniqueWithoutChatInput {
-  where: MessageWhereUniqueInput;
-  data: MessageUpdateWithoutChatDataInput;
+  where: MessageWhereUniqueInput
+  data: MessageUpdateWithoutChatDataInput
 }
 
 export interface MessageUpsertWithWhereUniqueWithoutChatInput {
-  where: MessageWhereUniqueInput;
-  update: MessageUpdateWithoutChatDataInput;
-  create: MessageCreateWithoutChatInput;
+  where: MessageWhereUniqueInput
+  update: MessageUpdateWithoutChatDataInput
+  create: MessageCreateWithoutChatInput
 }
 
 export interface MessageWhereInput {
-  AND?: MessageWhereInput[] | MessageWhereInput | null;
-  OR?: MessageWhereInput[] | MessageWhereInput | null;
-  NOT?: MessageWhereInput[] | MessageWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  content?: String | null;
-  content_not?: String | null;
-  content_in?: String[] | String | null;
-  content_not_in?: String[] | String | null;
-  content_lt?: String | null;
-  content_lte?: String | null;
-  content_gt?: String | null;
-  content_gte?: String | null;
-  content_contains?: String | null;
-  content_not_contains?: String | null;
-  content_starts_with?: String | null;
-  content_not_starts_with?: String | null;
-  content_ends_with?: String | null;
-  content_not_ends_with?: String | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
-  author?: UserWhereInput | null;
-  chat?: ChatWhereInput | null;
+  AND?: MessageWhereInput[] | MessageWhereInput | null
+  OR?: MessageWhereInput[] | MessageWhereInput | null
+  NOT?: MessageWhereInput[] | MessageWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  content?: String | null
+  content_not?: String | null
+  content_in?: String[] | String | null
+  content_not_in?: String[] | String | null
+  content_lt?: String | null
+  content_lte?: String | null
+  content_gt?: String | null
+  content_gte?: String | null
+  content_contains?: String | null
+  content_not_contains?: String | null
+  content_starts_with?: String | null
+  content_not_starts_with?: String | null
+  content_ends_with?: String | null
+  content_not_ends_with?: String | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  author?: UserWhereInput | null
+  chat?: ChatWhereInput | null
 }
 
 export interface MessageWhereUniqueInput {
-  id?: ID_Input | null;
+  id?: ID_Input | null
 }
 
 export interface PartyCreateInput {
-  id?: ID_Input | null;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  colorTint: String;
-  isPublic?: Boolean | null;
-  start?: DateTime | null;
-  end?: DateTime | null;
-  inviteSecret: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: GameCreateManyInput | null;
-  members?: UserCreateManyWithoutPartiesInput | null;
+  id?: ID_Input | null
+  title: String
+  normalizedTitle: String
+  description: String
+  colorTint: String
+  isPublic?: Boolean | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret: String
+  author: UserCreateOneInput
+  location: LocationCreateOneInput
+  games?: GameCreateManyInput | null
+  members?: UserCreateManyWithoutPartiesInput | null
 }
 
 export interface PartyCreateManyWithoutMembersInput {
-  create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput | null;
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null;
+  create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput | null
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
 }
 
 export interface PartyCreateOneInput {
-  create?: PartyCreateInput | null;
-  connect?: PartyWhereUniqueInput | null;
+  create?: PartyCreateInput | null
+  connect?: PartyWhereUniqueInput | null
 }
 
 export interface PartyCreateWithoutMembersInput {
-  id?: ID_Input | null;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  colorTint: String;
-  isPublic?: Boolean | null;
-  start?: DateTime | null;
-  end?: DateTime | null;
-  inviteSecret: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: GameCreateManyInput | null;
+  id?: ID_Input | null
+  title: String
+  normalizedTitle: String
+  description: String
+  colorTint: String
+  isPublic?: Boolean | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret: String
+  author: UserCreateOneInput
+  location: LocationCreateOneInput
+  games?: GameCreateManyInput | null
 }
 
 export interface PartyInvitationCreateInput {
-  id?: ID_Input | null;
-  invitedUserId: String;
-  partyId: String;
-  invitedBy: UserCreateOneInput;
-  user: UserCreateOneWithoutPendingPartyInvitationsInput;
-  party: PartyCreateOneInput;
+  id?: ID_Input | null
+  invitedUserId: String
+  partyId: String
+  invitedBy: UserCreateOneInput
+  user: UserCreateOneWithoutPendingPartyInvitationsInput
+  party: PartyCreateOneInput
 }
 
 export interface PartyInvitationCreateManyWithoutUserInput {
-  create?: PartyInvitationCreateWithoutUserInput[] | PartyInvitationCreateWithoutUserInput | null;
-  connect?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null;
+  create?: PartyInvitationCreateWithoutUserInput[] | PartyInvitationCreateWithoutUserInput | null
+  connect?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null
 }
 
 export interface PartyInvitationCreateWithoutUserInput {
-  id?: ID_Input | null;
-  invitedUserId: String;
-  partyId: String;
-  invitedBy: UserCreateOneInput;
-  party: PartyCreateOneInput;
+  id?: ID_Input | null
+  invitedUserId: String
+  partyId: String
+  invitedBy: UserCreateOneInput
+  party: PartyCreateOneInput
 }
 
 export interface PartyInvitationScalarWhereInput {
-  AND?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null;
-  OR?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null;
-  NOT?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  invitedUserId?: String | null;
-  invitedUserId_not?: String | null;
-  invitedUserId_in?: String[] | String | null;
-  invitedUserId_not_in?: String[] | String | null;
-  invitedUserId_lt?: String | null;
-  invitedUserId_lte?: String | null;
-  invitedUserId_gt?: String | null;
-  invitedUserId_gte?: String | null;
-  invitedUserId_contains?: String | null;
-  invitedUserId_not_contains?: String | null;
-  invitedUserId_starts_with?: String | null;
-  invitedUserId_not_starts_with?: String | null;
-  invitedUserId_ends_with?: String | null;
-  invitedUserId_not_ends_with?: String | null;
-  partyId?: String | null;
-  partyId_not?: String | null;
-  partyId_in?: String[] | String | null;
-  partyId_not_in?: String[] | String | null;
-  partyId_lt?: String | null;
-  partyId_lte?: String | null;
-  partyId_gt?: String | null;
-  partyId_gte?: String | null;
-  partyId_contains?: String | null;
-  partyId_not_contains?: String | null;
-  partyId_starts_with?: String | null;
-  partyId_not_starts_with?: String | null;
-  partyId_ends_with?: String | null;
-  partyId_not_ends_with?: String | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
+  AND?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null
+  OR?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null
+  NOT?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  invitedUserId?: String | null
+  invitedUserId_not?: String | null
+  invitedUserId_in?: String[] | String | null
+  invitedUserId_not_in?: String[] | String | null
+  invitedUserId_lt?: String | null
+  invitedUserId_lte?: String | null
+  invitedUserId_gt?: String | null
+  invitedUserId_gte?: String | null
+  invitedUserId_contains?: String | null
+  invitedUserId_not_contains?: String | null
+  invitedUserId_starts_with?: String | null
+  invitedUserId_not_starts_with?: String | null
+  invitedUserId_ends_with?: String | null
+  invitedUserId_not_ends_with?: String | null
+  partyId?: String | null
+  partyId_not?: String | null
+  partyId_in?: String[] | String | null
+  partyId_not_in?: String[] | String | null
+  partyId_lt?: String | null
+  partyId_lte?: String | null
+  partyId_gt?: String | null
+  partyId_gte?: String | null
+  partyId_contains?: String | null
+  partyId_not_contains?: String | null
+  partyId_starts_with?: String | null
+  partyId_not_starts_with?: String | null
+  partyId_ends_with?: String | null
+  partyId_not_ends_with?: String | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
 }
 
 export interface PartyInvitationSubscriptionWhereInput {
-  AND?: PartyInvitationSubscriptionWhereInput[] | PartyInvitationSubscriptionWhereInput | null;
-  OR?: PartyInvitationSubscriptionWhereInput[] | PartyInvitationSubscriptionWhereInput | null;
-  NOT?: PartyInvitationSubscriptionWhereInput[] | PartyInvitationSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: PartyInvitationWhereInput | null;
+  AND?: PartyInvitationSubscriptionWhereInput[] | PartyInvitationSubscriptionWhereInput | null
+  OR?: PartyInvitationSubscriptionWhereInput[] | PartyInvitationSubscriptionWhereInput | null
+  NOT?: PartyInvitationSubscriptionWhereInput[] | PartyInvitationSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: PartyInvitationWhereInput | null
 }
 
 export interface PartyInvitationUpdateInput {
-  invitedUserId?: String | null;
-  partyId?: String | null;
-  invitedBy?: UserUpdateOneRequiredInput | null;
-  user?: UserUpdateOneRequiredWithoutPendingPartyInvitationsInput | null;
-  party?: PartyUpdateOneRequiredInput | null;
+  invitedUserId?: String | null
+  partyId?: String | null
+  invitedBy?: UserUpdateOneRequiredInput | null
+  user?: UserUpdateOneRequiredWithoutPendingPartyInvitationsInput | null
+  party?: PartyUpdateOneRequiredInput | null
 }
 
 export interface PartyInvitationUpdateManyDataInput {
-  invitedUserId?: String | null;
-  partyId?: String | null;
+  invitedUserId?: String | null
+  partyId?: String | null
 }
 
 export interface PartyInvitationUpdateManyMutationInput {
-  invitedUserId?: String | null;
-  partyId?: String | null;
+  invitedUserId?: String | null
+  partyId?: String | null
 }
 
 export interface PartyInvitationUpdateManyWithoutUserInput {
-  create?: PartyInvitationCreateWithoutUserInput[] | PartyInvitationCreateWithoutUserInput | null;
-  connect?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null;
-  set?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null;
-  disconnect?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null;
-  delete?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null;
-  update?: PartyInvitationUpdateWithWhereUniqueWithoutUserInput[] | PartyInvitationUpdateWithWhereUniqueWithoutUserInput | null;
-  updateMany?: PartyInvitationUpdateManyWithWhereNestedInput[] | PartyInvitationUpdateManyWithWhereNestedInput | null;
-  deleteMany?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null;
-  upsert?: PartyInvitationUpsertWithWhereUniqueWithoutUserInput[] | PartyInvitationUpsertWithWhereUniqueWithoutUserInput | null;
+  create?: PartyInvitationCreateWithoutUserInput[] | PartyInvitationCreateWithoutUserInput | null
+  connect?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null
+  set?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null
+  disconnect?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null
+  delete?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput | null
+  update?: PartyInvitationUpdateWithWhereUniqueWithoutUserInput[] | PartyInvitationUpdateWithWhereUniqueWithoutUserInput | null
+  updateMany?: PartyInvitationUpdateManyWithWhereNestedInput[] | PartyInvitationUpdateManyWithWhereNestedInput | null
+  deleteMany?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput | null
+  upsert?: PartyInvitationUpsertWithWhereUniqueWithoutUserInput[] | PartyInvitationUpsertWithWhereUniqueWithoutUserInput | null
 }
 
 export interface PartyInvitationUpdateManyWithWhereNestedInput {
-  where: PartyInvitationScalarWhereInput;
-  data: PartyInvitationUpdateManyDataInput;
+  where: PartyInvitationScalarWhereInput
+  data: PartyInvitationUpdateManyDataInput
 }
 
 export interface PartyInvitationUpdateWithoutUserDataInput {
-  invitedUserId?: String | null;
-  partyId?: String | null;
-  invitedBy?: UserUpdateOneRequiredInput | null;
-  party?: PartyUpdateOneRequiredInput | null;
+  invitedUserId?: String | null
+  partyId?: String | null
+  invitedBy?: UserUpdateOneRequiredInput | null
+  party?: PartyUpdateOneRequiredInput | null
 }
 
 export interface PartyInvitationUpdateWithWhereUniqueWithoutUserInput {
-  where: PartyInvitationWhereUniqueInput;
-  data: PartyInvitationUpdateWithoutUserDataInput;
+  where: PartyInvitationWhereUniqueInput
+  data: PartyInvitationUpdateWithoutUserDataInput
 }
 
 export interface PartyInvitationUpsertWithWhereUniqueWithoutUserInput {
-  where: PartyInvitationWhereUniqueInput;
-  update: PartyInvitationUpdateWithoutUserDataInput;
-  create: PartyInvitationCreateWithoutUserInput;
+  where: PartyInvitationWhereUniqueInput
+  update: PartyInvitationUpdateWithoutUserDataInput
+  create: PartyInvitationCreateWithoutUserInput
 }
 
 export interface PartyInvitationWhereInput {
-  AND?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null;
-  OR?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null;
-  NOT?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  invitedUserId?: String | null;
-  invitedUserId_not?: String | null;
-  invitedUserId_in?: String[] | String | null;
-  invitedUserId_not_in?: String[] | String | null;
-  invitedUserId_lt?: String | null;
-  invitedUserId_lte?: String | null;
-  invitedUserId_gt?: String | null;
-  invitedUserId_gte?: String | null;
-  invitedUserId_contains?: String | null;
-  invitedUserId_not_contains?: String | null;
-  invitedUserId_starts_with?: String | null;
-  invitedUserId_not_starts_with?: String | null;
-  invitedUserId_ends_with?: String | null;
-  invitedUserId_not_ends_with?: String | null;
-  partyId?: String | null;
-  partyId_not?: String | null;
-  partyId_in?: String[] | String | null;
-  partyId_not_in?: String[] | String | null;
-  partyId_lt?: String | null;
-  partyId_lte?: String | null;
-  partyId_gt?: String | null;
-  partyId_gte?: String | null;
-  partyId_contains?: String | null;
-  partyId_not_contains?: String | null;
-  partyId_starts_with?: String | null;
-  partyId_not_starts_with?: String | null;
-  partyId_ends_with?: String | null;
-  partyId_not_ends_with?: String | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  invitedBy?: UserWhereInput | null;
-  user?: UserWhereInput | null;
-  party?: PartyWhereInput | null;
+  AND?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null
+  OR?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null
+  NOT?: PartyInvitationWhereInput[] | PartyInvitationWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  invitedUserId?: String | null
+  invitedUserId_not?: String | null
+  invitedUserId_in?: String[] | String | null
+  invitedUserId_not_in?: String[] | String | null
+  invitedUserId_lt?: String | null
+  invitedUserId_lte?: String | null
+  invitedUserId_gt?: String | null
+  invitedUserId_gte?: String | null
+  invitedUserId_contains?: String | null
+  invitedUserId_not_contains?: String | null
+  invitedUserId_starts_with?: String | null
+  invitedUserId_not_starts_with?: String | null
+  invitedUserId_ends_with?: String | null
+  invitedUserId_not_ends_with?: String | null
+  partyId?: String | null
+  partyId_not?: String | null
+  partyId_in?: String[] | String | null
+  partyId_not_in?: String[] | String | null
+  partyId_lt?: String | null
+  partyId_lte?: String | null
+  partyId_gt?: String | null
+  partyId_gte?: String | null
+  partyId_contains?: String | null
+  partyId_not_contains?: String | null
+  partyId_starts_with?: String | null
+  partyId_not_starts_with?: String | null
+  partyId_ends_with?: String | null
+  partyId_not_ends_with?: String | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  invitedBy?: UserWhereInput | null
+  user?: UserWhereInput | null
+  party?: PartyWhereInput | null
 }
 
 export interface PartyInvitationWhereUniqueInput {
-  id?: ID_Input | null;
+  id?: ID_Input | null
 }
 
 export interface PartyScalarWhereInput {
-  AND?: PartyScalarWhereInput[] | PartyScalarWhereInput | null;
-  OR?: PartyScalarWhereInput[] | PartyScalarWhereInput | null;
-  NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  title?: String | null;
-  title_not?: String | null;
-  title_in?: String[] | String | null;
-  title_not_in?: String[] | String | null;
-  title_lt?: String | null;
-  title_lte?: String | null;
-  title_gt?: String | null;
-  title_gte?: String | null;
-  title_contains?: String | null;
-  title_not_contains?: String | null;
-  title_starts_with?: String | null;
-  title_not_starts_with?: String | null;
-  title_ends_with?: String | null;
-  title_not_ends_with?: String | null;
-  normalizedTitle?: String | null;
-  normalizedTitle_not?: String | null;
-  normalizedTitle_in?: String[] | String | null;
-  normalizedTitle_not_in?: String[] | String | null;
-  normalizedTitle_lt?: String | null;
-  normalizedTitle_lte?: String | null;
-  normalizedTitle_gt?: String | null;
-  normalizedTitle_gte?: String | null;
-  normalizedTitle_contains?: String | null;
-  normalizedTitle_not_contains?: String | null;
-  normalizedTitle_starts_with?: String | null;
-  normalizedTitle_not_starts_with?: String | null;
-  normalizedTitle_ends_with?: String | null;
-  normalizedTitle_not_ends_with?: String | null;
-  description?: String | null;
-  description_not?: String | null;
-  description_in?: String[] | String | null;
-  description_not_in?: String[] | String | null;
-  description_lt?: String | null;
-  description_lte?: String | null;
-  description_gt?: String | null;
-  description_gte?: String | null;
-  description_contains?: String | null;
-  description_not_contains?: String | null;
-  description_starts_with?: String | null;
-  description_not_starts_with?: String | null;
-  description_ends_with?: String | null;
-  description_not_ends_with?: String | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
-  colorTint?: String | null;
-  colorTint_not?: String | null;
-  colorTint_in?: String[] | String | null;
-  colorTint_not_in?: String[] | String | null;
-  colorTint_lt?: String | null;
-  colorTint_lte?: String | null;
-  colorTint_gt?: String | null;
-  colorTint_gte?: String | null;
-  colorTint_contains?: String | null;
-  colorTint_not_contains?: String | null;
-  colorTint_starts_with?: String | null;
-  colorTint_not_starts_with?: String | null;
-  colorTint_ends_with?: String | null;
-  colorTint_not_ends_with?: String | null;
-  isPublic?: Boolean | null;
-  isPublic_not?: Boolean | null;
-  start?: DateTime | null;
-  start_not?: DateTime | null;
-  start_in?: DateTime[] | DateTime | null;
-  start_not_in?: DateTime[] | DateTime | null;
-  start_lt?: DateTime | null;
-  start_lte?: DateTime | null;
-  start_gt?: DateTime | null;
-  start_gte?: DateTime | null;
-  end?: DateTime | null;
-  end_not?: DateTime | null;
-  end_in?: DateTime[] | DateTime | null;
-  end_not_in?: DateTime[] | DateTime | null;
-  end_lt?: DateTime | null;
-  end_lte?: DateTime | null;
-  end_gt?: DateTime | null;
-  end_gte?: DateTime | null;
-  inviteSecret?: String | null;
-  inviteSecret_not?: String | null;
-  inviteSecret_in?: String[] | String | null;
-  inviteSecret_not_in?: String[] | String | null;
-  inviteSecret_lt?: String | null;
-  inviteSecret_lte?: String | null;
-  inviteSecret_gt?: String | null;
-  inviteSecret_gte?: String | null;
-  inviteSecret_contains?: String | null;
-  inviteSecret_not_contains?: String | null;
-  inviteSecret_starts_with?: String | null;
-  inviteSecret_not_starts_with?: String | null;
-  inviteSecret_ends_with?: String | null;
-  inviteSecret_not_ends_with?: String | null;
+  AND?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
+  OR?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
+  NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  title?: String | null
+  title_not?: String | null
+  title_in?: String[] | String | null
+  title_not_in?: String[] | String | null
+  title_lt?: String | null
+  title_lte?: String | null
+  title_gt?: String | null
+  title_gte?: String | null
+  title_contains?: String | null
+  title_not_contains?: String | null
+  title_starts_with?: String | null
+  title_not_starts_with?: String | null
+  title_ends_with?: String | null
+  title_not_ends_with?: String | null
+  normalizedTitle?: String | null
+  normalizedTitle_not?: String | null
+  normalizedTitle_in?: String[] | String | null
+  normalizedTitle_not_in?: String[] | String | null
+  normalizedTitle_lt?: String | null
+  normalizedTitle_lte?: String | null
+  normalizedTitle_gt?: String | null
+  normalizedTitle_gte?: String | null
+  normalizedTitle_contains?: String | null
+  normalizedTitle_not_contains?: String | null
+  normalizedTitle_starts_with?: String | null
+  normalizedTitle_not_starts_with?: String | null
+  normalizedTitle_ends_with?: String | null
+  normalizedTitle_not_ends_with?: String | null
+  description?: String | null
+  description_not?: String | null
+  description_in?: String[] | String | null
+  description_not_in?: String[] | String | null
+  description_lt?: String | null
+  description_lte?: String | null
+  description_gt?: String | null
+  description_gte?: String | null
+  description_contains?: String | null
+  description_not_contains?: String | null
+  description_starts_with?: String | null
+  description_not_starts_with?: String | null
+  description_ends_with?: String | null
+  description_not_ends_with?: String | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  colorTint?: String | null
+  colorTint_not?: String | null
+  colorTint_in?: String[] | String | null
+  colorTint_not_in?: String[] | String | null
+  colorTint_lt?: String | null
+  colorTint_lte?: String | null
+  colorTint_gt?: String | null
+  colorTint_gte?: String | null
+  colorTint_contains?: String | null
+  colorTint_not_contains?: String | null
+  colorTint_starts_with?: String | null
+  colorTint_not_starts_with?: String | null
+  colorTint_ends_with?: String | null
+  colorTint_not_ends_with?: String | null
+  isPublic?: Boolean | null
+  isPublic_not?: Boolean | null
+  start?: DateTime | null
+  start_not?: DateTime | null
+  start_in?: DateTime[] | DateTime | null
+  start_not_in?: DateTime[] | DateTime | null
+  start_lt?: DateTime | null
+  start_lte?: DateTime | null
+  start_gt?: DateTime | null
+  start_gte?: DateTime | null
+  end?: DateTime | null
+  end_not?: DateTime | null
+  end_in?: DateTime[] | DateTime | null
+  end_not_in?: DateTime[] | DateTime | null
+  end_lt?: DateTime | null
+  end_lte?: DateTime | null
+  end_gt?: DateTime | null
+  end_gte?: DateTime | null
+  inviteSecret?: String | null
+  inviteSecret_not?: String | null
+  inviteSecret_in?: String[] | String | null
+  inviteSecret_not_in?: String[] | String | null
+  inviteSecret_lt?: String | null
+  inviteSecret_lte?: String | null
+  inviteSecret_gt?: String | null
+  inviteSecret_gte?: String | null
+  inviteSecret_contains?: String | null
+  inviteSecret_not_contains?: String | null
+  inviteSecret_starts_with?: String | null
+  inviteSecret_not_starts_with?: String | null
+  inviteSecret_ends_with?: String | null
+  inviteSecret_not_ends_with?: String | null
 }
 
 export interface PartySubscriptionWhereInput {
-  AND?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null;
-  OR?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null;
-  NOT?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: PartyWhereInput | null;
+  AND?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
+  OR?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
+  NOT?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: PartyWhereInput | null
 }
 
 export interface PartyUpdateDataInput {
-  title?: String | null;
-  normalizedTitle?: String | null;
-  description?: String | null;
-  colorTint?: String | null;
-  isPublic?: Boolean | null;
-  start?: DateTime | null;
-  end?: DateTime | null;
-  inviteSecret?: String | null;
-  author?: UserUpdateOneRequiredInput | null;
-  location?: LocationUpdateOneRequiredInput | null;
-  games?: GameUpdateManyInput | null;
-  members?: UserUpdateManyWithoutPartiesInput | null;
+  title?: String | null
+  normalizedTitle?: String | null
+  description?: String | null
+  colorTint?: String | null
+  isPublic?: Boolean | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret?: String | null
+  author?: UserUpdateOneRequiredInput | null
+  location?: LocationUpdateOneRequiredInput | null
+  games?: GameUpdateManyInput | null
+  members?: UserUpdateManyWithoutPartiesInput | null
 }
 
 export interface PartyUpdateInput {
-  title?: String | null;
-  normalizedTitle?: String | null;
-  description?: String | null;
-  colorTint?: String | null;
-  isPublic?: Boolean | null;
-  start?: DateTime | null;
-  end?: DateTime | null;
-  inviteSecret?: String | null;
-  author?: UserUpdateOneRequiredInput | null;
-  location?: LocationUpdateOneRequiredInput | null;
-  games?: GameUpdateManyInput | null;
-  members?: UserUpdateManyWithoutPartiesInput | null;
+  title?: String | null
+  normalizedTitle?: String | null
+  description?: String | null
+  colorTint?: String | null
+  isPublic?: Boolean | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret?: String | null
+  author?: UserUpdateOneRequiredInput | null
+  location?: LocationUpdateOneRequiredInput | null
+  games?: GameUpdateManyInput | null
+  members?: UserUpdateManyWithoutPartiesInput | null
 }
 
 export interface PartyUpdateManyDataInput {
-  title?: String | null;
-  normalizedTitle?: String | null;
-  description?: String | null;
-  colorTint?: String | null;
-  isPublic?: Boolean | null;
-  start?: DateTime | null;
-  end?: DateTime | null;
-  inviteSecret?: String | null;
+  title?: String | null
+  normalizedTitle?: String | null
+  description?: String | null
+  colorTint?: String | null
+  isPublic?: Boolean | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret?: String | null
 }
 
 export interface PartyUpdateManyMutationInput {
-  title?: String | null;
-  normalizedTitle?: String | null;
-  description?: String | null;
-  colorTint?: String | null;
-  isPublic?: Boolean | null;
-  start?: DateTime | null;
-  end?: DateTime | null;
-  inviteSecret?: String | null;
+  title?: String | null
+  normalizedTitle?: String | null
+  description?: String | null
+  colorTint?: String | null
+  isPublic?: Boolean | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret?: String | null
 }
 
 export interface PartyUpdateManyWithoutMembersInput {
-  create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput | null;
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null;
-  set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null;
-  disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null;
-  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null;
-  update?: PartyUpdateWithWhereUniqueWithoutMembersInput[] | PartyUpdateWithWhereUniqueWithoutMembersInput | null;
-  updateMany?: PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput | null;
-  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput | null;
-  upsert?: PartyUpsertWithWhereUniqueWithoutMembersInput[] | PartyUpsertWithWhereUniqueWithoutMembersInput | null;
+  create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput | null
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  update?: PartyUpdateWithWhereUniqueWithoutMembersInput[] | PartyUpdateWithWhereUniqueWithoutMembersInput | null
+  updateMany?: PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput | null
+  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
+  upsert?: PartyUpsertWithWhereUniqueWithoutMembersInput[] | PartyUpsertWithWhereUniqueWithoutMembersInput | null
 }
 
 export interface PartyUpdateManyWithWhereNestedInput {
-  where: PartyScalarWhereInput;
-  data: PartyUpdateManyDataInput;
+  where: PartyScalarWhereInput
+  data: PartyUpdateManyDataInput
 }
 
 export interface PartyUpdateOneRequiredInput {
-  create?: PartyCreateInput | null;
-  connect?: PartyWhereUniqueInput | null;
-  update?: PartyUpdateDataInput | null;
-  upsert?: PartyUpsertNestedInput | null;
+  create?: PartyCreateInput | null
+  connect?: PartyWhereUniqueInput | null
+  update?: PartyUpdateDataInput | null
+  upsert?: PartyUpsertNestedInput | null
 }
 
 export interface PartyUpdateWithoutMembersDataInput {
-  title?: String | null;
-  normalizedTitle?: String | null;
-  description?: String | null;
-  colorTint?: String | null;
-  isPublic?: Boolean | null;
-  start?: DateTime | null;
-  end?: DateTime | null;
-  inviteSecret?: String | null;
-  author?: UserUpdateOneRequiredInput | null;
-  location?: LocationUpdateOneRequiredInput | null;
-  games?: GameUpdateManyInput | null;
+  title?: String | null
+  normalizedTitle?: String | null
+  description?: String | null
+  colorTint?: String | null
+  isPublic?: Boolean | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret?: String | null
+  author?: UserUpdateOneRequiredInput | null
+  location?: LocationUpdateOneRequiredInput | null
+  games?: GameUpdateManyInput | null
 }
 
 export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
-  where: PartyWhereUniqueInput;
-  data: PartyUpdateWithoutMembersDataInput;
+  where: PartyWhereUniqueInput
+  data: PartyUpdateWithoutMembersDataInput
 }
 
 export interface PartyUpsertNestedInput {
-  update: PartyUpdateDataInput;
-  create: PartyCreateInput;
+  update: PartyUpdateDataInput
+  create: PartyCreateInput
 }
 
 export interface PartyUpsertWithWhereUniqueWithoutMembersInput {
-  where: PartyWhereUniqueInput;
-  update: PartyUpdateWithoutMembersDataInput;
-  create: PartyCreateWithoutMembersInput;
+  where: PartyWhereUniqueInput
+  update: PartyUpdateWithoutMembersDataInput
+  create: PartyCreateWithoutMembersInput
 }
 
 export interface PartyWhereInput {
-  AND?: PartyWhereInput[] | PartyWhereInput | null;
-  OR?: PartyWhereInput[] | PartyWhereInput | null;
-  NOT?: PartyWhereInput[] | PartyWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  title?: String | null;
-  title_not?: String | null;
-  title_in?: String[] | String | null;
-  title_not_in?: String[] | String | null;
-  title_lt?: String | null;
-  title_lte?: String | null;
-  title_gt?: String | null;
-  title_gte?: String | null;
-  title_contains?: String | null;
-  title_not_contains?: String | null;
-  title_starts_with?: String | null;
-  title_not_starts_with?: String | null;
-  title_ends_with?: String | null;
-  title_not_ends_with?: String | null;
-  normalizedTitle?: String | null;
-  normalizedTitle_not?: String | null;
-  normalizedTitle_in?: String[] | String | null;
-  normalizedTitle_not_in?: String[] | String | null;
-  normalizedTitle_lt?: String | null;
-  normalizedTitle_lte?: String | null;
-  normalizedTitle_gt?: String | null;
-  normalizedTitle_gte?: String | null;
-  normalizedTitle_contains?: String | null;
-  normalizedTitle_not_contains?: String | null;
-  normalizedTitle_starts_with?: String | null;
-  normalizedTitle_not_starts_with?: String | null;
-  normalizedTitle_ends_with?: String | null;
-  normalizedTitle_not_ends_with?: String | null;
-  description?: String | null;
-  description_not?: String | null;
-  description_in?: String[] | String | null;
-  description_not_in?: String[] | String | null;
-  description_lt?: String | null;
-  description_lte?: String | null;
-  description_gt?: String | null;
-  description_gte?: String | null;
-  description_contains?: String | null;
-  description_not_contains?: String | null;
-  description_starts_with?: String | null;
-  description_not_starts_with?: String | null;
-  description_ends_with?: String | null;
-  description_not_ends_with?: String | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
-  colorTint?: String | null;
-  colorTint_not?: String | null;
-  colorTint_in?: String[] | String | null;
-  colorTint_not_in?: String[] | String | null;
-  colorTint_lt?: String | null;
-  colorTint_lte?: String | null;
-  colorTint_gt?: String | null;
-  colorTint_gte?: String | null;
-  colorTint_contains?: String | null;
-  colorTint_not_contains?: String | null;
-  colorTint_starts_with?: String | null;
-  colorTint_not_starts_with?: String | null;
-  colorTint_ends_with?: String | null;
-  colorTint_not_ends_with?: String | null;
-  isPublic?: Boolean | null;
-  isPublic_not?: Boolean | null;
-  start?: DateTime | null;
-  start_not?: DateTime | null;
-  start_in?: DateTime[] | DateTime | null;
-  start_not_in?: DateTime[] | DateTime | null;
-  start_lt?: DateTime | null;
-  start_lte?: DateTime | null;
-  start_gt?: DateTime | null;
-  start_gte?: DateTime | null;
-  end?: DateTime | null;
-  end_not?: DateTime | null;
-  end_in?: DateTime[] | DateTime | null;
-  end_not_in?: DateTime[] | DateTime | null;
-  end_lt?: DateTime | null;
-  end_lte?: DateTime | null;
-  end_gt?: DateTime | null;
-  end_gte?: DateTime | null;
-  inviteSecret?: String | null;
-  inviteSecret_not?: String | null;
-  inviteSecret_in?: String[] | String | null;
-  inviteSecret_not_in?: String[] | String | null;
-  inviteSecret_lt?: String | null;
-  inviteSecret_lte?: String | null;
-  inviteSecret_gt?: String | null;
-  inviteSecret_gte?: String | null;
-  inviteSecret_contains?: String | null;
-  inviteSecret_not_contains?: String | null;
-  inviteSecret_starts_with?: String | null;
-  inviteSecret_not_starts_with?: String | null;
-  inviteSecret_ends_with?: String | null;
-  inviteSecret_not_ends_with?: String | null;
-  author?: UserWhereInput | null;
-  location?: LocationWhereInput | null;
-  games_every?: GameWhereInput | null;
-  games_some?: GameWhereInput | null;
-  games_none?: GameWhereInput | null;
-  members_every?: UserWhereInput | null;
-  members_some?: UserWhereInput | null;
-  members_none?: UserWhereInput | null;
+  AND?: PartyWhereInput[] | PartyWhereInput | null
+  OR?: PartyWhereInput[] | PartyWhereInput | null
+  NOT?: PartyWhereInput[] | PartyWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  title?: String | null
+  title_not?: String | null
+  title_in?: String[] | String | null
+  title_not_in?: String[] | String | null
+  title_lt?: String | null
+  title_lte?: String | null
+  title_gt?: String | null
+  title_gte?: String | null
+  title_contains?: String | null
+  title_not_contains?: String | null
+  title_starts_with?: String | null
+  title_not_starts_with?: String | null
+  title_ends_with?: String | null
+  title_not_ends_with?: String | null
+  normalizedTitle?: String | null
+  normalizedTitle_not?: String | null
+  normalizedTitle_in?: String[] | String | null
+  normalizedTitle_not_in?: String[] | String | null
+  normalizedTitle_lt?: String | null
+  normalizedTitle_lte?: String | null
+  normalizedTitle_gt?: String | null
+  normalizedTitle_gte?: String | null
+  normalizedTitle_contains?: String | null
+  normalizedTitle_not_contains?: String | null
+  normalizedTitle_starts_with?: String | null
+  normalizedTitle_not_starts_with?: String | null
+  normalizedTitle_ends_with?: String | null
+  normalizedTitle_not_ends_with?: String | null
+  description?: String | null
+  description_not?: String | null
+  description_in?: String[] | String | null
+  description_not_in?: String[] | String | null
+  description_lt?: String | null
+  description_lte?: String | null
+  description_gt?: String | null
+  description_gte?: String | null
+  description_contains?: String | null
+  description_not_contains?: String | null
+  description_starts_with?: String | null
+  description_not_starts_with?: String | null
+  description_ends_with?: String | null
+  description_not_ends_with?: String | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  colorTint?: String | null
+  colorTint_not?: String | null
+  colorTint_in?: String[] | String | null
+  colorTint_not_in?: String[] | String | null
+  colorTint_lt?: String | null
+  colorTint_lte?: String | null
+  colorTint_gt?: String | null
+  colorTint_gte?: String | null
+  colorTint_contains?: String | null
+  colorTint_not_contains?: String | null
+  colorTint_starts_with?: String | null
+  colorTint_not_starts_with?: String | null
+  colorTint_ends_with?: String | null
+  colorTint_not_ends_with?: String | null
+  isPublic?: Boolean | null
+  isPublic_not?: Boolean | null
+  start?: DateTime | null
+  start_not?: DateTime | null
+  start_in?: DateTime[] | DateTime | null
+  start_not_in?: DateTime[] | DateTime | null
+  start_lt?: DateTime | null
+  start_lte?: DateTime | null
+  start_gt?: DateTime | null
+  start_gte?: DateTime | null
+  end?: DateTime | null
+  end_not?: DateTime | null
+  end_in?: DateTime[] | DateTime | null
+  end_not_in?: DateTime[] | DateTime | null
+  end_lt?: DateTime | null
+  end_lte?: DateTime | null
+  end_gt?: DateTime | null
+  end_gte?: DateTime | null
+  inviteSecret?: String | null
+  inviteSecret_not?: String | null
+  inviteSecret_in?: String[] | String | null
+  inviteSecret_not_in?: String[] | String | null
+  inviteSecret_lt?: String | null
+  inviteSecret_lte?: String | null
+  inviteSecret_gt?: String | null
+  inviteSecret_gte?: String | null
+  inviteSecret_contains?: String | null
+  inviteSecret_not_contains?: String | null
+  inviteSecret_starts_with?: String | null
+  inviteSecret_not_starts_with?: String | null
+  inviteSecret_ends_with?: String | null
+  inviteSecret_not_ends_with?: String | null
+  author?: UserWhereInput | null
+  location?: LocationWhereInput | null
+  games_every?: GameWhereInput | null
+  games_some?: GameWhereInput | null
+  games_none?: GameWhereInput | null
+  members_every?: UserWhereInput | null
+  members_some?: UserWhereInput | null
+  members_none?: UserWhereInput | null
 }
 
 export interface PartyWhereUniqueInput {
-  id?: ID_Input | null;
-  inviteSecret?: String | null;
+  id?: ID_Input | null
+  inviteSecret?: String | null
 }
 
 export interface PlaylistCreateInput {
-  id?: ID_Input | null;
-  playlist_id?: String | null;
-  name: String;
-  isTemporary?: Boolean | null;
-  tracks?: TrackCreateManyInput | null;
+  id?: ID_Input | null
+  playlist_id?: String | null
+  name: String
+  isTemporary?: Boolean | null
+  tracks?: TrackCreateManyInput | null
 }
 
 export interface PlaylistSubscriptionWhereInput {
-  AND?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null;
-  OR?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null;
-  NOT?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: PlaylistWhereInput | null;
+  AND?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null
+  OR?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null
+  NOT?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: PlaylistWhereInput | null
 }
 
 export interface PlaylistUpdateInput {
-  playlist_id?: String | null;
-  name?: String | null;
-  isTemporary?: Boolean | null;
-  tracks?: TrackUpdateManyInput | null;
+  playlist_id?: String | null
+  name?: String | null
+  isTemporary?: Boolean | null
+  tracks?: TrackUpdateManyInput | null
 }
 
 export interface PlaylistUpdateManyMutationInput {
-  playlist_id?: String | null;
-  name?: String | null;
-  isTemporary?: Boolean | null;
+  playlist_id?: String | null
+  name?: String | null
+  isTemporary?: Boolean | null
 }
 
 export interface PlaylistWhereInput {
-  AND?: PlaylistWhereInput[] | PlaylistWhereInput | null;
-  OR?: PlaylistWhereInput[] | PlaylistWhereInput | null;
-  NOT?: PlaylistWhereInput[] | PlaylistWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  playlist_id?: String | null;
-  playlist_id_not?: String | null;
-  playlist_id_in?: String[] | String | null;
-  playlist_id_not_in?: String[] | String | null;
-  playlist_id_lt?: String | null;
-  playlist_id_lte?: String | null;
-  playlist_id_gt?: String | null;
-  playlist_id_gte?: String | null;
-  playlist_id_contains?: String | null;
-  playlist_id_not_contains?: String | null;
-  playlist_id_starts_with?: String | null;
-  playlist_id_not_starts_with?: String | null;
-  playlist_id_ends_with?: String | null;
-  playlist_id_not_ends_with?: String | null;
-  name?: String | null;
-  name_not?: String | null;
-  name_in?: String[] | String | null;
-  name_not_in?: String[] | String | null;
-  name_lt?: String | null;
-  name_lte?: String | null;
-  name_gt?: String | null;
-  name_gte?: String | null;
-  name_contains?: String | null;
-  name_not_contains?: String | null;
-  name_starts_with?: String | null;
-  name_not_starts_with?: String | null;
-  name_ends_with?: String | null;
-  name_not_ends_with?: String | null;
-  isTemporary?: Boolean | null;
-  isTemporary_not?: Boolean | null;
-  tracks_every?: TrackWhereInput | null;
-  tracks_some?: TrackWhereInput | null;
-  tracks_none?: TrackWhereInput | null;
+  AND?: PlaylistWhereInput[] | PlaylistWhereInput | null
+  OR?: PlaylistWhereInput[] | PlaylistWhereInput | null
+  NOT?: PlaylistWhereInput[] | PlaylistWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  playlist_id?: String | null
+  playlist_id_not?: String | null
+  playlist_id_in?: String[] | String | null
+  playlist_id_not_in?: String[] | String | null
+  playlist_id_lt?: String | null
+  playlist_id_lte?: String | null
+  playlist_id_gt?: String | null
+  playlist_id_gte?: String | null
+  playlist_id_contains?: String | null
+  playlist_id_not_contains?: String | null
+  playlist_id_starts_with?: String | null
+  playlist_id_not_starts_with?: String | null
+  playlist_id_ends_with?: String | null
+  playlist_id_not_ends_with?: String | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  isTemporary?: Boolean | null
+  isTemporary_not?: Boolean | null
+  tracks_every?: TrackWhereInput | null
+  tracks_some?: TrackWhereInput | null
+  tracks_none?: TrackWhereInput | null
 }
 
 export interface PlaylistWhereUniqueInput {
-  id?: ID_Input | null;
-  playlist_id?: String | null;
+  id?: ID_Input | null
+  playlist_id?: String | null
 }
 
 export interface TrackCreateInput {
-  id?: ID_Input | null;
-  name: String;
-  duration: Int;
-  preview_url: String;
-  album: AlbumCreateOneInput;
-  artists?: ArtistCreateManyInput | null;
+  id?: ID_Input | null
+  name: String
+  duration: Int
+  preview_url: String
+  album: AlbumCreateOneInput
+  artists?: ArtistCreateManyInput | null
 }
 
 export interface TrackCreateManyInput {
-  create?: TrackCreateInput[] | TrackCreateInput | null;
-  connect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null;
+  create?: TrackCreateInput[] | TrackCreateInput | null
+  connect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
 }
 
 export interface TrackScalarWhereInput {
-  AND?: TrackScalarWhereInput[] | TrackScalarWhereInput | null;
-  OR?: TrackScalarWhereInput[] | TrackScalarWhereInput | null;
-  NOT?: TrackScalarWhereInput[] | TrackScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  name?: String | null;
-  name_not?: String | null;
-  name_in?: String[] | String | null;
-  name_not_in?: String[] | String | null;
-  name_lt?: String | null;
-  name_lte?: String | null;
-  name_gt?: String | null;
-  name_gte?: String | null;
-  name_contains?: String | null;
-  name_not_contains?: String | null;
-  name_starts_with?: String | null;
-  name_not_starts_with?: String | null;
-  name_ends_with?: String | null;
-  name_not_ends_with?: String | null;
-  duration?: Int | null;
-  duration_not?: Int | null;
-  duration_in?: Int[] | Int | null;
-  duration_not_in?: Int[] | Int | null;
-  duration_lt?: Int | null;
-  duration_lte?: Int | null;
-  duration_gt?: Int | null;
-  duration_gte?: Int | null;
-  preview_url?: String | null;
-  preview_url_not?: String | null;
-  preview_url_in?: String[] | String | null;
-  preview_url_not_in?: String[] | String | null;
-  preview_url_lt?: String | null;
-  preview_url_lte?: String | null;
-  preview_url_gt?: String | null;
-  preview_url_gte?: String | null;
-  preview_url_contains?: String | null;
-  preview_url_not_contains?: String | null;
-  preview_url_starts_with?: String | null;
-  preview_url_not_starts_with?: String | null;
-  preview_url_ends_with?: String | null;
-  preview_url_not_ends_with?: String | null;
+  AND?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
+  OR?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
+  NOT?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  duration?: Int | null
+  duration_not?: Int | null
+  duration_in?: Int[] | Int | null
+  duration_not_in?: Int[] | Int | null
+  duration_lt?: Int | null
+  duration_lte?: Int | null
+  duration_gt?: Int | null
+  duration_gte?: Int | null
+  preview_url?: String | null
+  preview_url_not?: String | null
+  preview_url_in?: String[] | String | null
+  preview_url_not_in?: String[] | String | null
+  preview_url_lt?: String | null
+  preview_url_lte?: String | null
+  preview_url_gt?: String | null
+  preview_url_gte?: String | null
+  preview_url_contains?: String | null
+  preview_url_not_contains?: String | null
+  preview_url_starts_with?: String | null
+  preview_url_not_starts_with?: String | null
+  preview_url_ends_with?: String | null
+  preview_url_not_ends_with?: String | null
 }
 
 export interface TrackSubscriptionWhereInput {
-  AND?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null;
-  OR?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null;
-  NOT?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: TrackWhereInput | null;
+  AND?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null
+  OR?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null
+  NOT?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: TrackWhereInput | null
 }
 
 export interface TrackUpdateDataInput {
-  name?: String | null;
-  duration?: Int | null;
-  preview_url?: String | null;
-  album?: AlbumUpdateOneRequiredInput | null;
-  artists?: ArtistUpdateManyInput | null;
+  name?: String | null
+  duration?: Int | null
+  preview_url?: String | null
+  album?: AlbumUpdateOneRequiredInput | null
+  artists?: ArtistUpdateManyInput | null
 }
 
 export interface TrackUpdateInput {
-  name?: String | null;
-  duration?: Int | null;
-  preview_url?: String | null;
-  album?: AlbumUpdateOneRequiredInput | null;
-  artists?: ArtistUpdateManyInput | null;
+  name?: String | null
+  duration?: Int | null
+  preview_url?: String | null
+  album?: AlbumUpdateOneRequiredInput | null
+  artists?: ArtistUpdateManyInput | null
 }
 
 export interface TrackUpdateManyDataInput {
-  name?: String | null;
-  duration?: Int | null;
-  preview_url?: String | null;
+  name?: String | null
+  duration?: Int | null
+  preview_url?: String | null
 }
 
 export interface TrackUpdateManyInput {
-  create?: TrackCreateInput[] | TrackCreateInput | null;
-  connect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null;
-  set?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null;
-  disconnect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null;
-  delete?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null;
-  update?: TrackUpdateWithWhereUniqueNestedInput[] | TrackUpdateWithWhereUniqueNestedInput | null;
-  updateMany?: TrackUpdateManyWithWhereNestedInput[] | TrackUpdateManyWithWhereNestedInput | null;
-  deleteMany?: TrackScalarWhereInput[] | TrackScalarWhereInput | null;
-  upsert?: TrackUpsertWithWhereUniqueNestedInput[] | TrackUpsertWithWhereUniqueNestedInput | null;
+  create?: TrackCreateInput[] | TrackCreateInput | null
+  connect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+  set?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+  disconnect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+  delete?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
+  update?: TrackUpdateWithWhereUniqueNestedInput[] | TrackUpdateWithWhereUniqueNestedInput | null
+  updateMany?: TrackUpdateManyWithWhereNestedInput[] | TrackUpdateManyWithWhereNestedInput | null
+  deleteMany?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
+  upsert?: TrackUpsertWithWhereUniqueNestedInput[] | TrackUpsertWithWhereUniqueNestedInput | null
 }
 
 export interface TrackUpdateManyMutationInput {
-  name?: String | null;
-  duration?: Int | null;
-  preview_url?: String | null;
+  name?: String | null
+  duration?: Int | null
+  preview_url?: String | null
 }
 
 export interface TrackUpdateManyWithWhereNestedInput {
-  where: TrackScalarWhereInput;
-  data: TrackUpdateManyDataInput;
+  where: TrackScalarWhereInput
+  data: TrackUpdateManyDataInput
 }
 
 export interface TrackUpdateWithWhereUniqueNestedInput {
-  where: TrackWhereUniqueInput;
-  data: TrackUpdateDataInput;
+  where: TrackWhereUniqueInput
+  data: TrackUpdateDataInput
 }
 
 export interface TrackUpsertWithWhereUniqueNestedInput {
-  where: TrackWhereUniqueInput;
-  update: TrackUpdateDataInput;
-  create: TrackCreateInput;
+  where: TrackWhereUniqueInput
+  update: TrackUpdateDataInput
+  create: TrackCreateInput
 }
 
 export interface TrackWhereInput {
-  AND?: TrackWhereInput[] | TrackWhereInput | null;
-  OR?: TrackWhereInput[] | TrackWhereInput | null;
-  NOT?: TrackWhereInput[] | TrackWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  name?: String | null;
-  name_not?: String | null;
-  name_in?: String[] | String | null;
-  name_not_in?: String[] | String | null;
-  name_lt?: String | null;
-  name_lte?: String | null;
-  name_gt?: String | null;
-  name_gte?: String | null;
-  name_contains?: String | null;
-  name_not_contains?: String | null;
-  name_starts_with?: String | null;
-  name_not_starts_with?: String | null;
-  name_ends_with?: String | null;
-  name_not_ends_with?: String | null;
-  duration?: Int | null;
-  duration_not?: Int | null;
-  duration_in?: Int[] | Int | null;
-  duration_not_in?: Int[] | Int | null;
-  duration_lt?: Int | null;
-  duration_lte?: Int | null;
-  duration_gt?: Int | null;
-  duration_gte?: Int | null;
-  preview_url?: String | null;
-  preview_url_not?: String | null;
-  preview_url_in?: String[] | String | null;
-  preview_url_not_in?: String[] | String | null;
-  preview_url_lt?: String | null;
-  preview_url_lte?: String | null;
-  preview_url_gt?: String | null;
-  preview_url_gte?: String | null;
-  preview_url_contains?: String | null;
-  preview_url_not_contains?: String | null;
-  preview_url_starts_with?: String | null;
-  preview_url_not_starts_with?: String | null;
-  preview_url_ends_with?: String | null;
-  preview_url_not_ends_with?: String | null;
-  album?: AlbumWhereInput | null;
-  artists_every?: ArtistWhereInput | null;
-  artists_some?: ArtistWhereInput | null;
-  artists_none?: ArtistWhereInput | null;
+  AND?: TrackWhereInput[] | TrackWhereInput | null
+  OR?: TrackWhereInput[] | TrackWhereInput | null
+  NOT?: TrackWhereInput[] | TrackWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  duration?: Int | null
+  duration_not?: Int | null
+  duration_in?: Int[] | Int | null
+  duration_not_in?: Int[] | Int | null
+  duration_lt?: Int | null
+  duration_lte?: Int | null
+  duration_gt?: Int | null
+  duration_gte?: Int | null
+  preview_url?: String | null
+  preview_url_not?: String | null
+  preview_url_in?: String[] | String | null
+  preview_url_not_in?: String[] | String | null
+  preview_url_lt?: String | null
+  preview_url_lte?: String | null
+  preview_url_gt?: String | null
+  preview_url_gte?: String | null
+  preview_url_contains?: String | null
+  preview_url_not_contains?: String | null
+  preview_url_starts_with?: String | null
+  preview_url_not_starts_with?: String | null
+  preview_url_ends_with?: String | null
+  preview_url_not_ends_with?: String | null
+  album?: AlbumWhereInput | null
+  artists_every?: ArtistWhereInput | null
+  artists_some?: ArtistWhereInput | null
+  artists_none?: ArtistWhereInput | null
 }
 
 export interface TrackWhereUniqueInput {
-  id?: ID_Input | null;
+  id?: ID_Input | null
 }
 
 export interface UserCreateInput {
-  id?: ID_Input | null;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  parties?: PartyCreateManyWithoutMembersInput | null;
-  friends?: UserCreateManyInput | null;
-  pendingFriendInvitations?: UserCreateManyInput | null;
-  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null;
-  chats?: ChatCreateManyWithoutMembersInput | null;
+  id?: ID_Input | null
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyCreateManyWithoutMembersInput | null
+  friends?: UserCreateManyInput | null
+  pendingFriendInvitations?: UserCreateManyInput | null
+  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
+  chats?: ChatCreateManyWithoutMembersInput | null
 }
 
 export interface UserCreateManyInput {
-  create?: UserCreateInput[] | UserCreateInput | null;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
+  create?: UserCreateInput[] | UserCreateInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
 }
 
 export interface UserCreateManyWithoutChatsInput {
-  create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput | null;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
+  create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
 }
 
 export interface UserCreateManyWithoutPartiesInput {
-  create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput | null;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
+  create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
 }
 
 export interface UserCreateOneInput {
-  create?: UserCreateInput | null;
-  connect?: UserWhereUniqueInput | null;
+  create?: UserCreateInput | null
+  connect?: UserWhereUniqueInput | null
 }
 
 export interface UserCreateOneWithoutPendingPartyInvitationsInput {
-  create?: UserCreateWithoutPendingPartyInvitationsInput | null;
-  connect?: UserWhereUniqueInput | null;
+  create?: UserCreateWithoutPendingPartyInvitationsInput | null
+  connect?: UserWhereUniqueInput | null
 }
 
 export interface UserCreateWithoutChatsInput {
-  id?: ID_Input | null;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  parties?: PartyCreateManyWithoutMembersInput | null;
-  friends?: UserCreateManyInput | null;
-  pendingFriendInvitations?: UserCreateManyInput | null;
-  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null;
+  id?: ID_Input | null
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyCreateManyWithoutMembersInput | null
+  friends?: UserCreateManyInput | null
+  pendingFriendInvitations?: UserCreateManyInput | null
+  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
 }
 
 export interface UserCreateWithoutPartiesInput {
-  id?: ID_Input | null;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  friends?: UserCreateManyInput | null;
-  pendingFriendInvitations?: UserCreateManyInput | null;
-  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null;
-  chats?: ChatCreateManyWithoutMembersInput | null;
+  id?: ID_Input | null
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  friends?: UserCreateManyInput | null
+  pendingFriendInvitations?: UserCreateManyInput | null
+  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
+  chats?: ChatCreateManyWithoutMembersInput | null
 }
 
 export interface UserCreateWithoutPendingPartyInvitationsInput {
-  id?: ID_Input | null;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  parties?: PartyCreateManyWithoutMembersInput | null;
-  friends?: UserCreateManyInput | null;
-  pendingFriendInvitations?: UserCreateManyInput | null;
-  chats?: ChatCreateManyWithoutMembersInput | null;
+  id?: ID_Input | null
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyCreateManyWithoutMembersInput | null
+  friends?: UserCreateManyInput | null
+  pendingFriendInvitations?: UserCreateManyInput | null
+  chats?: ChatCreateManyWithoutMembersInput | null
 }
 
 export interface UserScalarWhereInput {
-  AND?: UserScalarWhereInput[] | UserScalarWhereInput | null;
-  OR?: UserScalarWhereInput[] | UserScalarWhereInput | null;
-  NOT?: UserScalarWhereInput[] | UserScalarWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  email?: String | null;
-  email_not?: String | null;
-  email_in?: String[] | String | null;
-  email_not_in?: String[] | String | null;
-  email_lt?: String | null;
-  email_lte?: String | null;
-  email_gt?: String | null;
-  email_gte?: String | null;
-  email_contains?: String | null;
-  email_not_contains?: String | null;
-  email_starts_with?: String | null;
-  email_not_starts_with?: String | null;
-  email_ends_with?: String | null;
-  email_not_ends_with?: String | null;
-  firstName?: String | null;
-  firstName_not?: String | null;
-  firstName_in?: String[] | String | null;
-  firstName_not_in?: String[] | String | null;
-  firstName_lt?: String | null;
-  firstName_lte?: String | null;
-  firstName_gt?: String | null;
-  firstName_gte?: String | null;
-  firstName_contains?: String | null;
-  firstName_not_contains?: String | null;
-  firstName_starts_with?: String | null;
-  firstName_not_starts_with?: String | null;
-  firstName_ends_with?: String | null;
-  firstName_not_ends_with?: String | null;
-  lastName?: String | null;
-  lastName_not?: String | null;
-  lastName_in?: String[] | String | null;
-  lastName_not_in?: String[] | String | null;
-  lastName_lt?: String | null;
-  lastName_lte?: String | null;
-  lastName_gt?: String | null;
-  lastName_gte?: String | null;
-  lastName_contains?: String | null;
-  lastName_not_contains?: String | null;
-  lastName_starts_with?: String | null;
-  lastName_not_starts_with?: String | null;
-  lastName_ends_with?: String | null;
-  lastName_not_ends_with?: String | null;
-  password?: String | null;
-  password_not?: String | null;
-  password_in?: String[] | String | null;
-  password_not_in?: String[] | String | null;
-  password_lt?: String | null;
-  password_lte?: String | null;
-  password_gt?: String | null;
-  password_gte?: String | null;
-  password_contains?: String | null;
-  password_not_contains?: String | null;
-  password_starts_with?: String | null;
-  password_not_starts_with?: String | null;
-  password_ends_with?: String | null;
-  password_not_ends_with?: String | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
-  lastOnline?: DateTime | null;
-  lastOnline_not?: DateTime | null;
-  lastOnline_in?: DateTime[] | DateTime | null;
-  lastOnline_not_in?: DateTime[] | DateTime | null;
-  lastOnline_lt?: DateTime | null;
-  lastOnline_lte?: DateTime | null;
-  lastOnline_gt?: DateTime | null;
-  lastOnline_gte?: DateTime | null;
-  deleted?: Boolean | null;
-  deleted_not?: Boolean | null;
-  provider?: SocialMediaType | null;
-  provider_not?: SocialMediaType | null;
-  provider_in?: SocialMediaType[] | SocialMediaType | null;
-  provider_not_in?: SocialMediaType[] | SocialMediaType | null;
-  avatar?: String | null;
-  avatar_not?: String | null;
-  avatar_in?: String[] | String | null;
-  avatar_not_in?: String[] | String | null;
-  avatar_lt?: String | null;
-  avatar_lte?: String | null;
-  avatar_gt?: String | null;
-  avatar_gte?: String | null;
-  avatar_contains?: String | null;
-  avatar_not_contains?: String | null;
-  avatar_starts_with?: String | null;
-  avatar_not_starts_with?: String | null;
-  avatar_ends_with?: String | null;
-  avatar_not_ends_with?: String | null;
-  thirdPartyId?: String | null;
-  thirdPartyId_not?: String | null;
-  thirdPartyId_in?: String[] | String | null;
-  thirdPartyId_not_in?: String[] | String | null;
-  thirdPartyId_lt?: String | null;
-  thirdPartyId_lte?: String | null;
-  thirdPartyId_gt?: String | null;
-  thirdPartyId_gte?: String | null;
-  thirdPartyId_contains?: String | null;
-  thirdPartyId_not_contains?: String | null;
-  thirdPartyId_starts_with?: String | null;
-  thirdPartyId_not_starts_with?: String | null;
-  thirdPartyId_ends_with?: String | null;
-  thirdPartyId_not_ends_with?: String | null;
-  resetToken?: String | null;
-  resetToken_not?: String | null;
-  resetToken_in?: String[] | String | null;
-  resetToken_not_in?: String[] | String | null;
-  resetToken_lt?: String | null;
-  resetToken_lte?: String | null;
-  resetToken_gt?: String | null;
-  resetToken_gte?: String | null;
-  resetToken_contains?: String | null;
-  resetToken_not_contains?: String | null;
-  resetToken_starts_with?: String | null;
-  resetToken_not_starts_with?: String | null;
-  resetToken_ends_with?: String | null;
-  resetToken_not_ends_with?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  resetTokenExpiry_not?: DateTime | null;
-  resetTokenExpiry_in?: DateTime[] | DateTime | null;
-  resetTokenExpiry_not_in?: DateTime[] | DateTime | null;
-  resetTokenExpiry_lt?: DateTime | null;
-  resetTokenExpiry_lte?: DateTime | null;
-  resetTokenExpiry_gt?: DateTime | null;
-  resetTokenExpiry_gte?: DateTime | null;
+  AND?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  OR?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  NOT?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  email?: String | null
+  email_not?: String | null
+  email_in?: String[] | String | null
+  email_not_in?: String[] | String | null
+  email_lt?: String | null
+  email_lte?: String | null
+  email_gt?: String | null
+  email_gte?: String | null
+  email_contains?: String | null
+  email_not_contains?: String | null
+  email_starts_with?: String | null
+  email_not_starts_with?: String | null
+  email_ends_with?: String | null
+  email_not_ends_with?: String | null
+  firstName?: String | null
+  firstName_not?: String | null
+  firstName_in?: String[] | String | null
+  firstName_not_in?: String[] | String | null
+  firstName_lt?: String | null
+  firstName_lte?: String | null
+  firstName_gt?: String | null
+  firstName_gte?: String | null
+  firstName_contains?: String | null
+  firstName_not_contains?: String | null
+  firstName_starts_with?: String | null
+  firstName_not_starts_with?: String | null
+  firstName_ends_with?: String | null
+  firstName_not_ends_with?: String | null
+  lastName?: String | null
+  lastName_not?: String | null
+  lastName_in?: String[] | String | null
+  lastName_not_in?: String[] | String | null
+  lastName_lt?: String | null
+  lastName_lte?: String | null
+  lastName_gt?: String | null
+  lastName_gte?: String | null
+  lastName_contains?: String | null
+  lastName_not_contains?: String | null
+  lastName_starts_with?: String | null
+  lastName_not_starts_with?: String | null
+  lastName_ends_with?: String | null
+  lastName_not_ends_with?: String | null
+  password?: String | null
+  password_not?: String | null
+  password_in?: String[] | String | null
+  password_not_in?: String[] | String | null
+  password_lt?: String | null
+  password_lte?: String | null
+  password_gt?: String | null
+  password_gte?: String | null
+  password_contains?: String | null
+  password_not_contains?: String | null
+  password_starts_with?: String | null
+  password_not_starts_with?: String | null
+  password_ends_with?: String | null
+  password_not_ends_with?: String | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  lastOnline?: DateTime | null
+  lastOnline_not?: DateTime | null
+  lastOnline_in?: DateTime[] | DateTime | null
+  lastOnline_not_in?: DateTime[] | DateTime | null
+  lastOnline_lt?: DateTime | null
+  lastOnline_lte?: DateTime | null
+  lastOnline_gt?: DateTime | null
+  lastOnline_gte?: DateTime | null
+  deleted?: Boolean | null
+  deleted_not?: Boolean | null
+  provider?: SocialMediaType | null
+  provider_not?: SocialMediaType | null
+  provider_in?: SocialMediaType[] | SocialMediaType | null
+  provider_not_in?: SocialMediaType[] | SocialMediaType | null
+  avatar?: String | null
+  avatar_not?: String | null
+  avatar_in?: String[] | String | null
+  avatar_not_in?: String[] | String | null
+  avatar_lt?: String | null
+  avatar_lte?: String | null
+  avatar_gt?: String | null
+  avatar_gte?: String | null
+  avatar_contains?: String | null
+  avatar_not_contains?: String | null
+  avatar_starts_with?: String | null
+  avatar_not_starts_with?: String | null
+  avatar_ends_with?: String | null
+  avatar_not_ends_with?: String | null
+  thirdPartyId?: String | null
+  thirdPartyId_not?: String | null
+  thirdPartyId_in?: String[] | String | null
+  thirdPartyId_not_in?: String[] | String | null
+  thirdPartyId_lt?: String | null
+  thirdPartyId_lte?: String | null
+  thirdPartyId_gt?: String | null
+  thirdPartyId_gte?: String | null
+  thirdPartyId_contains?: String | null
+  thirdPartyId_not_contains?: String | null
+  thirdPartyId_starts_with?: String | null
+  thirdPartyId_not_starts_with?: String | null
+  thirdPartyId_ends_with?: String | null
+  thirdPartyId_not_ends_with?: String | null
+  resetToken?: String | null
+  resetToken_not?: String | null
+  resetToken_in?: String[] | String | null
+  resetToken_not_in?: String[] | String | null
+  resetToken_lt?: String | null
+  resetToken_lte?: String | null
+  resetToken_gt?: String | null
+  resetToken_gte?: String | null
+  resetToken_contains?: String | null
+  resetToken_not_contains?: String | null
+  resetToken_starts_with?: String | null
+  resetToken_not_starts_with?: String | null
+  resetToken_ends_with?: String | null
+  resetToken_not_ends_with?: String | null
+  resetTokenExpiry?: DateTime | null
+  resetTokenExpiry_not?: DateTime | null
+  resetTokenExpiry_in?: DateTime[] | DateTime | null
+  resetTokenExpiry_not_in?: DateTime[] | DateTime | null
+  resetTokenExpiry_lt?: DateTime | null
+  resetTokenExpiry_lte?: DateTime | null
+  resetTokenExpiry_gt?: DateTime | null
+  resetTokenExpiry_gte?: DateTime | null
 }
 
 export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null;
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null;
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null;
-  mutation_in?: MutationType[] | MutationType | null;
-  updatedFields_contains?: String | null;
-  updatedFields_contains_every?: String[] | String | null;
-  updatedFields_contains_some?: String[] | String | null;
-  node?: UserWhereInput | null;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: UserWhereInput | null
 }
 
 export interface UserUpdateDataInput {
-  email?: String | null;
-  firstName?: String | null;
-  lastName?: String | null;
-  password?: String | null;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  parties?: PartyUpdateManyWithoutMembersInput | null;
-  friends?: UserUpdateManyInput | null;
-  pendingFriendInvitations?: UserUpdateManyInput | null;
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null;
-  chats?: ChatUpdateManyWithoutMembersInput | null;
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyInput | null
+  pendingFriendInvitations?: UserUpdateManyInput | null
+  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
 export interface UserUpdateInput {
-  email?: String | null;
-  firstName?: String | null;
-  lastName?: String | null;
-  password?: String | null;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  parties?: PartyUpdateManyWithoutMembersInput | null;
-  friends?: UserUpdateManyInput | null;
-  pendingFriendInvitations?: UserUpdateManyInput | null;
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null;
-  chats?: ChatUpdateManyWithoutMembersInput | null;
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyInput | null
+  pendingFriendInvitations?: UserUpdateManyInput | null
+  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
 export interface UserUpdateManyDataInput {
-  email?: String | null;
-  firstName?: String | null;
-  lastName?: String | null;
-  password?: String | null;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
 }
 
 export interface UserUpdateManyInput {
-  create?: UserCreateInput[] | UserCreateInput | null;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  update?: UserUpdateWithWhereUniqueNestedInput[] | UserUpdateWithWhereUniqueNestedInput | null;
-  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null;
-  upsert?: UserUpsertWithWhereUniqueNestedInput[] | UserUpsertWithWhereUniqueNestedInput | null;
+  create?: UserCreateInput[] | UserCreateInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueNestedInput[] | UserUpdateWithWhereUniqueNestedInput | null
+  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  upsert?: UserUpsertWithWhereUniqueNestedInput[] | UserUpsertWithWhereUniqueNestedInput | null
 }
 
 export interface UserUpdateManyMutationInput {
-  email?: String | null;
-  firstName?: String | null;
-  lastName?: String | null;
-  password?: String | null;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
 }
 
 export interface UserUpdateManyWithoutChatsInput {
-  create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput | null;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  update?: UserUpdateWithWhereUniqueWithoutChatsInput[] | UserUpdateWithWhereUniqueWithoutChatsInput | null;
-  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null;
-  upsert?: UserUpsertWithWhereUniqueWithoutChatsInput[] | UserUpsertWithWhereUniqueWithoutChatsInput | null;
+  create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutChatsInput[] | UserUpdateWithWhereUniqueWithoutChatsInput | null
+  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutChatsInput[] | UserUpsertWithWhereUniqueWithoutChatsInput | null
 }
 
 export interface UserUpdateManyWithoutPartiesInput {
-  create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput | null;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null;
-  update?: UserUpdateWithWhereUniqueWithoutPartiesInput[] | UserUpdateWithWhereUniqueWithoutPartiesInput | null;
-  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null;
-  upsert?: UserUpsertWithWhereUniqueWithoutPartiesInput[] | UserUpsertWithWhereUniqueWithoutPartiesInput | null;
+  create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutPartiesInput[] | UserUpdateWithWhereUniqueWithoutPartiesInput | null
+  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutPartiesInput[] | UserUpsertWithWhereUniqueWithoutPartiesInput | null
 }
 
 export interface UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput;
-  data: UserUpdateManyDataInput;
+  where: UserScalarWhereInput
+  data: UserUpdateManyDataInput
 }
 
 export interface UserUpdateOneRequiredInput {
-  create?: UserCreateInput | null;
-  connect?: UserWhereUniqueInput | null;
-  update?: UserUpdateDataInput | null;
-  upsert?: UserUpsertNestedInput | null;
+  create?: UserCreateInput | null
+  connect?: UserWhereUniqueInput | null
+  update?: UserUpdateDataInput | null
+  upsert?: UserUpsertNestedInput | null
 }
 
 export interface UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
-  create?: UserCreateWithoutPendingPartyInvitationsInput | null;
-  connect?: UserWhereUniqueInput | null;
-  update?: UserUpdateWithoutPendingPartyInvitationsDataInput | null;
-  upsert?: UserUpsertWithoutPendingPartyInvitationsInput | null;
+  create?: UserCreateWithoutPendingPartyInvitationsInput | null
+  connect?: UserWhereUniqueInput | null
+  update?: UserUpdateWithoutPendingPartyInvitationsDataInput | null
+  upsert?: UserUpsertWithoutPendingPartyInvitationsInput | null
 }
 
 export interface UserUpdateWithoutChatsDataInput {
-  email?: String | null;
-  firstName?: String | null;
-  lastName?: String | null;
-  password?: String | null;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  parties?: PartyUpdateManyWithoutMembersInput | null;
-  friends?: UserUpdateManyInput | null;
-  pendingFriendInvitations?: UserUpdateManyInput | null;
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null;
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyInput | null
+  pendingFriendInvitations?: UserUpdateManyInput | null
+  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateWithoutPartiesDataInput {
-  email?: String | null;
-  firstName?: String | null;
-  lastName?: String | null;
-  password?: String | null;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  friends?: UserUpdateManyInput | null;
-  pendingFriendInvitations?: UserUpdateManyInput | null;
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null;
-  chats?: ChatUpdateManyWithoutMembersInput | null;
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  friends?: UserUpdateManyInput | null
+  pendingFriendInvitations?: UserUpdateManyInput | null
+  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
 export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
-  email?: String | null;
-  firstName?: String | null;
-  lastName?: String | null;
-  password?: String | null;
-  lastOnline?: DateTime | null;
-  deleted?: Boolean | null;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  parties?: PartyUpdateManyWithoutMembersInput | null;
-  friends?: UserUpdateManyInput | null;
-  pendingFriendInvitations?: UserUpdateManyInput | null;
-  chats?: ChatUpdateManyWithoutMembersInput | null;
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyInput | null
+  pendingFriendInvitations?: UserUpdateManyInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
 export interface UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateDataInput;
+  where: UserWhereUniqueInput
+  data: UserUpdateDataInput
 }
 
 export interface UserUpdateWithWhereUniqueWithoutChatsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutChatsDataInput;
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutChatsDataInput
 }
 
 export interface UserUpdateWithWhereUniqueWithoutPartiesInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutPartiesDataInput;
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutPartiesDataInput
 }
 
 export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
+  update: UserUpdateDataInput
+  create: UserCreateInput
 }
 
 export interface UserUpsertWithoutPendingPartyInvitationsInput {
-  update: UserUpdateWithoutPendingPartyInvitationsDataInput;
-  create: UserCreateWithoutPendingPartyInvitationsInput;
+  update: UserUpdateWithoutPendingPartyInvitationsDataInput
+  create: UserCreateWithoutPendingPartyInvitationsInput
 }
 
 export interface UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
+  where: UserWhereUniqueInput
+  update: UserUpdateDataInput
+  create: UserCreateInput
 }
 
 export interface UserUpsertWithWhereUniqueWithoutChatsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutChatsDataInput;
-  create: UserCreateWithoutChatsInput;
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutChatsDataInput
+  create: UserCreateWithoutChatsInput
 }
 
 export interface UserUpsertWithWhereUniqueWithoutPartiesInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutPartiesDataInput;
-  create: UserCreateWithoutPartiesInput;
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutPartiesDataInput
+  create: UserCreateWithoutPartiesInput
 }
 
 export interface UserWhereInput {
-  AND?: UserWhereInput[] | UserWhereInput | null;
-  OR?: UserWhereInput[] | UserWhereInput | null;
-  NOT?: UserWhereInput[] | UserWhereInput | null;
-  id?: ID_Input | null;
-  id_not?: ID_Input | null;
-  id_in?: ID_Output[] | ID_Output | null;
-  id_not_in?: ID_Output[] | ID_Output | null;
-  id_lt?: ID_Input | null;
-  id_lte?: ID_Input | null;
-  id_gt?: ID_Input | null;
-  id_gte?: ID_Input | null;
-  id_contains?: ID_Input | null;
-  id_not_contains?: ID_Input | null;
-  id_starts_with?: ID_Input | null;
-  id_not_starts_with?: ID_Input | null;
-  id_ends_with?: ID_Input | null;
-  id_not_ends_with?: ID_Input | null;
-  email?: String | null;
-  email_not?: String | null;
-  email_in?: String[] | String | null;
-  email_not_in?: String[] | String | null;
-  email_lt?: String | null;
-  email_lte?: String | null;
-  email_gt?: String | null;
-  email_gte?: String | null;
-  email_contains?: String | null;
-  email_not_contains?: String | null;
-  email_starts_with?: String | null;
-  email_not_starts_with?: String | null;
-  email_ends_with?: String | null;
-  email_not_ends_with?: String | null;
-  firstName?: String | null;
-  firstName_not?: String | null;
-  firstName_in?: String[] | String | null;
-  firstName_not_in?: String[] | String | null;
-  firstName_lt?: String | null;
-  firstName_lte?: String | null;
-  firstName_gt?: String | null;
-  firstName_gte?: String | null;
-  firstName_contains?: String | null;
-  firstName_not_contains?: String | null;
-  firstName_starts_with?: String | null;
-  firstName_not_starts_with?: String | null;
-  firstName_ends_with?: String | null;
-  firstName_not_ends_with?: String | null;
-  lastName?: String | null;
-  lastName_not?: String | null;
-  lastName_in?: String[] | String | null;
-  lastName_not_in?: String[] | String | null;
-  lastName_lt?: String | null;
-  lastName_lte?: String | null;
-  lastName_gt?: String | null;
-  lastName_gte?: String | null;
-  lastName_contains?: String | null;
-  lastName_not_contains?: String | null;
-  lastName_starts_with?: String | null;
-  lastName_not_starts_with?: String | null;
-  lastName_ends_with?: String | null;
-  lastName_not_ends_with?: String | null;
-  password?: String | null;
-  password_not?: String | null;
-  password_in?: String[] | String | null;
-  password_not_in?: String[] | String | null;
-  password_lt?: String | null;
-  password_lte?: String | null;
-  password_gt?: String | null;
-  password_gte?: String | null;
-  password_contains?: String | null;
-  password_not_contains?: String | null;
-  password_starts_with?: String | null;
-  password_not_starts_with?: String | null;
-  password_ends_with?: String | null;
-  password_not_ends_with?: String | null;
-  createdAt?: DateTime | null;
-  createdAt_not?: DateTime | null;
-  createdAt_in?: DateTime[] | DateTime | null;
-  createdAt_not_in?: DateTime[] | DateTime | null;
-  createdAt_lt?: DateTime | null;
-  createdAt_lte?: DateTime | null;
-  createdAt_gt?: DateTime | null;
-  createdAt_gte?: DateTime | null;
-  updatedAt?: DateTime | null;
-  updatedAt_not?: DateTime | null;
-  updatedAt_in?: DateTime[] | DateTime | null;
-  updatedAt_not_in?: DateTime[] | DateTime | null;
-  updatedAt_lt?: DateTime | null;
-  updatedAt_lte?: DateTime | null;
-  updatedAt_gt?: DateTime | null;
-  updatedAt_gte?: DateTime | null;
-  lastOnline?: DateTime | null;
-  lastOnline_not?: DateTime | null;
-  lastOnline_in?: DateTime[] | DateTime | null;
-  lastOnline_not_in?: DateTime[] | DateTime | null;
-  lastOnline_lt?: DateTime | null;
-  lastOnline_lte?: DateTime | null;
-  lastOnline_gt?: DateTime | null;
-  lastOnline_gte?: DateTime | null;
-  deleted?: Boolean | null;
-  deleted_not?: Boolean | null;
-  provider?: SocialMediaType | null;
-  provider_not?: SocialMediaType | null;
-  provider_in?: SocialMediaType[] | SocialMediaType | null;
-  provider_not_in?: SocialMediaType[] | SocialMediaType | null;
-  avatar?: String | null;
-  avatar_not?: String | null;
-  avatar_in?: String[] | String | null;
-  avatar_not_in?: String[] | String | null;
-  avatar_lt?: String | null;
-  avatar_lte?: String | null;
-  avatar_gt?: String | null;
-  avatar_gte?: String | null;
-  avatar_contains?: String | null;
-  avatar_not_contains?: String | null;
-  avatar_starts_with?: String | null;
-  avatar_not_starts_with?: String | null;
-  avatar_ends_with?: String | null;
-  avatar_not_ends_with?: String | null;
-  thirdPartyId?: String | null;
-  thirdPartyId_not?: String | null;
-  thirdPartyId_in?: String[] | String | null;
-  thirdPartyId_not_in?: String[] | String | null;
-  thirdPartyId_lt?: String | null;
-  thirdPartyId_lte?: String | null;
-  thirdPartyId_gt?: String | null;
-  thirdPartyId_gte?: String | null;
-  thirdPartyId_contains?: String | null;
-  thirdPartyId_not_contains?: String | null;
-  thirdPartyId_starts_with?: String | null;
-  thirdPartyId_not_starts_with?: String | null;
-  thirdPartyId_ends_with?: String | null;
-  thirdPartyId_not_ends_with?: String | null;
-  resetToken?: String | null;
-  resetToken_not?: String | null;
-  resetToken_in?: String[] | String | null;
-  resetToken_not_in?: String[] | String | null;
-  resetToken_lt?: String | null;
-  resetToken_lte?: String | null;
-  resetToken_gt?: String | null;
-  resetToken_gte?: String | null;
-  resetToken_contains?: String | null;
-  resetToken_not_contains?: String | null;
-  resetToken_starts_with?: String | null;
-  resetToken_not_starts_with?: String | null;
-  resetToken_ends_with?: String | null;
-  resetToken_not_ends_with?: String | null;
-  resetTokenExpiry?: DateTime | null;
-  resetTokenExpiry_not?: DateTime | null;
-  resetTokenExpiry_in?: DateTime[] | DateTime | null;
-  resetTokenExpiry_not_in?: DateTime[] | DateTime | null;
-  resetTokenExpiry_lt?: DateTime | null;
-  resetTokenExpiry_lte?: DateTime | null;
-  resetTokenExpiry_gt?: DateTime | null;
-  resetTokenExpiry_gte?: DateTime | null;
-  parties_every?: PartyWhereInput | null;
-  parties_some?: PartyWhereInput | null;
-  parties_none?: PartyWhereInput | null;
-  friends_every?: UserWhereInput | null;
-  friends_some?: UserWhereInput | null;
-  friends_none?: UserWhereInput | null;
-  pendingFriendInvitations_every?: UserWhereInput | null;
-  pendingFriendInvitations_some?: UserWhereInput | null;
-  pendingFriendInvitations_none?: UserWhereInput | null;
-  pendingPartyInvitations_every?: PartyInvitationWhereInput | null;
-  pendingPartyInvitations_some?: PartyInvitationWhereInput | null;
-  pendingPartyInvitations_none?: PartyInvitationWhereInput | null;
-  chats_every?: ChatWhereInput | null;
-  chats_some?: ChatWhereInput | null;
-  chats_none?: ChatWhereInput | null;
+  AND?: UserWhereInput[] | UserWhereInput | null
+  OR?: UserWhereInput[] | UserWhereInput | null
+  NOT?: UserWhereInput[] | UserWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  email?: String | null
+  email_not?: String | null
+  email_in?: String[] | String | null
+  email_not_in?: String[] | String | null
+  email_lt?: String | null
+  email_lte?: String | null
+  email_gt?: String | null
+  email_gte?: String | null
+  email_contains?: String | null
+  email_not_contains?: String | null
+  email_starts_with?: String | null
+  email_not_starts_with?: String | null
+  email_ends_with?: String | null
+  email_not_ends_with?: String | null
+  firstName?: String | null
+  firstName_not?: String | null
+  firstName_in?: String[] | String | null
+  firstName_not_in?: String[] | String | null
+  firstName_lt?: String | null
+  firstName_lte?: String | null
+  firstName_gt?: String | null
+  firstName_gte?: String | null
+  firstName_contains?: String | null
+  firstName_not_contains?: String | null
+  firstName_starts_with?: String | null
+  firstName_not_starts_with?: String | null
+  firstName_ends_with?: String | null
+  firstName_not_ends_with?: String | null
+  lastName?: String | null
+  lastName_not?: String | null
+  lastName_in?: String[] | String | null
+  lastName_not_in?: String[] | String | null
+  lastName_lt?: String | null
+  lastName_lte?: String | null
+  lastName_gt?: String | null
+  lastName_gte?: String | null
+  lastName_contains?: String | null
+  lastName_not_contains?: String | null
+  lastName_starts_with?: String | null
+  lastName_not_starts_with?: String | null
+  lastName_ends_with?: String | null
+  lastName_not_ends_with?: String | null
+  password?: String | null
+  password_not?: String | null
+  password_in?: String[] | String | null
+  password_not_in?: String[] | String | null
+  password_lt?: String | null
+  password_lte?: String | null
+  password_gt?: String | null
+  password_gte?: String | null
+  password_contains?: String | null
+  password_not_contains?: String | null
+  password_starts_with?: String | null
+  password_not_starts_with?: String | null
+  password_ends_with?: String | null
+  password_not_ends_with?: String | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  lastOnline?: DateTime | null
+  lastOnline_not?: DateTime | null
+  lastOnline_in?: DateTime[] | DateTime | null
+  lastOnline_not_in?: DateTime[] | DateTime | null
+  lastOnline_lt?: DateTime | null
+  lastOnline_lte?: DateTime | null
+  lastOnline_gt?: DateTime | null
+  lastOnline_gte?: DateTime | null
+  deleted?: Boolean | null
+  deleted_not?: Boolean | null
+  provider?: SocialMediaType | null
+  provider_not?: SocialMediaType | null
+  provider_in?: SocialMediaType[] | SocialMediaType | null
+  provider_not_in?: SocialMediaType[] | SocialMediaType | null
+  avatar?: String | null
+  avatar_not?: String | null
+  avatar_in?: String[] | String | null
+  avatar_not_in?: String[] | String | null
+  avatar_lt?: String | null
+  avatar_lte?: String | null
+  avatar_gt?: String | null
+  avatar_gte?: String | null
+  avatar_contains?: String | null
+  avatar_not_contains?: String | null
+  avatar_starts_with?: String | null
+  avatar_not_starts_with?: String | null
+  avatar_ends_with?: String | null
+  avatar_not_ends_with?: String | null
+  thirdPartyId?: String | null
+  thirdPartyId_not?: String | null
+  thirdPartyId_in?: String[] | String | null
+  thirdPartyId_not_in?: String[] | String | null
+  thirdPartyId_lt?: String | null
+  thirdPartyId_lte?: String | null
+  thirdPartyId_gt?: String | null
+  thirdPartyId_gte?: String | null
+  thirdPartyId_contains?: String | null
+  thirdPartyId_not_contains?: String | null
+  thirdPartyId_starts_with?: String | null
+  thirdPartyId_not_starts_with?: String | null
+  thirdPartyId_ends_with?: String | null
+  thirdPartyId_not_ends_with?: String | null
+  resetToken?: String | null
+  resetToken_not?: String | null
+  resetToken_in?: String[] | String | null
+  resetToken_not_in?: String[] | String | null
+  resetToken_lt?: String | null
+  resetToken_lte?: String | null
+  resetToken_gt?: String | null
+  resetToken_gte?: String | null
+  resetToken_contains?: String | null
+  resetToken_not_contains?: String | null
+  resetToken_starts_with?: String | null
+  resetToken_not_starts_with?: String | null
+  resetToken_ends_with?: String | null
+  resetToken_not_ends_with?: String | null
+  resetTokenExpiry?: DateTime | null
+  resetTokenExpiry_not?: DateTime | null
+  resetTokenExpiry_in?: DateTime[] | DateTime | null
+  resetTokenExpiry_not_in?: DateTime[] | DateTime | null
+  resetTokenExpiry_lt?: DateTime | null
+  resetTokenExpiry_lte?: DateTime | null
+  resetTokenExpiry_gt?: DateTime | null
+  resetTokenExpiry_gte?: DateTime | null
+  parties_every?: PartyWhereInput | null
+  parties_some?: PartyWhereInput | null
+  parties_none?: PartyWhereInput | null
+  friends_every?: UserWhereInput | null
+  friends_some?: UserWhereInput | null
+  friends_none?: UserWhereInput | null
+  pendingFriendInvitations_every?: UserWhereInput | null
+  pendingFriendInvitations_some?: UserWhereInput | null
+  pendingFriendInvitations_none?: UserWhereInput | null
+  pendingPartyInvitations_every?: PartyInvitationWhereInput | null
+  pendingPartyInvitations_some?: PartyInvitationWhereInput | null
+  pendingPartyInvitations_none?: PartyInvitationWhereInput | null
+  chats_every?: ChatWhereInput | null
+  chats_some?: ChatWhereInput | null
+  chats_none?: ChatWhereInput | null
 }
 
 export interface UserWhereUniqueInput {
-  id?: ID_Input | null;
-  email?: String | null;
+  id?: ID_Input | null
+  email?: String | null
 }
 
 /*
@@ -9246,61 +9248,61 @@ export interface UserWhereUniqueInput {
 
  */
 export interface Node {
-  id: ID_Output;
+  id: ID_Output
 }
 
 export interface AggregateAlbum {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateArtist {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateChat {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateGame {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateImage {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateLocation {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateMessage {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateParty {
-  count: Int;
+  count: Int
 }
 
 export interface AggregatePartyInvitation {
-  count: Int;
+  count: Int
 }
 
 export interface AggregatePlaylist {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateTrack {
-  count: Int;
+  count: Int
 }
 
 export interface AggregateUser {
-  count: Int;
+  count: Int
 }
 
 export interface Album extends Node {
-  id: ID_Output;
-  images?: Image[] | null;
-  artists?: Artist[] | null;
+  id: ID_Output
+  images?: Array<Image> | null
+  artists?: Array<Artist> | null
 }
 
 /*
@@ -9308,9 +9310,9 @@ export interface Album extends Node {
 
  */
 export interface AlbumConnection {
-  pageInfo: PageInfo;
-  edges: Array<AlbumEdge | null>;
-  aggregate: AggregateAlbum;
+  pageInfo: PageInfo
+  edges: Array<AlbumEdge | null>
+  aggregate: AggregateAlbum
 }
 
 /*
@@ -9318,24 +9320,24 @@ export interface AlbumConnection {
 
  */
 export interface AlbumEdge {
-  node: Album;
-  cursor: String;
+  node: Album
+  cursor: String
 }
 
 export interface AlbumPreviousValues {
-  id: ID_Output;
+  id: ID_Output
 }
 
 export interface AlbumSubscriptionPayload {
-  mutation: MutationType;
-  node?: Album | null;
-  updatedFields?: String[] | null;
-  previousValues?: AlbumPreviousValues | null;
+  mutation: MutationType
+  node?: Album | null
+  updatedFields?: Array<String> | null
+  previousValues?: AlbumPreviousValues | null
 }
 
 export interface Artist extends Node {
-  id: ID_Output;
-  name: String;
+  id: ID_Output
+  name: String
 }
 
 /*
@@ -9343,9 +9345,9 @@ export interface Artist extends Node {
 
  */
 export interface ArtistConnection {
-  pageInfo: PageInfo;
-  edges: Array<ArtistEdge | null>;
-  aggregate: AggregateArtist;
+  pageInfo: PageInfo
+  edges: Array<ArtistEdge | null>
+  aggregate: AggregateArtist
 }
 
 /*
@@ -9353,33 +9355,33 @@ export interface ArtistConnection {
 
  */
 export interface ArtistEdge {
-  node: Artist;
-  cursor: String;
+  node: Artist
+  cursor: String
 }
 
 export interface ArtistPreviousValues {
-  id: ID_Output;
-  name: String;
+  id: ID_Output
+  name: String
 }
 
 export interface ArtistSubscriptionPayload {
-  mutation: MutationType;
-  node?: Artist | null;
-  updatedFields?: String[] | null;
-  previousValues?: ArtistPreviousValues | null;
+  mutation: MutationType
+  node?: Artist | null
+  updatedFields?: Array<String> | null
+  previousValues?: ArtistPreviousValues | null
 }
 
 export interface BatchPayload {
-  count: Long;
+  count: Long
 }
 
 export interface Chat extends Node {
-  id: ID_Output;
-  party: Party;
-  members?: User[] | null;
-  messages?: Message[] | null;
-  createdAt: DateTime;
-  updatedAt: DateTime;
+  id: ID_Output
+  party: Party
+  members?: Array<User> | null
+  messages?: Array<Message> | null
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 /*
@@ -9387,9 +9389,9 @@ export interface Chat extends Node {
 
  */
 export interface ChatConnection {
-  pageInfo: PageInfo;
-  edges: Array<ChatEdge | null>;
-  aggregate: AggregateChat;
+  pageInfo: PageInfo
+  edges: Array<ChatEdge | null>
+  aggregate: AggregateChat
 }
 
 /*
@@ -9397,30 +9399,30 @@ export interface ChatConnection {
 
  */
 export interface ChatEdge {
-  node: Chat;
-  cursor: String;
+  node: Chat
+  cursor: String
 }
 
 export interface ChatPreviousValues {
-  id: ID_Output;
-  createdAt: DateTime;
-  updatedAt: DateTime;
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 export interface ChatSubscriptionPayload {
-  mutation: MutationType;
-  node?: Chat | null;
-  updatedFields?: String[] | null;
-  previousValues?: ChatPreviousValues | null;
+  mutation: MutationType
+  node?: Chat | null
+  updatedFields?: Array<String> | null
+  previousValues?: ChatPreviousValues | null
 }
 
 export interface Game extends Node {
-  id: ID_Output;
-  title: String;
-  cover?: String | null;
-  type: GameType;
-  createdAt: DateTime;
-  updatedAt: DateTime;
+  id: ID_Output
+  title: String
+  cover?: String | null
+  type: GameType
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 /*
@@ -9428,9 +9430,9 @@ export interface Game extends Node {
 
  */
 export interface GameConnection {
-  pageInfo: PageInfo;
-  edges: Array<GameEdge | null>;
-  aggregate: AggregateGame;
+  pageInfo: PageInfo
+  edges: Array<GameEdge | null>
+  aggregate: AggregateGame
 }
 
 /*
@@ -9438,31 +9440,31 @@ export interface GameConnection {
 
  */
 export interface GameEdge {
-  node: Game;
-  cursor: String;
+  node: Game
+  cursor: String
 }
 
 export interface GamePreviousValues {
-  id: ID_Output;
-  title: String;
-  cover?: String | null;
-  type: GameType;
-  createdAt: DateTime;
-  updatedAt: DateTime;
+  id: ID_Output
+  title: String
+  cover?: String | null
+  type: GameType
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 export interface GameSubscriptionPayload {
-  mutation: MutationType;
-  node?: Game | null;
-  updatedFields?: String[] | null;
-  previousValues?: GamePreviousValues | null;
+  mutation: MutationType
+  node?: Game | null
+  updatedFields?: Array<String> | null
+  previousValues?: GamePreviousValues | null
 }
 
 export interface Image extends Node {
-  id: ID_Output;
-  height: Int;
-  width: Int;
-  url: String;
+  id: ID_Output
+  height: Int
+  width: Int
+  url: String
 }
 
 /*
@@ -9470,9 +9472,9 @@ export interface Image extends Node {
 
  */
 export interface ImageConnection {
-  pageInfo: PageInfo;
-  edges: Array<ImageEdge | null>;
-  aggregate: AggregateImage;
+  pageInfo: PageInfo
+  edges: Array<ImageEdge | null>
+  aggregate: AggregateImage
 }
 
 /*
@@ -9480,31 +9482,31 @@ export interface ImageConnection {
 
  */
 export interface ImageEdge {
-  node: Image;
-  cursor: String;
+  node: Image
+  cursor: String
 }
 
 export interface ImagePreviousValues {
-  id: ID_Output;
-  height: Int;
-  width: Int;
-  url: String;
+  id: ID_Output
+  height: Int
+  width: Int
+  url: String
 }
 
 export interface ImageSubscriptionPayload {
-  mutation: MutationType;
-  node?: Image | null;
-  updatedFields?: String[] | null;
-  previousValues?: ImagePreviousValues | null;
+  mutation: MutationType
+  node?: Image | null
+  updatedFields?: Array<String> | null
+  previousValues?: ImagePreviousValues | null
 }
 
 export interface Location extends Node {
-  id: ID_Output;
-  placeName: String;
-  latitude: Float;
-  longitude: Float;
-  createdAt: DateTime;
-  updatedAt: DateTime;
+  id: ID_Output
+  placeName: String
+  latitude: Float
+  longitude: Float
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 /*
@@ -9512,9 +9514,9 @@ export interface Location extends Node {
 
  */
 export interface LocationConnection {
-  pageInfo: PageInfo;
-  edges: Array<LocationEdge | null>;
-  aggregate: AggregateLocation;
+  pageInfo: PageInfo
+  edges: Array<LocationEdge | null>
+  aggregate: AggregateLocation
 }
 
 /*
@@ -9522,33 +9524,33 @@ export interface LocationConnection {
 
  */
 export interface LocationEdge {
-  node: Location;
-  cursor: String;
+  node: Location
+  cursor: String
 }
 
 export interface LocationPreviousValues {
-  id: ID_Output;
-  placeName: String;
-  latitude: Float;
-  longitude: Float;
-  createdAt: DateTime;
-  updatedAt: DateTime;
+  id: ID_Output
+  placeName: String
+  latitude: Float
+  longitude: Float
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 export interface LocationSubscriptionPayload {
-  mutation: MutationType;
-  node?: Location | null;
-  updatedFields?: String[] | null;
-  previousValues?: LocationPreviousValues | null;
+  mutation: MutationType
+  node?: Location | null
+  updatedFields?: Array<String> | null
+  previousValues?: LocationPreviousValues | null
 }
 
 export interface Message extends Node {
-  id: ID_Output;
-  author: User;
-  chat: Chat;
-  content: String;
-  createdAt: DateTime;
-  updatedAt: DateTime;
+  id: ID_Output
+  author: User
+  chat: Chat
+  content: String
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 /*
@@ -9556,9 +9558,9 @@ export interface Message extends Node {
 
  */
 export interface MessageConnection {
-  pageInfo: PageInfo;
-  edges: Array<MessageEdge | null>;
-  aggregate: AggregateMessage;
+  pageInfo: PageInfo
+  edges: Array<MessageEdge | null>
+  aggregate: AggregateMessage
 }
 
 /*
@@ -9566,22 +9568,22 @@ export interface MessageConnection {
 
  */
 export interface MessageEdge {
-  node: Message;
-  cursor: String;
+  node: Message
+  cursor: String
 }
 
 export interface MessagePreviousValues {
-  id: ID_Output;
-  content: String;
-  createdAt: DateTime;
-  updatedAt: DateTime;
+  id: ID_Output
+  content: String
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 export interface MessageSubscriptionPayload {
-  mutation: MutationType;
-  node?: Message | null;
-  updatedFields?: String[] | null;
-  previousValues?: MessagePreviousValues | null;
+  mutation: MutationType
+  node?: Message | null
+  updatedFields?: Array<String> | null
+  previousValues?: MessagePreviousValues | null
 }
 
 /*
@@ -9589,28 +9591,28 @@ export interface MessageSubscriptionPayload {
 
  */
 export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String | null;
-  endCursor?: String | null;
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor?: String | null
+  endCursor?: String | null
 }
 
 export interface Party extends Node {
-  id: ID_Output;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: User;
-  createdAt: DateTime;
-  updatedAt: DateTime;
-  location: Location;
-  games?: Game[] | null;
-  colorTint: String;
-  isPublic?: Boolean | null;
-  members?: User[] | null;
-  start: DateTime;
-  end: DateTime;
-  inviteSecret: String;
+  id: ID_Output
+  title: String
+  normalizedTitle: String
+  description: String
+  author: User
+  createdAt: DateTime
+  updatedAt: DateTime
+  location: Location
+  games?: Array<Game> | null
+  colorTint: String
+  isPublic?: Boolean | null
+  members?: Array<User> | null
+  start: DateTime
+  end: DateTime
+  inviteSecret: String
 }
 
 /*
@@ -9618,9 +9620,9 @@ export interface Party extends Node {
 
  */
 export interface PartyConnection {
-  pageInfo: PageInfo;
-  edges: Array<PartyEdge | null>;
-  aggregate: AggregateParty;
+  pageInfo: PageInfo
+  edges: Array<PartyEdge | null>
+  aggregate: AggregateParty
 }
 
 /*
@@ -9628,18 +9630,18 @@ export interface PartyConnection {
 
  */
 export interface PartyEdge {
-  node: Party;
-  cursor: String;
+  node: Party
+  cursor: String
 }
 
 export interface PartyInvitation extends Node {
-  id: ID_Output;
-  invitedBy: User;
-  user: User;
-  party: Party;
-  invitedUserId: String;
-  partyId: String;
-  createdAt: DateTime;
+  id: ID_Output
+  invitedBy: User
+  user: User
+  party: Party
+  invitedUserId: String
+  partyId: String
+  createdAt: DateTime
 }
 
 /*
@@ -9647,9 +9649,9 @@ export interface PartyInvitation extends Node {
 
  */
 export interface PartyInvitationConnection {
-  pageInfo: PageInfo;
-  edges: Array<PartyInvitationEdge | null>;
-  aggregate: AggregatePartyInvitation;
+  pageInfo: PageInfo
+  edges: Array<PartyInvitationEdge | null>
+  aggregate: AggregatePartyInvitation
 }
 
 /*
@@ -9657,51 +9659,51 @@ export interface PartyInvitationConnection {
 
  */
 export interface PartyInvitationEdge {
-  node: PartyInvitation;
-  cursor: String;
+  node: PartyInvitation
+  cursor: String
 }
 
 export interface PartyInvitationPreviousValues {
-  id: ID_Output;
-  invitedUserId: String;
-  partyId: String;
-  createdAt: DateTime;
+  id: ID_Output
+  invitedUserId: String
+  partyId: String
+  createdAt: DateTime
 }
 
 export interface PartyInvitationSubscriptionPayload {
-  mutation: MutationType;
-  node?: PartyInvitation | null;
-  updatedFields?: String[] | null;
-  previousValues?: PartyInvitationPreviousValues | null;
+  mutation: MutationType
+  node?: PartyInvitation | null
+  updatedFields?: Array<String> | null
+  previousValues?: PartyInvitationPreviousValues | null
 }
 
 export interface PartyPreviousValues {
-  id: ID_Output;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  createdAt: DateTime;
-  updatedAt: DateTime;
-  colorTint: String;
-  isPublic?: Boolean | null;
-  start: DateTime;
-  end: DateTime;
-  inviteSecret: String;
+  id: ID_Output
+  title: String
+  normalizedTitle: String
+  description: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  colorTint: String
+  isPublic?: Boolean | null
+  start: DateTime
+  end: DateTime
+  inviteSecret: String
 }
 
 export interface PartySubscriptionPayload {
-  mutation: MutationType;
-  node?: Party | null;
-  updatedFields?: String[] | null;
-  previousValues?: PartyPreviousValues | null;
+  mutation: MutationType
+  node?: Party | null
+  updatedFields?: Array<String> | null
+  previousValues?: PartyPreviousValues | null
 }
 
 export interface Playlist extends Node {
-  id: ID_Output;
-  playlist_id?: String | null;
-  name: String;
-  tracks?: Track[] | null;
-  isTemporary?: Boolean | null;
+  id: ID_Output
+  playlist_id?: String | null
+  name: String
+  tracks?: Array<Track> | null
+  isTemporary?: Boolean | null
 }
 
 /*
@@ -9709,9 +9711,9 @@ export interface Playlist extends Node {
 
  */
 export interface PlaylistConnection {
-  pageInfo: PageInfo;
-  edges: Array<PlaylistEdge | null>;
-  aggregate: AggregatePlaylist;
+  pageInfo: PageInfo
+  edges: Array<PlaylistEdge | null>
+  aggregate: AggregatePlaylist
 }
 
 /*
@@ -9719,31 +9721,31 @@ export interface PlaylistConnection {
 
  */
 export interface PlaylistEdge {
-  node: Playlist;
-  cursor: String;
+  node: Playlist
+  cursor: String
 }
 
 export interface PlaylistPreviousValues {
-  id: ID_Output;
-  playlist_id?: String | null;
-  name: String;
-  isTemporary?: Boolean | null;
+  id: ID_Output
+  playlist_id?: String | null
+  name: String
+  isTemporary?: Boolean | null
 }
 
 export interface PlaylistSubscriptionPayload {
-  mutation: MutationType;
-  node?: Playlist | null;
-  updatedFields?: String[] | null;
-  previousValues?: PlaylistPreviousValues | null;
+  mutation: MutationType
+  node?: Playlist | null
+  updatedFields?: Array<String> | null
+  previousValues?: PlaylistPreviousValues | null
 }
 
 export interface Track extends Node {
-  id: ID_Output;
-  name: String;
-  album: Album;
-  artists?: Artist[] | null;
-  duration: Int;
-  preview_url: String;
+  id: ID_Output
+  name: String
+  album: Album
+  artists?: Array<Artist> | null
+  duration: Int
+  preview_url: String
 }
 
 /*
@@ -9751,9 +9753,9 @@ export interface Track extends Node {
 
  */
 export interface TrackConnection {
-  pageInfo: PageInfo;
-  edges: Array<TrackEdge | null>;
-  aggregate: AggregateTrack;
+  pageInfo: PageInfo
+  edges: Array<TrackEdge | null>
+  aggregate: AggregateTrack
 }
 
 /*
@@ -9761,44 +9763,44 @@ export interface TrackConnection {
 
  */
 export interface TrackEdge {
-  node: Track;
-  cursor: String;
+  node: Track
+  cursor: String
 }
 
 export interface TrackPreviousValues {
-  id: ID_Output;
-  name: String;
-  duration: Int;
-  preview_url: String;
+  id: ID_Output
+  name: String
+  duration: Int
+  preview_url: String
 }
 
 export interface TrackSubscriptionPayload {
-  mutation: MutationType;
-  node?: Track | null;
-  updatedFields?: String[] | null;
-  previousValues?: TrackPreviousValues | null;
+  mutation: MutationType
+  node?: Track | null
+  updatedFields?: Array<String> | null
+  previousValues?: TrackPreviousValues | null
 }
 
 export interface User extends Node {
-  id: ID_Output;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  parties?: Party[] | null;
-  friends?: User[] | null;
-  pendingFriendInvitations?: User[] | null;
-  pendingPartyInvitations?: PartyInvitation[] | null;
-  chats?: Chat[] | null;
-  createdAt: DateTime;
-  updatedAt: DateTime;
-  lastOnline?: DateTime | null;
-  deleted: Boolean;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
+  id: ID_Output
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  parties?: Array<Party> | null
+  friends?: Array<User> | null
+  pendingFriendInvitations?: Array<User> | null
+  pendingPartyInvitations?: Array<PartyInvitation> | null
+  chats?: Array<Chat> | null
+  createdAt: DateTime
+  updatedAt: DateTime
+  lastOnline?: DateTime | null
+  deleted: Boolean
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
 }
 
 /*
@@ -9806,9 +9808,9 @@ export interface User extends Node {
 
  */
 export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: Array<UserEdge | null>;
-  aggregate: AggregateUser;
+  pageInfo: PageInfo
+  edges: Array<UserEdge | null>
+  aggregate: AggregateUser
 }
 
 /*
@@ -9816,64 +9818,64 @@ export interface UserConnection {
 
  */
 export interface UserEdge {
-  node: User;
-  cursor: String;
+  node: User
+  cursor: String
 }
 
 export interface UserPreviousValues {
-  id: ID_Output;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  createdAt: DateTime;
-  updatedAt: DateTime;
-  lastOnline?: DateTime | null;
-  deleted: Boolean;
-  provider?: SocialMediaType | null;
-  avatar?: String | null;
-  thirdPartyId?: String | null;
-  resetToken?: String | null;
-  resetTokenExpiry?: DateTime | null;
+  id: ID_Output
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  lastOnline?: DateTime | null
+  deleted: Boolean
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
 }
 
 export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node?: User | null;
-  updatedFields?: String[] | null;
-  previousValues?: UserPreviousValues | null;
+  mutation: MutationType
+  node?: User | null
+  updatedFields?: Array<String> | null
+  previousValues?: UserPreviousValues | null
 }
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
-export type Boolean = boolean;
+export type Boolean = boolean
 
-export type DateTime = Date | string;
+export type DateTime = Date | string
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
 */
-export type Float = number;
+export type Float = number
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
-export type ID_Input = string | number;
-export type ID_Output = string;
+export type ID_Input = string | number
+export type ID_Output = string
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
-export type Int = number;
+export type Int = number
 
 /*
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
 */
-export type Long = string;
+export type Long = string
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
-export type String = string;
+export type String = string

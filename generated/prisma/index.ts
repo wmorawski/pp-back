@@ -827,7 +827,7 @@ export interface PartyCreateInput {
   start?: Maybe<DateTimeInput>;
   end?: Maybe<DateTimeInput>;
   inviteSecret: String;
-  playlist: PlaylistCreateOneWithoutPartiesInput;
+  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
 }
 
 export type ChatWhereUniqueInput = AtLeastOne<{
@@ -1088,7 +1088,7 @@ export interface PartyCreateWithoutMembersInput {
   start?: Maybe<DateTimeInput>;
   end?: Maybe<DateTimeInput>;
   inviteSecret: String;
-  playlist: PlaylistCreateOneWithoutPartiesInput;
+  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
 }
 
 export interface ChatWhereInput {
@@ -1765,7 +1765,7 @@ export interface PartyUpdateDataInput {
   start?: Maybe<DateTimeInput>;
   end?: Maybe<DateTimeInput>;
   inviteSecret?: Maybe<String>;
-  playlist?: Maybe<PlaylistUpdateOneRequiredWithoutPartiesInput>;
+  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
 }
 
 export interface PartyCartCreateWithoutItemsInput {
@@ -1923,7 +1923,7 @@ export interface PartyUpdateWithoutMembersDataInput {
   start?: Maybe<DateTimeInput>;
   end?: Maybe<DateTimeInput>;
   inviteSecret?: Maybe<String>;
-  playlist?: Maybe<PlaylistUpdateOneRequiredWithoutPartiesInput>;
+  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
 }
 
 export interface PartyCartItemUpdateWithoutCartDataInput {
@@ -2061,7 +2061,7 @@ export interface PartyUpdateInput {
   start?: Maybe<DateTimeInput>;
   end?: Maybe<DateTimeInput>;
   inviteSecret?: Maybe<String>;
-  playlist?: Maybe<PlaylistUpdateOneRequiredWithoutPartiesInput>;
+  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
 }
 
 export interface GameUpsertWithWhereUniqueNestedInput {
@@ -2173,10 +2173,12 @@ export interface ArtistCreateInput {
   name: String;
 }
 
-export interface PlaylistUpdateOneRequiredWithoutPartiesInput {
+export interface PlaylistUpdateOneWithoutPartiesInput {
   create?: Maybe<PlaylistCreateWithoutPartiesInput>;
   update?: Maybe<PlaylistUpdateWithoutPartiesDataInput>;
   upsert?: Maybe<PlaylistUpsertWithoutPartiesInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
   connect?: Maybe<PlaylistWhereUniqueInput>;
 }
 

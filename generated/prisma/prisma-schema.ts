@@ -1573,7 +1573,7 @@ type Party {
   start: DateTime!
   end: DateTime!
   inviteSecret: String!
-  playlist: Playlist!
+  playlist: Playlist
 }
 
 type PartyCart {
@@ -1982,7 +1982,7 @@ input PartyCreateInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-  playlist: PlaylistCreateOneWithoutPartiesInput!
+  playlist: PlaylistCreateOneWithoutPartiesInput
 }
 
 input PartyCreateManyWithoutMembersInput {
@@ -2013,7 +2013,7 @@ input PartyCreateWithoutMembersInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-  playlist: PlaylistCreateOneWithoutPartiesInput!
+  playlist: PlaylistCreateOneWithoutPartiesInput
 }
 
 input PartyCreateWithoutPlaylistInput {
@@ -2482,7 +2482,7 @@ input PartyUpdateDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
+  playlist: PlaylistUpdateOneWithoutPartiesInput
 }
 
 input PartyUpdateInput {
@@ -2498,7 +2498,7 @@ input PartyUpdateInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
+  playlist: PlaylistUpdateOneWithoutPartiesInput
 }
 
 input PartyUpdateManyDataInput {
@@ -2571,7 +2571,7 @@ input PartyUpdateWithoutMembersDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
+  playlist: PlaylistUpdateOneWithoutPartiesInput
 }
 
 input PartyUpdateWithoutPlaylistDataInput {
@@ -2858,10 +2858,12 @@ input PlaylistUpdateManyMutationInput {
   isTemporary: Boolean
 }
 
-input PlaylistUpdateOneRequiredWithoutPartiesInput {
+input PlaylistUpdateOneWithoutPartiesInput {
   create: PlaylistCreateWithoutPartiesInput
   update: PlaylistUpdateWithoutPartiesDataInput
   upsert: PlaylistUpsertWithoutPartiesInput
+  delete: Boolean
+  disconnect: Boolean
   connect: PlaylistWhereUniqueInput
 }
 

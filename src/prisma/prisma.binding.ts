@@ -1760,6 +1760,7 @@ type Party {
   start: DateTime!
   end: DateTime!
   inviteSecret: String!
+  playlist: Playlist!
 }
 
 type PartyCart {
@@ -2168,15 +2169,16 @@ input PartyCreateInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-}
-
-input PartyCreateManyInput {
-  create: [PartyCreateInput!]
-  connect: [PartyWhereUniqueInput!]
+  playlist: PlaylistCreateOneWithoutPartiesInput!
 }
 
 input PartyCreateManyWithoutMembersInput {
   create: [PartyCreateWithoutMembersInput!]
+  connect: [PartyWhereUniqueInput!]
+}
+
+input PartyCreateManyWithoutPlaylistInput {
+  create: [PartyCreateWithoutPlaylistInput!]
   connect: [PartyWhereUniqueInput!]
 }
 
@@ -2195,6 +2197,23 @@ input PartyCreateWithoutMembersInput {
   games: GameCreateManyInput
   colorTint: String!
   isPublic: Boolean
+  start: DateTime
+  end: DateTime
+  inviteSecret: String!
+  playlist: PlaylistCreateOneWithoutPartiesInput!
+}
+
+input PartyCreateWithoutPlaylistInput {
+  id: ID
+  title: String!
+  normalizedTitle: String!
+  description: String!
+  author: UserCreateOneInput!
+  location: LocationCreateOneInput!
+  games: GameCreateManyInput
+  colorTint: String!
+  isPublic: Boolean
+  members: UserCreateManyWithoutPartiesInput
   start: DateTime
   end: DateTime
   inviteSecret: String!
@@ -2650,6 +2669,7 @@ input PartyUpdateDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
+  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
 }
 
 input PartyUpdateInput {
@@ -2665,6 +2685,7 @@ input PartyUpdateInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
+  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
 }
 
 input PartyUpdateManyDataInput {
@@ -2676,18 +2697,6 @@ input PartyUpdateManyDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-}
-
-input PartyUpdateManyInput {
-  create: [PartyCreateInput!]
-  update: [PartyUpdateWithWhereUniqueNestedInput!]
-  upsert: [PartyUpsertWithWhereUniqueNestedInput!]
-  delete: [PartyWhereUniqueInput!]
-  connect: [PartyWhereUniqueInput!]
-  set: [PartyWhereUniqueInput!]
-  disconnect: [PartyWhereUniqueInput!]
-  deleteMany: [PartyScalarWhereInput!]
-  updateMany: [PartyUpdateManyWithWhereNestedInput!]
 }
 
 input PartyUpdateManyMutationInput {
@@ -2709,6 +2718,18 @@ input PartyUpdateManyWithoutMembersInput {
   disconnect: [PartyWhereUniqueInput!]
   update: [PartyUpdateWithWhereUniqueWithoutMembersInput!]
   upsert: [PartyUpsertWithWhereUniqueWithoutMembersInput!]
+  deleteMany: [PartyScalarWhereInput!]
+  updateMany: [PartyUpdateManyWithWhereNestedInput!]
+}
+
+input PartyUpdateManyWithoutPlaylistInput {
+  create: [PartyCreateWithoutPlaylistInput!]
+  delete: [PartyWhereUniqueInput!]
+  connect: [PartyWhereUniqueInput!]
+  set: [PartyWhereUniqueInput!]
+  disconnect: [PartyWhereUniqueInput!]
+  update: [PartyUpdateWithWhereUniqueWithoutPlaylistInput!]
+  upsert: [PartyUpsertWithWhereUniqueWithoutPlaylistInput!]
   deleteMany: [PartyScalarWhereInput!]
   updateMany: [PartyUpdateManyWithWhereNestedInput!]
 }
@@ -2737,11 +2758,22 @@ input PartyUpdateWithoutMembersDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
+  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
 }
 
-input PartyUpdateWithWhereUniqueNestedInput {
-  where: PartyWhereUniqueInput!
-  data: PartyUpdateDataInput!
+input PartyUpdateWithoutPlaylistDataInput {
+  title: String
+  normalizedTitle: String
+  description: String
+  author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
+  games: GameUpdateManyInput
+  colorTint: String
+  isPublic: Boolean
+  members: UserUpdateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
+  inviteSecret: String
 }
 
 input PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -2749,13 +2781,12 @@ input PartyUpdateWithWhereUniqueWithoutMembersInput {
   data: PartyUpdateWithoutMembersDataInput!
 }
 
-input PartyUpsertNestedInput {
-  update: PartyUpdateDataInput!
-  create: PartyCreateInput!
+input PartyUpdateWithWhereUniqueWithoutPlaylistInput {
+  where: PartyWhereUniqueInput!
+  data: PartyUpdateWithoutPlaylistDataInput!
 }
 
-input PartyUpsertWithWhereUniqueNestedInput {
-  where: PartyWhereUniqueInput!
+input PartyUpsertNestedInput {
   update: PartyUpdateDataInput!
   create: PartyCreateInput!
 }
@@ -2764,6 +2795,12 @@ input PartyUpsertWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput!
   update: PartyUpdateWithoutMembersDataInput!
   create: PartyCreateWithoutMembersInput!
+}
+
+input PartyUpsertWithWhereUniqueWithoutPlaylistInput {
+  where: PartyWhereUniqueInput!
+  update: PartyUpdateWithoutPlaylistDataInput!
+  create: PartyCreateWithoutPlaylistInput!
 }
 
 input PartyWhereInput {
@@ -2893,6 +2930,7 @@ input PartyWhereInput {
   inviteSecret_not_starts_with: String
   inviteSecret_ends_with: String
   inviteSecret_not_ends_with: String
+  playlist: PlaylistWhereInput
   AND: [PartyWhereInput!]
   OR: [PartyWhereInput!]
   NOT: [PartyWhereInput!]
@@ -2925,7 +2963,21 @@ input PlaylistCreateInput {
   id: ID
   playlist_id: String
   user: UserCreateOneInput!
-  parties: PartyCreateManyInput
+  parties: PartyCreateManyWithoutPlaylistInput
+  name: String!
+  tracks: TrackCreateManyInput
+  isTemporary: Boolean
+}
+
+input PlaylistCreateOneWithoutPartiesInput {
+  create: PlaylistCreateWithoutPartiesInput
+  connect: PlaylistWhereUniqueInput
+}
+
+input PlaylistCreateWithoutPartiesInput {
+  id: ID
+  playlist_id: String
+  user: UserCreateOneInput!
   name: String!
   tracks: TrackCreateManyInput
   isTemporary: Boolean
@@ -2981,7 +3033,7 @@ input PlaylistSubscriptionWhereInput {
 input PlaylistUpdateInput {
   playlist_id: String
   user: UserUpdateOneRequiredInput
-  parties: PartyUpdateManyInput
+  parties: PartyUpdateManyWithoutPlaylistInput
   name: String
   tracks: TrackUpdateManyInput
   isTemporary: Boolean
@@ -2991,6 +3043,26 @@ input PlaylistUpdateManyMutationInput {
   playlist_id: String
   name: String
   isTemporary: Boolean
+}
+
+input PlaylistUpdateOneRequiredWithoutPartiesInput {
+  create: PlaylistCreateWithoutPartiesInput
+  update: PlaylistUpdateWithoutPartiesDataInput
+  upsert: PlaylistUpsertWithoutPartiesInput
+  connect: PlaylistWhereUniqueInput
+}
+
+input PlaylistUpdateWithoutPartiesDataInput {
+  playlist_id: String
+  user: UserUpdateOneRequiredInput
+  name: String
+  tracks: TrackUpdateManyInput
+  isTemporary: Boolean
+}
+
+input PlaylistUpsertWithoutPartiesInput {
+  update: PlaylistUpdateWithoutPartiesDataInput!
+  create: PlaylistCreateWithoutPartiesInput!
 }
 
 input PlaylistWhereInput {
@@ -5825,15 +5897,16 @@ export interface PartyCreateInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret: String
-}
-
-export interface PartyCreateManyInput {
-  create?: PartyCreateInput[] | PartyCreateInput | null
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  playlist: PlaylistCreateOneWithoutPartiesInput
 }
 
 export interface PartyCreateManyWithoutMembersInput {
   create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput | null
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+}
+
+export interface PartyCreateManyWithoutPlaylistInput {
+  create?: PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput | null
   connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
 }
 
@@ -5852,6 +5925,23 @@ export interface PartyCreateWithoutMembersInput {
   games?: GameCreateManyInput | null
   colorTint: String
   isPublic?: Boolean | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret: String
+  playlist: PlaylistCreateOneWithoutPartiesInput
+}
+
+export interface PartyCreateWithoutPlaylistInput {
+  id?: ID_Input | null
+  title: String
+  normalizedTitle: String
+  description: String
+  author: UserCreateOneInput
+  location: LocationCreateOneInput
+  games?: GameCreateManyInput | null
+  colorTint: String
+  isPublic?: Boolean | null
+  members?: UserCreateManyWithoutPartiesInput | null
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret: String
@@ -6210,6 +6300,7 @@ export interface PartyUpdateDataInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret?: String | null
+  playlist?: PlaylistUpdateOneRequiredWithoutPartiesInput | null
 }
 
 export interface PartyUpdateInput {
@@ -6225,6 +6316,7 @@ export interface PartyUpdateInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret?: String | null
+  playlist?: PlaylistUpdateOneRequiredWithoutPartiesInput | null
 }
 
 export interface PartyUpdateManyDataInput {
@@ -6236,18 +6328,6 @@ export interface PartyUpdateManyDataInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret?: String | null
-}
-
-export interface PartyUpdateManyInput {
-  create?: PartyCreateInput[] | PartyCreateInput | null
-  update?: PartyUpdateWithWhereUniqueNestedInput[] | PartyUpdateWithWhereUniqueNestedInput | null
-  upsert?: PartyUpsertWithWhereUniqueNestedInput[] | PartyUpsertWithWhereUniqueNestedInput | null
-  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
-  set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
-  disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
-  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
-  updateMany?: PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput | null
 }
 
 export interface PartyUpdateManyMutationInput {
@@ -6269,6 +6349,18 @@ export interface PartyUpdateManyWithoutMembersInput {
   disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
   update?: PartyUpdateWithWhereUniqueWithoutMembersInput[] | PartyUpdateWithWhereUniqueWithoutMembersInput | null
   upsert?: PartyUpsertWithWhereUniqueWithoutMembersInput[] | PartyUpsertWithWhereUniqueWithoutMembersInput | null
+  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
+  updateMany?: PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput | null
+}
+
+export interface PartyUpdateManyWithoutPlaylistInput {
+  create?: PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput | null
+  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput | null
+  update?: PartyUpdateWithWhereUniqueWithoutPlaylistInput[] | PartyUpdateWithWhereUniqueWithoutPlaylistInput | null
+  upsert?: PartyUpsertWithWhereUniqueWithoutPlaylistInput[] | PartyUpsertWithWhereUniqueWithoutPlaylistInput | null
   deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput | null
   updateMany?: PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput | null
 }
@@ -6297,11 +6389,22 @@ export interface PartyUpdateWithoutMembersDataInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret?: String | null
+  playlist?: PlaylistUpdateOneRequiredWithoutPartiesInput | null
 }
 
-export interface PartyUpdateWithWhereUniqueNestedInput {
-  where: PartyWhereUniqueInput
-  data: PartyUpdateDataInput
+export interface PartyUpdateWithoutPlaylistDataInput {
+  title?: String | null
+  normalizedTitle?: String | null
+  description?: String | null
+  author?: UserUpdateOneRequiredInput | null
+  location?: LocationUpdateOneRequiredInput | null
+  games?: GameUpdateManyInput | null
+  colorTint?: String | null
+  isPublic?: Boolean | null
+  members?: UserUpdateManyWithoutPartiesInput | null
+  start?: DateTime | null
+  end?: DateTime | null
+  inviteSecret?: String | null
 }
 
 export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -6309,13 +6412,12 @@ export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
   data: PartyUpdateWithoutMembersDataInput
 }
 
-export interface PartyUpsertNestedInput {
-  update: PartyUpdateDataInput
-  create: PartyCreateInput
+export interface PartyUpdateWithWhereUniqueWithoutPlaylistInput {
+  where: PartyWhereUniqueInput
+  data: PartyUpdateWithoutPlaylistDataInput
 }
 
-export interface PartyUpsertWithWhereUniqueNestedInput {
-  where: PartyWhereUniqueInput
+export interface PartyUpsertNestedInput {
   update: PartyUpdateDataInput
   create: PartyCreateInput
 }
@@ -6324,6 +6426,12 @@ export interface PartyUpsertWithWhereUniqueWithoutMembersInput {
   where: PartyWhereUniqueInput
   update: PartyUpdateWithoutMembersDataInput
   create: PartyCreateWithoutMembersInput
+}
+
+export interface PartyUpsertWithWhereUniqueWithoutPlaylistInput {
+  where: PartyWhereUniqueInput
+  update: PartyUpdateWithoutPlaylistDataInput
+  create: PartyCreateWithoutPlaylistInput
 }
 
 export interface PartyWhereInput {
@@ -6453,6 +6561,7 @@ export interface PartyWhereInput {
   inviteSecret_not_starts_with?: String | null
   inviteSecret_ends_with?: String | null
   inviteSecret_not_ends_with?: String | null
+  playlist?: PlaylistWhereInput | null
   AND?: PartyWhereInput[] | PartyWhereInput | null
   OR?: PartyWhereInput[] | PartyWhereInput | null
   NOT?: PartyWhereInput[] | PartyWhereInput | null
@@ -6467,7 +6576,21 @@ export interface PlaylistCreateInput {
   id?: ID_Input | null
   playlist_id?: String | null
   user: UserCreateOneInput
-  parties?: PartyCreateManyInput | null
+  parties?: PartyCreateManyWithoutPlaylistInput | null
+  name: String
+  tracks?: TrackCreateManyInput | null
+  isTemporary?: Boolean | null
+}
+
+export interface PlaylistCreateOneWithoutPartiesInput {
+  create?: PlaylistCreateWithoutPartiesInput | null
+  connect?: PlaylistWhereUniqueInput | null
+}
+
+export interface PlaylistCreateWithoutPartiesInput {
+  id?: ID_Input | null
+  playlist_id?: String | null
+  user: UserCreateOneInput
   name: String
   tracks?: TrackCreateManyInput | null
   isTemporary?: Boolean | null
@@ -6487,7 +6610,7 @@ export interface PlaylistSubscriptionWhereInput {
 export interface PlaylistUpdateInput {
   playlist_id?: String | null
   user?: UserUpdateOneRequiredInput | null
-  parties?: PartyUpdateManyInput | null
+  parties?: PartyUpdateManyWithoutPlaylistInput | null
   name?: String | null
   tracks?: TrackUpdateManyInput | null
   isTemporary?: Boolean | null
@@ -6497,6 +6620,26 @@ export interface PlaylistUpdateManyMutationInput {
   playlist_id?: String | null
   name?: String | null
   isTemporary?: Boolean | null
+}
+
+export interface PlaylistUpdateOneRequiredWithoutPartiesInput {
+  create?: PlaylistCreateWithoutPartiesInput | null
+  update?: PlaylistUpdateWithoutPartiesDataInput | null
+  upsert?: PlaylistUpsertWithoutPartiesInput | null
+  connect?: PlaylistWhereUniqueInput | null
+}
+
+export interface PlaylistUpdateWithoutPartiesDataInput {
+  playlist_id?: String | null
+  user?: UserUpdateOneRequiredInput | null
+  name?: String | null
+  tracks?: TrackUpdateManyInput | null
+  isTemporary?: Boolean | null
+}
+
+export interface PlaylistUpsertWithoutPartiesInput {
+  update: PlaylistUpdateWithoutPartiesDataInput
+  create: PlaylistCreateWithoutPartiesInput
 }
 
 export interface PlaylistWhereInput {
@@ -7866,6 +8009,7 @@ export interface Party {
   start: DateTime
   end: DateTime
   inviteSecret: String
+  playlist: Playlist
 }
 
 export interface PartyCart {

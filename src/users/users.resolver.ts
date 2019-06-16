@@ -21,7 +21,7 @@ import { MailerService } from '@nest-modules/mailer';
 import { GraphQLError } from 'graphql';
 
 function getResetPasswordRoute(resetToken: string) {
-  return `${process.env.WEB_URL}/reset-password?token=${resetToken}`;
+  return `${process.env.WEB_URL}/reset-password/${resetToken}`;
 }
 
 @Resolver()

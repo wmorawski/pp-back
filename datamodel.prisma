@@ -87,11 +87,32 @@ type Location {
 
 type Playlist {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   playlist_id: String @unique
+  user: User!
+  parties: [Party!]!
   name: String!
   tracks: [Track!]!
   isTemporary: Boolean @default(value: true)
 }
+
+type PartyCart {
+  id: ID! @id
+  party: Party!
+  items: [PartyCartItem!]!
+}
+
+type PartyCartItem {
+  id: ID! @id
+  cart: PartyCart!
+  user: User
+  name: String!
+  description: String!
+  price: Float!
+  quantity: Int! @default(value: 0)
+}
+
 type Track {
   id: ID! @id
   name: String!

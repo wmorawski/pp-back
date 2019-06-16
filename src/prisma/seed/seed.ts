@@ -45,7 +45,7 @@ const createFakeParty = (author: any, members: any[]): PartyCreateInput => {
   const partyTitle = faker.lorem.slug();
   return {
     title: partyTitle,
-    normalizedTitle: partyTitle.toLowerCase(),
+    normalizedTitle: partyTitle.toLowerCase().replace(/[ -.,]/g, ''),
     author: {
       connect: {
         id: author.id,

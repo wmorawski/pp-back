@@ -1760,7 +1760,7 @@ type Party {
   start: DateTime!
   end: DateTime!
   inviteSecret: String!
-  playlist: Playlist!
+  playlist: Playlist
 }
 
 type PartyCart {
@@ -2169,7 +2169,7 @@ input PartyCreateInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-  playlist: PlaylistCreateOneWithoutPartiesInput!
+  playlist: PlaylistCreateOneWithoutPartiesInput
 }
 
 input PartyCreateManyWithoutMembersInput {
@@ -2200,7 +2200,7 @@ input PartyCreateWithoutMembersInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-  playlist: PlaylistCreateOneWithoutPartiesInput!
+  playlist: PlaylistCreateOneWithoutPartiesInput
 }
 
 input PartyCreateWithoutPlaylistInput {
@@ -2669,7 +2669,7 @@ input PartyUpdateDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
+  playlist: PlaylistUpdateOneWithoutPartiesInput
 }
 
 input PartyUpdateInput {
@@ -2685,7 +2685,7 @@ input PartyUpdateInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
+  playlist: PlaylistUpdateOneWithoutPartiesInput
 }
 
 input PartyUpdateManyDataInput {
@@ -2758,7 +2758,7 @@ input PartyUpdateWithoutMembersDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneRequiredWithoutPartiesInput
+  playlist: PlaylistUpdateOneWithoutPartiesInput
 }
 
 input PartyUpdateWithoutPlaylistDataInput {
@@ -3045,10 +3045,12 @@ input PlaylistUpdateManyMutationInput {
   isTemporary: Boolean
 }
 
-input PlaylistUpdateOneRequiredWithoutPartiesInput {
+input PlaylistUpdateOneWithoutPartiesInput {
   create: PlaylistCreateWithoutPartiesInput
   update: PlaylistUpdateWithoutPartiesDataInput
   upsert: PlaylistUpsertWithoutPartiesInput
+  delete: Boolean
+  disconnect: Boolean
   connect: PlaylistWhereUniqueInput
 }
 
@@ -5897,7 +5899,7 @@ export interface PartyCreateInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret: String
-  playlist: PlaylistCreateOneWithoutPartiesInput
+  playlist?: PlaylistCreateOneWithoutPartiesInput | null
 }
 
 export interface PartyCreateManyWithoutMembersInput {
@@ -5928,7 +5930,7 @@ export interface PartyCreateWithoutMembersInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret: String
-  playlist: PlaylistCreateOneWithoutPartiesInput
+  playlist?: PlaylistCreateOneWithoutPartiesInput | null
 }
 
 export interface PartyCreateWithoutPlaylistInput {
@@ -6300,7 +6302,7 @@ export interface PartyUpdateDataInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret?: String | null
-  playlist?: PlaylistUpdateOneRequiredWithoutPartiesInput | null
+  playlist?: PlaylistUpdateOneWithoutPartiesInput | null
 }
 
 export interface PartyUpdateInput {
@@ -6316,7 +6318,7 @@ export interface PartyUpdateInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret?: String | null
-  playlist?: PlaylistUpdateOneRequiredWithoutPartiesInput | null
+  playlist?: PlaylistUpdateOneWithoutPartiesInput | null
 }
 
 export interface PartyUpdateManyDataInput {
@@ -6389,7 +6391,7 @@ export interface PartyUpdateWithoutMembersDataInput {
   start?: DateTime | null
   end?: DateTime | null
   inviteSecret?: String | null
-  playlist?: PlaylistUpdateOneRequiredWithoutPartiesInput | null
+  playlist?: PlaylistUpdateOneWithoutPartiesInput | null
 }
 
 export interface PartyUpdateWithoutPlaylistDataInput {
@@ -6622,10 +6624,12 @@ export interface PlaylistUpdateManyMutationInput {
   isTemporary?: Boolean | null
 }
 
-export interface PlaylistUpdateOneRequiredWithoutPartiesInput {
+export interface PlaylistUpdateOneWithoutPartiesInput {
   create?: PlaylistCreateWithoutPartiesInput | null
   update?: PlaylistUpdateWithoutPartiesDataInput | null
   upsert?: PlaylistUpsertWithoutPartiesInput | null
+  delete?: Boolean | null
+  disconnect?: Boolean | null
   connect?: PlaylistWhereUniqueInput | null
 }
 
@@ -8009,7 +8013,7 @@ export interface Party {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: Playlist
+  playlist?: Playlist | null
 }
 
 export interface PartyCart {

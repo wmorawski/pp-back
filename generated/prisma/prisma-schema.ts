@@ -1574,6 +1574,7 @@ type Party {
   end: DateTime!
   inviteSecret: String!
   playlist: Playlist
+  cart: PartyCart
 }
 
 type PartyCart {
@@ -1590,7 +1591,7 @@ type PartyCartConnection {
 
 input PartyCartCreateInput {
   id: ID
-  party: PartyCreateOneInput!
+  party: PartyCreateOneWithoutCartInput!
   items: PartyCartItemCreateManyWithoutCartInput
 }
 
@@ -1599,9 +1600,19 @@ input PartyCartCreateOneWithoutItemsInput {
   connect: PartyCartWhereUniqueInput
 }
 
+input PartyCartCreateOneWithoutPartyInput {
+  create: PartyCartCreateWithoutPartyInput
+  connect: PartyCartWhereUniqueInput
+}
+
 input PartyCartCreateWithoutItemsInput {
   id: ID
-  party: PartyCreateOneInput!
+  party: PartyCreateOneWithoutCartInput!
+}
+
+input PartyCartCreateWithoutPartyInput {
+  id: ID
+  items: PartyCartItemCreateManyWithoutCartInput
 }
 
 type PartyCartEdge {
@@ -1914,7 +1925,7 @@ input PartyCartSubscriptionWhereInput {
 }
 
 input PartyCartUpdateInput {
-  party: PartyUpdateOneRequiredInput
+  party: PartyUpdateOneRequiredWithoutCartInput
   items: PartyCartItemUpdateManyWithoutCartInput
 }
 
@@ -1925,13 +1936,31 @@ input PartyCartUpdateOneRequiredWithoutItemsInput {
   connect: PartyCartWhereUniqueInput
 }
 
+input PartyCartUpdateOneWithoutPartyInput {
+  create: PartyCartCreateWithoutPartyInput
+  update: PartyCartUpdateWithoutPartyDataInput
+  upsert: PartyCartUpsertWithoutPartyInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: PartyCartWhereUniqueInput
+}
+
 input PartyCartUpdateWithoutItemsDataInput {
-  party: PartyUpdateOneRequiredInput
+  party: PartyUpdateOneRequiredWithoutCartInput
+}
+
+input PartyCartUpdateWithoutPartyDataInput {
+  items: PartyCartItemUpdateManyWithoutCartInput
 }
 
 input PartyCartUpsertWithoutItemsInput {
   update: PartyCartUpdateWithoutItemsDataInput!
   create: PartyCartCreateWithoutItemsInput!
+}
+
+input PartyCartUpsertWithoutPartyInput {
+  update: PartyCartUpdateWithoutPartyDataInput!
+  create: PartyCartCreateWithoutPartyInput!
 }
 
 input PartyCartWhereInput {
@@ -1983,6 +2012,7 @@ input PartyCreateInput {
   end: DateTime
   inviteSecret: String!
   playlist: PlaylistCreateOneWithoutPartiesInput
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 input PartyCreateManyWithoutMembersInput {
@@ -2000,6 +2030,28 @@ input PartyCreateOneInput {
   connect: PartyWhereUniqueInput
 }
 
+input PartyCreateOneWithoutCartInput {
+  create: PartyCreateWithoutCartInput
+  connect: PartyWhereUniqueInput
+}
+
+input PartyCreateWithoutCartInput {
+  id: ID
+  title: String!
+  normalizedTitle: String!
+  description: String!
+  author: UserCreateOneInput!
+  location: LocationCreateOneInput!
+  games: GameCreateManyInput
+  colorTint: String!
+  isPublic: Boolean
+  members: UserCreateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
+  inviteSecret: String!
+  playlist: PlaylistCreateOneWithoutPartiesInput
+}
+
 input PartyCreateWithoutMembersInput {
   id: ID
   title: String!
@@ -2014,6 +2066,7 @@ input PartyCreateWithoutMembersInput {
   end: DateTime
   inviteSecret: String!
   playlist: PlaylistCreateOneWithoutPartiesInput
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 input PartyCreateWithoutPlaylistInput {
@@ -2030,6 +2083,7 @@ input PartyCreateWithoutPlaylistInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 type PartyEdge {
@@ -2483,6 +2537,7 @@ input PartyUpdateDataInput {
   end: DateTime
   inviteSecret: String
   playlist: PlaylistUpdateOneWithoutPartiesInput
+  cart: PartyCartUpdateOneWithoutPartyInput
 }
 
 input PartyUpdateInput {
@@ -2499,6 +2554,7 @@ input PartyUpdateInput {
   end: DateTime
   inviteSecret: String
   playlist: PlaylistUpdateOneWithoutPartiesInput
+  cart: PartyCartUpdateOneWithoutPartyInput
 }
 
 input PartyUpdateManyDataInput {
@@ -2559,6 +2615,29 @@ input PartyUpdateOneRequiredInput {
   connect: PartyWhereUniqueInput
 }
 
+input PartyUpdateOneRequiredWithoutCartInput {
+  create: PartyCreateWithoutCartInput
+  update: PartyUpdateWithoutCartDataInput
+  upsert: PartyUpsertWithoutCartInput
+  connect: PartyWhereUniqueInput
+}
+
+input PartyUpdateWithoutCartDataInput {
+  title: String
+  normalizedTitle: String
+  description: String
+  author: UserUpdateOneRequiredInput
+  location: LocationUpdateOneRequiredInput
+  games: GameUpdateManyInput
+  colorTint: String
+  isPublic: Boolean
+  members: UserUpdateManyWithoutPartiesInput
+  start: DateTime
+  end: DateTime
+  inviteSecret: String
+  playlist: PlaylistUpdateOneWithoutPartiesInput
+}
+
 input PartyUpdateWithoutMembersDataInput {
   title: String
   normalizedTitle: String
@@ -2572,6 +2651,7 @@ input PartyUpdateWithoutMembersDataInput {
   end: DateTime
   inviteSecret: String
   playlist: PlaylistUpdateOneWithoutPartiesInput
+  cart: PartyCartUpdateOneWithoutPartyInput
 }
 
 input PartyUpdateWithoutPlaylistDataInput {
@@ -2587,6 +2667,7 @@ input PartyUpdateWithoutPlaylistDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
+  cart: PartyCartUpdateOneWithoutPartyInput
 }
 
 input PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -2602,6 +2683,11 @@ input PartyUpdateWithWhereUniqueWithoutPlaylistInput {
 input PartyUpsertNestedInput {
   update: PartyUpdateDataInput!
   create: PartyCreateInput!
+}
+
+input PartyUpsertWithoutCartInput {
+  update: PartyUpdateWithoutCartDataInput!
+  create: PartyCreateWithoutCartInput!
 }
 
 input PartyUpsertWithWhereUniqueWithoutMembersInput {
@@ -2744,6 +2830,7 @@ input PartyWhereInput {
   inviteSecret_ends_with: String
   inviteSecret_not_ends_with: String
   playlist: PlaylistWhereInput
+  cart: PartyCartWhereInput
   AND: [PartyWhereInput!]
   OR: [PartyWhereInput!]
   NOT: [PartyWhereInput!]

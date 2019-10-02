@@ -10,6 +10,7 @@ import {
   AuthPayload,
   JwtPayload,
   SignupPayload,
+  SocialLoginPayload,
 } from './auth.types';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
@@ -77,6 +78,24 @@ export class AuthService {
     if (!passwordValid) {
       throw new UnauthorizedException('Invalid password');
     }
+    return user;
+  }
+
+  async socialLogin(payload: SocialLoginPayload): Promise<User> {
+    const [user] = await this.prisma.query.users({
+      where: { thirdPartyId: payload.id },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException(`ERR_SIGNIN_SOCIAL_USER_NOT_FOUIND`);
+    }
+
+    if (user.provider) {
+      throw new InternalServerErrorException(
+        `You already logged with this email using ${user.provider}`,
+      );
+    }
+
     return user;
   }
   async validateOAuthLogin(payload: SignupPayload): Promise<string> {

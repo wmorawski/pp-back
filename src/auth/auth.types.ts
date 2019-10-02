@@ -37,6 +37,10 @@ export interface LoginPayload {
   password: string;
 }
 
+export interface SocialLoginPayload {
+  id: string;
+}
+
 export interface AuthPayload {
   token: string;
   user: User;

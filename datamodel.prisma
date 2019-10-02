@@ -57,6 +57,7 @@ type Party {
   end: DateTime! @default(value: "1970-01-01T00:00:01")
   inviteSecret: String! @unique
   playlist: Playlist
+  cart: PartyCart @relation(link: INLINE)
 }
 
 type Chat {

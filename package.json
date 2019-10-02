@@ -41,6 +41,7 @@
     "@nestjs/platform-fastify": "^6.0.2",
     "@nestjs/swagger": "^2.5.1",
     "@nestjs/websockets": "^5.4.0",
+    "@sendgrid/mail": "^6.4.0",
     "@types/dotenv": "^6.1.0",
     "@types/passport-twitter": "^1.0.34",
     "apollo-server-express": "^2.4.8",

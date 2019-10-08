@@ -27,7 +27,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "update:prisma": "prisma deploy",
     "update:graphql": "graphql get-schema --project database && graphql codegen --project database",
-    "update": "npm run update:prisma && npm run update:graphql"
+    "update": "npm run update:prisma && npm run update:graphql",
+    "dev": "source development.env && export $(cut -d= -f1 development.env) && npm run start:dev"
   },
   "dependencies": {
     "@nest-middlewares/express-session": "^5.1.1",

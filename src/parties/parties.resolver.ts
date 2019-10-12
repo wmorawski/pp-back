@@ -1,7 +1,10 @@
+import { PartySavedTrackConnection } from './../prisma/prisma.binding';
+
 import {
   Party,
   PartyConnection,
   PartyCreateInput,
+  PartySavedTrack,
 } from '../prisma/prisma.binding';
 import {
   Resolver,
@@ -52,6 +55,10 @@ export class PartiesResolver {
   @Mutation('deletePartyInvitation')
   async deletePartyInvitation(@Args() args, @Info() info) {
     return this.prisma.mutation.deletePartyInvitation(args, info);
+  }
+  @Mutation('createPartySavedTrack')
+  async createPartySavedTrack(@Args() args, @Info() info) {
+    return this.prisma.mutation.createPartySavedTrack(args, info);
   }
   // TODO:
   // THIS IS REALLY REALLY BAD, USE RAW DB QUERY HERE OR SOMETHING
@@ -153,6 +160,15 @@ export class PartiesResolver {
     });
   }
 
+  @Query('partySavedTracksConnection')
+  @UseGuards(GqlAuthGuard)
+  async PartySavedTracksConnection(
+    @Args() args,
+    @Info() info,
+  ): Promise<PartySavedTrackConnection> {
+    return await this.prisma.query.partySavedTracksConnection(args, info);
+  }
+
   @Query('partiesConnection')
   async PartiesConnection(
     @Args() args,
@@ -169,6 +185,7 @@ export class PartiesResolver {
       },
     };
   }
+
   @Subscription('party')
   onPartyUpdated() {
     return {

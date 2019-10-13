@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Sat Oct 12 2019 08:42:26 GMT+0200 (Central European Summer Time)
+# timestamp: Sun Oct 13 2019 20:23:27 GMT+0200 (Central European Summer Time)
 
 type AggregateAlbum {
   count: Int!
@@ -4283,9 +4283,11 @@ type PartySavedTrack implements Node {
   party: Party!
   imageUrl: String!
   artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
   votedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -4306,9 +4308,11 @@ input PartySavedTrackCreateInput {
   spotifyId: String!
   name: String!
   imageUrl: String!
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
   party: PartyCreateOneWithoutSavedTracksInput!
@@ -4326,9 +4330,11 @@ input PartySavedTrackCreateWithoutPartyInput {
   spotifyId: String!
   name: String!
   imageUrl: String!
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
   artists: ArtistCreateManyInput
@@ -4353,12 +4359,16 @@ enum PartySavedTrackOrderByInput {
   name_DESC
   imageUrl_ASC
   imageUrl_DESC
-  duration_ASC
-  duration_DESC
+  durationMs_ASC
+  durationMs_DESC
+  length_ASC
+  length_DESC
   preview_url_ASC
   preview_url_DESC
   uri_ASC
   uri_DESC
+  explicit_ASC
+  explicit_DESC
   upVotes_ASC
   upVotes_DESC
   downVotes_ASC
@@ -4370,9 +4380,11 @@ type PartySavedTrackPreviousValues {
   spotifyId: String!
   name: String!
   imageUrl: String!
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
 }
@@ -4546,28 +4558,68 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  duration: Int
+  durationMs: Int
 
   """All values that are not equal to given value."""
-  duration_not: Int
+  durationMs_not: Int
 
   """All values that are contained in given list."""
-  duration_in: [Int!]
+  durationMs_in: [Int!]
 
   """All values that are not contained in given list."""
-  duration_not_in: [Int!]
+  durationMs_not_in: [Int!]
 
   """All values less than the given value."""
-  duration_lt: Int
+  durationMs_lt: Int
 
   """All values less than or equal the given value."""
-  duration_lte: Int
+  durationMs_lte: Int
 
   """All values greater than the given value."""
-  duration_gt: Int
+  durationMs_gt: Int
 
   """All values greater than or equal the given value."""
-  duration_gte: Int
+  durationMs_gte: Int
+  length: String
+
+  """All values that are not equal to given value."""
+  length_not: String
+
+  """All values that are contained in given list."""
+  length_in: [String!]
+
+  """All values that are not contained in given list."""
+  length_not_in: [String!]
+
+  """All values less than the given value."""
+  length_lt: String
+
+  """All values less than or equal the given value."""
+  length_lte: String
+
+  """All values greater than the given value."""
+  length_gt: String
+
+  """All values greater than or equal the given value."""
+  length_gte: String
+
+  """All values containing the given string."""
+  length_contains: String
+
+  """All values not containing the given string."""
+  length_not_contains: String
+
+  """All values starting with the given string."""
+  length_starts_with: String
+
+  """All values not starting with the given string."""
+  length_not_starts_with: String
+
+  """All values ending with the given string."""
+  length_ends_with: String
+
+  """All values not ending with the given string."""
+  length_not_ends_with: String
   preview_url: String
 
   """All values that are not equal to given value."""
@@ -4648,6 +4700,10 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   uri_not_ends_with: String
+  explicit: Boolean
+
+  """All values that are not equal to given value."""
+  explicit_not: Boolean
   upVotes: Int
 
   """All values that are not equal to given value."""
@@ -4737,9 +4793,11 @@ input PartySavedTrackUpdateInput {
   spotifyId: String
   name: String
   imageUrl: String
-  duration: Int
+  durationMs: Int
+  length: String
   preview_url: String
   uri: String
+  explicit: Boolean
   upVotes: Int
   downVotes: Int
   party: PartyUpdateOneRequiredWithoutSavedTracksInput
@@ -4751,9 +4809,11 @@ input PartySavedTrackUpdateManyDataInput {
   spotifyId: String
   name: String
   imageUrl: String
-  duration: Int
+  durationMs: Int
+  length: String
   preview_url: String
   uri: String
+  explicit: Boolean
   upVotes: Int
   downVotes: Int
 }
@@ -4762,9 +4822,11 @@ input PartySavedTrackUpdateManyMutationInput {
   spotifyId: String
   name: String
   imageUrl: String
-  duration: Int
+  durationMs: Int
+  length: String
   preview_url: String
   uri: String
+  explicit: Boolean
   upVotes: Int
   downVotes: Int
 }
@@ -4790,9 +4852,11 @@ input PartySavedTrackUpdateWithoutPartyDataInput {
   spotifyId: String
   name: String
   imageUrl: String
-  duration: Int
+  durationMs: Int
+  length: String
   preview_url: String
   uri: String
+  explicit: Boolean
   upVotes: Int
   downVotes: Int
   artists: ArtistUpdateManyInput
@@ -4979,28 +5043,68 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  duration: Int
+  durationMs: Int
 
   """All values that are not equal to given value."""
-  duration_not: Int
+  durationMs_not: Int
 
   """All values that are contained in given list."""
-  duration_in: [Int!]
+  durationMs_in: [Int!]
 
   """All values that are not contained in given list."""
-  duration_not_in: [Int!]
+  durationMs_not_in: [Int!]
 
   """All values less than the given value."""
-  duration_lt: Int
+  durationMs_lt: Int
 
   """All values less than or equal the given value."""
-  duration_lte: Int
+  durationMs_lte: Int
 
   """All values greater than the given value."""
-  duration_gt: Int
+  durationMs_gt: Int
 
   """All values greater than or equal the given value."""
-  duration_gte: Int
+  durationMs_gte: Int
+  length: String
+
+  """All values that are not equal to given value."""
+  length_not: String
+
+  """All values that are contained in given list."""
+  length_in: [String!]
+
+  """All values that are not contained in given list."""
+  length_not_in: [String!]
+
+  """All values less than the given value."""
+  length_lt: String
+
+  """All values less than or equal the given value."""
+  length_lte: String
+
+  """All values greater than the given value."""
+  length_gt: String
+
+  """All values greater than or equal the given value."""
+  length_gte: String
+
+  """All values containing the given string."""
+  length_contains: String
+
+  """All values not containing the given string."""
+  length_not_contains: String
+
+  """All values starting with the given string."""
+  length_starts_with: String
+
+  """All values not starting with the given string."""
+  length_not_starts_with: String
+
+  """All values ending with the given string."""
+  length_ends_with: String
+
+  """All values not ending with the given string."""
+  length_not_ends_with: String
   preview_url: String
 
   """All values that are not equal to given value."""
@@ -5081,6 +5185,10 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   uri_not_ends_with: String
+  explicit: Boolean
+
+  """All values that are not equal to given value."""
+  explicit_not: Boolean
   upVotes: Int
 
   """All values that are not equal to given value."""

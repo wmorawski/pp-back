@@ -132,9 +132,11 @@ type PartySavedTrack {
   party: Party!
   imageUrl: String!
   artists: [Artist!]!
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
   votedBy: [User!]! @relation(name: "TrackVotedBy")

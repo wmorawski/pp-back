@@ -2496,9 +2496,11 @@ type PartySavedTrack {
   party: Party!
   imageUrl: String!
   artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
   votedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -2517,9 +2519,11 @@ input PartySavedTrackCreateInput {
   party: PartyCreateOneWithoutSavedTracksInput!
   imageUrl: String!
   artists: ArtistCreateManyInput
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
   votedBy: UserCreateManyInput
@@ -2536,9 +2540,11 @@ input PartySavedTrackCreateWithoutPartyInput {
   name: String!
   imageUrl: String!
   artists: ArtistCreateManyInput
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
   votedBy: UserCreateManyInput
@@ -2558,12 +2564,16 @@ enum PartySavedTrackOrderByInput {
   name_DESC
   imageUrl_ASC
   imageUrl_DESC
-  duration_ASC
-  duration_DESC
+  durationMs_ASC
+  durationMs_DESC
+  length_ASC
+  length_DESC
   preview_url_ASC
   preview_url_DESC
   uri_ASC
   uri_DESC
+  explicit_ASC
+  explicit_DESC
   upVotes_ASC
   upVotes_DESC
   downVotes_ASC
@@ -2575,9 +2585,11 @@ type PartySavedTrackPreviousValues {
   spotifyId: String!
   name: String!
   imageUrl: String!
-  duration: Int!
+  durationMs: Int!
+  length: String!
   preview_url: String
   uri: String
+  explicit: Boolean!
   upVotes: Int!
   downVotes: Int!
 }
@@ -2639,14 +2651,28 @@ input PartySavedTrackScalarWhereInput {
   imageUrl_not_starts_with: String
   imageUrl_ends_with: String
   imageUrl_not_ends_with: String
-  duration: Int
-  duration_not: Int
-  duration_in: [Int!]
-  duration_not_in: [Int!]
-  duration_lt: Int
-  duration_lte: Int
-  duration_gt: Int
-  duration_gte: Int
+  durationMs: Int
+  durationMs_not: Int
+  durationMs_in: [Int!]
+  durationMs_not_in: [Int!]
+  durationMs_lt: Int
+  durationMs_lte: Int
+  durationMs_gt: Int
+  durationMs_gte: Int
+  length: String
+  length_not: String
+  length_in: [String!]
+  length_not_in: [String!]
+  length_lt: String
+  length_lte: String
+  length_gt: String
+  length_gte: String
+  length_contains: String
+  length_not_contains: String
+  length_starts_with: String
+  length_not_starts_with: String
+  length_ends_with: String
+  length_not_ends_with: String
   preview_url: String
   preview_url_not: String
   preview_url_in: [String!]
@@ -2675,6 +2701,8 @@ input PartySavedTrackScalarWhereInput {
   uri_not_starts_with: String
   uri_ends_with: String
   uri_not_ends_with: String
+  explicit: Boolean
+  explicit_not: Boolean
   upVotes: Int
   upVotes_not: Int
   upVotes_in: [Int!]
@@ -2720,9 +2748,11 @@ input PartySavedTrackUpdateInput {
   party: PartyUpdateOneRequiredWithoutSavedTracksInput
   imageUrl: String
   artists: ArtistUpdateManyInput
-  duration: Int
+  durationMs: Int
+  length: String
   preview_url: String
   uri: String
+  explicit: Boolean
   upVotes: Int
   downVotes: Int
   votedBy: UserUpdateManyInput
@@ -2732,9 +2762,11 @@ input PartySavedTrackUpdateManyDataInput {
   spotifyId: String
   name: String
   imageUrl: String
-  duration: Int
+  durationMs: Int
+  length: String
   preview_url: String
   uri: String
+  explicit: Boolean
   upVotes: Int
   downVotes: Int
 }
@@ -2743,9 +2775,11 @@ input PartySavedTrackUpdateManyMutationInput {
   spotifyId: String
   name: String
   imageUrl: String
-  duration: Int
+  durationMs: Int
+  length: String
   preview_url: String
   uri: String
+  explicit: Boolean
   upVotes: Int
   downVotes: Int
 }
@@ -2772,9 +2806,11 @@ input PartySavedTrackUpdateWithoutPartyDataInput {
   name: String
   imageUrl: String
   artists: ArtistUpdateManyInput
-  duration: Int
+  durationMs: Int
+  length: String
   preview_url: String
   uri: String
+  explicit: Boolean
   upVotes: Int
   downVotes: Int
   votedBy: UserUpdateManyInput
@@ -2852,14 +2888,28 @@ input PartySavedTrackWhereInput {
   artists_every: ArtistWhereInput
   artists_some: ArtistWhereInput
   artists_none: ArtistWhereInput
-  duration: Int
-  duration_not: Int
-  duration_in: [Int!]
-  duration_not_in: [Int!]
-  duration_lt: Int
-  duration_lte: Int
-  duration_gt: Int
-  duration_gte: Int
+  durationMs: Int
+  durationMs_not: Int
+  durationMs_in: [Int!]
+  durationMs_not_in: [Int!]
+  durationMs_lt: Int
+  durationMs_lte: Int
+  durationMs_gt: Int
+  durationMs_gte: Int
+  length: String
+  length_not: String
+  length_in: [String!]
+  length_not_in: [String!]
+  length_lt: String
+  length_lte: String
+  length_gt: String
+  length_gte: String
+  length_contains: String
+  length_not_contains: String
+  length_starts_with: String
+  length_not_starts_with: String
+  length_ends_with: String
+  length_not_ends_with: String
   preview_url: String
   preview_url_not: String
   preview_url_in: [String!]
@@ -2888,6 +2938,8 @@ input PartySavedTrackWhereInput {
   uri_not_starts_with: String
   uri_ends_with: String
   uri_not_ends_with: String
+  explicit: Boolean
+  explicit_not: Boolean
   upVotes: Int
   upVotes_not: Int
   upVotes_in: [Int!]

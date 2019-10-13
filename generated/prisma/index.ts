@@ -670,12 +670,16 @@ export type PartySavedTrackOrderByInput =
   | "name_DESC"
   | "imageUrl_ASC"
   | "imageUrl_DESC"
-  | "duration_ASC"
-  | "duration_DESC"
+  | "durationMs_ASC"
+  | "durationMs_DESC"
+  | "length_ASC"
+  | "length_DESC"
   | "preview_url_ASC"
   | "preview_url_DESC"
   | "uri_ASC"
   | "uri_DESC"
+  | "explicit_ASC"
+  | "explicit_DESC"
   | "upVotes_ASC"
   | "upVotes_DESC"
   | "downVotes_ASC"
@@ -1149,9 +1153,11 @@ export interface PartySavedTrackCreateWithoutPartyInput {
   name: String;
   imageUrl: String;
   artists?: Maybe<ArtistCreateManyInput>;
-  duration: Int;
+  durationMs: Int;
+  length: String;
   preview_url?: Maybe<String>;
   uri?: Maybe<String>;
+  explicit: Boolean;
   upVotes: Int;
   downVotes: Int;
   votedBy?: Maybe<UserCreateManyInput>;
@@ -1501,14 +1507,28 @@ export interface PartySavedTrackWhereInput {
   artists_every?: Maybe<ArtistWhereInput>;
   artists_some?: Maybe<ArtistWhereInput>;
   artists_none?: Maybe<ArtistWhereInput>;
-  duration?: Maybe<Int>;
-  duration_not?: Maybe<Int>;
-  duration_in?: Maybe<Int[] | Int>;
-  duration_not_in?: Maybe<Int[] | Int>;
-  duration_lt?: Maybe<Int>;
-  duration_lte?: Maybe<Int>;
-  duration_gt?: Maybe<Int>;
-  duration_gte?: Maybe<Int>;
+  durationMs?: Maybe<Int>;
+  durationMs_not?: Maybe<Int>;
+  durationMs_in?: Maybe<Int[] | Int>;
+  durationMs_not_in?: Maybe<Int[] | Int>;
+  durationMs_lt?: Maybe<Int>;
+  durationMs_lte?: Maybe<Int>;
+  durationMs_gt?: Maybe<Int>;
+  durationMs_gte?: Maybe<Int>;
+  length?: Maybe<String>;
+  length_not?: Maybe<String>;
+  length_in?: Maybe<String[] | String>;
+  length_not_in?: Maybe<String[] | String>;
+  length_lt?: Maybe<String>;
+  length_lte?: Maybe<String>;
+  length_gt?: Maybe<String>;
+  length_gte?: Maybe<String>;
+  length_contains?: Maybe<String>;
+  length_not_contains?: Maybe<String>;
+  length_starts_with?: Maybe<String>;
+  length_not_starts_with?: Maybe<String>;
+  length_ends_with?: Maybe<String>;
+  length_not_ends_with?: Maybe<String>;
   preview_url?: Maybe<String>;
   preview_url_not?: Maybe<String>;
   preview_url_in?: Maybe<String[] | String>;
@@ -1537,6 +1557,8 @@ export interface PartySavedTrackWhereInput {
   uri_not_starts_with?: Maybe<String>;
   uri_ends_with?: Maybe<String>;
   uri_not_ends_with?: Maybe<String>;
+  explicit?: Maybe<Boolean>;
+  explicit_not?: Maybe<Boolean>;
   upVotes?: Maybe<Int>;
   upVotes_not?: Maybe<Int>;
   upVotes_in?: Maybe<Int[] | Int>;
@@ -2023,9 +2045,11 @@ export interface PartySavedTrackUpdateInput {
   party?: Maybe<PartyUpdateOneRequiredWithoutSavedTracksInput>;
   imageUrl?: Maybe<String>;
   artists?: Maybe<ArtistUpdateManyInput>;
-  duration?: Maybe<Int>;
+  durationMs?: Maybe<Int>;
+  length?: Maybe<String>;
   preview_url?: Maybe<String>;
   uri?: Maybe<String>;
+  explicit?: Maybe<Boolean>;
   upVotes?: Maybe<Int>;
   downVotes?: Maybe<Int>;
   votedBy?: Maybe<UserUpdateManyInput>;
@@ -2068,9 +2092,11 @@ export interface PartySavedTrackCreateInput {
   party: PartyCreateOneWithoutSavedTracksInput;
   imageUrl: String;
   artists?: Maybe<ArtistCreateManyInput>;
-  duration: Int;
+  durationMs: Int;
+  length: String;
   preview_url?: Maybe<String>;
   uri?: Maybe<String>;
+  explicit: Boolean;
   upVotes: Int;
   downVotes: Int;
   votedBy?: Maybe<UserCreateManyInput>;
@@ -2784,9 +2810,11 @@ export interface PartySavedTrackUpdateWithoutPartyDataInput {
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
   artists?: Maybe<ArtistUpdateManyInput>;
-  duration?: Maybe<Int>;
+  durationMs?: Maybe<Int>;
+  length?: Maybe<String>;
   preview_url?: Maybe<String>;
   uri?: Maybe<String>;
+  explicit?: Maybe<Boolean>;
   upVotes?: Maybe<Int>;
   downVotes?: Maybe<Int>;
   votedBy?: Maybe<UserUpdateManyInput>;
@@ -3103,14 +3131,28 @@ export interface PartySavedTrackScalarWhereInput {
   imageUrl_not_starts_with?: Maybe<String>;
   imageUrl_ends_with?: Maybe<String>;
   imageUrl_not_ends_with?: Maybe<String>;
-  duration?: Maybe<Int>;
-  duration_not?: Maybe<Int>;
-  duration_in?: Maybe<Int[] | Int>;
-  duration_not_in?: Maybe<Int[] | Int>;
-  duration_lt?: Maybe<Int>;
-  duration_lte?: Maybe<Int>;
-  duration_gt?: Maybe<Int>;
-  duration_gte?: Maybe<Int>;
+  durationMs?: Maybe<Int>;
+  durationMs_not?: Maybe<Int>;
+  durationMs_in?: Maybe<Int[] | Int>;
+  durationMs_not_in?: Maybe<Int[] | Int>;
+  durationMs_lt?: Maybe<Int>;
+  durationMs_lte?: Maybe<Int>;
+  durationMs_gt?: Maybe<Int>;
+  durationMs_gte?: Maybe<Int>;
+  length?: Maybe<String>;
+  length_not?: Maybe<String>;
+  length_in?: Maybe<String[] | String>;
+  length_not_in?: Maybe<String[] | String>;
+  length_lt?: Maybe<String>;
+  length_lte?: Maybe<String>;
+  length_gt?: Maybe<String>;
+  length_gte?: Maybe<String>;
+  length_contains?: Maybe<String>;
+  length_not_contains?: Maybe<String>;
+  length_starts_with?: Maybe<String>;
+  length_not_starts_with?: Maybe<String>;
+  length_ends_with?: Maybe<String>;
+  length_not_ends_with?: Maybe<String>;
   preview_url?: Maybe<String>;
   preview_url_not?: Maybe<String>;
   preview_url_in?: Maybe<String[] | String>;
@@ -3139,6 +3181,8 @@ export interface PartySavedTrackScalarWhereInput {
   uri_not_starts_with?: Maybe<String>;
   uri_ends_with?: Maybe<String>;
   uri_not_ends_with?: Maybe<String>;
+  explicit?: Maybe<Boolean>;
+  explicit_not?: Maybe<Boolean>;
   upVotes?: Maybe<Int>;
   upVotes_not?: Maybe<Int>;
   upVotes_in?: Maybe<Int[] | Int>;
@@ -3355,9 +3399,11 @@ export interface PartySavedTrackUpdateManyDataInput {
   spotifyId?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
-  duration?: Maybe<Int>;
+  durationMs?: Maybe<Int>;
+  length?: Maybe<String>;
   preview_url?: Maybe<String>;
   uri?: Maybe<String>;
+  explicit?: Maybe<Boolean>;
   upVotes?: Maybe<Int>;
   downVotes?: Maybe<Int>;
 }
@@ -4368,9 +4414,11 @@ export interface PartySavedTrackUpdateManyMutationInput {
   spotifyId?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
-  duration?: Maybe<Int>;
+  durationMs?: Maybe<Int>;
+  length?: Maybe<String>;
   preview_url?: Maybe<String>;
   uri?: Maybe<String>;
+  explicit?: Maybe<Boolean>;
   upVotes?: Maybe<Int>;
   downVotes?: Maybe<Int>;
 }
@@ -5006,9 +5054,11 @@ export interface PartySavedTrack {
   spotifyId: String;
   name: String;
   imageUrl: String;
-  duration: Int;
+  durationMs: Int;
+  length: String;
   preview_url?: String;
   uri?: String;
+  explicit: Boolean;
   upVotes: Int;
   downVotes: Int;
 }
@@ -5030,9 +5080,11 @@ export interface PartySavedTrackPromise
     first?: Int;
     last?: Int;
   }) => T;
-  duration: () => Promise<Int>;
+  durationMs: () => Promise<Int>;
+  length: () => Promise<String>;
   preview_url: () => Promise<String>;
   uri: () => Promise<String>;
+  explicit: () => Promise<Boolean>;
   upVotes: () => Promise<Int>;
   downVotes: () => Promise<Int>;
   votedBy: <T = FragmentableArray<User>>(args?: {
@@ -5063,9 +5115,11 @@ export interface PartySavedTrackSubscription
     first?: Int;
     last?: Int;
   }) => T;
-  duration: () => Promise<AsyncIterator<Int>>;
+  durationMs: () => Promise<AsyncIterator<Int>>;
+  length: () => Promise<AsyncIterator<String>>;
   preview_url: () => Promise<AsyncIterator<String>>;
   uri: () => Promise<AsyncIterator<String>>;
+  explicit: () => Promise<AsyncIterator<Boolean>>;
   upVotes: () => Promise<AsyncIterator<Int>>;
   downVotes: () => Promise<AsyncIterator<Int>>;
   votedBy: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
@@ -5096,9 +5150,11 @@ export interface PartySavedTrackNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
-  duration: () => Promise<Int>;
+  durationMs: () => Promise<Int>;
+  length: () => Promise<String>;
   preview_url: () => Promise<String>;
   uri: () => Promise<String>;
+  explicit: () => Promise<Boolean>;
   upVotes: () => Promise<Int>;
   downVotes: () => Promise<Int>;
   votedBy: <T = FragmentableArray<User>>(args?: {
@@ -7605,9 +7661,11 @@ export interface PartySavedTrackPreviousValues {
   spotifyId: String;
   name: String;
   imageUrl: String;
-  duration: Int;
+  durationMs: Int;
+  length: String;
   preview_url?: String;
   uri?: String;
+  explicit: Boolean;
   upVotes: Int;
   downVotes: Int;
 }
@@ -7619,9 +7677,11 @@ export interface PartySavedTrackPreviousValuesPromise
   spotifyId: () => Promise<String>;
   name: () => Promise<String>;
   imageUrl: () => Promise<String>;
-  duration: () => Promise<Int>;
+  durationMs: () => Promise<Int>;
+  length: () => Promise<String>;
   preview_url: () => Promise<String>;
   uri: () => Promise<String>;
+  explicit: () => Promise<Boolean>;
   upVotes: () => Promise<Int>;
   downVotes: () => Promise<Int>;
 }
@@ -7633,9 +7693,11 @@ export interface PartySavedTrackPreviousValuesSubscription
   spotifyId: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   imageUrl: () => Promise<AsyncIterator<String>>;
-  duration: () => Promise<AsyncIterator<Int>>;
+  durationMs: () => Promise<AsyncIterator<Int>>;
+  length: () => Promise<AsyncIterator<String>>;
   preview_url: () => Promise<AsyncIterator<String>>;
   uri: () => Promise<AsyncIterator<String>>;
+  explicit: () => Promise<AsyncIterator<Boolean>>;
   upVotes: () => Promise<AsyncIterator<Int>>;
   downVotes: () => Promise<AsyncIterator<Int>>;
 }

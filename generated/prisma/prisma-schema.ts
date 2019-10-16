@@ -64,11 +64,11 @@ type AggregateUser {
 
 type Album {
   id: ID!
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
-  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
+  imageUrl: String!
 }
 
 type AlbumConnection {
@@ -79,11 +79,11 @@ type AlbumConnection {
 
 input AlbumCreateInput {
   id: ID
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
-  images: ImageCreateManyInput
-  artists: ArtistCreateManyInput
+  imageUrl: String!
 }
 
 input AlbumCreateOneInput {
@@ -99,19 +99,25 @@ type AlbumEdge {
 enum AlbumOrderByInput {
   id_ASC
   id_DESC
+  spotifyId_ASC
+  spotifyId_DESC
   uri_ASC
   uri_DESC
   name_ASC
   name_DESC
   releaseDate_ASC
   releaseDate_DESC
+  imageUrl_ASC
+  imageUrl_DESC
 }
 
 type AlbumPreviousValues {
   id: ID!
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
+  imageUrl: String!
 }
 
 type AlbumSubscriptionPayload {
@@ -133,25 +139,27 @@ input AlbumSubscriptionWhereInput {
 }
 
 input AlbumUpdateDataInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
-  images: ImageUpdateManyInput
-  artists: ArtistUpdateManyInput
+  imageUrl: String
 }
 
 input AlbumUpdateInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
-  images: ImageUpdateManyInput
-  artists: ArtistUpdateManyInput
+  imageUrl: String
 }
 
 input AlbumUpdateManyMutationInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
+  imageUrl: String
 }
 
 input AlbumUpdateOneRequiredInput {
@@ -181,6 +189,20 @@ input AlbumWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  spotifyId: ID
+  spotifyId_not: ID
+  spotifyId_in: [ID!]
+  spotifyId_not_in: [ID!]
+  spotifyId_lt: ID
+  spotifyId_lte: ID
+  spotifyId_gt: ID
+  spotifyId_gte: ID
+  spotifyId_contains: ID
+  spotifyId_not_contains: ID
+  spotifyId_starts_with: ID
+  spotifyId_not_starts_with: ID
+  spotifyId_ends_with: ID
+  spotifyId_not_ends_with: ID
   uri: String
   uri_not: String
   uri_in: [String!]
@@ -223,12 +245,20 @@ input AlbumWhereInput {
   releaseDate_not_starts_with: String
   releaseDate_ends_with: String
   releaseDate_not_ends_with: String
-  images_every: ImageWhereInput
-  images_some: ImageWhereInput
-  images_none: ImageWhereInput
-  artists_every: ArtistWhereInput
-  artists_some: ArtistWhereInput
-  artists_none: ArtistWhereInput
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
   AND: [AlbumWhereInput!]
   OR: [AlbumWhereInput!]
   NOT: [AlbumWhereInput!]
@@ -240,6 +270,8 @@ input AlbumWhereUniqueInput {
 
 type Artist {
   id: ID!
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -251,6 +283,8 @@ type ArtistConnection {
 
 input ArtistCreateInput {
   id: ID
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -267,12 +301,18 @@ type ArtistEdge {
 enum ArtistOrderByInput {
   id_ASC
   id_DESC
+  spotifyId_ASC
+  spotifyId_DESC
+  uri_ASC
+  uri_DESC
   name_ASC
   name_DESC
 }
 
 type ArtistPreviousValues {
   id: ID!
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -291,6 +331,34 @@ input ArtistScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  spotifyId: ID
+  spotifyId_not: ID
+  spotifyId_in: [ID!]
+  spotifyId_not_in: [ID!]
+  spotifyId_lt: ID
+  spotifyId_lte: ID
+  spotifyId_gt: ID
+  spotifyId_gte: ID
+  spotifyId_contains: ID
+  spotifyId_not_contains: ID
+  spotifyId_starts_with: ID
+  spotifyId_not_starts_with: ID
+  spotifyId_ends_with: ID
+  spotifyId_not_ends_with: ID
+  uri: String
+  uri_not: String
+  uri_in: [String!]
+  uri_not_in: [String!]
+  uri_lt: String
+  uri_lte: String
+  uri_gt: String
+  uri_gte: String
+  uri_contains: String
+  uri_not_contains: String
+  uri_starts_with: String
+  uri_not_starts_with: String
+  uri_ends_with: String
+  uri_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -329,14 +397,20 @@ input ArtistSubscriptionWhereInput {
 }
 
 input ArtistUpdateDataInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
 input ArtistUpdateInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
 input ArtistUpdateManyDataInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
@@ -353,6 +427,8 @@ input ArtistUpdateManyInput {
 }
 
 input ArtistUpdateManyMutationInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
@@ -387,6 +463,34 @@ input ArtistWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  spotifyId: ID
+  spotifyId_not: ID
+  spotifyId_in: [ID!]
+  spotifyId_not_in: [ID!]
+  spotifyId_lt: ID
+  spotifyId_lte: ID
+  spotifyId_gt: ID
+  spotifyId_gte: ID
+  spotifyId_contains: ID
+  spotifyId_not_contains: ID
+  spotifyId_starts_with: ID
+  spotifyId_not_starts_with: ID
+  spotifyId_ends_with: ID
+  spotifyId_not_ends_with: ID
+  uri: String
+  uri_not: String
+  uri_in: [String!]
+  uri_not_in: [String!]
+  uri_lt: String
+  uri_lte: String
+  uri_gt: String
+  uri_gte: String
+  uri_contains: String
+  uri_not_contains: String
+  uri_starts_with: String
+  uri_not_starts_with: String
+  uri_ends_with: String
+  uri_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -924,11 +1028,6 @@ input ImageCreateInput {
   url: String!
 }
 
-input ImageCreateManyInput {
-  create: [ImageCreateInput!]
-  connect: [ImageWhereUniqueInput!]
-}
-
 type ImageEdge {
   node: Image!
   cursor: String!
@@ -952,56 +1051,6 @@ type ImagePreviousValues {
   url: String!
 }
 
-input ImageScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  height: Int
-  height_not: Int
-  height_in: [Int!]
-  height_not_in: [Int!]
-  height_lt: Int
-  height_lte: Int
-  height_gt: Int
-  height_gte: Int
-  width: Int
-  width_not: Int
-  width_in: [Int!]
-  width_not_in: [Int!]
-  width_lt: Int
-  width_lte: Int
-  width_gt: Int
-  width_gte: Int
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  AND: [ImageScalarWhereInput!]
-  OR: [ImageScalarWhereInput!]
-  NOT: [ImageScalarWhereInput!]
-}
-
 type ImageSubscriptionPayload {
   mutation: MutationType!
   node: Image
@@ -1020,56 +1069,16 @@ input ImageSubscriptionWhereInput {
   NOT: [ImageSubscriptionWhereInput!]
 }
 
-input ImageUpdateDataInput {
-  height: Int
-  width: Int
-  url: String
-}
-
 input ImageUpdateInput {
   height: Int
   width: Int
   url: String
 }
 
-input ImageUpdateManyDataInput {
-  height: Int
-  width: Int
-  url: String
-}
-
-input ImageUpdateManyInput {
-  create: [ImageCreateInput!]
-  update: [ImageUpdateWithWhereUniqueNestedInput!]
-  upsert: [ImageUpsertWithWhereUniqueNestedInput!]
-  delete: [ImageWhereUniqueInput!]
-  connect: [ImageWhereUniqueInput!]
-  set: [ImageWhereUniqueInput!]
-  disconnect: [ImageWhereUniqueInput!]
-  deleteMany: [ImageScalarWhereInput!]
-  updateMany: [ImageUpdateManyWithWhereNestedInput!]
-}
-
 input ImageUpdateManyMutationInput {
   height: Int
   width: Int
   url: String
-}
-
-input ImageUpdateManyWithWhereNestedInput {
-  where: ImageScalarWhereInput!
-  data: ImageUpdateManyDataInput!
-}
-
-input ImageUpdateWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput!
-  data: ImageUpdateDataInput!
-}
-
-input ImageUpsertWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput!
-  update: ImageUpdateDataInput!
-  create: ImageCreateInput!
 }
 
 input ImageWhereInput {
@@ -2492,18 +2501,16 @@ type PartyPreviousValues {
 type PartySavedTrack {
   id: ID!
   spotifyId: String!
-  name: String!
-  party: Party!
-  imageUrl: String!
-  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
-  votedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  name: String!
+  previewUrl: String
+  uri: String!
+  party: Party!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: Album!
 }
 
 type PartySavedTrackConnection {
@@ -2515,18 +2522,16 @@ type PartySavedTrackConnection {
 input PartySavedTrackCreateInput {
   id: ID
   spotifyId: String!
-  name: String!
-  party: PartyCreateOneWithoutSavedTracksInput!
-  imageUrl: String!
-  artists: ArtistCreateManyInput
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
-  votedBy: UserCreateManyInput
+  name: String!
+  previewUrl: String
+  uri: String!
+  party: PartyCreateOneWithoutSavedTracksInput!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: AlbumCreateOneInput!
 }
 
 input PartySavedTrackCreateManyWithoutPartyInput {
@@ -2537,17 +2542,15 @@ input PartySavedTrackCreateManyWithoutPartyInput {
 input PartySavedTrackCreateWithoutPartyInput {
   id: ID
   spotifyId: String!
-  name: String!
-  imageUrl: String!
-  artists: ArtistCreateManyInput
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
-  votedBy: UserCreateManyInput
+  name: String!
+  previewUrl: String
+  uri: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: AlbumCreateOneInput!
 }
 
 type PartySavedTrackEdge {
@@ -2560,38 +2563,35 @@ enum PartySavedTrackOrderByInput {
   id_DESC
   spotifyId_ASC
   spotifyId_DESC
-  name_ASC
-  name_DESC
-  imageUrl_ASC
-  imageUrl_DESC
   durationMs_ASC
   durationMs_DESC
-  length_ASC
-  length_DESC
-  preview_url_ASC
-  preview_url_DESC
-  uri_ASC
-  uri_DESC
   explicit_ASC
   explicit_DESC
-  upVotes_ASC
-  upVotes_DESC
-  downVotes_ASC
-  downVotes_DESC
+  name_ASC
+  name_DESC
+  previewUrl_ASC
+  previewUrl_DESC
+  uri_ASC
+  uri_DESC
+  stringArtists_ASC
+  stringArtists_DESC
+  length_ASC
+  length_DESC
+  popularity_ASC
+  popularity_DESC
 }
 
 type PartySavedTrackPreviousValues {
   id: ID!
   spotifyId: String!
-  name: String!
-  imageUrl: String!
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
+  name: String!
+  previewUrl: String
+  uri: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
 }
 
 input PartySavedTrackScalarWhereInput {
@@ -2623,6 +2623,16 @@ input PartySavedTrackScalarWhereInput {
   spotifyId_not_starts_with: String
   spotifyId_ends_with: String
   spotifyId_not_ends_with: String
+  durationMs: Int
+  durationMs_not: Int
+  durationMs_in: [Int!]
+  durationMs_not_in: [Int!]
+  durationMs_lt: Int
+  durationMs_lte: Int
+  durationMs_gt: Int
+  durationMs_gte: Int
+  explicit: Boolean
+  explicit_not: Boolean
   name: String
   name_not: String
   name_in: [String!]
@@ -2637,56 +2647,20 @@ input PartySavedTrackScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  imageUrl: String
-  imageUrl_not: String
-  imageUrl_in: [String!]
-  imageUrl_not_in: [String!]
-  imageUrl_lt: String
-  imageUrl_lte: String
-  imageUrl_gt: String
-  imageUrl_gte: String
-  imageUrl_contains: String
-  imageUrl_not_contains: String
-  imageUrl_starts_with: String
-  imageUrl_not_starts_with: String
-  imageUrl_ends_with: String
-  imageUrl_not_ends_with: String
-  durationMs: Int
-  durationMs_not: Int
-  durationMs_in: [Int!]
-  durationMs_not_in: [Int!]
-  durationMs_lt: Int
-  durationMs_lte: Int
-  durationMs_gt: Int
-  durationMs_gte: Int
-  length: String
-  length_not: String
-  length_in: [String!]
-  length_not_in: [String!]
-  length_lt: String
-  length_lte: String
-  length_gt: String
-  length_gte: String
-  length_contains: String
-  length_not_contains: String
-  length_starts_with: String
-  length_not_starts_with: String
-  length_ends_with: String
-  length_not_ends_with: String
-  preview_url: String
-  preview_url_not: String
-  preview_url_in: [String!]
-  preview_url_not_in: [String!]
-  preview_url_lt: String
-  preview_url_lte: String
-  preview_url_gt: String
-  preview_url_gte: String
-  preview_url_contains: String
-  preview_url_not_contains: String
-  preview_url_starts_with: String
-  preview_url_not_starts_with: String
-  preview_url_ends_with: String
-  preview_url_not_ends_with: String
+  previewUrl: String
+  previewUrl_not: String
+  previewUrl_in: [String!]
+  previewUrl_not_in: [String!]
+  previewUrl_lt: String
+  previewUrl_lte: String
+  previewUrl_gt: String
+  previewUrl_gte: String
+  previewUrl_contains: String
+  previewUrl_not_contains: String
+  previewUrl_starts_with: String
+  previewUrl_not_starts_with: String
+  previewUrl_ends_with: String
+  previewUrl_not_ends_with: String
   uri: String
   uri_not: String
   uri_in: [String!]
@@ -2701,24 +2675,42 @@ input PartySavedTrackScalarWhereInput {
   uri_not_starts_with: String
   uri_ends_with: String
   uri_not_ends_with: String
-  explicit: Boolean
-  explicit_not: Boolean
-  upVotes: Int
-  upVotes_not: Int
-  upVotes_in: [Int!]
-  upVotes_not_in: [Int!]
-  upVotes_lt: Int
-  upVotes_lte: Int
-  upVotes_gt: Int
-  upVotes_gte: Int
-  downVotes: Int
-  downVotes_not: Int
-  downVotes_in: [Int!]
-  downVotes_not_in: [Int!]
-  downVotes_lt: Int
-  downVotes_lte: Int
-  downVotes_gt: Int
-  downVotes_gte: Int
+  stringArtists: String
+  stringArtists_not: String
+  stringArtists_in: [String!]
+  stringArtists_not_in: [String!]
+  stringArtists_lt: String
+  stringArtists_lte: String
+  stringArtists_gt: String
+  stringArtists_gte: String
+  stringArtists_contains: String
+  stringArtists_not_contains: String
+  stringArtists_starts_with: String
+  stringArtists_not_starts_with: String
+  stringArtists_ends_with: String
+  stringArtists_not_ends_with: String
+  length: String
+  length_not: String
+  length_in: [String!]
+  length_not_in: [String!]
+  length_lt: String
+  length_lte: String
+  length_gt: String
+  length_gte: String
+  length_contains: String
+  length_not_contains: String
+  length_starts_with: String
+  length_not_starts_with: String
+  length_ends_with: String
+  length_not_ends_with: String
+  popularity: Int
+  popularity_not: Int
+  popularity_in: [Int!]
+  popularity_not_in: [Int!]
+  popularity_lt: Int
+  popularity_lte: Int
+  popularity_gt: Int
+  popularity_gte: Int
   AND: [PartySavedTrackScalarWhereInput!]
   OR: [PartySavedTrackScalarWhereInput!]
   NOT: [PartySavedTrackScalarWhereInput!]
@@ -2744,44 +2736,40 @@ input PartySavedTrackSubscriptionWhereInput {
 
 input PartySavedTrackUpdateInput {
   spotifyId: String
-  name: String
-  party: PartyUpdateOneRequiredWithoutSavedTracksInput
-  imageUrl: String
-  artists: ArtistUpdateManyInput
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
-  votedBy: UserUpdateManyInput
+  name: String
+  previewUrl: String
+  uri: String
+  party: PartyUpdateOneRequiredWithoutSavedTracksInput
+  stringArtists: String
+  length: String
+  popularity: Int
+  album: AlbumUpdateOneRequiredInput
 }
 
 input PartySavedTrackUpdateManyDataInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
 }
 
 input PartySavedTrackUpdateManyMutationInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
 }
 
 input PartySavedTrackUpdateManyWithoutPartyInput {
@@ -2803,17 +2791,15 @@ input PartySavedTrackUpdateManyWithWhereNestedInput {
 
 input PartySavedTrackUpdateWithoutPartyDataInput {
   spotifyId: String
-  name: String
-  imageUrl: String
-  artists: ArtistUpdateManyInput
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
-  votedBy: UserUpdateManyInput
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
+  album: AlbumUpdateOneRequiredInput
 }
 
 input PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
@@ -2856,6 +2842,16 @@ input PartySavedTrackWhereInput {
   spotifyId_not_starts_with: String
   spotifyId_ends_with: String
   spotifyId_not_ends_with: String
+  durationMs: Int
+  durationMs_not: Int
+  durationMs_in: [Int!]
+  durationMs_not_in: [Int!]
+  durationMs_lt: Int
+  durationMs_lte: Int
+  durationMs_gt: Int
+  durationMs_gte: Int
+  explicit: Boolean
+  explicit_not: Boolean
   name: String
   name_not: String
   name_in: [String!]
@@ -2870,60 +2866,20 @@ input PartySavedTrackWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  party: PartyWhereInput
-  imageUrl: String
-  imageUrl_not: String
-  imageUrl_in: [String!]
-  imageUrl_not_in: [String!]
-  imageUrl_lt: String
-  imageUrl_lte: String
-  imageUrl_gt: String
-  imageUrl_gte: String
-  imageUrl_contains: String
-  imageUrl_not_contains: String
-  imageUrl_starts_with: String
-  imageUrl_not_starts_with: String
-  imageUrl_ends_with: String
-  imageUrl_not_ends_with: String
-  artists_every: ArtistWhereInput
-  artists_some: ArtistWhereInput
-  artists_none: ArtistWhereInput
-  durationMs: Int
-  durationMs_not: Int
-  durationMs_in: [Int!]
-  durationMs_not_in: [Int!]
-  durationMs_lt: Int
-  durationMs_lte: Int
-  durationMs_gt: Int
-  durationMs_gte: Int
-  length: String
-  length_not: String
-  length_in: [String!]
-  length_not_in: [String!]
-  length_lt: String
-  length_lte: String
-  length_gt: String
-  length_gte: String
-  length_contains: String
-  length_not_contains: String
-  length_starts_with: String
-  length_not_starts_with: String
-  length_ends_with: String
-  length_not_ends_with: String
-  preview_url: String
-  preview_url_not: String
-  preview_url_in: [String!]
-  preview_url_not_in: [String!]
-  preview_url_lt: String
-  preview_url_lte: String
-  preview_url_gt: String
-  preview_url_gte: String
-  preview_url_contains: String
-  preview_url_not_contains: String
-  preview_url_starts_with: String
-  preview_url_not_starts_with: String
-  preview_url_ends_with: String
-  preview_url_not_ends_with: String
+  previewUrl: String
+  previewUrl_not: String
+  previewUrl_in: [String!]
+  previewUrl_not_in: [String!]
+  previewUrl_lt: String
+  previewUrl_lte: String
+  previewUrl_gt: String
+  previewUrl_gte: String
+  previewUrl_contains: String
+  previewUrl_not_contains: String
+  previewUrl_starts_with: String
+  previewUrl_not_starts_with: String
+  previewUrl_ends_with: String
+  previewUrl_not_ends_with: String
   uri: String
   uri_not: String
   uri_in: [String!]
@@ -2938,27 +2894,44 @@ input PartySavedTrackWhereInput {
   uri_not_starts_with: String
   uri_ends_with: String
   uri_not_ends_with: String
-  explicit: Boolean
-  explicit_not: Boolean
-  upVotes: Int
-  upVotes_not: Int
-  upVotes_in: [Int!]
-  upVotes_not_in: [Int!]
-  upVotes_lt: Int
-  upVotes_lte: Int
-  upVotes_gt: Int
-  upVotes_gte: Int
-  downVotes: Int
-  downVotes_not: Int
-  downVotes_in: [Int!]
-  downVotes_not_in: [Int!]
-  downVotes_lt: Int
-  downVotes_lte: Int
-  downVotes_gt: Int
-  downVotes_gte: Int
-  votedBy_every: UserWhereInput
-  votedBy_some: UserWhereInput
-  votedBy_none: UserWhereInput
+  party: PartyWhereInput
+  stringArtists: String
+  stringArtists_not: String
+  stringArtists_in: [String!]
+  stringArtists_not_in: [String!]
+  stringArtists_lt: String
+  stringArtists_lte: String
+  stringArtists_gt: String
+  stringArtists_gte: String
+  stringArtists_contains: String
+  stringArtists_not_contains: String
+  stringArtists_starts_with: String
+  stringArtists_not_starts_with: String
+  stringArtists_ends_with: String
+  stringArtists_not_ends_with: String
+  length: String
+  length_not: String
+  length_in: [String!]
+  length_not_in: [String!]
+  length_lt: String
+  length_lte: String
+  length_gt: String
+  length_gte: String
+  length_contains: String
+  length_not_contains: String
+  length_starts_with: String
+  length_not_starts_with: String
+  length_ends_with: String
+  length_not_ends_with: String
+  popularity: Int
+  popularity_not: Int
+  popularity_in: [Int!]
+  popularity_not_in: [Int!]
+  popularity_lt: Int
+  popularity_lte: Int
+  popularity_gt: Int
+  popularity_gte: Int
+  album: AlbumWhereInput
   AND: [PartySavedTrackWhereInput!]
   OR: [PartySavedTrackWhereInput!]
   NOT: [PartySavedTrackWhereInput!]
@@ -4036,11 +4009,6 @@ input UserCreateInput {
   resetTokenExpiry: DateTime
 }
 
-input UserCreateManyInput {
-  create: [UserCreateInput!]
-  connect: [UserWhereUniqueInput!]
-}
-
 input UserCreateManyWithoutChatsInput {
   create: [UserCreateWithoutChatsInput!]
   connect: [UserWhereUniqueInput!]
@@ -4445,18 +4413,6 @@ input UserUpdateManyDataInput {
   resetTokenExpiry: DateTime
 }
 
-input UserUpdateManyInput {
-  create: [UserCreateInput!]
-  update: [UserUpdateWithWhereUniqueNestedInput!]
-  upsert: [UserUpsertWithWhereUniqueNestedInput!]
-  delete: [UserWhereUniqueInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  deleteMany: [UserScalarWhereInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-}
-
 input UserUpdateManyMutationInput {
   email: String
   firstName: String
@@ -4637,11 +4593,6 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   resetTokenExpiry: DateTime
 }
 
-input UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateDataInput!
-}
-
 input UserUpdateWithWhereUniqueWithoutChatsInput {
   where: UserWhereUniqueInput!
   data: UserUpdateWithoutChatsDataInput!
@@ -4670,12 +4621,6 @@ input UserUpsertNestedInput {
 input UserUpsertWithoutPendingPartyInvitationsInput {
   update: UserUpdateWithoutPendingPartyInvitationsDataInput!
   create: UserCreateWithoutPendingPartyInvitationsInput!
-}
-
-input UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutChatsInput {

@@ -23,7 +23,13 @@ function createPassportStrategyConfig(
         : ''
     }${callbackURL}`,
     passReqToCallback: true,
-    scope: ['user-read-email', 'user-read-private', 'user-top-read'],
+    scope: [
+      'user-read-email',
+      'user-read-private',
+      'user-top-read',
+      'playlist-modify-public',
+      'playlist-modify-private',
+    ],
     showDialog: true,
   };
 }

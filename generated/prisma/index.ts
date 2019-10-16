@@ -666,24 +666,22 @@ export type PartySavedTrackOrderByInput =
   | "id_DESC"
   | "spotifyId_ASC"
   | "spotifyId_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "imageUrl_ASC"
-  | "imageUrl_DESC"
   | "durationMs_ASC"
   | "durationMs_DESC"
-  | "length_ASC"
-  | "length_DESC"
-  | "preview_url_ASC"
-  | "preview_url_DESC"
-  | "uri_ASC"
-  | "uri_DESC"
   | "explicit_ASC"
   | "explicit_DESC"
-  | "upVotes_ASC"
-  | "upVotes_DESC"
-  | "downVotes_ASC"
-  | "downVotes_DESC";
+  | "name_ASC"
+  | "name_DESC"
+  | "previewUrl_ASC"
+  | "previewUrl_DESC"
+  | "uri_ASC"
+  | "uri_DESC"
+  | "stringArtists_ASC"
+  | "stringArtists_DESC"
+  | "length_ASC"
+  | "length_DESC"
+  | "popularity_ASC"
+  | "popularity_DESC";
 
 export type SocialMediaType = "FACEBOOK" | "SPOTIFY" | "TWITTER";
 
@@ -711,30 +709,6 @@ export type PlaylistOrderByInput =
   | "isTemporary_ASC"
   | "isTemporary_DESC";
 
-export type AlbumOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "uri_ASC"
-  | "uri_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "releaseDate_ASC"
-  | "releaseDate_DESC";
-
-export type LocationOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "placeName_ASC"
-  | "placeName_DESC"
-  | "latitude_ASC"
-  | "latitude_DESC"
-  | "longitude_ASC"
-  | "longitude_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
 export type GameOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -749,15 +723,19 @@ export type GameOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type MessageOrderByInput =
+export type AlbumOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "content_ASC"
-  | "content_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | "spotifyId_ASC"
+  | "spotifyId_DESC"
+  | "uri_ASC"
+  | "uri_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "releaseDate_ASC"
+  | "releaseDate_DESC"
+  | "imageUrl_ASC"
+  | "imageUrl_DESC";
 
 export type ChatOrderByInput =
   | "id_ASC"
@@ -767,11 +745,37 @@ export type ChatOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type ArtistOrderByInput =
+export type ImageOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "height_ASC"
+  | "height_DESC"
+  | "width_ASC"
+  | "width_DESC"
+  | "url_ASC"
+  | "url_DESC";
+
+export type PartyInvitationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "invitedUserId_ASC"
+  | "invitedUserId_DESC"
+  | "partyId_ASC"
+  | "partyId_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC";
+
+export type PartyCartItemOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "name_ASC"
-  | "name_DESC";
+  | "name_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "price_ASC"
+  | "price_DESC"
+  | "quantity_ASC"
+  | "quantity_DESC";
 
 export type GameType = "BOARD" | "PC" | "CONSOLE";
 
@@ -829,54 +833,62 @@ export type UserOrderByInput =
   | "resetTokenExpiry_ASC"
   | "resetTokenExpiry_DESC";
 
-export type PartyInvitationOrderByInput =
+export type ArtistOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "invitedUserId_ASC"
-  | "invitedUserId_DESC"
-  | "partyId_ASC"
-  | "partyId_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC";
+  | "spotifyId_ASC"
+  | "spotifyId_DESC"
+  | "uri_ASC"
+  | "uri_DESC"
+  | "name_ASC"
+  | "name_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type PartyCartItemOrderByInput =
+export type MessageOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "price_ASC"
-  | "price_DESC"
-  | "quantity_ASC"
-  | "quantity_DESC";
+  | "content_ASC"
+  | "content_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
-export type ImageOrderByInput =
+export type LocationOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "height_ASC"
-  | "height_DESC"
-  | "width_ASC"
-  | "width_DESC"
-  | "url_ASC"
-  | "url_DESC";
+  | "placeName_ASC"
+  | "placeName_DESC"
+  | "latitude_ASC"
+  | "latitude_DESC"
+  | "longitude_ASC"
+  | "longitude_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type PartyCartOrderByInput = "id_ASC" | "id_DESC";
 
-export interface GameUpdateWithWhereUniqueNestedInput {
-  where: GameWhereUniqueInput;
-  data: GameUpdateDataInput;
+export interface AlbumUpdateOneRequiredInput {
+  create?: Maybe<AlbumCreateInput>;
+  update?: Maybe<AlbumUpdateDataInput>;
+  upsert?: Maybe<AlbumUpsertNestedInput>;
+  connect?: Maybe<AlbumWhereUniqueInput>;
 }
 
 export type AlbumWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface PlaylistCreateOneWithoutPartiesInput {
-  create?: Maybe<PlaylistCreateWithoutPartiesInput>;
-  connect?: Maybe<PlaylistWhereUniqueInput>;
+export interface PartyCartItemCreateWithoutCartInput {
+  id?: Maybe<ID_Input>;
+  user?: Maybe<UserCreateOneInput>;
+  name: String;
+  description: String;
+  price: Float;
+  quantity?: Maybe<Int>;
 }
 
 export interface ChatCreateOneWithoutMessagesInput {
@@ -884,46 +896,326 @@ export interface ChatCreateOneWithoutMessagesInput {
   connect?: Maybe<ChatWhereUniqueInput>;
 }
 
-export interface PlaylistCreateWithoutPartiesInput {
+export interface UserCreateManyWithoutFriendsInput {
+  create?: Maybe<
+    UserCreateWithoutFriendsInput[] | UserCreateWithoutFriendsInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface TrackUpsertWithWhereUniqueNestedInput {
+  where: TrackWhereUniqueInput;
+  update: TrackUpdateDataInput;
+  create: TrackCreateInput;
+}
+
+export interface UserCreateWithoutFriendsInput {
   id?: Maybe<ID_Input>;
-  playlist_id?: Maybe<String>;
-  user: UserCreateOneInput;
-  name: String;
-  tracks?: Maybe<TrackCreateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
+  pendingFriendInvitations?: Maybe<
+    UserCreateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
+  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
 }
 
-export interface TrackUpdateDataInput {
-  name?: Maybe<String>;
-  album?: Maybe<AlbumUpdateOneRequiredInput>;
-  artists?: Maybe<ArtistUpdateManyInput>;
-  duration?: Maybe<Int>;
-  preview_url?: Maybe<String>;
-}
-
-export interface TrackCreateManyInput {
-  create?: Maybe<TrackCreateInput[] | TrackCreateInput>;
-  connect?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
-export interface TrackCreateInput {
+export interface PartyWhereInput {
   id?: Maybe<ID_Input>;
-  name: String;
-  album: AlbumCreateOneInput;
-  artists?: Maybe<ArtistCreateManyInput>;
-  duration: Int;
-  preview_url?: Maybe<String>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  normalizedTitle_not?: Maybe<String>;
+  normalizedTitle_in?: Maybe<String[] | String>;
+  normalizedTitle_not_in?: Maybe<String[] | String>;
+  normalizedTitle_lt?: Maybe<String>;
+  normalizedTitle_lte?: Maybe<String>;
+  normalizedTitle_gt?: Maybe<String>;
+  normalizedTitle_gte?: Maybe<String>;
+  normalizedTitle_contains?: Maybe<String>;
+  normalizedTitle_not_contains?: Maybe<String>;
+  normalizedTitle_starts_with?: Maybe<String>;
+  normalizedTitle_not_starts_with?: Maybe<String>;
+  normalizedTitle_ends_with?: Maybe<String>;
+  normalizedTitle_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  author?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  location?: Maybe<LocationWhereInput>;
+  games_every?: Maybe<GameWhereInput>;
+  games_some?: Maybe<GameWhereInput>;
+  games_none?: Maybe<GameWhereInput>;
+  colorTint?: Maybe<String>;
+  colorTint_not?: Maybe<String>;
+  colorTint_in?: Maybe<String[] | String>;
+  colorTint_not_in?: Maybe<String[] | String>;
+  colorTint_lt?: Maybe<String>;
+  colorTint_lte?: Maybe<String>;
+  colorTint_gt?: Maybe<String>;
+  colorTint_gte?: Maybe<String>;
+  colorTint_contains?: Maybe<String>;
+  colorTint_not_contains?: Maybe<String>;
+  colorTint_starts_with?: Maybe<String>;
+  colorTint_not_starts_with?: Maybe<String>;
+  colorTint_ends_with?: Maybe<String>;
+  colorTint_not_ends_with?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  isPublic_not?: Maybe<Boolean>;
+  members_every?: Maybe<UserWhereInput>;
+  members_some?: Maybe<UserWhereInput>;
+  members_none?: Maybe<UserWhereInput>;
+  start?: Maybe<DateTimeInput>;
+  start_not?: Maybe<DateTimeInput>;
+  start_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  start_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  start_lt?: Maybe<DateTimeInput>;
+  start_lte?: Maybe<DateTimeInput>;
+  start_gt?: Maybe<DateTimeInput>;
+  start_gte?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  end_not?: Maybe<DateTimeInput>;
+  end_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  end_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  end_lt?: Maybe<DateTimeInput>;
+  end_lte?: Maybe<DateTimeInput>;
+  end_gt?: Maybe<DateTimeInput>;
+  end_gte?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+  inviteSecret_not?: Maybe<String>;
+  inviteSecret_in?: Maybe<String[] | String>;
+  inviteSecret_not_in?: Maybe<String[] | String>;
+  inviteSecret_lt?: Maybe<String>;
+  inviteSecret_lte?: Maybe<String>;
+  inviteSecret_gt?: Maybe<String>;
+  inviteSecret_gte?: Maybe<String>;
+  inviteSecret_contains?: Maybe<String>;
+  inviteSecret_not_contains?: Maybe<String>;
+  inviteSecret_starts_with?: Maybe<String>;
+  inviteSecret_not_starts_with?: Maybe<String>;
+  inviteSecret_ends_with?: Maybe<String>;
+  inviteSecret_not_ends_with?: Maybe<String>;
+  playlist?: Maybe<PlaylistWhereInput>;
+  savedTracks_every?: Maybe<PartySavedTrackWhereInput>;
+  savedTracks_some?: Maybe<PartySavedTrackWhereInput>;
+  savedTracks_none?: Maybe<PartySavedTrackWhereInput>;
+  cart?: Maybe<PartyCartWhereInput>;
+  AND?: Maybe<PartyWhereInput[] | PartyWhereInput>;
+  OR?: Maybe<PartyWhereInput[] | PartyWhereInput>;
+  NOT?: Maybe<PartyWhereInput[] | PartyWhereInput>;
+}
+
+export interface UserCreateManyWithoutPendingFriendInvitationsInput {
+  create?: Maybe<
+    | UserCreateWithoutPendingFriendInvitationsInput[]
+    | UserCreateWithoutPendingFriendInvitationsInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface PartyInvitationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  invitedBy?: Maybe<UserWhereInput>;
+  user?: Maybe<UserWhereInput>;
+  party?: Maybe<PartyWhereInput>;
+  invitedUserId?: Maybe<String>;
+  invitedUserId_not?: Maybe<String>;
+  invitedUserId_in?: Maybe<String[] | String>;
+  invitedUserId_not_in?: Maybe<String[] | String>;
+  invitedUserId_lt?: Maybe<String>;
+  invitedUserId_lte?: Maybe<String>;
+  invitedUserId_gt?: Maybe<String>;
+  invitedUserId_gte?: Maybe<String>;
+  invitedUserId_contains?: Maybe<String>;
+  invitedUserId_not_contains?: Maybe<String>;
+  invitedUserId_starts_with?: Maybe<String>;
+  invitedUserId_not_starts_with?: Maybe<String>;
+  invitedUserId_ends_with?: Maybe<String>;
+  invitedUserId_not_ends_with?: Maybe<String>;
+  partyId?: Maybe<String>;
+  partyId_not?: Maybe<String>;
+  partyId_in?: Maybe<String[] | String>;
+  partyId_not_in?: Maybe<String[] | String>;
+  partyId_lt?: Maybe<String>;
+  partyId_lte?: Maybe<String>;
+  partyId_gt?: Maybe<String>;
+  partyId_gte?: Maybe<String>;
+  partyId_contains?: Maybe<String>;
+  partyId_not_contains?: Maybe<String>;
+  partyId_starts_with?: Maybe<String>;
+  partyId_not_starts_with?: Maybe<String>;
+  partyId_ends_with?: Maybe<String>;
+  partyId_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<PartyInvitationWhereInput[] | PartyInvitationWhereInput>;
+  OR?: Maybe<PartyInvitationWhereInput[] | PartyInvitationWhereInput>;
+  NOT?: Maybe<PartyInvitationWhereInput[] | PartyInvitationWhereInput>;
+}
+
+export interface UserCreateWithoutPendingFriendInvitationsInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
+  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
+  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
+  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface ChatWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  party?: Maybe<PartyWhereInput>;
+  members_every?: Maybe<UserWhereInput>;
+  members_some?: Maybe<UserWhereInput>;
+  members_none?: Maybe<UserWhereInput>;
+  messages_every?: Maybe<MessageWhereInput>;
+  messages_some?: Maybe<MessageWhereInput>;
+  messages_none?: Maybe<MessageWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ChatWhereInput[] | ChatWhereInput>;
+  OR?: Maybe<ChatWhereInput[] | ChatWhereInput>;
+  NOT?: Maybe<ChatWhereInput[] | ChatWhereInput>;
+}
+
+export interface PartyInvitationCreateManyWithoutUserInput {
+  create?: Maybe<
+    | PartyInvitationCreateWithoutUserInput[]
+    | PartyInvitationCreateWithoutUserInput
+  >;
+  connect?: Maybe<
+    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
+  >;
+}
+
+export type ChatWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface PartyInvitationCreateWithoutUserInput {
+  id?: Maybe<ID_Input>;
+  invitedBy: UserCreateOneInput;
+  party: PartyCreateOneInput;
+  invitedUserId: String;
+  partyId: String;
 }
 
 export interface PlaylistSubscriptionWhereInput {
@@ -941,9 +1233,2620 @@ export interface PlaylistSubscriptionWhereInput {
   >;
 }
 
+export interface ChatCreateManyWithoutMembersInput {
+  create?: Maybe<
+    ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput
+  >;
+  connect?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
+}
+
+export interface PartySavedTrackSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PartySavedTrackWhereInput>;
+  AND?: Maybe<
+    | PartySavedTrackSubscriptionWhereInput[]
+    | PartySavedTrackSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | PartySavedTrackSubscriptionWhereInput[]
+    | PartySavedTrackSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | PartySavedTrackSubscriptionWhereInput[]
+    | PartySavedTrackSubscriptionWhereInput
+  >;
+}
+
+export interface ChatCreateWithoutMembersInput {
+  id?: Maybe<ID_Input>;
+  party: PartyCreateOneInput;
+  messages?: Maybe<MessageCreateManyWithoutChatInput>;
+}
+
+export interface TrackWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  album?: Maybe<AlbumWhereInput>;
+  artists_every?: Maybe<ArtistWhereInput>;
+  artists_some?: Maybe<ArtistWhereInput>;
+  artists_none?: Maybe<ArtistWhereInput>;
+  duration?: Maybe<Int>;
+  duration_not?: Maybe<Int>;
+  duration_in?: Maybe<Int[] | Int>;
+  duration_not_in?: Maybe<Int[] | Int>;
+  duration_lt?: Maybe<Int>;
+  duration_lte?: Maybe<Int>;
+  duration_gt?: Maybe<Int>;
+  duration_gte?: Maybe<Int>;
+  preview_url?: Maybe<String>;
+  preview_url_not?: Maybe<String>;
+  preview_url_in?: Maybe<String[] | String>;
+  preview_url_not_in?: Maybe<String[] | String>;
+  preview_url_lt?: Maybe<String>;
+  preview_url_lte?: Maybe<String>;
+  preview_url_gt?: Maybe<String>;
+  preview_url_gte?: Maybe<String>;
+  preview_url_contains?: Maybe<String>;
+  preview_url_not_contains?: Maybe<String>;
+  preview_url_starts_with?: Maybe<String>;
+  preview_url_not_starts_with?: Maybe<String>;
+  preview_url_ends_with?: Maybe<String>;
+  preview_url_not_ends_with?: Maybe<String>;
+  AND?: Maybe<TrackWhereInput[] | TrackWhereInput>;
+  OR?: Maybe<TrackWhereInput[] | TrackWhereInput>;
+  NOT?: Maybe<TrackWhereInput[] | TrackWhereInput>;
+}
+
+export interface MessageCreateManyWithoutChatInput {
+  create?: Maybe<
+    MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput
+  >;
+  connect?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
+}
+
+export interface PartyCartWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  party?: Maybe<PartyWhereInput>;
+  items_every?: Maybe<PartyCartItemWhereInput>;
+  items_some?: Maybe<PartyCartItemWhereInput>;
+  items_none?: Maybe<PartyCartItemWhereInput>;
+  AND?: Maybe<PartyCartWhereInput[] | PartyCartWhereInput>;
+  OR?: Maybe<PartyCartWhereInput[] | PartyCartWhereInput>;
+  NOT?: Maybe<PartyCartWhereInput[] | PartyCartWhereInput>;
+}
+
+export interface MessageCreateWithoutChatInput {
+  id?: Maybe<ID_Input>;
+  author: UserCreateOneInput;
+  content: String;
+}
+
+export interface PartyInvitationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PartyInvitationWhereInput>;
+  AND?: Maybe<
+    | PartyInvitationSubscriptionWhereInput[]
+    | PartyInvitationSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | PartyInvitationSubscriptionWhereInput[]
+    | PartyInvitationSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | PartyInvitationSubscriptionWhereInput[]
+    | PartyInvitationSubscriptionWhereInput
+  >;
+}
+
+export interface UserCreateManyWithoutPartiesInput {
+  create?: Maybe<
+    UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface ArtistWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  spotifyId?: Maybe<ID_Input>;
+  spotifyId_not?: Maybe<ID_Input>;
+  spotifyId_in?: Maybe<ID_Input[] | ID_Input>;
+  spotifyId_not_in?: Maybe<ID_Input[] | ID_Input>;
+  spotifyId_lt?: Maybe<ID_Input>;
+  spotifyId_lte?: Maybe<ID_Input>;
+  spotifyId_gt?: Maybe<ID_Input>;
+  spotifyId_gte?: Maybe<ID_Input>;
+  spotifyId_contains?: Maybe<ID_Input>;
+  spotifyId_not_contains?: Maybe<ID_Input>;
+  spotifyId_starts_with?: Maybe<ID_Input>;
+  spotifyId_not_starts_with?: Maybe<ID_Input>;
+  spotifyId_ends_with?: Maybe<ID_Input>;
+  spotifyId_not_ends_with?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  uri_not?: Maybe<String>;
+  uri_in?: Maybe<String[] | String>;
+  uri_not_in?: Maybe<String[] | String>;
+  uri_lt?: Maybe<String>;
+  uri_lte?: Maybe<String>;
+  uri_gt?: Maybe<String>;
+  uri_gte?: Maybe<String>;
+  uri_contains?: Maybe<String>;
+  uri_not_contains?: Maybe<String>;
+  uri_starts_with?: Maybe<String>;
+  uri_not_starts_with?: Maybe<String>;
+  uri_ends_with?: Maybe<String>;
+  uri_not_ends_with?: Maybe<String>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ArtistWhereInput[] | ArtistWhereInput>;
+  OR?: Maybe<ArtistWhereInput[] | ArtistWhereInput>;
+  NOT?: Maybe<ArtistWhereInput[] | ArtistWhereInput>;
+}
+
+export interface UserCreateWithoutPartiesInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserCreateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
+  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface PartySubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PartyWhereInput>;
+  AND?: Maybe<PartySubscriptionWhereInput[] | PartySubscriptionWhereInput>;
+  OR?: Maybe<PartySubscriptionWhereInput[] | PartySubscriptionWhereInput>;
+  NOT?: Maybe<PartySubscriptionWhereInput[] | PartySubscriptionWhereInput>;
+}
+
+export interface UserCreateManyWithoutChatsInput {
+  create?: Maybe<UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export type ArtistWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface UserCreateWithoutChatsInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
+  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserCreateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface ImageSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ImageWhereInput>;
+  AND?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+  OR?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+  NOT?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+}
+
+export interface ChatUpdateInput {
+  party?: Maybe<PartyUpdateOneRequiredInput>;
+  members?: Maybe<UserUpdateManyWithoutChatsInput>;
+  messages?: Maybe<MessageUpdateManyWithoutChatInput>;
+}
+
+export interface ChatSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ChatWhereInput>;
+  AND?: Maybe<ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput>;
+  OR?: Maybe<ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput>;
+  NOT?: Maybe<ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput>;
+}
+
+export interface PartyUpdateOneRequiredInput {
+  create?: Maybe<PartyCreateInput>;
+  update?: Maybe<PartyUpdateDataInput>;
+  upsert?: Maybe<PartyUpsertNestedInput>;
+  connect?: Maybe<PartyWhereUniqueInput>;
+}
+
+export interface AlbumSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<AlbumWhereInput>;
+  AND?: Maybe<AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput>;
+  OR?: Maybe<AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput>;
+  NOT?: Maybe<AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput>;
+}
+
+export interface PartyUpdateDataInput {
+  title?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  description?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
+  games?: Maybe<GameUpdateManyInput>;
+  colorTint?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
+  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
+  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
+}
+
+export interface UserUpdateInput {
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  password?: Maybe<String>;
+  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
+  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserUpdateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
+  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface TrackUpdateInput {
+  name?: Maybe<String>;
+  album?: Maybe<AlbumUpdateOneRequiredInput>;
+  artists?: Maybe<ArtistUpdateManyInput>;
+  duration?: Maybe<Int>;
+  preview_url?: Maybe<String>;
+}
+
+export interface UserUpdateDataInput {
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  password?: Maybe<String>;
+  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
+  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserUpdateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
+  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface PartyUpsertWithWhereUniqueWithoutPlaylistInput {
+  where: PartyWhereUniqueInput;
+  update: PartyUpdateWithoutPlaylistDataInput;
+  create: PartyCreateWithoutPlaylistInput;
+}
+
+export interface PartyUpdateManyWithoutMembersInput {
+  create?: Maybe<
+    PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput
+  >;
+  delete?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+  connect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+  set?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+  disconnect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+  update?: Maybe<
+    | PartyUpdateWithWhereUniqueWithoutMembersInput[]
+    | PartyUpdateWithWhereUniqueWithoutMembersInput
+  >;
+  upsert?: Maybe<
+    | PartyUpsertWithWhereUniqueWithoutMembersInput[]
+    | PartyUpsertWithWhereUniqueWithoutMembersInput
+  >;
+  deleteMany?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
+  updateMany?: Maybe<
+    PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PartyUpdateWithWhereUniqueWithoutPlaylistInput {
+  where: PartyWhereUniqueInput;
+  data: PartyUpdateWithoutPlaylistDataInput;
+}
+
+export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
+  where: PartyWhereUniqueInput;
+  data: PartyUpdateWithoutMembersDataInput;
+}
+
+export interface PartyUpdateManyWithoutPlaylistInput {
+  create?: Maybe<
+    PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput
+  >;
+  delete?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+  connect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+  set?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+  disconnect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+  update?: Maybe<
+    | PartyUpdateWithWhereUniqueWithoutPlaylistInput[]
+    | PartyUpdateWithWhereUniqueWithoutPlaylistInput
+  >;
+  upsert?: Maybe<
+    | PartyUpsertWithWhereUniqueWithoutPlaylistInput[]
+    | PartyUpsertWithWhereUniqueWithoutPlaylistInput
+  >;
+  deleteMany?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
+  updateMany?: Maybe<
+    PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PartyUpdateWithoutMembersDataInput {
+  title?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  description?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
+  games?: Maybe<GameUpdateManyInput>;
+  colorTint?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
+  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
+  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
+}
+
+export interface PartyCreateWithoutPlaylistInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  author: UserCreateOneInput;
+  location: LocationCreateOneInput;
+  games?: Maybe<GameCreateManyInput>;
+  colorTint: String;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserCreateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret: String;
+  savedTracks?: Maybe<PartySavedTrackCreateManyWithoutPartyInput>;
+  cart?: Maybe<PartyCartCreateOneWithoutPartyInput>;
+}
+
+export interface LocationUpdateOneRequiredInput {
+  create?: Maybe<LocationCreateInput>;
+  update?: Maybe<LocationUpdateDataInput>;
+  upsert?: Maybe<LocationUpsertNestedInput>;
+  connect?: Maybe<LocationWhereUniqueInput>;
+}
+
+export interface PartyCreateManyWithoutPlaylistInput {
+  create?: Maybe<
+    PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput
+  >;
+  connect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+}
+
+export interface LocationUpdateDataInput {
+  placeName?: Maybe<String>;
+  latitude?: Maybe<Float>;
+  longitude?: Maybe<Float>;
+}
+
+export interface PlaylistCreateInput {
+  id?: Maybe<ID_Input>;
+  playlist_id?: Maybe<String>;
+  user: UserCreateOneInput;
+  parties?: Maybe<PartyCreateManyWithoutPlaylistInput>;
+  name: String;
+  tracks?: Maybe<TrackCreateManyInput>;
+  isTemporary?: Maybe<Boolean>;
+}
+
+export interface LocationUpsertNestedInput {
+  update: LocationUpdateDataInput;
+  create: LocationCreateInput;
+}
+
+export interface PartyUpsertWithoutSavedTracksInput {
+  update: PartyUpdateWithoutSavedTracksDataInput;
+  create: PartyCreateWithoutSavedTracksInput;
+}
+
+export interface GameUpdateManyInput {
+  create?: Maybe<GameCreateInput[] | GameCreateInput>;
+  update?: Maybe<
+    | GameUpdateWithWhereUniqueNestedInput[]
+    | GameUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | GameUpsertWithWhereUniqueNestedInput[]
+    | GameUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
+  connect?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
+  set?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
+  disconnect?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
+  deleteMany?: Maybe<GameScalarWhereInput[] | GameScalarWhereInput>;
+  updateMany?: Maybe<
+    GameUpdateManyWithWhereNestedInput[] | GameUpdateManyWithWhereNestedInput
+  >;
+}
+
+export type LocationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface GameUpdateWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput;
+  data: GameUpdateDataInput;
+}
+
+export interface PartySavedTrackUpdateInput {
+  spotifyId?: Maybe<String>;
+  durationMs?: Maybe<Int>;
+  explicit?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  previewUrl?: Maybe<String>;
+  uri?: Maybe<String>;
+  party?: Maybe<PartyUpdateOneRequiredWithoutSavedTracksInput>;
+  stringArtists?: Maybe<String>;
+  length?: Maybe<String>;
+  popularity?: Maybe<Int>;
+  album?: Maybe<AlbumUpdateOneRequiredInput>;
+}
+
+export interface GameUpdateDataInput {
+  title?: Maybe<String>;
+  cover?: Maybe<String>;
+  type?: Maybe<GameType>;
+}
+
+export interface PartyCreateOneWithoutSavedTracksInput {
+  create?: Maybe<PartyCreateWithoutSavedTracksInput>;
+  connect?: Maybe<PartyWhereUniqueInput>;
+}
+
+export interface GameUpsertWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput;
+  update: GameUpdateDataInput;
+  create: GameCreateInput;
+}
+
+export interface PartySavedTrackCreateInput {
+  id?: Maybe<ID_Input>;
+  spotifyId: String;
+  durationMs: Int;
+  explicit: Boolean;
+  name: String;
+  previewUrl?: Maybe<String>;
+  uri: String;
+  party: PartyCreateOneWithoutSavedTracksInput;
+  stringArtists: String;
+  length: String;
+  popularity: Int;
+  album: AlbumCreateOneInput;
+}
+
+export interface GameScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  cover?: Maybe<String>;
+  cover_not?: Maybe<String>;
+  cover_in?: Maybe<String[] | String>;
+  cover_not_in?: Maybe<String[] | String>;
+  cover_lt?: Maybe<String>;
+  cover_lte?: Maybe<String>;
+  cover_gt?: Maybe<String>;
+  cover_gte?: Maybe<String>;
+  cover_contains?: Maybe<String>;
+  cover_not_contains?: Maybe<String>;
+  cover_starts_with?: Maybe<String>;
+  cover_not_starts_with?: Maybe<String>;
+  cover_ends_with?: Maybe<String>;
+  cover_not_ends_with?: Maybe<String>;
+  type?: Maybe<GameType>;
+  type_not?: Maybe<GameType>;
+  type_in?: Maybe<GameType[] | GameType>;
+  type_not_in?: Maybe<GameType[] | GameType>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<GameScalarWhereInput[] | GameScalarWhereInput>;
+  OR?: Maybe<GameScalarWhereInput[] | GameScalarWhereInput>;
+  NOT?: Maybe<GameScalarWhereInput[] | GameScalarWhereInput>;
+}
+
+export interface UserUpsertWithoutPendingPartyInvitationsInput {
+  update: UserUpdateWithoutPendingPartyInvitationsDataInput;
+  create: UserCreateWithoutPendingPartyInvitationsInput;
+}
+
+export interface GameUpdateManyWithWhereNestedInput {
+  where: GameScalarWhereInput;
+  data: GameUpdateManyDataInput;
+}
+
+export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  password?: Maybe<String>;
+  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
+  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserUpdateManyWithoutPendingFriendInvitationsInput
+  >;
+  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface GameUpdateManyDataInput {
+  title?: Maybe<String>;
+  cover?: Maybe<String>;
+  type?: Maybe<GameType>;
+}
+
+export interface PartyInvitationUpdateInput {
+  invitedBy?: Maybe<UserUpdateOneRequiredInput>;
+  user?: Maybe<UserUpdateOneRequiredWithoutPendingPartyInvitationsInput>;
+  party?: Maybe<PartyUpdateOneRequiredInput>;
+  invitedUserId?: Maybe<String>;
+  partyId?: Maybe<String>;
+}
+
+export interface PlaylistUpdateOneWithoutPartiesInput {
+  create?: Maybe<PlaylistCreateWithoutPartiesInput>;
+  update?: Maybe<PlaylistUpdateWithoutPartiesDataInput>;
+  upsert?: Maybe<PlaylistUpsertWithoutPartiesInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<PlaylistWhereUniqueInput>;
+}
+
+export interface AlbumWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  spotifyId?: Maybe<ID_Input>;
+  spotifyId_not?: Maybe<ID_Input>;
+  spotifyId_in?: Maybe<ID_Input[] | ID_Input>;
+  spotifyId_not_in?: Maybe<ID_Input[] | ID_Input>;
+  spotifyId_lt?: Maybe<ID_Input>;
+  spotifyId_lte?: Maybe<ID_Input>;
+  spotifyId_gt?: Maybe<ID_Input>;
+  spotifyId_gte?: Maybe<ID_Input>;
+  spotifyId_contains?: Maybe<ID_Input>;
+  spotifyId_not_contains?: Maybe<ID_Input>;
+  spotifyId_starts_with?: Maybe<ID_Input>;
+  spotifyId_not_starts_with?: Maybe<ID_Input>;
+  spotifyId_ends_with?: Maybe<ID_Input>;
+  spotifyId_not_ends_with?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  uri_not?: Maybe<String>;
+  uri_in?: Maybe<String[] | String>;
+  uri_not_in?: Maybe<String[] | String>;
+  uri_lt?: Maybe<String>;
+  uri_lte?: Maybe<String>;
+  uri_gt?: Maybe<String>;
+  uri_gte?: Maybe<String>;
+  uri_contains?: Maybe<String>;
+  uri_not_contains?: Maybe<String>;
+  uri_starts_with?: Maybe<String>;
+  uri_not_starts_with?: Maybe<String>;
+  uri_ends_with?: Maybe<String>;
+  uri_not_ends_with?: Maybe<String>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  releaseDate_not?: Maybe<String>;
+  releaseDate_in?: Maybe<String[] | String>;
+  releaseDate_not_in?: Maybe<String[] | String>;
+  releaseDate_lt?: Maybe<String>;
+  releaseDate_lte?: Maybe<String>;
+  releaseDate_gt?: Maybe<String>;
+  releaseDate_gte?: Maybe<String>;
+  releaseDate_contains?: Maybe<String>;
+  releaseDate_not_contains?: Maybe<String>;
+  releaseDate_starts_with?: Maybe<String>;
+  releaseDate_not_starts_with?: Maybe<String>;
+  releaseDate_ends_with?: Maybe<String>;
+  releaseDate_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  AND?: Maybe<AlbumWhereInput[] | AlbumWhereInput>;
+  OR?: Maybe<AlbumWhereInput[] | AlbumWhereInput>;
+  NOT?: Maybe<AlbumWhereInput[] | AlbumWhereInput>;
+}
+
+export interface PlaylistUpdateWithoutPartiesDataInput {
+  playlist_id?: Maybe<String>;
+  user?: Maybe<UserUpdateOneRequiredInput>;
+  name?: Maybe<String>;
+  tracks?: Maybe<TrackUpdateManyInput>;
+  isTemporary?: Maybe<Boolean>;
+}
+
+export interface UserCreateOneWithoutPendingPartyInvitationsInput {
+  create?: Maybe<UserCreateWithoutPendingPartyInvitationsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface TrackUpdateManyInput {
+  create?: Maybe<TrackCreateInput[] | TrackCreateInput>;
+  update?: Maybe<
+    | TrackUpdateWithWhereUniqueNestedInput[]
+    | TrackUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | TrackUpsertWithWhereUniqueNestedInput[]
+    | TrackUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
+  connect?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
+  set?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
+  disconnect?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
+  deleteMany?: Maybe<TrackScalarWhereInput[] | TrackScalarWhereInput>;
+  updateMany?: Maybe<
+    TrackUpdateManyWithWhereNestedInput[] | TrackUpdateManyWithWhereNestedInput
+  >;
+}
+
+export type PartyCartItemWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface TrackUpdateWithWhereUniqueNestedInput {
+  where: TrackWhereUniqueInput;
+  data: TrackUpdateDataInput;
+}
+
+export interface PartyCartUpsertWithoutItemsInput {
+  update: PartyCartUpdateWithoutItemsDataInput;
+  create: PartyCartCreateWithoutItemsInput;
+}
+
+export interface TrackUpdateDataInput {
+  name?: Maybe<String>;
+  album?: Maybe<AlbumUpdateOneRequiredInput>;
+  artists?: Maybe<ArtistUpdateManyInput>;
+  duration?: Maybe<Int>;
+  preview_url?: Maybe<String>;
+}
+
+export type PartyInvitationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface MessageUpdateInput {
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  chat?: Maybe<ChatUpdateOneRequiredWithoutMessagesInput>;
+  content?: Maybe<String>;
+}
+
+export interface PartyCartItemUpdateInput {
+  cart?: Maybe<PartyCartUpdateOneRequiredWithoutItemsInput>;
+  user?: Maybe<UserUpdateOneInput>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  price?: Maybe<Float>;
+  quantity?: Maybe<Int>;
+}
+
+export interface AlbumUpdateDataInput {
+  spotifyId?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  name?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+}
+
+export type PartySavedTrackWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface AlbumUpsertNestedInput {
+  update: AlbumUpdateDataInput;
+  create: AlbumCreateInput;
+}
+
+export interface PartyCartItemCreateInput {
+  id?: Maybe<ID_Input>;
+  cart: PartyCartCreateOneWithoutItemsInput;
+  user?: Maybe<UserCreateOneInput>;
+  name: String;
+  description: String;
+  price: Float;
+  quantity?: Maybe<Int>;
+}
+
+export interface ArtistUpdateManyInput {
+  create?: Maybe<ArtistCreateInput[] | ArtistCreateInput>;
+  update?: Maybe<
+    | ArtistUpdateWithWhereUniqueNestedInput[]
+    | ArtistUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | ArtistUpsertWithWhereUniqueNestedInput[]
+    | ArtistUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
+  connect?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
+  set?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
+  disconnect?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
+  deleteMany?: Maybe<ArtistScalarWhereInput[] | ArtistScalarWhereInput>;
+  updateMany?: Maybe<
+    | ArtistUpdateManyWithWhereNestedInput[]
+    | ArtistUpdateManyWithWhereNestedInput
+  >;
+}
+
+export type PlaylistWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  playlist_id?: Maybe<String>;
+}>;
+
+export interface ArtistUpdateWithWhereUniqueNestedInput {
+  where: ArtistWhereUniqueInput;
+  data: ArtistUpdateDataInput;
+}
+
+export interface PartyUpdateOneRequiredWithoutCartInput {
+  create?: Maybe<PartyCreateWithoutCartInput>;
+  update?: Maybe<PartyUpdateWithoutCartDataInput>;
+  upsert?: Maybe<PartyUpsertWithoutCartInput>;
+  connect?: Maybe<PartyWhereUniqueInput>;
+}
+
+export interface ArtistUpdateDataInput {
+  spotifyId?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  name?: Maybe<String>;
+}
+
+export interface PartyCreateWithoutCartInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  author: UserCreateOneInput;
+  location: LocationCreateOneInput;
+  games?: Maybe<GameCreateManyInput>;
+  colorTint: String;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserCreateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret: String;
+  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
+  savedTracks?: Maybe<PartySavedTrackCreateManyWithoutPartyInput>;
+}
+
+export interface ArtistUpsertWithWhereUniqueNestedInput {
+  where: ArtistWhereUniqueInput;
+  update: ArtistUpdateDataInput;
+  create: ArtistCreateInput;
+}
+
+export interface PartyCreateOneWithoutCartInput {
+  create?: Maybe<PartyCreateWithoutCartInput>;
+  connect?: Maybe<PartyWhereUniqueInput>;
+}
+
+export interface ArtistScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  spotifyId?: Maybe<ID_Input>;
+  spotifyId_not?: Maybe<ID_Input>;
+  spotifyId_in?: Maybe<ID_Input[] | ID_Input>;
+  spotifyId_not_in?: Maybe<ID_Input[] | ID_Input>;
+  spotifyId_lt?: Maybe<ID_Input>;
+  spotifyId_lte?: Maybe<ID_Input>;
+  spotifyId_gt?: Maybe<ID_Input>;
+  spotifyId_gte?: Maybe<ID_Input>;
+  spotifyId_contains?: Maybe<ID_Input>;
+  spotifyId_not_contains?: Maybe<ID_Input>;
+  spotifyId_starts_with?: Maybe<ID_Input>;
+  spotifyId_not_starts_with?: Maybe<ID_Input>;
+  spotifyId_ends_with?: Maybe<ID_Input>;
+  spotifyId_not_ends_with?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  uri_not?: Maybe<String>;
+  uri_in?: Maybe<String[] | String>;
+  uri_not_in?: Maybe<String[] | String>;
+  uri_lt?: Maybe<String>;
+  uri_lte?: Maybe<String>;
+  uri_gt?: Maybe<String>;
+  uri_gte?: Maybe<String>;
+  uri_contains?: Maybe<String>;
+  uri_not_contains?: Maybe<String>;
+  uri_starts_with?: Maybe<String>;
+  uri_not_starts_with?: Maybe<String>;
+  uri_ends_with?: Maybe<String>;
+  uri_not_ends_with?: Maybe<String>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ArtistScalarWhereInput[] | ArtistScalarWhereInput>;
+  OR?: Maybe<ArtistScalarWhereInput[] | ArtistScalarWhereInput>;
+  NOT?: Maybe<ArtistScalarWhereInput[] | ArtistScalarWhereInput>;
+}
+
+export interface PartyUpdateManyMutationInput {
+  title?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  description?: Maybe<String>;
+  colorTint?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+}
+
+export interface ArtistUpdateManyWithWhereNestedInput {
+  where: ArtistScalarWhereInput;
+  data: ArtistUpdateManyDataInput;
+}
+
+export interface PartyUpdateInput {
+  title?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  description?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
+  games?: Maybe<GameUpdateManyInput>;
+  colorTint?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
+  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
+  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
+}
+
+export interface ArtistUpdateManyDataInput {
+  spotifyId?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  name?: Maybe<String>;
+}
+
+export interface ChatUpsertWithoutMessagesInput {
+  update: ChatUpdateWithoutMessagesDataInput;
+  create: ChatCreateWithoutMessagesInput;
+}
+
+export interface ChatCreateWithoutMessagesInput {
+  id?: Maybe<ID_Input>;
+  party: PartyCreateOneInput;
+  members?: Maybe<UserCreateManyWithoutChatsInput>;
+}
+
+export interface AlbumCreateInput {
+  id?: Maybe<ID_Input>;
+  spotifyId: ID_Input;
+  uri: String;
+  name: String;
+  releaseDate: String;
+  imageUrl: String;
+}
+
+export interface TrackScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  duration?: Maybe<Int>;
+  duration_not?: Maybe<Int>;
+  duration_in?: Maybe<Int[] | Int>;
+  duration_not_in?: Maybe<Int[] | Int>;
+  duration_lt?: Maybe<Int>;
+  duration_lte?: Maybe<Int>;
+  duration_gt?: Maybe<Int>;
+  duration_gte?: Maybe<Int>;
+  preview_url?: Maybe<String>;
+  preview_url_not?: Maybe<String>;
+  preview_url_in?: Maybe<String[] | String>;
+  preview_url_not_in?: Maybe<String[] | String>;
+  preview_url_lt?: Maybe<String>;
+  preview_url_lte?: Maybe<String>;
+  preview_url_gt?: Maybe<String>;
+  preview_url_gte?: Maybe<String>;
+  preview_url_contains?: Maybe<String>;
+  preview_url_not_contains?: Maybe<String>;
+  preview_url_starts_with?: Maybe<String>;
+  preview_url_not_starts_with?: Maybe<String>;
+  preview_url_ends_with?: Maybe<String>;
+  preview_url_not_ends_with?: Maybe<String>;
+  AND?: Maybe<TrackScalarWhereInput[] | TrackScalarWhereInput>;
+  OR?: Maybe<TrackScalarWhereInput[] | TrackScalarWhereInput>;
+  NOT?: Maybe<TrackScalarWhereInput[] | TrackScalarWhereInput>;
+}
+
+export interface AlbumUpdateManyMutationInput {
+  spotifyId?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  name?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+}
+
+export interface TrackUpdateManyWithWhereNestedInput {
+  where: TrackScalarWhereInput;
+  data: TrackUpdateManyDataInput;
+}
+
+export interface ChatUpdateOneRequiredWithoutMessagesInput {
+  create?: Maybe<ChatCreateWithoutMessagesInput>;
+  update?: Maybe<ChatUpdateWithoutMessagesDataInput>;
+  upsert?: Maybe<ChatUpsertWithoutMessagesInput>;
+  connect?: Maybe<ChatWhereUniqueInput>;
+}
+
+export interface TrackUpdateManyDataInput {
+  name?: Maybe<String>;
+  duration?: Maybe<Int>;
+  preview_url?: Maybe<String>;
+}
+
+export interface ArtistUpdateInput {
+  spotifyId?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  name?: Maybe<String>;
+}
+
+export interface PlaylistUpsertWithoutPartiesInput {
+  update: PlaylistUpdateWithoutPartiesDataInput;
+  create: PlaylistCreateWithoutPartiesInput;
+}
+
+export interface ChatCreateInput {
+  id?: Maybe<ID_Input>;
+  party: PartyCreateOneInput;
+  members?: Maybe<UserCreateManyWithoutChatsInput>;
+  messages?: Maybe<MessageCreateManyWithoutChatInput>;
+}
+
+export interface PartySavedTrackUpdateManyWithoutPartyInput {
+  create?: Maybe<
+    | PartySavedTrackCreateWithoutPartyInput[]
+    | PartySavedTrackCreateWithoutPartyInput
+  >;
+  delete?: Maybe<
+    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
+  >;
+  connect?: Maybe<
+    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
+  >;
+  set?: Maybe<
+    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
+  >;
+  disconnect?: Maybe<
+    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
+  >;
+  update?: Maybe<
+    | PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput[]
+    | PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput
+  >;
+  upsert?: Maybe<
+    | PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput[]
+    | PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput
+  >;
+  deleteMany?: Maybe<
+    PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | PartySavedTrackUpdateManyWithWhereNestedInput[]
+    | PartySavedTrackUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PartyCreateInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  author: UserCreateOneInput;
+  location: LocationCreateOneInput;
+  games?: Maybe<GameCreateManyInput>;
+  colorTint: String;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserCreateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret: String;
+  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
+  savedTracks?: Maybe<PartySavedTrackCreateManyWithoutPartyInput>;
+  cart?: Maybe<PartyCartCreateOneWithoutPartyInput>;
+}
+
+export interface PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
+  where: PartySavedTrackWhereUniqueInput;
+  data: PartySavedTrackUpdateWithoutPartyDataInput;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
+  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserCreateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
+  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface PartySavedTrackUpdateWithoutPartyDataInput {
+  spotifyId?: Maybe<String>;
+  durationMs?: Maybe<Int>;
+  explicit?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  previewUrl?: Maybe<String>;
+  uri?: Maybe<String>;
+  stringArtists?: Maybe<String>;
+  length?: Maybe<String>;
+  popularity?: Maybe<Int>;
+  album?: Maybe<AlbumUpdateOneRequiredInput>;
+}
+
+export interface PartyCreateWithoutMembersInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  author: UserCreateOneInput;
+  location: LocationCreateOneInput;
+  games?: Maybe<GameCreateManyInput>;
+  colorTint: String;
+  isPublic?: Maybe<Boolean>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret: String;
+  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
+  savedTracks?: Maybe<PartySavedTrackCreateManyWithoutPartyInput>;
+  cart?: Maybe<PartyCartCreateOneWithoutPartyInput>;
+}
+
+export interface PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput {
+  where: PartySavedTrackWhereUniqueInput;
+  update: PartySavedTrackUpdateWithoutPartyDataInput;
+  create: PartySavedTrackCreateWithoutPartyInput;
+}
+
+export interface LocationCreateInput {
+  id?: Maybe<ID_Input>;
+  placeName: String;
+  latitude: Float;
+  longitude: Float;
+}
+
+export interface PartySavedTrackScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  spotifyId?: Maybe<String>;
+  spotifyId_not?: Maybe<String>;
+  spotifyId_in?: Maybe<String[] | String>;
+  spotifyId_not_in?: Maybe<String[] | String>;
+  spotifyId_lt?: Maybe<String>;
+  spotifyId_lte?: Maybe<String>;
+  spotifyId_gt?: Maybe<String>;
+  spotifyId_gte?: Maybe<String>;
+  spotifyId_contains?: Maybe<String>;
+  spotifyId_not_contains?: Maybe<String>;
+  spotifyId_starts_with?: Maybe<String>;
+  spotifyId_not_starts_with?: Maybe<String>;
+  spotifyId_ends_with?: Maybe<String>;
+  spotifyId_not_ends_with?: Maybe<String>;
+  durationMs?: Maybe<Int>;
+  durationMs_not?: Maybe<Int>;
+  durationMs_in?: Maybe<Int[] | Int>;
+  durationMs_not_in?: Maybe<Int[] | Int>;
+  durationMs_lt?: Maybe<Int>;
+  durationMs_lte?: Maybe<Int>;
+  durationMs_gt?: Maybe<Int>;
+  durationMs_gte?: Maybe<Int>;
+  explicit?: Maybe<Boolean>;
+  explicit_not?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  previewUrl?: Maybe<String>;
+  previewUrl_not?: Maybe<String>;
+  previewUrl_in?: Maybe<String[] | String>;
+  previewUrl_not_in?: Maybe<String[] | String>;
+  previewUrl_lt?: Maybe<String>;
+  previewUrl_lte?: Maybe<String>;
+  previewUrl_gt?: Maybe<String>;
+  previewUrl_gte?: Maybe<String>;
+  previewUrl_contains?: Maybe<String>;
+  previewUrl_not_contains?: Maybe<String>;
+  previewUrl_starts_with?: Maybe<String>;
+  previewUrl_not_starts_with?: Maybe<String>;
+  previewUrl_ends_with?: Maybe<String>;
+  previewUrl_not_ends_with?: Maybe<String>;
+  uri?: Maybe<String>;
+  uri_not?: Maybe<String>;
+  uri_in?: Maybe<String[] | String>;
+  uri_not_in?: Maybe<String[] | String>;
+  uri_lt?: Maybe<String>;
+  uri_lte?: Maybe<String>;
+  uri_gt?: Maybe<String>;
+  uri_gte?: Maybe<String>;
+  uri_contains?: Maybe<String>;
+  uri_not_contains?: Maybe<String>;
+  uri_starts_with?: Maybe<String>;
+  uri_not_starts_with?: Maybe<String>;
+  uri_ends_with?: Maybe<String>;
+  uri_not_ends_with?: Maybe<String>;
+  stringArtists?: Maybe<String>;
+  stringArtists_not?: Maybe<String>;
+  stringArtists_in?: Maybe<String[] | String>;
+  stringArtists_not_in?: Maybe<String[] | String>;
+  stringArtists_lt?: Maybe<String>;
+  stringArtists_lte?: Maybe<String>;
+  stringArtists_gt?: Maybe<String>;
+  stringArtists_gte?: Maybe<String>;
+  stringArtists_contains?: Maybe<String>;
+  stringArtists_not_contains?: Maybe<String>;
+  stringArtists_starts_with?: Maybe<String>;
+  stringArtists_not_starts_with?: Maybe<String>;
+  stringArtists_ends_with?: Maybe<String>;
+  stringArtists_not_ends_with?: Maybe<String>;
+  length?: Maybe<String>;
+  length_not?: Maybe<String>;
+  length_in?: Maybe<String[] | String>;
+  length_not_in?: Maybe<String[] | String>;
+  length_lt?: Maybe<String>;
+  length_lte?: Maybe<String>;
+  length_gt?: Maybe<String>;
+  length_gte?: Maybe<String>;
+  length_contains?: Maybe<String>;
+  length_not_contains?: Maybe<String>;
+  length_starts_with?: Maybe<String>;
+  length_not_starts_with?: Maybe<String>;
+  length_ends_with?: Maybe<String>;
+  length_not_ends_with?: Maybe<String>;
+  popularity?: Maybe<Int>;
+  popularity_not?: Maybe<Int>;
+  popularity_in?: Maybe<Int[] | Int>;
+  popularity_not_in?: Maybe<Int[] | Int>;
+  popularity_lt?: Maybe<Int>;
+  popularity_lte?: Maybe<Int>;
+  popularity_gt?: Maybe<Int>;
+  popularity_gte?: Maybe<Int>;
+  AND?: Maybe<
+    PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput
+  >;
+  OR?: Maybe<
+    PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput
+  >;
+  NOT?: Maybe<
+    PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput
+  >;
+}
+
+export interface GameCreateInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  cover?: Maybe<String>;
+  type: GameType;
+}
+
+export interface PartySavedTrackUpdateManyWithWhereNestedInput {
+  where: PartySavedTrackScalarWhereInput;
+  data: PartySavedTrackUpdateManyDataInput;
+}
+
+export interface PlaylistCreateWithoutPartiesInput {
+  id?: Maybe<ID_Input>;
+  playlist_id?: Maybe<String>;
+  user: UserCreateOneInput;
+  name: String;
+  tracks?: Maybe<TrackCreateManyInput>;
+  isTemporary?: Maybe<Boolean>;
+}
+
+export interface PartySavedTrackUpdateManyDataInput {
+  spotifyId?: Maybe<String>;
+  durationMs?: Maybe<Int>;
+  explicit?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  previewUrl?: Maybe<String>;
+  uri?: Maybe<String>;
+  stringArtists?: Maybe<String>;
+  length?: Maybe<String>;
+  popularity?: Maybe<Int>;
+}
+
+export interface TrackCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  album: AlbumCreateOneInput;
+  artists?: Maybe<ArtistCreateManyInput>;
+  duration: Int;
+  preview_url?: Maybe<String>;
+}
+
+export interface PartyCartUpdateOneWithoutPartyInput {
+  create?: Maybe<PartyCartCreateWithoutPartyInput>;
+  update?: Maybe<PartyCartUpdateWithoutPartyDataInput>;
+  upsert?: Maybe<PartyCartUpsertWithoutPartyInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<PartyCartWhereUniqueInput>;
+}
+
+export interface ArtistCreateManyInput {
+  create?: Maybe<ArtistCreateInput[] | ArtistCreateInput>;
+  connect?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
+}
+
+export interface PartyCartUpdateWithoutPartyDataInput {
+  items?: Maybe<PartyCartItemUpdateManyWithoutCartInput>;
+}
+
+export interface PartySavedTrackCreateWithoutPartyInput {
+  id?: Maybe<ID_Input>;
+  spotifyId: String;
+  durationMs: Int;
+  explicit: Boolean;
+  name: String;
+  previewUrl?: Maybe<String>;
+  uri: String;
+  stringArtists: String;
+  length: String;
+  popularity: Int;
+  album: AlbumCreateOneInput;
+}
+
+export interface PartyCartItemUpdateManyWithoutCartInput {
+  create?: Maybe<
+    PartyCartItemCreateWithoutCartInput[] | PartyCartItemCreateWithoutCartInput
+  >;
+  delete?: Maybe<
+    PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput
+  >;
+  connect?: Maybe<
+    PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput
+  >;
+  set?: Maybe<PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput>;
+  disconnect?: Maybe<
+    PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput
+  >;
+  update?: Maybe<
+    | PartyCartItemUpdateWithWhereUniqueWithoutCartInput[]
+    | PartyCartItemUpdateWithWhereUniqueWithoutCartInput
+  >;
+  upsert?: Maybe<
+    | PartyCartItemUpsertWithWhereUniqueWithoutCartInput[]
+    | PartyCartItemUpsertWithWhereUniqueWithoutCartInput
+  >;
+  deleteMany?: Maybe<
+    PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | PartyCartItemUpdateManyWithWhereNestedInput[]
+    | PartyCartItemUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PartyCartCreateWithoutPartyInput {
+  id?: Maybe<ID_Input>;
+  items?: Maybe<PartyCartItemCreateManyWithoutCartInput>;
+}
+
+export interface PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
+  where: PartyCartItemWhereUniqueInput;
+  data: PartyCartItemUpdateWithoutCartDataInput;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface PartyCartItemUpdateWithoutCartDataInput {
+  user?: Maybe<UserUpdateOneInput>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  price?: Maybe<Float>;
+  quantity?: Maybe<Int>;
+}
+
+export interface TrackSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<TrackWhereInput>;
+  AND?: Maybe<TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput>;
+  OR?: Maybe<TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput>;
+  NOT?: Maybe<TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput>;
+}
+
+export interface UserUpdateOneInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface LocationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  placeName?: Maybe<String>;
+  placeName_not?: Maybe<String>;
+  placeName_in?: Maybe<String[] | String>;
+  placeName_not_in?: Maybe<String[] | String>;
+  placeName_lt?: Maybe<String>;
+  placeName_lte?: Maybe<String>;
+  placeName_gt?: Maybe<String>;
+  placeName_gte?: Maybe<String>;
+  placeName_contains?: Maybe<String>;
+  placeName_not_contains?: Maybe<String>;
+  placeName_starts_with?: Maybe<String>;
+  placeName_not_starts_with?: Maybe<String>;
+  placeName_ends_with?: Maybe<String>;
+  placeName_not_ends_with?: Maybe<String>;
+  latitude?: Maybe<Float>;
+  latitude_not?: Maybe<Float>;
+  latitude_in?: Maybe<Float[] | Float>;
+  latitude_not_in?: Maybe<Float[] | Float>;
+  latitude_lt?: Maybe<Float>;
+  latitude_lte?: Maybe<Float>;
+  latitude_gt?: Maybe<Float>;
+  latitude_gte?: Maybe<Float>;
+  longitude?: Maybe<Float>;
+  longitude_not?: Maybe<Float>;
+  longitude_in?: Maybe<Float[] | Float>;
+  longitude_not_in?: Maybe<Float[] | Float>;
+  longitude_lt?: Maybe<Float>;
+  longitude_lte?: Maybe<Float>;
+  longitude_gt?: Maybe<Float>;
+  longitude_gte?: Maybe<Float>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<LocationWhereInput[] | LocationWhereInput>;
+  OR?: Maybe<LocationWhereInput[] | LocationWhereInput>;
+  NOT?: Maybe<LocationWhereInput[] | LocationWhereInput>;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface PlaylistWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  playlist_id?: Maybe<String>;
+  playlist_id_not?: Maybe<String>;
+  playlist_id_in?: Maybe<String[] | String>;
+  playlist_id_not_in?: Maybe<String[] | String>;
+  playlist_id_lt?: Maybe<String>;
+  playlist_id_lte?: Maybe<String>;
+  playlist_id_gt?: Maybe<String>;
+  playlist_id_gte?: Maybe<String>;
+  playlist_id_contains?: Maybe<String>;
+  playlist_id_not_contains?: Maybe<String>;
+  playlist_id_starts_with?: Maybe<String>;
+  playlist_id_not_starts_with?: Maybe<String>;
+  playlist_id_ends_with?: Maybe<String>;
+  playlist_id_not_ends_with?: Maybe<String>;
+  user?: Maybe<UserWhereInput>;
+  parties_every?: Maybe<PartyWhereInput>;
+  parties_some?: Maybe<PartyWhereInput>;
+  parties_none?: Maybe<PartyWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  tracks_every?: Maybe<TrackWhereInput>;
+  tracks_some?: Maybe<TrackWhereInput>;
+  tracks_none?: Maybe<TrackWhereInput>;
+  isTemporary?: Maybe<Boolean>;
+  isTemporary_not?: Maybe<Boolean>;
+  AND?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
+  OR?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
+  NOT?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
+}
+
+export interface PartyCartItemUpsertWithWhereUniqueWithoutCartInput {
+  where: PartyCartItemWhereUniqueInput;
+  update: PartyCartItemUpdateWithoutCartDataInput;
+  create: PartyCartItemCreateWithoutCartInput;
+}
+
+export interface PartyCartItemWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  cart?: Maybe<PartyCartWhereInput>;
+  user?: Maybe<UserWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  price?: Maybe<Float>;
+  price_not?: Maybe<Float>;
+  price_in?: Maybe<Float[] | Float>;
+  price_not_in?: Maybe<Float[] | Float>;
+  price_lt?: Maybe<Float>;
+  price_lte?: Maybe<Float>;
+  price_gt?: Maybe<Float>;
+  price_gte?: Maybe<Float>;
+  quantity?: Maybe<Int>;
+  quantity_not?: Maybe<Int>;
+  quantity_in?: Maybe<Int[] | Int>;
+  quantity_not_in?: Maybe<Int[] | Int>;
+  quantity_lt?: Maybe<Int>;
+  quantity_lte?: Maybe<Int>;
+  quantity_gt?: Maybe<Int>;
+  quantity_gte?: Maybe<Int>;
+  AND?: Maybe<PartyCartItemWhereInput[] | PartyCartItemWhereInput>;
+  OR?: Maybe<PartyCartItemWhereInput[] | PartyCartItemWhereInput>;
+  NOT?: Maybe<PartyCartItemWhereInput[] | PartyCartItemWhereInput>;
+}
+
+export interface PartyCartItemScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  price?: Maybe<Float>;
+  price_not?: Maybe<Float>;
+  price_in?: Maybe<Float[] | Float>;
+  price_not_in?: Maybe<Float[] | Float>;
+  price_lt?: Maybe<Float>;
+  price_lte?: Maybe<Float>;
+  price_gt?: Maybe<Float>;
+  price_gte?: Maybe<Float>;
+  quantity?: Maybe<Int>;
+  quantity_not?: Maybe<Int>;
+  quantity_in?: Maybe<Int[] | Int>;
+  quantity_not_in?: Maybe<Int[] | Int>;
+  quantity_lt?: Maybe<Int>;
+  quantity_lte?: Maybe<Int>;
+  quantity_gt?: Maybe<Int>;
+  quantity_gte?: Maybe<Int>;
+  AND?: Maybe<PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput>;
+  OR?: Maybe<PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput>;
+  NOT?: Maybe<PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput>;
+}
+
+export interface PartyCartSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PartyCartWhereInput>;
+  AND?: Maybe<
+    PartyCartSubscriptionWhereInput[] | PartyCartSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    PartyCartSubscriptionWhereInput[] | PartyCartSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    PartyCartSubscriptionWhereInput[] | PartyCartSubscriptionWhereInput
+  >;
+}
+
+export interface PartyCartItemUpdateManyWithWhereNestedInput {
+  where: PartyCartItemScalarWhereInput;
+  data: PartyCartItemUpdateManyDataInput;
+}
+
+export interface LocationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<LocationWhereInput>;
+  AND?: Maybe<
+    LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput
+  >;
+  OR?: Maybe<LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput>;
+  NOT?: Maybe<
+    LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput
+  >;
+}
+
+export interface PartyCartItemUpdateManyDataInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  price?: Maybe<Float>;
+  quantity?: Maybe<Int>;
+}
+
+export interface ArtistSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ArtistWhereInput>;
+  AND?: Maybe<ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput>;
+  OR?: Maybe<ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput>;
+  NOT?: Maybe<ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput>;
+}
+
+export interface PartyCartUpsertWithoutPartyInput {
+  update: PartyCartUpdateWithoutPartyDataInput;
+  create: PartyCartCreateWithoutPartyInput;
+}
+
+export interface TrackUpdateManyMutationInput {
+  name?: Maybe<String>;
+  duration?: Maybe<Int>;
+  preview_url?: Maybe<String>;
+}
+
+export interface PartyUpsertWithWhereUniqueWithoutMembersInput {
+  where: PartyWhereUniqueInput;
+  update: PartyUpdateWithoutMembersDataInput;
+  create: PartyCreateWithoutMembersInput;
+}
+
+export interface PartyUpdateWithoutPlaylistDataInput {
+  title?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  description?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
+  games?: Maybe<GameUpdateManyInput>;
+  colorTint?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
+  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
+}
+
+export interface PartyScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  normalizedTitle_not?: Maybe<String>;
+  normalizedTitle_in?: Maybe<String[] | String>;
+  normalizedTitle_not_in?: Maybe<String[] | String>;
+  normalizedTitle_lt?: Maybe<String>;
+  normalizedTitle_lte?: Maybe<String>;
+  normalizedTitle_gt?: Maybe<String>;
+  normalizedTitle_gte?: Maybe<String>;
+  normalizedTitle_contains?: Maybe<String>;
+  normalizedTitle_not_contains?: Maybe<String>;
+  normalizedTitle_starts_with?: Maybe<String>;
+  normalizedTitle_not_starts_with?: Maybe<String>;
+  normalizedTitle_ends_with?: Maybe<String>;
+  normalizedTitle_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  colorTint?: Maybe<String>;
+  colorTint_not?: Maybe<String>;
+  colorTint_in?: Maybe<String[] | String>;
+  colorTint_not_in?: Maybe<String[] | String>;
+  colorTint_lt?: Maybe<String>;
+  colorTint_lte?: Maybe<String>;
+  colorTint_gt?: Maybe<String>;
+  colorTint_gte?: Maybe<String>;
+  colorTint_contains?: Maybe<String>;
+  colorTint_not_contains?: Maybe<String>;
+  colorTint_starts_with?: Maybe<String>;
+  colorTint_not_starts_with?: Maybe<String>;
+  colorTint_ends_with?: Maybe<String>;
+  colorTint_not_ends_with?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  isPublic_not?: Maybe<Boolean>;
+  start?: Maybe<DateTimeInput>;
+  start_not?: Maybe<DateTimeInput>;
+  start_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  start_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  start_lt?: Maybe<DateTimeInput>;
+  start_lte?: Maybe<DateTimeInput>;
+  start_gt?: Maybe<DateTimeInput>;
+  start_gte?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  end_not?: Maybe<DateTimeInput>;
+  end_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  end_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  end_lt?: Maybe<DateTimeInput>;
+  end_lte?: Maybe<DateTimeInput>;
+  end_gt?: Maybe<DateTimeInput>;
+  end_gte?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+  inviteSecret_not?: Maybe<String>;
+  inviteSecret_in?: Maybe<String[] | String>;
+  inviteSecret_not_in?: Maybe<String[] | String>;
+  inviteSecret_lt?: Maybe<String>;
+  inviteSecret_lte?: Maybe<String>;
+  inviteSecret_gt?: Maybe<String>;
+  inviteSecret_gte?: Maybe<String>;
+  inviteSecret_contains?: Maybe<String>;
+  inviteSecret_not_contains?: Maybe<String>;
+  inviteSecret_starts_with?: Maybe<String>;
+  inviteSecret_not_starts_with?: Maybe<String>;
+  inviteSecret_ends_with?: Maybe<String>;
+  inviteSecret_not_ends_with?: Maybe<String>;
+  AND?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
+  OR?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
+  NOT?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
+}
+
+export interface PlaylistUpdateInput {
+  playlist_id?: Maybe<String>;
+  user?: Maybe<UserUpdateOneRequiredInput>;
+  parties?: Maybe<PartyUpdateManyWithoutPlaylistInput>;
+  name?: Maybe<String>;
+  tracks?: Maybe<TrackUpdateManyInput>;
+  isTemporary?: Maybe<Boolean>;
+}
+
+export interface PartyUpdateManyWithWhereNestedInput {
+  where: PartyScalarWhereInput;
+  data: PartyUpdateManyDataInput;
+}
+
+export interface ImageWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  height?: Maybe<Int>;
+  height_not?: Maybe<Int>;
+  height_in?: Maybe<Int[] | Int>;
+  height_not_in?: Maybe<Int[] | Int>;
+  height_lt?: Maybe<Int>;
+  height_lte?: Maybe<Int>;
+  height_gt?: Maybe<Int>;
+  height_gte?: Maybe<Int>;
+  width?: Maybe<Int>;
+  width_not?: Maybe<Int>;
+  width_in?: Maybe<Int[] | Int>;
+  width_not_in?: Maybe<Int[] | Int>;
+  width_lt?: Maybe<Int>;
+  width_lte?: Maybe<Int>;
+  width_gt?: Maybe<Int>;
+  width_gte?: Maybe<Int>;
+  url?: Maybe<String>;
+  url_not?: Maybe<String>;
+  url_in?: Maybe<String[] | String>;
+  url_not_in?: Maybe<String[] | String>;
+  url_lt?: Maybe<String>;
+  url_lte?: Maybe<String>;
+  url_gt?: Maybe<String>;
+  url_gte?: Maybe<String>;
+  url_contains?: Maybe<String>;
+  url_not_contains?: Maybe<String>;
+  url_starts_with?: Maybe<String>;
+  url_not_starts_with?: Maybe<String>;
+  url_ends_with?: Maybe<String>;
+  url_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+  OR?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+  NOT?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+}
+
+export interface PartyUpdateManyDataInput {
+  title?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  description?: Maybe<String>;
+  colorTint?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+}
+
+export interface PartyUpdateWithoutSavedTracksDataInput {
+  title?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  description?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
+  games?: Maybe<GameUpdateManyInput>;
+  colorTint?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
+  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
+}
+
+export interface UserUpdateManyWithoutFriendsInput {
+  create?: Maybe<
+    UserCreateWithoutFriendsInput[] | UserCreateWithoutFriendsInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutFriendsInput[]
+    | UserUpdateWithWhereUniqueWithoutFriendsInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutFriendsInput[]
+    | UserUpsertWithWhereUniqueWithoutFriendsInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PartyCreateWithoutSavedTracksInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  author: UserCreateOneInput;
+  location: LocationCreateOneInput;
+  games?: Maybe<GameCreateManyInput>;
+  colorTint: String;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserCreateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret: String;
+  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
+  cart?: Maybe<PartyCartCreateOneWithoutPartyInput>;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutFriendsDataInput;
+}
+
+export interface PartyInvitationUpdateManyMutationInput {
+  invitedUserId?: Maybe<String>;
+  partyId?: Maybe<String>;
+}
+
+export interface UserUpdateWithoutFriendsDataInput {
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  password?: Maybe<String>;
+  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
+  pendingFriendInvitations?: Maybe<
+    UserUpdateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
+  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
+  create?: Maybe<UserCreateWithoutPendingPartyInvitationsInput>;
+  update?: Maybe<UserUpdateWithoutPendingPartyInvitationsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutPendingPartyInvitationsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateManyWithoutPendingFriendInvitationsInput {
+  create?: Maybe<
+    | UserCreateWithoutPendingFriendInvitationsInput[]
+    | UserCreateWithoutPendingFriendInvitationsInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput[]
+    | UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput[]
+    | UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface UserCreateWithoutPendingPartyInvitationsInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
+  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserCreateManyWithoutPendingFriendInvitationsInput
+  >;
+  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutPendingFriendInvitationsDataInput;
+}
+
+export interface PartyCartItemUpdateManyMutationInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  price?: Maybe<Float>;
+  quantity?: Maybe<Int>;
+}
+
+export interface UserUpdateWithoutPendingFriendInvitationsDataInput {
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  password?: Maybe<String>;
+  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
+  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
+  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
+  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface PartyCartUpdateOneRequiredWithoutItemsInput {
+  create?: Maybe<PartyCartCreateWithoutItemsInput>;
+  update?: Maybe<PartyCartUpdateWithoutItemsDataInput>;
+  upsert?: Maybe<PartyCartUpsertWithoutItemsInput>;
+  connect?: Maybe<PartyCartWhereUniqueInput>;
+}
+
+export interface PartyInvitationUpdateManyWithoutUserInput {
+  create?: Maybe<
+    | PartyInvitationCreateWithoutUserInput[]
+    | PartyInvitationCreateWithoutUserInput
+  >;
+  delete?: Maybe<
+    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
+  >;
+  connect?: Maybe<
+    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
+  >;
+  set?: Maybe<
+    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
+  >;
+  disconnect?: Maybe<
+    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
+  >;
+  update?: Maybe<
+    | PartyInvitationUpdateWithWhereUniqueWithoutUserInput[]
+    | PartyInvitationUpdateWithWhereUniqueWithoutUserInput
+  >;
+  upsert?: Maybe<
+    | PartyInvitationUpsertWithWhereUniqueWithoutUserInput[]
+    | PartyInvitationUpsertWithWhereUniqueWithoutUserInput
+  >;
+  deleteMany?: Maybe<
+    PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | PartyInvitationUpdateManyWithWhereNestedInput[]
+    | PartyInvitationUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PartyCartCreateOneWithoutItemsInput {
+  create?: Maybe<PartyCartCreateWithoutItemsInput>;
+  connect?: Maybe<PartyCartWhereUniqueInput>;
+}
+
+export interface PartyInvitationUpdateWithWhereUniqueWithoutUserInput {
+  where: PartyInvitationWhereUniqueInput;
+  data: PartyInvitationUpdateWithoutUserDataInput;
+}
+
+export interface PartyUpdateWithoutCartDataInput {
+  title?: Maybe<String>;
+  normalizedTitle?: Maybe<String>;
+  description?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
+  games?: Maybe<GameUpdateManyInput>;
+  colorTint?: Maybe<String>;
+  isPublic?: Maybe<Boolean>;
+  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
+  start?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  inviteSecret?: Maybe<String>;
+  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
+  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
+}
+
+export interface PartyInvitationUpdateWithoutUserDataInput {
+  invitedBy?: Maybe<UserUpdateOneRequiredInput>;
+  party?: Maybe<PartyUpdateOneRequiredInput>;
+  invitedUserId?: Maybe<String>;
+  partyId?: Maybe<String>;
+}
+
+export type TrackWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface PartyInvitationUpsertWithWhereUniqueWithoutUserInput {
+  where: PartyInvitationWhereUniqueInput;
+  update: PartyInvitationUpdateWithoutUserDataInput;
+  create: PartyInvitationCreateWithoutUserInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface PartyInvitationScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  invitedUserId?: Maybe<String>;
+  invitedUserId_not?: Maybe<String>;
+  invitedUserId_in?: Maybe<String[] | String>;
+  invitedUserId_not_in?: Maybe<String[] | String>;
+  invitedUserId_lt?: Maybe<String>;
+  invitedUserId_lte?: Maybe<String>;
+  invitedUserId_gt?: Maybe<String>;
+  invitedUserId_gte?: Maybe<String>;
+  invitedUserId_contains?: Maybe<String>;
+  invitedUserId_not_contains?: Maybe<String>;
+  invitedUserId_starts_with?: Maybe<String>;
+  invitedUserId_not_starts_with?: Maybe<String>;
+  invitedUserId_ends_with?: Maybe<String>;
+  invitedUserId_not_ends_with?: Maybe<String>;
+  partyId?: Maybe<String>;
+  partyId_not?: Maybe<String>;
+  partyId_in?: Maybe<String[] | String>;
+  partyId_not_in?: Maybe<String[] | String>;
+  partyId_lt?: Maybe<String>;
+  partyId_lte?: Maybe<String>;
+  partyId_gt?: Maybe<String>;
+  partyId_gte?: Maybe<String>;
+  partyId_contains?: Maybe<String>;
+  partyId_not_contains?: Maybe<String>;
+  partyId_starts_with?: Maybe<String>;
+  partyId_not_starts_with?: Maybe<String>;
+  partyId_ends_with?: Maybe<String>;
+  partyId_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<
+    PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput
+  >;
+  OR?: Maybe<
+    PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput
+  >;
+  NOT?: Maybe<
+    PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput
+  >;
+}
+
+export interface ChatUpdateWithoutMessagesDataInput {
+  party?: Maybe<PartyUpdateOneRequiredInput>;
+  members?: Maybe<UserUpdateManyWithoutChatsInput>;
+}
+
+export interface PartyInvitationUpdateManyWithWhereNestedInput {
+  where: PartyInvitationScalarWhereInput;
+  data: PartyInvitationUpdateManyDataInput;
+}
+
+export interface ArtistUpdateManyMutationInput {
+  spotifyId?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  name?: Maybe<String>;
+}
+
+export interface PartyInvitationUpdateManyDataInput {
+  invitedUserId?: Maybe<String>;
+  partyId?: Maybe<String>;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface ChatUpdateManyWithoutMembersInput {
+  create?: Maybe<
+    ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput
+  >;
+  delete?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
+  connect?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
+  set?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
+  disconnect?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
+  update?: Maybe<
+    | ChatUpdateWithWhereUniqueWithoutMembersInput[]
+    | ChatUpdateWithWhereUniqueWithoutMembersInput
+  >;
+  upsert?: Maybe<
+    | ChatUpsertWithWhereUniqueWithoutMembersInput[]
+    | ChatUpsertWithWhereUniqueWithoutMembersInput
+  >;
+  deleteMany?: Maybe<ChatScalarWhereInput[] | ChatScalarWhereInput>;
+}
+
+export interface LocationCreateOneInput {
+  create?: Maybe<LocationCreateInput>;
+  connect?: Maybe<LocationWhereUniqueInput>;
+}
+
+export interface ChatUpdateWithWhereUniqueWithoutMembersInput {
+  where: ChatWhereUniqueInput;
+  data: ChatUpdateWithoutMembersDataInput;
+}
+
+export interface PlaylistCreateOneWithoutPartiesInput {
+  create?: Maybe<PlaylistCreateWithoutPartiesInput>;
+  connect?: Maybe<PlaylistWhereUniqueInput>;
+}
+
+export interface ChatUpdateWithoutMembersDataInput {
+  party?: Maybe<PartyUpdateOneRequiredInput>;
+  messages?: Maybe<MessageUpdateManyWithoutChatInput>;
+}
+
 export interface AlbumCreateOneInput {
   create?: Maybe<AlbumCreateInput>;
   connect?: Maybe<AlbumWhereUniqueInput>;
+}
+
+export interface MessageUpdateManyWithoutChatInput {
+  create?: Maybe<
+    MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput
+  >;
+  delete?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
+  connect?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
+  set?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
+  disconnect?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
+  update?: Maybe<
+    | MessageUpdateWithWhereUniqueWithoutChatInput[]
+    | MessageUpdateWithWhereUniqueWithoutChatInput
+  >;
+  upsert?: Maybe<
+    | MessageUpsertWithWhereUniqueWithoutChatInput[]
+    | MessageUpsertWithWhereUniqueWithoutChatInput
+  >;
+  deleteMany?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
+  updateMany?: Maybe<
+    | MessageUpdateManyWithWhereNestedInput[]
+    | MessageUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PartyCartCreateOneWithoutPartyInput {
+  create?: Maybe<PartyCartCreateWithoutPartyInput>;
+  connect?: Maybe<PartyCartWhereUniqueInput>;
+}
+
+export interface MessageUpdateWithWhereUniqueWithoutChatInput {
+  where: MessageWhereUniqueInput;
+  data: MessageUpdateWithoutChatDataInput;
 }
 
 export interface UserWhereInput {
@@ -1117,178 +4020,9 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface PartySavedTrackCreateManyWithoutPartyInput {
-  create?: Maybe<
-    | PartySavedTrackCreateWithoutPartyInput[]
-    | PartySavedTrackCreateWithoutPartyInput
-  >;
-  connect?: Maybe<
-    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
-  >;
-}
-
-export interface PartySavedTrackSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PartySavedTrackWhereInput>;
-  AND?: Maybe<
-    | PartySavedTrackSubscriptionWhereInput[]
-    | PartySavedTrackSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    | PartySavedTrackSubscriptionWhereInput[]
-    | PartySavedTrackSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    | PartySavedTrackSubscriptionWhereInput[]
-    | PartySavedTrackSubscriptionWhereInput
-  >;
-}
-
-export interface PartySavedTrackCreateWithoutPartyInput {
-  id?: Maybe<ID_Input>;
-  spotifyId: String;
-  name: String;
-  imageUrl: String;
-  artists?: Maybe<ArtistCreateManyInput>;
-  durationMs: Int;
-  length: String;
-  preview_url?: Maybe<String>;
-  uri?: Maybe<String>;
-  explicit: Boolean;
-  upVotes: Int;
-  downVotes: Int;
-  votedBy?: Maybe<UserCreateManyInput>;
-}
-
-export interface MessageWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  author?: Maybe<UserWhereInput>;
-  chat?: Maybe<ChatWhereInput>;
+export interface MessageUpdateWithoutChatDataInput {
+  author?: Maybe<UserUpdateOneRequiredInput>;
   content?: Maybe<String>;
-  content_not?: Maybe<String>;
-  content_in?: Maybe<String[] | String>;
-  content_not_in?: Maybe<String[] | String>;
-  content_lt?: Maybe<String>;
-  content_lte?: Maybe<String>;
-  content_gt?: Maybe<String>;
-  content_gte?: Maybe<String>;
-  content_contains?: Maybe<String>;
-  content_not_contains?: Maybe<String>;
-  content_starts_with?: Maybe<String>;
-  content_not_starts_with?: Maybe<String>;
-  content_ends_with?: Maybe<String>;
-  content_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<MessageWhereInput[] | MessageWhereInput>;
-  OR?: Maybe<MessageWhereInput[] | MessageWhereInput>;
-  NOT?: Maybe<MessageWhereInput[] | MessageWhereInput>;
-}
-
-export interface UserCreateManyInput {
-  create?: Maybe<UserCreateInput[] | UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-}
-
-export interface LocationWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  placeName?: Maybe<String>;
-  placeName_not?: Maybe<String>;
-  placeName_in?: Maybe<String[] | String>;
-  placeName_not_in?: Maybe<String[] | String>;
-  placeName_lt?: Maybe<String>;
-  placeName_lte?: Maybe<String>;
-  placeName_gt?: Maybe<String>;
-  placeName_gte?: Maybe<String>;
-  placeName_contains?: Maybe<String>;
-  placeName_not_contains?: Maybe<String>;
-  placeName_starts_with?: Maybe<String>;
-  placeName_not_starts_with?: Maybe<String>;
-  placeName_ends_with?: Maybe<String>;
-  placeName_not_ends_with?: Maybe<String>;
-  latitude?: Maybe<Float>;
-  latitude_not?: Maybe<Float>;
-  latitude_in?: Maybe<Float[] | Float>;
-  latitude_not_in?: Maybe<Float[] | Float>;
-  latitude_lt?: Maybe<Float>;
-  latitude_lte?: Maybe<Float>;
-  latitude_gt?: Maybe<Float>;
-  latitude_gte?: Maybe<Float>;
-  longitude?: Maybe<Float>;
-  longitude_not?: Maybe<Float>;
-  longitude_in?: Maybe<Float[] | Float>;
-  longitude_not_in?: Maybe<Float[] | Float>;
-  longitude_lt?: Maybe<Float>;
-  longitude_lte?: Maybe<Float>;
-  longitude_gt?: Maybe<Float>;
-  longitude_gte?: Maybe<Float>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<LocationWhereInput[] | LocationWhereInput>;
-  OR?: Maybe<LocationWhereInput[] | LocationWhereInput>;
-  NOT?: Maybe<LocationWhereInput[] | LocationWhereInput>;
-}
-
-export interface PartyCartCreateOneWithoutPartyInput {
-  create?: Maybe<PartyCartCreateWithoutPartyInput>;
-  connect?: Maybe<PartyCartWhereUniqueInput>;
 }
 
 export interface GameWhereInput {
@@ -1359,12 +4093,30 @@ export interface GameWhereInput {
   NOT?: Maybe<GameWhereInput[] | GameWhereInput>;
 }
 
-export interface PartyCartCreateWithoutPartyInput {
-  id?: Maybe<ID_Input>;
-  items?: Maybe<PartyCartItemCreateManyWithoutCartInput>;
+export interface MessageUpsertWithWhereUniqueWithoutChatInput {
+  where: MessageWhereUniqueInput;
+  update: MessageUpdateWithoutChatDataInput;
+  create: MessageCreateWithoutChatInput;
 }
 
-export interface PlaylistWhereInput {
+export interface PartyCartItemSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PartyCartItemWhereInput>;
+  AND?: Maybe<
+    PartyCartItemSubscriptionWhereInput[] | PartyCartItemSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    PartyCartItemSubscriptionWhereInput[] | PartyCartItemSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    PartyCartItemSubscriptionWhereInput[] | PartyCartItemSubscriptionWhereInput
+  >;
+}
+
+export interface MessageScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1379,6 +4131,20 @@ export interface PlaylistWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  content?: Maybe<String>;
+  content_not?: Maybe<String>;
+  content_in?: Maybe<String[] | String>;
+  content_not_in?: Maybe<String[] | String>;
+  content_lt?: Maybe<String>;
+  content_lte?: Maybe<String>;
+  content_gt?: Maybe<String>;
+  content_gte?: Maybe<String>;
+  content_contains?: Maybe<String>;
+  content_not_contains?: Maybe<String>;
+  content_starts_with?: Maybe<String>;
+  content_not_starts_with?: Maybe<String>;
+  content_ends_with?: Maybe<String>;
+  content_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1395,329 +4161,9 @@ export interface PlaylistWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  playlist_id?: Maybe<String>;
-  playlist_id_not?: Maybe<String>;
-  playlist_id_in?: Maybe<String[] | String>;
-  playlist_id_not_in?: Maybe<String[] | String>;
-  playlist_id_lt?: Maybe<String>;
-  playlist_id_lte?: Maybe<String>;
-  playlist_id_gt?: Maybe<String>;
-  playlist_id_gte?: Maybe<String>;
-  playlist_id_contains?: Maybe<String>;
-  playlist_id_not_contains?: Maybe<String>;
-  playlist_id_starts_with?: Maybe<String>;
-  playlist_id_not_starts_with?: Maybe<String>;
-  playlist_id_ends_with?: Maybe<String>;
-  playlist_id_not_ends_with?: Maybe<String>;
-  user?: Maybe<UserWhereInput>;
-  parties_every?: Maybe<PartyWhereInput>;
-  parties_some?: Maybe<PartyWhereInput>;
-  parties_none?: Maybe<PartyWhereInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  tracks_every?: Maybe<TrackWhereInput>;
-  tracks_some?: Maybe<TrackWhereInput>;
-  tracks_none?: Maybe<TrackWhereInput>;
-  isTemporary?: Maybe<Boolean>;
-  isTemporary_not?: Maybe<Boolean>;
-  AND?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
-  OR?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
-  NOT?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
-}
-
-export interface PartyCartItemCreateManyWithoutCartInput {
-  create?: Maybe<
-    PartyCartItemCreateWithoutCartInput[] | PartyCartItemCreateWithoutCartInput
-  >;
-  connect?: Maybe<
-    PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput
-  >;
-}
-
-export interface PartySavedTrackWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  spotifyId?: Maybe<String>;
-  spotifyId_not?: Maybe<String>;
-  spotifyId_in?: Maybe<String[] | String>;
-  spotifyId_not_in?: Maybe<String[] | String>;
-  spotifyId_lt?: Maybe<String>;
-  spotifyId_lte?: Maybe<String>;
-  spotifyId_gt?: Maybe<String>;
-  spotifyId_gte?: Maybe<String>;
-  spotifyId_contains?: Maybe<String>;
-  spotifyId_not_contains?: Maybe<String>;
-  spotifyId_starts_with?: Maybe<String>;
-  spotifyId_not_starts_with?: Maybe<String>;
-  spotifyId_ends_with?: Maybe<String>;
-  spotifyId_not_ends_with?: Maybe<String>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  party?: Maybe<PartyWhereInput>;
-  imageUrl?: Maybe<String>;
-  imageUrl_not?: Maybe<String>;
-  imageUrl_in?: Maybe<String[] | String>;
-  imageUrl_not_in?: Maybe<String[] | String>;
-  imageUrl_lt?: Maybe<String>;
-  imageUrl_lte?: Maybe<String>;
-  imageUrl_gt?: Maybe<String>;
-  imageUrl_gte?: Maybe<String>;
-  imageUrl_contains?: Maybe<String>;
-  imageUrl_not_contains?: Maybe<String>;
-  imageUrl_starts_with?: Maybe<String>;
-  imageUrl_not_starts_with?: Maybe<String>;
-  imageUrl_ends_with?: Maybe<String>;
-  imageUrl_not_ends_with?: Maybe<String>;
-  artists_every?: Maybe<ArtistWhereInput>;
-  artists_some?: Maybe<ArtistWhereInput>;
-  artists_none?: Maybe<ArtistWhereInput>;
-  durationMs?: Maybe<Int>;
-  durationMs_not?: Maybe<Int>;
-  durationMs_in?: Maybe<Int[] | Int>;
-  durationMs_not_in?: Maybe<Int[] | Int>;
-  durationMs_lt?: Maybe<Int>;
-  durationMs_lte?: Maybe<Int>;
-  durationMs_gt?: Maybe<Int>;
-  durationMs_gte?: Maybe<Int>;
-  length?: Maybe<String>;
-  length_not?: Maybe<String>;
-  length_in?: Maybe<String[] | String>;
-  length_not_in?: Maybe<String[] | String>;
-  length_lt?: Maybe<String>;
-  length_lte?: Maybe<String>;
-  length_gt?: Maybe<String>;
-  length_gte?: Maybe<String>;
-  length_contains?: Maybe<String>;
-  length_not_contains?: Maybe<String>;
-  length_starts_with?: Maybe<String>;
-  length_not_starts_with?: Maybe<String>;
-  length_ends_with?: Maybe<String>;
-  length_not_ends_with?: Maybe<String>;
-  preview_url?: Maybe<String>;
-  preview_url_not?: Maybe<String>;
-  preview_url_in?: Maybe<String[] | String>;
-  preview_url_not_in?: Maybe<String[] | String>;
-  preview_url_lt?: Maybe<String>;
-  preview_url_lte?: Maybe<String>;
-  preview_url_gt?: Maybe<String>;
-  preview_url_gte?: Maybe<String>;
-  preview_url_contains?: Maybe<String>;
-  preview_url_not_contains?: Maybe<String>;
-  preview_url_starts_with?: Maybe<String>;
-  preview_url_not_starts_with?: Maybe<String>;
-  preview_url_ends_with?: Maybe<String>;
-  preview_url_not_ends_with?: Maybe<String>;
-  uri?: Maybe<String>;
-  uri_not?: Maybe<String>;
-  uri_in?: Maybe<String[] | String>;
-  uri_not_in?: Maybe<String[] | String>;
-  uri_lt?: Maybe<String>;
-  uri_lte?: Maybe<String>;
-  uri_gt?: Maybe<String>;
-  uri_gte?: Maybe<String>;
-  uri_contains?: Maybe<String>;
-  uri_not_contains?: Maybe<String>;
-  uri_starts_with?: Maybe<String>;
-  uri_not_starts_with?: Maybe<String>;
-  uri_ends_with?: Maybe<String>;
-  uri_not_ends_with?: Maybe<String>;
-  explicit?: Maybe<Boolean>;
-  explicit_not?: Maybe<Boolean>;
-  upVotes?: Maybe<Int>;
-  upVotes_not?: Maybe<Int>;
-  upVotes_in?: Maybe<Int[] | Int>;
-  upVotes_not_in?: Maybe<Int[] | Int>;
-  upVotes_lt?: Maybe<Int>;
-  upVotes_lte?: Maybe<Int>;
-  upVotes_gt?: Maybe<Int>;
-  upVotes_gte?: Maybe<Int>;
-  downVotes?: Maybe<Int>;
-  downVotes_not?: Maybe<Int>;
-  downVotes_in?: Maybe<Int[] | Int>;
-  downVotes_not_in?: Maybe<Int[] | Int>;
-  downVotes_lt?: Maybe<Int>;
-  downVotes_lte?: Maybe<Int>;
-  downVotes_gt?: Maybe<Int>;
-  downVotes_gte?: Maybe<Int>;
-  votedBy_every?: Maybe<UserWhereInput>;
-  votedBy_some?: Maybe<UserWhereInput>;
-  votedBy_none?: Maybe<UserWhereInput>;
-  AND?: Maybe<PartySavedTrackWhereInput[] | PartySavedTrackWhereInput>;
-  OR?: Maybe<PartySavedTrackWhereInput[] | PartySavedTrackWhereInput>;
-  NOT?: Maybe<PartySavedTrackWhereInput[] | PartySavedTrackWhereInput>;
-}
-
-export interface PartyCartItemCreateWithoutCartInput {
-  id?: Maybe<ID_Input>;
-  user?: Maybe<UserCreateOneInput>;
-  name: String;
-  description: String;
-  price: Float;
-  quantity?: Maybe<Int>;
-}
-
-export interface PartyCartItemWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  cart?: Maybe<PartyCartWhereInput>;
-  user?: Maybe<UserWhereInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  price?: Maybe<Float>;
-  price_not?: Maybe<Float>;
-  price_in?: Maybe<Float[] | Float>;
-  price_not_in?: Maybe<Float[] | Float>;
-  price_lt?: Maybe<Float>;
-  price_lte?: Maybe<Float>;
-  price_gt?: Maybe<Float>;
-  price_gte?: Maybe<Float>;
-  quantity?: Maybe<Int>;
-  quantity_not?: Maybe<Int>;
-  quantity_in?: Maybe<Int[] | Int>;
-  quantity_not_in?: Maybe<Int[] | Int>;
-  quantity_lt?: Maybe<Int>;
-  quantity_lte?: Maybe<Int>;
-  quantity_gt?: Maybe<Int>;
-  quantity_gte?: Maybe<Int>;
-  AND?: Maybe<PartyCartItemWhereInput[] | PartyCartItemWhereInput>;
-  OR?: Maybe<PartyCartItemWhereInput[] | PartyCartItemWhereInput>;
-  NOT?: Maybe<PartyCartItemWhereInput[] | PartyCartItemWhereInput>;
-}
-
-export interface UserCreateManyWithoutFriendsInput {
-  create?: Maybe<
-    UserCreateWithoutFriendsInput[] | UserCreateWithoutFriendsInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-}
-
-export interface PartySubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PartyWhereInput>;
-  AND?: Maybe<PartySubscriptionWhereInput[] | PartySubscriptionWhereInput>;
-  OR?: Maybe<PartySubscriptionWhereInput[] | PartySubscriptionWhereInput>;
-  NOT?: Maybe<PartySubscriptionWhereInput[] | PartySubscriptionWhereInput>;
-}
-
-export interface UserCreateWithoutFriendsInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
-  pendingFriendInvitations?: Maybe<
-    UserCreateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
-  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface LocationSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<LocationWhereInput>;
-  AND?: Maybe<
-    LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput
-  >;
-  OR?: Maybe<LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput>;
-  NOT?: Maybe<
-    LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput
-  >;
-}
-
-export interface UserCreateManyWithoutPendingFriendInvitationsInput {
-  create?: Maybe<
-    | UserCreateWithoutPendingFriendInvitationsInput[]
-    | UserCreateWithoutPendingFriendInvitationsInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  AND?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
+  OR?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
+  NOT?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
 }
 
 export interface GameSubscriptionWhereInput {
@@ -1731,162 +4177,9 @@ export interface GameSubscriptionWhereInput {
   NOT?: Maybe<GameSubscriptionWhereInput[] | GameSubscriptionWhereInput>;
 }
 
-export interface UserCreateWithoutPendingFriendInvitationsInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
-  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
-  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
-  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface ArtistSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ArtistWhereInput>;
-  AND?: Maybe<ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput>;
-  OR?: Maybe<ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput>;
-  NOT?: Maybe<ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput>;
-}
-
-export interface PartyInvitationCreateManyWithoutUserInput {
-  create?: Maybe<
-    | PartyInvitationCreateWithoutUserInput[]
-    | PartyInvitationCreateWithoutUserInput
-  >;
-  connect?: Maybe<
-    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
-  >;
-}
-
-export interface AlbumWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  uri?: Maybe<String>;
-  uri_not?: Maybe<String>;
-  uri_in?: Maybe<String[] | String>;
-  uri_not_in?: Maybe<String[] | String>;
-  uri_lt?: Maybe<String>;
-  uri_lte?: Maybe<String>;
-  uri_gt?: Maybe<String>;
-  uri_gte?: Maybe<String>;
-  uri_contains?: Maybe<String>;
-  uri_not_contains?: Maybe<String>;
-  uri_starts_with?: Maybe<String>;
-  uri_not_starts_with?: Maybe<String>;
-  uri_ends_with?: Maybe<String>;
-  uri_not_ends_with?: Maybe<String>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  releaseDate?: Maybe<String>;
-  releaseDate_not?: Maybe<String>;
-  releaseDate_in?: Maybe<String[] | String>;
-  releaseDate_not_in?: Maybe<String[] | String>;
-  releaseDate_lt?: Maybe<String>;
-  releaseDate_lte?: Maybe<String>;
-  releaseDate_gt?: Maybe<String>;
-  releaseDate_gte?: Maybe<String>;
-  releaseDate_contains?: Maybe<String>;
-  releaseDate_not_contains?: Maybe<String>;
-  releaseDate_starts_with?: Maybe<String>;
-  releaseDate_not_starts_with?: Maybe<String>;
-  releaseDate_ends_with?: Maybe<String>;
-  releaseDate_not_ends_with?: Maybe<String>;
-  images_every?: Maybe<ImageWhereInput>;
-  images_some?: Maybe<ImageWhereInput>;
-  images_none?: Maybe<ImageWhereInput>;
-  artists_every?: Maybe<ArtistWhereInput>;
-  artists_some?: Maybe<ArtistWhereInput>;
-  artists_none?: Maybe<ArtistWhereInput>;
-  AND?: Maybe<AlbumWhereInput[] | AlbumWhereInput>;
-  OR?: Maybe<AlbumWhereInput[] | AlbumWhereInput>;
-  NOT?: Maybe<AlbumWhereInput[] | AlbumWhereInput>;
-}
-
-export interface PartyInvitationCreateWithoutUserInput {
-  id?: Maybe<ID_Input>;
-  invitedBy: UserCreateOneInput;
-  party: PartyCreateOneInput;
-  invitedUserId: String;
-  partyId: String;
-}
-
-export interface UserUpdateInput {
-  email?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  password?: Maybe<String>;
-  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
-  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserUpdateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
-  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface ChatCreateManyWithoutMembersInput {
-  create?: Maybe<
-    ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput
-  >;
-  connect?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
-}
-
-export interface TrackUpdateInput {
-  name?: Maybe<String>;
-  album?: Maybe<AlbumUpdateOneRequiredInput>;
-  artists?: Maybe<ArtistUpdateManyInput>;
-  duration?: Maybe<Int>;
-  preview_url?: Maybe<String>;
-}
-
-export interface ChatCreateWithoutMembersInput {
-  id?: Maybe<ID_Input>;
-  party: PartyCreateOneInput;
-  messages?: Maybe<MessageCreateManyWithoutChatInput>;
+export interface MessageUpdateManyWithWhereNestedInput {
+  where: MessageScalarWhereInput;
+  data: MessageUpdateManyDataInput;
 }
 
 export interface PlaylistUpdateManyMutationInput {
@@ -1895,312 +4188,28 @@ export interface PlaylistUpdateManyMutationInput {
   isTemporary?: Maybe<Boolean>;
 }
 
-export interface MessageCreateManyWithoutChatInput {
-  create?: Maybe<
-    MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput
-  >;
-  connect?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
-}
-
-export interface PartyUpdateWithoutPlaylistDataInput {
-  title?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  description?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
-  games?: Maybe<GameUpdateManyInput>;
-  colorTint?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
-  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
-}
-
-export interface MessageCreateWithoutChatInput {
-  id?: Maybe<ID_Input>;
-  author: UserCreateOneInput;
-  content: String;
-}
-
-export interface PartyUpdateManyWithoutPlaylistInput {
-  create?: Maybe<
-    PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput
-  >;
-  delete?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-  connect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-  set?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-  disconnect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-  update?: Maybe<
-    | PartyUpdateWithWhereUniqueWithoutPlaylistInput[]
-    | PartyUpdateWithWhereUniqueWithoutPlaylistInput
-  >;
-  upsert?: Maybe<
-    | PartyUpsertWithWhereUniqueWithoutPlaylistInput[]
-    | PartyUpsertWithWhereUniqueWithoutPlaylistInput
-  >;
-  deleteMany?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
-  updateMany?: Maybe<
-    PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface UserCreateManyWithoutPartiesInput {
-  create?: Maybe<
-    UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-}
-
-export type GameWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  title?: Maybe<String>;
-}>;
-
-export interface UserCreateWithoutPartiesInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserCreateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
-  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface PartyCreateManyWithoutPlaylistInput {
-  create?: Maybe<
-    PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput
-  >;
-  connect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-}
-
-export interface UserCreateManyWithoutChatsInput {
-  create?: Maybe<UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+export interface MessageUpdateManyDataInput {
+  content?: Maybe<String>;
 }
 
 export type ImageWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface UserCreateWithoutChatsInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
-  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserCreateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
+export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
+  where: ChatWhereUniqueInput;
+  update: ChatUpdateWithoutMembersDataInput;
+  create: ChatCreateWithoutMembersInput;
 }
 
-export interface PartyUpsertWithoutSavedTracksInput {
-  update: PartyUpdateWithoutSavedTracksDataInput;
-  create: PartyCreateWithoutSavedTracksInput;
-}
-
-export interface ChatUpdateInput {
-  party?: Maybe<PartyUpdateOneRequiredInput>;
-  members?: Maybe<UserUpdateManyWithoutChatsInput>;
-  messages?: Maybe<MessageUpdateManyWithoutChatInput>;
-}
-
-export type LocationWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface PartyUpdateOneRequiredInput {
-  create?: Maybe<PartyCreateInput>;
-  update?: Maybe<PartyUpdateDataInput>;
-  upsert?: Maybe<PartyUpsertNestedInput>;
-  connect?: Maybe<PartyWhereUniqueInput>;
-}
-
-export interface PartySavedTrackUpdateInput {
-  spotifyId?: Maybe<String>;
-  name?: Maybe<String>;
-  party?: Maybe<PartyUpdateOneRequiredWithoutSavedTracksInput>;
-  imageUrl?: Maybe<String>;
-  artists?: Maybe<ArtistUpdateManyInput>;
-  durationMs?: Maybe<Int>;
-  length?: Maybe<String>;
-  preview_url?: Maybe<String>;
-  uri?: Maybe<String>;
-  explicit?: Maybe<Boolean>;
-  upVotes?: Maybe<Int>;
-  downVotes?: Maybe<Int>;
-  votedBy?: Maybe<UserUpdateManyInput>;
-}
-
-export interface PartyUpdateDataInput {
-  title?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  description?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
-  games?: Maybe<GameUpdateManyInput>;
-  colorTint?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
-  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
-  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
-}
-
-export interface PartyCreateOneWithoutSavedTracksInput {
+export interface PartyUpdateOneRequiredWithoutSavedTracksInput {
   create?: Maybe<PartyCreateWithoutSavedTracksInput>;
+  update?: Maybe<PartyUpdateWithoutSavedTracksDataInput>;
+  upsert?: Maybe<PartyUpsertWithoutSavedTracksInput>;
   connect?: Maybe<PartyWhereUniqueInput>;
 }
 
-export interface UserUpdateOneRequiredInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface PartySavedTrackCreateInput {
-  id?: Maybe<ID_Input>;
-  spotifyId: String;
-  name: String;
-  party: PartyCreateOneWithoutSavedTracksInput;
-  imageUrl: String;
-  artists?: Maybe<ArtistCreateManyInput>;
-  durationMs: Int;
-  length: String;
-  preview_url?: Maybe<String>;
-  uri?: Maybe<String>;
-  explicit: Boolean;
-  upVotes: Int;
-  downVotes: Int;
-  votedBy?: Maybe<UserCreateManyInput>;
-}
-
-export interface UserUpdateDataInput {
-  email?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  password?: Maybe<String>;
-  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
-  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserUpdateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
-  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface UserUpsertWithoutPendingPartyInvitationsInput {
-  update: UserUpdateWithoutPendingPartyInvitationsDataInput;
-  create: UserCreateWithoutPendingPartyInvitationsInput;
-}
-
-export interface PartyUpdateManyWithoutMembersInput {
-  create?: Maybe<
-    PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput
-  >;
-  delete?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-  connect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-  set?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-  disconnect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
-  update?: Maybe<
-    | PartyUpdateWithWhereUniqueWithoutMembersInput[]
-    | PartyUpdateWithWhereUniqueWithoutMembersInput
-  >;
-  upsert?: Maybe<
-    | PartyUpsertWithWhereUniqueWithoutMembersInput[]
-    | PartyUpsertWithWhereUniqueWithoutMembersInput
-  >;
-  deleteMany?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
-  updateMany?: Maybe<
-    PartyUpdateManyWithWhereNestedInput[] | PartyUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
-  email?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  password?: Maybe<String>;
-  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
-  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserUpdateManyWithoutPendingFriendInvitationsInput
-  >;
-  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
-  where: PartyWhereUniqueInput;
-  data: PartyUpdateWithoutMembersDataInput;
-}
-
-export interface PartyInvitationUpdateInput {
-  invitedBy?: Maybe<UserUpdateOneRequiredInput>;
-  user?: Maybe<UserUpdateOneRequiredWithoutPendingPartyInvitationsInput>;
-  party?: Maybe<PartyUpdateOneRequiredInput>;
-  invitedUserId?: Maybe<String>;
-  partyId?: Maybe<String>;
-}
-
-export interface PartyUpdateWithoutMembersDataInput {
-  title?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  description?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
-  games?: Maybe<GameUpdateManyInput>;
-  colorTint?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
-  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
-  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
-}
-
-export interface ImageWhereInput {
+export interface ChatScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -2215,185 +4224,6 @@ export interface ImageWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  height?: Maybe<Int>;
-  height_not?: Maybe<Int>;
-  height_in?: Maybe<Int[] | Int>;
-  height_not_in?: Maybe<Int[] | Int>;
-  height_lt?: Maybe<Int>;
-  height_lte?: Maybe<Int>;
-  height_gt?: Maybe<Int>;
-  height_gte?: Maybe<Int>;
-  width?: Maybe<Int>;
-  width_not?: Maybe<Int>;
-  width_in?: Maybe<Int[] | Int>;
-  width_not_in?: Maybe<Int[] | Int>;
-  width_lt?: Maybe<Int>;
-  width_lte?: Maybe<Int>;
-  width_gt?: Maybe<Int>;
-  width_gte?: Maybe<Int>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ImageWhereInput[] | ImageWhereInput>;
-  OR?: Maybe<ImageWhereInput[] | ImageWhereInput>;
-  NOT?: Maybe<ImageWhereInput[] | ImageWhereInput>;
-}
-
-export interface LocationUpdateOneRequiredInput {
-  create?: Maybe<LocationCreateInput>;
-  update?: Maybe<LocationUpdateDataInput>;
-  upsert?: Maybe<LocationUpsertNestedInput>;
-  connect?: Maybe<LocationWhereUniqueInput>;
-}
-
-export interface UserCreateOneWithoutPendingPartyInvitationsInput {
-  create?: Maybe<UserCreateWithoutPendingPartyInvitationsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface LocationUpdateDataInput {
-  placeName?: Maybe<String>;
-  latitude?: Maybe<Float>;
-  longitude?: Maybe<Float>;
-}
-
-export type PartyCartItemWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface LocationUpsertNestedInput {
-  update: LocationUpdateDataInput;
-  create: LocationCreateInput;
-}
-
-export interface PartyCartUpsertWithoutItemsInput {
-  update: PartyCartUpdateWithoutItemsDataInput;
-  create: PartyCartCreateWithoutItemsInput;
-}
-
-export interface GameUpdateManyInput {
-  create?: Maybe<GameCreateInput[] | GameCreateInput>;
-  update?: Maybe<
-    | GameUpdateWithWhereUniqueNestedInput[]
-    | GameUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | GameUpsertWithWhereUniqueNestedInput[]
-    | GameUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
-  connect?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
-  set?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
-  disconnect?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
-  deleteMany?: Maybe<GameScalarWhereInput[] | GameScalarWhereInput>;
-  updateMany?: Maybe<
-    GameUpdateManyWithWhereNestedInput[] | GameUpdateManyWithWhereNestedInput
-  >;
-}
-
-export type PartyInvitationWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface MessageUpdateInput {
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  chat?: Maybe<ChatUpdateOneRequiredWithoutMessagesInput>;
-  content?: Maybe<String>;
-}
-
-export interface PartyCartItemUpdateInput {
-  cart?: Maybe<PartyCartUpdateOneRequiredWithoutItemsInput>;
-  user?: Maybe<UserUpdateOneInput>;
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  price?: Maybe<Float>;
-  quantity?: Maybe<Int>;
-}
-
-export interface GameUpdateDataInput {
-  title?: Maybe<String>;
-  cover?: Maybe<String>;
-  type?: Maybe<GameType>;
-}
-
-export type PartySavedTrackWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface GameUpsertWithWhereUniqueNestedInput {
-  where: GameWhereUniqueInput;
-  update: GameUpdateDataInput;
-  create: GameCreateInput;
-}
-
-export interface PartyCartItemCreateInput {
-  id?: Maybe<ID_Input>;
-  cart: PartyCartCreateOneWithoutItemsInput;
-  user?: Maybe<UserCreateOneInput>;
-  name: String;
-  description: String;
-  price: Float;
-  quantity?: Maybe<Int>;
-}
-
-export interface GameScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  cover?: Maybe<String>;
-  cover_not?: Maybe<String>;
-  cover_in?: Maybe<String[] | String>;
-  cover_not_in?: Maybe<String[] | String>;
-  cover_lt?: Maybe<String>;
-  cover_lte?: Maybe<String>;
-  cover_gt?: Maybe<String>;
-  cover_gte?: Maybe<String>;
-  cover_contains?: Maybe<String>;
-  cover_not_contains?: Maybe<String>;
-  cover_starts_with?: Maybe<String>;
-  cover_not_starts_with?: Maybe<String>;
-  cover_ends_with?: Maybe<String>;
-  cover_not_ends_with?: Maybe<String>;
-  type?: Maybe<GameType>;
-  type_not?: Maybe<GameType>;
-  type_in?: Maybe<GameType[] | GameType>;
-  type_not_in?: Maybe<GameType[] | GameType>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -2410,466 +4240,29 @@ export interface GameScalarWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<GameScalarWhereInput[] | GameScalarWhereInput>;
-  OR?: Maybe<GameScalarWhereInput[] | GameScalarWhereInput>;
-  NOT?: Maybe<GameScalarWhereInput[] | GameScalarWhereInput>;
+  AND?: Maybe<ChatScalarWhereInput[] | ChatScalarWhereInput>;
+  OR?: Maybe<ChatScalarWhereInput[] | ChatScalarWhereInput>;
+  NOT?: Maybe<ChatScalarWhereInput[] | ChatScalarWhereInput>;
 }
 
-export type PlaylistWhereUniqueInput = AtLeastOne<{
+export type PartyWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  playlist_id?: Maybe<String>;
+  inviteSecret?: Maybe<String>;
 }>;
 
-export interface GameUpdateManyWithWhereNestedInput {
-  where: GameScalarWhereInput;
-  data: GameUpdateManyDataInput;
+export interface UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutPendingFriendInvitationsDataInput;
+  create: UserCreateWithoutPendingFriendInvitationsInput;
 }
 
-export interface PartyUpdateOneRequiredWithoutCartInput {
-  create?: Maybe<PartyCreateWithoutCartInput>;
-  update?: Maybe<PartyUpdateWithoutCartDataInput>;
-  upsert?: Maybe<PartyUpsertWithoutCartInput>;
-  connect?: Maybe<PartyWhereUniqueInput>;
-}
-
-export interface GameUpdateManyDataInput {
-  title?: Maybe<String>;
-  cover?: Maybe<String>;
-  type?: Maybe<GameType>;
-}
-
-export interface PartyCreateWithoutCartInput {
+export interface PartyInvitationCreateInput {
   id?: Maybe<ID_Input>;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: Maybe<GameCreateManyInput>;
-  colorTint: String;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserCreateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret: String;
-  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
-  savedTracks?: Maybe<PartySavedTrackCreateManyWithoutPartyInput>;
-}
-
-export interface PlaylistUpdateOneWithoutPartiesInput {
-  create?: Maybe<PlaylistCreateWithoutPartiesInput>;
-  update?: Maybe<PlaylistUpdateWithoutPartiesDataInput>;
-  upsert?: Maybe<PlaylistUpsertWithoutPartiesInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<PlaylistWhereUniqueInput>;
-}
-
-export interface PartyCreateOneWithoutCartInput {
-  create?: Maybe<PartyCreateWithoutCartInput>;
-  connect?: Maybe<PartyWhereUniqueInput>;
-}
-
-export interface PlaylistUpdateWithoutPartiesDataInput {
-  playlist_id?: Maybe<String>;
-  user?: Maybe<UserUpdateOneRequiredInput>;
-  name?: Maybe<String>;
-  tracks?: Maybe<TrackUpdateManyInput>;
-  isTemporary?: Maybe<Boolean>;
-}
-
-export interface PartyUpdateManyMutationInput {
-  title?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  description?: Maybe<String>;
-  colorTint?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-}
-
-export interface TrackUpdateManyInput {
-  create?: Maybe<TrackCreateInput[] | TrackCreateInput>;
-  update?: Maybe<
-    | TrackUpdateWithWhereUniqueNestedInput[]
-    | TrackUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | TrackUpsertWithWhereUniqueNestedInput[]
-    | TrackUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
-  connect?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
-  set?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
-  disconnect?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
-  deleteMany?: Maybe<TrackScalarWhereInput[] | TrackScalarWhereInput>;
-  updateMany?: Maybe<
-    TrackUpdateManyWithWhereNestedInput[] | TrackUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface PartyUpdateInput {
-  title?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  description?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
-  games?: Maybe<GameUpdateManyInput>;
-  colorTint?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
-  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
-  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
-}
-
-export interface TrackUpdateWithWhereUniqueNestedInput {
-  where: TrackWhereUniqueInput;
-  data: TrackUpdateDataInput;
-}
-
-export interface ChatUpsertWithoutMessagesInput {
-  update: ChatUpdateWithoutMessagesDataInput;
-  create: ChatCreateWithoutMessagesInput;
-}
-
-export interface ChatCreateWithoutMessagesInput {
-  id?: Maybe<ID_Input>;
+  invitedBy: UserCreateOneInput;
+  user: UserCreateOneWithoutPendingPartyInvitationsInput;
   party: PartyCreateOneInput;
-  members?: Maybe<UserCreateManyWithoutChatsInput>;
-}
-
-export interface AlbumCreateInput {
-  id?: Maybe<ID_Input>;
-  uri: String;
-  name: String;
-  releaseDate: String;
-  images?: Maybe<ImageCreateManyInput>;
-  artists?: Maybe<ArtistCreateManyInput>;
-}
-
-export interface AlbumUpdateOneRequiredInput {
-  create?: Maybe<AlbumCreateInput>;
-  update?: Maybe<AlbumUpdateDataInput>;
-  upsert?: Maybe<AlbumUpsertNestedInput>;
-  connect?: Maybe<AlbumWhereUniqueInput>;
-}
-
-export interface ImageCreateInput {
-  id?: Maybe<ID_Input>;
-  height: Int;
-  width: Int;
-  url: String;
-}
-
-export interface AlbumUpdateDataInput {
-  uri?: Maybe<String>;
-  name?: Maybe<String>;
-  releaseDate?: Maybe<String>;
-  images?: Maybe<ImageUpdateManyInput>;
-  artists?: Maybe<ArtistUpdateManyInput>;
-}
-
-export interface ArtistCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-}
-
-export interface AlbumUpsertNestedInput {
-  update: AlbumUpdateDataInput;
-  create: AlbumCreateInput;
-}
-
-export interface ImageUpdateManyInput {
-  create?: Maybe<ImageCreateInput[] | ImageCreateInput>;
-  update?: Maybe<
-    | ImageUpdateWithWhereUniqueNestedInput[]
-    | ImageUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | ImageUpsertWithWhereUniqueNestedInput[]
-    | ImageUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<ImageWhereUniqueInput[] | ImageWhereUniqueInput>;
-  connect?: Maybe<ImageWhereUniqueInput[] | ImageWhereUniqueInput>;
-  set?: Maybe<ImageWhereUniqueInput[] | ImageWhereUniqueInput>;
-  disconnect?: Maybe<ImageWhereUniqueInput[] | ImageWhereUniqueInput>;
-  deleteMany?: Maybe<ImageScalarWhereInput[] | ImageScalarWhereInput>;
-  updateMany?: Maybe<
-    ImageUpdateManyWithWhereNestedInput[] | ImageUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface TrackUpsertWithWhereUniqueNestedInput {
-  where: TrackWhereUniqueInput;
-  update: TrackUpdateDataInput;
-  create: TrackCreateInput;
-}
-
-export interface ImageUpdateDataInput {
-  height?: Maybe<Int>;
-  width?: Maybe<Int>;
-  url?: Maybe<String>;
-}
-
-export interface TrackScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  duration?: Maybe<Int>;
-  duration_not?: Maybe<Int>;
-  duration_in?: Maybe<Int[] | Int>;
-  duration_not_in?: Maybe<Int[] | Int>;
-  duration_lt?: Maybe<Int>;
-  duration_lte?: Maybe<Int>;
-  duration_gt?: Maybe<Int>;
-  duration_gte?: Maybe<Int>;
-  preview_url?: Maybe<String>;
-  preview_url_not?: Maybe<String>;
-  preview_url_in?: Maybe<String[] | String>;
-  preview_url_not_in?: Maybe<String[] | String>;
-  preview_url_lt?: Maybe<String>;
-  preview_url_lte?: Maybe<String>;
-  preview_url_gt?: Maybe<String>;
-  preview_url_gte?: Maybe<String>;
-  preview_url_contains?: Maybe<String>;
-  preview_url_not_contains?: Maybe<String>;
-  preview_url_starts_with?: Maybe<String>;
-  preview_url_not_starts_with?: Maybe<String>;
-  preview_url_ends_with?: Maybe<String>;
-  preview_url_not_ends_with?: Maybe<String>;
-  AND?: Maybe<TrackScalarWhereInput[] | TrackScalarWhereInput>;
-  OR?: Maybe<TrackScalarWhereInput[] | TrackScalarWhereInput>;
-  NOT?: Maybe<TrackScalarWhereInput[] | TrackScalarWhereInput>;
-}
-
-export interface ImageScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  height?: Maybe<Int>;
-  height_not?: Maybe<Int>;
-  height_in?: Maybe<Int[] | Int>;
-  height_not_in?: Maybe<Int[] | Int>;
-  height_lt?: Maybe<Int>;
-  height_lte?: Maybe<Int>;
-  height_gt?: Maybe<Int>;
-  height_gte?: Maybe<Int>;
-  width?: Maybe<Int>;
-  width_not?: Maybe<Int>;
-  width_in?: Maybe<Int[] | Int>;
-  width_not_in?: Maybe<Int[] | Int>;
-  width_lt?: Maybe<Int>;
-  width_lte?: Maybe<Int>;
-  width_gt?: Maybe<Int>;
-  width_gte?: Maybe<Int>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ImageScalarWhereInput[] | ImageScalarWhereInput>;
-  OR?: Maybe<ImageScalarWhereInput[] | ImageScalarWhereInput>;
-  NOT?: Maybe<ImageScalarWhereInput[] | ImageScalarWhereInput>;
-}
-
-export interface TrackUpdateManyWithWhereNestedInput {
-  where: TrackScalarWhereInput;
-  data: TrackUpdateManyDataInput;
-}
-
-export interface ImageUpdateManyDataInput {
-  height?: Maybe<Int>;
-  width?: Maybe<Int>;
-  url?: Maybe<String>;
-}
-
-export interface TrackUpdateManyDataInput {
-  name?: Maybe<String>;
-  duration?: Maybe<Int>;
-  preview_url?: Maybe<String>;
-}
-
-export interface ArtistUpdateWithWhereUniqueNestedInput {
-  where: ArtistWhereUniqueInput;
-  data: ArtistUpdateDataInput;
-}
-
-export interface PlaylistUpsertWithoutPartiesInput {
-  update: PlaylistUpdateWithoutPartiesDataInput;
-  create: PlaylistCreateWithoutPartiesInput;
-}
-
-export interface ArtistUpsertWithWhereUniqueNestedInput {
-  where: ArtistWhereUniqueInput;
-  update: ArtistUpdateDataInput;
-  create: ArtistCreateInput;
-}
-
-export interface PartySavedTrackUpdateManyWithoutPartyInput {
-  create?: Maybe<
-    | PartySavedTrackCreateWithoutPartyInput[]
-    | PartySavedTrackCreateWithoutPartyInput
-  >;
-  delete?: Maybe<
-    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
-  >;
-  connect?: Maybe<
-    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
-  >;
-  set?: Maybe<
-    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
-  >;
-  disconnect?: Maybe<
-    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
-  >;
-  update?: Maybe<
-    | PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput[]
-    | PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput
-  >;
-  upsert?: Maybe<
-    | PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput[]
-    | PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput
-  >;
-  deleteMany?: Maybe<
-    PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | PartySavedTrackUpdateManyWithWhereNestedInput[]
-    | PartySavedTrackUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ArtistUpdateManyWithWhereNestedInput {
-  where: ArtistScalarWhereInput;
-  data: ArtistUpdateManyDataInput;
-}
-
-export interface PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
-  where: PartySavedTrackWhereUniqueInput;
-  data: PartySavedTrackUpdateWithoutPartyDataInput;
-}
-
-export interface AlbumUpdateManyMutationInput {
-  uri?: Maybe<String>;
-  name?: Maybe<String>;
-  releaseDate?: Maybe<String>;
-}
-
-export interface PartySavedTrackUpdateWithoutPartyDataInput {
-  spotifyId?: Maybe<String>;
-  name?: Maybe<String>;
-  imageUrl?: Maybe<String>;
-  artists?: Maybe<ArtistUpdateManyInput>;
-  durationMs?: Maybe<Int>;
-  length?: Maybe<String>;
-  preview_url?: Maybe<String>;
-  uri?: Maybe<String>;
-  explicit?: Maybe<Boolean>;
-  upVotes?: Maybe<Int>;
-  downVotes?: Maybe<Int>;
-  votedBy?: Maybe<UserUpdateManyInput>;
-}
-
-export interface ChatUpdateOneRequiredWithoutMessagesInput {
-  create?: Maybe<ChatCreateWithoutMessagesInput>;
-  update?: Maybe<ChatUpdateWithoutMessagesDataInput>;
-  upsert?: Maybe<ChatUpsertWithoutMessagesInput>;
-  connect?: Maybe<ChatWhereUniqueInput>;
-}
-
-export interface UserUpdateManyInput {
-  create?: Maybe<UserCreateInput[] | UserCreateInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueNestedInput[]
-    | UserUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueNestedInput[]
-    | UserUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ArtistUpdateManyMutationInput {
-  name?: Maybe<String>;
-}
-
-export interface UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateDataInput;
-}
-
-export interface PartyCreateOneInput {
-  create?: Maybe<PartyCreateInput>;
-  connect?: Maybe<PartyWhereUniqueInput>;
-}
-
-export interface UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface UserCreateOneInput {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
+  invitedUserId: String;
+  partyId: String;
 }
 
 export interface UserScalarWhereInput {
@@ -3028,11 +4421,9 @@ export interface UserScalarWhereInput {
   NOT?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
 }
 
-export interface PartyCreateManyWithoutMembersInput {
-  create?: Maybe<
-    PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput
-  >;
-  connect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+export interface PartyCartCreateWithoutItemsInput {
+  id?: Maybe<ID_Input>;
+  party: PartyCreateOneWithoutCartInput;
 }
 
 export interface UserUpdateManyWithWhereNestedInput {
@@ -3040,9 +4431,9 @@ export interface UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput;
 }
 
-export interface LocationCreateOneInput {
-  create?: Maybe<LocationCreateInput>;
-  connect?: Maybe<LocationWhereUniqueInput>;
+export interface PartyCartUpdateInput {
+  party?: Maybe<PartyUpdateOneRequiredWithoutCartInput>;
+  items?: Maybe<PartyCartItemUpdateManyWithoutCartInput>;
 }
 
 export interface UserUpdateManyDataInput {
@@ -3059,22 +4450,98 @@ export interface UserUpdateManyDataInput {
   resetTokenExpiry?: Maybe<DateTimeInput>;
 }
 
-export interface GameCreateManyInput {
-  create?: Maybe<GameCreateInput[] | GameCreateInput>;
-  connect?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
+export interface MessageUpdateManyMutationInput {
+  content?: Maybe<String>;
 }
 
-export interface PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput {
-  where: PartySavedTrackWhereUniqueInput;
-  update: PartySavedTrackUpdateWithoutPartyDataInput;
-  create: PartySavedTrackCreateWithoutPartyInput;
+export interface UserUpsertWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutFriendsDataInput;
+  create: UserCreateWithoutFriendsInput;
 }
 
-export type ChatWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface ArtistCreateInput {
+  id?: Maybe<ID_Input>;
+  spotifyId: ID_Input;
+  uri: String;
+  name: String;
+}
 
-export interface PartySavedTrackScalarWhereInput {
+export interface UserUpdateManyWithoutPartiesInput {
+  create?: Maybe<
+    UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutPartiesInput[]
+    | UserUpdateWithWhereUniqueWithoutPartiesInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutPartiesInput[]
+    | UserUpsertWithWhereUniqueWithoutPartiesInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PartyCreateManyWithoutMembersInput {
+  create?: Maybe<
+    PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput
+  >;
+  connect?: Maybe<PartyWhereUniqueInput[] | PartyWhereUniqueInput>;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutPartiesDataInput;
+}
+
+export interface TrackCreateManyInput {
+  create?: Maybe<TrackCreateInput[] | TrackCreateInput>;
+  connect?: Maybe<TrackWhereUniqueInput[] | TrackWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutPartiesDataInput {
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  password?: Maybe<String>;
+  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserUpdateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
+  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface PartyCartItemCreateManyWithoutCartInput {
+  create?: Maybe<
+    PartyCartItemCreateWithoutCartInput[] | PartyCartItemCreateWithoutCartInput
+  >;
+  connect?: Maybe<
+    PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput
+  >;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutPartiesDataInput;
+  create: UserCreateWithoutPartiesInput;
+}
+
+export interface PartySavedTrackWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -3103,6 +4570,16 @@ export interface PartySavedTrackScalarWhereInput {
   spotifyId_not_starts_with?: Maybe<String>;
   spotifyId_ends_with?: Maybe<String>;
   spotifyId_not_ends_with?: Maybe<String>;
+  durationMs?: Maybe<Int>;
+  durationMs_not?: Maybe<Int>;
+  durationMs_in?: Maybe<Int[] | Int>;
+  durationMs_not_in?: Maybe<Int[] | Int>;
+  durationMs_lt?: Maybe<Int>;
+  durationMs_lte?: Maybe<Int>;
+  durationMs_gt?: Maybe<Int>;
+  durationMs_gte?: Maybe<Int>;
+  explicit?: Maybe<Boolean>;
+  explicit_not?: Maybe<Boolean>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -3117,56 +4594,20 @@ export interface PartySavedTrackScalarWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  imageUrl?: Maybe<String>;
-  imageUrl_not?: Maybe<String>;
-  imageUrl_in?: Maybe<String[] | String>;
-  imageUrl_not_in?: Maybe<String[] | String>;
-  imageUrl_lt?: Maybe<String>;
-  imageUrl_lte?: Maybe<String>;
-  imageUrl_gt?: Maybe<String>;
-  imageUrl_gte?: Maybe<String>;
-  imageUrl_contains?: Maybe<String>;
-  imageUrl_not_contains?: Maybe<String>;
-  imageUrl_starts_with?: Maybe<String>;
-  imageUrl_not_starts_with?: Maybe<String>;
-  imageUrl_ends_with?: Maybe<String>;
-  imageUrl_not_ends_with?: Maybe<String>;
-  durationMs?: Maybe<Int>;
-  durationMs_not?: Maybe<Int>;
-  durationMs_in?: Maybe<Int[] | Int>;
-  durationMs_not_in?: Maybe<Int[] | Int>;
-  durationMs_lt?: Maybe<Int>;
-  durationMs_lte?: Maybe<Int>;
-  durationMs_gt?: Maybe<Int>;
-  durationMs_gte?: Maybe<Int>;
-  length?: Maybe<String>;
-  length_not?: Maybe<String>;
-  length_in?: Maybe<String[] | String>;
-  length_not_in?: Maybe<String[] | String>;
-  length_lt?: Maybe<String>;
-  length_lte?: Maybe<String>;
-  length_gt?: Maybe<String>;
-  length_gte?: Maybe<String>;
-  length_contains?: Maybe<String>;
-  length_not_contains?: Maybe<String>;
-  length_starts_with?: Maybe<String>;
-  length_not_starts_with?: Maybe<String>;
-  length_ends_with?: Maybe<String>;
-  length_not_ends_with?: Maybe<String>;
-  preview_url?: Maybe<String>;
-  preview_url_not?: Maybe<String>;
-  preview_url_in?: Maybe<String[] | String>;
-  preview_url_not_in?: Maybe<String[] | String>;
-  preview_url_lt?: Maybe<String>;
-  preview_url_lte?: Maybe<String>;
-  preview_url_gt?: Maybe<String>;
-  preview_url_gte?: Maybe<String>;
-  preview_url_contains?: Maybe<String>;
-  preview_url_not_contains?: Maybe<String>;
-  preview_url_starts_with?: Maybe<String>;
-  preview_url_not_starts_with?: Maybe<String>;
-  preview_url_ends_with?: Maybe<String>;
-  preview_url_not_ends_with?: Maybe<String>;
+  previewUrl?: Maybe<String>;
+  previewUrl_not?: Maybe<String>;
+  previewUrl_in?: Maybe<String[] | String>;
+  previewUrl_not_in?: Maybe<String[] | String>;
+  previewUrl_lt?: Maybe<String>;
+  previewUrl_lte?: Maybe<String>;
+  previewUrl_gt?: Maybe<String>;
+  previewUrl_gte?: Maybe<String>;
+  previewUrl_contains?: Maybe<String>;
+  previewUrl_not_contains?: Maybe<String>;
+  previewUrl_starts_with?: Maybe<String>;
+  previewUrl_not_starts_with?: Maybe<String>;
+  previewUrl_ends_with?: Maybe<String>;
+  previewUrl_not_ends_with?: Maybe<String>;
   uri?: Maybe<String>;
   uri_not?: Maybe<String>;
   uri_in?: Maybe<String[] | String>;
@@ -3181,1186 +4622,52 @@ export interface PartySavedTrackScalarWhereInput {
   uri_not_starts_with?: Maybe<String>;
   uri_ends_with?: Maybe<String>;
   uri_not_ends_with?: Maybe<String>;
-  explicit?: Maybe<Boolean>;
-  explicit_not?: Maybe<Boolean>;
-  upVotes?: Maybe<Int>;
-  upVotes_not?: Maybe<Int>;
-  upVotes_in?: Maybe<Int[] | Int>;
-  upVotes_not_in?: Maybe<Int[] | Int>;
-  upVotes_lt?: Maybe<Int>;
-  upVotes_lte?: Maybe<Int>;
-  upVotes_gt?: Maybe<Int>;
-  upVotes_gte?: Maybe<Int>;
-  downVotes?: Maybe<Int>;
-  downVotes_not?: Maybe<Int>;
-  downVotes_in?: Maybe<Int[] | Int>;
-  downVotes_not_in?: Maybe<Int[] | Int>;
-  downVotes_lt?: Maybe<Int>;
-  downVotes_lte?: Maybe<Int>;
-  downVotes_gt?: Maybe<Int>;
-  downVotes_gte?: Maybe<Int>;
-  AND?: Maybe<
-    PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput
-  >;
-  OR?: Maybe<
-    PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput
-  >;
-  NOT?: Maybe<
-    PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput
-  >;
-}
-
-export interface PartyWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  normalizedTitle_not?: Maybe<String>;
-  normalizedTitle_in?: Maybe<String[] | String>;
-  normalizedTitle_not_in?: Maybe<String[] | String>;
-  normalizedTitle_lt?: Maybe<String>;
-  normalizedTitle_lte?: Maybe<String>;
-  normalizedTitle_gt?: Maybe<String>;
-  normalizedTitle_gte?: Maybe<String>;
-  normalizedTitle_contains?: Maybe<String>;
-  normalizedTitle_not_contains?: Maybe<String>;
-  normalizedTitle_starts_with?: Maybe<String>;
-  normalizedTitle_not_starts_with?: Maybe<String>;
-  normalizedTitle_ends_with?: Maybe<String>;
-  normalizedTitle_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  author?: Maybe<UserWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  location?: Maybe<LocationWhereInput>;
-  games_every?: Maybe<GameWhereInput>;
-  games_some?: Maybe<GameWhereInput>;
-  games_none?: Maybe<GameWhereInput>;
-  colorTint?: Maybe<String>;
-  colorTint_not?: Maybe<String>;
-  colorTint_in?: Maybe<String[] | String>;
-  colorTint_not_in?: Maybe<String[] | String>;
-  colorTint_lt?: Maybe<String>;
-  colorTint_lte?: Maybe<String>;
-  colorTint_gt?: Maybe<String>;
-  colorTint_gte?: Maybe<String>;
-  colorTint_contains?: Maybe<String>;
-  colorTint_not_contains?: Maybe<String>;
-  colorTint_starts_with?: Maybe<String>;
-  colorTint_not_starts_with?: Maybe<String>;
-  colorTint_ends_with?: Maybe<String>;
-  colorTint_not_ends_with?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  isPublic_not?: Maybe<Boolean>;
-  members_every?: Maybe<UserWhereInput>;
-  members_some?: Maybe<UserWhereInput>;
-  members_none?: Maybe<UserWhereInput>;
-  start?: Maybe<DateTimeInput>;
-  start_not?: Maybe<DateTimeInput>;
-  start_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  start_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  start_lt?: Maybe<DateTimeInput>;
-  start_lte?: Maybe<DateTimeInput>;
-  start_gt?: Maybe<DateTimeInput>;
-  start_gte?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  end_not?: Maybe<DateTimeInput>;
-  end_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  end_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  end_lt?: Maybe<DateTimeInput>;
-  end_lte?: Maybe<DateTimeInput>;
-  end_gt?: Maybe<DateTimeInput>;
-  end_gte?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-  inviteSecret_not?: Maybe<String>;
-  inviteSecret_in?: Maybe<String[] | String>;
-  inviteSecret_not_in?: Maybe<String[] | String>;
-  inviteSecret_lt?: Maybe<String>;
-  inviteSecret_lte?: Maybe<String>;
-  inviteSecret_gt?: Maybe<String>;
-  inviteSecret_gte?: Maybe<String>;
-  inviteSecret_contains?: Maybe<String>;
-  inviteSecret_not_contains?: Maybe<String>;
-  inviteSecret_starts_with?: Maybe<String>;
-  inviteSecret_not_starts_with?: Maybe<String>;
-  inviteSecret_ends_with?: Maybe<String>;
-  inviteSecret_not_ends_with?: Maybe<String>;
-  playlist?: Maybe<PlaylistWhereInput>;
-  savedTracks_every?: Maybe<PartySavedTrackWhereInput>;
-  savedTracks_some?: Maybe<PartySavedTrackWhereInput>;
-  savedTracks_none?: Maybe<PartySavedTrackWhereInput>;
-  cart?: Maybe<PartyCartWhereInput>;
-  AND?: Maybe<PartyWhereInput[] | PartyWhereInput>;
-  OR?: Maybe<PartyWhereInput[] | PartyWhereInput>;
-  NOT?: Maybe<PartyWhereInput[] | PartyWhereInput>;
-}
-
-export interface PartySavedTrackUpdateManyWithWhereNestedInput {
-  where: PartySavedTrackScalarWhereInput;
-  data: PartySavedTrackUpdateManyDataInput;
-}
-
-export interface ChatWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
   party?: Maybe<PartyWhereInput>;
-  members_every?: Maybe<UserWhereInput>;
-  members_some?: Maybe<UserWhereInput>;
-  members_none?: Maybe<UserWhereInput>;
-  messages_every?: Maybe<MessageWhereInput>;
-  messages_some?: Maybe<MessageWhereInput>;
-  messages_none?: Maybe<MessageWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ChatWhereInput[] | ChatWhereInput>;
-  OR?: Maybe<ChatWhereInput[] | ChatWhereInput>;
-  NOT?: Maybe<ChatWhereInput[] | ChatWhereInput>;
-}
-
-export interface PartySavedTrackUpdateManyDataInput {
-  spotifyId?: Maybe<String>;
-  name?: Maybe<String>;
-  imageUrl?: Maybe<String>;
-  durationMs?: Maybe<Int>;
+  stringArtists?: Maybe<String>;
+  stringArtists_not?: Maybe<String>;
+  stringArtists_in?: Maybe<String[] | String>;
+  stringArtists_not_in?: Maybe<String[] | String>;
+  stringArtists_lt?: Maybe<String>;
+  stringArtists_lte?: Maybe<String>;
+  stringArtists_gt?: Maybe<String>;
+  stringArtists_gte?: Maybe<String>;
+  stringArtists_contains?: Maybe<String>;
+  stringArtists_not_contains?: Maybe<String>;
+  stringArtists_starts_with?: Maybe<String>;
+  stringArtists_not_starts_with?: Maybe<String>;
+  stringArtists_ends_with?: Maybe<String>;
+  stringArtists_not_ends_with?: Maybe<String>;
   length?: Maybe<String>;
-  preview_url?: Maybe<String>;
-  uri?: Maybe<String>;
-  explicit?: Maybe<Boolean>;
-  upVotes?: Maybe<Int>;
-  downVotes?: Maybe<Int>;
-}
-
-export interface PartyCartItemSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PartyCartItemWhereInput>;
-  AND?: Maybe<
-    PartyCartItemSubscriptionWhereInput[] | PartyCartItemSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    PartyCartItemSubscriptionWhereInput[] | PartyCartItemSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    PartyCartItemSubscriptionWhereInput[] | PartyCartItemSubscriptionWhereInput
-  >;
-}
-
-export interface PartyCartUpdateOneWithoutPartyInput {
-  create?: Maybe<PartyCartCreateWithoutPartyInput>;
-  update?: Maybe<PartyCartUpdateWithoutPartyDataInput>;
-  upsert?: Maybe<PartyCartUpsertWithoutPartyInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<PartyCartWhereUniqueInput>;
-}
-
-export interface TrackWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
+  length_not?: Maybe<String>;
+  length_in?: Maybe<String[] | String>;
+  length_not_in?: Maybe<String[] | String>;
+  length_lt?: Maybe<String>;
+  length_lte?: Maybe<String>;
+  length_gt?: Maybe<String>;
+  length_gte?: Maybe<String>;
+  length_contains?: Maybe<String>;
+  length_not_contains?: Maybe<String>;
+  length_starts_with?: Maybe<String>;
+  length_not_starts_with?: Maybe<String>;
+  length_ends_with?: Maybe<String>;
+  length_not_ends_with?: Maybe<String>;
+  popularity?: Maybe<Int>;
+  popularity_not?: Maybe<Int>;
+  popularity_in?: Maybe<Int[] | Int>;
+  popularity_not_in?: Maybe<Int[] | Int>;
+  popularity_lt?: Maybe<Int>;
+  popularity_lte?: Maybe<Int>;
+  popularity_gt?: Maybe<Int>;
+  popularity_gte?: Maybe<Int>;
   album?: Maybe<AlbumWhereInput>;
-  artists_every?: Maybe<ArtistWhereInput>;
-  artists_some?: Maybe<ArtistWhereInput>;
-  artists_none?: Maybe<ArtistWhereInput>;
-  duration?: Maybe<Int>;
-  duration_not?: Maybe<Int>;
-  duration_in?: Maybe<Int[] | Int>;
-  duration_not_in?: Maybe<Int[] | Int>;
-  duration_lt?: Maybe<Int>;
-  duration_lte?: Maybe<Int>;
-  duration_gt?: Maybe<Int>;
-  duration_gte?: Maybe<Int>;
-  preview_url?: Maybe<String>;
-  preview_url_not?: Maybe<String>;
-  preview_url_in?: Maybe<String[] | String>;
-  preview_url_not_in?: Maybe<String[] | String>;
-  preview_url_lt?: Maybe<String>;
-  preview_url_lte?: Maybe<String>;
-  preview_url_gt?: Maybe<String>;
-  preview_url_gte?: Maybe<String>;
-  preview_url_contains?: Maybe<String>;
-  preview_url_not_contains?: Maybe<String>;
-  preview_url_starts_with?: Maybe<String>;
-  preview_url_not_starts_with?: Maybe<String>;
-  preview_url_ends_with?: Maybe<String>;
-  preview_url_not_ends_with?: Maybe<String>;
-  AND?: Maybe<TrackWhereInput[] | TrackWhereInput>;
-  OR?: Maybe<TrackWhereInput[] | TrackWhereInput>;
-  NOT?: Maybe<TrackWhereInput[] | TrackWhereInput>;
+  AND?: Maybe<PartySavedTrackWhereInput[] | PartySavedTrackWhereInput>;
+  OR?: Maybe<PartySavedTrackWhereInput[] | PartySavedTrackWhereInput>;
+  NOT?: Maybe<PartySavedTrackWhereInput[] | PartySavedTrackWhereInput>;
 }
 
-export interface PartyCartUpdateWithoutPartyDataInput {
-  items?: Maybe<PartyCartItemUpdateManyWithoutCartInput>;
-}
-
-export interface PartyCartSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PartyCartWhereInput>;
-  AND?: Maybe<
-    PartyCartSubscriptionWhereInput[] | PartyCartSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    PartyCartSubscriptionWhereInput[] | PartyCartSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    PartyCartSubscriptionWhereInput[] | PartyCartSubscriptionWhereInput
-  >;
-}
-
-export interface PartyCartItemUpdateManyWithoutCartInput {
-  create?: Maybe<
-    PartyCartItemCreateWithoutCartInput[] | PartyCartItemCreateWithoutCartInput
-  >;
-  delete?: Maybe<
-    PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput
-  >;
-  connect?: Maybe<
-    PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput
-  >;
-  set?: Maybe<PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput>;
-  disconnect?: Maybe<
-    PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput
-  >;
-  update?: Maybe<
-    | PartyCartItemUpdateWithWhereUniqueWithoutCartInput[]
-    | PartyCartItemUpdateWithWhereUniqueWithoutCartInput
-  >;
-  upsert?: Maybe<
-    | PartyCartItemUpsertWithWhereUniqueWithoutCartInput[]
-    | PartyCartItemUpsertWithWhereUniqueWithoutCartInput
-  >;
-  deleteMany?: Maybe<
-    PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | PartyCartItemUpdateManyWithWhereNestedInput[]
-    | PartyCartItemUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ImageSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ImageWhereInput>;
-  AND?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
-  OR?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
-  NOT?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
-}
-
-export interface PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
-  where: PartyCartItemWhereUniqueInput;
-  data: PartyCartItemUpdateWithoutCartDataInput;
-}
-
-export interface AlbumSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<AlbumWhereInput>;
-  AND?: Maybe<AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput>;
-  OR?: Maybe<AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput>;
-  NOT?: Maybe<AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput>;
-}
-
-export interface PartyCartItemUpdateWithoutCartDataInput {
-  user?: Maybe<UserUpdateOneInput>;
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  price?: Maybe<Float>;
-  quantity?: Maybe<Int>;
-}
-
-export interface TrackUpdateManyMutationInput {
-  name?: Maybe<String>;
-  duration?: Maybe<Int>;
-  preview_url?: Maybe<String>;
-}
-
-export interface UserUpdateOneInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface PartyUpsertWithWhereUniqueWithoutPlaylistInput {
-  where: PartyWhereUniqueInput;
-  update: PartyUpdateWithoutPlaylistDataInput;
-  create: PartyCreateWithoutPlaylistInput;
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface PlaylistUpdateInput {
-  playlist_id?: Maybe<String>;
-  user?: Maybe<UserUpdateOneRequiredInput>;
-  parties?: Maybe<PartyUpdateManyWithoutPlaylistInput>;
-  name?: Maybe<String>;
-  tracks?: Maybe<TrackUpdateManyInput>;
-  isTemporary?: Maybe<Boolean>;
-}
-
-export interface PartyCartItemUpsertWithWhereUniqueWithoutCartInput {
-  where: PartyCartItemWhereUniqueInput;
-  update: PartyCartItemUpdateWithoutCartDataInput;
-  create: PartyCartItemCreateWithoutCartInput;
-}
-
-export interface PlaylistCreateInput {
-  id?: Maybe<ID_Input>;
-  playlist_id?: Maybe<String>;
-  user: UserCreateOneInput;
-  parties?: Maybe<PartyCreateManyWithoutPlaylistInput>;
-  name: String;
-  tracks?: Maybe<TrackCreateManyInput>;
-  isTemporary?: Maybe<Boolean>;
-}
-
-export interface PartyCartItemScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  price?: Maybe<Float>;
-  price_not?: Maybe<Float>;
-  price_in?: Maybe<Float[] | Float>;
-  price_not_in?: Maybe<Float[] | Float>;
-  price_lt?: Maybe<Float>;
-  price_lte?: Maybe<Float>;
-  price_gt?: Maybe<Float>;
-  price_gte?: Maybe<Float>;
-  quantity?: Maybe<Int>;
-  quantity_not?: Maybe<Int>;
-  quantity_in?: Maybe<Int[] | Int>;
-  quantity_not_in?: Maybe<Int[] | Int>;
-  quantity_lt?: Maybe<Int>;
-  quantity_lte?: Maybe<Int>;
-  quantity_gt?: Maybe<Int>;
-  quantity_gte?: Maybe<Int>;
-  AND?: Maybe<PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput>;
-  OR?: Maybe<PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput>;
-  NOT?: Maybe<PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput>;
-}
-
-export interface PartyUpdateWithoutSavedTracksDataInput {
-  title?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  description?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
-  games?: Maybe<GameUpdateManyInput>;
-  colorTint?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
-  cart?: Maybe<PartyCartUpdateOneWithoutPartyInput>;
-}
-
-export interface PartyCartItemUpdateManyWithWhereNestedInput {
-  where: PartyCartItemScalarWhereInput;
-  data: PartyCartItemUpdateManyDataInput;
-}
-
-export interface PartyCreateWithoutSavedTracksInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: Maybe<GameCreateManyInput>;
-  colorTint: String;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserCreateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret: String;
-  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
-  cart?: Maybe<PartyCartCreateOneWithoutPartyInput>;
-}
-
-export interface PartyCartItemUpdateManyDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  price?: Maybe<Float>;
-  quantity?: Maybe<Int>;
-}
-
-export interface PartyInvitationUpdateManyMutationInput {
-  invitedUserId?: Maybe<String>;
-  partyId?: Maybe<String>;
-}
-
-export interface PartyCartUpsertWithoutPartyInput {
-  update: PartyCartUpdateWithoutPartyDataInput;
-  create: PartyCartCreateWithoutPartyInput;
-}
-
-export interface UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
-  create?: Maybe<UserCreateWithoutPendingPartyInvitationsInput>;
-  update?: Maybe<UserUpdateWithoutPendingPartyInvitationsDataInput>;
-  upsert?: Maybe<UserUpsertWithoutPendingPartyInvitationsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface PartyUpsertWithWhereUniqueWithoutMembersInput {
-  where: PartyWhereUniqueInput;
-  update: PartyUpdateWithoutMembersDataInput;
-  create: PartyCreateWithoutMembersInput;
-}
-
-export interface UserCreateWithoutPendingPartyInvitationsInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
-  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserCreateManyWithoutPendingFriendInvitationsInput
-  >;
-  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface PartyScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  normalizedTitle_not?: Maybe<String>;
-  normalizedTitle_in?: Maybe<String[] | String>;
-  normalizedTitle_not_in?: Maybe<String[] | String>;
-  normalizedTitle_lt?: Maybe<String>;
-  normalizedTitle_lte?: Maybe<String>;
-  normalizedTitle_gt?: Maybe<String>;
-  normalizedTitle_gte?: Maybe<String>;
-  normalizedTitle_contains?: Maybe<String>;
-  normalizedTitle_not_contains?: Maybe<String>;
-  normalizedTitle_starts_with?: Maybe<String>;
-  normalizedTitle_not_starts_with?: Maybe<String>;
-  normalizedTitle_ends_with?: Maybe<String>;
-  normalizedTitle_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  colorTint?: Maybe<String>;
-  colorTint_not?: Maybe<String>;
-  colorTint_in?: Maybe<String[] | String>;
-  colorTint_not_in?: Maybe<String[] | String>;
-  colorTint_lt?: Maybe<String>;
-  colorTint_lte?: Maybe<String>;
-  colorTint_gt?: Maybe<String>;
-  colorTint_gte?: Maybe<String>;
-  colorTint_contains?: Maybe<String>;
-  colorTint_not_contains?: Maybe<String>;
-  colorTint_starts_with?: Maybe<String>;
-  colorTint_not_starts_with?: Maybe<String>;
-  colorTint_ends_with?: Maybe<String>;
-  colorTint_not_ends_with?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  isPublic_not?: Maybe<Boolean>;
-  start?: Maybe<DateTimeInput>;
-  start_not?: Maybe<DateTimeInput>;
-  start_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  start_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  start_lt?: Maybe<DateTimeInput>;
-  start_lte?: Maybe<DateTimeInput>;
-  start_gt?: Maybe<DateTimeInput>;
-  start_gte?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  end_not?: Maybe<DateTimeInput>;
-  end_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  end_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  end_lt?: Maybe<DateTimeInput>;
-  end_lte?: Maybe<DateTimeInput>;
-  end_gt?: Maybe<DateTimeInput>;
-  end_gte?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-  inviteSecret_not?: Maybe<String>;
-  inviteSecret_in?: Maybe<String[] | String>;
-  inviteSecret_not_in?: Maybe<String[] | String>;
-  inviteSecret_lt?: Maybe<String>;
-  inviteSecret_lte?: Maybe<String>;
-  inviteSecret_gt?: Maybe<String>;
-  inviteSecret_gte?: Maybe<String>;
-  inviteSecret_contains?: Maybe<String>;
-  inviteSecret_not_contains?: Maybe<String>;
-  inviteSecret_starts_with?: Maybe<String>;
-  inviteSecret_not_starts_with?: Maybe<String>;
-  inviteSecret_ends_with?: Maybe<String>;
-  inviteSecret_not_ends_with?: Maybe<String>;
-  AND?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
-  OR?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
-  NOT?: Maybe<PartyScalarWhereInput[] | PartyScalarWhereInput>;
-}
-
-export interface PartyCartItemUpdateManyMutationInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  price?: Maybe<Float>;
-  quantity?: Maybe<Int>;
-}
-
-export interface PartyUpdateManyWithWhereNestedInput {
-  where: PartyScalarWhereInput;
-  data: PartyUpdateManyDataInput;
-}
-
-export interface PartyCartUpdateOneRequiredWithoutItemsInput {
-  create?: Maybe<PartyCartCreateWithoutItemsInput>;
-  update?: Maybe<PartyCartUpdateWithoutItemsDataInput>;
-  upsert?: Maybe<PartyCartUpsertWithoutItemsInput>;
-  connect?: Maybe<PartyCartWhereUniqueInput>;
-}
-
-export interface PartyUpdateManyDataInput {
-  title?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  description?: Maybe<String>;
-  colorTint?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-}
-
-export interface PartyCartCreateOneWithoutItemsInput {
-  create?: Maybe<PartyCartCreateWithoutItemsInput>;
-  connect?: Maybe<PartyCartWhereUniqueInput>;
-}
-
-export interface UserUpdateManyWithoutFriendsInput {
-  create?: Maybe<
-    UserCreateWithoutFriendsInput[] | UserCreateWithoutFriendsInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutFriendsInput[]
-    | UserUpdateWithWhereUniqueWithoutFriendsInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutFriendsInput[]
-    | UserUpsertWithWhereUniqueWithoutFriendsInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface PartyUpdateWithoutCartDataInput {
-  title?: Maybe<String>;
-  normalizedTitle?: Maybe<String>;
-  description?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
-  games?: Maybe<GameUpdateManyInput>;
-  colorTint?: Maybe<String>;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserUpdateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret?: Maybe<String>;
-  playlist?: Maybe<PlaylistUpdateOneWithoutPartiesInput>;
-  savedTracks?: Maybe<PartySavedTrackUpdateManyWithoutPartyInput>;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutFriendsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutFriendsDataInput;
-}
-
-export type TrackWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface UserUpdateWithoutFriendsDataInput {
-  email?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  password?: Maybe<String>;
-  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
-  pendingFriendInvitations?: Maybe<
-    UserUpdateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
-  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface UserUpdateManyWithoutPendingFriendInvitationsInput {
-  create?: Maybe<
-    | UserCreateWithoutPendingFriendInvitationsInput[]
-    | UserCreateWithoutPendingFriendInvitationsInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput[]
-    | UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput[]
-    | UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ArtistCreateManyInput {
-  create?: Maybe<ArtistCreateInput[] | ArtistCreateInput>;
-  connect?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutPendingFriendInvitationsDataInput;
-}
-
-export interface ImageUpdateWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput;
-  data: ImageUpdateDataInput;
-}
-
-export interface UserUpdateWithoutPendingFriendInvitationsDataInput {
-  email?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  password?: Maybe<String>;
-  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
-  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
-  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
-  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface ImageUpdateManyWithWhereNestedInput {
-  where: ImageScalarWhereInput;
-  data: ImageUpdateManyDataInput;
-}
-
-export interface PartyInvitationUpdateManyWithoutUserInput {
-  create?: Maybe<
-    | PartyInvitationCreateWithoutUserInput[]
-    | PartyInvitationCreateWithoutUserInput
-  >;
-  delete?: Maybe<
-    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
-  >;
-  connect?: Maybe<
-    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
-  >;
-  set?: Maybe<
-    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
-  >;
-  disconnect?: Maybe<
-    PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput
-  >;
-  update?: Maybe<
-    | PartyInvitationUpdateWithWhereUniqueWithoutUserInput[]
-    | PartyInvitationUpdateWithWhereUniqueWithoutUserInput
-  >;
-  upsert?: Maybe<
-    | PartyInvitationUpsertWithWhereUniqueWithoutUserInput[]
-    | PartyInvitationUpsertWithWhereUniqueWithoutUserInput
-  >;
-  deleteMany?: Maybe<
-    PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | PartyInvitationUpdateManyWithWhereNestedInput[]
-    | PartyInvitationUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ArtistUpdateDataInput {
-  name?: Maybe<String>;
-}
-
-export interface PartyInvitationUpdateWithWhereUniqueWithoutUserInput {
-  where: PartyInvitationWhereUniqueInput;
-  data: PartyInvitationUpdateWithoutUserDataInput;
-}
-
-export interface ArtistUpdateManyDataInput {
-  name?: Maybe<String>;
-}
-
-export interface PartyInvitationUpdateWithoutUserDataInput {
-  invitedBy?: Maybe<UserUpdateOneRequiredInput>;
-  party?: Maybe<PartyUpdateOneRequiredInput>;
-  invitedUserId?: Maybe<String>;
-  partyId?: Maybe<String>;
-}
-
-export interface ArtistUpdateInput {
-  name?: Maybe<String>;
-}
-
-export interface PartyInvitationUpsertWithWhereUniqueWithoutUserInput {
-  where: PartyInvitationWhereUniqueInput;
-  update: PartyInvitationUpdateWithoutUserDataInput;
-  create: PartyInvitationCreateWithoutUserInput;
-}
-
-export interface PartyCreateInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: Maybe<GameCreateManyInput>;
-  colorTint: String;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserCreateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret: String;
-  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
-  savedTracks?: Maybe<PartySavedTrackCreateManyWithoutPartyInput>;
-  cart?: Maybe<PartyCartCreateOneWithoutPartyInput>;
-}
-
-export interface PartyInvitationScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  invitedUserId?: Maybe<String>;
-  invitedUserId_not?: Maybe<String>;
-  invitedUserId_in?: Maybe<String[] | String>;
-  invitedUserId_not_in?: Maybe<String[] | String>;
-  invitedUserId_lt?: Maybe<String>;
-  invitedUserId_lte?: Maybe<String>;
-  invitedUserId_gt?: Maybe<String>;
-  invitedUserId_gte?: Maybe<String>;
-  invitedUserId_contains?: Maybe<String>;
-  invitedUserId_not_contains?: Maybe<String>;
-  invitedUserId_starts_with?: Maybe<String>;
-  invitedUserId_not_starts_with?: Maybe<String>;
-  invitedUserId_ends_with?: Maybe<String>;
-  invitedUserId_not_ends_with?: Maybe<String>;
-  partyId?: Maybe<String>;
-  partyId_not?: Maybe<String>;
-  partyId_in?: Maybe<String[] | String>;
-  partyId_not_in?: Maybe<String[] | String>;
-  partyId_lt?: Maybe<String>;
-  partyId_lte?: Maybe<String>;
-  partyId_gt?: Maybe<String>;
-  partyId_gte?: Maybe<String>;
-  partyId_contains?: Maybe<String>;
-  partyId_not_contains?: Maybe<String>;
-  partyId_starts_with?: Maybe<String>;
-  partyId_not_starts_with?: Maybe<String>;
-  partyId_ends_with?: Maybe<String>;
-  partyId_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<
-    PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput
-  >;
-  OR?: Maybe<
-    PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput
-  >;
-  NOT?: Maybe<
-    PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput
-  >;
-}
-
-export interface PartyCreateWithoutMembersInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: Maybe<GameCreateManyInput>;
-  colorTint: String;
-  isPublic?: Maybe<Boolean>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret: String;
-  playlist?: Maybe<PlaylistCreateOneWithoutPartiesInput>;
-  savedTracks?: Maybe<PartySavedTrackCreateManyWithoutPartyInput>;
-  cart?: Maybe<PartyCartCreateOneWithoutPartyInput>;
-}
-
-export interface PartyInvitationUpdateManyWithWhereNestedInput {
-  where: PartyInvitationScalarWhereInput;
-  data: PartyInvitationUpdateManyDataInput;
-}
-
-export interface GameCreateInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  cover?: Maybe<String>;
-  type: GameType;
-}
-
-export interface PartyInvitationUpdateManyDataInput {
-  invitedUserId?: Maybe<String>;
-  partyId?: Maybe<String>;
-}
-
-export interface PartyInvitationWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  invitedBy?: Maybe<UserWhereInput>;
-  user?: Maybe<UserWhereInput>;
-  party?: Maybe<PartyWhereInput>;
-  invitedUserId?: Maybe<String>;
-  invitedUserId_not?: Maybe<String>;
-  invitedUserId_in?: Maybe<String[] | String>;
-  invitedUserId_not_in?: Maybe<String[] | String>;
-  invitedUserId_lt?: Maybe<String>;
-  invitedUserId_lte?: Maybe<String>;
-  invitedUserId_gt?: Maybe<String>;
-  invitedUserId_gte?: Maybe<String>;
-  invitedUserId_contains?: Maybe<String>;
-  invitedUserId_not_contains?: Maybe<String>;
-  invitedUserId_starts_with?: Maybe<String>;
-  invitedUserId_not_starts_with?: Maybe<String>;
-  invitedUserId_ends_with?: Maybe<String>;
-  invitedUserId_not_ends_with?: Maybe<String>;
-  partyId?: Maybe<String>;
-  partyId_not?: Maybe<String>;
-  partyId_in?: Maybe<String[] | String>;
-  partyId_not_in?: Maybe<String[] | String>;
-  partyId_lt?: Maybe<String>;
-  partyId_lte?: Maybe<String>;
-  partyId_gt?: Maybe<String>;
-  partyId_gte?: Maybe<String>;
-  partyId_contains?: Maybe<String>;
-  partyId_not_contains?: Maybe<String>;
-  partyId_starts_with?: Maybe<String>;
-  partyId_not_starts_with?: Maybe<String>;
-  partyId_ends_with?: Maybe<String>;
-  partyId_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<PartyInvitationWhereInput[] | PartyInvitationWhereInput>;
-  OR?: Maybe<PartyInvitationWhereInput[] | PartyInvitationWhereInput>;
-  NOT?: Maybe<PartyInvitationWhereInput[] | PartyInvitationWhereInput>;
-}
-
-export interface ChatUpdateManyWithoutMembersInput {
-  create?: Maybe<
-    ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput
-  >;
-  delete?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
-  connect?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
-  set?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
-  disconnect?: Maybe<ChatWhereUniqueInput[] | ChatWhereUniqueInput>;
-  update?: Maybe<
-    | ChatUpdateWithWhereUniqueWithoutMembersInput[]
-    | ChatUpdateWithWhereUniqueWithoutMembersInput
-  >;
-  upsert?: Maybe<
-    | ChatUpsertWithWhereUniqueWithoutMembersInput[]
-    | ChatUpsertWithWhereUniqueWithoutMembersInput
-  >;
-  deleteMany?: Maybe<ChatScalarWhereInput[] | ChatScalarWhereInput>;
-}
-
-export type ArtistWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface ChatUpdateWithWhereUniqueWithoutMembersInput {
-  where: ChatWhereUniqueInput;
-  data: ChatUpdateWithoutMembersDataInput;
-}
-
-export interface MessageSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<MessageWhereInput>;
-  AND?: Maybe<MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput>;
-  OR?: Maybe<MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput>;
-  NOT?: Maybe<MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput>;
-}
-
-export interface ChatUpdateWithoutMembersDataInput {
-  party?: Maybe<PartyUpdateOneRequiredInput>;
-  messages?: Maybe<MessageUpdateManyWithoutChatInput>;
+export interface PartyUpsertNestedInput {
+  update: PartyUpdateDataInput;
+  create: PartyCreateInput;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -4377,72 +4684,104 @@ export interface UserUpdateManyMutationInput {
   resetTokenExpiry?: Maybe<DateTimeInput>;
 }
 
-export interface MessageUpdateManyWithoutChatInput {
-  create?: Maybe<
-    MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput
-  >;
-  delete?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
-  connect?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
-  set?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
-  disconnect?: Maybe<MessageWhereUniqueInput[] | MessageWhereUniqueInput>;
+export interface UserUpdateManyWithoutChatsInput {
+  create?: Maybe<UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput>;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
   update?: Maybe<
-    | MessageUpdateWithWhereUniqueWithoutChatInput[]
-    | MessageUpdateWithWhereUniqueWithoutChatInput
+    | UserUpdateWithWhereUniqueWithoutChatsInput[]
+    | UserUpdateWithWhereUniqueWithoutChatsInput
   >;
   upsert?: Maybe<
-    | MessageUpsertWithWhereUniqueWithoutChatInput[]
-    | MessageUpsertWithWhereUniqueWithoutChatInput
+    | UserUpsertWithWhereUniqueWithoutChatsInput[]
+    | UserUpsertWithWhereUniqueWithoutChatsInput
   >;
-  deleteMany?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
   updateMany?: Maybe<
-    | MessageUpdateManyWithWhereNestedInput[]
-    | MessageUpdateManyWithWhereNestedInput
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
   >;
-}
-
-export interface PartyUpdateWithWhereUniqueWithoutPlaylistInput {
-  where: PartyWhereUniqueInput;
-  data: PartyUpdateWithoutPlaylistDataInput;
-}
-
-export interface MessageUpdateWithWhereUniqueWithoutChatInput {
-  where: MessageWhereUniqueInput;
-  data: MessageUpdateWithoutChatDataInput;
 }
 
 export interface PartySavedTrackUpdateManyMutationInput {
   spotifyId?: Maybe<String>;
-  name?: Maybe<String>;
-  imageUrl?: Maybe<String>;
   durationMs?: Maybe<Int>;
-  length?: Maybe<String>;
-  preview_url?: Maybe<String>;
-  uri?: Maybe<String>;
   explicit?: Maybe<Boolean>;
-  upVotes?: Maybe<Int>;
-  downVotes?: Maybe<Int>;
+  name?: Maybe<String>;
+  previewUrl?: Maybe<String>;
+  uri?: Maybe<String>;
+  stringArtists?: Maybe<String>;
+  length?: Maybe<String>;
+  popularity?: Maybe<Int>;
 }
 
-export interface MessageUpdateWithoutChatDataInput {
-  author?: Maybe<UserUpdateOneRequiredInput>;
-  content?: Maybe<String>;
-}
-
-export type MessageWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface MessageUpsertWithWhereUniqueWithoutChatInput {
-  where: MessageWhereUniqueInput;
-  update: MessageUpdateWithoutChatDataInput;
-  create: MessageCreateWithoutChatInput;
+export interface UserUpdateWithWhereUniqueWithoutChatsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutChatsDataInput;
 }
 
 export type PartyCartWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface MessageScalarWhereInput {
+export interface UserUpdateWithoutChatsDataInput {
+  email?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  password?: Maybe<String>;
+  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
+  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
+  pendingFriendInvitations?: Maybe<
+    UserUpdateManyWithoutPendingFriendInvitationsInput
+  >;
+  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
+  lastOnline?: Maybe<DateTimeInput>;
+  deleted?: Maybe<Boolean>;
+  provider?: Maybe<SocialMediaType>;
+  avatar?: Maybe<String>;
+  thirdPartyId?: Maybe<String>;
+  resetToken?: Maybe<String>;
+  resetTokenExpiry?: Maybe<DateTimeInput>;
+}
+
+export interface PartyUpsertWithoutCartInput {
+  update: PartyUpdateWithoutCartDataInput;
+  create: PartyCreateWithoutCartInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutChatsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutChatsDataInput;
+  create: UserCreateWithoutChatsInput;
+}
+
+export interface AlbumUpdateInput {
+  spotifyId?: Maybe<ID_Input>;
+  uri?: Maybe<String>;
+  name?: Maybe<String>;
+  releaseDate?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+}
+
+export interface GameUpdateInput {
+  title?: Maybe<String>;
+  cover?: Maybe<String>;
+  type?: Maybe<GameType>;
+}
+
+export interface GameCreateManyInput {
+  create?: Maybe<GameCreateInput[] | GameCreateInput>;
+  connect?: Maybe<GameWhereUniqueInput[] | GameWhereUniqueInput>;
+}
+
+export interface GameUpdateManyMutationInput {
+  title?: Maybe<String>;
+  cover?: Maybe<String>;
+  type?: Maybe<GameType>;
+}
+
+export interface MessageWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -4457,6 +4796,8 @@ export interface MessageScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  author?: Maybe<UserWhereInput>;
+  chat?: Maybe<ChatWhereInput>;
   content?: Maybe<String>;
   content_not?: Maybe<String>;
   content_in?: Maybe<String[] | String>;
@@ -4487,405 +4828,22 @@ export interface MessageScalarWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
-  OR?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
-  NOT?: Maybe<MessageScalarWhereInput[] | MessageScalarWhereInput>;
+  AND?: Maybe<MessageWhereInput[] | MessageWhereInput>;
+  OR?: Maybe<MessageWhereInput[] | MessageWhereInput>;
+  NOT?: Maybe<MessageWhereInput[] | MessageWhereInput>;
 }
 
-export interface PartyCartUpdateWithoutItemsDataInput {
-  party?: Maybe<PartyUpdateOneRequiredWithoutCartInput>;
-}
-
-export interface MessageUpdateManyWithWhereNestedInput {
-  where: MessageScalarWhereInput;
-  data: MessageUpdateManyDataInput;
-}
-
-export interface PartyUpsertWithoutCartInput {
-  update: PartyUpdateWithoutCartDataInput;
-  create: PartyCreateWithoutCartInput;
-}
-
-export interface MessageUpdateManyDataInput {
-  content?: Maybe<String>;
-}
-
-export interface PartyCartCreateInput {
+export interface ImageCreateInput {
   id?: Maybe<ID_Input>;
-  party: PartyCreateOneWithoutCartInput;
-  items?: Maybe<PartyCartItemCreateManyWithoutCartInput>;
+  height: Int;
+  width: Int;
+  url: String;
 }
 
-export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
-  where: ChatWhereUniqueInput;
-  update: ChatUpdateWithoutMembersDataInput;
-  create: ChatCreateWithoutMembersInput;
-}
-
-export interface ImageCreateManyInput {
-  create?: Maybe<ImageCreateInput[] | ImageCreateInput>;
-  connect?: Maybe<ImageWhereUniqueInput[] | ImageWhereUniqueInput>;
-}
-
-export interface ChatScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ChatScalarWhereInput[] | ChatScalarWhereInput>;
-  OR?: Maybe<ChatScalarWhereInput[] | ChatScalarWhereInput>;
-  NOT?: Maybe<ChatScalarWhereInput[] | ChatScalarWhereInput>;
-}
-
-export interface ImageUpsertWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput;
-  update: ImageUpdateDataInput;
-  create: ImageCreateInput;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutPendingFriendInvitationsDataInput;
-  create: UserCreateWithoutPendingFriendInvitationsInput;
-}
-
-export interface ArtistScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ArtistScalarWhereInput[] | ArtistScalarWhereInput>;
-  OR?: Maybe<ArtistScalarWhereInput[] | ArtistScalarWhereInput>;
-  NOT?: Maybe<ArtistScalarWhereInput[] | ArtistScalarWhereInput>;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutFriendsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutFriendsDataInput;
-  create: UserCreateWithoutFriendsInput;
-}
-
-export interface ChatCreateInput {
-  id?: Maybe<ID_Input>;
-  party: PartyCreateOneInput;
-  members?: Maybe<UserCreateManyWithoutChatsInput>;
-  messages?: Maybe<MessageCreateManyWithoutChatInput>;
-}
-
-export interface UserUpdateManyWithoutPartiesInput {
-  create?: Maybe<
-    UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutPartiesInput[]
-    | UserUpdateWithWhereUniqueWithoutPartiesInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutPartiesInput[]
-    | UserUpsertWithWhereUniqueWithoutPartiesInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface LocationCreateInput {
-  id?: Maybe<ID_Input>;
-  placeName: String;
-  latitude: Float;
-  longitude: Float;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutPartiesInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutPartiesDataInput;
-}
-
-export interface PartyInvitationSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PartyInvitationWhereInput>;
-  AND?: Maybe<
-    | PartyInvitationSubscriptionWhereInput[]
-    | PartyInvitationSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    | PartyInvitationSubscriptionWhereInput[]
-    | PartyInvitationSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    | PartyInvitationSubscriptionWhereInput[]
-    | PartyInvitationSubscriptionWhereInput
-  >;
-}
-
-export interface UserUpdateWithoutPartiesDataInput {
-  email?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  password?: Maybe<String>;
-  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserUpdateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
-  chats?: Maybe<ChatUpdateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface ChatSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ChatWhereInput>;
-  AND?: Maybe<ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput>;
-  OR?: Maybe<ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput>;
-  NOT?: Maybe<ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput>;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutPartiesInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutPartiesDataInput;
-  create: UserCreateWithoutPartiesInput;
-}
-
-export interface PartyCreateWithoutPlaylistInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: Maybe<GameCreateManyInput>;
-  colorTint: String;
-  isPublic?: Maybe<Boolean>;
-  members?: Maybe<UserCreateManyWithoutPartiesInput>;
-  start?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  inviteSecret: String;
-  savedTracks?: Maybe<PartySavedTrackCreateManyWithoutPartyInput>;
-  cart?: Maybe<PartyCartCreateOneWithoutPartyInput>;
-}
-
-export interface PartyUpsertNestedInput {
-  update: PartyUpdateDataInput;
-  create: PartyCreateInput;
-}
-
-export type PartyWhereUniqueInput = AtLeastOne<{
+export type GameWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  inviteSecret?: Maybe<String>;
+  title?: Maybe<String>;
 }>;
-
-export interface UserUpdateManyWithoutChatsInput {
-  create?: Maybe<UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput>;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutChatsInput[]
-    | UserUpdateWithWhereUniqueWithoutChatsInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutChatsInput[]
-    | UserUpsertWithWhereUniqueWithoutChatsInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface PartyCartCreateWithoutItemsInput {
-  id?: Maybe<ID_Input>;
-  party: PartyCreateOneWithoutCartInput;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutChatsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutChatsDataInput;
-}
-
-export interface MessageUpdateManyMutationInput {
-  content?: Maybe<String>;
-}
-
-export interface UserUpdateWithoutChatsDataInput {
-  email?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  password?: Maybe<String>;
-  parties?: Maybe<PartyUpdateManyWithoutMembersInput>;
-  friends?: Maybe<UserUpdateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserUpdateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationUpdateManyWithoutUserInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface ArtistUpdateManyInput {
-  create?: Maybe<ArtistCreateInput[] | ArtistCreateInput>;
-  update?: Maybe<
-    | ArtistUpdateWithWhereUniqueNestedInput[]
-    | ArtistUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | ArtistUpsertWithWhereUniqueNestedInput[]
-    | ArtistUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
-  connect?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
-  set?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
-  disconnect?: Maybe<ArtistWhereUniqueInput[] | ArtistWhereUniqueInput>;
-  deleteMany?: Maybe<ArtistScalarWhereInput[] | ArtistScalarWhereInput>;
-  updateMany?: Maybe<
-    | ArtistUpdateManyWithWhereNestedInput[]
-    | ArtistUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutChatsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutChatsDataInput;
-  create: UserCreateWithoutChatsInput;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  parties?: Maybe<PartyCreateManyWithoutMembersInput>;
-  friends?: Maybe<UserCreateManyWithoutFriendsInput>;
-  pendingFriendInvitations?: Maybe<
-    UserCreateManyWithoutPendingFriendInvitationsInput
-  >;
-  pendingPartyInvitations?: Maybe<PartyInvitationCreateManyWithoutUserInput>;
-  chats?: Maybe<ChatCreateManyWithoutMembersInput>;
-  lastOnline?: Maybe<DateTimeInput>;
-  deleted?: Maybe<Boolean>;
-  provider?: Maybe<SocialMediaType>;
-  avatar?: Maybe<String>;
-  thirdPartyId?: Maybe<String>;
-  resetToken?: Maybe<String>;
-  resetTokenExpiry?: Maybe<DateTimeInput>;
-}
-
-export interface GameUpdateInput {
-  title?: Maybe<String>;
-  cover?: Maybe<String>;
-  type?: Maybe<GameType>;
-}
-
-export interface PartyCartWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  party?: Maybe<PartyWhereInput>;
-  items_every?: Maybe<PartyCartItemWhereInput>;
-  items_some?: Maybe<PartyCartItemWhereInput>;
-  items_none?: Maybe<PartyCartItemWhereInput>;
-  AND?: Maybe<PartyCartWhereInput[] | PartyCartWhereInput>;
-  OR?: Maybe<PartyCartWhereInput[] | PartyCartWhereInput>;
-  NOT?: Maybe<PartyCartWhereInput[] | PartyCartWhereInput>;
-}
-
-export interface GameUpdateManyMutationInput {
-  title?: Maybe<String>;
-  cover?: Maybe<String>;
-  type?: Maybe<GameType>;
-}
-
-export interface PartyUpdateOneRequiredWithoutSavedTracksInput {
-  create?: Maybe<PartyCreateWithoutSavedTracksInput>;
-  update?: Maybe<PartyUpdateWithoutSavedTracksDataInput>;
-  upsert?: Maybe<PartyUpsertWithoutSavedTracksInput>;
-  connect?: Maybe<PartyWhereUniqueInput>;
-}
 
 export interface ImageUpdateInput {
   height?: Maybe<Int>;
@@ -4893,9 +4851,8 @@ export interface ImageUpdateInput {
   url?: Maybe<String>;
 }
 
-export interface PartyCartUpdateInput {
+export interface PartyCartUpdateWithoutItemsDataInput {
   party?: Maybe<PartyUpdateOneRequiredWithoutCartInput>;
-  items?: Maybe<PartyCartItemUpdateManyWithoutCartInput>;
 }
 
 export interface MessageCreateInput {
@@ -4923,71 +4880,40 @@ export interface ImageUpdateManyMutationInput {
   url?: Maybe<String>;
 }
 
-export interface AlbumUpdateInput {
-  uri?: Maybe<String>;
-  name?: Maybe<String>;
-  releaseDate?: Maybe<String>;
-  images?: Maybe<ImageUpdateManyInput>;
-  artists?: Maybe<ArtistUpdateManyInput>;
-}
-
-export interface PartyInvitationCreateInput {
+export interface PartyCartCreateInput {
   id?: Maybe<ID_Input>;
-  invitedBy: UserCreateOneInput;
-  user: UserCreateOneWithoutPendingPartyInvitationsInput;
-  party: PartyCreateOneInput;
-  invitedUserId: String;
-  partyId: String;
+  party: PartyCreateOneWithoutCartInput;
+  items?: Maybe<PartyCartItemCreateManyWithoutCartInput>;
 }
 
-export interface ArtistWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ArtistWhereInput[] | ArtistWhereInput>;
-  OR?: Maybe<ArtistWhereInput[] | ArtistWhereInput>;
-  NOT?: Maybe<ArtistWhereInput[] | ArtistWhereInput>;
-}
+export type MessageWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
-export interface TrackSubscriptionWhereInput {
+export interface MessageSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<TrackWhereInput>;
-  AND?: Maybe<TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput>;
-  OR?: Maybe<TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput>;
-  NOT?: Maybe<TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput>;
+  node?: Maybe<MessageWhereInput>;
+  AND?: Maybe<MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput>;
+  OR?: Maybe<MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput>;
+  NOT?: Maybe<MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput>;
 }
 
-export interface ChatUpdateWithoutMessagesDataInput {
-  party?: Maybe<PartyUpdateOneRequiredInput>;
-  members?: Maybe<UserUpdateManyWithoutChatsInput>;
+export interface PartySavedTrackCreateManyWithoutPartyInput {
+  create?: Maybe<
+    | PartySavedTrackCreateWithoutPartyInput[]
+    | PartySavedTrackCreateWithoutPartyInput
+  >;
+  connect?: Maybe<
+    PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput
+  >;
+}
+
+export interface PartyCreateOneInput {
+  create?: Maybe<PartyCreateInput>;
+  connect?: Maybe<PartyWhereUniqueInput>;
 }
 
 export interface NodeNode {
@@ -5049,1367 +4975,6 @@ export interface UserPreviousValuesSubscription
   resetTokenExpiry: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface PartySavedTrack {
-  id: ID_Output;
-  spotifyId: String;
-  name: String;
-  imageUrl: String;
-  durationMs: Int;
-  length: String;
-  preview_url?: String;
-  uri?: String;
-  explicit: Boolean;
-  upVotes: Int;
-  downVotes: Int;
-}
-
-export interface PartySavedTrackPromise
-  extends Promise<PartySavedTrack>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  spotifyId: () => Promise<String>;
-  name: () => Promise<String>;
-  party: <T = PartyPromise>() => T;
-  imageUrl: () => Promise<String>;
-  artists: <T = FragmentableArray<Artist>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  durationMs: () => Promise<Int>;
-  length: () => Promise<String>;
-  preview_url: () => Promise<String>;
-  uri: () => Promise<String>;
-  explicit: () => Promise<Boolean>;
-  upVotes: () => Promise<Int>;
-  downVotes: () => Promise<Int>;
-  votedBy: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface PartySavedTrackSubscription
-  extends Promise<AsyncIterator<PartySavedTrack>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  spotifyId: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  party: <T = PartySubscription>() => T;
-  imageUrl: () => Promise<AsyncIterator<String>>;
-  artists: <T = Promise<AsyncIterator<ArtistSubscription>>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  durationMs: () => Promise<AsyncIterator<Int>>;
-  length: () => Promise<AsyncIterator<String>>;
-  preview_url: () => Promise<AsyncIterator<String>>;
-  uri: () => Promise<AsyncIterator<String>>;
-  explicit: () => Promise<AsyncIterator<Boolean>>;
-  upVotes: () => Promise<AsyncIterator<Int>>;
-  downVotes: () => Promise<AsyncIterator<Int>>;
-  votedBy: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface PartySavedTrackNullablePromise
-  extends Promise<PartySavedTrack | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  spotifyId: () => Promise<String>;
-  name: () => Promise<String>;
-  party: <T = PartyPromise>() => T;
-  imageUrl: () => Promise<String>;
-  artists: <T = FragmentableArray<Artist>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  durationMs: () => Promise<Int>;
-  length: () => Promise<String>;
-  preview_url: () => Promise<String>;
-  uri: () => Promise<String>;
-  explicit: () => Promise<Boolean>;
-  upVotes: () => Promise<Int>;
-  downVotes: () => Promise<Int>;
-  votedBy: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface ArtistEdge {
-  node: Artist;
-  cursor: String;
-}
-
-export interface ArtistEdgePromise extends Promise<ArtistEdge>, Fragmentable {
-  node: <T = ArtistPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ArtistEdgeSubscription
-  extends Promise<AsyncIterator<ArtistEdge>>,
-    Fragmentable {
-  node: <T = ArtistSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Artist {
-  id: ID_Output;
-  name: String;
-}
-
-export interface ArtistPromise extends Promise<Artist>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface ArtistSubscription
-  extends Promise<AsyncIterator<Artist>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ArtistNullablePromise
-  extends Promise<Artist | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface AggregateArtist {
-  count: Int;
-}
-
-export interface AggregateArtistPromise
-  extends Promise<AggregateArtist>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateArtistSubscription
-  extends Promise<AsyncIterator<AggregateArtist>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Track {
-  id: ID_Output;
-  name: String;
-  duration: Int;
-  preview_url?: String;
-}
-
-export interface TrackPromise extends Promise<Track>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  album: <T = AlbumPromise>() => T;
-  artists: <T = FragmentableArray<Artist>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  duration: () => Promise<Int>;
-  preview_url: () => Promise<String>;
-}
-
-export interface TrackSubscription
-  extends Promise<AsyncIterator<Track>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  album: <T = AlbumSubscription>() => T;
-  artists: <T = Promise<AsyncIterator<ArtistSubscription>>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  duration: () => Promise<AsyncIterator<Int>>;
-  preview_url: () => Promise<AsyncIterator<String>>;
-}
-
-export interface TrackNullablePromise
-  extends Promise<Track | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  album: <T = AlbumPromise>() => T;
-  artists: <T = FragmentableArray<Artist>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  duration: () => Promise<Int>;
-  preview_url: () => Promise<String>;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Playlist {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  playlist_id?: String;
-  name: String;
-  isTemporary?: Boolean;
-}
-
-export interface PlaylistPromise extends Promise<Playlist>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  playlist_id: () => Promise<String>;
-  user: <T = UserPromise>() => T;
-  parties: <T = FragmentableArray<Party>>(args?: {
-    where?: PartyWhereInput;
-    orderBy?: PartyOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  name: () => Promise<String>;
-  tracks: <T = FragmentableArray<Track>>(args?: {
-    where?: TrackWhereInput;
-    orderBy?: TrackOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  isTemporary: () => Promise<Boolean>;
-}
-
-export interface PlaylistSubscription
-  extends Promise<AsyncIterator<Playlist>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  playlist_id: () => Promise<AsyncIterator<String>>;
-  user: <T = UserSubscription>() => T;
-  parties: <T = Promise<AsyncIterator<PartySubscription>>>(args?: {
-    where?: PartyWhereInput;
-    orderBy?: PartyOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  name: () => Promise<AsyncIterator<String>>;
-  tracks: <T = Promise<AsyncIterator<TrackSubscription>>>(args?: {
-    where?: TrackWhereInput;
-    orderBy?: TrackOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  isTemporary: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface PlaylistNullablePromise
-  extends Promise<Playlist | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  playlist_id: () => Promise<String>;
-  user: <T = UserPromise>() => T;
-  parties: <T = FragmentableArray<Party>>(args?: {
-    where?: PartyWhereInput;
-    orderBy?: PartyOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  name: () => Promise<String>;
-  tracks: <T = FragmentableArray<Track>>(args?: {
-    where?: TrackWhereInput;
-    orderBy?: TrackOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  isTemporary: () => Promise<Boolean>;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface Album {
-  id: ID_Output;
-  uri: String;
-  name: String;
-  releaseDate: String;
-}
-
-export interface AlbumPromise extends Promise<Album>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  uri: () => Promise<String>;
-  name: () => Promise<String>;
-  releaseDate: () => Promise<String>;
-  images: <T = FragmentableArray<Image>>(args?: {
-    where?: ImageWhereInput;
-    orderBy?: ImageOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  artists: <T = FragmentableArray<Artist>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface AlbumSubscription
-  extends Promise<AsyncIterator<Album>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  uri: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  releaseDate: () => Promise<AsyncIterator<String>>;
-  images: <T = Promise<AsyncIterator<ImageSubscription>>>(args?: {
-    where?: ImageWhereInput;
-    orderBy?: ImageOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  artists: <T = Promise<AsyncIterator<ArtistSubscription>>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface AlbumNullablePromise
-  extends Promise<Album | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  uri: () => Promise<String>;
-  name: () => Promise<String>;
-  releaseDate: () => Promise<String>;
-  images: <T = FragmentableArray<Image>>(args?: {
-    where?: ImageWhereInput;
-    orderBy?: ImageOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  artists: <T = FragmentableArray<Artist>>(args?: {
-    where?: ArtistWhereInput;
-    orderBy?: ArtistOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface TrackEdge {
-  node: Track;
-  cursor: String;
-}
-
-export interface TrackEdgePromise extends Promise<TrackEdge>, Fragmentable {
-  node: <T = TrackPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TrackEdgeSubscription
-  extends Promise<AsyncIterator<TrackEdge>>,
-    Fragmentable {
-  node: <T = TrackSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AlbumSubscriptionPayload {
-  mutation: MutationType;
-  node: Album;
-  updatedFields: String[];
-  previousValues: AlbumPreviousValues;
-}
-
-export interface AlbumSubscriptionPayloadPromise
-  extends Promise<AlbumSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = AlbumPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = AlbumPreviousValuesPromise>() => T;
-}
-
-export interface AlbumSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<AlbumSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = AlbumSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = AlbumPreviousValuesSubscription>() => T;
-}
-
-export interface AggregatePlaylist {
-  count: Int;
-}
-
-export interface AggregatePlaylistPromise
-  extends Promise<AggregatePlaylist>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePlaylistSubscription
-  extends Promise<AsyncIterator<AggregatePlaylist>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface AlbumPreviousValues {
-  id: ID_Output;
-  uri: String;
-  name: String;
-  releaseDate: String;
-}
-
-export interface AlbumPreviousValuesPromise
-  extends Promise<AlbumPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  uri: () => Promise<String>;
-  name: () => Promise<String>;
-  releaseDate: () => Promise<String>;
-}
-
-export interface AlbumPreviousValuesSubscription
-  extends Promise<AsyncIterator<AlbumPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  uri: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  releaseDate: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PlaylistConnection {
-  pageInfo: PageInfo;
-  edges: PlaylistEdge[];
-}
-
-export interface PlaylistConnectionPromise
-  extends Promise<PlaylistConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PlaylistEdge>>() => T;
-  aggregate: <T = AggregatePlaylistPromise>() => T;
-}
-
-export interface PlaylistConnectionSubscription
-  extends Promise<AsyncIterator<PlaylistConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PlaylistEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePlaylistSubscription>() => T;
-}
-
-export interface Game {
-  id: ID_Output;
-  title: String;
-  cover?: String;
-  type: GameType;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface GamePromise extends Promise<Game>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  cover: () => Promise<String>;
-  type: () => Promise<GameType>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface GameSubscription
-  extends Promise<AsyncIterator<Game>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  cover: () => Promise<AsyncIterator<String>>;
-  type: () => Promise<AsyncIterator<GameType>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface GameNullablePromise
-  extends Promise<Game | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  cover: () => Promise<String>;
-  type: () => Promise<GameType>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface AggregatePartySavedTrack {
-  count: Int;
-}
-
-export interface AggregatePartySavedTrackPromise
-  extends Promise<AggregatePartySavedTrack>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePartySavedTrackSubscription
-  extends Promise<AsyncIterator<AggregatePartySavedTrack>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ArtistSubscriptionPayload {
-  mutation: MutationType;
-  node: Artist;
-  updatedFields: String[];
-  previousValues: ArtistPreviousValues;
-}
-
-export interface ArtistSubscriptionPayloadPromise
-  extends Promise<ArtistSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ArtistPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ArtistPreviousValuesPromise>() => T;
-}
-
-export interface ArtistSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ArtistSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ArtistSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ArtistPreviousValuesSubscription>() => T;
-}
-
-export interface PartySavedTrackConnection {
-  pageInfo: PageInfo;
-  edges: PartySavedTrackEdge[];
-}
-
-export interface PartySavedTrackConnectionPromise
-  extends Promise<PartySavedTrackConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartySavedTrackEdge>>() => T;
-  aggregate: <T = AggregatePartySavedTrackPromise>() => T;
-}
-
-export interface PartySavedTrackConnectionSubscription
-  extends Promise<AsyncIterator<PartySavedTrackConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartySavedTrackEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartySavedTrackSubscription>() => T;
-}
-
-export interface ArtistPreviousValues {
-  id: ID_Output;
-  name: String;
-}
-
-export interface ArtistPreviousValuesPromise
-  extends Promise<ArtistPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-}
-
-export interface ArtistPreviousValuesSubscription
-  extends Promise<AsyncIterator<ArtistPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PartyInvitationEdge {
-  node: PartyInvitation;
-  cursor: String;
-}
-
-export interface PartyInvitationEdgePromise
-  extends Promise<PartyInvitationEdge>,
-    Fragmentable {
-  node: <T = PartyInvitationPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PartyInvitationEdgeSubscription
-  extends Promise<AsyncIterator<PartyInvitationEdge>>,
-    Fragmentable {
-  node: <T = PartyInvitationSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AlbumConnection {
-  pageInfo: PageInfo;
-  edges: AlbumEdge[];
-}
-
-export interface AlbumConnectionPromise
-  extends Promise<AlbumConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<AlbumEdge>>() => T;
-  aggregate: <T = AggregateAlbumPromise>() => T;
-}
-
-export interface AlbumConnectionSubscription
-  extends Promise<AsyncIterator<AlbumConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<AlbumEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateAlbumSubscription>() => T;
-}
-
-export interface AggregatePartyCartItem {
-  count: Int;
-}
-
-export interface AggregatePartyCartItemPromise
-  extends Promise<AggregatePartyCartItem>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePartyCartItemSubscription
-  extends Promise<AsyncIterator<AggregatePartyCartItem>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ChatSubscriptionPayload {
-  mutation: MutationType;
-  node: Chat;
-  updatedFields: String[];
-  previousValues: ChatPreviousValues;
-}
-
-export interface ChatSubscriptionPayloadPromise
-  extends Promise<ChatSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ChatPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ChatPreviousValuesPromise>() => T;
-}
-
-export interface ChatSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ChatSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ChatSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ChatPreviousValuesSubscription>() => T;
-}
-
-export interface PartyCartItemConnection {
-  pageInfo: PageInfo;
-  edges: PartyCartItemEdge[];
-}
-
-export interface PartyCartItemConnectionPromise
-  extends Promise<PartyCartItemConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartyCartItemEdge>>() => T;
-  aggregate: <T = AggregatePartyCartItemPromise>() => T;
-}
-
-export interface PartyCartItemConnectionSubscription
-  extends Promise<AsyncIterator<PartyCartItemConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartyCartItemEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartyCartItemSubscription>() => T;
-}
-
-export interface ChatPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface ChatPreviousValuesPromise
-  extends Promise<ChatPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface ChatPreviousValuesSubscription
-  extends Promise<AsyncIterator<ChatPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface PartyCartEdge {
-  node: PartyCart;
-  cursor: String;
-}
-
-export interface PartyCartEdgePromise
-  extends Promise<PartyCartEdge>,
-    Fragmentable {
-  node: <T = PartyCartPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PartyCartEdgeSubscription
-  extends Promise<AsyncIterator<PartyCartEdge>>,
-    Fragmentable {
-  node: <T = PartyCartSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Location {
-  id: ID_Output;
-  placeName: String;
-  latitude: Float;
-  longitude: Float;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface LocationPromise extends Promise<Location>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  placeName: () => Promise<String>;
-  latitude: () => Promise<Float>;
-  longitude: () => Promise<Float>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface LocationSubscription
-  extends Promise<AsyncIterator<Location>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  placeName: () => Promise<AsyncIterator<String>>;
-  latitude: () => Promise<AsyncIterator<Float>>;
-  longitude: () => Promise<AsyncIterator<Float>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface LocationNullablePromise
-  extends Promise<Location | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  placeName: () => Promise<String>;
-  latitude: () => Promise<Float>;
-  longitude: () => Promise<Float>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface AggregateParty {
-  count: Int;
-}
-
-export interface AggregatePartyPromise
-  extends Promise<AggregateParty>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePartySubscription
-  extends Promise<AsyncIterator<AggregateParty>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface GameSubscriptionPayload {
-  mutation: MutationType;
-  node: Game;
-  updatedFields: String[];
-  previousValues: GamePreviousValues;
-}
-
-export interface GameSubscriptionPayloadPromise
-  extends Promise<GameSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = GamePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = GamePreviousValuesPromise>() => T;
-}
-
-export interface GameSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<GameSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = GameSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = GamePreviousValuesSubscription>() => T;
-}
-
-export interface PartyConnection {
-  pageInfo: PageInfo;
-  edges: PartyEdge[];
-}
-
-export interface PartyConnectionPromise
-  extends Promise<PartyConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartyEdge>>() => T;
-  aggregate: <T = AggregatePartyPromise>() => T;
-}
-
-export interface PartyConnectionSubscription
-  extends Promise<AsyncIterator<PartyConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartyEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartySubscription>() => T;
-}
-
-export interface GamePreviousValues {
-  id: ID_Output;
-  title: String;
-  cover?: String;
-  type: GameType;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface GamePreviousValuesPromise
-  extends Promise<GamePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  cover: () => Promise<String>;
-  type: () => Promise<GameType>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface GamePreviousValuesSubscription
-  extends Promise<AsyncIterator<GamePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  cover: () => Promise<AsyncIterator<String>>;
-  type: () => Promise<AsyncIterator<GameType>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface MessageEdge {
-  node: Message;
-  cursor: String;
-}
-
-export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
-  node: <T = MessagePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface MessageEdgeSubscription
-  extends Promise<AsyncIterator<MessageEdge>>,
-    Fragmentable {
-  node: <T = MessageSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateLocation {
-  count: Int;
-}
-
-export interface AggregateLocationPromise
-  extends Promise<AggregateLocation>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateLocationSubscription
-  extends Promise<AsyncIterator<AggregateLocation>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ImageSubscriptionPayload {
-  mutation: MutationType;
-  node: Image;
-  updatedFields: String[];
-  previousValues: ImagePreviousValues;
-}
-
-export interface ImageSubscriptionPayloadPromise
-  extends Promise<ImageSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ImagePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ImagePreviousValuesPromise>() => T;
-}
-
-export interface ImageSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ImageSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ImageSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ImagePreviousValuesSubscription>() => T;
-}
-
-export interface LocationConnection {
-  pageInfo: PageInfo;
-  edges: LocationEdge[];
-}
-
-export interface LocationConnectionPromise
-  extends Promise<LocationConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LocationEdge>>() => T;
-  aggregate: <T = AggregateLocationPromise>() => T;
-}
-
-export interface LocationConnectionSubscription
-  extends Promise<AsyncIterator<LocationConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LocationEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLocationSubscription>() => T;
-}
-
-export interface ImagePreviousValues {
-  id: ID_Output;
-  height: Int;
-  width: Int;
-  url: String;
-}
-
-export interface ImagePreviousValuesPromise
-  extends Promise<ImagePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  height: () => Promise<Int>;
-  width: () => Promise<Int>;
-  url: () => Promise<String>;
-}
-
-export interface ImagePreviousValuesSubscription
-  extends Promise<AsyncIterator<ImagePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  height: () => Promise<AsyncIterator<Int>>;
-  width: () => Promise<AsyncIterator<Int>>;
-  url: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateImage {
-  count: Int;
-}
-
-export interface AggregateImagePromise
-  extends Promise<AggregateImage>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateImageSubscription
-  extends Promise<AsyncIterator<AggregateImage>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PartyInvitation {
-  id: ID_Output;
-  invitedUserId: String;
-  partyId: String;
-  createdAt: DateTimeOutput;
-}
-
-export interface PartyInvitationPromise
-  extends Promise<PartyInvitation>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  invitedBy: <T = UserPromise>() => T;
-  user: <T = UserPromise>() => T;
-  party: <T = PartyPromise>() => T;
-  invitedUserId: () => Promise<String>;
-  partyId: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-}
-
-export interface PartyInvitationSubscription
-  extends Promise<AsyncIterator<PartyInvitation>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  invitedBy: <T = UserSubscription>() => T;
-  user: <T = UserSubscription>() => T;
-  party: <T = PartySubscription>() => T;
-  invitedUserId: () => Promise<AsyncIterator<String>>;
-  partyId: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface PartyInvitationNullablePromise
-  extends Promise<PartyInvitation | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  invitedBy: <T = UserPromise>() => T;
-  user: <T = UserPromise>() => T;
-  party: <T = PartyPromise>() => T;
-  invitedUserId: () => Promise<String>;
-  partyId: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-}
-
-export interface ImageConnection {
-  pageInfo: PageInfo;
-  edges: ImageEdge[];
-}
-
-export interface ImageConnectionPromise
-  extends Promise<ImageConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ImageEdge>>() => T;
-  aggregate: <T = AggregateImagePromise>() => T;
-}
-
-export interface ImageConnectionSubscription
-  extends Promise<AsyncIterator<ImageConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ImageEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateImageSubscription>() => T;
-}
-
-export interface LocationSubscriptionPayload {
-  mutation: MutationType;
-  node: Location;
-  updatedFields: String[];
-  previousValues: LocationPreviousValues;
-}
-
-export interface LocationSubscriptionPayloadPromise
-  extends Promise<LocationSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = LocationPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = LocationPreviousValuesPromise>() => T;
-}
-
-export interface LocationSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<LocationSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = LocationSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = LocationPreviousValuesSubscription>() => T;
-}
-
-export interface GameEdge {
-  node: Game;
-  cursor: String;
-}
-
-export interface GameEdgePromise extends Promise<GameEdge>, Fragmentable {
-  node: <T = GamePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface GameEdgeSubscription
-  extends Promise<AsyncIterator<GameEdge>>,
-    Fragmentable {
-  node: <T = GameSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface LocationPreviousValues {
-  id: ID_Output;
-  placeName: String;
-  latitude: Float;
-  longitude: Float;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface LocationPreviousValuesPromise
-  extends Promise<LocationPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  placeName: () => Promise<String>;
-  latitude: () => Promise<Float>;
-  longitude: () => Promise<Float>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface LocationPreviousValuesSubscription
-  extends Promise<AsyncIterator<LocationPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  placeName: () => Promise<AsyncIterator<String>>;
-  latitude: () => Promise<AsyncIterator<Float>>;
-  longitude: () => Promise<AsyncIterator<Float>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface AggregateChat {
-  count: Int;
-}
-
-export interface AggregateChatPromise
-  extends Promise<AggregateChat>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateChatSubscription
-  extends Promise<AsyncIterator<AggregateChat>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface AggregateGame {
-  count: Int;
-}
-
-export interface AggregateGamePromise
-  extends Promise<AggregateGame>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateGameSubscription
-  extends Promise<AsyncIterator<AggregateGame>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PlaylistPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  playlist_id?: String;
-  name: String;
-  isTemporary?: Boolean;
-}
-
-export interface PlaylistPreviousValuesPromise
-  extends Promise<PlaylistPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  playlist_id: () => Promise<String>;
-  name: () => Promise<String>;
-  isTemporary: () => Promise<Boolean>;
-}
-
-export interface PlaylistPreviousValuesSubscription
-  extends Promise<AsyncIterator<PlaylistPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  playlist_id: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  isTemporary: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface GameConnection {
-  pageInfo: PageInfo;
-  edges: GameEdge[];
-}
-
-export interface GameConnectionPromise
-  extends Promise<GameConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<GameEdge>>() => T;
-  aggregate: <T = AggregateGamePromise>() => T;
-}
-
-export interface GameConnectionSubscription
-  extends Promise<AsyncIterator<GameConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<GameEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateGameSubscription>() => T;
-}
-
-export interface ChatConnection {
-  pageInfo: PageInfo;
-  edges: ChatEdge[];
-}
-
-export interface ChatConnectionPromise
-  extends Promise<ChatConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ChatEdge>>() => T;
-  aggregate: <T = AggregateChatPromise>() => T;
-}
-
-export interface ChatConnectionSubscription
-  extends Promise<AsyncIterator<ChatConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ChatEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateChatSubscription>() => T;
-}
-
-export interface ChatEdge {
-  node: Chat;
-  cursor: String;
-}
-
-export interface ChatEdgePromise extends Promise<ChatEdge>, Fragmentable {
-  node: <T = ChatPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ChatEdgeSubscription
-  extends Promise<AsyncIterator<ChatEdge>>,
-    Fragmentable {
-  node: <T = ChatSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface PartyCartItem {
   id: ID_Output;
   name: String;
@@ -6452,174 +5017,6 @@ export interface PartyCartItemNullablePromise
   description: () => Promise<String>;
   price: () => Promise<Float>;
   quantity: () => Promise<Int>;
-}
-
-export interface Message {
-  id: ID_Output;
-  content: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface MessagePromise extends Promise<Message>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  author: <T = UserPromise>() => T;
-  chat: <T = ChatPromise>() => T;
-  content: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface MessageSubscription
-  extends Promise<AsyncIterator<Message>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  author: <T = UserSubscription>() => T;
-  chat: <T = ChatSubscription>() => T;
-  content: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface MessageNullablePromise
-  extends Promise<Message | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  author: <T = UserPromise>() => T;
-  chat: <T = ChatPromise>() => T;
-  content: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
-}
-
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
-}
-
-export interface MessageSubscriptionPayload {
-  mutation: MutationType;
-  node: Message;
-  updatedFields: String[];
-  previousValues: MessagePreviousValues;
-}
-
-export interface MessageSubscriptionPayloadPromise
-  extends Promise<MessageSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = MessagePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = MessagePreviousValuesPromise>() => T;
-}
-
-export interface MessageSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<MessageSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = MessageSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = MessagePreviousValuesSubscription>() => T;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface MessagePreviousValues {
-  id: ID_Output;
-  content: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface MessagePreviousValuesPromise
-  extends Promise<MessagePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  content: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface MessagePreviousValuesSubscription
-  extends Promise<AsyncIterator<MessagePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  content: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface TrackConnection {
-  pageInfo: PageInfo;
-  edges: TrackEdge[];
-}
-
-export interface TrackConnectionPromise
-  extends Promise<TrackConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TrackEdge>>() => T;
-  aggregate: <T = AggregateTrackPromise>() => T;
-}
-
-export interface TrackConnectionSubscription
-  extends Promise<AsyncIterator<TrackConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TrackEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTrackSubscription>() => T;
-}
-
-export interface AlbumEdge {
-  node: Album;
-  cursor: String;
-}
-
-export interface AlbumEdgePromise extends Promise<AlbumEdge>, Fragmentable {
-  node: <T = AlbumPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface AlbumEdgeSubscription
-  extends Promise<AsyncIterator<AlbumEdge>>,
-    Fragmentable {
-  node: <T = AlbumSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Chat {
@@ -6707,511 +5104,96 @@ export interface ChatNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface PartySubscriptionPayload {
-  mutation: MutationType;
-  node: Party;
-  updatedFields: String[];
-  previousValues: PartyPreviousValues;
-}
-
-export interface PartySubscriptionPayloadPromise
-  extends Promise<PartySubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = PartyPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = PartyPreviousValuesPromise>() => T;
-}
-
-export interface PartySubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PartySubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PartySubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PartyPreviousValuesSubscription>() => T;
-}
-
-export interface AggregatePartyInvitation {
-  count: Int;
-}
-
-export interface AggregatePartyInvitationPromise
-  extends Promise<AggregatePartyInvitation>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePartyInvitationSubscription
-  extends Promise<AsyncIterator<AggregatePartyInvitation>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PartyPreviousValues {
+export interface Message {
   id: ID_Output;
-  title: String;
-  normalizedTitle: String;
-  description: String;
+  content: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
-  colorTint: String;
-  isPublic?: Boolean;
-  start: DateTimeOutput;
-  end: DateTimeOutput;
-  inviteSecret: String;
 }
 
-export interface PartyPreviousValuesPromise
-  extends Promise<PartyPreviousValues>,
-    Fragmentable {
+export interface MessagePromise extends Promise<Message>, Fragmentable {
   id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  normalizedTitle: () => Promise<String>;
-  description: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  chat: <T = ChatPromise>() => T;
+  content: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  colorTint: () => Promise<String>;
-  isPublic: () => Promise<Boolean>;
-  start: () => Promise<DateTimeOutput>;
-  end: () => Promise<DateTimeOutput>;
-  inviteSecret: () => Promise<String>;
 }
 
-export interface PartyPreviousValuesSubscription
-  extends Promise<AsyncIterator<PartyPreviousValues>>,
+export interface MessageSubscription
+  extends Promise<AsyncIterator<Message>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  normalizedTitle: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
+  author: <T = UserSubscription>() => T;
+  chat: <T = ChatSubscription>() => T;
+  content: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  colorTint: () => Promise<AsyncIterator<String>>;
-  isPublic: () => Promise<AsyncIterator<Boolean>>;
-  start: () => Promise<AsyncIterator<DateTimeOutput>>;
-  end: () => Promise<AsyncIterator<DateTimeOutput>>;
-  inviteSecret: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PartyCartItemEdge {
-  node: PartyCartItem;
-  cursor: String;
-}
-
-export interface PartyCartItemEdgePromise
-  extends Promise<PartyCartItemEdge>,
-    Fragmentable {
-  node: <T = PartyCartItemPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PartyCartItemEdgeSubscription
-  extends Promise<AsyncIterator<PartyCartItemEdge>>,
-    Fragmentable {
-  node: <T = PartyCartItemSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateAlbum {
-  count: Int;
-}
-
-export interface AggregateAlbumPromise
-  extends Promise<AggregateAlbum>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateAlbumSubscription
-  extends Promise<AsyncIterator<AggregateAlbum>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PartyCartConnection {
-  pageInfo: PageInfo;
-  edges: PartyCartEdge[];
-}
-
-export interface PartyCartConnectionPromise
-  extends Promise<PartyCartConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartyCartEdge>>() => T;
-  aggregate: <T = AggregatePartyCartPromise>() => T;
-}
-
-export interface PartyCartConnectionSubscription
-  extends Promise<AsyncIterator<PartyCartConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartyCartEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartyCartSubscription>() => T;
-}
-
-export interface PartyCartSubscriptionPayload {
-  mutation: MutationType;
-  node: PartyCart;
-  updatedFields: String[];
-  previousValues: PartyCartPreviousValues;
-}
-
-export interface PartyCartSubscriptionPayloadPromise
-  extends Promise<PartyCartSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = PartyCartPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = PartyCartPreviousValuesPromise>() => T;
-}
-
-export interface PartyCartSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PartyCartSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PartyCartSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PartyCartPreviousValuesSubscription>() => T;
-}
-
-export interface AggregateMessage {
-  count: Int;
-}
-
-export interface AggregateMessagePromise
-  extends Promise<AggregateMessage>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMessageSubscription
-  extends Promise<AsyncIterator<AggregateMessage>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PartyCartPreviousValues {
-  id: ID_Output;
-}
-
-export interface PartyCartPreviousValuesPromise
-  extends Promise<PartyCartPreviousValues>,
+export interface MessageNullablePromise
+  extends Promise<Message | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-}
-
-export interface PartyCartPreviousValuesSubscription
-  extends Promise<AsyncIterator<PartyCartPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-}
-
-export interface LocationEdge {
-  node: Location;
-  cursor: String;
-}
-
-export interface LocationEdgePromise
-  extends Promise<LocationEdge>,
-    Fragmentable {
-  node: <T = LocationPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface LocationEdgeSubscription
-  extends Promise<AsyncIterator<LocationEdge>>,
-    Fragmentable {
-  node: <T = LocationSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface TrackSubscriptionPayload {
-  mutation: MutationType;
-  node: Track;
-  updatedFields: String[];
-  previousValues: TrackPreviousValues;
-}
-
-export interface TrackSubscriptionPayloadPromise
-  extends Promise<TrackSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = TrackPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = TrackPreviousValuesPromise>() => T;
-}
-
-export interface TrackSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TrackSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TrackSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TrackPreviousValuesSubscription>() => T;
-}
-
-export interface ImageEdge {
-  node: Image;
-  cursor: String;
-}
-
-export interface ImageEdgePromise extends Promise<ImageEdge>, Fragmentable {
-  node: <T = ImagePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ImageEdgeSubscription
-  extends Promise<AsyncIterator<ImageEdge>>,
-    Fragmentable {
-  node: <T = ImageSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PartyCartItemSubscriptionPayload {
-  mutation: MutationType;
-  node: PartyCartItem;
-  updatedFields: String[];
-  previousValues: PartyCartItemPreviousValues;
-}
-
-export interface PartyCartItemSubscriptionPayloadPromise
-  extends Promise<PartyCartItemSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = PartyCartItemPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = PartyCartItemPreviousValuesPromise>() => T;
-}
-
-export interface PartyCartItemSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PartyCartItemSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PartyCartItemSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PartyCartItemPreviousValuesSubscription>() => T;
-}
-
-export interface PartyCart {
-  id: ID_Output;
-}
-
-export interface PartyCartPromise extends Promise<PartyCart>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  party: <T = PartyPromise>() => T;
-  items: <T = FragmentableArray<PartyCartItem>>(args?: {
-    where?: PartyCartItemWhereInput;
-    orderBy?: PartyCartItemOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface PartyCartSubscription
-  extends Promise<AsyncIterator<PartyCart>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  party: <T = PartySubscription>() => T;
-  items: <T = Promise<AsyncIterator<PartyCartItemSubscription>>>(args?: {
-    where?: PartyCartItemWhereInput;
-    orderBy?: PartyCartItemOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface PartyCartNullablePromise
-  extends Promise<PartyCart | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  party: <T = PartyPromise>() => T;
-  items: <T = FragmentableArray<PartyCartItem>>(args?: {
-    where?: PartyCartItemWhereInput;
-    orderBy?: PartyCartItemOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface PartyCartItemPreviousValues {
-  id: ID_Output;
-  name: String;
-  description: String;
-  price: Float;
-  quantity: Int;
-}
-
-export interface PartyCartItemPreviousValuesPromise
-  extends Promise<PartyCartItemPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  price: () => Promise<Float>;
-  quantity: () => Promise<Int>;
-}
-
-export interface PartyCartItemPreviousValuesSubscription
-  extends Promise<AsyncIterator<PartyCartItemPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  price: () => Promise<AsyncIterator<Float>>;
-  quantity: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface AggregateTrack {
-  count: Int;
-}
-
-export interface AggregateTrackPromise
-  extends Promise<AggregateTrack>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateTrackSubscription
-  extends Promise<AsyncIterator<AggregateTrack>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ArtistConnection {
-  pageInfo: PageInfo;
-  edges: ArtistEdge[];
-}
-
-export interface ArtistConnectionPromise
-  extends Promise<ArtistConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ArtistEdge>>() => T;
-  aggregate: <T = AggregateArtistPromise>() => T;
-}
-
-export interface ArtistConnectionSubscription
-  extends Promise<AsyncIterator<ArtistConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ArtistEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateArtistSubscription>() => T;
-}
-
-export interface PartySavedTrackEdge {
-  node: PartySavedTrack;
-  cursor: String;
-}
-
-export interface PartySavedTrackEdgePromise
-  extends Promise<PartySavedTrackEdge>,
-    Fragmentable {
-  node: <T = PartySavedTrackPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PartySavedTrackEdgeSubscription
-  extends Promise<AsyncIterator<PartySavedTrackEdge>>,
-    Fragmentable {
-  node: <T = PartySavedTrackSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PartyInvitationSubscriptionPayload {
-  mutation: MutationType;
-  node: PartyInvitation;
-  updatedFields: String[];
-  previousValues: PartyInvitationPreviousValues;
-}
-
-export interface PartyInvitationSubscriptionPayloadPromise
-  extends Promise<PartyInvitationSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = PartyInvitationPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = PartyInvitationPreviousValuesPromise>() => T;
-}
-
-export interface PartyInvitationSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PartyInvitationSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PartyInvitationSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PartyInvitationPreviousValuesSubscription>() => T;
-}
-
-export interface AggregatePartyCart {
-  count: Int;
-}
-
-export interface AggregatePartyCartPromise
-  extends Promise<AggregatePartyCart>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePartyCartSubscription
-  extends Promise<AsyncIterator<AggregatePartyCart>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PartyInvitationPreviousValues {
-  id: ID_Output;
-  invitedUserId: String;
-  partyId: String;
-  createdAt: DateTimeOutput;
-}
-
-export interface PartyInvitationPreviousValuesPromise
-  extends Promise<PartyInvitationPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  invitedUserId: () => Promise<String>;
-  partyId: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  chat: <T = ChatPromise>() => T;
+  content: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface PartyInvitationPreviousValuesSubscription
-  extends Promise<AsyncIterator<PartyInvitationPreviousValues>>,
+export interface PlaylistPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  playlist_id?: String;
+  name: String;
+  isTemporary?: Boolean;
+}
+
+export interface PlaylistPreviousValuesPromise
+  extends Promise<PlaylistPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  playlist_id: () => Promise<String>;
+  name: () => Promise<String>;
+  isTemporary: () => Promise<Boolean>;
+}
+
+export interface PlaylistPreviousValuesSubscription
+  extends Promise<AsyncIterator<PlaylistPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  invitedUserId: () => Promise<AsyncIterator<String>>;
-  partyId: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  playlist_id: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  isTemporary: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface MessageConnection {
-  pageInfo: PageInfo;
-  edges: MessageEdge[];
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface MessageConnectionPromise
-  extends Promise<MessageConnection>,
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MessageEdge>>() => T;
-  aggregate: <T = AggregateMessagePromise>() => T;
-}
-
-export interface MessageConnectionSubscription
-  extends Promise<AsyncIterator<MessageConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMessageSubscription>() => T;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Party {
@@ -7369,36 +5351,213 @@ export interface PartyNullablePromise
   cart: <T = PartyCartPromise>() => T;
 }
 
-export interface Image {
+export interface TrackPreviousValues {
   id: ID_Output;
-  height: Int;
-  width: Int;
-  url: String;
+  name: String;
+  duration: Int;
+  preview_url?: String;
 }
 
-export interface ImagePromise extends Promise<Image>, Fragmentable {
+export interface TrackPreviousValuesPromise
+  extends Promise<TrackPreviousValues>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
-  height: () => Promise<Int>;
-  width: () => Promise<Int>;
-  url: () => Promise<String>;
+  name: () => Promise<String>;
+  duration: () => Promise<Int>;
+  preview_url: () => Promise<String>;
 }
 
-export interface ImageSubscription
-  extends Promise<AsyncIterator<Image>>,
+export interface TrackPreviousValuesSubscription
+  extends Promise<AsyncIterator<TrackPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  height: () => Promise<AsyncIterator<Int>>;
-  width: () => Promise<AsyncIterator<Int>>;
-  url: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  duration: () => Promise<AsyncIterator<Int>>;
+  preview_url: () => Promise<AsyncIterator<String>>;
 }
 
-export interface ImageNullablePromise
-  extends Promise<Image | null>,
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface AggregateTrack {
+  count: Int;
+}
+
+export interface AggregateTrackPromise
+  extends Promise<AggregateTrack>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTrackSubscription
+  extends Promise<AsyncIterator<AggregateTrack>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PartyCart {
+  id: ID_Output;
+}
+
+export interface PartyCartPromise extends Promise<PartyCart>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  party: <T = PartyPromise>() => T;
+  items: <T = FragmentableArray<PartyCartItem>>(args?: {
+    where?: PartyCartItemWhereInput;
+    orderBy?: PartyCartItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PartyCartSubscription
+  extends Promise<AsyncIterator<PartyCart>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  party: <T = PartySubscription>() => T;
+  items: <T = Promise<AsyncIterator<PartyCartItemSubscription>>>(args?: {
+    where?: PartyCartItemWhereInput;
+    orderBy?: PartyCartItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PartyCartNullablePromise
+  extends Promise<PartyCart | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  height: () => Promise<Int>;
-  width: () => Promise<Int>;
-  url: () => Promise<String>;
+  party: <T = PartyPromise>() => T;
+  items: <T = FragmentableArray<PartyCartItem>>(args?: {
+    where?: PartyCartItemWhereInput;
+    orderBy?: PartyCartItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface TrackConnection {
+  pageInfo: PageInfo;
+  edges: TrackEdge[];
+}
+
+export interface TrackConnectionPromise
+  extends Promise<TrackConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TrackEdge>>() => T;
+  aggregate: <T = AggregateTrackPromise>() => T;
+}
+
+export interface TrackConnectionSubscription
+  extends Promise<AsyncIterator<TrackConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TrackEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTrackSubscription>() => T;
+}
+
+export interface PartySavedTrack {
+  id: ID_Output;
+  spotifyId: String;
+  durationMs: Int;
+  explicit: Boolean;
+  name: String;
+  previewUrl?: String;
+  uri: String;
+  stringArtists: String;
+  length: String;
+  popularity: Int;
+}
+
+export interface PartySavedTrackPromise
+  extends Promise<PartySavedTrack>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<String>;
+  durationMs: () => Promise<Int>;
+  explicit: () => Promise<Boolean>;
+  name: () => Promise<String>;
+  previewUrl: () => Promise<String>;
+  uri: () => Promise<String>;
+  party: <T = PartyPromise>() => T;
+  stringArtists: () => Promise<String>;
+  length: () => Promise<String>;
+  popularity: () => Promise<Int>;
+  album: <T = AlbumPromise>() => T;
+}
+
+export interface PartySavedTrackSubscription
+  extends Promise<AsyncIterator<PartySavedTrack>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  spotifyId: () => Promise<AsyncIterator<String>>;
+  durationMs: () => Promise<AsyncIterator<Int>>;
+  explicit: () => Promise<AsyncIterator<Boolean>>;
+  name: () => Promise<AsyncIterator<String>>;
+  previewUrl: () => Promise<AsyncIterator<String>>;
+  uri: () => Promise<AsyncIterator<String>>;
+  party: <T = PartySubscription>() => T;
+  stringArtists: () => Promise<AsyncIterator<String>>;
+  length: () => Promise<AsyncIterator<String>>;
+  popularity: () => Promise<AsyncIterator<Int>>;
+  album: <T = AlbumSubscription>() => T;
+}
+
+export interface PartySavedTrackNullablePromise
+  extends Promise<PartySavedTrack | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<String>;
+  durationMs: () => Promise<Int>;
+  explicit: () => Promise<Boolean>;
+  name: () => Promise<String>;
+  previewUrl: () => Promise<String>;
+  uri: () => Promise<String>;
+  party: <T = PartyPromise>() => T;
+  stringArtists: () => Promise<String>;
+  length: () => Promise<String>;
+  popularity: () => Promise<Int>;
+  album: <T = AlbumPromise>() => T;
 }
 
 export interface PlaylistEdge {
@@ -7420,29 +5579,558 @@ export interface PlaylistEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PlaylistSubscriptionPayload {
-  mutation: MutationType;
-  node: Playlist;
-  updatedFields: String[];
-  previousValues: PlaylistPreviousValues;
+export interface Album {
+  id: ID_Output;
+  spotifyId: ID_Output;
+  uri: String;
+  name: String;
+  releaseDate: String;
+  imageUrl: String;
 }
 
-export interface PlaylistSubscriptionPayloadPromise
-  extends Promise<PlaylistSubscriptionPayload>,
+export interface AlbumPromise extends Promise<Album>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<ID_Output>;
+  uri: () => Promise<String>;
+  name: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+}
+
+export interface AlbumSubscription
+  extends Promise<AsyncIterator<Album>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  spotifyId: () => Promise<AsyncIterator<ID_Output>>;
+  uri: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  releaseDate: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AlbumNullablePromise
+  extends Promise<Album | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<ID_Output>;
+  uri: () => Promise<String>;
+  name: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = PlaylistPromise>() => T;
+  node: <T = UserPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = PlaylistPreviousValuesPromise>() => T;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
 }
 
-export interface PlaylistSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PlaylistSubscriptionPayload>>,
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PlaylistSubscription>() => T;
+  node: <T = UserSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PlaylistPreviousValuesSubscription>() => T;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface AlbumSubscriptionPayload {
+  mutation: MutationType;
+  node: Album;
+  updatedFields: String[];
+  previousValues: AlbumPreviousValues;
+}
+
+export interface AlbumSubscriptionPayloadPromise
+  extends Promise<AlbumSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = AlbumPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = AlbumPreviousValuesPromise>() => T;
+}
+
+export interface AlbumSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AlbumSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = AlbumSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = AlbumPreviousValuesSubscription>() => T;
+}
+
+export interface PartySavedTrackEdge {
+  node: PartySavedTrack;
+  cursor: String;
+}
+
+export interface PartySavedTrackEdgePromise
+  extends Promise<PartySavedTrackEdge>,
+    Fragmentable {
+  node: <T = PartySavedTrackPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PartySavedTrackEdgeSubscription
+  extends Promise<AsyncIterator<PartySavedTrackEdge>>,
+    Fragmentable {
+  node: <T = PartySavedTrackSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AlbumPreviousValues {
+  id: ID_Output;
+  spotifyId: ID_Output;
+  uri: String;
+  name: String;
+  releaseDate: String;
+  imageUrl: String;
+}
+
+export interface AlbumPreviousValuesPromise
+  extends Promise<AlbumPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<ID_Output>;
+  uri: () => Promise<String>;
+  name: () => Promise<String>;
+  releaseDate: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+}
+
+export interface AlbumPreviousValuesSubscription
+  extends Promise<AsyncIterator<AlbumPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  spotifyId: () => Promise<AsyncIterator<ID_Output>>;
+  uri: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  releaseDate: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregatePartyInvitation {
+  count: Int;
+}
+
+export interface AggregatePartyInvitationPromise
+  extends Promise<AggregatePartyInvitation>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePartyInvitationSubscription
+  extends Promise<AsyncIterator<AggregatePartyInvitation>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AlbumEdge {
+  node: Album;
+  cursor: String;
+}
+
+export interface AlbumEdgePromise extends Promise<AlbumEdge>, Fragmentable {
+  node: <T = AlbumPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface AlbumEdgeSubscription
+  extends Promise<AsyncIterator<AlbumEdge>>,
+    Fragmentable {
+  node: <T = AlbumSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartyInvitationConnection {
+  pageInfo: PageInfo;
+  edges: PartyInvitationEdge[];
+}
+
+export interface PartyInvitationConnectionPromise
+  extends Promise<PartyInvitationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartyInvitationEdge>>() => T;
+  aggregate: <T = AggregatePartyInvitationPromise>() => T;
+}
+
+export interface PartyInvitationConnectionSubscription
+  extends Promise<AsyncIterator<PartyInvitationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartyInvitationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartyInvitationSubscription>() => T;
+}
+
+export interface ArtistSubscriptionPayload {
+  mutation: MutationType;
+  node: Artist;
+  updatedFields: String[];
+  previousValues: ArtistPreviousValues;
+}
+
+export interface ArtistSubscriptionPayloadPromise
+  extends Promise<ArtistSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ArtistPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ArtistPreviousValuesPromise>() => T;
+}
+
+export interface ArtistSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ArtistSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ArtistSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ArtistPreviousValuesSubscription>() => T;
+}
+
+export interface PartyCartItemEdge {
+  node: PartyCartItem;
+  cursor: String;
+}
+
+export interface PartyCartItemEdgePromise
+  extends Promise<PartyCartItemEdge>,
+    Fragmentable {
+  node: <T = PartyCartItemPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PartyCartItemEdgeSubscription
+  extends Promise<AsyncIterator<PartyCartItemEdge>>,
+    Fragmentable {
+  node: <T = PartyCartItemSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ArtistPreviousValues {
+  id: ID_Output;
+  spotifyId: ID_Output;
+  uri: String;
+  name: String;
+}
+
+export interface ArtistPreviousValuesPromise
+  extends Promise<ArtistPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<ID_Output>;
+  uri: () => Promise<String>;
+  name: () => Promise<String>;
+}
+
+export interface ArtistPreviousValuesSubscription
+  extends Promise<AsyncIterator<ArtistPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  spotifyId: () => Promise<AsyncIterator<ID_Output>>;
+  uri: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregatePartyCart {
+  count: Int;
+}
+
+export interface AggregatePartyCartPromise
+  extends Promise<AggregatePartyCart>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePartyCartSubscription
+  extends Promise<AsyncIterator<AggregatePartyCart>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Track {
+  id: ID_Output;
+  name: String;
+  duration: Int;
+  preview_url?: String;
+}
+
+export interface TrackPromise extends Promise<Track>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  album: <T = AlbumPromise>() => T;
+  artists: <T = FragmentableArray<Artist>>(args?: {
+    where?: ArtistWhereInput;
+    orderBy?: ArtistOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  duration: () => Promise<Int>;
+  preview_url: () => Promise<String>;
+}
+
+export interface TrackSubscription
+  extends Promise<AsyncIterator<Track>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  album: <T = AlbumSubscription>() => T;
+  artists: <T = Promise<AsyncIterator<ArtistSubscription>>>(args?: {
+    where?: ArtistWhereInput;
+    orderBy?: ArtistOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  duration: () => Promise<AsyncIterator<Int>>;
+  preview_url: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TrackNullablePromise
+  extends Promise<Track | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  album: <T = AlbumPromise>() => T;
+  artists: <T = FragmentableArray<Artist>>(args?: {
+    where?: ArtistWhereInput;
+    orderBy?: ArtistOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  duration: () => Promise<Int>;
+  preview_url: () => Promise<String>;
+}
+
+export interface PartyCartConnection {
+  pageInfo: PageInfo;
+  edges: PartyCartEdge[];
+}
+
+export interface PartyCartConnectionPromise
+  extends Promise<PartyCartConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartyCartEdge>>() => T;
+  aggregate: <T = AggregatePartyCartPromise>() => T;
+}
+
+export interface PartyCartConnectionSubscription
+  extends Promise<AsyncIterator<PartyCartConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartyCartEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartyCartSubscription>() => T;
+}
+
+export interface ChatSubscriptionPayload {
+  mutation: MutationType;
+  node: Chat;
+  updatedFields: String[];
+  previousValues: ChatPreviousValues;
+}
+
+export interface ChatSubscriptionPayloadPromise
+  extends Promise<ChatSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ChatPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ChatPreviousValuesPromise>() => T;
+}
+
+export interface ChatSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ChatSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ChatSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ChatPreviousValuesSubscription>() => T;
+}
+
+export interface PartyEdge {
+  node: Party;
+  cursor: String;
+}
+
+export interface PartyEdgePromise extends Promise<PartyEdge>, Fragmentable {
+  node: <T = PartyPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PartyEdgeSubscription
+  extends Promise<AsyncIterator<PartyEdge>>,
+    Fragmentable {
+  node: <T = PartySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ChatPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ChatPreviousValuesPromise
+  extends Promise<ChatPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ChatPreviousValuesSubscription
+  extends Promise<AsyncIterator<ChatPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface AggregateMessage {
+  count: Int;
+}
+
+export interface AggregateMessagePromise
+  extends Promise<AggregateMessage>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMessageSubscription
+  extends Promise<AsyncIterator<AggregateMessage>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateAlbum {
+  count: Int;
+}
+
+export interface AggregateAlbumPromise
+  extends Promise<AggregateAlbum>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAlbumSubscription
+  extends Promise<AsyncIterator<AggregateAlbum>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface MessageConnection {
+  pageInfo: PageInfo;
+  edges: MessageEdge[];
+}
+
+export interface MessageConnectionPromise
+  extends Promise<MessageConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MessageEdge>>() => T;
+  aggregate: <T = AggregateMessagePromise>() => T;
+}
+
+export interface MessageConnectionSubscription
+  extends Promise<AsyncIterator<MessageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMessageSubscription>() => T;
+}
+
+export interface GameSubscriptionPayload {
+  mutation: MutationType;
+  node: Game;
+  updatedFields: String[];
+  previousValues: GamePreviousValues;
+}
+
+export interface GameSubscriptionPayloadPromise
+  extends Promise<GameSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = GamePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = GamePreviousValuesPromise>() => T;
+}
+
+export interface GameSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<GameSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = GameSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = GamePreviousValuesSubscription>() => T;
+}
+
+export interface LocationEdge {
+  node: Location;
+  cursor: String;
+}
+
+export interface LocationEdgePromise
+  extends Promise<LocationEdge>,
+    Fragmentable {
+  node: <T = LocationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LocationEdgeSubscription
+  extends Promise<AsyncIterator<LocationEdge>>,
+    Fragmentable {
+  node: <T = LocationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface GamePreviousValues {
+  id: ID_Output;
+  title: String;
+  cover?: String;
+  type: GameType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface GamePreviousValuesPromise
+  extends Promise<GamePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  cover: () => Promise<String>;
+  type: () => Promise<GameType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface GamePreviousValuesSubscription
+  extends Promise<AsyncIterator<GamePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  cover: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<GameType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface User {
@@ -7656,18 +6344,1183 @@ export interface UserNullablePromise
   resetTokenExpiry: () => Promise<DateTimeOutput>;
 }
 
+export interface Playlist {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  playlist_id?: String;
+  name: String;
+  isTemporary?: Boolean;
+}
+
+export interface PlaylistPromise extends Promise<Playlist>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  playlist_id: () => Promise<String>;
+  user: <T = UserPromise>() => T;
+  parties: <T = FragmentableArray<Party>>(args?: {
+    where?: PartyWhereInput;
+    orderBy?: PartyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  tracks: <T = FragmentableArray<Track>>(args?: {
+    where?: TrackWhereInput;
+    orderBy?: TrackOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  isTemporary: () => Promise<Boolean>;
+}
+
+export interface PlaylistSubscription
+  extends Promise<AsyncIterator<Playlist>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  playlist_id: () => Promise<AsyncIterator<String>>;
+  user: <T = UserSubscription>() => T;
+  parties: <T = Promise<AsyncIterator<PartySubscription>>>(args?: {
+    where?: PartyWhereInput;
+    orderBy?: PartyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<AsyncIterator<String>>;
+  tracks: <T = Promise<AsyncIterator<TrackSubscription>>>(args?: {
+    where?: TrackWhereInput;
+    orderBy?: TrackOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  isTemporary: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface PlaylistNullablePromise
+  extends Promise<Playlist | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  playlist_id: () => Promise<String>;
+  user: <T = UserPromise>() => T;
+  parties: <T = FragmentableArray<Party>>(args?: {
+    where?: PartyWhereInput;
+    orderBy?: PartyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  tracks: <T = FragmentableArray<Track>>(args?: {
+    where?: TrackWhereInput;
+    orderBy?: TrackOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  isTemporary: () => Promise<Boolean>;
+}
+
+export interface ImageEdge {
+  node: Image;
+  cursor: String;
+}
+
+export interface ImageEdgePromise extends Promise<ImageEdge>, Fragmentable {
+  node: <T = ImagePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ImageEdgeSubscription
+  extends Promise<AsyncIterator<ImageEdge>>,
+    Fragmentable {
+  node: <T = ImageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ImageSubscriptionPayload {
+  mutation: MutationType;
+  node: Image;
+  updatedFields: String[];
+  previousValues: ImagePreviousValues;
+}
+
+export interface ImageSubscriptionPayloadPromise
+  extends Promise<ImageSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ImagePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ImagePreviousValuesPromise>() => T;
+}
+
+export interface ImageSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ImageSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ImageSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ImagePreviousValuesSubscription>() => T;
+}
+
+export interface AlbumConnection {
+  pageInfo: PageInfo;
+  edges: AlbumEdge[];
+}
+
+export interface AlbumConnectionPromise
+  extends Promise<AlbumConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<AlbumEdge>>() => T;
+  aggregate: <T = AggregateAlbumPromise>() => T;
+}
+
+export interface AlbumConnectionSubscription
+  extends Promise<AsyncIterator<AlbumConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AlbumEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAlbumSubscription>() => T;
+}
+
+export interface ImagePreviousValues {
+  id: ID_Output;
+  height: Int;
+  width: Int;
+  url: String;
+}
+
+export interface ImagePreviousValuesPromise
+  extends Promise<ImagePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  height: () => Promise<Int>;
+  width: () => Promise<Int>;
+  url: () => Promise<String>;
+}
+
+export interface ImagePreviousValuesSubscription
+  extends Promise<AsyncIterator<ImagePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  height: () => Promise<AsyncIterator<Int>>;
+  width: () => Promise<AsyncIterator<Int>>;
+  url: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateGame {
+  count: Int;
+}
+
+export interface AggregateGamePromise
+  extends Promise<AggregateGame>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateGameSubscription
+  extends Promise<AsyncIterator<AggregateGame>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Game {
+  id: ID_Output;
+  title: String;
+  cover?: String;
+  type: GameType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface GamePromise extends Promise<Game>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  cover: () => Promise<String>;
+  type: () => Promise<GameType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface GameSubscription
+  extends Promise<AsyncIterator<Game>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  cover: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<GameType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface GameNullablePromise
+  extends Promise<Game | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  cover: () => Promise<String>;
+  type: () => Promise<GameType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface GameConnection {
+  pageInfo: PageInfo;
+  edges: GameEdge[];
+}
+
+export interface GameConnectionPromise
+  extends Promise<GameConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<GameEdge>>() => T;
+  aggregate: <T = AggregateGamePromise>() => T;
+}
+
+export interface GameConnectionSubscription
+  extends Promise<AsyncIterator<GameConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<GameEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateGameSubscription>() => T;
+}
+
+export interface LocationSubscriptionPayload {
+  mutation: MutationType;
+  node: Location;
+  updatedFields: String[];
+  previousValues: LocationPreviousValues;
+}
+
+export interface LocationSubscriptionPayloadPromise
+  extends Promise<LocationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = LocationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = LocationPreviousValuesPromise>() => T;
+}
+
+export interface LocationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<LocationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = LocationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = LocationPreviousValuesSubscription>() => T;
+}
+
+export interface ChatEdge {
+  node: Chat;
+  cursor: String;
+}
+
+export interface ChatEdgePromise extends Promise<ChatEdge>, Fragmentable {
+  node: <T = ChatPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ChatEdgeSubscription
+  extends Promise<AsyncIterator<ChatEdge>>,
+    Fragmentable {
+  node: <T = ChatSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface LocationPreviousValues {
+  id: ID_Output;
+  placeName: String;
+  latitude: Float;
+  longitude: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface LocationPreviousValuesPromise
+  extends Promise<LocationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  placeName: () => Promise<String>;
+  latitude: () => Promise<Float>;
+  longitude: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface LocationPreviousValuesSubscription
+  extends Promise<AsyncIterator<LocationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  placeName: () => Promise<AsyncIterator<String>>;
+  latitude: () => Promise<AsyncIterator<Float>>;
+  longitude: () => Promise<AsyncIterator<Float>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Location {
+  id: ID_Output;
+  placeName: String;
+  latitude: Float;
+  longitude: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface LocationPromise extends Promise<Location>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  placeName: () => Promise<String>;
+  latitude: () => Promise<Float>;
+  longitude: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface LocationSubscription
+  extends Promise<AsyncIterator<Location>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  placeName: () => Promise<AsyncIterator<String>>;
+  latitude: () => Promise<AsyncIterator<Float>>;
+  longitude: () => Promise<AsyncIterator<Float>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface LocationNullablePromise
+  extends Promise<Location | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  placeName: () => Promise<String>;
+  latitude: () => Promise<Float>;
+  longitude: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface TrackEdge {
+  node: Track;
+  cursor: String;
+}
+
+export interface TrackEdgePromise extends Promise<TrackEdge>, Fragmentable {
+  node: <T = TrackPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TrackEdgeSubscription
+  extends Promise<AsyncIterator<TrackEdge>>,
+    Fragmentable {
+  node: <T = TrackSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MessageSubscriptionPayload {
+  mutation: MutationType;
+  node: Message;
+  updatedFields: String[];
+  previousValues: MessagePreviousValues;
+}
+
+export interface MessageSubscriptionPayloadPromise
+  extends Promise<MessageSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MessagePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MessagePreviousValuesPromise>() => T;
+}
+
+export interface MessageSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MessageSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MessageSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MessagePreviousValuesSubscription>() => T;
+}
+
+export interface PlaylistConnection {
+  pageInfo: PageInfo;
+  edges: PlaylistEdge[];
+}
+
+export interface PlaylistConnectionPromise
+  extends Promise<PlaylistConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PlaylistEdge>>() => T;
+  aggregate: <T = AggregatePlaylistPromise>() => T;
+}
+
+export interface PlaylistConnectionSubscription
+  extends Promise<AsyncIterator<PlaylistConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PlaylistEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePlaylistSubscription>() => T;
+}
+
+export interface MessagePreviousValues {
+  id: ID_Output;
+  content: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface MessagePreviousValuesPromise
+  extends Promise<MessagePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MessagePreviousValuesSubscription
+  extends Promise<AsyncIterator<MessagePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  content: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface PartySavedTrackConnection {
+  pageInfo: PageInfo;
+  edges: PartySavedTrackEdge[];
+}
+
+export interface PartySavedTrackConnectionPromise
+  extends Promise<PartySavedTrackConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartySavedTrackEdge>>() => T;
+  aggregate: <T = AggregatePartySavedTrackPromise>() => T;
+}
+
+export interface PartySavedTrackConnectionSubscription
+  extends Promise<AsyncIterator<PartySavedTrackConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartySavedTrackEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartySavedTrackSubscription>() => T;
+}
+
+export interface Artist {
+  id: ID_Output;
+  spotifyId: ID_Output;
+  uri: String;
+  name: String;
+}
+
+export interface ArtistPromise extends Promise<Artist>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<ID_Output>;
+  uri: () => Promise<String>;
+  name: () => Promise<String>;
+}
+
+export interface ArtistSubscription
+  extends Promise<AsyncIterator<Artist>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  spotifyId: () => Promise<AsyncIterator<ID_Output>>;
+  uri: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ArtistNullablePromise
+  extends Promise<Artist | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<ID_Output>;
+  uri: () => Promise<String>;
+  name: () => Promise<String>;
+}
+
+export interface AggregatePartyCartItem {
+  count: Int;
+}
+
+export interface AggregatePartyCartItemPromise
+  extends Promise<AggregatePartyCartItem>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePartyCartItemSubscription
+  extends Promise<AsyncIterator<AggregatePartyCartItem>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PartySubscriptionPayload {
+  mutation: MutationType;
+  node: Party;
+  updatedFields: String[];
+  previousValues: PartyPreviousValues;
+}
+
+export interface PartySubscriptionPayloadPromise
+  extends Promise<PartySubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PartyPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PartyPreviousValuesPromise>() => T;
+}
+
+export interface PartySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PartySubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PartySubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PartyPreviousValuesSubscription>() => T;
+}
+
+export interface PartyCartEdge {
+  node: PartyCart;
+  cursor: String;
+}
+
+export interface PartyCartEdgePromise
+  extends Promise<PartyCartEdge>,
+    Fragmentable {
+  node: <T = PartyCartPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PartyCartEdgeSubscription
+  extends Promise<AsyncIterator<PartyCartEdge>>,
+    Fragmentable {
+  node: <T = PartyCartSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartyPreviousValues {
+  id: ID_Output;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  colorTint: String;
+  isPublic?: Boolean;
+  start: DateTimeOutput;
+  end: DateTimeOutput;
+  inviteSecret: String;
+}
+
+export interface PartyPreviousValuesPromise
+  extends Promise<PartyPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  normalizedTitle: () => Promise<String>;
+  description: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  colorTint: () => Promise<String>;
+  isPublic: () => Promise<Boolean>;
+  start: () => Promise<DateTimeOutput>;
+  end: () => Promise<DateTimeOutput>;
+  inviteSecret: () => Promise<String>;
+}
+
+export interface PartyPreviousValuesSubscription
+  extends Promise<AsyncIterator<PartyPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  normalizedTitle: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  colorTint: () => Promise<AsyncIterator<String>>;
+  isPublic: () => Promise<AsyncIterator<Boolean>>;
+  start: () => Promise<AsyncIterator<DateTimeOutput>>;
+  end: () => Promise<AsyncIterator<DateTimeOutput>>;
+  inviteSecret: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartyConnection {
+  pageInfo: PageInfo;
+  edges: PartyEdge[];
+}
+
+export interface PartyConnectionPromise
+  extends Promise<PartyConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartyEdge>>() => T;
+  aggregate: <T = AggregatePartyPromise>() => T;
+}
+
+export interface PartyConnectionSubscription
+  extends Promise<AsyncIterator<PartyConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartyEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartySubscription>() => T;
+}
+
+export interface PartyInvitation {
+  id: ID_Output;
+  invitedUserId: String;
+  partyId: String;
+  createdAt: DateTimeOutput;
+}
+
+export interface PartyInvitationPromise
+  extends Promise<PartyInvitation>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  invitedBy: <T = UserPromise>() => T;
+  user: <T = UserPromise>() => T;
+  party: <T = PartyPromise>() => T;
+  invitedUserId: () => Promise<String>;
+  partyId: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
+export interface PartyInvitationSubscription
+  extends Promise<AsyncIterator<PartyInvitation>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  invitedBy: <T = UserSubscription>() => T;
+  user: <T = UserSubscription>() => T;
+  party: <T = PartySubscription>() => T;
+  invitedUserId: () => Promise<AsyncIterator<String>>;
+  partyId: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface PartyInvitationNullablePromise
+  extends Promise<PartyInvitation | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  invitedBy: <T = UserPromise>() => T;
+  user: <T = UserPromise>() => T;
+  party: <T = PartyPromise>() => T;
+  invitedUserId: () => Promise<String>;
+  partyId: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
+export interface AggregateLocation {
+  count: Int;
+}
+
+export interface AggregateLocationPromise
+  extends Promise<AggregateLocation>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLocationSubscription
+  extends Promise<AsyncIterator<AggregateLocation>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PartyCartSubscriptionPayload {
+  mutation: MutationType;
+  node: PartyCart;
+  updatedFields: String[];
+  previousValues: PartyCartPreviousValues;
+}
+
+export interface PartyCartSubscriptionPayloadPromise
+  extends Promise<PartyCartSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PartyCartPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PartyCartPreviousValuesPromise>() => T;
+}
+
+export interface PartyCartSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PartyCartSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PartyCartSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PartyCartPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateImage {
+  count: Int;
+}
+
+export interface AggregateImagePromise
+  extends Promise<AggregateImage>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateImageSubscription
+  extends Promise<AsyncIterator<AggregateImage>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PartyCartPreviousValues {
+  id: ID_Output;
+}
+
+export interface PartyCartPreviousValuesPromise
+  extends Promise<PartyCartPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+}
+
+export interface PartyCartPreviousValuesSubscription
+  extends Promise<AsyncIterator<PartyCartPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+}
+
+export interface Image {
+  id: ID_Output;
+  height: Int;
+  width: Int;
+  url: String;
+}
+
+export interface ImagePromise extends Promise<Image>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  height: () => Promise<Int>;
+  width: () => Promise<Int>;
+  url: () => Promise<String>;
+}
+
+export interface ImageSubscription
+  extends Promise<AsyncIterator<Image>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  height: () => Promise<AsyncIterator<Int>>;
+  width: () => Promise<AsyncIterator<Int>>;
+  url: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ImageNullablePromise
+  extends Promise<Image | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  height: () => Promise<Int>;
+  width: () => Promise<Int>;
+  url: () => Promise<String>;
+}
+
+export interface ArtistConnection {
+  pageInfo: PageInfo;
+  edges: ArtistEdge[];
+}
+
+export interface ArtistConnectionPromise
+  extends Promise<ArtistConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ArtistEdge>>() => T;
+  aggregate: <T = AggregateArtistPromise>() => T;
+}
+
+export interface ArtistConnectionSubscription
+  extends Promise<AsyncIterator<ArtistConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ArtistEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateArtistSubscription>() => T;
+}
+
+export interface AggregateChat {
+  count: Int;
+}
+
+export interface AggregateChatPromise
+  extends Promise<AggregateChat>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateChatSubscription
+  extends Promise<AsyncIterator<AggregateChat>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PartyCartItemSubscriptionPayload {
+  mutation: MutationType;
+  node: PartyCartItem;
+  updatedFields: String[];
+  previousValues: PartyCartItemPreviousValues;
+}
+
+export interface PartyCartItemSubscriptionPayloadPromise
+  extends Promise<PartyCartItemSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PartyCartItemPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PartyCartItemPreviousValuesPromise>() => T;
+}
+
+export interface PartyCartItemSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PartyCartItemSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PartyCartItemSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PartyCartItemPreviousValuesSubscription>() => T;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface PartyCartItemPreviousValues {
+  id: ID_Output;
+  name: String;
+  description: String;
+  price: Float;
+  quantity: Int;
+}
+
+export interface PartyCartItemPreviousValuesPromise
+  extends Promise<PartyCartItemPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  price: () => Promise<Float>;
+  quantity: () => Promise<Int>;
+}
+
+export interface PartyCartItemPreviousValuesSubscription
+  extends Promise<AsyncIterator<PartyCartItemPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Float>>;
+  quantity: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregatePartySavedTrack {
+  count: Int;
+}
+
+export interface AggregatePartySavedTrackPromise
+  extends Promise<AggregatePartySavedTrack>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePartySavedTrackSubscription
+  extends Promise<AsyncIterator<AggregatePartySavedTrack>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ArtistEdge {
+  node: Artist;
+  cursor: String;
+}
+
+export interface ArtistEdgePromise extends Promise<ArtistEdge>, Fragmentable {
+  node: <T = ArtistPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ArtistEdgeSubscription
+  extends Promise<AsyncIterator<ArtistEdge>>,
+    Fragmentable {
+  node: <T = ArtistSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartyCartItemConnection {
+  pageInfo: PageInfo;
+  edges: PartyCartItemEdge[];
+}
+
+export interface PartyCartItemConnectionPromise
+  extends Promise<PartyCartItemConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartyCartItemEdge>>() => T;
+  aggregate: <T = AggregatePartyCartItemPromise>() => T;
+}
+
+export interface PartyCartItemConnectionSubscription
+  extends Promise<AsyncIterator<PartyCartItemConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartyCartItemEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartyCartItemSubscription>() => T;
+}
+
+export interface PartyInvitationSubscriptionPayload {
+  mutation: MutationType;
+  node: PartyInvitation;
+  updatedFields: String[];
+  previousValues: PartyInvitationPreviousValues;
+}
+
+export interface PartyInvitationSubscriptionPayloadPromise
+  extends Promise<PartyInvitationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PartyInvitationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PartyInvitationPreviousValuesPromise>() => T;
+}
+
+export interface PartyInvitationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PartyInvitationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PartyInvitationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PartyInvitationPreviousValuesSubscription>() => T;
+}
+
+export interface MessageEdge {
+  node: Message;
+  cursor: String;
+}
+
+export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
+  node: <T = MessagePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MessageEdgeSubscription
+  extends Promise<AsyncIterator<MessageEdge>>,
+    Fragmentable {
+  node: <T = MessageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PartyInvitationPreviousValues {
+  id: ID_Output;
+  invitedUserId: String;
+  partyId: String;
+  createdAt: DateTimeOutput;
+}
+
+export interface PartyInvitationPreviousValuesPromise
+  extends Promise<PartyInvitationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  invitedUserId: () => Promise<String>;
+  partyId: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
+export interface PartyInvitationPreviousValuesSubscription
+  extends Promise<AsyncIterator<PartyInvitationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  invitedUserId: () => Promise<AsyncIterator<String>>;
+  partyId: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ImageConnection {
+  pageInfo: PageInfo;
+  edges: ImageEdge[];
+}
+
+export interface ImageConnectionPromise
+  extends Promise<ImageConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ImageEdge>>() => T;
+  aggregate: <T = AggregateImagePromise>() => T;
+}
+
+export interface ImageConnectionSubscription
+  extends Promise<AsyncIterator<ImageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ImageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateImageSubscription>() => T;
+}
+
+export interface AggregateArtist {
+  count: Int;
+}
+
+export interface AggregateArtistPromise
+  extends Promise<AggregateArtist>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateArtistSubscription
+  extends Promise<AsyncIterator<AggregateArtist>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ChatConnection {
+  pageInfo: PageInfo;
+  edges: ChatEdge[];
+}
+
+export interface ChatConnectionPromise
+  extends Promise<ChatConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ChatEdge>>() => T;
+  aggregate: <T = AggregateChatPromise>() => T;
+}
+
+export interface ChatConnectionSubscription
+  extends Promise<AsyncIterator<ChatConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ChatEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateChatSubscription>() => T;
+}
+
+export interface PartyInvitationEdge {
+  node: PartyInvitation;
+  cursor: String;
+}
+
+export interface PartyInvitationEdgePromise
+  extends Promise<PartyInvitationEdge>,
+    Fragmentable {
+  node: <T = PartyInvitationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PartyInvitationEdgeSubscription
+  extends Promise<AsyncIterator<PartyInvitationEdge>>,
+    Fragmentable {
+  node: <T = PartyInvitationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PlaylistSubscriptionPayload {
+  mutation: MutationType;
+  node: Playlist;
+  updatedFields: String[];
+  previousValues: PlaylistPreviousValues;
+}
+
+export interface PlaylistSubscriptionPayloadPromise
+  extends Promise<PlaylistSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = PlaylistPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PlaylistPreviousValuesPromise>() => T;
+}
+
+export interface PlaylistSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PlaylistSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PlaylistSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PlaylistPreviousValuesSubscription>() => T;
+}
+
+export interface TrackSubscriptionPayload {
+  mutation: MutationType;
+  node: Track;
+  updatedFields: String[];
+  previousValues: TrackPreviousValues;
+}
+
+export interface TrackSubscriptionPayloadPromise
+  extends Promise<TrackSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TrackPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TrackPreviousValuesPromise>() => T;
+}
+
+export interface TrackSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TrackSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TrackSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TrackPreviousValuesSubscription>() => T;
+}
+
 export interface PartySavedTrackPreviousValues {
   id: ID_Output;
   spotifyId: String;
-  name: String;
-  imageUrl: String;
   durationMs: Int;
-  length: String;
-  preview_url?: String;
-  uri?: String;
   explicit: Boolean;
-  upVotes: Int;
-  downVotes: Int;
+  name: String;
+  previewUrl?: String;
+  uri: String;
+  stringArtists: String;
+  length: String;
+  popularity: Int;
 }
 
 export interface PartySavedTrackPreviousValuesPromise
@@ -7675,15 +7528,14 @@ export interface PartySavedTrackPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   spotifyId: () => Promise<String>;
-  name: () => Promise<String>;
-  imageUrl: () => Promise<String>;
   durationMs: () => Promise<Int>;
-  length: () => Promise<String>;
-  preview_url: () => Promise<String>;
-  uri: () => Promise<String>;
   explicit: () => Promise<Boolean>;
-  upVotes: () => Promise<Int>;
-  downVotes: () => Promise<Int>;
+  name: () => Promise<String>;
+  previewUrl: () => Promise<String>;
+  uri: () => Promise<String>;
+  stringArtists: () => Promise<String>;
+  length: () => Promise<String>;
+  popularity: () => Promise<Int>;
 }
 
 export interface PartySavedTrackPreviousValuesSubscription
@@ -7691,15 +7543,14 @@ export interface PartySavedTrackPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   spotifyId: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  imageUrl: () => Promise<AsyncIterator<String>>;
   durationMs: () => Promise<AsyncIterator<Int>>;
-  length: () => Promise<AsyncIterator<String>>;
-  preview_url: () => Promise<AsyncIterator<String>>;
-  uri: () => Promise<AsyncIterator<String>>;
   explicit: () => Promise<AsyncIterator<Boolean>>;
-  upVotes: () => Promise<AsyncIterator<Int>>;
-  downVotes: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+  previewUrl: () => Promise<AsyncIterator<String>>;
+  uri: () => Promise<AsyncIterator<String>>;
+  stringArtists: () => Promise<AsyncIterator<String>>;
+  length: () => Promise<AsyncIterator<String>>;
+  popularity: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface PartySavedTrackSubscriptionPayload {
@@ -7727,83 +7578,74 @@ export interface PartySavedTrackSubscriptionPayloadSubscription
   previousValues: <T = PartySavedTrackPreviousValuesSubscription>() => T;
 }
 
-export interface PartyInvitationConnection {
-  pageInfo: PageInfo;
-  edges: PartyInvitationEdge[];
+export interface AggregateParty {
+  count: Int;
 }
 
-export interface PartyInvitationConnectionPromise
-  extends Promise<PartyInvitationConnection>,
+export interface AggregatePartyPromise
+  extends Promise<AggregateParty>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartyInvitationEdge>>() => T;
-  aggregate: <T = AggregatePartyInvitationPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface PartyInvitationConnectionSubscription
-  extends Promise<AsyncIterator<PartyInvitationConnection>>,
+export interface AggregatePartySubscription
+  extends Promise<AsyncIterator<AggregateParty>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartyInvitationEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartyInvitationSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface BatchPayload {
-  count: Long;
+export interface AggregatePlaylist {
+  count: Int;
 }
 
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
+export interface AggregatePlaylistPromise
+  extends Promise<AggregatePlaylist>,
     Fragmentable {
-  count: () => Promise<Long>;
+  count: () => Promise<Int>;
 }
 
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
+export interface AggregatePlaylistSubscription
+  extends Promise<AsyncIterator<AggregatePlaylist>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface TrackPreviousValues {
-  id: ID_Output;
-  name: String;
-  duration: Int;
-  preview_url?: String;
-}
-
-export interface TrackPreviousValuesPromise
-  extends Promise<TrackPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  duration: () => Promise<Int>;
-  preview_url: () => Promise<String>;
-}
-
-export interface TrackPreviousValuesSubscription
-  extends Promise<AsyncIterator<TrackPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  duration: () => Promise<AsyncIterator<Int>>;
-  preview_url: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PartyEdge {
-  node: Party;
+export interface GameEdge {
+  node: Game;
   cursor: String;
 }
 
-export interface PartyEdgePromise extends Promise<PartyEdge>, Fragmentable {
-  node: <T = PartyPromise>() => T;
+export interface GameEdgePromise extends Promise<GameEdge>, Fragmentable {
+  node: <T = GamePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface PartyEdgeSubscription
-  extends Promise<AsyncIterator<PartyEdge>>,
+export interface GameEdgeSubscription
+  extends Promise<AsyncIterator<GameEdge>>,
     Fragmentable {
-  node: <T = PartySubscription>() => T;
+  node: <T = GameSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface LocationConnection {
+  pageInfo: PageInfo;
+  edges: LocationEdge[];
+}
+
+export interface LocationConnectionPromise
+  extends Promise<LocationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LocationEdge>>() => T;
+  aggregate: <T = AggregateLocationPromise>() => T;
+}
+
+export interface LocationConnectionSubscription
+  extends Promise<AsyncIterator<LocationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LocationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLocationSubscription>() => T;
 }
 
 /*
@@ -7814,12 +7656,6 @@ export type Boolean = boolean;
 export type Long = string;
 
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-/*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
 export type String = string;
@@ -7828,6 +7664,12 @@ export type String = string;
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).

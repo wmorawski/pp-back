@@ -11,14 +11,14 @@ export interface Query {
     partyCarts: <T = Array<PartyCart | null>>(args: { where?: PartyCartWhereInput | null, orderBy?: PartyCartOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partyCartItems: <T = Array<PartyCartItem | null>>(args: { where?: PartyCartItemWhereInput | null, orderBy?: PartyCartItemOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partySavedTracks: <T = Array<PartySavedTrack | null>>(args: { where?: PartySavedTrackWhereInput | null, orderBy?: PartySavedTrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    albums: <T = Array<Album | null>>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     images: <T = Array<Image | null>>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    artists: <T = Array<Artist | null>>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     locations: <T = Array<Location | null>>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     games: <T = Array<Game | null>>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    artists: <T = Array<Artist | null>>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     tracks: <T = Array<Track | null>>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     parties: <T = Array<Party | null>>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    albums: <T = Array<Album | null>>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     message: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     partyInvitation: <T = PartyInvitation | null>(args: { where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     chat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -26,14 +26,14 @@ export interface Query {
     partyCart: <T = PartyCart | null>(args: { where: PartyCartWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     partyCartItem: <T = PartyCartItem | null>(args: { where: PartyCartItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     partySavedTrack: <T = PartySavedTrack | null>(args: { where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    album: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     image: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    artist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     game: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    artist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     track: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     party: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    album: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     messagesConnection: <T = MessageConnection>(args: { where?: MessageWhereInput | null, orderBy?: MessageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partyInvitationsConnection: <T = PartyInvitationConnection>(args: { where?: PartyInvitationWhereInput | null, orderBy?: PartyInvitationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     chatsConnection: <T = ChatConnection>(args: { where?: ChatWhereInput | null, orderBy?: ChatOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -41,14 +41,14 @@ export interface Query {
     partyCartsConnection: <T = PartyCartConnection>(args: { where?: PartyCartWhereInput | null, orderBy?: PartyCartOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partyCartItemsConnection: <T = PartyCartItemConnection>(args: { where?: PartyCartItemWhereInput | null, orderBy?: PartyCartItemOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partySavedTracksConnection: <T = PartySavedTrackConnection>(args: { where?: PartySavedTrackWhereInput | null, orderBy?: PartySavedTrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    albumsConnection: <T = AlbumConnection>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     imagesConnection: <T = ImageConnection>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    artistsConnection: <T = ArtistConnection>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     locationsConnection: <T = LocationConnection>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     gamesConnection: <T = GameConnection>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    artistsConnection: <T = ArtistConnection>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     tracksConnection: <T = TrackConnection>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partiesConnection: <T = PartyConnection>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    albumsConnection: <T = AlbumConnection>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
 
@@ -60,14 +60,14 @@ export interface Mutation {
     createPartyCart: <T = PartyCart>(args: { data: PartyCartCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createPartyCartItem: <T = PartyCartItem>(args: { data: PartyCartItemCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createPartySavedTrack: <T = PartySavedTrack>(args: { data: PartySavedTrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createAlbum: <T = Album>(args: { data: AlbumCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createImage: <T = Image>(args: { data: ImageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createArtist: <T = Artist>(args: { data: ArtistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createGame: <T = Game>(args: { data: GameCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createArtist: <T = Artist>(args: { data: ArtistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createTrack: <T = Track>(args: { data: TrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createParty: <T = Party>(args: { data: PartyCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createAlbum: <T = Album>(args: { data: AlbumCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateMessage: <T = Message | null>(args: { data: MessageUpdateInput, where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updatePartyInvitation: <T = PartyInvitation | null>(args: { data: PartyInvitationUpdateInput, where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateChat: <T = Chat | null>(args: { data: ChatUpdateInput, where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -75,14 +75,14 @@ export interface Mutation {
     updatePartyCart: <T = PartyCart | null>(args: { data: PartyCartUpdateInput, where: PartyCartWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updatePartyCartItem: <T = PartyCartItem | null>(args: { data: PartyCartItemUpdateInput, where: PartyCartItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updatePartySavedTrack: <T = PartySavedTrack | null>(args: { data: PartySavedTrackUpdateInput, where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateAlbum: <T = Album | null>(args: { data: AlbumUpdateInput, where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateImage: <T = Image | null>(args: { data: ImageUpdateInput, where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateArtist: <T = Artist | null>(args: { data: ArtistUpdateInput, where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateGame: <T = Game | null>(args: { data: GameUpdateInput, where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateArtist: <T = Artist | null>(args: { data: ArtistUpdateInput, where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateTrack: <T = Track | null>(args: { data: TrackUpdateInput, where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateParty: <T = Party | null>(args: { data: PartyUpdateInput, where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateAlbum: <T = Album | null>(args: { data: AlbumUpdateInput, where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteMessage: <T = Message | null>(args: { where: MessageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deletePartyInvitation: <T = PartyInvitation | null>(args: { where: PartyInvitationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteChat: <T = Chat | null>(args: { where: ChatWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -90,14 +90,14 @@ export interface Mutation {
     deletePartyCart: <T = PartyCart | null>(args: { where: PartyCartWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deletePartyCartItem: <T = PartyCartItem | null>(args: { where: PartyCartItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deletePartySavedTrack: <T = PartySavedTrack | null>(args: { where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteAlbum: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteImage: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteArtist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteLocation: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteGame: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteArtist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteTrack: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteParty: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteAlbum: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertMessage: <T = Message>(args: { where: MessageWhereUniqueInput, create: MessageCreateInput, update: MessageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertPartyInvitation: <T = PartyInvitation>(args: { where: PartyInvitationWhereUniqueInput, create: PartyInvitationCreateInput, update: PartyInvitationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertChat: <T = Chat>(args: { where: ChatWhereUniqueInput, create: ChatCreateInput, update: ChatUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -105,27 +105,27 @@ export interface Mutation {
     upsertPartyCart: <T = PartyCart>(args: { where: PartyCartWhereUniqueInput, create: PartyCartCreateInput, update: PartyCartUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertPartyCartItem: <T = PartyCartItem>(args: { where: PartyCartItemWhereUniqueInput, create: PartyCartItemCreateInput, update: PartyCartItemUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertPartySavedTrack: <T = PartySavedTrack>(args: { where: PartySavedTrackWhereUniqueInput, create: PartySavedTrackCreateInput, update: PartySavedTrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertAlbum: <T = Album>(args: { where: AlbumWhereUniqueInput, create: AlbumCreateInput, update: AlbumUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertImage: <T = Image>(args: { where: ImageWhereUniqueInput, create: ImageCreateInput, update: ImageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertArtist: <T = Artist>(args: { where: ArtistWhereUniqueInput, create: ArtistCreateInput, update: ArtistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertLocation: <T = Location>(args: { where: LocationWhereUniqueInput, create: LocationCreateInput, update: LocationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertGame: <T = Game>(args: { where: GameWhereUniqueInput, create: GameCreateInput, update: GameUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertArtist: <T = Artist>(args: { where: ArtistWhereUniqueInput, create: ArtistCreateInput, update: ArtistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertTrack: <T = Track>(args: { where: TrackWhereUniqueInput, create: TrackCreateInput, update: TrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertParty: <T = Party>(args: { where: PartyWhereUniqueInput, create: PartyCreateInput, update: PartyUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertAlbum: <T = Album>(args: { where: AlbumWhereUniqueInput, create: AlbumCreateInput, update: AlbumUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyMessages: <T = BatchPayload>(args: { data: MessageUpdateManyMutationInput, where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPartyInvitations: <T = BatchPayload>(args: { data: PartyInvitationUpdateManyMutationInput, where?: PartyInvitationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPlaylists: <T = BatchPayload>(args: { data: PlaylistUpdateManyMutationInput, where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPartyCartItems: <T = BatchPayload>(args: { data: PartyCartItemUpdateManyMutationInput, where?: PartyCartItemWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPartySavedTracks: <T = BatchPayload>(args: { data: PartySavedTrackUpdateManyMutationInput, where?: PartySavedTrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyAlbums: <T = BatchPayload>(args: { data: AlbumUpdateManyMutationInput, where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyImages: <T = BatchPayload>(args: { data: ImageUpdateManyMutationInput, where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyArtists: <T = BatchPayload>(args: { data: ArtistUpdateManyMutationInput, where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyLocations: <T = BatchPayload>(args: { data: LocationUpdateManyMutationInput, where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyGames: <T = BatchPayload>(args: { data: GameUpdateManyMutationInput, where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyArtists: <T = BatchPayload>(args: { data: ArtistUpdateManyMutationInput, where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyTracks: <T = BatchPayload>(args: { data: TrackUpdateManyMutationInput, where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyParties: <T = BatchPayload>(args: { data: PartyUpdateManyMutationInput, where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyAlbums: <T = BatchPayload>(args: { data: AlbumUpdateManyMutationInput, where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyMessages: <T = BatchPayload>(args: { where?: MessageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyPartyInvitations: <T = BatchPayload>(args: { where?: PartyInvitationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyChats: <T = BatchPayload>(args: { where?: ChatWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -133,14 +133,14 @@ export interface Mutation {
     deleteManyPartyCarts: <T = BatchPayload>(args: { where?: PartyCartWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyPartyCartItems: <T = BatchPayload>(args: { where?: PartyCartItemWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyPartySavedTracks: <T = BatchPayload>(args: { where?: PartySavedTrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyAlbums: <T = BatchPayload>(args: { where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyImages: <T = BatchPayload>(args: { where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyArtists: <T = BatchPayload>(args: { where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyLocations: <T = BatchPayload>(args: { where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyGames: <T = BatchPayload>(args: { where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyArtists: <T = BatchPayload>(args: { where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyTracks: <T = BatchPayload>(args: { where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyParties: <T = BatchPayload>(args: { where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyParties: <T = BatchPayload>(args: { where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyAlbums: <T = BatchPayload>(args: { where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
@@ -151,14 +151,14 @@ export interface Subscription {
     partyCart: <T = PartyCartSubscriptionPayload | null>(args: { where?: PartyCartSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     partyCartItem: <T = PartyCartItemSubscriptionPayload | null>(args: { where?: PartyCartItemSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     partySavedTrack: <T = PartySavedTrackSubscriptionPayload | null>(args: { where?: PartySavedTrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    album: <T = AlbumSubscriptionPayload | null>(args: { where?: AlbumSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     image: <T = ImageSubscriptionPayload | null>(args: { where?: ImageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    artist: <T = ArtistSubscriptionPayload | null>(args: { where?: ArtistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     location: <T = LocationSubscriptionPayload | null>(args: { where?: LocationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     game: <T = GameSubscriptionPayload | null>(args: { where?: GameSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    artist: <T = ArtistSubscriptionPayload | null>(args: { where?: ArtistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     track: <T = TrackSubscriptionPayload | null>(args: { where?: TrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    party: <T = PartySubscriptionPayload | null>(args: { where?: PartySubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
+    party: <T = PartySubscriptionPayload | null>(args: { where?: PartySubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    album: <T = AlbumSubscriptionPayload | null>(args: { where?: AlbumSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
@@ -169,14 +169,14 @@ export interface Exists {
   PartyCart: (where?: PartyCartWhereInput) => Promise<boolean>
   PartyCartItem: (where?: PartyCartItemWhereInput) => Promise<boolean>
   PartySavedTrack: (where?: PartySavedTrackWhereInput) => Promise<boolean>
-  Album: (where?: AlbumWhereInput) => Promise<boolean>
   Image: (where?: ImageWhereInput) => Promise<boolean>
+  Artist: (where?: ArtistWhereInput) => Promise<boolean>
   Location: (where?: LocationWhereInput) => Promise<boolean>
   Game: (where?: GameWhereInput) => Promise<boolean>
-  Artist: (where?: ArtistWhereInput) => Promise<boolean>
   Track: (where?: TrackWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
   Party: (where?: PartyWhereInput) => Promise<boolean>
+  Album: (where?: AlbumWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -263,11 +263,11 @@ type AggregateUser {
 
 type Album implements Node {
   id: ID!
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
-  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
+  imageUrl: String!
 }
 
 """A connection to a list of items."""
@@ -282,11 +282,11 @@ type AlbumConnection {
 
 input AlbumCreateInput {
   id: ID
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
-  images: ImageCreateManyInput
-  artists: ArtistCreateManyInput
+  imageUrl: String!
 }
 
 input AlbumCreateOneInput {
@@ -306,19 +306,25 @@ type AlbumEdge {
 enum AlbumOrderByInput {
   id_ASC
   id_DESC
+  spotifyId_ASC
+  spotifyId_DESC
   uri_ASC
   uri_DESC
   name_ASC
   name_DESC
   releaseDate_ASC
   releaseDate_DESC
+  imageUrl_ASC
+  imageUrl_DESC
 }
 
 type AlbumPreviousValues {
   id: ID!
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
+  imageUrl: String!
 }
 
 type AlbumSubscriptionPayload {
@@ -361,25 +367,27 @@ input AlbumSubscriptionWhereInput {
 }
 
 input AlbumUpdateDataInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
-  images: ImageUpdateManyInput
-  artists: ArtistUpdateManyInput
+  imageUrl: String
 }
 
 input AlbumUpdateInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
-  images: ImageUpdateManyInput
-  artists: ArtistUpdateManyInput
+  imageUrl: String
 }
 
 input AlbumUpdateManyMutationInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
+  imageUrl: String
 }
 
 input AlbumUpdateOneRequiredInput {
@@ -443,6 +451,46 @@ input AlbumWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  spotifyId: ID
+
+  """All values that are not equal to given value."""
+  spotifyId_not: ID
+
+  """All values that are contained in given list."""
+  spotifyId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [ID!]
+
+  """All values less than the given value."""
+  spotifyId_lt: ID
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: ID
+
+  """All values greater than the given value."""
+  spotifyId_gt: ID
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: ID
+
+  """All values containing the given string."""
+  spotifyId_contains: ID
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: ID
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: ID
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: ID
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: ID
   uri: String
 
   """All values that are not equal to given value."""
@@ -563,12 +611,46 @@ input AlbumWhereInput {
 
   """All values not ending with the given string."""
   releaseDate_not_ends_with: String
-  images_every: ImageWhereInput
-  images_some: ImageWhereInput
-  images_none: ImageWhereInput
-  artists_every: ArtistWhereInput
-  artists_some: ArtistWhereInput
-  artists_none: ArtistWhereInput
+  imageUrl: String
+
+  """All values that are not equal to given value."""
+  imageUrl_not: String
+
+  """All values that are contained in given list."""
+  imageUrl_in: [String!]
+
+  """All values that are not contained in given list."""
+  imageUrl_not_in: [String!]
+
+  """All values less than the given value."""
+  imageUrl_lt: String
+
+  """All values less than or equal the given value."""
+  imageUrl_lte: String
+
+  """All values greater than the given value."""
+  imageUrl_gt: String
+
+  """All values greater than or equal the given value."""
+  imageUrl_gte: String
+
+  """All values containing the given string."""
+  imageUrl_contains: String
+
+  """All values not containing the given string."""
+  imageUrl_not_contains: String
+
+  """All values starting with the given string."""
+  imageUrl_starts_with: String
+
+  """All values not starting with the given string."""
+  imageUrl_not_starts_with: String
+
+  """All values ending with the given string."""
+  imageUrl_ends_with: String
+
+  """All values not ending with the given string."""
+  imageUrl_not_ends_with: String
 }
 
 input AlbumWhereUniqueInput {
@@ -577,6 +659,8 @@ input AlbumWhereUniqueInput {
 
 type Artist implements Node {
   id: ID!
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -592,6 +676,8 @@ type ArtistConnection {
 
 input ArtistCreateInput {
   id: ID
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -612,12 +698,18 @@ type ArtistEdge {
 enum ArtistOrderByInput {
   id_ASC
   id_DESC
+  spotifyId_ASC
+  spotifyId_DESC
+  uri_ASC
+  uri_DESC
   name_ASC
   name_DESC
 }
 
 type ArtistPreviousValues {
   id: ID!
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -670,6 +762,86 @@ input ArtistScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  spotifyId: ID
+
+  """All values that are not equal to given value."""
+  spotifyId_not: ID
+
+  """All values that are contained in given list."""
+  spotifyId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [ID!]
+
+  """All values less than the given value."""
+  spotifyId_lt: ID
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: ID
+
+  """All values greater than the given value."""
+  spotifyId_gt: ID
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: ID
+
+  """All values containing the given string."""
+  spotifyId_contains: ID
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: ID
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: ID
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: ID
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: ID
+  uri: String
+
+  """All values that are not equal to given value."""
+  uri_not: String
+
+  """All values that are contained in given list."""
+  uri_in: [String!]
+
+  """All values that are not contained in given list."""
+  uri_not_in: [String!]
+
+  """All values less than the given value."""
+  uri_lt: String
+
+  """All values less than or equal the given value."""
+  uri_lte: String
+
+  """All values greater than the given value."""
+  uri_gt: String
+
+  """All values greater than or equal the given value."""
+  uri_gte: String
+
+  """All values containing the given string."""
+  uri_contains: String
+
+  """All values not containing the given string."""
+  uri_not_contains: String
+
+  """All values starting with the given string."""
+  uri_starts_with: String
+
+  """All values not starting with the given string."""
+  uri_not_starts_with: String
+
+  """All values ending with the given string."""
+  uri_ends_with: String
+
+  """All values not ending with the given string."""
+  uri_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -752,14 +924,20 @@ input ArtistSubscriptionWhereInput {
 }
 
 input ArtistUpdateDataInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
 input ArtistUpdateInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
 input ArtistUpdateManyDataInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
@@ -776,6 +954,8 @@ input ArtistUpdateManyInput {
 }
 
 input ArtistUpdateManyMutationInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
@@ -844,6 +1024,86 @@ input ArtistWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  spotifyId: ID
+
+  """All values that are not equal to given value."""
+  spotifyId_not: ID
+
+  """All values that are contained in given list."""
+  spotifyId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [ID!]
+
+  """All values less than the given value."""
+  spotifyId_lt: ID
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: ID
+
+  """All values greater than the given value."""
+  spotifyId_gt: ID
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: ID
+
+  """All values containing the given string."""
+  spotifyId_contains: ID
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: ID
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: ID
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: ID
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: ID
+  uri: String
+
+  """All values that are not equal to given value."""
+  uri_not: String
+
+  """All values that are contained in given list."""
+  uri_in: [String!]
+
+  """All values that are not contained in given list."""
+  uri_not_in: [String!]
+
+  """All values less than the given value."""
+  uri_lt: String
+
+  """All values less than or equal the given value."""
+  uri_lte: String
+
+  """All values greater than the given value."""
+  uri_gt: String
+
+  """All values greater than or equal the given value."""
+  uri_gte: String
+
+  """All values containing the given string."""
+  uri_contains: String
+
+  """All values not containing the given string."""
+  uri_not_contains: String
+
+  """All values starting with the given string."""
+  uri_starts_with: String
+
+  """All values not starting with the given string."""
+  uri_not_starts_with: String
+
+  """All values ending with the given string."""
+  uri_ends_with: String
+
+  """All values not ending with the given string."""
+  uri_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -1819,11 +2079,6 @@ input ImageCreateInput {
   url: String!
 }
 
-input ImageCreateManyInput {
-  create: [ImageCreateInput!]
-  connect: [ImageWhereUniqueInput!]
-}
-
 """An edge in a connection."""
 type ImageEdge {
   """The item at the end of the edge."""
@@ -1849,141 +2104,6 @@ type ImagePreviousValues {
   height: Int!
   width: Int!
   url: String!
-}
-
-input ImageScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ImageScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ImageScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ImageScalarWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  height: Int
-
-  """All values that are not equal to given value."""
-  height_not: Int
-
-  """All values that are contained in given list."""
-  height_in: [Int!]
-
-  """All values that are not contained in given list."""
-  height_not_in: [Int!]
-
-  """All values less than the given value."""
-  height_lt: Int
-
-  """All values less than or equal the given value."""
-  height_lte: Int
-
-  """All values greater than the given value."""
-  height_gt: Int
-
-  """All values greater than or equal the given value."""
-  height_gte: Int
-  width: Int
-
-  """All values that are not equal to given value."""
-  width_not: Int
-
-  """All values that are contained in given list."""
-  width_in: [Int!]
-
-  """All values that are not contained in given list."""
-  width_not_in: [Int!]
-
-  """All values less than the given value."""
-  width_lt: Int
-
-  """All values less than or equal the given value."""
-  width_lte: Int
-
-  """All values greater than the given value."""
-  width_gt: Int
-
-  """All values greater than or equal the given value."""
-  width_gte: Int
-  url: String
-
-  """All values that are not equal to given value."""
-  url_not: String
-
-  """All values that are contained in given list."""
-  url_in: [String!]
-
-  """All values that are not contained in given list."""
-  url_not_in: [String!]
-
-  """All values less than the given value."""
-  url_lt: String
-
-  """All values less than or equal the given value."""
-  url_lte: String
-
-  """All values greater than the given value."""
-  url_gt: String
-
-  """All values greater than or equal the given value."""
-  url_gte: String
-
-  """All values containing the given string."""
-  url_contains: String
-
-  """All values not containing the given string."""
-  url_not_contains: String
-
-  """All values starting with the given string."""
-  url_starts_with: String
-
-  """All values not starting with the given string."""
-  url_not_starts_with: String
-
-  """All values ending with the given string."""
-  url_ends_with: String
-
-  """All values not ending with the given string."""
-  url_not_ends_with: String
 }
 
 type ImageSubscriptionPayload {
@@ -2025,56 +2145,16 @@ input ImageSubscriptionWhereInput {
   node: ImageWhereInput
 }
 
-input ImageUpdateDataInput {
-  height: Int
-  width: Int
-  url: String
-}
-
 input ImageUpdateInput {
   height: Int
   width: Int
   url: String
 }
 
-input ImageUpdateManyDataInput {
-  height: Int
-  width: Int
-  url: String
-}
-
-input ImageUpdateManyInput {
-  create: [ImageCreateInput!]
-  connect: [ImageWhereUniqueInput!]
-  set: [ImageWhereUniqueInput!]
-  disconnect: [ImageWhereUniqueInput!]
-  delete: [ImageWhereUniqueInput!]
-  update: [ImageUpdateWithWhereUniqueNestedInput!]
-  updateMany: [ImageUpdateManyWithWhereNestedInput!]
-  deleteMany: [ImageScalarWhereInput!]
-  upsert: [ImageUpsertWithWhereUniqueNestedInput!]
-}
-
 input ImageUpdateManyMutationInput {
   height: Int
   width: Int
   url: String
-}
-
-input ImageUpdateManyWithWhereNestedInput {
-  where: ImageScalarWhereInput!
-  data: ImageUpdateManyDataInput!
-}
-
-input ImageUpdateWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput!
-  data: ImageUpdateDataInput!
-}
-
-input ImageUpsertWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput!
-  update: ImageUpdateDataInput!
-  create: ImageCreateInput!
 }
 
 input ImageWhereInput {
@@ -2972,14 +3052,14 @@ type Mutation {
   createPartyCart(data: PartyCartCreateInput!): PartyCart!
   createPartyCartItem(data: PartyCartItemCreateInput!): PartyCartItem!
   createPartySavedTrack(data: PartySavedTrackCreateInput!): PartySavedTrack!
-  createAlbum(data: AlbumCreateInput!): Album!
   createImage(data: ImageCreateInput!): Image!
+  createArtist(data: ArtistCreateInput!): Artist!
   createLocation(data: LocationCreateInput!): Location!
   createGame(data: GameCreateInput!): Game!
-  createArtist(data: ArtistCreateInput!): Artist!
   createTrack(data: TrackCreateInput!): Track!
   createUser(data: UserCreateInput!): User!
   createParty(data: PartyCreateInput!): Party!
+  createAlbum(data: AlbumCreateInput!): Album!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
   updatePartyInvitation(data: PartyInvitationUpdateInput!, where: PartyInvitationWhereUniqueInput!): PartyInvitation
   updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
@@ -2987,14 +3067,14 @@ type Mutation {
   updatePartyCart(data: PartyCartUpdateInput!, where: PartyCartWhereUniqueInput!): PartyCart
   updatePartyCartItem(data: PartyCartItemUpdateInput!, where: PartyCartItemWhereUniqueInput!): PartyCartItem
   updatePartySavedTrack(data: PartySavedTrackUpdateInput!, where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
-  updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
   updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
+  updateArtist(data: ArtistUpdateInput!, where: ArtistWhereUniqueInput!): Artist
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
-  updateArtist(data: ArtistUpdateInput!, where: ArtistWhereUniqueInput!): Artist
   updateTrack(data: TrackUpdateInput!, where: TrackWhereUniqueInput!): Track
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
+  updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
   deleteMessage(where: MessageWhereUniqueInput!): Message
   deletePartyInvitation(where: PartyInvitationWhereUniqueInput!): PartyInvitation
   deleteChat(where: ChatWhereUniqueInput!): Chat
@@ -3002,14 +3082,14 @@ type Mutation {
   deletePartyCart(where: PartyCartWhereUniqueInput!): PartyCart
   deletePartyCartItem(where: PartyCartItemWhereUniqueInput!): PartyCartItem
   deletePartySavedTrack(where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
-  deleteAlbum(where: AlbumWhereUniqueInput!): Album
   deleteImage(where: ImageWhereUniqueInput!): Image
+  deleteArtist(where: ArtistWhereUniqueInput!): Artist
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteGame(where: GameWhereUniqueInput!): Game
-  deleteArtist(where: ArtistWhereUniqueInput!): Artist
   deleteTrack(where: TrackWhereUniqueInput!): Track
   deleteUser(where: UserWhereUniqueInput!): User
   deleteParty(where: PartyWhereUniqueInput!): Party
+  deleteAlbum(where: AlbumWhereUniqueInput!): Album
   upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
   upsertPartyInvitation(where: PartyInvitationWhereUniqueInput!, create: PartyInvitationCreateInput!, update: PartyInvitationUpdateInput!): PartyInvitation!
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
@@ -3017,27 +3097,27 @@ type Mutation {
   upsertPartyCart(where: PartyCartWhereUniqueInput!, create: PartyCartCreateInput!, update: PartyCartUpdateInput!): PartyCart!
   upsertPartyCartItem(where: PartyCartItemWhereUniqueInput!, create: PartyCartItemCreateInput!, update: PartyCartItemUpdateInput!): PartyCartItem!
   upsertPartySavedTrack(where: PartySavedTrackWhereUniqueInput!, create: PartySavedTrackCreateInput!, update: PartySavedTrackUpdateInput!): PartySavedTrack!
-  upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
   upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
+  upsertArtist(where: ArtistWhereUniqueInput!, create: ArtistCreateInput!, update: ArtistUpdateInput!): Artist!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
-  upsertArtist(where: ArtistWhereUniqueInput!, create: ArtistCreateInput!, update: ArtistUpdateInput!): Artist!
   upsertTrack(where: TrackWhereUniqueInput!, create: TrackCreateInput!, update: TrackUpdateInput!): Track!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
+  upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
   updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
   updateManyPartyInvitations(data: PartyInvitationUpdateManyMutationInput!, where: PartyInvitationWhereInput): BatchPayload!
   updateManyPlaylists(data: PlaylistUpdateManyMutationInput!, where: PlaylistWhereInput): BatchPayload!
   updateManyPartyCartItems(data: PartyCartItemUpdateManyMutationInput!, where: PartyCartItemWhereInput): BatchPayload!
   updateManyPartySavedTracks(data: PartySavedTrackUpdateManyMutationInput!, where: PartySavedTrackWhereInput): BatchPayload!
-  updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
   updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
+  updateManyArtists(data: ArtistUpdateManyMutationInput!, where: ArtistWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
-  updateManyArtists(data: ArtistUpdateManyMutationInput!, where: ArtistWhereInput): BatchPayload!
   updateManyTracks(data: TrackUpdateManyMutationInput!, where: TrackWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyParties(data: PartyUpdateManyMutationInput!, where: PartyWhereInput): BatchPayload!
+  updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
   deleteManyPartyInvitations(where: PartyInvitationWhereInput): BatchPayload!
   deleteManyChats(where: ChatWhereInput): BatchPayload!
@@ -3045,14 +3125,14 @@ type Mutation {
   deleteManyPartyCarts(where: PartyCartWhereInput): BatchPayload!
   deleteManyPartyCartItems(where: PartyCartItemWhereInput): BatchPayload!
   deleteManyPartySavedTracks(where: PartySavedTrackWhereInput): BatchPayload!
-  deleteManyAlbums(where: AlbumWhereInput): BatchPayload!
   deleteManyImages(where: ImageWhereInput): BatchPayload!
+  deleteManyArtists(where: ArtistWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyGames(where: GameWhereInput): BatchPayload!
-  deleteManyArtists(where: ArtistWhereInput): BatchPayload!
   deleteManyTracks(where: TrackWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyParties(where: PartyWhereInput): BatchPayload!
+  deleteManyAlbums(where: AlbumWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -4479,18 +4559,16 @@ type PartyPreviousValues {
 type PartySavedTrack implements Node {
   id: ID!
   spotifyId: String!
-  name: String!
-  party: Party!
-  imageUrl: String!
-  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
-  votedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  name: String!
+  previewUrl: String
+  uri: String!
+  party: Party!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: Album!
 }
 
 """A connection to a list of items."""
@@ -4506,18 +4584,16 @@ type PartySavedTrackConnection {
 input PartySavedTrackCreateInput {
   id: ID
   spotifyId: String!
-  name: String!
-  imageUrl: String!
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
+  name: String!
+  previewUrl: String
+  uri: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
   party: PartyCreateOneWithoutSavedTracksInput!
-  artists: ArtistCreateManyInput
-  votedBy: UserCreateManyInput
+  album: AlbumCreateOneInput!
 }
 
 input PartySavedTrackCreateManyWithoutPartyInput {
@@ -4528,17 +4604,15 @@ input PartySavedTrackCreateManyWithoutPartyInput {
 input PartySavedTrackCreateWithoutPartyInput {
   id: ID
   spotifyId: String!
-  name: String!
-  imageUrl: String!
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
-  artists: ArtistCreateManyInput
-  votedBy: UserCreateManyInput
+  name: String!
+  previewUrl: String
+  uri: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: AlbumCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -4555,38 +4629,35 @@ enum PartySavedTrackOrderByInput {
   id_DESC
   spotifyId_ASC
   spotifyId_DESC
-  name_ASC
-  name_DESC
-  imageUrl_ASC
-  imageUrl_DESC
   durationMs_ASC
   durationMs_DESC
-  length_ASC
-  length_DESC
-  preview_url_ASC
-  preview_url_DESC
-  uri_ASC
-  uri_DESC
   explicit_ASC
   explicit_DESC
-  upVotes_ASC
-  upVotes_DESC
-  downVotes_ASC
-  downVotes_DESC
+  name_ASC
+  name_DESC
+  previewUrl_ASC
+  previewUrl_DESC
+  uri_ASC
+  uri_DESC
+  stringArtists_ASC
+  stringArtists_DESC
+  length_ASC
+  length_DESC
+  popularity_ASC
+  popularity_DESC
 }
 
 type PartySavedTrackPreviousValues {
   id: ID!
   spotifyId: String!
-  name: String!
-  imageUrl: String!
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
+  name: String!
+  previewUrl: String
+  uri: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
 }
 
 input PartySavedTrackScalarWhereInput {
@@ -4678,6 +4749,32 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   spotifyId_not_ends_with: String
+  durationMs: Int
+
+  """All values that are not equal to given value."""
+  durationMs_not: Int
+
+  """All values that are contained in given list."""
+  durationMs_in: [Int!]
+
+  """All values that are not contained in given list."""
+  durationMs_not_in: [Int!]
+
+  """All values less than the given value."""
+  durationMs_lt: Int
+
+  """All values less than or equal the given value."""
+  durationMs_lte: Int
+
+  """All values greater than the given value."""
+  durationMs_gt: Int
+
+  """All values greater than or equal the given value."""
+  durationMs_gte: Int
+  explicit: Boolean
+
+  """All values that are not equal to given value."""
+  explicit_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -4718,148 +4815,46 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  imageUrl: String
+  previewUrl: String
 
   """All values that are not equal to given value."""
-  imageUrl_not: String
+  previewUrl_not: String
 
   """All values that are contained in given list."""
-  imageUrl_in: [String!]
+  previewUrl_in: [String!]
 
   """All values that are not contained in given list."""
-  imageUrl_not_in: [String!]
+  previewUrl_not_in: [String!]
 
   """All values less than the given value."""
-  imageUrl_lt: String
+  previewUrl_lt: String
 
   """All values less than or equal the given value."""
-  imageUrl_lte: String
+  previewUrl_lte: String
 
   """All values greater than the given value."""
-  imageUrl_gt: String
+  previewUrl_gt: String
 
   """All values greater than or equal the given value."""
-  imageUrl_gte: String
+  previewUrl_gte: String
 
   """All values containing the given string."""
-  imageUrl_contains: String
+  previewUrl_contains: String
 
   """All values not containing the given string."""
-  imageUrl_not_contains: String
+  previewUrl_not_contains: String
 
   """All values starting with the given string."""
-  imageUrl_starts_with: String
+  previewUrl_starts_with: String
 
   """All values not starting with the given string."""
-  imageUrl_not_starts_with: String
+  previewUrl_not_starts_with: String
 
   """All values ending with the given string."""
-  imageUrl_ends_with: String
+  previewUrl_ends_with: String
 
   """All values not ending with the given string."""
-  imageUrl_not_ends_with: String
-  durationMs: Int
-
-  """All values that are not equal to given value."""
-  durationMs_not: Int
-
-  """All values that are contained in given list."""
-  durationMs_in: [Int!]
-
-  """All values that are not contained in given list."""
-  durationMs_not_in: [Int!]
-
-  """All values less than the given value."""
-  durationMs_lt: Int
-
-  """All values less than or equal the given value."""
-  durationMs_lte: Int
-
-  """All values greater than the given value."""
-  durationMs_gt: Int
-
-  """All values greater than or equal the given value."""
-  durationMs_gte: Int
-  length: String
-
-  """All values that are not equal to given value."""
-  length_not: String
-
-  """All values that are contained in given list."""
-  length_in: [String!]
-
-  """All values that are not contained in given list."""
-  length_not_in: [String!]
-
-  """All values less than the given value."""
-  length_lt: String
-
-  """All values less than or equal the given value."""
-  length_lte: String
-
-  """All values greater than the given value."""
-  length_gt: String
-
-  """All values greater than or equal the given value."""
-  length_gte: String
-
-  """All values containing the given string."""
-  length_contains: String
-
-  """All values not containing the given string."""
-  length_not_contains: String
-
-  """All values starting with the given string."""
-  length_starts_with: String
-
-  """All values not starting with the given string."""
-  length_not_starts_with: String
-
-  """All values ending with the given string."""
-  length_ends_with: String
-
-  """All values not ending with the given string."""
-  length_not_ends_with: String
-  preview_url: String
-
-  """All values that are not equal to given value."""
-  preview_url_not: String
-
-  """All values that are contained in given list."""
-  preview_url_in: [String!]
-
-  """All values that are not contained in given list."""
-  preview_url_not_in: [String!]
-
-  """All values less than the given value."""
-  preview_url_lt: String
-
-  """All values less than or equal the given value."""
-  preview_url_lte: String
-
-  """All values greater than the given value."""
-  preview_url_gt: String
-
-  """All values greater than or equal the given value."""
-  preview_url_gte: String
-
-  """All values containing the given string."""
-  preview_url_contains: String
-
-  """All values not containing the given string."""
-  preview_url_not_contains: String
-
-  """All values starting with the given string."""
-  preview_url_starts_with: String
-
-  """All values not starting with the given string."""
-  preview_url_not_starts_with: String
-
-  """All values ending with the given string."""
-  preview_url_ends_with: String
-
-  """All values not ending with the given string."""
-  preview_url_not_ends_with: String
+  previewUrl_not_ends_with: String
   uri: String
 
   """All values that are not equal to given value."""
@@ -4900,54 +4895,108 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   uri_not_ends_with: String
-  explicit: Boolean
+  stringArtists: String
 
   """All values that are not equal to given value."""
-  explicit_not: Boolean
-  upVotes: Int
-
-  """All values that are not equal to given value."""
-  upVotes_not: Int
+  stringArtists_not: String
 
   """All values that are contained in given list."""
-  upVotes_in: [Int!]
+  stringArtists_in: [String!]
 
   """All values that are not contained in given list."""
-  upVotes_not_in: [Int!]
+  stringArtists_not_in: [String!]
 
   """All values less than the given value."""
-  upVotes_lt: Int
+  stringArtists_lt: String
 
   """All values less than or equal the given value."""
-  upVotes_lte: Int
+  stringArtists_lte: String
 
   """All values greater than the given value."""
-  upVotes_gt: Int
+  stringArtists_gt: String
 
   """All values greater than or equal the given value."""
-  upVotes_gte: Int
-  downVotes: Int
+  stringArtists_gte: String
+
+  """All values containing the given string."""
+  stringArtists_contains: String
+
+  """All values not containing the given string."""
+  stringArtists_not_contains: String
+
+  """All values starting with the given string."""
+  stringArtists_starts_with: String
+
+  """All values not starting with the given string."""
+  stringArtists_not_starts_with: String
+
+  """All values ending with the given string."""
+  stringArtists_ends_with: String
+
+  """All values not ending with the given string."""
+  stringArtists_not_ends_with: String
+  length: String
 
   """All values that are not equal to given value."""
-  downVotes_not: Int
+  length_not: String
 
   """All values that are contained in given list."""
-  downVotes_in: [Int!]
+  length_in: [String!]
 
   """All values that are not contained in given list."""
-  downVotes_not_in: [Int!]
+  length_not_in: [String!]
 
   """All values less than the given value."""
-  downVotes_lt: Int
+  length_lt: String
 
   """All values less than or equal the given value."""
-  downVotes_lte: Int
+  length_lte: String
 
   """All values greater than the given value."""
-  downVotes_gt: Int
+  length_gt: String
 
   """All values greater than or equal the given value."""
-  downVotes_gte: Int
+  length_gte: String
+
+  """All values containing the given string."""
+  length_contains: String
+
+  """All values not containing the given string."""
+  length_not_contains: String
+
+  """All values starting with the given string."""
+  length_starts_with: String
+
+  """All values not starting with the given string."""
+  length_not_starts_with: String
+
+  """All values ending with the given string."""
+  length_ends_with: String
+
+  """All values not ending with the given string."""
+  length_not_ends_with: String
+  popularity: Int
+
+  """All values that are not equal to given value."""
+  popularity_not: Int
+
+  """All values that are contained in given list."""
+  popularity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  popularity_not_in: [Int!]
+
+  """All values less than the given value."""
+  popularity_lt: Int
+
+  """All values less than or equal the given value."""
+  popularity_lte: Int
+
+  """All values greater than the given value."""
+  popularity_gt: Int
+
+  """All values greater than or equal the given value."""
+  popularity_gte: Int
 }
 
 type PartySavedTrackSubscriptionPayload {
@@ -4991,44 +5040,40 @@ input PartySavedTrackSubscriptionWhereInput {
 
 input PartySavedTrackUpdateInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
   party: PartyUpdateOneRequiredWithoutSavedTracksInput
-  artists: ArtistUpdateManyInput
-  votedBy: UserUpdateManyInput
+  album: AlbumUpdateOneRequiredInput
 }
 
 input PartySavedTrackUpdateManyDataInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
 }
 
 input PartySavedTrackUpdateManyMutationInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
 }
 
 input PartySavedTrackUpdateManyWithoutPartyInput {
@@ -5050,17 +5095,15 @@ input PartySavedTrackUpdateManyWithWhereNestedInput {
 
 input PartySavedTrackUpdateWithoutPartyDataInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
-  artists: ArtistUpdateManyInput
-  votedBy: UserUpdateManyInput
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
+  album: AlbumUpdateOneRequiredInput
 }
 
 input PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
@@ -5163,6 +5206,32 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   spotifyId_not_ends_with: String
+  durationMs: Int
+
+  """All values that are not equal to given value."""
+  durationMs_not: Int
+
+  """All values that are contained in given list."""
+  durationMs_in: [Int!]
+
+  """All values that are not contained in given list."""
+  durationMs_not_in: [Int!]
+
+  """All values less than the given value."""
+  durationMs_lt: Int
+
+  """All values less than or equal the given value."""
+  durationMs_lte: Int
+
+  """All values greater than the given value."""
+  durationMs_gt: Int
+
+  """All values greater than or equal the given value."""
+  durationMs_gte: Int
+  explicit: Boolean
+
+  """All values that are not equal to given value."""
+  explicit_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -5203,148 +5272,46 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  imageUrl: String
+  previewUrl: String
 
   """All values that are not equal to given value."""
-  imageUrl_not: String
+  previewUrl_not: String
 
   """All values that are contained in given list."""
-  imageUrl_in: [String!]
+  previewUrl_in: [String!]
 
   """All values that are not contained in given list."""
-  imageUrl_not_in: [String!]
+  previewUrl_not_in: [String!]
 
   """All values less than the given value."""
-  imageUrl_lt: String
+  previewUrl_lt: String
 
   """All values less than or equal the given value."""
-  imageUrl_lte: String
+  previewUrl_lte: String
 
   """All values greater than the given value."""
-  imageUrl_gt: String
+  previewUrl_gt: String
 
   """All values greater than or equal the given value."""
-  imageUrl_gte: String
+  previewUrl_gte: String
 
   """All values containing the given string."""
-  imageUrl_contains: String
+  previewUrl_contains: String
 
   """All values not containing the given string."""
-  imageUrl_not_contains: String
+  previewUrl_not_contains: String
 
   """All values starting with the given string."""
-  imageUrl_starts_with: String
+  previewUrl_starts_with: String
 
   """All values not starting with the given string."""
-  imageUrl_not_starts_with: String
+  previewUrl_not_starts_with: String
 
   """All values ending with the given string."""
-  imageUrl_ends_with: String
+  previewUrl_ends_with: String
 
   """All values not ending with the given string."""
-  imageUrl_not_ends_with: String
-  durationMs: Int
-
-  """All values that are not equal to given value."""
-  durationMs_not: Int
-
-  """All values that are contained in given list."""
-  durationMs_in: [Int!]
-
-  """All values that are not contained in given list."""
-  durationMs_not_in: [Int!]
-
-  """All values less than the given value."""
-  durationMs_lt: Int
-
-  """All values less than or equal the given value."""
-  durationMs_lte: Int
-
-  """All values greater than the given value."""
-  durationMs_gt: Int
-
-  """All values greater than or equal the given value."""
-  durationMs_gte: Int
-  length: String
-
-  """All values that are not equal to given value."""
-  length_not: String
-
-  """All values that are contained in given list."""
-  length_in: [String!]
-
-  """All values that are not contained in given list."""
-  length_not_in: [String!]
-
-  """All values less than the given value."""
-  length_lt: String
-
-  """All values less than or equal the given value."""
-  length_lte: String
-
-  """All values greater than the given value."""
-  length_gt: String
-
-  """All values greater than or equal the given value."""
-  length_gte: String
-
-  """All values containing the given string."""
-  length_contains: String
-
-  """All values not containing the given string."""
-  length_not_contains: String
-
-  """All values starting with the given string."""
-  length_starts_with: String
-
-  """All values not starting with the given string."""
-  length_not_starts_with: String
-
-  """All values ending with the given string."""
-  length_ends_with: String
-
-  """All values not ending with the given string."""
-  length_not_ends_with: String
-  preview_url: String
-
-  """All values that are not equal to given value."""
-  preview_url_not: String
-
-  """All values that are contained in given list."""
-  preview_url_in: [String!]
-
-  """All values that are not contained in given list."""
-  preview_url_not_in: [String!]
-
-  """All values less than the given value."""
-  preview_url_lt: String
-
-  """All values less than or equal the given value."""
-  preview_url_lte: String
-
-  """All values greater than the given value."""
-  preview_url_gt: String
-
-  """All values greater than or equal the given value."""
-  preview_url_gte: String
-
-  """All values containing the given string."""
-  preview_url_contains: String
-
-  """All values not containing the given string."""
-  preview_url_not_contains: String
-
-  """All values starting with the given string."""
-  preview_url_starts_with: String
-
-  """All values not starting with the given string."""
-  preview_url_not_starts_with: String
-
-  """All values ending with the given string."""
-  preview_url_ends_with: String
-
-  """All values not ending with the given string."""
-  preview_url_not_ends_with: String
+  previewUrl_not_ends_with: String
   uri: String
 
   """All values that are not equal to given value."""
@@ -5385,61 +5352,110 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   uri_not_ends_with: String
-  explicit: Boolean
+  stringArtists: String
 
   """All values that are not equal to given value."""
-  explicit_not: Boolean
-  upVotes: Int
-
-  """All values that are not equal to given value."""
-  upVotes_not: Int
+  stringArtists_not: String
 
   """All values that are contained in given list."""
-  upVotes_in: [Int!]
+  stringArtists_in: [String!]
 
   """All values that are not contained in given list."""
-  upVotes_not_in: [Int!]
+  stringArtists_not_in: [String!]
 
   """All values less than the given value."""
-  upVotes_lt: Int
+  stringArtists_lt: String
 
   """All values less than or equal the given value."""
-  upVotes_lte: Int
+  stringArtists_lte: String
 
   """All values greater than the given value."""
-  upVotes_gt: Int
+  stringArtists_gt: String
 
   """All values greater than or equal the given value."""
-  upVotes_gte: Int
-  downVotes: Int
+  stringArtists_gte: String
+
+  """All values containing the given string."""
+  stringArtists_contains: String
+
+  """All values not containing the given string."""
+  stringArtists_not_contains: String
+
+  """All values starting with the given string."""
+  stringArtists_starts_with: String
+
+  """All values not starting with the given string."""
+  stringArtists_not_starts_with: String
+
+  """All values ending with the given string."""
+  stringArtists_ends_with: String
+
+  """All values not ending with the given string."""
+  stringArtists_not_ends_with: String
+  length: String
 
   """All values that are not equal to given value."""
-  downVotes_not: Int
+  length_not: String
 
   """All values that are contained in given list."""
-  downVotes_in: [Int!]
+  length_in: [String!]
 
   """All values that are not contained in given list."""
-  downVotes_not_in: [Int!]
+  length_not_in: [String!]
 
   """All values less than the given value."""
-  downVotes_lt: Int
+  length_lt: String
 
   """All values less than or equal the given value."""
-  downVotes_lte: Int
+  length_lte: String
 
   """All values greater than the given value."""
-  downVotes_gt: Int
+  length_gt: String
 
   """All values greater than or equal the given value."""
-  downVotes_gte: Int
+  length_gte: String
+
+  """All values containing the given string."""
+  length_contains: String
+
+  """All values not containing the given string."""
+  length_not_contains: String
+
+  """All values starting with the given string."""
+  length_starts_with: String
+
+  """All values not starting with the given string."""
+  length_not_starts_with: String
+
+  """All values ending with the given string."""
+  length_ends_with: String
+
+  """All values not ending with the given string."""
+  length_not_ends_with: String
+  popularity: Int
+
+  """All values that are not equal to given value."""
+  popularity_not: Int
+
+  """All values that are contained in given list."""
+  popularity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  popularity_not_in: [Int!]
+
+  """All values less than the given value."""
+  popularity_lt: Int
+
+  """All values less than or equal the given value."""
+  popularity_lte: Int
+
+  """All values greater than the given value."""
+  popularity_gt: Int
+
+  """All values greater than or equal the given value."""
+  popularity_gte: Int
   party: PartyWhereInput
-  artists_every: ArtistWhereInput
-  artists_some: ArtistWhereInput
-  artists_none: ArtistWhereInput
-  votedBy_every: UserWhereInput
-  votedBy_some: UserWhereInput
-  votedBy_none: UserWhereInput
+  album: AlbumWhereInput
 }
 
 input PartySavedTrackWhereUniqueInput {
@@ -6756,14 +6772,14 @@ type Query {
   partyCarts(where: PartyCartWhereInput, orderBy: PartyCartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCart]!
   partyCartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem]!
   partySavedTracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack]!
-  albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
+  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
-  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist]!
   tracks(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Track]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
+  albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
   message(where: MessageWhereUniqueInput!): Message
   partyInvitation(where: PartyInvitationWhereUniqueInput!): PartyInvitation
   chat(where: ChatWhereUniqueInput!): Chat
@@ -6771,14 +6787,14 @@ type Query {
   partyCart(where: PartyCartWhereUniqueInput!): PartyCart
   partyCartItem(where: PartyCartItemWhereUniqueInput!): PartyCartItem
   partySavedTrack(where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
-  album(where: AlbumWhereUniqueInput!): Album
   image(where: ImageWhereUniqueInput!): Image
+  artist(where: ArtistWhereUniqueInput!): Artist
   location(where: LocationWhereUniqueInput!): Location
   game(where: GameWhereUniqueInput!): Game
-  artist(where: ArtistWhereUniqueInput!): Artist
   track(where: TrackWhereUniqueInput!): Track
   user(where: UserWhereUniqueInput!): User
   party(where: PartyWhereUniqueInput!): Party
+  album(where: AlbumWhereUniqueInput!): Album
   messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
   partyInvitationsConnection(where: PartyInvitationWhereInput, orderBy: PartyInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyInvitationConnection!
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
@@ -6786,14 +6802,14 @@ type Query {
   partyCartsConnection(where: PartyCartWhereInput, orderBy: PartyCartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyCartConnection!
   partyCartItemsConnection(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyCartItemConnection!
   partySavedTracksConnection(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartySavedTrackConnection!
-  albumsConnection(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlbumConnection!
   imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
+  artistsConnection(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ArtistConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
-  artistsConnection(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ArtistConnection!
   tracksConnection(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TrackConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
+  albumsConnection(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlbumConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -6816,14 +6832,14 @@ type Subscription {
   partyCart(where: PartyCartSubscriptionWhereInput): PartyCartSubscriptionPayload
   partyCartItem(where: PartyCartItemSubscriptionWhereInput): PartyCartItemSubscriptionPayload
   partySavedTrack(where: PartySavedTrackSubscriptionWhereInput): PartySavedTrackSubscriptionPayload
-  album(where: AlbumSubscriptionWhereInput): AlbumSubscriptionPayload
   image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
+  artist(where: ArtistSubscriptionWhereInput): ArtistSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
-  artist(where: ArtistSubscriptionWhereInput): ArtistSubscriptionPayload
   track(where: TrackSubscriptionWhereInput): TrackSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
+  album(where: AlbumSubscriptionWhereInput): AlbumSubscriptionPayload
 }
 
 type Track implements Node {
@@ -8647,15 +8663,23 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
 
 export type AlbumOrderByInput =   'id_ASC' |
   'id_DESC' |
+  'spotifyId_ASC' |
+  'spotifyId_DESC' |
   'uri_ASC' |
   'uri_DESC' |
   'name_ASC' |
   'name_DESC' |
   'releaseDate_ASC' |
-  'releaseDate_DESC'
+  'releaseDate_DESC' |
+  'imageUrl_ASC' |
+  'imageUrl_DESC'
 
 export type ArtistOrderByInput =   'id_ASC' |
   'id_DESC' |
+  'spotifyId_ASC' |
+  'spotifyId_DESC' |
+  'uri_ASC' |
+  'uri_DESC' |
   'name_ASC' |
   'name_DESC'
 
@@ -8768,24 +8792,22 @@ export type PartySavedTrackOrderByInput =   'id_ASC' |
   'id_DESC' |
   'spotifyId_ASC' |
   'spotifyId_DESC' |
-  'name_ASC' |
-  'name_DESC' |
-  'imageUrl_ASC' |
-  'imageUrl_DESC' |
   'durationMs_ASC' |
   'durationMs_DESC' |
-  'length_ASC' |
-  'length_DESC' |
-  'preview_url_ASC' |
-  'preview_url_DESC' |
-  'uri_ASC' |
-  'uri_DESC' |
   'explicit_ASC' |
   'explicit_DESC' |
-  'upVotes_ASC' |
-  'upVotes_DESC' |
-  'downVotes_ASC' |
-  'downVotes_DESC'
+  'name_ASC' |
+  'name_DESC' |
+  'previewUrl_ASC' |
+  'previewUrl_DESC' |
+  'uri_ASC' |
+  'uri_DESC' |
+  'stringArtists_ASC' |
+  'stringArtists_DESC' |
+  'length_ASC' |
+  'length_DESC' |
+  'popularity_ASC' |
+  'popularity_DESC'
 
 export type PlaylistOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -8844,11 +8866,11 @@ export type UserOrderByInput =   'id_ASC' |
 
 export interface AlbumCreateInput {
   id?: ID_Input | null
+  spotifyId: ID_Output
   uri: String
   name: String
   releaseDate: String
-  images?: ImageCreateManyInput | null
-  artists?: ArtistCreateManyInput | null
+  imageUrl: String
 }
 
 export interface AlbumCreateOneInput {
@@ -8868,25 +8890,27 @@ export interface AlbumSubscriptionWhereInput {
 }
 
 export interface AlbumUpdateDataInput {
+  spotifyId?: ID_Input | null
   uri?: String | null
   name?: String | null
   releaseDate?: String | null
-  images?: ImageUpdateManyInput | null
-  artists?: ArtistUpdateManyInput | null
+  imageUrl?: String | null
 }
 
 export interface AlbumUpdateInput {
+  spotifyId?: ID_Input | null
   uri?: String | null
   name?: String | null
   releaseDate?: String | null
-  images?: ImageUpdateManyInput | null
-  artists?: ArtistUpdateManyInput | null
+  imageUrl?: String | null
 }
 
 export interface AlbumUpdateManyMutationInput {
+  spotifyId?: ID_Input | null
   uri?: String | null
   name?: String | null
   releaseDate?: String | null
+  imageUrl?: String | null
 }
 
 export interface AlbumUpdateOneRequiredInput {
@@ -8919,6 +8943,20 @@ export interface AlbumWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
+  spotifyId?: ID_Input | null
+  spotifyId_not?: ID_Input | null
+  spotifyId_in?: ID_Output[] | ID_Output | null
+  spotifyId_not_in?: ID_Output[] | ID_Output | null
+  spotifyId_lt?: ID_Input | null
+  spotifyId_lte?: ID_Input | null
+  spotifyId_gt?: ID_Input | null
+  spotifyId_gte?: ID_Input | null
+  spotifyId_contains?: ID_Input | null
+  spotifyId_not_contains?: ID_Input | null
+  spotifyId_starts_with?: ID_Input | null
+  spotifyId_not_starts_with?: ID_Input | null
+  spotifyId_ends_with?: ID_Input | null
+  spotifyId_not_ends_with?: ID_Input | null
   uri?: String | null
   uri_not?: String | null
   uri_in?: String[] | String | null
@@ -8961,12 +8999,20 @@ export interface AlbumWhereInput {
   releaseDate_not_starts_with?: String | null
   releaseDate_ends_with?: String | null
   releaseDate_not_ends_with?: String | null
-  images_every?: ImageWhereInput | null
-  images_some?: ImageWhereInput | null
-  images_none?: ImageWhereInput | null
-  artists_every?: ArtistWhereInput | null
-  artists_some?: ArtistWhereInput | null
-  artists_none?: ArtistWhereInput | null
+  imageUrl?: String | null
+  imageUrl_not?: String | null
+  imageUrl_in?: String[] | String | null
+  imageUrl_not_in?: String[] | String | null
+  imageUrl_lt?: String | null
+  imageUrl_lte?: String | null
+  imageUrl_gt?: String | null
+  imageUrl_gte?: String | null
+  imageUrl_contains?: String | null
+  imageUrl_not_contains?: String | null
+  imageUrl_starts_with?: String | null
+  imageUrl_not_starts_with?: String | null
+  imageUrl_ends_with?: String | null
+  imageUrl_not_ends_with?: String | null
 }
 
 export interface AlbumWhereUniqueInput {
@@ -8975,6 +9021,8 @@ export interface AlbumWhereUniqueInput {
 
 export interface ArtistCreateInput {
   id?: ID_Input | null
+  spotifyId: ID_Output
+  uri: String
   name: String
 }
 
@@ -9001,6 +9049,34 @@ export interface ArtistScalarWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
+  spotifyId?: ID_Input | null
+  spotifyId_not?: ID_Input | null
+  spotifyId_in?: ID_Output[] | ID_Output | null
+  spotifyId_not_in?: ID_Output[] | ID_Output | null
+  spotifyId_lt?: ID_Input | null
+  spotifyId_lte?: ID_Input | null
+  spotifyId_gt?: ID_Input | null
+  spotifyId_gte?: ID_Input | null
+  spotifyId_contains?: ID_Input | null
+  spotifyId_not_contains?: ID_Input | null
+  spotifyId_starts_with?: ID_Input | null
+  spotifyId_not_starts_with?: ID_Input | null
+  spotifyId_ends_with?: ID_Input | null
+  spotifyId_not_ends_with?: ID_Input | null
+  uri?: String | null
+  uri_not?: String | null
+  uri_in?: String[] | String | null
+  uri_not_in?: String[] | String | null
+  uri_lt?: String | null
+  uri_lte?: String | null
+  uri_gt?: String | null
+  uri_gte?: String | null
+  uri_contains?: String | null
+  uri_not_contains?: String | null
+  uri_starts_with?: String | null
+  uri_not_starts_with?: String | null
+  uri_ends_with?: String | null
+  uri_not_ends_with?: String | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -9029,14 +9105,20 @@ export interface ArtistSubscriptionWhereInput {
 }
 
 export interface ArtistUpdateDataInput {
+  spotifyId?: ID_Input | null
+  uri?: String | null
   name?: String | null
 }
 
 export interface ArtistUpdateInput {
+  spotifyId?: ID_Input | null
+  uri?: String | null
   name?: String | null
 }
 
 export interface ArtistUpdateManyDataInput {
+  spotifyId?: ID_Input | null
+  uri?: String | null
   name?: String | null
 }
 
@@ -9053,6 +9135,8 @@ export interface ArtistUpdateManyInput {
 }
 
 export interface ArtistUpdateManyMutationInput {
+  spotifyId?: ID_Input | null
+  uri?: String | null
   name?: String | null
 }
 
@@ -9090,6 +9174,34 @@ export interface ArtistWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
+  spotifyId?: ID_Input | null
+  spotifyId_not?: ID_Input | null
+  spotifyId_in?: ID_Output[] | ID_Output | null
+  spotifyId_not_in?: ID_Output[] | ID_Output | null
+  spotifyId_lt?: ID_Input | null
+  spotifyId_lte?: ID_Input | null
+  spotifyId_gt?: ID_Input | null
+  spotifyId_gte?: ID_Input | null
+  spotifyId_contains?: ID_Input | null
+  spotifyId_not_contains?: ID_Input | null
+  spotifyId_starts_with?: ID_Input | null
+  spotifyId_not_starts_with?: ID_Input | null
+  spotifyId_ends_with?: ID_Input | null
+  spotifyId_not_ends_with?: ID_Input | null
+  uri?: String | null
+  uri_not?: String | null
+  uri_in?: String[] | String | null
+  uri_not_in?: String[] | String | null
+  uri_lt?: String | null
+  uri_lte?: String | null
+  uri_gt?: String | null
+  uri_gte?: String | null
+  uri_contains?: String | null
+  uri_not_contains?: String | null
+  uri_starts_with?: String | null
+  uri_not_starts_with?: String | null
+  uri_ends_with?: String | null
+  uri_not_ends_with?: String | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -9506,61 +9618,6 @@ export interface ImageCreateInput {
   url: String
 }
 
-export interface ImageCreateManyInput {
-  create?: ImageCreateInput[] | ImageCreateInput | null
-  connect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
-}
-
-export interface ImageScalarWhereInput {
-  AND?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
-  OR?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
-  NOT?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
-  id?: ID_Input | null
-  id_not?: ID_Input | null
-  id_in?: ID_Output[] | ID_Output | null
-  id_not_in?: ID_Output[] | ID_Output | null
-  id_lt?: ID_Input | null
-  id_lte?: ID_Input | null
-  id_gt?: ID_Input | null
-  id_gte?: ID_Input | null
-  id_contains?: ID_Input | null
-  id_not_contains?: ID_Input | null
-  id_starts_with?: ID_Input | null
-  id_not_starts_with?: ID_Input | null
-  id_ends_with?: ID_Input | null
-  id_not_ends_with?: ID_Input | null
-  height?: Int | null
-  height_not?: Int | null
-  height_in?: Int[] | Int | null
-  height_not_in?: Int[] | Int | null
-  height_lt?: Int | null
-  height_lte?: Int | null
-  height_gt?: Int | null
-  height_gte?: Int | null
-  width?: Int | null
-  width_not?: Int | null
-  width_in?: Int[] | Int | null
-  width_not_in?: Int[] | Int | null
-  width_lt?: Int | null
-  width_lte?: Int | null
-  width_gt?: Int | null
-  width_gte?: Int | null
-  url?: String | null
-  url_not?: String | null
-  url_in?: String[] | String | null
-  url_not_in?: String[] | String | null
-  url_lt?: String | null
-  url_lte?: String | null
-  url_gt?: String | null
-  url_gte?: String | null
-  url_contains?: String | null
-  url_not_contains?: String | null
-  url_starts_with?: String | null
-  url_not_starts_with?: String | null
-  url_ends_with?: String | null
-  url_not_ends_with?: String | null
-}
-
 export interface ImageSubscriptionWhereInput {
   AND?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null
   OR?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput | null
@@ -9572,56 +9629,16 @@ export interface ImageSubscriptionWhereInput {
   node?: ImageWhereInput | null
 }
 
-export interface ImageUpdateDataInput {
-  height?: Int | null
-  width?: Int | null
-  url?: String | null
-}
-
 export interface ImageUpdateInput {
   height?: Int | null
   width?: Int | null
   url?: String | null
 }
 
-export interface ImageUpdateManyDataInput {
-  height?: Int | null
-  width?: Int | null
-  url?: String | null
-}
-
-export interface ImageUpdateManyInput {
-  create?: ImageCreateInput[] | ImageCreateInput | null
-  connect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
-  set?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
-  disconnect?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
-  delete?: ImageWhereUniqueInput[] | ImageWhereUniqueInput | null
-  update?: ImageUpdateWithWhereUniqueNestedInput[] | ImageUpdateWithWhereUniqueNestedInput | null
-  updateMany?: ImageUpdateManyWithWhereNestedInput[] | ImageUpdateManyWithWhereNestedInput | null
-  deleteMany?: ImageScalarWhereInput[] | ImageScalarWhereInput | null
-  upsert?: ImageUpsertWithWhereUniqueNestedInput[] | ImageUpsertWithWhereUniqueNestedInput | null
-}
-
 export interface ImageUpdateManyMutationInput {
   height?: Int | null
   width?: Int | null
   url?: String | null
-}
-
-export interface ImageUpdateManyWithWhereNestedInput {
-  where: ImageScalarWhereInput
-  data: ImageUpdateManyDataInput
-}
-
-export interface ImageUpdateWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput
-  data: ImageUpdateDataInput
-}
-
-export interface ImageUpsertWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput
-  update: ImageUpdateDataInput
-  create: ImageCreateInput
 }
 
 export interface ImageWhereInput {
@@ -10639,18 +10656,16 @@ export interface PartyInvitationWhereUniqueInput {
 export interface PartySavedTrackCreateInput {
   id?: ID_Input | null
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url?: String | null
-  uri?: String | null
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl?: String | null
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
   party: PartyCreateOneWithoutSavedTracksInput
-  artists?: ArtistCreateManyInput | null
-  votedBy?: UserCreateManyInput | null
+  album: AlbumCreateOneInput
 }
 
 export interface PartySavedTrackCreateManyWithoutPartyInput {
@@ -10661,17 +10676,15 @@ export interface PartySavedTrackCreateManyWithoutPartyInput {
 export interface PartySavedTrackCreateWithoutPartyInput {
   id?: ID_Input | null
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url?: String | null
-  uri?: String | null
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
-  artists?: ArtistCreateManyInput | null
-  votedBy?: UserCreateManyInput | null
+  name: String
+  previewUrl?: String | null
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
+  album: AlbumCreateOneInput
 }
 
 export interface PartySavedTrackScalarWhereInput {
@@ -10706,6 +10719,16 @@ export interface PartySavedTrackScalarWhereInput {
   spotifyId_not_starts_with?: String | null
   spotifyId_ends_with?: String | null
   spotifyId_not_ends_with?: String | null
+  durationMs?: Int | null
+  durationMs_not?: Int | null
+  durationMs_in?: Int[] | Int | null
+  durationMs_not_in?: Int[] | Int | null
+  durationMs_lt?: Int | null
+  durationMs_lte?: Int | null
+  durationMs_gt?: Int | null
+  durationMs_gte?: Int | null
+  explicit?: Boolean | null
+  explicit_not?: Boolean | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -10720,56 +10743,20 @@ export interface PartySavedTrackScalarWhereInput {
   name_not_starts_with?: String | null
   name_ends_with?: String | null
   name_not_ends_with?: String | null
-  imageUrl?: String | null
-  imageUrl_not?: String | null
-  imageUrl_in?: String[] | String | null
-  imageUrl_not_in?: String[] | String | null
-  imageUrl_lt?: String | null
-  imageUrl_lte?: String | null
-  imageUrl_gt?: String | null
-  imageUrl_gte?: String | null
-  imageUrl_contains?: String | null
-  imageUrl_not_contains?: String | null
-  imageUrl_starts_with?: String | null
-  imageUrl_not_starts_with?: String | null
-  imageUrl_ends_with?: String | null
-  imageUrl_not_ends_with?: String | null
-  durationMs?: Int | null
-  durationMs_not?: Int | null
-  durationMs_in?: Int[] | Int | null
-  durationMs_not_in?: Int[] | Int | null
-  durationMs_lt?: Int | null
-  durationMs_lte?: Int | null
-  durationMs_gt?: Int | null
-  durationMs_gte?: Int | null
-  length?: String | null
-  length_not?: String | null
-  length_in?: String[] | String | null
-  length_not_in?: String[] | String | null
-  length_lt?: String | null
-  length_lte?: String | null
-  length_gt?: String | null
-  length_gte?: String | null
-  length_contains?: String | null
-  length_not_contains?: String | null
-  length_starts_with?: String | null
-  length_not_starts_with?: String | null
-  length_ends_with?: String | null
-  length_not_ends_with?: String | null
-  preview_url?: String | null
-  preview_url_not?: String | null
-  preview_url_in?: String[] | String | null
-  preview_url_not_in?: String[] | String | null
-  preview_url_lt?: String | null
-  preview_url_lte?: String | null
-  preview_url_gt?: String | null
-  preview_url_gte?: String | null
-  preview_url_contains?: String | null
-  preview_url_not_contains?: String | null
-  preview_url_starts_with?: String | null
-  preview_url_not_starts_with?: String | null
-  preview_url_ends_with?: String | null
-  preview_url_not_ends_with?: String | null
+  previewUrl?: String | null
+  previewUrl_not?: String | null
+  previewUrl_in?: String[] | String | null
+  previewUrl_not_in?: String[] | String | null
+  previewUrl_lt?: String | null
+  previewUrl_lte?: String | null
+  previewUrl_gt?: String | null
+  previewUrl_gte?: String | null
+  previewUrl_contains?: String | null
+  previewUrl_not_contains?: String | null
+  previewUrl_starts_with?: String | null
+  previewUrl_not_starts_with?: String | null
+  previewUrl_ends_with?: String | null
+  previewUrl_not_ends_with?: String | null
   uri?: String | null
   uri_not?: String | null
   uri_in?: String[] | String | null
@@ -10784,24 +10771,42 @@ export interface PartySavedTrackScalarWhereInput {
   uri_not_starts_with?: String | null
   uri_ends_with?: String | null
   uri_not_ends_with?: String | null
-  explicit?: Boolean | null
-  explicit_not?: Boolean | null
-  upVotes?: Int | null
-  upVotes_not?: Int | null
-  upVotes_in?: Int[] | Int | null
-  upVotes_not_in?: Int[] | Int | null
-  upVotes_lt?: Int | null
-  upVotes_lte?: Int | null
-  upVotes_gt?: Int | null
-  upVotes_gte?: Int | null
-  downVotes?: Int | null
-  downVotes_not?: Int | null
-  downVotes_in?: Int[] | Int | null
-  downVotes_not_in?: Int[] | Int | null
-  downVotes_lt?: Int | null
-  downVotes_lte?: Int | null
-  downVotes_gt?: Int | null
-  downVotes_gte?: Int | null
+  stringArtists?: String | null
+  stringArtists_not?: String | null
+  stringArtists_in?: String[] | String | null
+  stringArtists_not_in?: String[] | String | null
+  stringArtists_lt?: String | null
+  stringArtists_lte?: String | null
+  stringArtists_gt?: String | null
+  stringArtists_gte?: String | null
+  stringArtists_contains?: String | null
+  stringArtists_not_contains?: String | null
+  stringArtists_starts_with?: String | null
+  stringArtists_not_starts_with?: String | null
+  stringArtists_ends_with?: String | null
+  stringArtists_not_ends_with?: String | null
+  length?: String | null
+  length_not?: String | null
+  length_in?: String[] | String | null
+  length_not_in?: String[] | String | null
+  length_lt?: String | null
+  length_lte?: String | null
+  length_gt?: String | null
+  length_gte?: String | null
+  length_contains?: String | null
+  length_not_contains?: String | null
+  length_starts_with?: String | null
+  length_not_starts_with?: String | null
+  length_ends_with?: String | null
+  length_not_ends_with?: String | null
+  popularity?: Int | null
+  popularity_not?: Int | null
+  popularity_in?: Int[] | Int | null
+  popularity_not_in?: Int[] | Int | null
+  popularity_lt?: Int | null
+  popularity_lte?: Int | null
+  popularity_gt?: Int | null
+  popularity_gte?: Int | null
 }
 
 export interface PartySavedTrackSubscriptionWhereInput {
@@ -10817,44 +10822,40 @@ export interface PartySavedTrackSubscriptionWhereInput {
 
 export interface PartySavedTrackUpdateInput {
   spotifyId?: String | null
-  name?: String | null
-  imageUrl?: String | null
   durationMs?: Int | null
-  length?: String | null
-  preview_url?: String | null
-  uri?: String | null
   explicit?: Boolean | null
-  upVotes?: Int | null
-  downVotes?: Int | null
+  name?: String | null
+  previewUrl?: String | null
+  uri?: String | null
+  stringArtists?: String | null
+  length?: String | null
+  popularity?: Int | null
   party?: PartyUpdateOneRequiredWithoutSavedTracksInput | null
-  artists?: ArtistUpdateManyInput | null
-  votedBy?: UserUpdateManyInput | null
+  album?: AlbumUpdateOneRequiredInput | null
 }
 
 export interface PartySavedTrackUpdateManyDataInput {
   spotifyId?: String | null
-  name?: String | null
-  imageUrl?: String | null
   durationMs?: Int | null
-  length?: String | null
-  preview_url?: String | null
-  uri?: String | null
   explicit?: Boolean | null
-  upVotes?: Int | null
-  downVotes?: Int | null
+  name?: String | null
+  previewUrl?: String | null
+  uri?: String | null
+  stringArtists?: String | null
+  length?: String | null
+  popularity?: Int | null
 }
 
 export interface PartySavedTrackUpdateManyMutationInput {
   spotifyId?: String | null
-  name?: String | null
-  imageUrl?: String | null
   durationMs?: Int | null
-  length?: String | null
-  preview_url?: String | null
-  uri?: String | null
   explicit?: Boolean | null
-  upVotes?: Int | null
-  downVotes?: Int | null
+  name?: String | null
+  previewUrl?: String | null
+  uri?: String | null
+  stringArtists?: String | null
+  length?: String | null
+  popularity?: Int | null
 }
 
 export interface PartySavedTrackUpdateManyWithoutPartyInput {
@@ -10876,17 +10877,15 @@ export interface PartySavedTrackUpdateManyWithWhereNestedInput {
 
 export interface PartySavedTrackUpdateWithoutPartyDataInput {
   spotifyId?: String | null
-  name?: String | null
-  imageUrl?: String | null
   durationMs?: Int | null
-  length?: String | null
-  preview_url?: String | null
-  uri?: String | null
   explicit?: Boolean | null
-  upVotes?: Int | null
-  downVotes?: Int | null
-  artists?: ArtistUpdateManyInput | null
-  votedBy?: UserUpdateManyInput | null
+  name?: String | null
+  previewUrl?: String | null
+  uri?: String | null
+  stringArtists?: String | null
+  length?: String | null
+  popularity?: Int | null
+  album?: AlbumUpdateOneRequiredInput | null
 }
 
 export interface PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
@@ -10932,6 +10931,16 @@ export interface PartySavedTrackWhereInput {
   spotifyId_not_starts_with?: String | null
   spotifyId_ends_with?: String | null
   spotifyId_not_ends_with?: String | null
+  durationMs?: Int | null
+  durationMs_not?: Int | null
+  durationMs_in?: Int[] | Int | null
+  durationMs_not_in?: Int[] | Int | null
+  durationMs_lt?: Int | null
+  durationMs_lte?: Int | null
+  durationMs_gt?: Int | null
+  durationMs_gte?: Int | null
+  explicit?: Boolean | null
+  explicit_not?: Boolean | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -10946,56 +10955,20 @@ export interface PartySavedTrackWhereInput {
   name_not_starts_with?: String | null
   name_ends_with?: String | null
   name_not_ends_with?: String | null
-  imageUrl?: String | null
-  imageUrl_not?: String | null
-  imageUrl_in?: String[] | String | null
-  imageUrl_not_in?: String[] | String | null
-  imageUrl_lt?: String | null
-  imageUrl_lte?: String | null
-  imageUrl_gt?: String | null
-  imageUrl_gte?: String | null
-  imageUrl_contains?: String | null
-  imageUrl_not_contains?: String | null
-  imageUrl_starts_with?: String | null
-  imageUrl_not_starts_with?: String | null
-  imageUrl_ends_with?: String | null
-  imageUrl_not_ends_with?: String | null
-  durationMs?: Int | null
-  durationMs_not?: Int | null
-  durationMs_in?: Int[] | Int | null
-  durationMs_not_in?: Int[] | Int | null
-  durationMs_lt?: Int | null
-  durationMs_lte?: Int | null
-  durationMs_gt?: Int | null
-  durationMs_gte?: Int | null
-  length?: String | null
-  length_not?: String | null
-  length_in?: String[] | String | null
-  length_not_in?: String[] | String | null
-  length_lt?: String | null
-  length_lte?: String | null
-  length_gt?: String | null
-  length_gte?: String | null
-  length_contains?: String | null
-  length_not_contains?: String | null
-  length_starts_with?: String | null
-  length_not_starts_with?: String | null
-  length_ends_with?: String | null
-  length_not_ends_with?: String | null
-  preview_url?: String | null
-  preview_url_not?: String | null
-  preview_url_in?: String[] | String | null
-  preview_url_not_in?: String[] | String | null
-  preview_url_lt?: String | null
-  preview_url_lte?: String | null
-  preview_url_gt?: String | null
-  preview_url_gte?: String | null
-  preview_url_contains?: String | null
-  preview_url_not_contains?: String | null
-  preview_url_starts_with?: String | null
-  preview_url_not_starts_with?: String | null
-  preview_url_ends_with?: String | null
-  preview_url_not_ends_with?: String | null
+  previewUrl?: String | null
+  previewUrl_not?: String | null
+  previewUrl_in?: String[] | String | null
+  previewUrl_not_in?: String[] | String | null
+  previewUrl_lt?: String | null
+  previewUrl_lte?: String | null
+  previewUrl_gt?: String | null
+  previewUrl_gte?: String | null
+  previewUrl_contains?: String | null
+  previewUrl_not_contains?: String | null
+  previewUrl_starts_with?: String | null
+  previewUrl_not_starts_with?: String | null
+  previewUrl_ends_with?: String | null
+  previewUrl_not_ends_with?: String | null
   uri?: String | null
   uri_not?: String | null
   uri_in?: String[] | String | null
@@ -11010,31 +10983,44 @@ export interface PartySavedTrackWhereInput {
   uri_not_starts_with?: String | null
   uri_ends_with?: String | null
   uri_not_ends_with?: String | null
-  explicit?: Boolean | null
-  explicit_not?: Boolean | null
-  upVotes?: Int | null
-  upVotes_not?: Int | null
-  upVotes_in?: Int[] | Int | null
-  upVotes_not_in?: Int[] | Int | null
-  upVotes_lt?: Int | null
-  upVotes_lte?: Int | null
-  upVotes_gt?: Int | null
-  upVotes_gte?: Int | null
-  downVotes?: Int | null
-  downVotes_not?: Int | null
-  downVotes_in?: Int[] | Int | null
-  downVotes_not_in?: Int[] | Int | null
-  downVotes_lt?: Int | null
-  downVotes_lte?: Int | null
-  downVotes_gt?: Int | null
-  downVotes_gte?: Int | null
+  stringArtists?: String | null
+  stringArtists_not?: String | null
+  stringArtists_in?: String[] | String | null
+  stringArtists_not_in?: String[] | String | null
+  stringArtists_lt?: String | null
+  stringArtists_lte?: String | null
+  stringArtists_gt?: String | null
+  stringArtists_gte?: String | null
+  stringArtists_contains?: String | null
+  stringArtists_not_contains?: String | null
+  stringArtists_starts_with?: String | null
+  stringArtists_not_starts_with?: String | null
+  stringArtists_ends_with?: String | null
+  stringArtists_not_ends_with?: String | null
+  length?: String | null
+  length_not?: String | null
+  length_in?: String[] | String | null
+  length_not_in?: String[] | String | null
+  length_lt?: String | null
+  length_lte?: String | null
+  length_gt?: String | null
+  length_gte?: String | null
+  length_contains?: String | null
+  length_not_contains?: String | null
+  length_starts_with?: String | null
+  length_not_starts_with?: String | null
+  length_ends_with?: String | null
+  length_not_ends_with?: String | null
+  popularity?: Int | null
+  popularity_not?: Int | null
+  popularity_in?: Int[] | Int | null
+  popularity_not_in?: Int[] | Int | null
+  popularity_lt?: Int | null
+  popularity_lte?: Int | null
+  popularity_gt?: Int | null
+  popularity_gte?: Int | null
   party?: PartyWhereInput | null
-  artists_every?: ArtistWhereInput | null
-  artists_some?: ArtistWhereInput | null
-  artists_none?: ArtistWhereInput | null
-  votedBy_every?: UserWhereInput | null
-  votedBy_some?: UserWhereInput | null
-  votedBy_none?: UserWhereInput | null
+  album?: AlbumWhereInput | null
 }
 
 export interface PartySavedTrackWhereUniqueInput {
@@ -12624,11 +12610,11 @@ export interface AggregateUser {
 
 export interface Album extends Node {
   id: ID_Output
+  spotifyId: ID_Output
   uri: String
   name: String
   releaseDate: String
-  images?: Array<Image> | null
-  artists?: Array<Artist> | null
+  imageUrl: String
 }
 
 /*
@@ -12652,9 +12638,11 @@ export interface AlbumEdge {
 
 export interface AlbumPreviousValues {
   id: ID_Output
+  spotifyId: ID_Output
   uri: String
   name: String
   releaseDate: String
+  imageUrl: String
 }
 
 export interface AlbumSubscriptionPayload {
@@ -12666,6 +12654,8 @@ export interface AlbumSubscriptionPayload {
 
 export interface Artist extends Node {
   id: ID_Output
+  spotifyId: ID_Output
+  uri: String
   name: String
 }
 
@@ -12690,6 +12680,8 @@ export interface ArtistEdge {
 
 export interface ArtistPreviousValues {
   id: ID_Output
+  spotifyId: ID_Output
+  uri: String
   name: String
 }
 
@@ -13106,18 +13098,16 @@ export interface PartyPreviousValues {
 export interface PartySavedTrack extends Node {
   id: ID_Output
   spotifyId: String
-  name: String
-  party: Party
-  imageUrl: String
-  artists?: Array<Artist> | null
   durationMs: Int
-  length: String
-  preview_url?: String | null
-  uri?: String | null
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
-  votedBy?: Array<User> | null
+  name: String
+  previewUrl?: String | null
+  uri: String
+  party: Party
+  stringArtists: String
+  length: String
+  popularity: Int
+  album: Album
 }
 
 /*
@@ -13142,15 +13132,14 @@ export interface PartySavedTrackEdge {
 export interface PartySavedTrackPreviousValues {
   id: ID_Output
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url?: String | null
-  uri?: String | null
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl?: String | null
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
 }
 
 export interface PartySavedTrackSubscriptionPayload {

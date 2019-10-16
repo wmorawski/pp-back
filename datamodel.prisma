@@ -128,31 +128,32 @@ type Track {
 type PartySavedTrack {
   id: ID! @id
   spotifyId: String!
-  name: String!
-  party: Party!
-  imageUrl: String!
-  artists: [Artist!]!
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
-  votedBy: [User!]! @relation(name: "TrackVotedBy")
+  name: String!
+  previewUrl: String
+  uri: String!
+  party: Party!
+  spotifyExternalUrl: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: Album! @relation(link: INLINE)
 }
 
 type Album {
   id: ID! @id
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
-  images: [Image!]!
-  artists: [Artist!]!
+  imageUrl: String!
 }
 
 type Artist {
   id: ID! @id
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 

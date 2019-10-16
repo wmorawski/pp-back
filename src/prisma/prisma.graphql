@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Sun Oct 13 2019 20:23:27 GMT+0200 (Central European Summer Time)
+# timestamp: Wed Oct 16 2019 15:41:59 GMT+0200 (Central European Summer Time)
 
 type AggregateAlbum {
   count: Int!
@@ -63,11 +63,11 @@ type AggregateUser {
 
 type Album implements Node {
   id: ID!
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
-  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
+  imageUrl: String!
 }
 
 """A connection to a list of items."""
@@ -82,11 +82,11 @@ type AlbumConnection {
 
 input AlbumCreateInput {
   id: ID
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
-  images: ImageCreateManyInput
-  artists: ArtistCreateManyInput
+  imageUrl: String!
 }
 
 input AlbumCreateOneInput {
@@ -106,19 +106,25 @@ type AlbumEdge {
 enum AlbumOrderByInput {
   id_ASC
   id_DESC
+  spotifyId_ASC
+  spotifyId_DESC
   uri_ASC
   uri_DESC
   name_ASC
   name_DESC
   releaseDate_ASC
   releaseDate_DESC
+  imageUrl_ASC
+  imageUrl_DESC
 }
 
 type AlbumPreviousValues {
   id: ID!
+  spotifyId: ID!
   uri: String!
   name: String!
   releaseDate: String!
+  imageUrl: String!
 }
 
 type AlbumSubscriptionPayload {
@@ -161,25 +167,27 @@ input AlbumSubscriptionWhereInput {
 }
 
 input AlbumUpdateDataInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
-  images: ImageUpdateManyInput
-  artists: ArtistUpdateManyInput
+  imageUrl: String
 }
 
 input AlbumUpdateInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
-  images: ImageUpdateManyInput
-  artists: ArtistUpdateManyInput
+  imageUrl: String
 }
 
 input AlbumUpdateManyMutationInput {
+  spotifyId: ID
   uri: String
   name: String
   releaseDate: String
+  imageUrl: String
 }
 
 input AlbumUpdateOneRequiredInput {
@@ -243,6 +251,46 @@ input AlbumWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  spotifyId: ID
+
+  """All values that are not equal to given value."""
+  spotifyId_not: ID
+
+  """All values that are contained in given list."""
+  spotifyId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [ID!]
+
+  """All values less than the given value."""
+  spotifyId_lt: ID
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: ID
+
+  """All values greater than the given value."""
+  spotifyId_gt: ID
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: ID
+
+  """All values containing the given string."""
+  spotifyId_contains: ID
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: ID
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: ID
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: ID
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: ID
   uri: String
 
   """All values that are not equal to given value."""
@@ -363,12 +411,46 @@ input AlbumWhereInput {
 
   """All values not ending with the given string."""
   releaseDate_not_ends_with: String
-  images_every: ImageWhereInput
-  images_some: ImageWhereInput
-  images_none: ImageWhereInput
-  artists_every: ArtistWhereInput
-  artists_some: ArtistWhereInput
-  artists_none: ArtistWhereInput
+  imageUrl: String
+
+  """All values that are not equal to given value."""
+  imageUrl_not: String
+
+  """All values that are contained in given list."""
+  imageUrl_in: [String!]
+
+  """All values that are not contained in given list."""
+  imageUrl_not_in: [String!]
+
+  """All values less than the given value."""
+  imageUrl_lt: String
+
+  """All values less than or equal the given value."""
+  imageUrl_lte: String
+
+  """All values greater than the given value."""
+  imageUrl_gt: String
+
+  """All values greater than or equal the given value."""
+  imageUrl_gte: String
+
+  """All values containing the given string."""
+  imageUrl_contains: String
+
+  """All values not containing the given string."""
+  imageUrl_not_contains: String
+
+  """All values starting with the given string."""
+  imageUrl_starts_with: String
+
+  """All values not starting with the given string."""
+  imageUrl_not_starts_with: String
+
+  """All values ending with the given string."""
+  imageUrl_ends_with: String
+
+  """All values not ending with the given string."""
+  imageUrl_not_ends_with: String
 }
 
 input AlbumWhereUniqueInput {
@@ -377,6 +459,8 @@ input AlbumWhereUniqueInput {
 
 type Artist implements Node {
   id: ID!
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -392,6 +476,8 @@ type ArtistConnection {
 
 input ArtistCreateInput {
   id: ID
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -412,12 +498,18 @@ type ArtistEdge {
 enum ArtistOrderByInput {
   id_ASC
   id_DESC
+  spotifyId_ASC
+  spotifyId_DESC
+  uri_ASC
+  uri_DESC
   name_ASC
   name_DESC
 }
 
 type ArtistPreviousValues {
   id: ID!
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 
@@ -470,6 +562,86 @@ input ArtistScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  spotifyId: ID
+
+  """All values that are not equal to given value."""
+  spotifyId_not: ID
+
+  """All values that are contained in given list."""
+  spotifyId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [ID!]
+
+  """All values less than the given value."""
+  spotifyId_lt: ID
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: ID
+
+  """All values greater than the given value."""
+  spotifyId_gt: ID
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: ID
+
+  """All values containing the given string."""
+  spotifyId_contains: ID
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: ID
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: ID
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: ID
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: ID
+  uri: String
+
+  """All values that are not equal to given value."""
+  uri_not: String
+
+  """All values that are contained in given list."""
+  uri_in: [String!]
+
+  """All values that are not contained in given list."""
+  uri_not_in: [String!]
+
+  """All values less than the given value."""
+  uri_lt: String
+
+  """All values less than or equal the given value."""
+  uri_lte: String
+
+  """All values greater than the given value."""
+  uri_gt: String
+
+  """All values greater than or equal the given value."""
+  uri_gte: String
+
+  """All values containing the given string."""
+  uri_contains: String
+
+  """All values not containing the given string."""
+  uri_not_contains: String
+
+  """All values starting with the given string."""
+  uri_starts_with: String
+
+  """All values not starting with the given string."""
+  uri_not_starts_with: String
+
+  """All values ending with the given string."""
+  uri_ends_with: String
+
+  """All values not ending with the given string."""
+  uri_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -552,14 +724,20 @@ input ArtistSubscriptionWhereInput {
 }
 
 input ArtistUpdateDataInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
 input ArtistUpdateInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
 input ArtistUpdateManyDataInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
@@ -576,6 +754,8 @@ input ArtistUpdateManyInput {
 }
 
 input ArtistUpdateManyMutationInput {
+  spotifyId: ID
+  uri: String
   name: String
 }
 
@@ -644,6 +824,86 @@ input ArtistWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  spotifyId: ID
+
+  """All values that are not equal to given value."""
+  spotifyId_not: ID
+
+  """All values that are contained in given list."""
+  spotifyId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [ID!]
+
+  """All values less than the given value."""
+  spotifyId_lt: ID
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: ID
+
+  """All values greater than the given value."""
+  spotifyId_gt: ID
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: ID
+
+  """All values containing the given string."""
+  spotifyId_contains: ID
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: ID
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: ID
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: ID
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: ID
+  uri: String
+
+  """All values that are not equal to given value."""
+  uri_not: String
+
+  """All values that are contained in given list."""
+  uri_in: [String!]
+
+  """All values that are not contained in given list."""
+  uri_not_in: [String!]
+
+  """All values less than the given value."""
+  uri_lt: String
+
+  """All values less than or equal the given value."""
+  uri_lte: String
+
+  """All values greater than the given value."""
+  uri_gt: String
+
+  """All values greater than or equal the given value."""
+  uri_gte: String
+
+  """All values containing the given string."""
+  uri_contains: String
+
+  """All values not containing the given string."""
+  uri_not_contains: String
+
+  """All values starting with the given string."""
+  uri_starts_with: String
+
+  """All values not starting with the given string."""
+  uri_not_starts_with: String
+
+  """All values ending with the given string."""
+  uri_ends_with: String
+
+  """All values not ending with the given string."""
+  uri_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -1619,11 +1879,6 @@ input ImageCreateInput {
   url: String!
 }
 
-input ImageCreateManyInput {
-  create: [ImageCreateInput!]
-  connect: [ImageWhereUniqueInput!]
-}
-
 """An edge in a connection."""
 type ImageEdge {
   """The item at the end of the edge."""
@@ -1649,141 +1904,6 @@ type ImagePreviousValues {
   height: Int!
   width: Int!
   url: String!
-}
-
-input ImageScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ImageScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ImageScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ImageScalarWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  height: Int
-
-  """All values that are not equal to given value."""
-  height_not: Int
-
-  """All values that are contained in given list."""
-  height_in: [Int!]
-
-  """All values that are not contained in given list."""
-  height_not_in: [Int!]
-
-  """All values less than the given value."""
-  height_lt: Int
-
-  """All values less than or equal the given value."""
-  height_lte: Int
-
-  """All values greater than the given value."""
-  height_gt: Int
-
-  """All values greater than or equal the given value."""
-  height_gte: Int
-  width: Int
-
-  """All values that are not equal to given value."""
-  width_not: Int
-
-  """All values that are contained in given list."""
-  width_in: [Int!]
-
-  """All values that are not contained in given list."""
-  width_not_in: [Int!]
-
-  """All values less than the given value."""
-  width_lt: Int
-
-  """All values less than or equal the given value."""
-  width_lte: Int
-
-  """All values greater than the given value."""
-  width_gt: Int
-
-  """All values greater than or equal the given value."""
-  width_gte: Int
-  url: String
-
-  """All values that are not equal to given value."""
-  url_not: String
-
-  """All values that are contained in given list."""
-  url_in: [String!]
-
-  """All values that are not contained in given list."""
-  url_not_in: [String!]
-
-  """All values less than the given value."""
-  url_lt: String
-
-  """All values less than or equal the given value."""
-  url_lte: String
-
-  """All values greater than the given value."""
-  url_gt: String
-
-  """All values greater than or equal the given value."""
-  url_gte: String
-
-  """All values containing the given string."""
-  url_contains: String
-
-  """All values not containing the given string."""
-  url_not_contains: String
-
-  """All values starting with the given string."""
-  url_starts_with: String
-
-  """All values not starting with the given string."""
-  url_not_starts_with: String
-
-  """All values ending with the given string."""
-  url_ends_with: String
-
-  """All values not ending with the given string."""
-  url_not_ends_with: String
 }
 
 type ImageSubscriptionPayload {
@@ -1825,56 +1945,16 @@ input ImageSubscriptionWhereInput {
   node: ImageWhereInput
 }
 
-input ImageUpdateDataInput {
-  height: Int
-  width: Int
-  url: String
-}
-
 input ImageUpdateInput {
   height: Int
   width: Int
   url: String
 }
 
-input ImageUpdateManyDataInput {
-  height: Int
-  width: Int
-  url: String
-}
-
-input ImageUpdateManyInput {
-  create: [ImageCreateInput!]
-  connect: [ImageWhereUniqueInput!]
-  set: [ImageWhereUniqueInput!]
-  disconnect: [ImageWhereUniqueInput!]
-  delete: [ImageWhereUniqueInput!]
-  update: [ImageUpdateWithWhereUniqueNestedInput!]
-  updateMany: [ImageUpdateManyWithWhereNestedInput!]
-  deleteMany: [ImageScalarWhereInput!]
-  upsert: [ImageUpsertWithWhereUniqueNestedInput!]
-}
-
 input ImageUpdateManyMutationInput {
   height: Int
   width: Int
   url: String
-}
-
-input ImageUpdateManyWithWhereNestedInput {
-  where: ImageScalarWhereInput!
-  data: ImageUpdateManyDataInput!
-}
-
-input ImageUpdateWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput!
-  data: ImageUpdateDataInput!
-}
-
-input ImageUpsertWithWhereUniqueNestedInput {
-  where: ImageWhereUniqueInput!
-  update: ImageUpdateDataInput!
-  create: ImageCreateInput!
 }
 
 input ImageWhereInput {
@@ -2772,14 +2852,14 @@ type Mutation {
   createPartyCart(data: PartyCartCreateInput!): PartyCart!
   createPartyCartItem(data: PartyCartItemCreateInput!): PartyCartItem!
   createPartySavedTrack(data: PartySavedTrackCreateInput!): PartySavedTrack!
-  createAlbum(data: AlbumCreateInput!): Album!
   createImage(data: ImageCreateInput!): Image!
+  createArtist(data: ArtistCreateInput!): Artist!
   createLocation(data: LocationCreateInput!): Location!
   createGame(data: GameCreateInput!): Game!
-  createArtist(data: ArtistCreateInput!): Artist!
   createTrack(data: TrackCreateInput!): Track!
   createUser(data: UserCreateInput!): User!
   createParty(data: PartyCreateInput!): Party!
+  createAlbum(data: AlbumCreateInput!): Album!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
   updatePartyInvitation(data: PartyInvitationUpdateInput!, where: PartyInvitationWhereUniqueInput!): PartyInvitation
   updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
@@ -2787,14 +2867,14 @@ type Mutation {
   updatePartyCart(data: PartyCartUpdateInput!, where: PartyCartWhereUniqueInput!): PartyCart
   updatePartyCartItem(data: PartyCartItemUpdateInput!, where: PartyCartItemWhereUniqueInput!): PartyCartItem
   updatePartySavedTrack(data: PartySavedTrackUpdateInput!, where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
-  updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
   updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
+  updateArtist(data: ArtistUpdateInput!, where: ArtistWhereUniqueInput!): Artist
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
-  updateArtist(data: ArtistUpdateInput!, where: ArtistWhereUniqueInput!): Artist
   updateTrack(data: TrackUpdateInput!, where: TrackWhereUniqueInput!): Track
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
+  updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
   deleteMessage(where: MessageWhereUniqueInput!): Message
   deletePartyInvitation(where: PartyInvitationWhereUniqueInput!): PartyInvitation
   deleteChat(where: ChatWhereUniqueInput!): Chat
@@ -2802,14 +2882,14 @@ type Mutation {
   deletePartyCart(where: PartyCartWhereUniqueInput!): PartyCart
   deletePartyCartItem(where: PartyCartItemWhereUniqueInput!): PartyCartItem
   deletePartySavedTrack(where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
-  deleteAlbum(where: AlbumWhereUniqueInput!): Album
   deleteImage(where: ImageWhereUniqueInput!): Image
+  deleteArtist(where: ArtistWhereUniqueInput!): Artist
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteGame(where: GameWhereUniqueInput!): Game
-  deleteArtist(where: ArtistWhereUniqueInput!): Artist
   deleteTrack(where: TrackWhereUniqueInput!): Track
   deleteUser(where: UserWhereUniqueInput!): User
   deleteParty(where: PartyWhereUniqueInput!): Party
+  deleteAlbum(where: AlbumWhereUniqueInput!): Album
   upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
   upsertPartyInvitation(where: PartyInvitationWhereUniqueInput!, create: PartyInvitationCreateInput!, update: PartyInvitationUpdateInput!): PartyInvitation!
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
@@ -2817,27 +2897,27 @@ type Mutation {
   upsertPartyCart(where: PartyCartWhereUniqueInput!, create: PartyCartCreateInput!, update: PartyCartUpdateInput!): PartyCart!
   upsertPartyCartItem(where: PartyCartItemWhereUniqueInput!, create: PartyCartItemCreateInput!, update: PartyCartItemUpdateInput!): PartyCartItem!
   upsertPartySavedTrack(where: PartySavedTrackWhereUniqueInput!, create: PartySavedTrackCreateInput!, update: PartySavedTrackUpdateInput!): PartySavedTrack!
-  upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
   upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
+  upsertArtist(where: ArtistWhereUniqueInput!, create: ArtistCreateInput!, update: ArtistUpdateInput!): Artist!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
-  upsertArtist(where: ArtistWhereUniqueInput!, create: ArtistCreateInput!, update: ArtistUpdateInput!): Artist!
   upsertTrack(where: TrackWhereUniqueInput!, create: TrackCreateInput!, update: TrackUpdateInput!): Track!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
+  upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
   updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
   updateManyPartyInvitations(data: PartyInvitationUpdateManyMutationInput!, where: PartyInvitationWhereInput): BatchPayload!
   updateManyPlaylists(data: PlaylistUpdateManyMutationInput!, where: PlaylistWhereInput): BatchPayload!
   updateManyPartyCartItems(data: PartyCartItemUpdateManyMutationInput!, where: PartyCartItemWhereInput): BatchPayload!
   updateManyPartySavedTracks(data: PartySavedTrackUpdateManyMutationInput!, where: PartySavedTrackWhereInput): BatchPayload!
-  updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
   updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
+  updateManyArtists(data: ArtistUpdateManyMutationInput!, where: ArtistWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
-  updateManyArtists(data: ArtistUpdateManyMutationInput!, where: ArtistWhereInput): BatchPayload!
   updateManyTracks(data: TrackUpdateManyMutationInput!, where: TrackWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyParties(data: PartyUpdateManyMutationInput!, where: PartyWhereInput): BatchPayload!
+  updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
   deleteManyPartyInvitations(where: PartyInvitationWhereInput): BatchPayload!
   deleteManyChats(where: ChatWhereInput): BatchPayload!
@@ -2845,14 +2925,14 @@ type Mutation {
   deleteManyPartyCarts(where: PartyCartWhereInput): BatchPayload!
   deleteManyPartyCartItems(where: PartyCartItemWhereInput): BatchPayload!
   deleteManyPartySavedTracks(where: PartySavedTrackWhereInput): BatchPayload!
-  deleteManyAlbums(where: AlbumWhereInput): BatchPayload!
   deleteManyImages(where: ImageWhereInput): BatchPayload!
+  deleteManyArtists(where: ArtistWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyGames(where: GameWhereInput): BatchPayload!
-  deleteManyArtists(where: ArtistWhereInput): BatchPayload!
   deleteManyTracks(where: TrackWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyParties(where: PartyWhereInput): BatchPayload!
+  deleteManyAlbums(where: AlbumWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -4279,18 +4359,16 @@ type PartyPreviousValues {
 type PartySavedTrack implements Node {
   id: ID!
   spotifyId: String!
-  name: String!
-  party: Party!
-  imageUrl: String!
-  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist!]
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
-  votedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  name: String!
+  previewUrl: String
+  uri: String!
+  party: Party!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: Album!
 }
 
 """A connection to a list of items."""
@@ -4306,18 +4384,16 @@ type PartySavedTrackConnection {
 input PartySavedTrackCreateInput {
   id: ID
   spotifyId: String!
-  name: String!
-  imageUrl: String!
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
+  name: String!
+  previewUrl: String
+  uri: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
   party: PartyCreateOneWithoutSavedTracksInput!
-  artists: ArtistCreateManyInput
-  votedBy: UserCreateManyInput
+  album: AlbumCreateOneInput!
 }
 
 input PartySavedTrackCreateManyWithoutPartyInput {
@@ -4328,17 +4404,15 @@ input PartySavedTrackCreateManyWithoutPartyInput {
 input PartySavedTrackCreateWithoutPartyInput {
   id: ID
   spotifyId: String!
-  name: String!
-  imageUrl: String!
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
-  artists: ArtistCreateManyInput
-  votedBy: UserCreateManyInput
+  name: String!
+  previewUrl: String
+  uri: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: AlbumCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -4355,38 +4429,35 @@ enum PartySavedTrackOrderByInput {
   id_DESC
   spotifyId_ASC
   spotifyId_DESC
-  name_ASC
-  name_DESC
-  imageUrl_ASC
-  imageUrl_DESC
   durationMs_ASC
   durationMs_DESC
-  length_ASC
-  length_DESC
-  preview_url_ASC
-  preview_url_DESC
-  uri_ASC
-  uri_DESC
   explicit_ASC
   explicit_DESC
-  upVotes_ASC
-  upVotes_DESC
-  downVotes_ASC
-  downVotes_DESC
+  name_ASC
+  name_DESC
+  previewUrl_ASC
+  previewUrl_DESC
+  uri_ASC
+  uri_DESC
+  stringArtists_ASC
+  stringArtists_DESC
+  length_ASC
+  length_DESC
+  popularity_ASC
+  popularity_DESC
 }
 
 type PartySavedTrackPreviousValues {
   id: ID!
   spotifyId: String!
-  name: String!
-  imageUrl: String!
   durationMs: Int!
-  length: String!
-  preview_url: String
-  uri: String
   explicit: Boolean!
-  upVotes: Int!
-  downVotes: Int!
+  name: String!
+  previewUrl: String
+  uri: String!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
 }
 
 input PartySavedTrackScalarWhereInput {
@@ -4478,6 +4549,32 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   spotifyId_not_ends_with: String
+  durationMs: Int
+
+  """All values that are not equal to given value."""
+  durationMs_not: Int
+
+  """All values that are contained in given list."""
+  durationMs_in: [Int!]
+
+  """All values that are not contained in given list."""
+  durationMs_not_in: [Int!]
+
+  """All values less than the given value."""
+  durationMs_lt: Int
+
+  """All values less than or equal the given value."""
+  durationMs_lte: Int
+
+  """All values greater than the given value."""
+  durationMs_gt: Int
+
+  """All values greater than or equal the given value."""
+  durationMs_gte: Int
+  explicit: Boolean
+
+  """All values that are not equal to given value."""
+  explicit_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -4518,148 +4615,46 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  imageUrl: String
+  previewUrl: String
 
   """All values that are not equal to given value."""
-  imageUrl_not: String
+  previewUrl_not: String
 
   """All values that are contained in given list."""
-  imageUrl_in: [String!]
+  previewUrl_in: [String!]
 
   """All values that are not contained in given list."""
-  imageUrl_not_in: [String!]
+  previewUrl_not_in: [String!]
 
   """All values less than the given value."""
-  imageUrl_lt: String
+  previewUrl_lt: String
 
   """All values less than or equal the given value."""
-  imageUrl_lte: String
+  previewUrl_lte: String
 
   """All values greater than the given value."""
-  imageUrl_gt: String
+  previewUrl_gt: String
 
   """All values greater than or equal the given value."""
-  imageUrl_gte: String
+  previewUrl_gte: String
 
   """All values containing the given string."""
-  imageUrl_contains: String
+  previewUrl_contains: String
 
   """All values not containing the given string."""
-  imageUrl_not_contains: String
+  previewUrl_not_contains: String
 
   """All values starting with the given string."""
-  imageUrl_starts_with: String
+  previewUrl_starts_with: String
 
   """All values not starting with the given string."""
-  imageUrl_not_starts_with: String
+  previewUrl_not_starts_with: String
 
   """All values ending with the given string."""
-  imageUrl_ends_with: String
+  previewUrl_ends_with: String
 
   """All values not ending with the given string."""
-  imageUrl_not_ends_with: String
-  durationMs: Int
-
-  """All values that are not equal to given value."""
-  durationMs_not: Int
-
-  """All values that are contained in given list."""
-  durationMs_in: [Int!]
-
-  """All values that are not contained in given list."""
-  durationMs_not_in: [Int!]
-
-  """All values less than the given value."""
-  durationMs_lt: Int
-
-  """All values less than or equal the given value."""
-  durationMs_lte: Int
-
-  """All values greater than the given value."""
-  durationMs_gt: Int
-
-  """All values greater than or equal the given value."""
-  durationMs_gte: Int
-  length: String
-
-  """All values that are not equal to given value."""
-  length_not: String
-
-  """All values that are contained in given list."""
-  length_in: [String!]
-
-  """All values that are not contained in given list."""
-  length_not_in: [String!]
-
-  """All values less than the given value."""
-  length_lt: String
-
-  """All values less than or equal the given value."""
-  length_lte: String
-
-  """All values greater than the given value."""
-  length_gt: String
-
-  """All values greater than or equal the given value."""
-  length_gte: String
-
-  """All values containing the given string."""
-  length_contains: String
-
-  """All values not containing the given string."""
-  length_not_contains: String
-
-  """All values starting with the given string."""
-  length_starts_with: String
-
-  """All values not starting with the given string."""
-  length_not_starts_with: String
-
-  """All values ending with the given string."""
-  length_ends_with: String
-
-  """All values not ending with the given string."""
-  length_not_ends_with: String
-  preview_url: String
-
-  """All values that are not equal to given value."""
-  preview_url_not: String
-
-  """All values that are contained in given list."""
-  preview_url_in: [String!]
-
-  """All values that are not contained in given list."""
-  preview_url_not_in: [String!]
-
-  """All values less than the given value."""
-  preview_url_lt: String
-
-  """All values less than or equal the given value."""
-  preview_url_lte: String
-
-  """All values greater than the given value."""
-  preview_url_gt: String
-
-  """All values greater than or equal the given value."""
-  preview_url_gte: String
-
-  """All values containing the given string."""
-  preview_url_contains: String
-
-  """All values not containing the given string."""
-  preview_url_not_contains: String
-
-  """All values starting with the given string."""
-  preview_url_starts_with: String
-
-  """All values not starting with the given string."""
-  preview_url_not_starts_with: String
-
-  """All values ending with the given string."""
-  preview_url_ends_with: String
-
-  """All values not ending with the given string."""
-  preview_url_not_ends_with: String
+  previewUrl_not_ends_with: String
   uri: String
 
   """All values that are not equal to given value."""
@@ -4700,54 +4695,108 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   uri_not_ends_with: String
-  explicit: Boolean
+  stringArtists: String
 
   """All values that are not equal to given value."""
-  explicit_not: Boolean
-  upVotes: Int
-
-  """All values that are not equal to given value."""
-  upVotes_not: Int
+  stringArtists_not: String
 
   """All values that are contained in given list."""
-  upVotes_in: [Int!]
+  stringArtists_in: [String!]
 
   """All values that are not contained in given list."""
-  upVotes_not_in: [Int!]
+  stringArtists_not_in: [String!]
 
   """All values less than the given value."""
-  upVotes_lt: Int
+  stringArtists_lt: String
 
   """All values less than or equal the given value."""
-  upVotes_lte: Int
+  stringArtists_lte: String
 
   """All values greater than the given value."""
-  upVotes_gt: Int
+  stringArtists_gt: String
 
   """All values greater than or equal the given value."""
-  upVotes_gte: Int
-  downVotes: Int
+  stringArtists_gte: String
+
+  """All values containing the given string."""
+  stringArtists_contains: String
+
+  """All values not containing the given string."""
+  stringArtists_not_contains: String
+
+  """All values starting with the given string."""
+  stringArtists_starts_with: String
+
+  """All values not starting with the given string."""
+  stringArtists_not_starts_with: String
+
+  """All values ending with the given string."""
+  stringArtists_ends_with: String
+
+  """All values not ending with the given string."""
+  stringArtists_not_ends_with: String
+  length: String
 
   """All values that are not equal to given value."""
-  downVotes_not: Int
+  length_not: String
 
   """All values that are contained in given list."""
-  downVotes_in: [Int!]
+  length_in: [String!]
 
   """All values that are not contained in given list."""
-  downVotes_not_in: [Int!]
+  length_not_in: [String!]
 
   """All values less than the given value."""
-  downVotes_lt: Int
+  length_lt: String
 
   """All values less than or equal the given value."""
-  downVotes_lte: Int
+  length_lte: String
 
   """All values greater than the given value."""
-  downVotes_gt: Int
+  length_gt: String
 
   """All values greater than or equal the given value."""
-  downVotes_gte: Int
+  length_gte: String
+
+  """All values containing the given string."""
+  length_contains: String
+
+  """All values not containing the given string."""
+  length_not_contains: String
+
+  """All values starting with the given string."""
+  length_starts_with: String
+
+  """All values not starting with the given string."""
+  length_not_starts_with: String
+
+  """All values ending with the given string."""
+  length_ends_with: String
+
+  """All values not ending with the given string."""
+  length_not_ends_with: String
+  popularity: Int
+
+  """All values that are not equal to given value."""
+  popularity_not: Int
+
+  """All values that are contained in given list."""
+  popularity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  popularity_not_in: [Int!]
+
+  """All values less than the given value."""
+  popularity_lt: Int
+
+  """All values less than or equal the given value."""
+  popularity_lte: Int
+
+  """All values greater than the given value."""
+  popularity_gt: Int
+
+  """All values greater than or equal the given value."""
+  popularity_gte: Int
 }
 
 type PartySavedTrackSubscriptionPayload {
@@ -4791,44 +4840,40 @@ input PartySavedTrackSubscriptionWhereInput {
 
 input PartySavedTrackUpdateInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
   party: PartyUpdateOneRequiredWithoutSavedTracksInput
-  artists: ArtistUpdateManyInput
-  votedBy: UserUpdateManyInput
+  album: AlbumUpdateOneRequiredInput
 }
 
 input PartySavedTrackUpdateManyDataInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
 }
 
 input PartySavedTrackUpdateManyMutationInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
 }
 
 input PartySavedTrackUpdateManyWithoutPartyInput {
@@ -4850,17 +4895,15 @@ input PartySavedTrackUpdateManyWithWhereNestedInput {
 
 input PartySavedTrackUpdateWithoutPartyDataInput {
   spotifyId: String
-  name: String
-  imageUrl: String
   durationMs: Int
-  length: String
-  preview_url: String
-  uri: String
   explicit: Boolean
-  upVotes: Int
-  downVotes: Int
-  artists: ArtistUpdateManyInput
-  votedBy: UserUpdateManyInput
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
+  album: AlbumUpdateOneRequiredInput
 }
 
 input PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
@@ -4963,6 +5006,32 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   spotifyId_not_ends_with: String
+  durationMs: Int
+
+  """All values that are not equal to given value."""
+  durationMs_not: Int
+
+  """All values that are contained in given list."""
+  durationMs_in: [Int!]
+
+  """All values that are not contained in given list."""
+  durationMs_not_in: [Int!]
+
+  """All values less than the given value."""
+  durationMs_lt: Int
+
+  """All values less than or equal the given value."""
+  durationMs_lte: Int
+
+  """All values greater than the given value."""
+  durationMs_gt: Int
+
+  """All values greater than or equal the given value."""
+  durationMs_gte: Int
+  explicit: Boolean
+
+  """All values that are not equal to given value."""
+  explicit_not: Boolean
   name: String
 
   """All values that are not equal to given value."""
@@ -5003,148 +5072,46 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  imageUrl: String
+  previewUrl: String
 
   """All values that are not equal to given value."""
-  imageUrl_not: String
+  previewUrl_not: String
 
   """All values that are contained in given list."""
-  imageUrl_in: [String!]
+  previewUrl_in: [String!]
 
   """All values that are not contained in given list."""
-  imageUrl_not_in: [String!]
+  previewUrl_not_in: [String!]
 
   """All values less than the given value."""
-  imageUrl_lt: String
+  previewUrl_lt: String
 
   """All values less than or equal the given value."""
-  imageUrl_lte: String
+  previewUrl_lte: String
 
   """All values greater than the given value."""
-  imageUrl_gt: String
+  previewUrl_gt: String
 
   """All values greater than or equal the given value."""
-  imageUrl_gte: String
+  previewUrl_gte: String
 
   """All values containing the given string."""
-  imageUrl_contains: String
+  previewUrl_contains: String
 
   """All values not containing the given string."""
-  imageUrl_not_contains: String
+  previewUrl_not_contains: String
 
   """All values starting with the given string."""
-  imageUrl_starts_with: String
+  previewUrl_starts_with: String
 
   """All values not starting with the given string."""
-  imageUrl_not_starts_with: String
+  previewUrl_not_starts_with: String
 
   """All values ending with the given string."""
-  imageUrl_ends_with: String
+  previewUrl_ends_with: String
 
   """All values not ending with the given string."""
-  imageUrl_not_ends_with: String
-  durationMs: Int
-
-  """All values that are not equal to given value."""
-  durationMs_not: Int
-
-  """All values that are contained in given list."""
-  durationMs_in: [Int!]
-
-  """All values that are not contained in given list."""
-  durationMs_not_in: [Int!]
-
-  """All values less than the given value."""
-  durationMs_lt: Int
-
-  """All values less than or equal the given value."""
-  durationMs_lte: Int
-
-  """All values greater than the given value."""
-  durationMs_gt: Int
-
-  """All values greater than or equal the given value."""
-  durationMs_gte: Int
-  length: String
-
-  """All values that are not equal to given value."""
-  length_not: String
-
-  """All values that are contained in given list."""
-  length_in: [String!]
-
-  """All values that are not contained in given list."""
-  length_not_in: [String!]
-
-  """All values less than the given value."""
-  length_lt: String
-
-  """All values less than or equal the given value."""
-  length_lte: String
-
-  """All values greater than the given value."""
-  length_gt: String
-
-  """All values greater than or equal the given value."""
-  length_gte: String
-
-  """All values containing the given string."""
-  length_contains: String
-
-  """All values not containing the given string."""
-  length_not_contains: String
-
-  """All values starting with the given string."""
-  length_starts_with: String
-
-  """All values not starting with the given string."""
-  length_not_starts_with: String
-
-  """All values ending with the given string."""
-  length_ends_with: String
-
-  """All values not ending with the given string."""
-  length_not_ends_with: String
-  preview_url: String
-
-  """All values that are not equal to given value."""
-  preview_url_not: String
-
-  """All values that are contained in given list."""
-  preview_url_in: [String!]
-
-  """All values that are not contained in given list."""
-  preview_url_not_in: [String!]
-
-  """All values less than the given value."""
-  preview_url_lt: String
-
-  """All values less than or equal the given value."""
-  preview_url_lte: String
-
-  """All values greater than the given value."""
-  preview_url_gt: String
-
-  """All values greater than or equal the given value."""
-  preview_url_gte: String
-
-  """All values containing the given string."""
-  preview_url_contains: String
-
-  """All values not containing the given string."""
-  preview_url_not_contains: String
-
-  """All values starting with the given string."""
-  preview_url_starts_with: String
-
-  """All values not starting with the given string."""
-  preview_url_not_starts_with: String
-
-  """All values ending with the given string."""
-  preview_url_ends_with: String
-
-  """All values not ending with the given string."""
-  preview_url_not_ends_with: String
+  previewUrl_not_ends_with: String
   uri: String
 
   """All values that are not equal to given value."""
@@ -5185,61 +5152,110 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   uri_not_ends_with: String
-  explicit: Boolean
+  stringArtists: String
 
   """All values that are not equal to given value."""
-  explicit_not: Boolean
-  upVotes: Int
-
-  """All values that are not equal to given value."""
-  upVotes_not: Int
+  stringArtists_not: String
 
   """All values that are contained in given list."""
-  upVotes_in: [Int!]
+  stringArtists_in: [String!]
 
   """All values that are not contained in given list."""
-  upVotes_not_in: [Int!]
+  stringArtists_not_in: [String!]
 
   """All values less than the given value."""
-  upVotes_lt: Int
+  stringArtists_lt: String
 
   """All values less than or equal the given value."""
-  upVotes_lte: Int
+  stringArtists_lte: String
 
   """All values greater than the given value."""
-  upVotes_gt: Int
+  stringArtists_gt: String
 
   """All values greater than or equal the given value."""
-  upVotes_gte: Int
-  downVotes: Int
+  stringArtists_gte: String
+
+  """All values containing the given string."""
+  stringArtists_contains: String
+
+  """All values not containing the given string."""
+  stringArtists_not_contains: String
+
+  """All values starting with the given string."""
+  stringArtists_starts_with: String
+
+  """All values not starting with the given string."""
+  stringArtists_not_starts_with: String
+
+  """All values ending with the given string."""
+  stringArtists_ends_with: String
+
+  """All values not ending with the given string."""
+  stringArtists_not_ends_with: String
+  length: String
 
   """All values that are not equal to given value."""
-  downVotes_not: Int
+  length_not: String
 
   """All values that are contained in given list."""
-  downVotes_in: [Int!]
+  length_in: [String!]
 
   """All values that are not contained in given list."""
-  downVotes_not_in: [Int!]
+  length_not_in: [String!]
 
   """All values less than the given value."""
-  downVotes_lt: Int
+  length_lt: String
 
   """All values less than or equal the given value."""
-  downVotes_lte: Int
+  length_lte: String
 
   """All values greater than the given value."""
-  downVotes_gt: Int
+  length_gt: String
 
   """All values greater than or equal the given value."""
-  downVotes_gte: Int
+  length_gte: String
+
+  """All values containing the given string."""
+  length_contains: String
+
+  """All values not containing the given string."""
+  length_not_contains: String
+
+  """All values starting with the given string."""
+  length_starts_with: String
+
+  """All values not starting with the given string."""
+  length_not_starts_with: String
+
+  """All values ending with the given string."""
+  length_ends_with: String
+
+  """All values not ending with the given string."""
+  length_not_ends_with: String
+  popularity: Int
+
+  """All values that are not equal to given value."""
+  popularity_not: Int
+
+  """All values that are contained in given list."""
+  popularity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  popularity_not_in: [Int!]
+
+  """All values less than the given value."""
+  popularity_lt: Int
+
+  """All values less than or equal the given value."""
+  popularity_lte: Int
+
+  """All values greater than the given value."""
+  popularity_gt: Int
+
+  """All values greater than or equal the given value."""
+  popularity_gte: Int
   party: PartyWhereInput
-  artists_every: ArtistWhereInput
-  artists_some: ArtistWhereInput
-  artists_none: ArtistWhereInput
-  votedBy_every: UserWhereInput
-  votedBy_some: UserWhereInput
-  votedBy_none: UserWhereInput
+  album: AlbumWhereInput
 }
 
 input PartySavedTrackWhereUniqueInput {
@@ -6556,14 +6572,14 @@ type Query {
   partyCarts(where: PartyCartWhereInput, orderBy: PartyCartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCart]!
   partyCartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem]!
   partySavedTracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack]!
-  albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
+  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
-  artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist]!
   tracks(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Track]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
+  albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
   message(where: MessageWhereUniqueInput!): Message
   partyInvitation(where: PartyInvitationWhereUniqueInput!): PartyInvitation
   chat(where: ChatWhereUniqueInput!): Chat
@@ -6571,14 +6587,14 @@ type Query {
   partyCart(where: PartyCartWhereUniqueInput!): PartyCart
   partyCartItem(where: PartyCartItemWhereUniqueInput!): PartyCartItem
   partySavedTrack(where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
-  album(where: AlbumWhereUniqueInput!): Album
   image(where: ImageWhereUniqueInput!): Image
+  artist(where: ArtistWhereUniqueInput!): Artist
   location(where: LocationWhereUniqueInput!): Location
   game(where: GameWhereUniqueInput!): Game
-  artist(where: ArtistWhereUniqueInput!): Artist
   track(where: TrackWhereUniqueInput!): Track
   user(where: UserWhereUniqueInput!): User
   party(where: PartyWhereUniqueInput!): Party
+  album(where: AlbumWhereUniqueInput!): Album
   messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
   partyInvitationsConnection(where: PartyInvitationWhereInput, orderBy: PartyInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyInvitationConnection!
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
@@ -6586,14 +6602,14 @@ type Query {
   partyCartsConnection(where: PartyCartWhereInput, orderBy: PartyCartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyCartConnection!
   partyCartItemsConnection(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyCartItemConnection!
   partySavedTracksConnection(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartySavedTrackConnection!
-  albumsConnection(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlbumConnection!
   imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
+  artistsConnection(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ArtistConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
-  artistsConnection(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ArtistConnection!
   tracksConnection(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TrackConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
+  albumsConnection(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlbumConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -6616,14 +6632,14 @@ type Subscription {
   partyCart(where: PartyCartSubscriptionWhereInput): PartyCartSubscriptionPayload
   partyCartItem(where: PartyCartItemSubscriptionWhereInput): PartyCartItemSubscriptionPayload
   partySavedTrack(where: PartySavedTrackSubscriptionWhereInput): PartySavedTrackSubscriptionPayload
-  album(where: AlbumSubscriptionWhereInput): AlbumSubscriptionPayload
   image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
+  artist(where: ArtistSubscriptionWhereInput): ArtistSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
-  artist(where: ArtistSubscriptionWhereInput): ArtistSubscriptionPayload
   track(where: TrackSubscriptionWhereInput): TrackSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
+  album(where: AlbumSubscriptionWhereInput): AlbumSubscriptionPayload
 }
 
 type Track implements Node {

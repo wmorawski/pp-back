@@ -152,6 +152,11 @@ export class PartiesResolver {
     return await this.prisma.query.parties(args, info);
   }
 
+  @Query('party')
+  async party(@Args() args, @Info() info): Promise<Party> {
+    return await this.prisma.query.party(args, info);
+  }
+
   @Query('hasParties')
   @UseGuards(GqlAuthGuard)
   async hasParties(@Context() { req }, @Args() args): Promise<boolean> {

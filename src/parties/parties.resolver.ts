@@ -174,12 +174,11 @@ export class PartiesResolver {
     return await this.prisma.query.partySavedTracksConnection(args, info);
   }
 
-  //   @Query('partySavedTracks')
-  //   @UseGuards(GqlAuthGuard)
-  //   async PartySavedTracks(
-  //       @Args() Args,
-  //       @Info() info
-  //   )
+  @Query('partySavedTracks')
+  @UseGuards(GqlAuthGuard)
+  async PartySavedTracks(@Args() args, @Info() info) {
+    return await this.prisma.query.partySavedTracks(args, info);
+  }
 
   @Query('partiesConnection')
   async PartiesConnection(

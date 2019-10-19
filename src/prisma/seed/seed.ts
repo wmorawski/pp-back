@@ -6,9 +6,9 @@ import { compose, filter } from 'ramda';
 import { parse, addHours } from 'date-fns';
 import { PartyCreateInput, UserCreateInput } from '../prisma.binding';
 
-const USERS_NUM = 120;
-const PARTIES_NUM = 90;
-const MESSAGES_NUM = 400;
+const USERS_NUM = 30;
+const PARTIES_NUM = 20;
+const MESSAGES_NUM = 30;
 
 const calendarTintsHexArray = [
   '#f44336',

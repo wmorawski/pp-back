@@ -20,7 +20,6 @@ export class ChatsResolver {
   @Query('hasChats')
   @UseGuards(GqlAuthGuard)
   async hasChats(@Context() { req }, @Args() args): Promise<boolean> {
-    console.log(args, req.user.userId);
     return this.prisma.exists.Chat({
       ...args.where,
       members_some: { id: req.user.userId },

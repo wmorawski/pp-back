@@ -3,7 +3,12 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './../users/create-user.dto';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { AuthPayload, LoginPayload, SignupPayload } from './auth.types';
+import {
+  AuthPayload,
+  LoginPayload,
+  SignupPayload,
+  SocialLoginPayload,
+} from './auth.types';
 import { UsersService } from '../users/users.service';
 import { AuthenticationError } from 'apollo-server-core';
 
@@ -24,6 +29,12 @@ export class AuthResolver {
   @Mutation('login')
   async login(@Args() payload: LoginPayload): Promise<AuthPayload> {
     const user = await this.auth.login(payload);
+    return this.auth.createAuthPayload(user);
+  }
+
+  @Mutation('socialLogin')
+  async socialLogin(@Args() payload: SocialLoginPayload): Promise<AuthPayload> {
+    const user = await this.auth.socialLogin(payload);
     return this.auth.createAuthPayload(user);
   }
 }

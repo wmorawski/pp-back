@@ -2,13 +2,13 @@
 // Please don't change this file manually but run `prisma generate` to update it.
 // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-import { DocumentNode } from "graphql";
+import { DocumentNode } from 'graphql';
 import {
   makePrismaClientClass,
   BaseClientOptions,
-  Model
-} from "prisma-client-lib";
-import { typeDefs } from "./prisma-schema";
+  Model,
+} from 'prisma-client-lib';
+import { typeDefs } from './prisma-schema';
 
 export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
@@ -24,7 +24,7 @@ export interface Exists {
 
 export interface Node {}
 
-export type FragmentableArray<T> = Promise<Array<T>> & Fragmentable;
+export type FragmentableArray<T> = Promise<T[]> & Fragmentable;
 
 export interface Fragmentable {
   $fragment<T>(fragment: string | DocumentNode): Promise<T>;
@@ -34,7 +34,7 @@ export interface Prisma {
   $exists: Exists;
   $graphql: <T = any>(
     query: string,
-    variables?: { [key: string]: any }
+    variables?: { [key: string]: any },
   ) => Promise<T>;
 
   /**
@@ -263,130 +263,128 @@ export interface Prisma {
 
 export interface Subscription {
   chat: (
-    where?: ChatSubscriptionWhereInput
+    where?: ChatSubscriptionWhereInput,
   ) => ChatSubscriptionPayloadSubscription;
   game: (
-    where?: GameSubscriptionWhereInput
+    where?: GameSubscriptionWhereInput,
   ) => GameSubscriptionPayloadSubscription;
   location: (
-    where?: LocationSubscriptionWhereInput
+    where?: LocationSubscriptionWhereInput,
   ) => LocationSubscriptionPayloadSubscription;
   message: (
-    where?: MessageSubscriptionWhereInput
+    where?: MessageSubscriptionWhereInput,
   ) => MessageSubscriptionPayloadSubscription;
   party: (
-    where?: PartySubscriptionWhereInput
+    where?: PartySubscriptionWhereInput,
   ) => PartySubscriptionPayloadSubscription;
   user: (
-    where?: UserSubscriptionWhereInput
+    where?: UserSubscriptionWhereInput,
   ) => UserSubscriptionPayloadSubscription;
 }
 
-export interface ClientConstructor<T> {
-  new (options?: BaseClientOptions): T;
-}
+export type ClientConstructor<T> = new (options?: BaseClientOptions) => T;
 
 /**
  * Types
  */
 
-export type SocialMediaType = "FACEBOOK" | "SPOTIFY" | "TWITTER";
+export type SocialMediaType = 'FACEBOOK' | 'SPOTIFY' | 'TWITTER';
 
-export type GameType = "BOARD" | "PC" | "CONSOLE";
+export type GameType = 'BOARD' | 'PC' | 'CONSOLE';
 
 export type PartyOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "title_ASC"
-  | "title_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "colorTint_ASC"
-  | "colorTint_DESC"
-  | "isPublic_ASC"
-  | "isPublic_DESC"
-  | "start_ASC"
-  | "start_DESC"
-  | "end_ASC"
-  | "end_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'colorTint_ASC'
+  | 'colorTint_DESC'
+  | 'isPublic_ASC'
+  | 'isPublic_DESC'
+  | 'start_ASC'
+  | 'start_DESC'
+  | 'end_ASC'
+  | 'end_DESC';
 
 export type UserOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "email_ASC"
-  | "email_DESC"
-  | "firstName_ASC"
-  | "firstName_DESC"
-  | "lastName_ASC"
-  | "lastName_DESC"
-  | "password_ASC"
-  | "password_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "lastOnline_ASC"
-  | "lastOnline_DESC"
-  | "deleted_ASC"
-  | "deleted_DESC"
-  | "provider_ASC"
-  | "provider_DESC"
-  | "avatar_ASC"
-  | "avatar_DESC"
-  | "thirdPartyId_ASC"
-  | "thirdPartyId_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'firstName_ASC'
+  | 'firstName_DESC'
+  | 'lastName_ASC'
+  | 'lastName_DESC'
+  | 'password_ASC'
+  | 'password_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'lastOnline_ASC'
+  | 'lastOnline_DESC'
+  | 'deleted_ASC'
+  | 'deleted_DESC'
+  | 'provider_ASC'
+  | 'provider_DESC'
+  | 'avatar_ASC'
+  | 'avatar_DESC'
+  | 'thirdPartyId_ASC'
+  | 'thirdPartyId_DESC';
 
 export type MessageOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "content_ASC"
-  | "content_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'content_ASC'
+  | 'content_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
 
 export type ChatOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
 
 export type GameOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "title_ASC"
-  | "title_DESC"
-  | "cover_ASC"
-  | "cover_DESC"
-  | "type_ASC"
-  | "type_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'cover_ASC'
+  | 'cover_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
 
 export type LocationOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "placeName_ASC"
-  | "placeName_DESC"
-  | "latitude_ASC"
-  | "latitude_DESC"
-  | "longitude_ASC"
-  | "longitude_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'placeName_ASC'
+  | 'placeName_DESC'
+  | 'latitude_ASC'
+  | 'latitude_DESC'
+  | 'longitude_ASC'
+  | 'longitude_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
 
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+export type MutationType = 'CREATED' | 'UPDATED' | 'DELETED';
 
 export interface LocationUpdateOneRequiredInput {
   create?: LocationCreateInput;
@@ -3309,7 +3307,7 @@ export type DateTimeOutput = string;
 export type Long = string;
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 */
 export type Float = number;
 
@@ -3325,7 +3323,7 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
 
@@ -3335,37 +3333,37 @@ export type Int = number;
 
 export const models: Model[] = [
   {
-    name: "User",
-    embedded: false
+    name: 'User',
+    embedded: false,
   },
   {
-    name: "Party",
-    embedded: false
+    name: 'Party',
+    embedded: false,
   },
   {
-    name: "Chat",
-    embedded: false
+    name: 'Chat',
+    embedded: false,
   },
   {
-    name: "Message",
-    embedded: false
+    name: 'Message',
+    embedded: false,
   },
   {
-    name: "Game",
-    embedded: false
+    name: 'Game',
+    embedded: false,
   },
   {
-    name: "Location",
-    embedded: false
+    name: 'Location',
+    embedded: false,
   },
   {
-    name: "GameType",
-    embedded: false
+    name: 'GameType',
+    embedded: false,
   },
   {
-    name: "SocialMediaType",
-    embedded: false
-  }
+    name: 'SocialMediaType',
+    embedded: false,
+  },
 ];
 
 /**
@@ -3375,7 +3373,7 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `${process.env["PRISMA_ENDPOINT"]}`,
-  secret: `${process.env["PRISMA_SECRET"]}`
+  endpoint: `${process.env.PRISMA_ENDPOINT}`,
+  secret: `${process.env.PRISMA_SECRET}`,
 });
 export const prisma = new Prisma();

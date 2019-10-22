@@ -56,6 +56,9 @@ type Party {
   start: DateTime! @default(value: "1970-01-01T00:00:01")
   end: DateTime! @default(value: "1970-01-01T00:00:01")
   inviteSecret: String! @unique
+  playlist: [Playlist!]
+  savedTracks: [PartySavedTrack!]
+  cart: PartyCart @relation(link: INLINE)
 }
 
 type Chat {
@@ -87,26 +90,72 @@ type Location {
 
 type Playlist {
   id: ID! @id
-  playlist_id: String @unique
+  spotifyId: ID! @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  uri: String!
+  spotifyExternalUrl: String!
+  user: User!
+  parties: [Party!]!
   name: String!
-  tracks: [Track!]!
+  imageUrl: String!
+  tracks: [PartySavedTrack!]!
   isTemporary: Boolean @default(value: true)
 }
+
+type PartyCart {
+  id: ID! @id
+  party: Party!
+  items: [PartyCartItem!]!
+}
+
+type PartyCartItem {
+  id: ID! @id
+  cart: PartyCart!
+  user: User
+  name: String!
+  description: String!
+  price: Float!
+  quantity: Int! @default(value: 0)
+}
+
 type Track {
   id: ID! @id
   name: String!
   album: Album!
   artists: [Artist!]!
   duration: Int!
-  preview_url: String!
+  preview_url: String
 }
+
+type PartySavedTrack {
+  id: ID! @id
+  spotifyId: String!
+  durationMs: Int!
+  explicit: Boolean!
+  name: String!
+  previewUrl: String
+  uri: String!
+  party: Party!
+  stringArtists: String!
+  length: String!
+  popularity: Int!
+  album: Album! @relation(link: INLINE)
+}
+
 type Album {
   id: ID! @id
-  images: [Image!]!
-  artists: [Artist!]!
+  spotifyId: ID!
+  uri: String!
+  name: String!
+  releaseDate: String!
+  imageUrl: String!
 }
+
 type Artist {
   id: ID! @id
+  spotifyId: ID!
+  uri: String!
   name: String!
 }
 

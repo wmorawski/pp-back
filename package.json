@@ -8,30 +8,27 @@
   },
   "contributors": [
     {
-      "name": "Eryk Miszczuk"
-    },
-    {
       "name": "Wojciech Matuszewski"
     }
   ],
   "scripts": {
-    "build": "npm i --save --save-exact graphql-cli && npm install --save --save-exact prisma && prisma login --key eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjanNubXRxeTJpYm1nMDg2MTc0Z2tiZWZ1IiwiaWF0IjoxNTU1MjQwNjM5LCJleHAiOjE1NTc4MzI2Mzl9.iaiF26t-kB6yKipaIh7kh-J7s0moJ9kzxP9feKL8Tg0 && prisma deploy && tsc -p tsconfig.build.json",
+    "build": "npm i --save --save-exact graphql-cli && npm run update:graphql && tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
     "prestart:prod": "rimraf dist && npm run build",
     "start:prod": "node dist/src/main.js",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint": "tslint -p tsconfig.json -c tslint.json --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "update:prisma": "prisma deploy",
-    "update:graphql": "graphql get-schema --project database; graphql codegen --project database",
-    "update": "npm run update:prisma; npm run update:graphql",
-    "postinstall": "npm run prestart:prod"
+    "update:graphql": "graphql get-schema --project database && graphql codegen --project database",
+    "update": "npm run update:prisma && npm run update:graphql",
+    "dev": "source development.env && export $(cut -d= -f1 development.env) && npm run start:dev"
   },
   "dependencies": {
     "@nest-middlewares/express-session": "^5.1.1",
@@ -45,6 +42,7 @@
     "@nestjs/platform-fastify": "^6.0.2",
     "@nestjs/swagger": "^2.5.1",
     "@nestjs/websockets": "^5.4.0",
+    "@sendgrid/mail": "^6.4.0",
     "@types/dotenv": "^6.1.0",
     "@types/passport-twitter": "^1.0.34",
     "apollo-server-express": "^2.4.8",
@@ -57,6 +55,7 @@
     "google-auth-library": "^3.1.1",
     "graphql": "^14.1.1",
     "graphql-binding": "^2.5.1",
+    "graphql-cli": "3.0.14",
     "graphql-tools": "^4.0.4",
     "handlebars": "^4.1.1",
     "hbs": "^4.0.3",
@@ -70,6 +69,7 @@
     "passport-spotify": "^1.0.1",
     "passport-twitter": "^1.0.4",
     "point-of-view": "^3.1.1",
+    "prisma": "^1.32.2",
     "prisma-binding": "^2.3.3",
     "prisma-client-lib": "^1.27.3",
     "qs": "^6.7.0",
@@ -81,6 +81,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.9",
     "@nestjs/testing": "^5.4.0",
     "@types/bcrypt": "^3.0.0",
     "@types/cors": "^2.8.4",
@@ -95,7 +96,9 @@
     "@types/ramda": "^0.26.3",
     "@types/supertest": "^2.0.7",
     "graphql-config-extension-prisma": "^0.3.0",
+    "husky": "^2.3.0",
     "jest": "^23.6.0",
+    "lint-staged": "^8.1.7",
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3",
     "supertest": "^3.4.1",
@@ -118,5 +121,21 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "ignore": [
+      "src/prisma/**"
+    ],
+    "linters": {
+      "src/**/*.{ts,tsx}": [
+        "tslint --fix -p tsconfig.json -c tslint.json",
+        "git add"
+      ]
+    }
   }
 }

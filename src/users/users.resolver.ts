@@ -10,7 +10,7 @@ import {
 } from '@nestjs/graphql';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
-import { UseGuards, UnauthorizedException } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../guards/GqlAuthGuard.guard';
 import { SuccessMessage } from './user.types';
 import { randomBytes } from 'crypto';
@@ -21,7 +21,7 @@ import { MailerService } from '@nest-modules/mailer';
 import { GraphQLError } from 'graphql';
 
 function getResetPasswordRoute(resetToken: string) {
-  return `${process.env.WEB_URL}/reset-password?token=${resetToken}`;
+  return `${process.env.WEB_URL}/reset-password/${resetToken}`;
 }
 
 @Resolver()
@@ -91,6 +91,18 @@ export class UsersResolver {
     });
 
     try {
+      // using Twilio SendGrid's v3 Node.js Library
+      // https://github.com/sendgrid/sendgrid-nodejs
+      const sgMail = require('@sendgrid/mail');
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to: 'test@example.com',
+        from: 'test@example.com',
+        subject: 'Sending with Twilio SendGrid is Fun',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      };
+      sgMail.send(msg);
       await this.mailerService.sendMail({
         to: args.email,
         from: 'noreply@partyplanner.io',
@@ -112,7 +124,7 @@ export class UsersResolver {
   @Mutation('resetPassword')
   async resetPassword(@Args() args): Promise<AuthPayload> {
     if (args.password !== args.confirmPassword) {
-      throw new Error("Your passwords don't match!");
+      throw new Error('Your passwords don\'t match!');
     }
 
     const [user] = await this.prisma.query.users({

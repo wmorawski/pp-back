@@ -90,13 +90,15 @@ type Location {
 
 type Playlist {
   id: ID! @id
+  spotifyId: ID! @unique
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  playlist_id: String @unique
+  uri: String!
+  spotifyExternalUrl: String!
   user: User!
   parties: [Party!]!
   name: String!
-  tracks: [Track!]!
+  tracks: [PartySavedTrack!]!
   isTemporary: Boolean @default(value: true)
 }
 
@@ -134,7 +136,6 @@ type PartySavedTrack {
   previewUrl: String
   uri: String!
   party: Party!
-  spotifyExternalUrl: String!
   stringArtists: String!
   length: String!
   popularity: Int!

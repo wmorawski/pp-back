@@ -10,12 +10,12 @@ export interface Query {
     playlists: <T = Array<Playlist | null>>(args: { where?: PlaylistWhereInput | null, orderBy?: PlaylistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partyCarts: <T = Array<PartyCart | null>>(args: { where?: PartyCartWhereInput | null, orderBy?: PartyCartOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partyCartItems: <T = Array<PartyCartItem | null>>(args: { where?: PartyCartItemWhereInput | null, orderBy?: PartyCartItemOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    partySavedTracks: <T = Array<PartySavedTrack | null>>(args: { where?: PartySavedTrackWhereInput | null, orderBy?: PartySavedTrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    tracks: <T = Array<Track | null>>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     images: <T = Array<Image | null>>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     artists: <T = Array<Artist | null>>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     locations: <T = Array<Location | null>>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     games: <T = Array<Game | null>>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    tracks: <T = Array<Track | null>>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    partySavedTracks: <T = Array<PartySavedTrack | null>>(args: { where?: PartySavedTrackWhereInput | null, orderBy?: PartySavedTrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     parties: <T = Array<Party | null>>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     albums: <T = Array<Album | null>>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -25,12 +25,12 @@ export interface Query {
     playlist: <T = Playlist | null>(args: { where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     partyCart: <T = PartyCart | null>(args: { where: PartyCartWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     partyCartItem: <T = PartyCartItem | null>(args: { where: PartyCartItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    partySavedTrack: <T = PartySavedTrack | null>(args: { where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    track: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     image: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     artist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     game: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    track: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    partySavedTrack: <T = PartySavedTrack | null>(args: { where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     party: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     album: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -40,12 +40,12 @@ export interface Query {
     playlistsConnection: <T = PlaylistConnection>(args: { where?: PlaylistWhereInput | null, orderBy?: PlaylistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partyCartsConnection: <T = PartyCartConnection>(args: { where?: PartyCartWhereInput | null, orderBy?: PartyCartOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partyCartItemsConnection: <T = PartyCartItemConnection>(args: { where?: PartyCartItemWhereInput | null, orderBy?: PartyCartItemOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    partySavedTracksConnection: <T = PartySavedTrackConnection>(args: { where?: PartySavedTrackWhereInput | null, orderBy?: PartySavedTrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    tracksConnection: <T = TrackConnection>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     imagesConnection: <T = ImageConnection>(args: { where?: ImageWhereInput | null, orderBy?: ImageOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     artistsConnection: <T = ArtistConnection>(args: { where?: ArtistWhereInput | null, orderBy?: ArtistOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     locationsConnection: <T = LocationConnection>(args: { where?: LocationWhereInput | null, orderBy?: LocationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     gamesConnection: <T = GameConnection>(args: { where?: GameWhereInput | null, orderBy?: GameOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    tracksConnection: <T = TrackConnection>(args: { where?: TrackWhereInput | null, orderBy?: TrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    partySavedTracksConnection: <T = PartySavedTrackConnection>(args: { where?: PartySavedTrackWhereInput | null, orderBy?: PartySavedTrackOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     partiesConnection: <T = PartyConnection>(args: { where?: PartyWhereInput | null, orderBy?: PartyOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     albumsConnection: <T = AlbumConnection>(args: { where?: AlbumWhereInput | null, orderBy?: AlbumOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -59,12 +59,12 @@ export interface Mutation {
     createPlaylist: <T = Playlist>(args: { data: PlaylistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createPartyCart: <T = PartyCart>(args: { data: PartyCartCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createPartyCartItem: <T = PartyCartItem>(args: { data: PartyCartItemCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createPartySavedTrack: <T = PartySavedTrack>(args: { data: PartySavedTrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createTrack: <T = Track>(args: { data: TrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createImage: <T = Image>(args: { data: ImageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createArtist: <T = Artist>(args: { data: ArtistCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createGame: <T = Game>(args: { data: GameCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createTrack: <T = Track>(args: { data: TrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createPartySavedTrack: <T = PartySavedTrack>(args: { data: PartySavedTrackCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createParty: <T = Party>(args: { data: PartyCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createAlbum: <T = Album>(args: { data: AlbumCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -74,12 +74,12 @@ export interface Mutation {
     updatePlaylist: <T = Playlist | null>(args: { data: PlaylistUpdateInput, where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updatePartyCart: <T = PartyCart | null>(args: { data: PartyCartUpdateInput, where: PartyCartWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updatePartyCartItem: <T = PartyCartItem | null>(args: { data: PartyCartItemUpdateInput, where: PartyCartItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updatePartySavedTrack: <T = PartySavedTrack | null>(args: { data: PartySavedTrackUpdateInput, where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateTrack: <T = Track | null>(args: { data: TrackUpdateInput, where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateImage: <T = Image | null>(args: { data: ImageUpdateInput, where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateArtist: <T = Artist | null>(args: { data: ArtistUpdateInput, where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateGame: <T = Game | null>(args: { data: GameUpdateInput, where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateTrack: <T = Track | null>(args: { data: TrackUpdateInput, where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updatePartySavedTrack: <T = PartySavedTrack | null>(args: { data: PartySavedTrackUpdateInput, where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateParty: <T = Party | null>(args: { data: PartyUpdateInput, where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateAlbum: <T = Album | null>(args: { data: AlbumUpdateInput, where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -89,12 +89,12 @@ export interface Mutation {
     deletePlaylist: <T = Playlist | null>(args: { where: PlaylistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deletePartyCart: <T = PartyCart | null>(args: { where: PartyCartWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deletePartyCartItem: <T = PartyCartItem | null>(args: { where: PartyCartItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deletePartySavedTrack: <T = PartySavedTrack | null>(args: { where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteTrack: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteImage: <T = Image | null>(args: { where: ImageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteArtist: <T = Artist | null>(args: { where: ArtistWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteLocation: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteGame: <T = Game | null>(args: { where: GameWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteTrack: <T = Track | null>(args: { where: TrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deletePartySavedTrack: <T = PartySavedTrack | null>(args: { where: PartySavedTrackWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteParty: <T = Party | null>(args: { where: PartyWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteAlbum: <T = Album | null>(args: { where: AlbumWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
@@ -104,12 +104,12 @@ export interface Mutation {
     upsertPlaylist: <T = Playlist>(args: { where: PlaylistWhereUniqueInput, create: PlaylistCreateInput, update: PlaylistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertPartyCart: <T = PartyCart>(args: { where: PartyCartWhereUniqueInput, create: PartyCartCreateInput, update: PartyCartUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertPartyCartItem: <T = PartyCartItem>(args: { where: PartyCartItemWhereUniqueInput, create: PartyCartItemCreateInput, update: PartyCartItemUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertPartySavedTrack: <T = PartySavedTrack>(args: { where: PartySavedTrackWhereUniqueInput, create: PartySavedTrackCreateInput, update: PartySavedTrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertTrack: <T = Track>(args: { where: TrackWhereUniqueInput, create: TrackCreateInput, update: TrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertImage: <T = Image>(args: { where: ImageWhereUniqueInput, create: ImageCreateInput, update: ImageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertArtist: <T = Artist>(args: { where: ArtistWhereUniqueInput, create: ArtistCreateInput, update: ArtistUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertLocation: <T = Location>(args: { where: LocationWhereUniqueInput, create: LocationCreateInput, update: LocationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertGame: <T = Game>(args: { where: GameWhereUniqueInput, create: GameCreateInput, update: GameUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertTrack: <T = Track>(args: { where: TrackWhereUniqueInput, create: TrackCreateInput, update: TrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertPartySavedTrack: <T = PartySavedTrack>(args: { where: PartySavedTrackWhereUniqueInput, create: PartySavedTrackCreateInput, update: PartySavedTrackUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertParty: <T = Party>(args: { where: PartyWhereUniqueInput, create: PartyCreateInput, update: PartyUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertAlbum: <T = Album>(args: { where: AlbumWhereUniqueInput, create: AlbumCreateInput, update: AlbumUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -117,12 +117,12 @@ export interface Mutation {
     updateManyPartyInvitations: <T = BatchPayload>(args: { data: PartyInvitationUpdateManyMutationInput, where?: PartyInvitationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPlaylists: <T = BatchPayload>(args: { data: PlaylistUpdateManyMutationInput, where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPartyCartItems: <T = BatchPayload>(args: { data: PartyCartItemUpdateManyMutationInput, where?: PartyCartItemWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyPartySavedTracks: <T = BatchPayload>(args: { data: PartySavedTrackUpdateManyMutationInput, where?: PartySavedTrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyTracks: <T = BatchPayload>(args: { data: TrackUpdateManyMutationInput, where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyImages: <T = BatchPayload>(args: { data: ImageUpdateManyMutationInput, where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyArtists: <T = BatchPayload>(args: { data: ArtistUpdateManyMutationInput, where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyLocations: <T = BatchPayload>(args: { data: LocationUpdateManyMutationInput, where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyGames: <T = BatchPayload>(args: { data: GameUpdateManyMutationInput, where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyTracks: <T = BatchPayload>(args: { data: TrackUpdateManyMutationInput, where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyPartySavedTracks: <T = BatchPayload>(args: { data: PartySavedTrackUpdateManyMutationInput, where?: PartySavedTrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyParties: <T = BatchPayload>(args: { data: PartyUpdateManyMutationInput, where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyAlbums: <T = BatchPayload>(args: { data: AlbumUpdateManyMutationInput, where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -132,12 +132,12 @@ export interface Mutation {
     deleteManyPlaylists: <T = BatchPayload>(args: { where?: PlaylistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyPartyCarts: <T = BatchPayload>(args: { where?: PartyCartWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyPartyCartItems: <T = BatchPayload>(args: { where?: PartyCartItemWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyPartySavedTracks: <T = BatchPayload>(args: { where?: PartySavedTrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyTracks: <T = BatchPayload>(args: { where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyImages: <T = BatchPayload>(args: { where?: ImageWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyArtists: <T = BatchPayload>(args: { where?: ArtistWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyLocations: <T = BatchPayload>(args: { where?: LocationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyGames: <T = BatchPayload>(args: { where?: GameWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyTracks: <T = BatchPayload>(args: { where?: TrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyPartySavedTracks: <T = BatchPayload>(args: { where?: PartySavedTrackWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyParties: <T = BatchPayload>(args: { where?: PartyWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyAlbums: <T = BatchPayload>(args: { where?: AlbumWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
@@ -150,12 +150,12 @@ export interface Subscription {
     playlist: <T = PlaylistSubscriptionPayload | null>(args: { where?: PlaylistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     partyCart: <T = PartyCartSubscriptionPayload | null>(args: { where?: PartyCartSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     partyCartItem: <T = PartyCartItemSubscriptionPayload | null>(args: { where?: PartyCartItemSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    partySavedTrack: <T = PartySavedTrackSubscriptionPayload | null>(args: { where?: PartySavedTrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    track: <T = TrackSubscriptionPayload | null>(args: { where?: TrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     image: <T = ImageSubscriptionPayload | null>(args: { where?: ImageSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     artist: <T = ArtistSubscriptionPayload | null>(args: { where?: ArtistSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     location: <T = LocationSubscriptionPayload | null>(args: { where?: LocationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     game: <T = GameSubscriptionPayload | null>(args: { where?: GameSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    track: <T = TrackSubscriptionPayload | null>(args: { where?: TrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    partySavedTrack: <T = PartySavedTrackSubscriptionPayload | null>(args: { where?: PartySavedTrackSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     party: <T = PartySubscriptionPayload | null>(args: { where?: PartySubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     album: <T = AlbumSubscriptionPayload | null>(args: { where?: AlbumSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
@@ -168,12 +168,12 @@ export interface Exists {
   Playlist: (where?: PlaylistWhereInput) => Promise<boolean>
   PartyCart: (where?: PartyCartWhereInput) => Promise<boolean>
   PartyCartItem: (where?: PartyCartItemWhereInput) => Promise<boolean>
-  PartySavedTrack: (where?: PartySavedTrackWhereInput) => Promise<boolean>
+  Track: (where?: TrackWhereInput) => Promise<boolean>
   Image: (where?: ImageWhereInput) => Promise<boolean>
   Artist: (where?: ArtistWhereInput) => Promise<boolean>
   Location: (where?: LocationWhereInput) => Promise<boolean>
   Game: (where?: GameWhereInput) => Promise<boolean>
-  Track: (where?: TrackWhereInput) => Promise<boolean>
+  PartySavedTrack: (where?: PartySavedTrackWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
   Party: (where?: PartyWhereInput) => Promise<boolean>
   Album: (where?: AlbumWhereInput) => Promise<boolean>
@@ -3051,12 +3051,12 @@ type Mutation {
   createPlaylist(data: PlaylistCreateInput!): Playlist!
   createPartyCart(data: PartyCartCreateInput!): PartyCart!
   createPartyCartItem(data: PartyCartItemCreateInput!): PartyCartItem!
-  createPartySavedTrack(data: PartySavedTrackCreateInput!): PartySavedTrack!
+  createTrack(data: TrackCreateInput!): Track!
   createImage(data: ImageCreateInput!): Image!
   createArtist(data: ArtistCreateInput!): Artist!
   createLocation(data: LocationCreateInput!): Location!
   createGame(data: GameCreateInput!): Game!
-  createTrack(data: TrackCreateInput!): Track!
+  createPartySavedTrack(data: PartySavedTrackCreateInput!): PartySavedTrack!
   createUser(data: UserCreateInput!): User!
   createParty(data: PartyCreateInput!): Party!
   createAlbum(data: AlbumCreateInput!): Album!
@@ -3066,12 +3066,12 @@ type Mutation {
   updatePlaylist(data: PlaylistUpdateInput!, where: PlaylistWhereUniqueInput!): Playlist
   updatePartyCart(data: PartyCartUpdateInput!, where: PartyCartWhereUniqueInput!): PartyCart
   updatePartyCartItem(data: PartyCartItemUpdateInput!, where: PartyCartItemWhereUniqueInput!): PartyCartItem
-  updatePartySavedTrack(data: PartySavedTrackUpdateInput!, where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
+  updateTrack(data: TrackUpdateInput!, where: TrackWhereUniqueInput!): Track
   updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
   updateArtist(data: ArtistUpdateInput!, where: ArtistWhereUniqueInput!): Artist
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
-  updateTrack(data: TrackUpdateInput!, where: TrackWhereUniqueInput!): Track
+  updatePartySavedTrack(data: PartySavedTrackUpdateInput!, where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
   updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
@@ -3081,12 +3081,12 @@ type Mutation {
   deletePlaylist(where: PlaylistWhereUniqueInput!): Playlist
   deletePartyCart(where: PartyCartWhereUniqueInput!): PartyCart
   deletePartyCartItem(where: PartyCartItemWhereUniqueInput!): PartyCartItem
-  deletePartySavedTrack(where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
+  deleteTrack(where: TrackWhereUniqueInput!): Track
   deleteImage(where: ImageWhereUniqueInput!): Image
   deleteArtist(where: ArtistWhereUniqueInput!): Artist
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteGame(where: GameWhereUniqueInput!): Game
-  deleteTrack(where: TrackWhereUniqueInput!): Track
+  deletePartySavedTrack(where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
   deleteUser(where: UserWhereUniqueInput!): User
   deleteParty(where: PartyWhereUniqueInput!): Party
   deleteAlbum(where: AlbumWhereUniqueInput!): Album
@@ -3096,12 +3096,12 @@ type Mutation {
   upsertPlaylist(where: PlaylistWhereUniqueInput!, create: PlaylistCreateInput!, update: PlaylistUpdateInput!): Playlist!
   upsertPartyCart(where: PartyCartWhereUniqueInput!, create: PartyCartCreateInput!, update: PartyCartUpdateInput!): PartyCart!
   upsertPartyCartItem(where: PartyCartItemWhereUniqueInput!, create: PartyCartItemCreateInput!, update: PartyCartItemUpdateInput!): PartyCartItem!
-  upsertPartySavedTrack(where: PartySavedTrackWhereUniqueInput!, create: PartySavedTrackCreateInput!, update: PartySavedTrackUpdateInput!): PartySavedTrack!
+  upsertTrack(where: TrackWhereUniqueInput!, create: TrackCreateInput!, update: TrackUpdateInput!): Track!
   upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
   upsertArtist(where: ArtistWhereUniqueInput!, create: ArtistCreateInput!, update: ArtistUpdateInput!): Artist!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
-  upsertTrack(where: TrackWhereUniqueInput!, create: TrackCreateInput!, update: TrackUpdateInput!): Track!
+  upsertPartySavedTrack(where: PartySavedTrackWhereUniqueInput!, create: PartySavedTrackCreateInput!, update: PartySavedTrackUpdateInput!): PartySavedTrack!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertParty(where: PartyWhereUniqueInput!, create: PartyCreateInput!, update: PartyUpdateInput!): Party!
   upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
@@ -3109,12 +3109,12 @@ type Mutation {
   updateManyPartyInvitations(data: PartyInvitationUpdateManyMutationInput!, where: PartyInvitationWhereInput): BatchPayload!
   updateManyPlaylists(data: PlaylistUpdateManyMutationInput!, where: PlaylistWhereInput): BatchPayload!
   updateManyPartyCartItems(data: PartyCartItemUpdateManyMutationInput!, where: PartyCartItemWhereInput): BatchPayload!
-  updateManyPartySavedTracks(data: PartySavedTrackUpdateManyMutationInput!, where: PartySavedTrackWhereInput): BatchPayload!
+  updateManyTracks(data: TrackUpdateManyMutationInput!, where: TrackWhereInput): BatchPayload!
   updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
   updateManyArtists(data: ArtistUpdateManyMutationInput!, where: ArtistWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
-  updateManyTracks(data: TrackUpdateManyMutationInput!, where: TrackWhereInput): BatchPayload!
+  updateManyPartySavedTracks(data: PartySavedTrackUpdateManyMutationInput!, where: PartySavedTrackWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyParties(data: PartyUpdateManyMutationInput!, where: PartyWhereInput): BatchPayload!
   updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
@@ -3124,12 +3124,12 @@ type Mutation {
   deleteManyPlaylists(where: PlaylistWhereInput): BatchPayload!
   deleteManyPartyCarts(where: PartyCartWhereInput): BatchPayload!
   deleteManyPartyCartItems(where: PartyCartItemWhereInput): BatchPayload!
-  deleteManyPartySavedTracks(where: PartySavedTrackWhereInput): BatchPayload!
+  deleteManyTracks(where: TrackWhereInput): BatchPayload!
   deleteManyImages(where: ImageWhereInput): BatchPayload!
   deleteManyArtists(where: ArtistWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyGames(where: GameWhereInput): BatchPayload!
-  deleteManyTracks(where: TrackWhereInput): BatchPayload!
+  deleteManyPartySavedTracks(where: PartySavedTrackWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyParties(where: PartyWhereInput): BatchPayload!
   deleteManyAlbums(where: AlbumWhereInput): BatchPayload!
@@ -4596,6 +4596,11 @@ input PartySavedTrackCreateInput {
   album: AlbumCreateOneInput!
 }
 
+input PartySavedTrackCreateManyInput {
+  create: [PartySavedTrackCreateInput!]
+  connect: [PartySavedTrackWhereUniqueInput!]
+}
+
 input PartySavedTrackCreateManyWithoutPartyInput {
   create: [PartySavedTrackCreateWithoutPartyInput!]
   connect: [PartySavedTrackWhereUniqueInput!]
@@ -5038,6 +5043,20 @@ input PartySavedTrackSubscriptionWhereInput {
   node: PartySavedTrackWhereInput
 }
 
+input PartySavedTrackUpdateDataInput {
+  spotifyId: String
+  durationMs: Int
+  explicit: Boolean
+  name: String
+  previewUrl: String
+  uri: String
+  stringArtists: String
+  length: String
+  popularity: Int
+  party: PartyUpdateOneRequiredWithoutSavedTracksInput
+  album: AlbumUpdateOneRequiredInput
+}
+
 input PartySavedTrackUpdateInput {
   spotifyId: String
   durationMs: Int
@@ -5062,6 +5081,18 @@ input PartySavedTrackUpdateManyDataInput {
   stringArtists: String
   length: String
   popularity: Int
+}
+
+input PartySavedTrackUpdateManyInput {
+  create: [PartySavedTrackCreateInput!]
+  connect: [PartySavedTrackWhereUniqueInput!]
+  set: [PartySavedTrackWhereUniqueInput!]
+  disconnect: [PartySavedTrackWhereUniqueInput!]
+  delete: [PartySavedTrackWhereUniqueInput!]
+  update: [PartySavedTrackUpdateWithWhereUniqueNestedInput!]
+  updateMany: [PartySavedTrackUpdateManyWithWhereNestedInput!]
+  deleteMany: [PartySavedTrackScalarWhereInput!]
+  upsert: [PartySavedTrackUpsertWithWhereUniqueNestedInput!]
 }
 
 input PartySavedTrackUpdateManyMutationInput {
@@ -5106,9 +5137,20 @@ input PartySavedTrackUpdateWithoutPartyDataInput {
   album: AlbumUpdateOneRequiredInput
 }
 
+input PartySavedTrackUpdateWithWhereUniqueNestedInput {
+  where: PartySavedTrackWhereUniqueInput!
+  data: PartySavedTrackUpdateDataInput!
+}
+
 input PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
   where: PartySavedTrackWhereUniqueInput!
   data: PartySavedTrackUpdateWithoutPartyDataInput!
+}
+
+input PartySavedTrackUpsertWithWhereUniqueNestedInput {
+  where: PartySavedTrackWhereUniqueInput!
+  update: PartySavedTrackUpdateDataInput!
+  create: PartySavedTrackCreateInput!
 }
 
 input PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput {
@@ -6420,13 +6462,15 @@ input PartyWhereUniqueInput {
 
 type Playlist implements Node {
   id: ID!
+  spotifyId: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  playlist_id: String
+  uri: String!
+  spotifyExternalUrl: String!
   user: User!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   name: String!
-  tracks(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Track!]
+  tracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
   isTemporary: Boolean
 }
 
@@ -6442,12 +6486,14 @@ type PlaylistConnection {
 
 input PlaylistCreateInput {
   id: ID
-  playlist_id: String
+  spotifyId: ID!
+  uri: String!
+  spotifyExternalUrl: String!
   name: String!
   isTemporary: Boolean
   user: UserCreateOneInput!
   parties: PartyCreateManyWithoutPlaylistInput
-  tracks: TrackCreateManyInput
+  tracks: PartySavedTrackCreateManyInput
 }
 
 input PlaylistCreateOneWithoutPartiesInput {
@@ -6457,11 +6503,13 @@ input PlaylistCreateOneWithoutPartiesInput {
 
 input PlaylistCreateWithoutPartiesInput {
   id: ID
-  playlist_id: String
+  spotifyId: ID!
+  uri: String!
+  spotifyExternalUrl: String!
   name: String!
   isTemporary: Boolean
   user: UserCreateOneInput!
-  tracks: TrackCreateManyInput
+  tracks: PartySavedTrackCreateManyInput
 }
 
 """An edge in a connection."""
@@ -6476,12 +6524,16 @@ type PlaylistEdge {
 enum PlaylistOrderByInput {
   id_ASC
   id_DESC
+  spotifyId_ASC
+  spotifyId_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  playlist_id_ASC
-  playlist_id_DESC
+  uri_ASC
+  uri_DESC
+  spotifyExternalUrl_ASC
+  spotifyExternalUrl_DESC
   name_ASC
   name_DESC
   isTemporary_ASC
@@ -6490,9 +6542,11 @@ enum PlaylistOrderByInput {
 
 type PlaylistPreviousValues {
   id: ID!
+  spotifyId: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  playlist_id: String
+  uri: String!
+  spotifyExternalUrl: String!
   name: String!
   isTemporary: Boolean
 }
@@ -6537,16 +6591,20 @@ input PlaylistSubscriptionWhereInput {
 }
 
 input PlaylistUpdateInput {
-  playlist_id: String
+  spotifyId: ID
+  uri: String
+  spotifyExternalUrl: String
   name: String
   isTemporary: Boolean
   user: UserUpdateOneRequiredInput
   parties: PartyUpdateManyWithoutPlaylistInput
-  tracks: TrackUpdateManyInput
+  tracks: PartySavedTrackUpdateManyInput
 }
 
 input PlaylistUpdateManyMutationInput {
-  playlist_id: String
+  spotifyId: ID
+  uri: String
+  spotifyExternalUrl: String
   name: String
   isTemporary: Boolean
 }
@@ -6561,11 +6619,13 @@ input PlaylistUpdateOneWithoutPartiesInput {
 }
 
 input PlaylistUpdateWithoutPartiesDataInput {
-  playlist_id: String
+  spotifyId: ID
+  uri: String
+  spotifyExternalUrl: String
   name: String
   isTemporary: Boolean
   user: UserUpdateOneRequiredInput
-  tracks: TrackUpdateManyInput
+  tracks: PartySavedTrackUpdateManyInput
 }
 
 input PlaylistUpsertWithoutPartiesInput {
@@ -6622,6 +6682,46 @@ input PlaylistWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  spotifyId: ID
+
+  """All values that are not equal to given value."""
+  spotifyId_not: ID
+
+  """All values that are contained in given list."""
+  spotifyId_in: [ID!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [ID!]
+
+  """All values less than the given value."""
+  spotifyId_lt: ID
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: ID
+
+  """All values greater than the given value."""
+  spotifyId_gt: ID
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: ID
+
+  """All values containing the given string."""
+  spotifyId_contains: ID
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: ID
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: ID
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: ID
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: ID
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: ID
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -6666,46 +6766,86 @@ input PlaylistWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  playlist_id: String
+  uri: String
 
   """All values that are not equal to given value."""
-  playlist_id_not: String
+  uri_not: String
 
   """All values that are contained in given list."""
-  playlist_id_in: [String!]
+  uri_in: [String!]
 
   """All values that are not contained in given list."""
-  playlist_id_not_in: [String!]
+  uri_not_in: [String!]
 
   """All values less than the given value."""
-  playlist_id_lt: String
+  uri_lt: String
 
   """All values less than or equal the given value."""
-  playlist_id_lte: String
+  uri_lte: String
 
   """All values greater than the given value."""
-  playlist_id_gt: String
+  uri_gt: String
 
   """All values greater than or equal the given value."""
-  playlist_id_gte: String
+  uri_gte: String
 
   """All values containing the given string."""
-  playlist_id_contains: String
+  uri_contains: String
 
   """All values not containing the given string."""
-  playlist_id_not_contains: String
+  uri_not_contains: String
 
   """All values starting with the given string."""
-  playlist_id_starts_with: String
+  uri_starts_with: String
 
   """All values not starting with the given string."""
-  playlist_id_not_starts_with: String
+  uri_not_starts_with: String
 
   """All values ending with the given string."""
-  playlist_id_ends_with: String
+  uri_ends_with: String
 
   """All values not ending with the given string."""
-  playlist_id_not_ends_with: String
+  uri_not_ends_with: String
+  spotifyExternalUrl: String
+
+  """All values that are not equal to given value."""
+  spotifyExternalUrl_not: String
+
+  """All values that are contained in given list."""
+  spotifyExternalUrl_in: [String!]
+
+  """All values that are not contained in given list."""
+  spotifyExternalUrl_not_in: [String!]
+
+  """All values less than the given value."""
+  spotifyExternalUrl_lt: String
+
+  """All values less than or equal the given value."""
+  spotifyExternalUrl_lte: String
+
+  """All values greater than the given value."""
+  spotifyExternalUrl_gt: String
+
+  """All values greater than or equal the given value."""
+  spotifyExternalUrl_gte: String
+
+  """All values containing the given string."""
+  spotifyExternalUrl_contains: String
+
+  """All values not containing the given string."""
+  spotifyExternalUrl_not_contains: String
+
+  """All values starting with the given string."""
+  spotifyExternalUrl_starts_with: String
+
+  """All values not starting with the given string."""
+  spotifyExternalUrl_not_starts_with: String
+
+  """All values ending with the given string."""
+  spotifyExternalUrl_ends_with: String
+
+  """All values not ending with the given string."""
+  spotifyExternalUrl_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -6754,14 +6894,14 @@ input PlaylistWhereInput {
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput
-  tracks_every: TrackWhereInput
-  tracks_some: TrackWhereInput
-  tracks_none: TrackWhereInput
+  tracks_every: PartySavedTrackWhereInput
+  tracks_some: PartySavedTrackWhereInput
+  tracks_none: PartySavedTrackWhereInput
 }
 
 input PlaylistWhereUniqueInput {
   id: ID
-  playlist_id: String
+  spotifyId: ID
 }
 
 type Query {
@@ -6771,12 +6911,12 @@ type Query {
   playlists(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Playlist]!
   partyCarts(where: PartyCartWhereInput, orderBy: PartyCartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCart]!
   partyCartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem]!
-  partySavedTracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack]!
+  tracks(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Track]!
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   artists(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Artist]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
-  tracks(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Track]!
+  partySavedTracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party]!
   albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
@@ -6786,12 +6926,12 @@ type Query {
   playlist(where: PlaylistWhereUniqueInput!): Playlist
   partyCart(where: PartyCartWhereUniqueInput!): PartyCart
   partyCartItem(where: PartyCartItemWhereUniqueInput!): PartyCartItem
-  partySavedTrack(where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
+  track(where: TrackWhereUniqueInput!): Track
   image(where: ImageWhereUniqueInput!): Image
   artist(where: ArtistWhereUniqueInput!): Artist
   location(where: LocationWhereUniqueInput!): Location
   game(where: GameWhereUniqueInput!): Game
-  track(where: TrackWhereUniqueInput!): Track
+  partySavedTrack(where: PartySavedTrackWhereUniqueInput!): PartySavedTrack
   user(where: UserWhereUniqueInput!): User
   party(where: PartyWhereUniqueInput!): Party
   album(where: AlbumWhereUniqueInput!): Album
@@ -6801,12 +6941,12 @@ type Query {
   playlistsConnection(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaylistConnection!
   partyCartsConnection(where: PartyCartWhereInput, orderBy: PartyCartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyCartConnection!
   partyCartItemsConnection(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyCartItemConnection!
-  partySavedTracksConnection(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartySavedTrackConnection!
+  tracksConnection(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TrackConnection!
   imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
   artistsConnection(where: ArtistWhereInput, orderBy: ArtistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ArtistConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
-  tracksConnection(where: TrackWhereInput, orderBy: TrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TrackConnection!
+  partySavedTracksConnection(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartySavedTrackConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   partiesConnection(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyConnection!
   albumsConnection(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlbumConnection!
@@ -6831,12 +6971,12 @@ type Subscription {
   playlist(where: PlaylistSubscriptionWhereInput): PlaylistSubscriptionPayload
   partyCart(where: PartyCartSubscriptionWhereInput): PartyCartSubscriptionPayload
   partyCartItem(where: PartyCartItemSubscriptionWhereInput): PartyCartItemSubscriptionPayload
-  partySavedTrack(where: PartySavedTrackSubscriptionWhereInput): PartySavedTrackSubscriptionPayload
+  track(where: TrackSubscriptionWhereInput): TrackSubscriptionPayload
   image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
   artist(where: ArtistSubscriptionWhereInput): ArtistSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
-  track(where: TrackSubscriptionWhereInput): TrackSubscriptionPayload
+  partySavedTrack(where: PartySavedTrackSubscriptionWhereInput): PartySavedTrackSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
   album(where: AlbumSubscriptionWhereInput): AlbumSubscriptionPayload
@@ -6870,11 +7010,6 @@ input TrackCreateInput {
   artists: ArtistCreateManyInput
 }
 
-input TrackCreateManyInput {
-  create: [TrackCreateInput!]
-  connect: [TrackWhereUniqueInput!]
-}
-
 """An edge in a connection."""
 type TrackEdge {
   """The item at the end of the edge."""
@@ -6900,159 +7035,6 @@ type TrackPreviousValues {
   name: String!
   duration: Int!
   preview_url: String
-}
-
-input TrackScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [TrackScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [TrackScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [TrackScalarWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  duration: Int
-
-  """All values that are not equal to given value."""
-  duration_not: Int
-
-  """All values that are contained in given list."""
-  duration_in: [Int!]
-
-  """All values that are not contained in given list."""
-  duration_not_in: [Int!]
-
-  """All values less than the given value."""
-  duration_lt: Int
-
-  """All values less than or equal the given value."""
-  duration_lte: Int
-
-  """All values greater than the given value."""
-  duration_gt: Int
-
-  """All values greater than or equal the given value."""
-  duration_gte: Int
-  preview_url: String
-
-  """All values that are not equal to given value."""
-  preview_url_not: String
-
-  """All values that are contained in given list."""
-  preview_url_in: [String!]
-
-  """All values that are not contained in given list."""
-  preview_url_not_in: [String!]
-
-  """All values less than the given value."""
-  preview_url_lt: String
-
-  """All values less than or equal the given value."""
-  preview_url_lte: String
-
-  """All values greater than the given value."""
-  preview_url_gt: String
-
-  """All values greater than or equal the given value."""
-  preview_url_gte: String
-
-  """All values containing the given string."""
-  preview_url_contains: String
-
-  """All values not containing the given string."""
-  preview_url_not_contains: String
-
-  """All values starting with the given string."""
-  preview_url_starts_with: String
-
-  """All values not starting with the given string."""
-  preview_url_not_starts_with: String
-
-  """All values ending with the given string."""
-  preview_url_ends_with: String
-
-  """All values not ending with the given string."""
-  preview_url_not_ends_with: String
 }
 
 type TrackSubscriptionPayload {
@@ -7094,14 +7076,6 @@ input TrackSubscriptionWhereInput {
   node: TrackWhereInput
 }
 
-input TrackUpdateDataInput {
-  name: String
-  duration: Int
-  preview_url: String
-  album: AlbumUpdateOneRequiredInput
-  artists: ArtistUpdateManyInput
-}
-
 input TrackUpdateInput {
   name: String
   duration: Int
@@ -7110,44 +7084,10 @@ input TrackUpdateInput {
   artists: ArtistUpdateManyInput
 }
 
-input TrackUpdateManyDataInput {
-  name: String
-  duration: Int
-  preview_url: String
-}
-
-input TrackUpdateManyInput {
-  create: [TrackCreateInput!]
-  connect: [TrackWhereUniqueInput!]
-  set: [TrackWhereUniqueInput!]
-  disconnect: [TrackWhereUniqueInput!]
-  delete: [TrackWhereUniqueInput!]
-  update: [TrackUpdateWithWhereUniqueNestedInput!]
-  updateMany: [TrackUpdateManyWithWhereNestedInput!]
-  deleteMany: [TrackScalarWhereInput!]
-  upsert: [TrackUpsertWithWhereUniqueNestedInput!]
-}
-
 input TrackUpdateManyMutationInput {
   name: String
   duration: Int
   preview_url: String
-}
-
-input TrackUpdateManyWithWhereNestedInput {
-  where: TrackScalarWhereInput!
-  data: TrackUpdateManyDataInput!
-}
-
-input TrackUpdateWithWhereUniqueNestedInput {
-  where: TrackWhereUniqueInput!
-  data: TrackUpdateDataInput!
-}
-
-input TrackUpsertWithWhereUniqueNestedInput {
-  where: TrackWhereUniqueInput!
-  update: TrackUpdateDataInput!
-  create: TrackCreateInput!
 }
 
 input TrackWhereInput {
@@ -8811,12 +8751,16 @@ export type PartySavedTrackOrderByInput =   'id_ASC' |
 
 export type PlaylistOrderByInput =   'id_ASC' |
   'id_DESC' |
+  'spotifyId_ASC' |
+  'spotifyId_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
-  'playlist_id_ASC' |
-  'playlist_id_DESC' |
+  'uri_ASC' |
+  'uri_DESC' |
+  'spotifyExternalUrl_ASC' |
+  'spotifyExternalUrl_DESC' |
   'name_ASC' |
   'name_DESC' |
   'isTemporary_ASC' |
@@ -10668,6 +10612,11 @@ export interface PartySavedTrackCreateInput {
   album: AlbumCreateOneInput
 }
 
+export interface PartySavedTrackCreateManyInput {
+  create?: PartySavedTrackCreateInput[] | PartySavedTrackCreateInput | null
+  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput | null
+}
+
 export interface PartySavedTrackCreateManyWithoutPartyInput {
   create?: PartySavedTrackCreateWithoutPartyInput[] | PartySavedTrackCreateWithoutPartyInput | null
   connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput | null
@@ -10820,6 +10769,20 @@ export interface PartySavedTrackSubscriptionWhereInput {
   node?: PartySavedTrackWhereInput | null
 }
 
+export interface PartySavedTrackUpdateDataInput {
+  spotifyId?: String | null
+  durationMs?: Int | null
+  explicit?: Boolean | null
+  name?: String | null
+  previewUrl?: String | null
+  uri?: String | null
+  stringArtists?: String | null
+  length?: String | null
+  popularity?: Int | null
+  party?: PartyUpdateOneRequiredWithoutSavedTracksInput | null
+  album?: AlbumUpdateOneRequiredInput | null
+}
+
 export interface PartySavedTrackUpdateInput {
   spotifyId?: String | null
   durationMs?: Int | null
@@ -10844,6 +10807,18 @@ export interface PartySavedTrackUpdateManyDataInput {
   stringArtists?: String | null
   length?: String | null
   popularity?: Int | null
+}
+
+export interface PartySavedTrackUpdateManyInput {
+  create?: PartySavedTrackCreateInput[] | PartySavedTrackCreateInput | null
+  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput | null
+  set?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput | null
+  disconnect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput | null
+  delete?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput | null
+  update?: PartySavedTrackUpdateWithWhereUniqueNestedInput[] | PartySavedTrackUpdateWithWhereUniqueNestedInput | null
+  updateMany?: PartySavedTrackUpdateManyWithWhereNestedInput[] | PartySavedTrackUpdateManyWithWhereNestedInput | null
+  deleteMany?: PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput | null
+  upsert?: PartySavedTrackUpsertWithWhereUniqueNestedInput[] | PartySavedTrackUpsertWithWhereUniqueNestedInput | null
 }
 
 export interface PartySavedTrackUpdateManyMutationInput {
@@ -10888,9 +10863,20 @@ export interface PartySavedTrackUpdateWithoutPartyDataInput {
   album?: AlbumUpdateOneRequiredInput | null
 }
 
+export interface PartySavedTrackUpdateWithWhereUniqueNestedInput {
+  where: PartySavedTrackWhereUniqueInput
+  data: PartySavedTrackUpdateDataInput
+}
+
 export interface PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
   where: PartySavedTrackWhereUniqueInput
   data: PartySavedTrackUpdateWithoutPartyDataInput
+}
+
+export interface PartySavedTrackUpsertWithWhereUniqueNestedInput {
+  where: PartySavedTrackWhereUniqueInput
+  update: PartySavedTrackUpdateDataInput
+  create: PartySavedTrackCreateInput
 }
 
 export interface PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput {
@@ -11519,12 +11505,14 @@ export interface PartyWhereUniqueInput {
 
 export interface PlaylistCreateInput {
   id?: ID_Input | null
-  playlist_id?: String | null
+  spotifyId: ID_Output
+  uri: String
+  spotifyExternalUrl: String
   name: String
   isTemporary?: Boolean | null
   user: UserCreateOneInput
   parties?: PartyCreateManyWithoutPlaylistInput | null
-  tracks?: TrackCreateManyInput | null
+  tracks?: PartySavedTrackCreateManyInput | null
 }
 
 export interface PlaylistCreateOneWithoutPartiesInput {
@@ -11534,11 +11522,13 @@ export interface PlaylistCreateOneWithoutPartiesInput {
 
 export interface PlaylistCreateWithoutPartiesInput {
   id?: ID_Input | null
-  playlist_id?: String | null
+  spotifyId: ID_Output
+  uri: String
+  spotifyExternalUrl: String
   name: String
   isTemporary?: Boolean | null
   user: UserCreateOneInput
-  tracks?: TrackCreateManyInput | null
+  tracks?: PartySavedTrackCreateManyInput | null
 }
 
 export interface PlaylistSubscriptionWhereInput {
@@ -11553,16 +11543,20 @@ export interface PlaylistSubscriptionWhereInput {
 }
 
 export interface PlaylistUpdateInput {
-  playlist_id?: String | null
+  spotifyId?: ID_Input | null
+  uri?: String | null
+  spotifyExternalUrl?: String | null
   name?: String | null
   isTemporary?: Boolean | null
   user?: UserUpdateOneRequiredInput | null
   parties?: PartyUpdateManyWithoutPlaylistInput | null
-  tracks?: TrackUpdateManyInput | null
+  tracks?: PartySavedTrackUpdateManyInput | null
 }
 
 export interface PlaylistUpdateManyMutationInput {
-  playlist_id?: String | null
+  spotifyId?: ID_Input | null
+  uri?: String | null
+  spotifyExternalUrl?: String | null
   name?: String | null
   isTemporary?: Boolean | null
 }
@@ -11577,11 +11571,13 @@ export interface PlaylistUpdateOneWithoutPartiesInput {
 }
 
 export interface PlaylistUpdateWithoutPartiesDataInput {
-  playlist_id?: String | null
+  spotifyId?: ID_Input | null
+  uri?: String | null
+  spotifyExternalUrl?: String | null
   name?: String | null
   isTemporary?: Boolean | null
   user?: UserUpdateOneRequiredInput | null
-  tracks?: TrackUpdateManyInput | null
+  tracks?: PartySavedTrackUpdateManyInput | null
 }
 
 export interface PlaylistUpsertWithoutPartiesInput {
@@ -11607,6 +11603,20 @@ export interface PlaylistWhereInput {
   id_not_starts_with?: ID_Input | null
   id_ends_with?: ID_Input | null
   id_not_ends_with?: ID_Input | null
+  spotifyId?: ID_Input | null
+  spotifyId_not?: ID_Input | null
+  spotifyId_in?: ID_Output[] | ID_Output | null
+  spotifyId_not_in?: ID_Output[] | ID_Output | null
+  spotifyId_lt?: ID_Input | null
+  spotifyId_lte?: ID_Input | null
+  spotifyId_gt?: ID_Input | null
+  spotifyId_gte?: ID_Input | null
+  spotifyId_contains?: ID_Input | null
+  spotifyId_not_contains?: ID_Input | null
+  spotifyId_starts_with?: ID_Input | null
+  spotifyId_not_starts_with?: ID_Input | null
+  spotifyId_ends_with?: ID_Input | null
+  spotifyId_not_ends_with?: ID_Input | null
   createdAt?: DateTime | null
   createdAt_not?: DateTime | null
   createdAt_in?: DateTime[] | DateTime | null
@@ -11623,20 +11633,34 @@ export interface PlaylistWhereInput {
   updatedAt_lte?: DateTime | null
   updatedAt_gt?: DateTime | null
   updatedAt_gte?: DateTime | null
-  playlist_id?: String | null
-  playlist_id_not?: String | null
-  playlist_id_in?: String[] | String | null
-  playlist_id_not_in?: String[] | String | null
-  playlist_id_lt?: String | null
-  playlist_id_lte?: String | null
-  playlist_id_gt?: String | null
-  playlist_id_gte?: String | null
-  playlist_id_contains?: String | null
-  playlist_id_not_contains?: String | null
-  playlist_id_starts_with?: String | null
-  playlist_id_not_starts_with?: String | null
-  playlist_id_ends_with?: String | null
-  playlist_id_not_ends_with?: String | null
+  uri?: String | null
+  uri_not?: String | null
+  uri_in?: String[] | String | null
+  uri_not_in?: String[] | String | null
+  uri_lt?: String | null
+  uri_lte?: String | null
+  uri_gt?: String | null
+  uri_gte?: String | null
+  uri_contains?: String | null
+  uri_not_contains?: String | null
+  uri_starts_with?: String | null
+  uri_not_starts_with?: String | null
+  uri_ends_with?: String | null
+  uri_not_ends_with?: String | null
+  spotifyExternalUrl?: String | null
+  spotifyExternalUrl_not?: String | null
+  spotifyExternalUrl_in?: String[] | String | null
+  spotifyExternalUrl_not_in?: String[] | String | null
+  spotifyExternalUrl_lt?: String | null
+  spotifyExternalUrl_lte?: String | null
+  spotifyExternalUrl_gt?: String | null
+  spotifyExternalUrl_gte?: String | null
+  spotifyExternalUrl_contains?: String | null
+  spotifyExternalUrl_not_contains?: String | null
+  spotifyExternalUrl_starts_with?: String | null
+  spotifyExternalUrl_not_starts_with?: String | null
+  spotifyExternalUrl_ends_with?: String | null
+  spotifyExternalUrl_not_ends_with?: String | null
   name?: String | null
   name_not?: String | null
   name_in?: String[] | String | null
@@ -11657,14 +11681,14 @@ export interface PlaylistWhereInput {
   parties_every?: PartyWhereInput | null
   parties_some?: PartyWhereInput | null
   parties_none?: PartyWhereInput | null
-  tracks_every?: TrackWhereInput | null
-  tracks_some?: TrackWhereInput | null
-  tracks_none?: TrackWhereInput | null
+  tracks_every?: PartySavedTrackWhereInput | null
+  tracks_some?: PartySavedTrackWhereInput | null
+  tracks_none?: PartySavedTrackWhereInput | null
 }
 
 export interface PlaylistWhereUniqueInput {
   id?: ID_Input | null
-  playlist_id?: String | null
+  spotifyId?: ID_Input | null
 }
 
 export interface TrackCreateInput {
@@ -11674,67 +11698,6 @@ export interface TrackCreateInput {
   preview_url?: String | null
   album: AlbumCreateOneInput
   artists?: ArtistCreateManyInput | null
-}
-
-export interface TrackCreateManyInput {
-  create?: TrackCreateInput[] | TrackCreateInput | null
-  connect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
-}
-
-export interface TrackScalarWhereInput {
-  AND?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
-  OR?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
-  NOT?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
-  id?: ID_Input | null
-  id_not?: ID_Input | null
-  id_in?: ID_Output[] | ID_Output | null
-  id_not_in?: ID_Output[] | ID_Output | null
-  id_lt?: ID_Input | null
-  id_lte?: ID_Input | null
-  id_gt?: ID_Input | null
-  id_gte?: ID_Input | null
-  id_contains?: ID_Input | null
-  id_not_contains?: ID_Input | null
-  id_starts_with?: ID_Input | null
-  id_not_starts_with?: ID_Input | null
-  id_ends_with?: ID_Input | null
-  id_not_ends_with?: ID_Input | null
-  name?: String | null
-  name_not?: String | null
-  name_in?: String[] | String | null
-  name_not_in?: String[] | String | null
-  name_lt?: String | null
-  name_lte?: String | null
-  name_gt?: String | null
-  name_gte?: String | null
-  name_contains?: String | null
-  name_not_contains?: String | null
-  name_starts_with?: String | null
-  name_not_starts_with?: String | null
-  name_ends_with?: String | null
-  name_not_ends_with?: String | null
-  duration?: Int | null
-  duration_not?: Int | null
-  duration_in?: Int[] | Int | null
-  duration_not_in?: Int[] | Int | null
-  duration_lt?: Int | null
-  duration_lte?: Int | null
-  duration_gt?: Int | null
-  duration_gte?: Int | null
-  preview_url?: String | null
-  preview_url_not?: String | null
-  preview_url_in?: String[] | String | null
-  preview_url_not_in?: String[] | String | null
-  preview_url_lt?: String | null
-  preview_url_lte?: String | null
-  preview_url_gt?: String | null
-  preview_url_gte?: String | null
-  preview_url_contains?: String | null
-  preview_url_not_contains?: String | null
-  preview_url_starts_with?: String | null
-  preview_url_not_starts_with?: String | null
-  preview_url_ends_with?: String | null
-  preview_url_not_ends_with?: String | null
 }
 
 export interface TrackSubscriptionWhereInput {
@@ -11748,14 +11711,6 @@ export interface TrackSubscriptionWhereInput {
   node?: TrackWhereInput | null
 }
 
-export interface TrackUpdateDataInput {
-  name?: String | null
-  duration?: Int | null
-  preview_url?: String | null
-  album?: AlbumUpdateOneRequiredInput | null
-  artists?: ArtistUpdateManyInput | null
-}
-
 export interface TrackUpdateInput {
   name?: String | null
   duration?: Int | null
@@ -11764,44 +11719,10 @@ export interface TrackUpdateInput {
   artists?: ArtistUpdateManyInput | null
 }
 
-export interface TrackUpdateManyDataInput {
-  name?: String | null
-  duration?: Int | null
-  preview_url?: String | null
-}
-
-export interface TrackUpdateManyInput {
-  create?: TrackCreateInput[] | TrackCreateInput | null
-  connect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
-  set?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
-  disconnect?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
-  delete?: TrackWhereUniqueInput[] | TrackWhereUniqueInput | null
-  update?: TrackUpdateWithWhereUniqueNestedInput[] | TrackUpdateWithWhereUniqueNestedInput | null
-  updateMany?: TrackUpdateManyWithWhereNestedInput[] | TrackUpdateManyWithWhereNestedInput | null
-  deleteMany?: TrackScalarWhereInput[] | TrackScalarWhereInput | null
-  upsert?: TrackUpsertWithWhereUniqueNestedInput[] | TrackUpsertWithWhereUniqueNestedInput | null
-}
-
 export interface TrackUpdateManyMutationInput {
   name?: String | null
   duration?: Int | null
   preview_url?: String | null
-}
-
-export interface TrackUpdateManyWithWhereNestedInput {
-  where: TrackScalarWhereInput
-  data: TrackUpdateManyDataInput
-}
-
-export interface TrackUpdateWithWhereUniqueNestedInput {
-  where: TrackWhereUniqueInput
-  data: TrackUpdateDataInput
-}
-
-export interface TrackUpsertWithWhereUniqueNestedInput {
-  where: TrackWhereUniqueInput
-  update: TrackUpdateDataInput
-  create: TrackCreateInput
 }
 
 export interface TrackWhereInput {
@@ -13158,13 +13079,15 @@ export interface PartySubscriptionPayload {
 
 export interface Playlist extends Node {
   id: ID_Output
+  spotifyId: ID_Output
   createdAt: DateTime
   updatedAt: DateTime
-  playlist_id?: String | null
+  uri: String
+  spotifyExternalUrl: String
   user: User
   parties?: Array<Party> | null
   name: String
-  tracks?: Array<Track> | null
+  tracks?: Array<PartySavedTrack> | null
   isTemporary?: Boolean | null
 }
 
@@ -13189,9 +13112,11 @@ export interface PlaylistEdge {
 
 export interface PlaylistPreviousValues {
   id: ID_Output
+  spotifyId: ID_Output
   createdAt: DateTime
   updatedAt: DateTime
-  playlist_id?: String | null
+  uri: String
+  spotifyExternalUrl: String
   name: String
   isTemporary?: Boolean | null
 }

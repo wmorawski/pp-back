@@ -657,20 +657,6 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type PartyCartItemOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "price_ASC"
-  | "price_DESC"
-  | "quantity_ASC"
-  | "quantity_DESC";
-
-export type SocialMediaType = "FACEBOOK" | "SPOTIFY" | "TWITTER";
-
 export type PartySavedTrackOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -692,6 +678,28 @@ export type PartySavedTrackOrderByInput =
   | "length_DESC"
   | "popularity_ASC"
   | "popularity_DESC";
+
+export type SocialMediaType = "FACEBOOK" | "SPOTIFY" | "TWITTER";
+
+export type PlaylistOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "spotifyId_ASC"
+  | "spotifyId_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "uri_ASC"
+  | "uri_DESC"
+  | "spotifyExternalUrl_ASC"
+  | "spotifyExternalUrl_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "imageUrl_ASC"
+  | "imageUrl_DESC"
+  | "isTemporary_ASC"
+  | "isTemporary_DESC";
 
 export type TrackOrderByInput =
   | "id_ASC"
@@ -739,19 +747,15 @@ export type ChatOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type LocationOrderByInput =
+export type ImageOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "placeName_ASC"
-  | "placeName_DESC"
-  | "latitude_ASC"
-  | "latitude_DESC"
-  | "longitude_ASC"
-  | "longitude_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | "height_ASC"
+  | "height_DESC"
+  | "width_ASC"
+  | "width_DESC"
+  | "url_ASC"
+  | "url_DESC";
 
 export type PartyInvitationOrderByInput =
   | "id_ASC"
@@ -763,15 +767,17 @@ export type PartyInvitationOrderByInput =
   | "createdAt_ASC"
   | "createdAt_DESC";
 
-export type MessageOrderByInput =
+export type PartyCartItemOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "content_ASC"
-  | "content_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
+  | "name_ASC"
+  | "name_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "price_ASC"
+  | "price_DESC"
+  | "quantity_ASC"
+  | "quantity_DESC";
 
 export type GameType = "BOARD" | "PC" | "CONSOLE";
 
@@ -841,97 +847,49 @@ export type ArtistOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type ImageOrderByInput =
+export type MessageOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "height_ASC"
-  | "height_DESC"
-  | "width_ASC"
-  | "width_DESC"
-  | "url_ASC"
-  | "url_DESC";
-
-export type PartyCartOrderByInput = "id_ASC" | "id_DESC";
-
-export type PlaylistOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "spotifyId_ASC"
-  | "spotifyId_DESC"
+  | "content_ASC"
+  | "content_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "uri_ASC"
-  | "uri_DESC"
-  | "spotifyExternalUrl_ASC"
-  | "spotifyExternalUrl_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "isTemporary_ASC"
-  | "isTemporary_DESC";
+  | "updatedAt_DESC";
 
-export interface PartySavedTrackUpdateWithWhereUniqueNestedInput {
-  where: PartySavedTrackWhereUniqueInput;
-  data: PartySavedTrackUpdateDataInput;
+export type LocationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "placeName_ASC"
+  | "placeName_DESC"
+  | "latitude_ASC"
+  | "latitude_DESC"
+  | "longitude_ASC"
+  | "longitude_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type PartyCartOrderByInput = "id_ASC" | "id_DESC";
+
+export interface PartySavedTrackUpdateDataInput {
+  spotifyId?: String;
+  durationMs?: Int;
+  explicit?: Boolean;
+  name?: String;
+  previewUrl?: String;
+  uri?: String;
+  party?: PartyUpdateOneRequiredWithoutSavedTracksInput;
+  stringArtists?: String;
+  length?: String;
+  popularity?: Int;
+  album?: AlbumUpdateOneRequiredInput;
 }
 
 export type AlbumWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
-
-export interface UserCreateWithoutFriendsInput {
-  id?: ID_Input;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  parties?: PartyCreateManyWithoutMembersInput;
-  pendingFriendInvitations?: UserCreateManyWithoutPendingFriendInvitationsInput;
-  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput;
-  chats?: ChatCreateManyWithoutMembersInput;
-  lastOnline?: DateTimeInput;
-  deleted?: Boolean;
-  provider?: SocialMediaType;
-  avatar?: String;
-  thirdPartyId?: String;
-  resetToken?: String;
-  resetTokenExpiry?: DateTimeInput;
-}
-
-export interface ChatUpdateOneRequiredWithoutMessagesInput {
-  create?: ChatCreateWithoutMessagesInput;
-  update?: ChatUpdateWithoutMessagesDataInput;
-  upsert?: ChatUpsertWithoutMessagesInput;
-  connect?: ChatWhereUniqueInput;
-}
-
-export interface UserCreateManyWithoutPendingFriendInvitationsInput {
-  create?:
-    | UserCreateWithoutPendingFriendInvitationsInput[]
-    | UserCreateWithoutPendingFriendInvitationsInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-}
-
-export interface UserUpdateManyWithoutPendingFriendInvitationsInput {
-  create?:
-    | UserCreateWithoutPendingFriendInvitationsInput[]
-    | UserCreateWithoutPendingFriendInvitationsInput;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  update?:
-    | UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput[]
-    | UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput;
-  upsert?:
-    | UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput[]
-    | UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
-  updateMany?:
-    | UserUpdateManyWithWhereNestedInput[]
-    | UserUpdateManyWithWhereNestedInput;
-}
 
 export interface UserCreateWithoutPendingFriendInvitationsInput {
   id?: ID_Input;
@@ -950,6 +908,33 @@ export interface UserCreateWithoutPendingFriendInvitationsInput {
   thirdPartyId?: String;
   resetToken?: String;
   resetTokenExpiry?: DateTimeInput;
+}
+
+export interface ChatUpdateOneRequiredWithoutMessagesInput {
+  create?: ChatCreateWithoutMessagesInput;
+  update?: ChatUpdateWithoutMessagesDataInput;
+  upsert?: ChatUpsertWithoutMessagesInput;
+  connect?: ChatWhereUniqueInput;
+}
+
+export interface PartyInvitationCreateManyWithoutUserInput {
+  create?:
+    | PartyInvitationCreateWithoutUserInput[]
+    | PartyInvitationCreateWithoutUserInput;
+  connect?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutPendingFriendInvitationsDataInput;
+}
+
+export interface PartyInvitationCreateWithoutUserInput {
+  id?: ID_Input;
+  invitedBy: UserCreateOneInput;
+  party: PartyCreateOneInput;
+  invitedUserId: String;
+  partyId: String;
 }
 
 export interface PartyWhereInput {
@@ -1079,7 +1064,9 @@ export interface PartyWhereInput {
   inviteSecret_not_starts_with?: String;
   inviteSecret_ends_with?: String;
   inviteSecret_not_ends_with?: String;
-  playlist?: PlaylistWhereInput;
+  playlist_every?: PlaylistWhereInput;
+  playlist_some?: PlaylistWhereInput;
+  playlist_none?: PlaylistWhereInput;
   savedTracks_every?: PartySavedTrackWhereInput;
   savedTracks_some?: PartySavedTrackWhereInput;
   savedTracks_none?: PartySavedTrackWhereInput;
@@ -1089,11 +1076,9 @@ export interface PartyWhereInput {
   NOT?: PartyWhereInput[] | PartyWhereInput;
 }
 
-export interface PartyInvitationCreateManyWithoutUserInput {
-  create?:
-    | PartyInvitationCreateWithoutUserInput[]
-    | PartyInvitationCreateWithoutUserInput;
-  connect?: PartyInvitationWhereUniqueInput[] | PartyInvitationWhereUniqueInput;
+export interface ChatCreateManyWithoutMembersInput {
+  create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput;
+  connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput;
 }
 
 export interface PartyInvitationWhereInput {
@@ -1155,12 +1140,10 @@ export interface PartyInvitationWhereInput {
   NOT?: PartyInvitationWhereInput[] | PartyInvitationWhereInput;
 }
 
-export interface PartyInvitationCreateWithoutUserInput {
+export interface ChatCreateWithoutMembersInput {
   id?: ID_Input;
-  invitedBy: UserCreateOneInput;
   party: PartyCreateOneInput;
-  invitedUserId: String;
-  partyId: String;
+  messages?: MessageCreateManyWithoutChatInput;
 }
 
 export interface ChatWhereInput {
@@ -1206,19 +1189,19 @@ export interface ChatWhereInput {
   NOT?: ChatWhereInput[] | ChatWhereInput;
 }
 
-export interface ChatCreateManyWithoutMembersInput {
-  create?: ChatCreateWithoutMembersInput[] | ChatCreateWithoutMembersInput;
-  connect?: ChatWhereUniqueInput[] | ChatWhereUniqueInput;
+export interface MessageCreateManyWithoutChatInput {
+  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput;
+  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
 }
 
 export type ChatWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface ChatCreateWithoutMembersInput {
+export interface MessageCreateWithoutChatInput {
   id?: ID_Input;
-  party: PartyCreateOneInput;
-  messages?: MessageCreateManyWithoutChatInput;
+  author: UserCreateOneInput;
+  content: String;
 }
 
 export interface PlaylistSubscriptionWhereInput {
@@ -1232,9 +1215,9 @@ export interface PlaylistSubscriptionWhereInput {
   NOT?: PlaylistSubscriptionWhereInput[] | PlaylistSubscriptionWhereInput;
 }
 
-export interface MessageCreateManyWithoutChatInput {
-  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput;
-  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+export interface PartyCartCreateOneWithoutPartyInput {
+  create?: PartyCartCreateWithoutPartyInput;
+  connect?: PartyCartWhereUniqueInput;
 }
 
 export interface PartySavedTrackSubscriptionWhereInput {
@@ -1254,10 +1237,9 @@ export interface PartySavedTrackSubscriptionWhereInput {
     | PartySavedTrackSubscriptionWhereInput;
 }
 
-export interface MessageCreateWithoutChatInput {
+export interface PartyCartCreateWithoutPartyInput {
   id?: ID_Input;
-  author: UserCreateOneInput;
-  content: String;
+  items?: PartyCartItemCreateManyWithoutCartInput;
 }
 
 export interface PartySavedTrackWhereInput {
@@ -1384,9 +1366,11 @@ export interface PartySavedTrackWhereInput {
   NOT?: PartySavedTrackWhereInput[] | PartySavedTrackWhereInput;
 }
 
-export interface PartyCartCreateOneWithoutPartyInput {
-  create?: PartyCartCreateWithoutPartyInput;
-  connect?: PartyCartWhereUniqueInput;
+export interface PartyCartItemCreateManyWithoutCartInput {
+  create?:
+    | PartyCartItemCreateWithoutCartInput[]
+    | PartyCartItemCreateWithoutCartInput;
+  connect?: PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput;
 }
 
 export interface PartyCartItemWhereInput {
@@ -1455,9 +1439,13 @@ export interface PartyCartItemWhereInput {
   NOT?: PartyCartItemWhereInput[] | PartyCartItemWhereInput;
 }
 
-export interface PartyCartCreateWithoutPartyInput {
+export interface PartyCartItemCreateWithoutCartInput {
   id?: ID_Input;
-  items?: PartyCartItemCreateManyWithoutCartInput;
+  user?: UserCreateOneInput;
+  name: String;
+  description: String;
+  price: Float;
+  quantity?: Int;
 }
 
 export interface PartyCartItemSubscriptionWhereInput {
@@ -1477,11 +1465,9 @@ export interface PartyCartItemSubscriptionWhereInput {
     | PartyCartItemSubscriptionWhereInput;
 }
 
-export interface PartyCartItemCreateManyWithoutCartInput {
-  create?:
-    | PartyCartItemCreateWithoutCartInput[]
-    | PartyCartItemCreateWithoutCartInput;
-  connect?: PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput;
+export interface AlbumCreateOneInput {
+  create?: AlbumCreateInput;
+  connect?: AlbumWhereUniqueInput;
 }
 
 export interface PartyCartSubscriptionWhereInput {
@@ -1495,13 +1481,11 @@ export interface PartyCartSubscriptionWhereInput {
   NOT?: PartyCartSubscriptionWhereInput[] | PartyCartSubscriptionWhereInput;
 }
 
-export interface PartyCartItemCreateWithoutCartInput {
-  id?: ID_Input;
-  user?: UserCreateOneInput;
-  name: String;
-  description: String;
-  price: Float;
-  quantity?: Int;
+export interface PartySavedTrackCreateManyWithoutPartyInput {
+  create?:
+    | PartySavedTrackCreateWithoutPartyInput[]
+    | PartySavedTrackCreateWithoutPartyInput;
+  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
 }
 
 export interface MessageSubscriptionWhereInput {
@@ -1513,40 +1497,6 @@ export interface MessageSubscriptionWhereInput {
   AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
   OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
   NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput;
-}
-
-export interface AlbumCreateOneInput {
-  create?: AlbumCreateInput;
-  connect?: AlbumWhereUniqueInput;
-}
-
-export interface LocationSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: LocationWhereInput;
-  AND?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput;
-  OR?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput;
-  NOT?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput;
-}
-
-export interface PartySavedTrackCreateManyWithoutPartyInput {
-  create?:
-    | PartySavedTrackCreateWithoutPartyInput[]
-    | PartySavedTrackCreateWithoutPartyInput;
-  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
-}
-
-export interface GameSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: GameWhereInput;
-  AND?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
-  OR?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
-  NOT?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
 }
 
 export interface PartySavedTrackCreateWithoutPartyInput {
@@ -1563,15 +1513,15 @@ export interface PartySavedTrackCreateWithoutPartyInput {
   album: AlbumCreateOneInput;
 }
 
-export interface ArtistSubscriptionWhereInput {
+export interface LocationSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: ArtistWhereInput;
-  AND?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput;
-  OR?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput;
-  NOT?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput;
+  node?: LocationWhereInput;
+  AND?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput;
+  OR?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput;
+  NOT?: LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput;
 }
 
 export interface UserCreateManyWithoutChatsInput {
@@ -1579,18 +1529,15 @@ export interface UserCreateManyWithoutChatsInput {
   connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
 }
 
-export interface UserUpdateManyMutationInput {
-  email?: String;
-  firstName?: String;
-  lastName?: String;
-  password?: String;
-  lastOnline?: DateTimeInput;
-  deleted?: Boolean;
-  provider?: SocialMediaType;
-  avatar?: String;
-  thirdPartyId?: String;
-  resetToken?: String;
-  resetTokenExpiry?: DateTimeInput;
+export interface GameSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: GameWhereInput;
+  AND?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
+  OR?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
+  NOT?: GameSubscriptionWhereInput[] | GameSubscriptionWhereInput;
 }
 
 export interface UserCreateWithoutChatsInput {
@@ -1612,10 +1559,15 @@ export interface UserCreateWithoutChatsInput {
   resetTokenExpiry?: DateTimeInput;
 }
 
-export interface TrackUpdateManyMutationInput {
-  name?: String;
-  duration?: Int;
-  preview_url?: String;
+export interface ArtistSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ArtistWhereInput;
+  AND?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput;
+  OR?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput;
+  NOT?: ArtistSubscriptionWhereInput[] | ArtistSubscriptionWhereInput;
 }
 
 export interface ChatUpdateInput {
@@ -1624,9 +1576,18 @@ export interface ChatUpdateInput {
   messages?: MessageUpdateManyWithoutChatInput;
 }
 
-export interface ArtistUpdateManyWithWhereNestedInput {
-  where: ArtistScalarWhereInput;
-  data: ArtistUpdateManyDataInput;
+export interface UserUpdateManyMutationInput {
+  email?: String;
+  firstName?: String;
+  lastName?: String;
+  password?: String;
+  lastOnline?: DateTimeInput;
+  deleted?: Boolean;
+  provider?: SocialMediaType;
+  avatar?: String;
+  thirdPartyId?: String;
+  resetToken?: String;
+  resetTokenExpiry?: DateTimeInput;
 }
 
 export interface PartyUpdateOneRequiredInput {
@@ -1636,10 +1597,11 @@ export interface PartyUpdateOneRequiredInput {
   connect?: PartyWhereUniqueInput;
 }
 
-export type GameWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  title?: String;
-}>;
+export interface TrackUpdateManyMutationInput {
+  name?: String;
+  duration?: Int;
+  preview_url?: String;
+}
 
 export interface PartyUpdateDataInput {
   title?: String;
@@ -1654,15 +1616,14 @@ export interface PartyUpdateDataInput {
   start?: DateTimeInput;
   end?: DateTimeInput;
   inviteSecret?: String;
-  playlist?: PlaylistUpdateOneWithoutPartiesInput;
+  playlist?: PlaylistUpdateManyWithoutPartiesInput;
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput;
   cart?: PartyCartUpdateOneWithoutPartyInput;
 }
 
-export interface ArtistUpdateDataInput {
-  spotifyId?: ID_Input;
-  uri?: String;
-  name?: String;
+export interface ArtistUpdateManyWithWhereNestedInput {
+  where: ArtistScalarWhereInput;
+  data: ArtistUpdateManyDataInput;
 }
 
 export interface UserUpdateOneRequiredInput {
@@ -1672,9 +1633,11 @@ export interface UserUpdateOneRequiredInput {
   connect?: UserWhereUniqueInput;
 }
 
-export type ImageWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
+export interface ArtistUpsertWithWhereUniqueNestedInput {
+  where: ArtistWhereUniqueInput;
+  update: ArtistUpdateDataInput;
+  create: ArtistCreateInput;
+}
 
 export interface UserUpdateDataInput {
   email?: String;
@@ -1695,54 +1658,10 @@ export interface UserUpdateDataInput {
   resetTokenExpiry?: DateTimeInput;
 }
 
-export interface ImageWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  height?: Int;
-  height_not?: Int;
-  height_in?: Int[] | Int;
-  height_not_in?: Int[] | Int;
-  height_lt?: Int;
-  height_lte?: Int;
-  height_gt?: Int;
-  height_gte?: Int;
-  width?: Int;
-  width_not?: Int;
-  width_in?: Int[] | Int;
-  width_not_in?: Int[] | Int;
-  width_lt?: Int;
-  width_lte?: Int;
-  width_gt?: Int;
-  width_gte?: Int;
-  url?: String;
-  url_not?: String;
-  url_in?: String[] | String;
-  url_not_in?: String[] | String;
-  url_lt?: String;
-  url_lte?: String;
-  url_gt?: String;
-  url_gte?: String;
-  url_contains?: String;
-  url_not_contains?: String;
-  url_starts_with?: String;
-  url_not_starts_with?: String;
-  url_ends_with?: String;
-  url_not_ends_with?: String;
-  AND?: ImageWhereInput[] | ImageWhereInput;
-  OR?: ImageWhereInput[] | ImageWhereInput;
-  NOT?: ImageWhereInput[] | ImageWhereInput;
+export interface ArtistUpdateDataInput {
+  spotifyId?: ID_Input;
+  uri?: String;
+  name?: String;
 }
 
 export interface PartyUpdateManyWithoutMembersInput {
@@ -1763,9 +1682,22 @@ export interface PartyUpdateManyWithoutMembersInput {
     | PartyUpdateManyWithWhereNestedInput;
 }
 
-export interface ArtistCreateManyInput {
+export interface ArtistUpdateManyInput {
   create?: ArtistCreateInput[] | ArtistCreateInput;
+  update?:
+    | ArtistUpdateWithWhereUniqueNestedInput[]
+    | ArtistUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | ArtistUpsertWithWhereUniqueNestedInput[]
+    | ArtistUpsertWithWhereUniqueNestedInput;
+  delete?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
   connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
+  set?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
+  disconnect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
+  deleteMany?: ArtistScalarWhereInput[] | ArtistScalarWhereInput;
+  updateMany?:
+    | ArtistUpdateManyWithWhereNestedInput[]
+    | ArtistUpdateManyWithWhereNestedInput;
 }
 
 export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -1773,12 +1705,12 @@ export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
   data: PartyUpdateWithoutMembersDataInput;
 }
 
-export interface PlaylistUpdateManyMutationInput {
-  spotifyId?: ID_Input;
-  uri?: String;
-  spotifyExternalUrl?: String;
+export interface TrackUpdateInput {
   name?: String;
-  isTemporary?: Boolean;
+  album?: AlbumUpdateOneRequiredInput;
+  artists?: ArtistUpdateManyInput;
+  duration?: Int;
+  preview_url?: String;
 }
 
 export interface PartyUpdateWithoutMembersDataInput {
@@ -1793,15 +1725,14 @@ export interface PartyUpdateWithoutMembersDataInput {
   start?: DateTimeInput;
   end?: DateTimeInput;
   inviteSecret?: String;
-  playlist?: PlaylistUpdateOneWithoutPartiesInput;
+  playlist?: PlaylistUpdateManyWithoutPartiesInput;
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput;
   cart?: PartyCartUpdateOneWithoutPartyInput;
 }
 
-export interface PartyUpsertWithWhereUniqueWithoutPlaylistInput {
-  where: PartyWhereUniqueInput;
-  update: PartyUpdateWithoutPlaylistDataInput;
-  create: PartyCreateWithoutPlaylistInput;
+export interface ArtistCreateManyInput {
+  create?: ArtistCreateInput[] | ArtistCreateInput;
+  connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
 }
 
 export interface LocationUpdateOneRequiredInput {
@@ -1811,9 +1742,13 @@ export interface LocationUpdateOneRequiredInput {
   connect?: LocationWhereUniqueInput;
 }
 
-export interface PartyUpdateWithWhereUniqueWithoutPlaylistInput {
-  where: PartyWhereUniqueInput;
-  data: PartyUpdateWithoutPlaylistDataInput;
+export interface PlaylistUpdateManyMutationInput {
+  spotifyId?: ID_Input;
+  uri?: String;
+  spotifyExternalUrl?: String;
+  name?: String;
+  imageUrl?: String;
+  isTemporary?: Boolean;
 }
 
 export interface LocationUpdateDataInput {
@@ -1822,7 +1757,7 @@ export interface LocationUpdateDataInput {
   longitude?: Float;
 }
 
-export type MessageWhereUniqueInput = AtLeastOne<{
+export type LocationWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
@@ -1831,22 +1766,9 @@ export interface LocationUpsertNestedInput {
   create: LocationCreateInput;
 }
 
-export interface PartyCreateWithoutPlaylistInput {
-  id?: ID_Input;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: GameCreateManyInput;
-  colorTint: String;
-  isPublic?: Boolean;
-  members?: UserCreateManyWithoutPartiesInput;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  inviteSecret: String;
-  savedTracks?: PartySavedTrackCreateManyWithoutPartyInput;
-  cart?: PartyCartCreateOneWithoutPartyInput;
+export interface PartyUpdateWithWhereUniqueWithoutPlaylistInput {
+  where: PartyWhereUniqueInput;
+  data: PartyUpdateWithoutPlaylistDataInput;
 }
 
 export interface GameUpdateManyInput {
@@ -1867,14 +1789,64 @@ export interface GameUpdateManyInput {
     | GameUpdateManyWithWhereNestedInput;
 }
 
-export type PartyWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  inviteSecret?: String;
-}>;
+export interface PlaylistUpdateInput {
+  spotifyId?: ID_Input;
+  uri?: String;
+  spotifyExternalUrl?: String;
+  user?: UserUpdateOneRequiredInput;
+  parties?: PartyUpdateManyWithoutPlaylistInput;
+  name?: String;
+  imageUrl?: String;
+  tracks?: PartySavedTrackUpdateManyInput;
+  isTemporary?: Boolean;
+}
 
 export interface GameUpdateWithWhereUniqueNestedInput {
   where: GameWhereUniqueInput;
   data: GameUpdateDataInput;
+}
+
+export interface PartyCreateWithoutPlaylistInput {
+  id?: ID_Input;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  author: UserCreateOneInput;
+  location: LocationCreateOneInput;
+  games?: GameCreateManyInput;
+  colorTint: String;
+  isPublic?: Boolean;
+  members?: UserCreateManyWithoutPartiesInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  inviteSecret: String;
+  savedTracks?: PartySavedTrackCreateManyWithoutPartyInput;
+  cart?: PartyCartCreateOneWithoutPartyInput;
+}
+
+export interface GameUpdateDataInput {
+  title?: String;
+  cover?: String;
+  type?: GameType;
+}
+
+export interface PlaylistCreateInput {
+  id?: ID_Input;
+  spotifyId: ID_Input;
+  uri: String;
+  spotifyExternalUrl: String;
+  user: UserCreateOneInput;
+  parties?: PartyCreateManyWithoutPlaylistInput;
+  name: String;
+  imageUrl: String;
+  tracks?: PartySavedTrackCreateManyInput;
+  isTemporary?: Boolean;
+}
+
+export interface GameUpsertWithWhereUniqueNestedInput {
+  where: GameWhereUniqueInput;
+  update: GameUpdateDataInput;
+  create: GameCreateInput;
 }
 
 export interface PartySavedTrackUpdateManyMutationInput {
@@ -1887,27 +1859,6 @@ export interface PartySavedTrackUpdateManyMutationInput {
   stringArtists?: String;
   length?: String;
   popularity?: Int;
-}
-
-export interface GameUpdateDataInput {
-  title?: String;
-  cover?: String;
-  type?: GameType;
-}
-
-export type PartyCartWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface GameUpsertWithWhereUniqueNestedInput {
-  where: GameWhereUniqueInput;
-  update: GameUpdateDataInput;
-  create: GameCreateInput;
-}
-
-export interface UserUpsertWithoutPendingPartyInvitationsInput {
-  update: UserUpdateWithoutPendingPartyInvitationsDataInput;
-  create: UserCreateWithoutPendingPartyInvitationsInput;
 }
 
 export interface GameScalarWhereInput {
@@ -1978,122 +1929,14 @@ export interface GameScalarWhereInput {
   NOT?: GameScalarWhereInput[] | GameScalarWhereInput;
 }
 
-export interface UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
-  create?: UserCreateWithoutPendingPartyInvitationsInput;
-  update?: UserUpdateWithoutPendingPartyInvitationsDataInput;
-  upsert?: UserUpsertWithoutPendingPartyInvitationsInput;
-  connect?: UserWhereUniqueInput;
+export interface PartyInvitationUpdateManyMutationInput {
+  invitedUserId?: String;
+  partyId?: String;
 }
 
 export interface GameUpdateManyWithWhereNestedInput {
   where: GameScalarWhereInput;
   data: GameUpdateManyDataInput;
-}
-
-export interface PartyInvitationUpdateInput {
-  invitedBy?: UserUpdateOneRequiredInput;
-  user?: UserUpdateOneRequiredWithoutPendingPartyInvitationsInput;
-  party?: PartyUpdateOneRequiredInput;
-  invitedUserId?: String;
-  partyId?: String;
-}
-
-export interface GameUpdateManyDataInput {
-  title?: String;
-  cover?: String;
-  type?: GameType;
-}
-
-export interface UserCreateOneWithoutPendingPartyInvitationsInput {
-  create?: UserCreateWithoutPendingPartyInvitationsInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface PlaylistUpdateOneWithoutPartiesInput {
-  create?: PlaylistCreateWithoutPartiesInput;
-  update?: PlaylistUpdateWithoutPartiesDataInput;
-  upsert?: PlaylistUpsertWithoutPartiesInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: PlaylistWhereUniqueInput;
-}
-
-export interface PartyInvitationCreateInput {
-  id?: ID_Input;
-  invitedBy: UserCreateOneInput;
-  user: UserCreateOneWithoutPendingPartyInvitationsInput;
-  party: PartyCreateOneInput;
-  invitedUserId: String;
-  partyId: String;
-}
-
-export interface PlaylistUpdateWithoutPartiesDataInput {
-  spotifyId?: ID_Input;
-  uri?: String;
-  spotifyExternalUrl?: String;
-  user?: UserUpdateOneRequiredInput;
-  name?: String;
-  tracks?: PartySavedTrackUpdateManyInput;
-  isTemporary?: Boolean;
-}
-
-export interface PartyCartUpsertWithoutItemsInput {
-  update: PartyCartUpdateWithoutItemsDataInput;
-  create: PartyCartCreateWithoutItemsInput;
-}
-
-export interface PartySavedTrackUpdateManyInput {
-  create?: PartySavedTrackCreateInput[] | PartySavedTrackCreateInput;
-  update?:
-    | PartySavedTrackUpdateWithWhereUniqueNestedInput[]
-    | PartySavedTrackUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | PartySavedTrackUpsertWithWhereUniqueNestedInput[]
-    | PartySavedTrackUpsertWithWhereUniqueNestedInput;
-  delete?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
-  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
-  set?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
-  disconnect?:
-    | PartySavedTrackWhereUniqueInput[]
-    | PartySavedTrackWhereUniqueInput;
-  deleteMany?:
-    | PartySavedTrackScalarWhereInput[]
-    | PartySavedTrackScalarWhereInput;
-  updateMany?:
-    | PartySavedTrackUpdateManyWithWhereNestedInput[]
-    | PartySavedTrackUpdateManyWithWhereNestedInput;
-}
-
-export interface PartyCartUpdateWithoutItemsDataInput {
-  party?: PartyUpdateOneRequiredWithoutCartInput;
-}
-
-export interface ChatUpsertWithoutMessagesInput {
-  update: ChatUpdateWithoutMessagesDataInput;
-  create: ChatCreateWithoutMessagesInput;
-}
-
-export interface PartyCartItemUpdateInput {
-  cart?: PartyCartUpdateOneRequiredWithoutItemsInput;
-  user?: UserUpdateOneInput;
-  name?: String;
-  description?: String;
-  price?: Float;
-  quantity?: Int;
-}
-
-export interface PartySavedTrackUpdateDataInput {
-  spotifyId?: String;
-  durationMs?: Int;
-  explicit?: Boolean;
-  name?: String;
-  previewUrl?: String;
-  uri?: String;
-  party?: PartyUpdateOneRequiredWithoutSavedTracksInput;
-  stringArtists?: String;
-  length?: String;
-  popularity?: Int;
-  album?: AlbumUpdateOneRequiredInput;
 }
 
 export interface AlbumWhereInput {
@@ -2186,6 +2029,143 @@ export interface AlbumWhereInput {
   NOT?: AlbumWhereInput[] | AlbumWhereInput;
 }
 
+export interface GameUpdateManyDataInput {
+  title?: String;
+  cover?: String;
+  type?: GameType;
+}
+
+export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
+  email?: String;
+  firstName?: String;
+  lastName?: String;
+  password?: String;
+  parties?: PartyUpdateManyWithoutMembersInput;
+  friends?: UserUpdateManyWithoutFriendsInput;
+  pendingFriendInvitations?: UserUpdateManyWithoutPendingFriendInvitationsInput;
+  chats?: ChatUpdateManyWithoutMembersInput;
+  lastOnline?: DateTimeInput;
+  deleted?: Boolean;
+  provider?: SocialMediaType;
+  avatar?: String;
+  thirdPartyId?: String;
+  resetToken?: String;
+  resetTokenExpiry?: DateTimeInput;
+}
+
+export interface PlaylistUpdateManyWithoutPartiesInput {
+  create?:
+    | PlaylistCreateWithoutPartiesInput[]
+    | PlaylistCreateWithoutPartiesInput;
+  delete?: PlaylistWhereUniqueInput[] | PlaylistWhereUniqueInput;
+  connect?: PlaylistWhereUniqueInput[] | PlaylistWhereUniqueInput;
+  set?: PlaylistWhereUniqueInput[] | PlaylistWhereUniqueInput;
+  disconnect?: PlaylistWhereUniqueInput[] | PlaylistWhereUniqueInput;
+  update?:
+    | PlaylistUpdateWithWhereUniqueWithoutPartiesInput[]
+    | PlaylistUpdateWithWhereUniqueWithoutPartiesInput;
+  upsert?:
+    | PlaylistUpsertWithWhereUniqueWithoutPartiesInput[]
+    | PlaylistUpsertWithWhereUniqueWithoutPartiesInput;
+  deleteMany?: PlaylistScalarWhereInput[] | PlaylistScalarWhereInput;
+  updateMany?:
+    | PlaylistUpdateManyWithWhereNestedInput[]
+    | PlaylistUpdateManyWithWhereNestedInput;
+}
+
+export type PartyCartItemWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface PlaylistUpdateWithWhereUniqueWithoutPartiesInput {
+  where: PlaylistWhereUniqueInput;
+  data: PlaylistUpdateWithoutPartiesDataInput;
+}
+
+export interface UserCreateWithoutPendingPartyInvitationsInput {
+  id?: ID_Input;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  parties?: PartyCreateManyWithoutMembersInput;
+  friends?: UserCreateManyWithoutFriendsInput;
+  pendingFriendInvitations?: UserCreateManyWithoutPendingFriendInvitationsInput;
+  chats?: ChatCreateManyWithoutMembersInput;
+  lastOnline?: DateTimeInput;
+  deleted?: Boolean;
+  provider?: SocialMediaType;
+  avatar?: String;
+  thirdPartyId?: String;
+  resetToken?: String;
+  resetTokenExpiry?: DateTimeInput;
+}
+
+export interface PlaylistUpdateWithoutPartiesDataInput {
+  spotifyId?: ID_Input;
+  uri?: String;
+  spotifyExternalUrl?: String;
+  user?: UserUpdateOneRequiredInput;
+  name?: String;
+  imageUrl?: String;
+  tracks?: PartySavedTrackUpdateManyInput;
+  isTemporary?: Boolean;
+}
+
+export type PartyInvitationWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface PartySavedTrackUpdateManyInput {
+  create?: PartySavedTrackCreateInput[] | PartySavedTrackCreateInput;
+  update?:
+    | PartySavedTrackUpdateWithWhereUniqueNestedInput[]
+    | PartySavedTrackUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | PartySavedTrackUpsertWithWhereUniqueNestedInput[]
+    | PartySavedTrackUpsertWithWhereUniqueNestedInput;
+  delete?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
+  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
+  set?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
+  disconnect?:
+    | PartySavedTrackWhereUniqueInput[]
+    | PartySavedTrackWhereUniqueInput;
+  deleteMany?:
+    | PartySavedTrackScalarWhereInput[]
+    | PartySavedTrackScalarWhereInput;
+  updateMany?:
+    | PartySavedTrackUpdateManyWithWhereNestedInput[]
+    | PartySavedTrackUpdateManyWithWhereNestedInput;
+}
+
+export interface PartyCartItemUpdateManyMutationInput {
+  name?: String;
+  description?: String;
+  price?: Float;
+  quantity?: Int;
+}
+
+export interface PartySavedTrackUpdateWithWhereUniqueNestedInput {
+  where: PartySavedTrackWhereUniqueInput;
+  data: PartySavedTrackUpdateDataInput;
+}
+
+export type PartySavedTrackWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface ChatUpsertWithoutMessagesInput {
+  update: ChatUpdateWithoutMessagesDataInput;
+  create: ChatCreateWithoutMessagesInput;
+}
+
+export interface PartyCartUpdateOneRequiredWithoutItemsInput {
+  create?: PartyCartCreateWithoutItemsInput;
+  update?: PartyCartUpdateWithoutItemsDataInput;
+  upsert?: PartyCartUpsertWithoutItemsInput;
+  connect?: PartyCartWhereUniqueInput;
+}
+
 export interface PartyUpdateOneRequiredWithoutSavedTracksInput {
   create?: PartyCreateWithoutSavedTracksInput;
   update?: PartyUpdateWithoutSavedTracksDataInput;
@@ -2193,10 +2173,10 @@ export interface PartyUpdateOneRequiredWithoutSavedTracksInput {
   connect?: PartyWhereUniqueInput;
 }
 
-export interface PartyCartCreateOneWithoutItemsInput {
-  create?: PartyCartCreateWithoutItemsInput;
-  connect?: PartyCartWhereUniqueInput;
-}
+export type PlaylistWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  spotifyId?: ID_Input;
+}>;
 
 export interface PartyUpdateWithoutSavedTracksDataInput {
   title?: String;
@@ -2211,13 +2191,14 @@ export interface PartyUpdateWithoutSavedTracksDataInput {
   start?: DateTimeInput;
   end?: DateTimeInput;
   inviteSecret?: String;
-  playlist?: PlaylistUpdateOneWithoutPartiesInput;
+  playlist?: PlaylistUpdateManyWithoutPartiesInput;
   cart?: PartyCartUpdateOneWithoutPartyInput;
 }
 
-export type TrackWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
+export interface PartyCartCreateOneWithoutItemsInput {
+  create?: PartyCartCreateWithoutItemsInput;
+  connect?: PartyCartWhereUniqueInput;
+}
 
 export interface UserUpdateManyWithoutPartiesInput {
   create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput;
@@ -2235,6 +2216,15 @@ export interface UserUpdateManyWithoutPartiesInput {
   updateMany?:
     | UserUpdateManyWithWhereNestedInput[]
     | UserUpdateManyWithWhereNestedInput;
+}
+
+export type TrackWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface UserUpdateWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutPartiesDataInput;
 }
 
 export interface TrackWhereInput {
@@ -2297,18 +2287,6 @@ export interface TrackWhereInput {
   NOT?: TrackWhereInput[] | TrackWhereInput;
 }
 
-export interface UserUpdateWithWhereUniqueWithoutPartiesInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutPartiesDataInput;
-}
-
-export interface PartyUpdateOneRequiredWithoutCartInput {
-  create?: PartyCreateWithoutCartInput;
-  update?: PartyUpdateWithoutCartDataInput;
-  upsert?: PartyUpsertWithoutCartInput;
-  connect?: PartyWhereUniqueInput;
-}
-
 export interface UserUpdateWithoutPartiesDataInput {
   email?: String;
   firstName?: String;
@@ -2327,22 +2305,11 @@ export interface UserUpdateWithoutPartiesDataInput {
   resetTokenExpiry?: DateTimeInput;
 }
 
-export interface PartyCreateWithoutCartInput {
-  id?: ID_Input;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: GameCreateManyInput;
-  colorTint: String;
-  isPublic?: Boolean;
-  members?: UserCreateManyWithoutPartiesInput;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  inviteSecret: String;
-  playlist?: PlaylistCreateOneWithoutPartiesInput;
-  savedTracks?: PartySavedTrackCreateManyWithoutPartyInput;
+export interface PartyUpdateOneRequiredWithoutCartInput {
+  create?: PartyCreateWithoutCartInput;
+  update?: PartyUpdateWithoutCartDataInput;
+  upsert?: PartyUpsertWithoutCartInput;
+  connect?: PartyWhereUniqueInput;
 }
 
 export interface UserUpdateManyWithoutFriendsInput {
@@ -2363,9 +2330,22 @@ export interface UserUpdateManyWithoutFriendsInput {
     | UserUpdateManyWithWhereNestedInput;
 }
 
-export interface PartyCreateOneWithoutCartInput {
-  create?: PartyCreateWithoutCartInput;
-  connect?: PartyWhereUniqueInput;
+export interface PartyCreateWithoutCartInput {
+  id?: ID_Input;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  author: UserCreateOneInput;
+  location: LocationCreateOneInput;
+  games?: GameCreateManyInput;
+  colorTint: String;
+  isPublic?: Boolean;
+  members?: UserCreateManyWithoutPartiesInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  inviteSecret: String;
+  playlist?: PlaylistCreateManyWithoutPartiesInput;
+  savedTracks?: PartySavedTrackCreateManyWithoutPartyInput;
 }
 
 export interface UserUpdateWithWhereUniqueWithoutFriendsInput {
@@ -2373,15 +2353,9 @@ export interface UserUpdateWithWhereUniqueWithoutFriendsInput {
   data: UserUpdateWithoutFriendsDataInput;
 }
 
-export interface PartyUpdateManyMutationInput {
-  title?: String;
-  normalizedTitle?: String;
-  description?: String;
-  colorTint?: String;
-  isPublic?: Boolean;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  inviteSecret?: String;
+export interface PartyCreateOneWithoutCartInput {
+  create?: PartyCreateWithoutCartInput;
+  connect?: PartyWhereUniqueInput;
 }
 
 export interface UserUpdateWithoutFriendsDataInput {
@@ -2400,6 +2374,37 @@ export interface UserUpdateWithoutFriendsDataInput {
   thirdPartyId?: String;
   resetToken?: String;
   resetTokenExpiry?: DateTimeInput;
+}
+
+export interface PartyUpdateManyMutationInput {
+  title?: String;
+  normalizedTitle?: String;
+  description?: String;
+  colorTint?: String;
+  isPublic?: Boolean;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  inviteSecret?: String;
+}
+
+export interface UserUpdateManyWithoutPendingFriendInvitationsInput {
+  create?:
+    | UserCreateWithoutPendingFriendInvitationsInput[]
+    | UserCreateWithoutPendingFriendInvitationsInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  update?:
+    | UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput[]
+    | UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput[]
+    | UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
 }
 
 export interface AlbumCreateInput {
@@ -2424,15 +2429,6 @@ export interface AlbumUpdateManyMutationInput {
   imageUrl?: String;
 }
 
-export interface UserUpdateWithWhereUniqueWithoutPendingFriendInvitationsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutPendingFriendInvitationsDataInput;
-}
-
-export interface MessageUpdateManyMutationInput {
-  content?: String;
-}
-
 export interface UserUpdateWithoutPendingFriendInvitationsDataInput {
   email?: String;
   firstName?: String;
@@ -2451,10 +2447,8 @@ export interface UserUpdateWithoutPendingFriendInvitationsDataInput {
   resetTokenExpiry?: DateTimeInput;
 }
 
-export interface ArtistUpdateInput {
-  spotifyId?: ID_Input;
-  uri?: String;
-  name?: String;
+export interface MessageUpdateManyMutationInput {
+  content?: String;
 }
 
 export interface PartyInvitationUpdateManyWithoutUserInput {
@@ -2481,6 +2475,17 @@ export interface PartyInvitationUpdateManyWithoutUserInput {
     | PartyInvitationUpdateManyWithWhereNestedInput;
 }
 
+export interface ArtistUpdateInput {
+  spotifyId?: ID_Input;
+  uri?: String;
+  name?: String;
+}
+
+export interface PartyInvitationUpdateWithWhereUniqueWithoutUserInput {
+  where: PartyInvitationWhereUniqueInput;
+  data: PartyInvitationUpdateWithoutUserDataInput;
+}
+
 export interface ChatCreateInput {
   id?: ID_Input;
   party: PartyCreateOneInput;
@@ -2488,9 +2493,11 @@ export interface ChatCreateInput {
   messages?: MessageCreateManyWithoutChatInput;
 }
 
-export interface PartyInvitationUpdateWithWhereUniqueWithoutUserInput {
-  where: PartyInvitationWhereUniqueInput;
-  data: PartyInvitationUpdateWithoutUserDataInput;
+export interface PartyInvitationUpdateWithoutUserDataInput {
+  invitedBy?: UserUpdateOneRequiredInput;
+  party?: PartyUpdateOneRequiredInput;
+  invitedUserId?: String;
+  partyId?: String;
 }
 
 export interface PartyCreateInput {
@@ -2507,16 +2514,15 @@ export interface PartyCreateInput {
   start?: DateTimeInput;
   end?: DateTimeInput;
   inviteSecret: String;
-  playlist?: PlaylistCreateOneWithoutPartiesInput;
+  playlist?: PlaylistCreateManyWithoutPartiesInput;
   savedTracks?: PartySavedTrackCreateManyWithoutPartyInput;
   cart?: PartyCartCreateOneWithoutPartyInput;
 }
 
-export interface PartyInvitationUpdateWithoutUserDataInput {
-  invitedBy?: UserUpdateOneRequiredInput;
-  party?: PartyUpdateOneRequiredInput;
-  invitedUserId?: String;
-  partyId?: String;
+export interface PartyInvitationUpsertWithWhereUniqueWithoutUserInput {
+  where: PartyInvitationWhereUniqueInput;
+  update: PartyInvitationUpdateWithoutUserDataInput;
+  create: PartyInvitationCreateWithoutUserInput;
 }
 
 export interface UserCreateInput {
@@ -2537,30 +2543,6 @@ export interface UserCreateInput {
   thirdPartyId?: String;
   resetToken?: String;
   resetTokenExpiry?: DateTimeInput;
-}
-
-export interface PartyInvitationUpsertWithWhereUniqueWithoutUserInput {
-  where: PartyInvitationWhereUniqueInput;
-  update: PartyInvitationUpdateWithoutUserDataInput;
-  create: PartyInvitationCreateWithoutUserInput;
-}
-
-export interface PartyCreateWithoutMembersInput {
-  id?: ID_Input;
-  title: String;
-  normalizedTitle: String;
-  description: String;
-  author: UserCreateOneInput;
-  location: LocationCreateOneInput;
-  games?: GameCreateManyInput;
-  colorTint: String;
-  isPublic?: Boolean;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  inviteSecret: String;
-  playlist?: PlaylistCreateOneWithoutPartiesInput;
-  savedTracks?: PartySavedTrackCreateManyWithoutPartyInput;
-  cart?: PartyCartCreateOneWithoutPartyInput;
 }
 
 export interface PartyInvitationScalarWhereInput {
@@ -2619,11 +2601,22 @@ export interface PartyInvitationScalarWhereInput {
   NOT?: PartyInvitationScalarWhereInput[] | PartyInvitationScalarWhereInput;
 }
 
-export interface LocationCreateInput {
+export interface PartyCreateWithoutMembersInput {
   id?: ID_Input;
-  placeName: String;
-  latitude: Float;
-  longitude: Float;
+  title: String;
+  normalizedTitle: String;
+  description: String;
+  author: UserCreateOneInput;
+  location: LocationCreateOneInput;
+  games?: GameCreateManyInput;
+  colorTint: String;
+  isPublic?: Boolean;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  inviteSecret: String;
+  playlist?: PlaylistCreateManyWithoutPartiesInput;
+  savedTracks?: PartySavedTrackCreateManyWithoutPartyInput;
+  cart?: PartyCartCreateOneWithoutPartyInput;
 }
 
 export interface PartyInvitationUpdateManyWithWhereNestedInput {
@@ -2631,11 +2624,11 @@ export interface PartyInvitationUpdateManyWithWhereNestedInput {
   data: PartyInvitationUpdateManyDataInput;
 }
 
-export interface GameCreateInput {
+export interface LocationCreateInput {
   id?: ID_Input;
-  title: String;
-  cover?: String;
-  type: GameType;
+  placeName: String;
+  latitude: Float;
+  longitude: Float;
 }
 
 export interface PartyInvitationUpdateManyDataInput {
@@ -2643,15 +2636,11 @@ export interface PartyInvitationUpdateManyDataInput {
   partyId?: String;
 }
 
-export interface PlaylistCreateWithoutPartiesInput {
+export interface GameCreateInput {
   id?: ID_Input;
-  spotifyId: ID_Input;
-  uri: String;
-  spotifyExternalUrl: String;
-  user: UserCreateOneInput;
-  name: String;
-  tracks?: PartySavedTrackCreateManyInput;
-  isTemporary?: Boolean;
+  title: String;
+  cover?: String;
+  type: GameType;
 }
 
 export interface ChatUpdateManyWithoutMembersInput {
@@ -2669,6 +2658,23 @@ export interface ChatUpdateManyWithoutMembersInput {
   deleteMany?: ChatScalarWhereInput[] | ChatScalarWhereInput;
 }
 
+export interface PlaylistCreateWithoutPartiesInput {
+  id?: ID_Input;
+  spotifyId: ID_Input;
+  uri: String;
+  spotifyExternalUrl: String;
+  user: UserCreateOneInput;
+  name: String;
+  imageUrl: String;
+  tracks?: PartySavedTrackCreateManyInput;
+  isTemporary?: Boolean;
+}
+
+export interface ChatUpdateWithWhereUniqueWithoutMembersInput {
+  where: ChatWhereUniqueInput;
+  data: ChatUpdateWithoutMembersDataInput;
+}
+
 export interface PartySavedTrackCreateInput {
   id?: ID_Input;
   spotifyId: String;
@@ -2684,9 +2690,9 @@ export interface PartySavedTrackCreateInput {
   album: AlbumCreateOneInput;
 }
 
-export interface ChatUpdateWithWhereUniqueWithoutMembersInput {
-  where: ChatWhereUniqueInput;
-  data: ChatUpdateWithoutMembersDataInput;
+export interface ChatUpdateWithoutMembersDataInput {
+  party?: PartyUpdateOneRequiredInput;
+  messages?: MessageUpdateManyWithoutChatInput;
 }
 
 export interface PartyCreateWithoutSavedTracksInput {
@@ -2703,13 +2709,26 @@ export interface PartyCreateWithoutSavedTracksInput {
   start?: DateTimeInput;
   end?: DateTimeInput;
   inviteSecret: String;
-  playlist?: PlaylistCreateOneWithoutPartiesInput;
+  playlist?: PlaylistCreateManyWithoutPartiesInput;
   cart?: PartyCartCreateOneWithoutPartyInput;
 }
 
-export interface ChatUpdateWithoutMembersDataInput {
-  party?: PartyUpdateOneRequiredInput;
-  messages?: MessageUpdateManyWithoutChatInput;
+export interface MessageUpdateManyWithoutChatInput {
+  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput;
+  delete?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+  set?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+  disconnect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
+  update?:
+    | MessageUpdateWithWhereUniqueWithoutChatInput[]
+    | MessageUpdateWithWhereUniqueWithoutChatInput;
+  upsert?:
+    | MessageUpsertWithWhereUniqueWithoutChatInput[]
+    | MessageUpsertWithWhereUniqueWithoutChatInput;
+  deleteMany?: MessageScalarWhereInput[] | MessageScalarWhereInput;
+  updateMany?:
+    | MessageUpdateManyWithWhereNestedInput[]
+    | MessageUpdateManyWithWhereNestedInput;
 }
 
 export interface UserCreateWithoutPartiesInput {
@@ -2731,22 +2750,33 @@ export interface UserCreateWithoutPartiesInput {
   resetTokenExpiry?: DateTimeInput;
 }
 
-export interface MessageUpdateManyWithoutChatInput {
-  create?: MessageCreateWithoutChatInput[] | MessageCreateWithoutChatInput;
-  delete?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
-  connect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
-  set?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
-  disconnect?: MessageWhereUniqueInput[] | MessageWhereUniqueInput;
-  update?:
-    | MessageUpdateWithWhereUniqueWithoutChatInput[]
-    | MessageUpdateWithWhereUniqueWithoutChatInput;
-  upsert?:
-    | MessageUpsertWithWhereUniqueWithoutChatInput[]
-    | MessageUpsertWithWhereUniqueWithoutChatInput;
-  deleteMany?: MessageScalarWhereInput[] | MessageScalarWhereInput;
-  updateMany?:
-    | MessageUpdateManyWithWhereNestedInput[]
-    | MessageUpdateManyWithWhereNestedInput;
+export interface MessageUpdateWithWhereUniqueWithoutChatInput {
+  where: MessageWhereUniqueInput;
+  data: MessageUpdateWithoutChatDataInput;
+}
+
+export interface UserCreateWithoutFriendsInput {
+  id?: ID_Input;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  parties?: PartyCreateManyWithoutMembersInput;
+  pendingFriendInvitations?: UserCreateManyWithoutPendingFriendInvitationsInput;
+  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput;
+  chats?: ChatCreateManyWithoutMembersInput;
+  lastOnline?: DateTimeInput;
+  deleted?: Boolean;
+  provider?: SocialMediaType;
+  avatar?: String;
+  thirdPartyId?: String;
+  resetToken?: String;
+  resetTokenExpiry?: DateTimeInput;
+}
+
+export interface MessageUpdateWithoutChatDataInput {
+  author?: UserUpdateOneRequiredInput;
+  content?: String;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -2760,9 +2790,10 @@ export interface UserSubscriptionWhereInput {
   NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
-export interface MessageUpdateWithWhereUniqueWithoutChatInput {
+export interface MessageUpsertWithWhereUniqueWithoutChatInput {
   where: MessageWhereUniqueInput;
-  data: MessageUpdateWithoutChatDataInput;
+  update: MessageUpdateWithoutChatDataInput;
+  create: MessageCreateWithoutChatInput;
 }
 
 export interface TrackSubscriptionWhereInput {
@@ -2776,9 +2807,54 @@ export interface TrackSubscriptionWhereInput {
   NOT?: TrackSubscriptionWhereInput[] | TrackSubscriptionWhereInput;
 }
 
-export interface MessageUpdateWithoutChatDataInput {
-  author?: UserUpdateOneRequiredInput;
+export interface MessageScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
   content?: String;
+  content_not?: String;
+  content_in?: String[] | String;
+  content_not_in?: String[] | String;
+  content_lt?: String;
+  content_lte?: String;
+  content_gt?: String;
+  content_gte?: String;
+  content_contains?: String;
+  content_not_contains?: String;
+  content_starts_with?: String;
+  content_not_starts_with?: String;
+  content_ends_with?: String;
+  content_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: MessageScalarWhereInput[] | MessageScalarWhereInput;
+  OR?: MessageScalarWhereInput[] | MessageScalarWhereInput;
+  NOT?: MessageScalarWhereInput[] | MessageScalarWhereInput;
 }
 
 export interface LocationWhereInput {
@@ -2847,10 +2923,9 @@ export interface LocationWhereInput {
   NOT?: LocationWhereInput[] | LocationWhereInput;
 }
 
-export interface MessageUpsertWithWhereUniqueWithoutChatInput {
-  where: MessageWhereUniqueInput;
-  update: MessageUpdateWithoutChatDataInput;
-  create: MessageCreateWithoutChatInput;
+export interface MessageUpdateManyWithWhereNestedInput {
+  where: MessageScalarWhereInput;
+  data: MessageUpdateManyDataInput;
 }
 
 export interface PlaylistWhereInput {
@@ -2944,6 +3019,20 @@ export interface PlaylistWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
+  imageUrl?: String;
+  imageUrl_not?: String;
+  imageUrl_in?: String[] | String;
+  imageUrl_not_in?: String[] | String;
+  imageUrl_lt?: String;
+  imageUrl_lte?: String;
+  imageUrl_gt?: String;
+  imageUrl_gte?: String;
+  imageUrl_contains?: String;
+  imageUrl_not_contains?: String;
+  imageUrl_starts_with?: String;
+  imageUrl_not_starts_with?: String;
+  imageUrl_ends_with?: String;
+  imageUrl_not_ends_with?: String;
   tracks_every?: PartySavedTrackWhereInput;
   tracks_some?: PartySavedTrackWhereInput;
   tracks_none?: PartySavedTrackWhereInput;
@@ -2954,54 +3043,8 @@ export interface PlaylistWhereInput {
   NOT?: PlaylistWhereInput[] | PlaylistWhereInput;
 }
 
-export interface MessageScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
+export interface MessageUpdateManyDataInput {
   content?: String;
-  content_not?: String;
-  content_in?: String[] | String;
-  content_not_in?: String[] | String;
-  content_lt?: String;
-  content_lte?: String;
-  content_gt?: String;
-  content_gte?: String;
-  content_contains?: String;
-  content_not_contains?: String;
-  content_starts_with?: String;
-  content_not_starts_with?: String;
-  content_ends_with?: String;
-  content_not_ends_with?: String;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  AND?: MessageScalarWhereInput[] | MessageScalarWhereInput;
-  OR?: MessageScalarWhereInput[] | MessageScalarWhereInput;
-  NOT?: MessageScalarWhereInput[] | MessageScalarWhereInput;
 }
 
 export interface PartyInvitationSubscriptionWhereInput {
@@ -3021,9 +3064,10 @@ export interface PartyInvitationSubscriptionWhereInput {
     | PartyInvitationSubscriptionWhereInput;
 }
 
-export interface MessageUpdateManyWithWhereNestedInput {
-  where: MessageScalarWhereInput;
-  data: MessageUpdateManyDataInput;
+export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
+  where: ChatWhereUniqueInput;
+  update: ChatUpdateWithoutMembersDataInput;
+  create: ChatCreateWithoutMembersInput;
 }
 
 export interface PartySubscriptionWhereInput {
@@ -3035,38 +3079,6 @@ export interface PartySubscriptionWhereInput {
   AND?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
   OR?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
   NOT?: PartySubscriptionWhereInput[] | PartySubscriptionWhereInput;
-}
-
-export interface MessageUpdateManyDataInput {
-  content?: String;
-}
-
-export interface ImageSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ImageWhereInput;
-  AND?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput;
-  OR?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput;
-  NOT?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput;
-}
-
-export interface ChatUpsertWithWhereUniqueWithoutMembersInput {
-  where: ChatWhereUniqueInput;
-  update: ChatUpdateWithoutMembersDataInput;
-  create: ChatCreateWithoutMembersInput;
-}
-
-export interface AlbumSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: AlbumWhereInput;
-  AND?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput;
-  OR?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput;
-  NOT?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput;
 }
 
 export interface ChatScalarWhereInput {
@@ -3105,10 +3117,15 @@ export interface ChatScalarWhereInput {
   NOT?: ChatScalarWhereInput[] | ChatScalarWhereInput;
 }
 
-export interface ArtistUpdateManyDataInput {
-  spotifyId?: ID_Input;
-  uri?: String;
-  name?: String;
+export interface ImageSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ImageWhereInput;
+  AND?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput;
+  OR?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput;
+  NOT?: ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput;
 }
 
 export interface UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput {
@@ -3117,10 +3134,15 @@ export interface UserUpsertWithWhereUniqueWithoutPendingFriendInvitationsInput {
   create: UserCreateWithoutPendingFriendInvitationsInput;
 }
 
-export interface ArtistUpsertWithWhereUniqueNestedInput {
-  where: ArtistWhereUniqueInput;
-  update: ArtistUpdateDataInput;
-  create: ArtistCreateInput;
+export interface AlbumSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: AlbumWhereInput;
+  AND?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput;
+  OR?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput;
+  NOT?: AlbumSubscriptionWhereInput[] | AlbumSubscriptionWhereInput;
 }
 
 export interface UserScalarWhereInput {
@@ -3279,22 +3301,10 @@ export interface UserScalarWhereInput {
   NOT?: UserScalarWhereInput[] | UserScalarWhereInput;
 }
 
-export interface ArtistUpdateManyInput {
-  create?: ArtistCreateInput[] | ArtistCreateInput;
-  update?:
-    | ArtistUpdateWithWhereUniqueNestedInput[]
-    | ArtistUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | ArtistUpsertWithWhereUniqueNestedInput[]
-    | ArtistUpsertWithWhereUniqueNestedInput;
-  delete?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
-  connect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
-  set?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
-  disconnect?: ArtistWhereUniqueInput[] | ArtistWhereUniqueInput;
-  deleteMany?: ArtistScalarWhereInput[] | ArtistScalarWhereInput;
-  updateMany?:
-    | ArtistUpdateManyWithWhereNestedInput[]
-    | ArtistUpdateManyWithWhereNestedInput;
+export interface ArtistUpdateManyDataInput {
+  spotifyId?: ID_Input;
+  uri?: String;
+  name?: String;
 }
 
 export interface UserUpdateManyWithWhereNestedInput {
@@ -3302,14 +3312,10 @@ export interface UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput;
 }
 
-export interface TrackCreateInput {
-  id?: ID_Input;
-  name: String;
-  album: AlbumCreateOneInput;
-  artists?: ArtistCreateManyInput;
-  duration: Int;
-  preview_url?: String;
-}
+export type GameWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  title?: String;
+}>;
 
 export interface UserUpdateManyDataInput {
   email?: String;
@@ -3323,6 +3329,31 @@ export interface UserUpdateManyDataInput {
   thirdPartyId?: String;
   resetToken?: String;
   resetTokenExpiry?: DateTimeInput;
+}
+
+export type ImageWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface UserUpsertWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutFriendsDataInput;
+  create: UserCreateWithoutFriendsInput;
+}
+
+export interface TrackCreateInput {
+  id?: ID_Input;
+  name: String;
+  album: AlbumCreateOneInput;
+  artists?: ArtistCreateManyInput;
+  duration: Int;
+  preview_url?: String;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutPartiesInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutPartiesDataInput;
+  create: UserCreateWithoutPartiesInput;
 }
 
 export interface PartyUpdateWithoutPlaylistDataInput {
@@ -3342,41 +3373,6 @@ export interface PartyUpdateWithoutPlaylistDataInput {
   cart?: PartyCartUpdateOneWithoutPartyInput;
 }
 
-export interface UserUpsertWithWhereUniqueWithoutFriendsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutFriendsDataInput;
-  create: UserCreateWithoutFriendsInput;
-}
-
-export interface PlaylistUpdateInput {
-  spotifyId?: ID_Input;
-  uri?: String;
-  spotifyExternalUrl?: String;
-  user?: UserUpdateOneRequiredInput;
-  parties?: PartyUpdateManyWithoutPlaylistInput;
-  name?: String;
-  tracks?: PartySavedTrackUpdateManyInput;
-  isTemporary?: Boolean;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutPartiesInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutPartiesDataInput;
-  create: UserCreateWithoutPartiesInput;
-}
-
-export interface PlaylistCreateInput {
-  id?: ID_Input;
-  spotifyId: ID_Input;
-  uri: String;
-  spotifyExternalUrl: String;
-  user: UserCreateOneInput;
-  parties?: PartyCreateManyWithoutPlaylistInput;
-  name: String;
-  tracks?: PartySavedTrackCreateManyInput;
-  isTemporary?: Boolean;
-}
-
 export interface PartyCartUpdateOneWithoutPartyInput {
   create?: PartyCartCreateWithoutPartyInput;
   update?: PartyCartUpdateWithoutPartyDataInput;
@@ -3386,17 +3382,17 @@ export interface PartyCartUpdateOneWithoutPartyInput {
   connect?: PartyCartWhereUniqueInput;
 }
 
-export interface PartyInvitationUpdateManyMutationInput {
-  invitedUserId?: String;
-  partyId?: String;
-}
+export type MessageWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
 export interface PartyCartUpdateWithoutPartyDataInput {
   items?: PartyCartItemUpdateManyWithoutCartInput;
 }
 
-export type PartyCartItemWhereUniqueInput = AtLeastOne<{
+export type PartyWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
+  inviteSecret?: String;
 }>;
 
 export interface PartyCartItemUpdateManyWithoutCartInput {
@@ -3419,7 +3415,7 @@ export interface PartyCartItemUpdateManyWithoutCartInput {
     | PartyCartItemUpdateManyWithWhereNestedInput;
 }
 
-export type PartyInvitationWhereUniqueInput = AtLeastOne<{
+export type PartyCartWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
@@ -3428,9 +3424,12 @@ export interface PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
   data: PartyCartItemUpdateWithoutCartDataInput;
 }
 
-export type PartySavedTrackWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
+export interface UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
+  create?: UserCreateWithoutPendingPartyInvitationsInput;
+  update?: UserUpdateWithoutPendingPartyInvitationsDataInput;
+  upsert?: UserUpsertWithoutPendingPartyInvitationsInput;
+  connect?: UserWhereUniqueInput;
+}
 
 export interface PartyCartItemUpdateWithoutCartDataInput {
   user?: UserUpdateOneInput;
@@ -3440,10 +3439,10 @@ export interface PartyCartItemUpdateWithoutCartDataInput {
   quantity?: Int;
 }
 
-export type PlaylistWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  spotifyId?: ID_Input;
-}>;
+export interface UserCreateOneWithoutPendingPartyInvitationsInput {
+  create?: UserCreateWithoutPendingPartyInvitationsInput;
+  connect?: UserWhereUniqueInput;
+}
 
 export interface UserUpdateOneInput {
   create?: UserCreateInput;
@@ -3452,6 +3451,31 @@ export interface UserUpdateOneInput {
   delete?: Boolean;
   disconnect?: Boolean;
   connect?: UserWhereUniqueInput;
+}
+
+export interface PartyCartUpsertWithoutItemsInput {
+  update: PartyCartUpdateWithoutItemsDataInput;
+  create: PartyCartCreateWithoutItemsInput;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface PartyCartItemUpdateInput {
+  cart?: PartyCartUpdateOneRequiredWithoutItemsInput;
+  user?: UserUpdateOneInput;
+  name?: String;
+  description?: String;
+  price?: Float;
+  quantity?: Int;
+}
+
+export interface PartyCartItemUpsertWithWhereUniqueWithoutCartInput {
+  where: PartyCartItemWhereUniqueInput;
+  update: PartyCartItemUpdateWithoutCartDataInput;
+  create: PartyCartItemCreateWithoutCartInput;
 }
 
 export interface PartyCartItemCreateInput {
@@ -3463,39 +3487,6 @@ export interface PartyCartItemCreateInput {
   price: Float;
   quantity?: Int;
 }
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface PartyUpdateWithoutCartDataInput {
-  title?: String;
-  normalizedTitle?: String;
-  description?: String;
-  author?: UserUpdateOneRequiredInput;
-  location?: LocationUpdateOneRequiredInput;
-  games?: GameUpdateManyInput;
-  colorTint?: String;
-  isPublic?: Boolean;
-  members?: UserUpdateManyWithoutPartiesInput;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  inviteSecret?: String;
-  playlist?: PlaylistUpdateOneWithoutPartiesInput;
-  savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput;
-}
-
-export interface PartyCartItemUpsertWithWhereUniqueWithoutCartInput {
-  where: PartyCartItemWhereUniqueInput;
-  update: PartyCartItemUpdateWithoutCartDataInput;
-  create: PartyCartItemCreateWithoutCartInput;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  email?: String;
-}>;
 
 export interface PartyCartItemScalarWhereInput {
   id?: ID_Input;
@@ -3561,6 +3552,40 @@ export interface PartyCartItemScalarWhereInput {
   NOT?: PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput;
 }
 
+export interface PartyUpdateWithoutCartDataInput {
+  title?: String;
+  normalizedTitle?: String;
+  description?: String;
+  author?: UserUpdateOneRequiredInput;
+  location?: LocationUpdateOneRequiredInput;
+  games?: GameUpdateManyInput;
+  colorTint?: String;
+  isPublic?: Boolean;
+  members?: UserUpdateManyWithoutPartiesInput;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  inviteSecret?: String;
+  playlist?: PlaylistUpdateManyWithoutPartiesInput;
+  savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput;
+}
+
+export interface PartyCartItemUpdateManyWithWhereNestedInput {
+  where: PartyCartItemScalarWhereInput;
+  data: PartyCartItemUpdateManyDataInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
+
+export interface PartyCartItemUpdateManyDataInput {
+  name?: String;
+  description?: String;
+  price?: Float;
+  quantity?: Int;
+}
+
 export interface PartyUpdateInput {
   title?: String;
   normalizedTitle?: String;
@@ -3574,14 +3599,14 @@ export interface PartyUpdateInput {
   start?: DateTimeInput;
   end?: DateTimeInput;
   inviteSecret?: String;
-  playlist?: PlaylistUpdateOneWithoutPartiesInput;
+  playlist?: PlaylistUpdateManyWithoutPartiesInput;
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput;
   cart?: PartyCartUpdateOneWithoutPartyInput;
 }
 
-export interface PartyCartItemUpdateManyWithWhereNestedInput {
-  where: PartyCartItemScalarWhereInput;
-  data: PartyCartItemUpdateManyDataInput;
+export interface PartyCartUpsertWithoutPartyInput {
+  update: PartyCartUpdateWithoutPartyDataInput;
+  create: PartyCartCreateWithoutPartyInput;
 }
 
 export interface ArtistUpdateManyMutationInput {
@@ -3590,36 +3615,14 @@ export interface ArtistUpdateManyMutationInput {
   name?: String;
 }
 
-export interface PartyCartItemUpdateManyDataInput {
-  name?: String;
-  description?: String;
-  price?: Float;
-  quantity?: Int;
-}
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface PartyCartUpsertWithoutPartyInput {
-  update: PartyCartUpdateWithoutPartyDataInput;
-  create: PartyCartCreateWithoutPartyInput;
-}
-
-export interface LocationCreateOneInput {
-  create?: LocationCreateInput;
-  connect?: LocationWhereUniqueInput;
-}
-
 export interface PartyUpsertWithoutSavedTracksInput {
   update: PartyUpdateWithoutSavedTracksDataInput;
   create: PartyCreateWithoutSavedTracksInput;
 }
 
-export interface PlaylistCreateOneWithoutPartiesInput {
-  create?: PlaylistCreateWithoutPartiesInput;
-  connect?: PlaylistWhereUniqueInput;
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export interface AlbumUpdateOneRequiredInput {
@@ -3629,9 +3632,9 @@ export interface AlbumUpdateOneRequiredInput {
   connect?: AlbumWhereUniqueInput;
 }
 
-export interface PartyCreateOneWithoutSavedTracksInput {
-  create?: PartyCreateWithoutSavedTracksInput;
-  connect?: PartyWhereUniqueInput;
+export interface LocationCreateOneInput {
+  create?: LocationCreateInput;
+  connect?: LocationWhereUniqueInput;
 }
 
 export interface AlbumUpdateDataInput {
@@ -3642,9 +3645,11 @@ export interface AlbumUpdateDataInput {
   imageUrl?: String;
 }
 
-export interface UserCreateManyWithoutFriendsInput {
-  create?: UserCreateWithoutFriendsInput[] | UserCreateWithoutFriendsInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+export interface PlaylistCreateManyWithoutPartiesInput {
+  create?:
+    | PlaylistCreateWithoutPartiesInput[]
+    | PlaylistCreateWithoutPartiesInput;
+  connect?: PlaylistWhereUniqueInput[] | PlaylistWhereUniqueInput;
 }
 
 export interface AlbumUpsertNestedInput {
@@ -3652,56 +3657,9 @@ export interface AlbumUpsertNestedInput {
   create: AlbumCreateInput;
 }
 
-export interface MessageWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  author?: UserWhereInput;
-  chat?: ChatWhereInput;
-  content?: String;
-  content_not?: String;
-  content_in?: String[] | String;
-  content_not_in?: String[] | String;
-  content_lt?: String;
-  content_lte?: String;
-  content_gt?: String;
-  content_gte?: String;
-  content_contains?: String;
-  content_not_contains?: String;
-  content_starts_with?: String;
-  content_not_starts_with?: String;
-  content_ends_with?: String;
-  content_not_ends_with?: String;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  AND?: MessageWhereInput[] | MessageWhereInput;
-  OR?: MessageWhereInput[] | MessageWhereInput;
-  NOT?: MessageWhereInput[] | MessageWhereInput;
+export interface PartyCreateOneWithoutSavedTracksInput {
+  create?: PartyCreateWithoutSavedTracksInput;
+  connect?: PartyWhereUniqueInput;
 }
 
 export interface PartySavedTrackUpsertWithWhereUniqueNestedInput {
@@ -3710,28 +3668,9 @@ export interface PartySavedTrackUpsertWithWhereUniqueNestedInput {
   create: PartySavedTrackCreateInput;
 }
 
-export interface PartyCartWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  party?: PartyWhereInput;
-  items_every?: PartyCartItemWhereInput;
-  items_some?: PartyCartItemWhereInput;
-  items_none?: PartyCartItemWhereInput;
-  AND?: PartyCartWhereInput[] | PartyCartWhereInput;
-  OR?: PartyCartWhereInput[] | PartyCartWhereInput;
-  NOT?: PartyCartWhereInput[] | PartyCartWhereInput;
+export interface UserCreateManyWithoutFriendsInput {
+  create?: UserCreateWithoutFriendsInput[] | UserCreateWithoutFriendsInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
 }
 
 export interface PartySavedTrackScalarWhereInput {
@@ -3854,513 +3793,6 @@ export interface PartySavedTrackScalarWhereInput {
   AND?: PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput;
   OR?: PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput;
   NOT?: PartySavedTrackScalarWhereInput[] | PartySavedTrackScalarWhereInput;
-}
-
-export type ArtistWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface PartySavedTrackUpdateManyWithWhereNestedInput {
-  where: PartySavedTrackScalarWhereInput;
-  data: PartySavedTrackUpdateManyDataInput;
-}
-
-export interface UserUpdateInput {
-  email?: String;
-  firstName?: String;
-  lastName?: String;
-  password?: String;
-  parties?: PartyUpdateManyWithoutMembersInput;
-  friends?: UserUpdateManyWithoutFriendsInput;
-  pendingFriendInvitations?: UserUpdateManyWithoutPendingFriendInvitationsInput;
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput;
-  chats?: ChatUpdateManyWithoutMembersInput;
-  lastOnline?: DateTimeInput;
-  deleted?: Boolean;
-  provider?: SocialMediaType;
-  avatar?: String;
-  thirdPartyId?: String;
-  resetToken?: String;
-  resetTokenExpiry?: DateTimeInput;
-}
-
-export interface PartySavedTrackUpdateManyDataInput {
-  spotifyId?: String;
-  durationMs?: Int;
-  explicit?: Boolean;
-  name?: String;
-  previewUrl?: String;
-  uri?: String;
-  stringArtists?: String;
-  length?: String;
-  popularity?: Int;
-}
-
-export interface ArtistUpdateWithWhereUniqueNestedInput {
-  where: ArtistWhereUniqueInput;
-  data: ArtistUpdateDataInput;
-}
-
-export interface PlaylistUpsertWithoutPartiesInput {
-  update: PlaylistUpdateWithoutPartiesDataInput;
-  create: PlaylistCreateWithoutPartiesInput;
-}
-
-export type LocationWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface PartySavedTrackUpdateManyWithoutPartyInput {
-  create?:
-    | PartySavedTrackCreateWithoutPartyInput[]
-    | PartySavedTrackCreateWithoutPartyInput;
-  delete?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
-  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
-  set?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
-  disconnect?:
-    | PartySavedTrackWhereUniqueInput[]
-    | PartySavedTrackWhereUniqueInput;
-  update?:
-    | PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput[]
-    | PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput;
-  upsert?:
-    | PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput[]
-    | PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput;
-  deleteMany?:
-    | PartySavedTrackScalarWhereInput[]
-    | PartySavedTrackScalarWhereInput;
-  updateMany?:
-    | PartySavedTrackUpdateManyWithWhereNestedInput[]
-    | PartySavedTrackUpdateManyWithWhereNestedInput;
-}
-
-export interface PartyCreateManyWithoutPlaylistInput {
-  create?: PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput;
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-}
-
-export interface PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
-  where: PartySavedTrackWhereUniqueInput;
-  data: PartySavedTrackUpdateWithoutPartyDataInput;
-}
-
-export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
-  email?: String;
-  firstName?: String;
-  lastName?: String;
-  password?: String;
-  parties?: PartyUpdateManyWithoutMembersInput;
-  friends?: UserUpdateManyWithoutFriendsInput;
-  pendingFriendInvitations?: UserUpdateManyWithoutPendingFriendInvitationsInput;
-  chats?: ChatUpdateManyWithoutMembersInput;
-  lastOnline?: DateTimeInput;
-  deleted?: Boolean;
-  provider?: SocialMediaType;
-  avatar?: String;
-  thirdPartyId?: String;
-  resetToken?: String;
-  resetTokenExpiry?: DateTimeInput;
-}
-
-export interface PartySavedTrackUpdateWithoutPartyDataInput {
-  spotifyId?: String;
-  durationMs?: Int;
-  explicit?: Boolean;
-  name?: String;
-  previewUrl?: String;
-  uri?: String;
-  stringArtists?: String;
-  length?: String;
-  popularity?: Int;
-  album?: AlbumUpdateOneRequiredInput;
-}
-
-export interface PartyCartItemUpdateManyMutationInput {
-  name?: String;
-  description?: String;
-  price?: Float;
-  quantity?: Int;
-}
-
-export interface PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput {
-  where: PartySavedTrackWhereUniqueInput;
-  update: PartySavedTrackUpdateWithoutPartyDataInput;
-  create: PartySavedTrackCreateWithoutPartyInput;
-}
-
-export interface PartyCartCreateWithoutItemsInput {
-  id?: ID_Input;
-  party: PartyCreateOneWithoutCartInput;
-}
-
-export interface PartyUpsertWithWhereUniqueWithoutMembersInput {
-  where: PartyWhereUniqueInput;
-  update: PartyUpdateWithoutMembersDataInput;
-  create: PartyCreateWithoutMembersInput;
-}
-
-export interface PartyCartUpdateInput {
-  party?: PartyUpdateOneRequiredWithoutCartInput;
-  items?: PartyCartItemUpdateManyWithoutCartInput;
-}
-
-export interface PartyScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  normalizedTitle?: String;
-  normalizedTitle_not?: String;
-  normalizedTitle_in?: String[] | String;
-  normalizedTitle_not_in?: String[] | String;
-  normalizedTitle_lt?: String;
-  normalizedTitle_lte?: String;
-  normalizedTitle_gt?: String;
-  normalizedTitle_gte?: String;
-  normalizedTitle_contains?: String;
-  normalizedTitle_not_contains?: String;
-  normalizedTitle_starts_with?: String;
-  normalizedTitle_not_starts_with?: String;
-  normalizedTitle_ends_with?: String;
-  normalizedTitle_not_ends_with?: String;
-  description?: String;
-  description_not?: String;
-  description_in?: String[] | String;
-  description_not_in?: String[] | String;
-  description_lt?: String;
-  description_lte?: String;
-  description_gt?: String;
-  description_gte?: String;
-  description_contains?: String;
-  description_not_contains?: String;
-  description_starts_with?: String;
-  description_not_starts_with?: String;
-  description_ends_with?: String;
-  description_not_ends_with?: String;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  colorTint?: String;
-  colorTint_not?: String;
-  colorTint_in?: String[] | String;
-  colorTint_not_in?: String[] | String;
-  colorTint_lt?: String;
-  colorTint_lte?: String;
-  colorTint_gt?: String;
-  colorTint_gte?: String;
-  colorTint_contains?: String;
-  colorTint_not_contains?: String;
-  colorTint_starts_with?: String;
-  colorTint_not_starts_with?: String;
-  colorTint_ends_with?: String;
-  colorTint_not_ends_with?: String;
-  isPublic?: Boolean;
-  isPublic_not?: Boolean;
-  start?: DateTimeInput;
-  start_not?: DateTimeInput;
-  start_in?: DateTimeInput[] | DateTimeInput;
-  start_not_in?: DateTimeInput[] | DateTimeInput;
-  start_lt?: DateTimeInput;
-  start_lte?: DateTimeInput;
-  start_gt?: DateTimeInput;
-  start_gte?: DateTimeInput;
-  end?: DateTimeInput;
-  end_not?: DateTimeInput;
-  end_in?: DateTimeInput[] | DateTimeInput;
-  end_not_in?: DateTimeInput[] | DateTimeInput;
-  end_lt?: DateTimeInput;
-  end_lte?: DateTimeInput;
-  end_gt?: DateTimeInput;
-  end_gte?: DateTimeInput;
-  inviteSecret?: String;
-  inviteSecret_not?: String;
-  inviteSecret_in?: String[] | String;
-  inviteSecret_not_in?: String[] | String;
-  inviteSecret_lt?: String;
-  inviteSecret_lte?: String;
-  inviteSecret_gt?: String;
-  inviteSecret_gte?: String;
-  inviteSecret_contains?: String;
-  inviteSecret_not_contains?: String;
-  inviteSecret_starts_with?: String;
-  inviteSecret_not_starts_with?: String;
-  inviteSecret_ends_with?: String;
-  inviteSecret_not_ends_with?: String;
-  AND?: PartyScalarWhereInput[] | PartyScalarWhereInput;
-  OR?: PartyScalarWhereInput[] | PartyScalarWhereInput;
-  NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput;
-}
-
-export interface AlbumUpdateInput {
-  spotifyId?: ID_Input;
-  uri?: String;
-  name?: String;
-  releaseDate?: String;
-  imageUrl?: String;
-}
-
-export interface PartyUpdateManyWithWhereNestedInput {
-  where: PartyScalarWhereInput;
-  data: PartyUpdateManyDataInput;
-}
-
-export interface PartyCreateOneInput {
-  create?: PartyCreateInput;
-  connect?: PartyWhereUniqueInput;
-}
-
-export interface PartyUpdateManyDataInput {
-  title?: String;
-  normalizedTitle?: String;
-  description?: String;
-  colorTint?: String;
-  isPublic?: Boolean;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  inviteSecret?: String;
-}
-
-export interface GameCreateManyInput {
-  create?: GameCreateInput[] | GameCreateInput;
-  connect?: GameWhereUniqueInput[] | GameWhereUniqueInput;
-}
-
-export interface PartyUpsertNestedInput {
-  update: PartyUpdateDataInput;
-  create: PartyCreateInput;
-}
-
-export interface UserCreateManyWithoutPartiesInput {
-  create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-}
-
-export interface UserUpdateManyWithoutChatsInput {
-  create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput;
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
-  update?:
-    | UserUpdateWithWhereUniqueWithoutChatsInput[]
-    | UserUpdateWithWhereUniqueWithoutChatsInput;
-  upsert?:
-    | UserUpsertWithWhereUniqueWithoutChatsInput[]
-    | UserUpsertWithWhereUniqueWithoutChatsInput;
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
-  updateMany?:
-    | UserUpdateManyWithWhereNestedInput[]
-    | UserUpdateManyWithWhereNestedInput;
-}
-
-export interface GameWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  cover?: String;
-  cover_not?: String;
-  cover_in?: String[] | String;
-  cover_not_in?: String[] | String;
-  cover_lt?: String;
-  cover_lte?: String;
-  cover_gt?: String;
-  cover_gte?: String;
-  cover_contains?: String;
-  cover_not_contains?: String;
-  cover_starts_with?: String;
-  cover_not_starts_with?: String;
-  cover_ends_with?: String;
-  cover_not_ends_with?: String;
-  type?: GameType;
-  type_not?: GameType;
-  type_in?: GameType[] | GameType;
-  type_not_in?: GameType[] | GameType;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  AND?: GameWhereInput[] | GameWhereInput;
-  OR?: GameWhereInput[] | GameWhereInput;
-  NOT?: GameWhereInput[] | GameWhereInput;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutChatsInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutChatsDataInput;
-}
-
-export interface ChatSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ChatWhereInput;
-  AND?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
-  OR?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
-  NOT?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
-}
-
-export interface UserUpdateWithoutChatsDataInput {
-  email?: String;
-  firstName?: String;
-  lastName?: String;
-  password?: String;
-  parties?: PartyUpdateManyWithoutMembersInput;
-  friends?: UserUpdateManyWithoutFriendsInput;
-  pendingFriendInvitations?: UserUpdateManyWithoutPendingFriendInvitationsInput;
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput;
-  lastOnline?: DateTimeInput;
-  deleted?: Boolean;
-  provider?: SocialMediaType;
-  avatar?: String;
-  thirdPartyId?: String;
-  resetToken?: String;
-  resetTokenExpiry?: DateTimeInput;
-}
-
-export interface TrackUpdateInput {
-  name?: String;
-  album?: AlbumUpdateOneRequiredInput;
-  artists?: ArtistUpdateManyInput;
-  duration?: Int;
-  preview_url?: String;
-}
-
-export interface UserUpsertWithWhereUniqueWithoutChatsInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutChatsDataInput;
-  create: UserCreateWithoutChatsInput;
-}
-
-export interface PartySavedTrackUpdateInput {
-  spotifyId?: String;
-  durationMs?: Int;
-  explicit?: Boolean;
-  name?: String;
-  previewUrl?: String;
-  uri?: String;
-  party?: PartyUpdateOneRequiredWithoutSavedTracksInput;
-  stringArtists?: String;
-  length?: String;
-  popularity?: Int;
-  album?: AlbumUpdateOneRequiredInput;
-}
-
-export interface GameUpdateInput {
-  title?: String;
-  cover?: String;
-  type?: GameType;
-}
-
-export interface PartyCartUpdateOneRequiredWithoutItemsInput {
-  create?: PartyCartCreateWithoutItemsInput;
-  update?: PartyCartUpdateWithoutItemsDataInput;
-  upsert?: PartyCartUpsertWithoutItemsInput;
-  connect?: PartyCartWhereUniqueInput;
-}
-
-export interface GameUpdateManyMutationInput {
-  title?: String;
-  cover?: String;
-  type?: GameType;
-}
-
-export interface PartyCartCreateInput {
-  id?: ID_Input;
-  party: PartyCreateOneWithoutCartInput;
-  items?: PartyCartItemCreateManyWithoutCartInput;
-}
-
-export interface ImageCreateInput {
-  id?: ID_Input;
-  height: Int;
-  width: Int;
-  url: String;
-}
-
-export interface PartyCreateManyWithoutMembersInput {
-  create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput;
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-}
-
-export interface ImageUpdateInput {
-  height?: Int;
-  width?: Int;
-  url?: String;
 }
 
 export interface UserWhereInput {
@@ -4534,13 +3966,12 @@ export interface UserWhereInput {
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface ImageUpdateManyMutationInput {
-  height?: Int;
-  width?: Int;
-  url?: String;
+export interface PartySavedTrackUpdateManyWithWhereNestedInput {
+  where: PartySavedTrackScalarWhereInput;
+  data: PartySavedTrackUpdateManyDataInput;
 }
 
-export interface ArtistScalarWhereInput {
+export interface GameWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -4555,141 +3986,69 @@ export interface ArtistScalarWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  spotifyId?: ID_Input;
-  spotifyId_not?: ID_Input;
-  spotifyId_in?: ID_Input[] | ID_Input;
-  spotifyId_not_in?: ID_Input[] | ID_Input;
-  spotifyId_lt?: ID_Input;
-  spotifyId_lte?: ID_Input;
-  spotifyId_gt?: ID_Input;
-  spotifyId_gte?: ID_Input;
-  spotifyId_contains?: ID_Input;
-  spotifyId_not_contains?: ID_Input;
-  spotifyId_starts_with?: ID_Input;
-  spotifyId_not_starts_with?: ID_Input;
-  spotifyId_ends_with?: ID_Input;
-  spotifyId_not_ends_with?: ID_Input;
-  uri?: String;
-  uri_not?: String;
-  uri_in?: String[] | String;
-  uri_not_in?: String[] | String;
-  uri_lt?: String;
-  uri_lte?: String;
-  uri_gt?: String;
-  uri_gte?: String;
-  uri_contains?: String;
-  uri_not_contains?: String;
-  uri_starts_with?: String;
-  uri_not_starts_with?: String;
-  uri_ends_with?: String;
-  uri_not_ends_with?: String;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  cover?: String;
+  cover_not?: String;
+  cover_in?: String[] | String;
+  cover_not_in?: String[] | String;
+  cover_lt?: String;
+  cover_lte?: String;
+  cover_gt?: String;
+  cover_gte?: String;
+  cover_contains?: String;
+  cover_not_contains?: String;
+  cover_starts_with?: String;
+  cover_not_starts_with?: String;
+  cover_ends_with?: String;
+  cover_not_ends_with?: String;
+  type?: GameType;
+  type_not?: GameType;
+  type_in?: GameType[] | GameType;
+  type_not_in?: GameType[] | GameType;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: GameWhereInput[] | GameWhereInput;
+  OR?: GameWhereInput[] | GameWhereInput;
+  NOT?: GameWhereInput[] | GameWhereInput;
+}
+
+export interface PartySavedTrackUpdateManyDataInput {
+  spotifyId?: String;
+  durationMs?: Int;
+  explicit?: Boolean;
   name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  AND?: ArtistScalarWhereInput[] | ArtistScalarWhereInput;
-  OR?: ArtistScalarWhereInput[] | ArtistScalarWhereInput;
-  NOT?: ArtistScalarWhereInput[] | ArtistScalarWhereInput;
-}
-
-export interface LocationUpdateInput {
-  placeName?: String;
-  latitude?: Float;
-  longitude?: Float;
-}
-
-export interface UserCreateWithoutPendingPartyInvitationsInput {
-  id?: ID_Input;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  parties?: PartyCreateManyWithoutMembersInput;
-  friends?: UserCreateManyWithoutFriendsInput;
-  pendingFriendInvitations?: UserCreateManyWithoutPendingFriendInvitationsInput;
-  chats?: ChatCreateManyWithoutMembersInput;
-  lastOnline?: DateTimeInput;
-  deleted?: Boolean;
-  provider?: SocialMediaType;
-  avatar?: String;
-  thirdPartyId?: String;
-  resetToken?: String;
-  resetTokenExpiry?: DateTimeInput;
-}
-
-export interface LocationUpdateManyMutationInput {
-  placeName?: String;
-  latitude?: Float;
-  longitude?: Float;
-}
-
-export interface ArtistCreateInput {
-  id?: ID_Input;
-  spotifyId: ID_Input;
-  uri: String;
-  name: String;
-}
-
-export interface MessageUpdateInput {
-  author?: UserUpdateOneRequiredInput;
-  chat?: ChatUpdateOneRequiredWithoutMessagesInput;
-  content?: String;
-}
-
-export interface ChatCreateWithoutMessagesInput {
-  id?: ID_Input;
-  party: PartyCreateOneInput;
-  members?: UserCreateManyWithoutChatsInput;
-}
-
-export interface ChatCreateOneWithoutMessagesInput {
-  create?: ChatCreateWithoutMessagesInput;
-  connect?: ChatWhereUniqueInput;
-}
-
-export interface MessageCreateInput {
-  id?: ID_Input;
-  author: UserCreateOneInput;
-  chat: ChatCreateOneWithoutMessagesInput;
-  content: String;
-}
-
-export interface PartySavedTrackCreateManyInput {
-  create?: PartySavedTrackCreateInput[] | PartySavedTrackCreateInput;
-  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
-}
-
-export interface PartyUpsertWithoutCartInput {
-  update: PartyUpdateWithoutCartDataInput;
-  create: PartyCreateWithoutCartInput;
-}
-
-export interface PartyUpdateManyWithoutPlaylistInput {
-  create?: PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput;
-  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-  set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-  disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
-  update?:
-    | PartyUpdateWithWhereUniqueWithoutPlaylistInput[]
-    | PartyUpdateWithWhereUniqueWithoutPlaylistInput;
-  upsert?:
-    | PartyUpsertWithWhereUniqueWithoutPlaylistInput[]
-    | PartyUpsertWithWhereUniqueWithoutPlaylistInput;
-  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput;
-  updateMany?:
-    | PartyUpdateManyWithWhereNestedInput[]
-    | PartyUpdateManyWithWhereNestedInput;
+  previewUrl?: String;
+  uri?: String;
+  stringArtists?: String;
+  length?: String;
+  popularity?: Int;
 }
 
 export interface ArtistWhereInput {
@@ -4754,6 +4113,811 @@ export interface ArtistWhereInput {
   NOT?: ArtistWhereInput[] | ArtistWhereInput;
 }
 
+export interface PlaylistUpsertWithWhereUniqueWithoutPartiesInput {
+  where: PlaylistWhereUniqueInput;
+  update: PlaylistUpdateWithoutPartiesDataInput;
+  create: PlaylistCreateWithoutPartiesInput;
+}
+
+export interface ChatSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ChatWhereInput;
+  AND?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
+  OR?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
+  NOT?: ChatSubscriptionWhereInput[] | ChatSubscriptionWhereInput;
+}
+
+export interface PlaylistScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  spotifyId?: ID_Input;
+  spotifyId_not?: ID_Input;
+  spotifyId_in?: ID_Input[] | ID_Input;
+  spotifyId_not_in?: ID_Input[] | ID_Input;
+  spotifyId_lt?: ID_Input;
+  spotifyId_lte?: ID_Input;
+  spotifyId_gt?: ID_Input;
+  spotifyId_gte?: ID_Input;
+  spotifyId_contains?: ID_Input;
+  spotifyId_not_contains?: ID_Input;
+  spotifyId_starts_with?: ID_Input;
+  spotifyId_not_starts_with?: ID_Input;
+  spotifyId_ends_with?: ID_Input;
+  spotifyId_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  uri?: String;
+  uri_not?: String;
+  uri_in?: String[] | String;
+  uri_not_in?: String[] | String;
+  uri_lt?: String;
+  uri_lte?: String;
+  uri_gt?: String;
+  uri_gte?: String;
+  uri_contains?: String;
+  uri_not_contains?: String;
+  uri_starts_with?: String;
+  uri_not_starts_with?: String;
+  uri_ends_with?: String;
+  uri_not_ends_with?: String;
+  spotifyExternalUrl?: String;
+  spotifyExternalUrl_not?: String;
+  spotifyExternalUrl_in?: String[] | String;
+  spotifyExternalUrl_not_in?: String[] | String;
+  spotifyExternalUrl_lt?: String;
+  spotifyExternalUrl_lte?: String;
+  spotifyExternalUrl_gt?: String;
+  spotifyExternalUrl_gte?: String;
+  spotifyExternalUrl_contains?: String;
+  spotifyExternalUrl_not_contains?: String;
+  spotifyExternalUrl_starts_with?: String;
+  spotifyExternalUrl_not_starts_with?: String;
+  spotifyExternalUrl_ends_with?: String;
+  spotifyExternalUrl_not_ends_with?: String;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  imageUrl?: String;
+  imageUrl_not?: String;
+  imageUrl_in?: String[] | String;
+  imageUrl_not_in?: String[] | String;
+  imageUrl_lt?: String;
+  imageUrl_lte?: String;
+  imageUrl_gt?: String;
+  imageUrl_gte?: String;
+  imageUrl_contains?: String;
+  imageUrl_not_contains?: String;
+  imageUrl_starts_with?: String;
+  imageUrl_not_starts_with?: String;
+  imageUrl_ends_with?: String;
+  imageUrl_not_ends_with?: String;
+  isTemporary?: Boolean;
+  isTemporary_not?: Boolean;
+  AND?: PlaylistScalarWhereInput[] | PlaylistScalarWhereInput;
+  OR?: PlaylistScalarWhereInput[] | PlaylistScalarWhereInput;
+  NOT?: PlaylistScalarWhereInput[] | PlaylistScalarWhereInput;
+}
+
+export interface ArtistScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  spotifyId?: ID_Input;
+  spotifyId_not?: ID_Input;
+  spotifyId_in?: ID_Input[] | ID_Input;
+  spotifyId_not_in?: ID_Input[] | ID_Input;
+  spotifyId_lt?: ID_Input;
+  spotifyId_lte?: ID_Input;
+  spotifyId_gt?: ID_Input;
+  spotifyId_gte?: ID_Input;
+  spotifyId_contains?: ID_Input;
+  spotifyId_not_contains?: ID_Input;
+  spotifyId_starts_with?: ID_Input;
+  spotifyId_not_starts_with?: ID_Input;
+  spotifyId_ends_with?: ID_Input;
+  spotifyId_not_ends_with?: ID_Input;
+  uri?: String;
+  uri_not?: String;
+  uri_in?: String[] | String;
+  uri_not_in?: String[] | String;
+  uri_lt?: String;
+  uri_lte?: String;
+  uri_gt?: String;
+  uri_gte?: String;
+  uri_contains?: String;
+  uri_not_contains?: String;
+  uri_starts_with?: String;
+  uri_not_starts_with?: String;
+  uri_ends_with?: String;
+  uri_not_ends_with?: String;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  AND?: ArtistScalarWhereInput[] | ArtistScalarWhereInput;
+  OR?: ArtistScalarWhereInput[] | ArtistScalarWhereInput;
+  NOT?: ArtistScalarWhereInput[] | ArtistScalarWhereInput;
+}
+
+export interface PlaylistUpdateManyWithWhereNestedInput {
+  where: PlaylistScalarWhereInput;
+  data: PlaylistUpdateManyDataInput;
+}
+
+export interface ImageWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  height?: Int;
+  height_not?: Int;
+  height_in?: Int[] | Int;
+  height_not_in?: Int[] | Int;
+  height_lt?: Int;
+  height_lte?: Int;
+  height_gt?: Int;
+  height_gte?: Int;
+  width?: Int;
+  width_not?: Int;
+  width_in?: Int[] | Int;
+  width_not_in?: Int[] | Int;
+  width_lt?: Int;
+  width_lte?: Int;
+  width_gt?: Int;
+  width_gte?: Int;
+  url?: String;
+  url_not?: String;
+  url_in?: String[] | String;
+  url_not_in?: String[] | String;
+  url_lt?: String;
+  url_lte?: String;
+  url_gt?: String;
+  url_gte?: String;
+  url_contains?: String;
+  url_not_contains?: String;
+  url_starts_with?: String;
+  url_not_starts_with?: String;
+  url_ends_with?: String;
+  url_not_ends_with?: String;
+  AND?: ImageWhereInput[] | ImageWhereInput;
+  OR?: ImageWhereInput[] | ImageWhereInput;
+  NOT?: ImageWhereInput[] | ImageWhereInput;
+}
+
+export interface PlaylistUpdateManyDataInput {
+  spotifyId?: ID_Input;
+  uri?: String;
+  spotifyExternalUrl?: String;
+  name?: String;
+  imageUrl?: String;
+  isTemporary?: Boolean;
+}
+
+export interface PartyUpdateManyWithoutPlaylistInput {
+  create?: PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput;
+  delete?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+  set?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+  disconnect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+  update?:
+    | PartyUpdateWithWhereUniqueWithoutPlaylistInput[]
+    | PartyUpdateWithWhereUniqueWithoutPlaylistInput;
+  upsert?:
+    | PartyUpsertWithWhereUniqueWithoutPlaylistInput[]
+    | PartyUpsertWithWhereUniqueWithoutPlaylistInput;
+  deleteMany?: PartyScalarWhereInput[] | PartyScalarWhereInput;
+  updateMany?:
+    | PartyUpdateManyWithWhereNestedInput[]
+    | PartyUpdateManyWithWhereNestedInput;
+}
+
+export interface PartySavedTrackUpdateManyWithoutPartyInput {
+  create?:
+    | PartySavedTrackCreateWithoutPartyInput[]
+    | PartySavedTrackCreateWithoutPartyInput;
+  delete?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
+  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
+  set?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
+  disconnect?:
+    | PartySavedTrackWhereUniqueInput[]
+    | PartySavedTrackWhereUniqueInput;
+  update?:
+    | PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput[]
+    | PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput;
+  upsert?:
+    | PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput[]
+    | PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput;
+  deleteMany?:
+    | PartySavedTrackScalarWhereInput[]
+    | PartySavedTrackScalarWhereInput;
+  updateMany?:
+    | PartySavedTrackUpdateManyWithWhereNestedInput[]
+    | PartySavedTrackUpdateManyWithWhereNestedInput;
+}
+
+export interface PartySavedTrackUpdateInput {
+  spotifyId?: String;
+  durationMs?: Int;
+  explicit?: Boolean;
+  name?: String;
+  previewUrl?: String;
+  uri?: String;
+  party?: PartyUpdateOneRequiredWithoutSavedTracksInput;
+  stringArtists?: String;
+  length?: String;
+  popularity?: Int;
+  album?: AlbumUpdateOneRequiredInput;
+}
+
+export interface PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
+  where: PartySavedTrackWhereUniqueInput;
+  data: PartySavedTrackUpdateWithoutPartyDataInput;
+}
+
+export interface PartyInvitationUpdateInput {
+  invitedBy?: UserUpdateOneRequiredInput;
+  user?: UserUpdateOneRequiredWithoutPendingPartyInvitationsInput;
+  party?: PartyUpdateOneRequiredInput;
+  invitedUserId?: String;
+  partyId?: String;
+}
+
+export interface PartySavedTrackUpdateWithoutPartyDataInput {
+  spotifyId?: String;
+  durationMs?: Int;
+  explicit?: Boolean;
+  name?: String;
+  previewUrl?: String;
+  uri?: String;
+  stringArtists?: String;
+  length?: String;
+  popularity?: Int;
+  album?: AlbumUpdateOneRequiredInput;
+}
+
+export interface PartyCartUpdateWithoutItemsDataInput {
+  party?: PartyUpdateOneRequiredWithoutCartInput;
+}
+
+export interface PartySavedTrackUpsertWithWhereUniqueWithoutPartyInput {
+  where: PartySavedTrackWhereUniqueInput;
+  update: PartySavedTrackUpdateWithoutPartyDataInput;
+  create: PartySavedTrackCreateWithoutPartyInput;
+}
+
+export interface PartyUpsertWithoutCartInput {
+  update: PartyUpdateWithoutCartDataInput;
+  create: PartyCreateWithoutCartInput;
+}
+
+export interface PartyUpsertWithWhereUniqueWithoutMembersInput {
+  where: PartyWhereUniqueInput;
+  update: PartyUpdateWithoutMembersDataInput;
+  create: PartyCreateWithoutMembersInput;
+}
+
+export interface PartyCartCreateInput {
+  id?: ID_Input;
+  party: PartyCreateOneWithoutCartInput;
+  items?: PartyCartItemCreateManyWithoutCartInput;
+}
+
+export interface PartyScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  normalizedTitle?: String;
+  normalizedTitle_not?: String;
+  normalizedTitle_in?: String[] | String;
+  normalizedTitle_not_in?: String[] | String;
+  normalizedTitle_lt?: String;
+  normalizedTitle_lte?: String;
+  normalizedTitle_gt?: String;
+  normalizedTitle_gte?: String;
+  normalizedTitle_contains?: String;
+  normalizedTitle_not_contains?: String;
+  normalizedTitle_starts_with?: String;
+  normalizedTitle_not_starts_with?: String;
+  normalizedTitle_ends_with?: String;
+  normalizedTitle_not_ends_with?: String;
+  description?: String;
+  description_not?: String;
+  description_in?: String[] | String;
+  description_not_in?: String[] | String;
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  colorTint?: String;
+  colorTint_not?: String;
+  colorTint_in?: String[] | String;
+  colorTint_not_in?: String[] | String;
+  colorTint_lt?: String;
+  colorTint_lte?: String;
+  colorTint_gt?: String;
+  colorTint_gte?: String;
+  colorTint_contains?: String;
+  colorTint_not_contains?: String;
+  colorTint_starts_with?: String;
+  colorTint_not_starts_with?: String;
+  colorTint_ends_with?: String;
+  colorTint_not_ends_with?: String;
+  isPublic?: Boolean;
+  isPublic_not?: Boolean;
+  start?: DateTimeInput;
+  start_not?: DateTimeInput;
+  start_in?: DateTimeInput[] | DateTimeInput;
+  start_not_in?: DateTimeInput[] | DateTimeInput;
+  start_lt?: DateTimeInput;
+  start_lte?: DateTimeInput;
+  start_gt?: DateTimeInput;
+  start_gte?: DateTimeInput;
+  end?: DateTimeInput;
+  end_not?: DateTimeInput;
+  end_in?: DateTimeInput[] | DateTimeInput;
+  end_not_in?: DateTimeInput[] | DateTimeInput;
+  end_lt?: DateTimeInput;
+  end_lte?: DateTimeInput;
+  end_gt?: DateTimeInput;
+  end_gte?: DateTimeInput;
+  inviteSecret?: String;
+  inviteSecret_not?: String;
+  inviteSecret_in?: String[] | String;
+  inviteSecret_not_in?: String[] | String;
+  inviteSecret_lt?: String;
+  inviteSecret_lte?: String;
+  inviteSecret_gt?: String;
+  inviteSecret_gte?: String;
+  inviteSecret_contains?: String;
+  inviteSecret_not_contains?: String;
+  inviteSecret_starts_with?: String;
+  inviteSecret_not_starts_with?: String;
+  inviteSecret_ends_with?: String;
+  inviteSecret_not_ends_with?: String;
+  AND?: PartyScalarWhereInput[] | PartyScalarWhereInput;
+  OR?: PartyScalarWhereInput[] | PartyScalarWhereInput;
+  NOT?: PartyScalarWhereInput[] | PartyScalarWhereInput;
+}
+
+export interface ArtistCreateInput {
+  id?: ID_Input;
+  spotifyId: ID_Input;
+  uri: String;
+  name: String;
+}
+
+export interface PartyUpdateManyWithWhereNestedInput {
+  where: PartyScalarWhereInput;
+  data: PartyUpdateManyDataInput;
+}
+
+export interface PartyCreateManyWithoutMembersInput {
+  create?: PartyCreateWithoutMembersInput[] | PartyCreateWithoutMembersInput;
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+}
+
+export interface PartyUpdateManyDataInput {
+  title?: String;
+  normalizedTitle?: String;
+  description?: String;
+  colorTint?: String;
+  isPublic?: Boolean;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  inviteSecret?: String;
+}
+
+export interface PartySavedTrackCreateManyInput {
+  create?: PartySavedTrackCreateInput[] | PartySavedTrackCreateInput;
+  connect?: PartySavedTrackWhereUniqueInput[] | PartySavedTrackWhereUniqueInput;
+}
+
+export interface PartyUpsertNestedInput {
+  update: PartyUpdateDataInput;
+  create: PartyCreateInput;
+}
+
+export interface UserCreateManyWithoutPendingFriendInvitationsInput {
+  create?:
+    | UserCreateWithoutPendingFriendInvitationsInput[]
+    | UserCreateWithoutPendingFriendInvitationsInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface UserUpdateManyWithoutChatsInput {
+  create?: UserCreateWithoutChatsInput[] | UserCreateWithoutChatsInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  set?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  update?:
+    | UserUpdateWithWhereUniqueWithoutChatsInput[]
+    | UserUpdateWithWhereUniqueWithoutChatsInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueWithoutChatsInput[]
+    | UserUpsertWithWhereUniqueWithoutChatsInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
+}
+
+export interface PartyCartWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  party?: PartyWhereInput;
+  items_every?: PartyCartItemWhereInput;
+  items_some?: PartyCartItemWhereInput;
+  items_none?: PartyCartItemWhereInput;
+  AND?: PartyCartWhereInput[] | PartyCartWhereInput;
+  OR?: PartyCartWhereInput[] | PartyCartWhereInput;
+  NOT?: PartyCartWhereInput[] | PartyCartWhereInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutChatsInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutChatsDataInput;
+}
+
+export interface UserUpdateInput {
+  email?: String;
+  firstName?: String;
+  lastName?: String;
+  password?: String;
+  parties?: PartyUpdateManyWithoutMembersInput;
+  friends?: UserUpdateManyWithoutFriendsInput;
+  pendingFriendInvitations?: UserUpdateManyWithoutPendingFriendInvitationsInput;
+  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput;
+  chats?: ChatUpdateManyWithoutMembersInput;
+  lastOnline?: DateTimeInput;
+  deleted?: Boolean;
+  provider?: SocialMediaType;
+  avatar?: String;
+  thirdPartyId?: String;
+  resetToken?: String;
+  resetTokenExpiry?: DateTimeInput;
+}
+
+export interface UserUpdateWithoutChatsDataInput {
+  email?: String;
+  firstName?: String;
+  lastName?: String;
+  password?: String;
+  parties?: PartyUpdateManyWithoutMembersInput;
+  friends?: UserUpdateManyWithoutFriendsInput;
+  pendingFriendInvitations?: UserUpdateManyWithoutPendingFriendInvitationsInput;
+  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput;
+  lastOnline?: DateTimeInput;
+  deleted?: Boolean;
+  provider?: SocialMediaType;
+  avatar?: String;
+  thirdPartyId?: String;
+  resetToken?: String;
+  resetTokenExpiry?: DateTimeInput;
+}
+
+export interface PartyUpsertWithWhereUniqueWithoutPlaylistInput {
+  where: PartyWhereUniqueInput;
+  update: PartyUpdateWithoutPlaylistDataInput;
+  create: PartyCreateWithoutPlaylistInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutChatsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutChatsDataInput;
+  create: UserCreateWithoutChatsInput;
+}
+
+export interface UserUpsertWithoutPendingPartyInvitationsInput {
+  update: UserUpdateWithoutPendingPartyInvitationsDataInput;
+  create: UserCreateWithoutPendingPartyInvitationsInput;
+}
+
+export interface GameUpdateInput {
+  title?: String;
+  cover?: String;
+  type?: GameType;
+}
+
+export interface PartyCartCreateWithoutItemsInput {
+  id?: ID_Input;
+  party: PartyCreateOneWithoutCartInput;
+}
+
+export interface GameUpdateManyMutationInput {
+  title?: String;
+  cover?: String;
+  type?: GameType;
+}
+
+export interface AlbumUpdateInput {
+  spotifyId?: ID_Input;
+  uri?: String;
+  name?: String;
+  releaseDate?: String;
+  imageUrl?: String;
+}
+
+export interface ImageCreateInput {
+  id?: ID_Input;
+  height: Int;
+  width: Int;
+  url: String;
+}
+
+export interface GameCreateManyInput {
+  create?: GameCreateInput[] | GameCreateInput;
+  connect?: GameWhereUniqueInput[] | GameWhereUniqueInput;
+}
+
+export interface ImageUpdateInput {
+  height?: Int;
+  width?: Int;
+  url?: String;
+}
+
+export interface MessageWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  author?: UserWhereInput;
+  chat?: ChatWhereInput;
+  content?: String;
+  content_not?: String;
+  content_in?: String[] | String;
+  content_not_in?: String[] | String;
+  content_lt?: String;
+  content_lte?: String;
+  content_gt?: String;
+  content_gte?: String;
+  content_contains?: String;
+  content_not_contains?: String;
+  content_starts_with?: String;
+  content_not_starts_with?: String;
+  content_ends_with?: String;
+  content_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: MessageWhereInput[] | MessageWhereInput;
+  OR?: MessageWhereInput[] | MessageWhereInput;
+  NOT?: MessageWhereInput[] | MessageWhereInput;
+}
+
+export interface ImageUpdateManyMutationInput {
+  height?: Int;
+  width?: Int;
+  url?: String;
+}
+
+export interface ArtistUpdateWithWhereUniqueNestedInput {
+  where: ArtistWhereUniqueInput;
+  data: ArtistUpdateDataInput;
+}
+
+export interface LocationUpdateInput {
+  placeName?: String;
+  latitude?: Float;
+  longitude?: Float;
+}
+
+export interface PartyInvitationCreateInput {
+  id?: ID_Input;
+  invitedBy: UserCreateOneInput;
+  user: UserCreateOneWithoutPendingPartyInvitationsInput;
+  party: PartyCreateOneInput;
+  invitedUserId: String;
+  partyId: String;
+}
+
+export interface LocationUpdateManyMutationInput {
+  placeName?: String;
+  latitude?: Float;
+  longitude?: Float;
+}
+
+export interface PartyCreateOneInput {
+  create?: PartyCreateInput;
+  connect?: PartyWhereUniqueInput;
+}
+
+export interface MessageUpdateInput {
+  author?: UserUpdateOneRequiredInput;
+  chat?: ChatUpdateOneRequiredWithoutMessagesInput;
+  content?: String;
+}
+
+export interface ChatCreateWithoutMessagesInput {
+  id?: ID_Input;
+  party: PartyCreateOneInput;
+  members?: UserCreateManyWithoutChatsInput;
+}
+
+export interface ChatCreateOneWithoutMessagesInput {
+  create?: ChatCreateWithoutMessagesInput;
+  connect?: ChatWhereUniqueInput;
+}
+
+export interface MessageCreateInput {
+  id?: ID_Input;
+  author: UserCreateOneInput;
+  chat: ChatCreateOneWithoutMessagesInput;
+  content: String;
+}
+
+export interface UserCreateManyWithoutPartiesInput {
+  create?: UserCreateWithoutPartiesInput[] | UserCreateWithoutPartiesInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+}
+
+export interface PartyCartUpdateInput {
+  party?: PartyUpdateOneRequiredWithoutCartInput;
+  items?: PartyCartItemUpdateManyWithoutCartInput;
+}
+
+export interface PartyCreateManyWithoutPlaylistInput {
+  create?: PartyCreateWithoutPlaylistInput[] | PartyCreateWithoutPlaylistInput;
+  connect?: PartyWhereUniqueInput[] | PartyWhereUniqueInput;
+}
+
+export type ArtistWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
 export interface NodeNode {
   id: ID_Output;
 }
@@ -4813,31 +4977,27 @@ export interface UserPreviousValuesSubscription
   resetTokenExpiry: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface Message {
-  id: ID_Output;
-  content: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface MessagePromise extends Promise<Message>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  author: <T = UserPromise>() => T;
-  chat: <T = ChatPromise>() => T;
-  content: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
 }
 
-export interface MessageSubscription
-  extends Promise<AsyncIterator<Message>>,
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  author: <T = UserSubscription>() => T;
-  chat: <T = ChatSubscription>() => T;
-  content: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Chat {
@@ -4898,79 +5058,36 @@ export interface ChatSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface ChatEdge {
-  node: Chat;
-  cursor: String;
-}
-
-export interface ChatEdgePromise extends Promise<ChatEdge>, Fragmentable {
-  node: <T = ChatPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ChatEdgeSubscription
-  extends Promise<AsyncIterator<ChatEdge>>,
-    Fragmentable {
-  node: <T = ChatSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PlaylistPreviousValues {
+export interface PartyCartItem {
   id: ID_Output;
-  spotifyId: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  uri: String;
-  spotifyExternalUrl: String;
   name: String;
-  isTemporary?: Boolean;
+  description: String;
+  price: Float;
+  quantity: Int;
 }
 
-export interface PlaylistPreviousValuesPromise
-  extends Promise<PlaylistPreviousValues>,
+export interface PartyCartItemPromise
+  extends Promise<PartyCartItem>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  spotifyId: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  uri: () => Promise<String>;
-  spotifyExternalUrl: () => Promise<String>;
+  cart: <T = PartyCartPromise>() => T;
+  user: <T = UserPromise>() => T;
   name: () => Promise<String>;
-  isTemporary: () => Promise<Boolean>;
+  description: () => Promise<String>;
+  price: () => Promise<Float>;
+  quantity: () => Promise<Int>;
 }
 
-export interface PlaylistPreviousValuesSubscription
-  extends Promise<AsyncIterator<PlaylistPreviousValues>>,
+export interface PartyCartItemSubscription
+  extends Promise<AsyncIterator<PartyCartItem>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  spotifyId: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  uri: () => Promise<AsyncIterator<String>>;
-  spotifyExternalUrl: () => Promise<AsyncIterator<String>>;
+  cart: <T = PartyCartSubscription>() => T;
+  user: <T = UserSubscription>() => T;
   name: () => Promise<AsyncIterator<String>>;
-  isTemporary: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface ChatConnection {
-  pageInfo: PageInfo;
-  edges: ChatEdge[];
-}
-
-export interface ChatConnectionPromise
-  extends Promise<ChatConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ChatEdge>>() => T;
-  aggregate: <T = AggregateChatPromise>() => T;
-}
-
-export interface ChatConnectionSubscription
-  extends Promise<AsyncIterator<ChatConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ChatEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateChatSubscription>() => T;
+  description: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Float>>;
+  quantity: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Party {
@@ -5019,7 +5136,15 @@ export interface PartyPromise extends Promise<Party>, Fragmentable {
   start: () => Promise<DateTimeOutput>;
   end: () => Promise<DateTimeOutput>;
   inviteSecret: () => Promise<String>;
-  playlist: <T = PlaylistPromise>() => T;
+  playlist: <T = FragmentableArray<Playlist>>(args?: {
+    where?: PlaylistWhereInput;
+    orderBy?: PlaylistOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   savedTracks: <T = FragmentableArray<PartySavedTrack>>(args?: {
     where?: PartySavedTrackWhereInput;
     orderBy?: PartySavedTrackOrderByInput;
@@ -5066,7 +5191,15 @@ export interface PartySubscription
   start: () => Promise<AsyncIterator<DateTimeOutput>>;
   end: () => Promise<AsyncIterator<DateTimeOutput>>;
   inviteSecret: () => Promise<AsyncIterator<String>>;
-  playlist: <T = PlaylistSubscription>() => T;
+  playlist: <T = Promise<AsyncIterator<PlaylistSubscription>>>(args?: {
+    where?: PlaylistWhereInput;
+    orderBy?: PlaylistOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   savedTracks: <
     T = Promise<AsyncIterator<PartySavedTrackSubscription>>
   >(args?: {
@@ -5079,6 +5212,73 @@ export interface PartySubscription
     last?: Int;
   }) => T;
   cart: <T = PartyCartSubscription>() => T;
+}
+
+export interface Message {
+  id: ID_Output;
+  content: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface MessagePromise extends Promise<Message>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  author: <T = UserPromise>() => T;
+  chat: <T = ChatPromise>() => T;
+  content: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MessageSubscription
+  extends Promise<AsyncIterator<Message>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  author: <T = UserSubscription>() => T;
+  chat: <T = ChatSubscription>() => T;
+  content: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface PlaylistPreviousValues {
+  id: ID_Output;
+  spotifyId: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  uri: String;
+  spotifyExternalUrl: String;
+  name: String;
+  imageUrl: String;
+  isTemporary?: Boolean;
+}
+
+export interface PlaylistPreviousValuesPromise
+  extends Promise<PlaylistPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  uri: () => Promise<String>;
+  spotifyExternalUrl: () => Promise<String>;
+  name: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  isTemporary: () => Promise<Boolean>;
+}
+
+export interface PlaylistPreviousValuesSubscription
+  extends Promise<AsyncIterator<PlaylistPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  spotifyId: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  uri: () => Promise<AsyncIterator<String>>;
+  spotifyExternalUrl: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  isTemporary: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface TrackPreviousValues {
@@ -5106,21 +5306,20 @@ export interface TrackPreviousValuesSubscription
   preview_url: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserEdge {
-  node: User;
-  cursor: String;
+export interface AggregateUser {
+  count: Int;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface BatchPayload {
@@ -5155,36 +5354,21 @@ export interface AggregateTrackSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface PartyCartItem {
-  id: ID_Output;
-  name: String;
-  description: String;
-  price: Float;
-  quantity: Int;
+export interface UserEdge {
+  node: User;
+  cursor: String;
 }
 
-export interface PartyCartItemPromise
-  extends Promise<PartyCartItem>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  cart: <T = PartyCartPromise>() => T;
-  user: <T = UserPromise>() => T;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  price: () => Promise<Float>;
-  quantity: () => Promise<Int>;
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface PartyCartItemSubscription
-  extends Promise<AsyncIterator<PartyCartItem>>,
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  cart: <T = PartyCartSubscription>() => T;
-  user: <T = UserSubscription>() => T;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  price: () => Promise<AsyncIterator<Float>>;
-  quantity: () => Promise<AsyncIterator<Int>>;
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface TrackConnection {
@@ -5208,21 +5392,38 @@ export interface TrackConnectionSubscription
   aggregate: <T = AggregateTrackSubscription>() => T;
 }
 
-export interface AlbumEdge {
-  node: Album;
-  cursor: String;
+export interface PartyCart {
+  id: ID_Output;
 }
 
-export interface AlbumEdgePromise extends Promise<AlbumEdge>, Fragmentable {
-  node: <T = AlbumPromise>() => T;
-  cursor: () => Promise<String>;
+export interface PartyCartPromise extends Promise<PartyCart>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  party: <T = PartyPromise>() => T;
+  items: <T = FragmentableArray<PartyCartItem>>(args?: {
+    where?: PartyCartItemWhereInput;
+    orderBy?: PartyCartItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface AlbumEdgeSubscription
-  extends Promise<AsyncIterator<AlbumEdge>>,
+export interface PartyCartSubscription
+  extends Promise<AsyncIterator<PartyCart>>,
     Fragmentable {
-  node: <T = AlbumSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  party: <T = PartySubscription>() => T;
+  items: <T = Promise<AsyncIterator<PartyCartItemSubscription>>>(args?: {
+    where?: PartyCartItemWhereInput;
+    orderBy?: PartyCartItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface Track {
@@ -5409,38 +5610,51 @@ export interface PartySavedTrackConnectionSubscription
   aggregate: <T = AggregatePartySavedTrackSubscription>() => T;
 }
 
-export interface PartyCart {
+export interface PartySavedTrack {
   id: ID_Output;
+  spotifyId: String;
+  durationMs: Int;
+  explicit: Boolean;
+  name: String;
+  previewUrl?: String;
+  uri: String;
+  stringArtists: String;
+  length: String;
+  popularity: Int;
 }
 
-export interface PartyCartPromise extends Promise<PartyCart>, Fragmentable {
+export interface PartySavedTrackPromise
+  extends Promise<PartySavedTrack>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<String>;
+  durationMs: () => Promise<Int>;
+  explicit: () => Promise<Boolean>;
+  name: () => Promise<String>;
+  previewUrl: () => Promise<String>;
+  uri: () => Promise<String>;
   party: <T = PartyPromise>() => T;
-  items: <T = FragmentableArray<PartyCartItem>>(args?: {
-    where?: PartyCartItemWhereInput;
-    orderBy?: PartyCartItemOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  stringArtists: () => Promise<String>;
+  length: () => Promise<String>;
+  popularity: () => Promise<Int>;
+  album: <T = AlbumPromise>() => T;
 }
 
-export interface PartyCartSubscription
-  extends Promise<AsyncIterator<PartyCart>>,
+export interface PartySavedTrackSubscription
+  extends Promise<AsyncIterator<PartySavedTrack>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  spotifyId: () => Promise<AsyncIterator<String>>;
+  durationMs: () => Promise<AsyncIterator<Int>>;
+  explicit: () => Promise<AsyncIterator<Boolean>>;
+  name: () => Promise<AsyncIterator<String>>;
+  previewUrl: () => Promise<AsyncIterator<String>>;
+  uri: () => Promise<AsyncIterator<String>>;
   party: <T = PartySubscription>() => T;
-  items: <T = Promise<AsyncIterator<PartyCartItemSubscription>>>(args?: {
-    where?: PartyCartItemWhereInput;
-    orderBy?: PartyCartItemOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  stringArtists: () => Promise<AsyncIterator<String>>;
+  length: () => Promise<AsyncIterator<String>>;
+  popularity: () => Promise<AsyncIterator<Int>>;
+  album: <T = AlbumSubscription>() => T;
 }
 
 export interface PartyInvitationEdge {
@@ -5549,51 +5763,21 @@ export interface PartyCartItemConnectionSubscription
   aggregate: <T = AggregatePartyCartItemSubscription>() => T;
 }
 
-export interface PartySavedTrack {
-  id: ID_Output;
-  spotifyId: String;
-  durationMs: Int;
-  explicit: Boolean;
-  name: String;
-  previewUrl?: String;
-  uri: String;
-  stringArtists: String;
-  length: String;
-  popularity: Int;
+export interface AlbumEdge {
+  node: Album;
+  cursor: String;
 }
 
-export interface PartySavedTrackPromise
-  extends Promise<PartySavedTrack>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  spotifyId: () => Promise<String>;
-  durationMs: () => Promise<Int>;
-  explicit: () => Promise<Boolean>;
-  name: () => Promise<String>;
-  previewUrl: () => Promise<String>;
-  uri: () => Promise<String>;
-  party: <T = PartyPromise>() => T;
-  stringArtists: () => Promise<String>;
-  length: () => Promise<String>;
-  popularity: () => Promise<Int>;
-  album: <T = AlbumPromise>() => T;
+export interface AlbumEdgePromise extends Promise<AlbumEdge>, Fragmentable {
+  node: <T = AlbumPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface PartySavedTrackSubscription
-  extends Promise<AsyncIterator<PartySavedTrack>>,
+export interface AlbumEdgeSubscription
+  extends Promise<AsyncIterator<AlbumEdge>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  spotifyId: () => Promise<AsyncIterator<String>>;
-  durationMs: () => Promise<AsyncIterator<Int>>;
-  explicit: () => Promise<AsyncIterator<Boolean>>;
-  name: () => Promise<AsyncIterator<String>>;
-  previewUrl: () => Promise<AsyncIterator<String>>;
-  uri: () => Promise<AsyncIterator<String>>;
-  party: <T = PartySubscription>() => T;
-  stringArtists: () => Promise<AsyncIterator<String>>;
-  length: () => Promise<AsyncIterator<String>>;
-  popularity: () => Promise<AsyncIterator<Int>>;
-  album: <T = AlbumSubscription>() => T;
+  node: <T = AlbumSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PartyCartEdge {
@@ -5640,151 +5824,20 @@ export interface ChatSubscriptionPayloadSubscription
   previousValues: <T = ChatPreviousValuesSubscription>() => T;
 }
 
-export interface User {
-  id: ID_Output;
-  email: String;
-  firstName: String;
-  lastName: String;
-  password: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  lastOnline?: DateTimeOutput;
-  deleted: Boolean;
-  provider?: SocialMediaType;
-  avatar?: String;
-  thirdPartyId?: String;
-  resetToken?: String;
-  resetTokenExpiry?: DateTimeOutput;
+export interface AggregateParty {
+  count: Int;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  email: () => Promise<String>;
-  firstName: () => Promise<String>;
-  lastName: () => Promise<String>;
-  password: () => Promise<String>;
-  parties: <T = FragmentableArray<Party>>(args?: {
-    where?: PartyWhereInput;
-    orderBy?: PartyOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  friends: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  pendingFriendInvitations: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  pendingPartyInvitations: <T = FragmentableArray<PartyInvitation>>(args?: {
-    where?: PartyInvitationWhereInput;
-    orderBy?: PartyInvitationOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  chats: <T = FragmentableArray<Chat>>(args?: {
-    where?: ChatWhereInput;
-    orderBy?: ChatOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  lastOnline: () => Promise<DateTimeOutput>;
-  deleted: () => Promise<Boolean>;
-  provider: () => Promise<SocialMediaType>;
-  avatar: () => Promise<String>;
-  thirdPartyId: () => Promise<String>;
-  resetToken: () => Promise<String>;
-  resetTokenExpiry: () => Promise<DateTimeOutput>;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface AggregatePartyPromise
+  extends Promise<AggregateParty>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  email: () => Promise<AsyncIterator<String>>;
-  firstName: () => Promise<AsyncIterator<String>>;
-  lastName: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  parties: <T = Promise<AsyncIterator<PartySubscription>>>(args?: {
-    where?: PartyWhereInput;
-    orderBy?: PartyOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  friends: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  pendingFriendInvitations: <
-    T = Promise<AsyncIterator<UserSubscription>>
-  >(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  pendingPartyInvitations: <
-    T = Promise<AsyncIterator<PartyInvitationSubscription>>
-  >(args?: {
-    where?: PartyInvitationWhereInput;
-    orderBy?: PartyInvitationOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  chats: <T = Promise<AsyncIterator<ChatSubscription>>>(args?: {
-    where?: ChatWhereInput;
-    orderBy?: ChatOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  lastOnline: () => Promise<AsyncIterator<DateTimeOutput>>;
-  deleted: () => Promise<AsyncIterator<Boolean>>;
-  provider: () => Promise<AsyncIterator<SocialMediaType>>;
-  avatar: () => Promise<AsyncIterator<String>>;
-  thirdPartyId: () => Promise<AsyncIterator<String>>;
-  resetToken: () => Promise<AsyncIterator<String>>;
-  resetTokenExpiry: () => Promise<AsyncIterator<DateTimeOutput>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePartySubscription
+  extends Promise<AsyncIterator<AggregateParty>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ChatPreviousValues {
@@ -5809,53 +5862,118 @@ export interface ChatPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface PartyEdge {
-  node: Party;
+export interface PartyConnection {
+  pageInfo: PageInfo;
+  edges: PartyEdge[];
+}
+
+export interface PartyConnectionPromise
+  extends Promise<PartyConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PartyEdge>>() => T;
+  aggregate: <T = AggregatePartyPromise>() => T;
+}
+
+export interface PartyConnectionSubscription
+  extends Promise<AsyncIterator<PartyConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PartyEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePartySubscription>() => T;
+}
+
+export interface Playlist {
+  id: ID_Output;
+  spotifyId: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  uri: String;
+  spotifyExternalUrl: String;
+  name: String;
+  imageUrl: String;
+  isTemporary?: Boolean;
+}
+
+export interface PlaylistPromise extends Promise<Playlist>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  spotifyId: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  uri: () => Promise<String>;
+  spotifyExternalUrl: () => Promise<String>;
+  user: <T = UserPromise>() => T;
+  parties: <T = FragmentableArray<Party>>(args?: {
+    where?: PartyWhereInput;
+    orderBy?: PartyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  tracks: <T = FragmentableArray<PartySavedTrack>>(args?: {
+    where?: PartySavedTrackWhereInput;
+    orderBy?: PartySavedTrackOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  isTemporary: () => Promise<Boolean>;
+}
+
+export interface PlaylistSubscription
+  extends Promise<AsyncIterator<Playlist>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  spotifyId: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  uri: () => Promise<AsyncIterator<String>>;
+  spotifyExternalUrl: () => Promise<AsyncIterator<String>>;
+  user: <T = UserSubscription>() => T;
+  parties: <T = Promise<AsyncIterator<PartySubscription>>>(args?: {
+    where?: PartyWhereInput;
+    orderBy?: PartyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  tracks: <T = Promise<AsyncIterator<PartySavedTrackSubscription>>>(args?: {
+    where?: PartySavedTrackWhereInput;
+    orderBy?: PartySavedTrackOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  isTemporary: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface MessageEdge {
+  node: Message;
   cursor: String;
 }
 
-export interface PartyEdgePromise extends Promise<PartyEdge>, Fragmentable {
-  node: <T = PartyPromise>() => T;
+export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
+  node: <T = MessagePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface PartyEdgeSubscription
-  extends Promise<AsyncIterator<PartyEdge>>,
+export interface MessageEdgeSubscription
+  extends Promise<AsyncIterator<MessageEdge>>,
     Fragmentable {
-  node: <T = PartySubscription>() => T;
+  node: <T = MessageSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateAlbum {
-  count: Int;
-}
-
-export interface AggregateAlbumPromise
-  extends Promise<AggregateAlbum>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateAlbumSubscription
-  extends Promise<AsyncIterator<AggregateAlbum>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface AggregateMessage {
-  count: Int;
-}
-
-export interface AggregateMessagePromise
-  extends Promise<AggregateMessage>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMessageSubscription
-  extends Promise<AsyncIterator<AggregateMessage>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface GameSubscriptionPayload {
@@ -5883,25 +6001,20 @@ export interface GameSubscriptionPayloadSubscription
   previousValues: <T = GamePreviousValuesSubscription>() => T;
 }
 
-export interface MessageConnection {
-  pageInfo: PageInfo;
-  edges: MessageEdge[];
+export interface AggregateLocation {
+  count: Int;
 }
 
-export interface MessageConnectionPromise
-  extends Promise<MessageConnection>,
+export interface AggregateLocationPromise
+  extends Promise<AggregateLocation>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MessageEdge>>() => T;
-  aggregate: <T = AggregateMessagePromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface MessageConnectionSubscription
-  extends Promise<AsyncIterator<MessageConnection>>,
+export interface AggregateLocationSubscription
+  extends Promise<AsyncIterator<AggregateLocation>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMessageSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface GamePreviousValues {
@@ -5935,117 +6048,57 @@ export interface GamePreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface LocationEdge {
-  node: Location;
-  cursor: String;
-}
-
-export interface LocationEdgePromise
-  extends Promise<LocationEdge>,
-    Fragmentable {
-  node: <T = LocationPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface LocationEdgeSubscription
-  extends Promise<AsyncIterator<LocationEdge>>,
-    Fragmentable {
-  node: <T = LocationSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Playlist {
-  id: ID_Output;
-  spotifyId: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  uri: String;
-  spotifyExternalUrl: String;
-  name: String;
-  isTemporary?: Boolean;
-}
-
-export interface PlaylistPromise extends Promise<Playlist>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  spotifyId: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  uri: () => Promise<String>;
-  spotifyExternalUrl: () => Promise<String>;
-  user: <T = UserPromise>() => T;
-  parties: <T = FragmentableArray<Party>>(args?: {
-    where?: PartyWhereInput;
-    orderBy?: PartyOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  name: () => Promise<String>;
-  tracks: <T = FragmentableArray<PartySavedTrack>>(args?: {
-    where?: PartySavedTrackWhereInput;
-    orderBy?: PartySavedTrackOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  isTemporary: () => Promise<Boolean>;
-}
-
-export interface PlaylistSubscription
-  extends Promise<AsyncIterator<Playlist>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  spotifyId: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  uri: () => Promise<AsyncIterator<String>>;
-  spotifyExternalUrl: () => Promise<AsyncIterator<String>>;
-  user: <T = UserSubscription>() => T;
-  parties: <T = Promise<AsyncIterator<PartySubscription>>>(args?: {
-    where?: PartyWhereInput;
-    orderBy?: PartyOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  name: () => Promise<AsyncIterator<String>>;
-  tracks: <T = Promise<AsyncIterator<PartySavedTrackSubscription>>>(args?: {
-    where?: PartySavedTrackWhereInput;
-    orderBy?: PartySavedTrackOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  isTemporary: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface AlbumConnection {
+export interface LocationConnection {
   pageInfo: PageInfo;
-  edges: AlbumEdge[];
+  edges: LocationEdge[];
 }
 
-export interface AlbumConnectionPromise
-  extends Promise<AlbumConnection>,
+export interface LocationConnectionPromise
+  extends Promise<LocationConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<AlbumEdge>>() => T;
-  aggregate: <T = AggregateAlbumPromise>() => T;
+  edges: <T = FragmentableArray<LocationEdge>>() => T;
+  aggregate: <T = AggregateLocationPromise>() => T;
 }
 
-export interface AlbumConnectionSubscription
-  extends Promise<AsyncIterator<AlbumConnection>>,
+export interface LocationConnectionSubscription
+  extends Promise<AsyncIterator<LocationConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<AlbumEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateAlbumSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LocationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLocationSubscription>() => T;
+}
+
+export interface AggregateAlbum {
+  count: Int;
+}
+
+export interface AggregateAlbumPromise
+  extends Promise<AggregateAlbum>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAlbumSubscription
+  extends Promise<AsyncIterator<AggregateAlbum>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateImage {
+  count: Int;
+}
+
+export interface AggregateImagePromise
+  extends Promise<AggregateImage>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateImageSubscription
+  extends Promise<AsyncIterator<AggregateImage>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ImageSubscriptionPayload {
@@ -6073,21 +6126,25 @@ export interface ImageSubscriptionPayloadSubscription
   previousValues: <T = ImagePreviousValuesSubscription>() => T;
 }
 
-export interface ImageEdge {
-  node: Image;
-  cursor: String;
+export interface ImageConnection {
+  pageInfo: PageInfo;
+  edges: ImageEdge[];
 }
 
-export interface ImageEdgePromise extends Promise<ImageEdge>, Fragmentable {
-  node: <T = ImagePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ImageEdgeSubscription
-  extends Promise<AsyncIterator<ImageEdge>>,
+export interface ImageConnectionPromise
+  extends Promise<ImageConnection>,
     Fragmentable {
-  node: <T = ImageSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ImageEdge>>() => T;
+  aggregate: <T = AggregateImagePromise>() => T;
+}
+
+export interface ImageConnectionSubscription
+  extends Promise<AsyncIterator<ImageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ImageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateImageSubscription>() => T;
 }
 
 export interface ImagePreviousValues {
@@ -6115,27 +6172,27 @@ export interface ImagePreviousValuesSubscription
   url: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
+export interface Image {
+  id: ID_Output;
+  height: Int;
+  width: Int;
+  url: String;
 }
 
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
+export interface ImagePromise extends Promise<Image>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  height: () => Promise<Int>;
+  width: () => Promise<Int>;
+  url: () => Promise<String>;
 }
 
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface ImageSubscription
+  extends Promise<AsyncIterator<Image>>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  height: () => Promise<AsyncIterator<Int>>;
+  width: () => Promise<AsyncIterator<Int>>;
+  url: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Game {
@@ -6167,20 +6224,21 @@ export interface GameSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface AggregateGame {
-  count: Int;
+export interface GameEdge {
+  node: Game;
+  cursor: String;
 }
 
-export interface AggregateGamePromise
-  extends Promise<AggregateGame>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface GameEdgePromise extends Promise<GameEdge>, Fragmentable {
+  node: <T = GamePromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateGameSubscription
-  extends Promise<AsyncIterator<AggregateGame>>,
+export interface GameEdgeSubscription
+  extends Promise<AsyncIterator<GameEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = GameSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface LocationSubscriptionPayload {
@@ -6208,25 +6266,20 @@ export interface LocationSubscriptionPayloadSubscription
   previousValues: <T = LocationPreviousValuesSubscription>() => T;
 }
 
-export interface GameConnection {
-  pageInfo: PageInfo;
-  edges: GameEdge[];
+export interface AggregateChat {
+  count: Int;
 }
 
-export interface GameConnectionPromise
-  extends Promise<GameConnection>,
+export interface AggregateChatPromise
+  extends Promise<AggregateChat>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<GameEdge>>() => T;
-  aggregate: <T = AggregateGamePromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface GameConnectionSubscription
-  extends Promise<AsyncIterator<GameConnection>>,
+export interface AggregateChatSubscription
+  extends Promise<AsyncIterator<AggregateChat>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<GameEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateGameSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface LocationPreviousValues {
@@ -6260,20 +6313,25 @@ export interface LocationPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface AggregateUser {
-  count: Int;
+export interface ChatConnection {
+  pageInfo: PageInfo;
+  edges: ChatEdge[];
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface ChatConnectionPromise
+  extends Promise<ChatConnection>,
     Fragmentable {
-  count: () => Promise<Int>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ChatEdge>>() => T;
+  aggregate: <T = AggregateChatPromise>() => T;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface ChatConnectionSubscription
+  extends Promise<AsyncIterator<ChatConnection>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ChatEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateChatSubscription>() => T;
 }
 
 export interface Location {
@@ -6538,20 +6596,21 @@ export interface PartyPreviousValuesSubscription
   inviteSecret: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateParty {
-  count: Int;
+export interface PartyEdge {
+  node: Party;
+  cursor: String;
 }
 
-export interface AggregatePartyPromise
-  extends Promise<AggregateParty>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface PartyEdgePromise extends Promise<PartyEdge>, Fragmentable {
+  node: <T = PartyPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregatePartySubscription
-  extends Promise<AsyncIterator<AggregateParty>>,
+export interface PartyEdgeSubscription
+  extends Promise<AsyncIterator<PartyEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = PartySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PartyInvitation {
@@ -6585,21 +6644,25 @@ export interface PartyInvitationSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface MessageEdge {
-  node: Message;
-  cursor: String;
+export interface MessageConnection {
+  pageInfo: PageInfo;
+  edges: MessageEdge[];
 }
 
-export interface MessageEdgePromise extends Promise<MessageEdge>, Fragmentable {
-  node: <T = MessagePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface MessageEdgeSubscription
-  extends Promise<AsyncIterator<MessageEdge>>,
+export interface MessageConnectionPromise
+  extends Promise<MessageConnection>,
     Fragmentable {
-  node: <T = MessageSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MessageEdge>>() => T;
+  aggregate: <T = AggregateMessagePromise>() => T;
+}
+
+export interface MessageConnectionSubscription
+  extends Promise<AsyncIterator<MessageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MessageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMessageSubscription>() => T;
 }
 
 export interface PartyCartSubscriptionPayload {
@@ -6627,25 +6690,151 @@ export interface PartyCartSubscriptionPayloadSubscription
   previousValues: <T = PartyCartPreviousValuesSubscription>() => T;
 }
 
-export interface LocationConnection {
-  pageInfo: PageInfo;
-  edges: LocationEdge[];
+export interface User {
+  id: ID_Output;
+  email: String;
+  firstName: String;
+  lastName: String;
+  password: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  lastOnline?: DateTimeOutput;
+  deleted: Boolean;
+  provider?: SocialMediaType;
+  avatar?: String;
+  thirdPartyId?: String;
+  resetToken?: String;
+  resetTokenExpiry?: DateTimeOutput;
 }
 
-export interface LocationConnectionPromise
-  extends Promise<LocationConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LocationEdge>>() => T;
-  aggregate: <T = AggregateLocationPromise>() => T;
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  password: () => Promise<String>;
+  parties: <T = FragmentableArray<Party>>(args?: {
+    where?: PartyWhereInput;
+    orderBy?: PartyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  friends: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  pendingFriendInvitations: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  pendingPartyInvitations: <T = FragmentableArray<PartyInvitation>>(args?: {
+    where?: PartyInvitationWhereInput;
+    orderBy?: PartyInvitationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  chats: <T = FragmentableArray<Chat>>(args?: {
+    where?: ChatWhereInput;
+    orderBy?: ChatOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  lastOnline: () => Promise<DateTimeOutput>;
+  deleted: () => Promise<Boolean>;
+  provider: () => Promise<SocialMediaType>;
+  avatar: () => Promise<String>;
+  thirdPartyId: () => Promise<String>;
+  resetToken: () => Promise<String>;
+  resetTokenExpiry: () => Promise<DateTimeOutput>;
 }
 
-export interface LocationConnectionSubscription
-  extends Promise<AsyncIterator<LocationConnection>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LocationEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLocationSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  parties: <T = Promise<AsyncIterator<PartySubscription>>>(args?: {
+    where?: PartyWhereInput;
+    orderBy?: PartyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  friends: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  pendingFriendInvitations: <
+    T = Promise<AsyncIterator<UserSubscription>>
+  >(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  pendingPartyInvitations: <
+    T = Promise<AsyncIterator<PartyInvitationSubscription>>
+  >(args?: {
+    where?: PartyInvitationWhereInput;
+    orderBy?: PartyInvitationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  chats: <T = Promise<AsyncIterator<ChatSubscription>>>(args?: {
+    where?: ChatWhereInput;
+    orderBy?: ChatOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  lastOnline: () => Promise<AsyncIterator<DateTimeOutput>>;
+  deleted: () => Promise<AsyncIterator<Boolean>>;
+  provider: () => Promise<AsyncIterator<SocialMediaType>>;
+  avatar: () => Promise<AsyncIterator<String>>;
+  thirdPartyId: () => Promise<AsyncIterator<String>>;
+  resetToken: () => Promise<AsyncIterator<String>>;
+  resetTokenExpiry: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface PartyCartPreviousValues {
@@ -6664,25 +6853,25 @@ export interface PartyCartPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
 }
 
-export interface ImageConnection {
+export interface AlbumConnection {
   pageInfo: PageInfo;
-  edges: ImageEdge[];
+  edges: AlbumEdge[];
 }
 
-export interface ImageConnectionPromise
-  extends Promise<ImageConnection>,
+export interface AlbumConnectionPromise
+  extends Promise<AlbumConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ImageEdge>>() => T;
-  aggregate: <T = AggregateImagePromise>() => T;
+  edges: <T = FragmentableArray<AlbumEdge>>() => T;
+  aggregate: <T = AggregateAlbumPromise>() => T;
 }
 
-export interface ImageConnectionSubscription
-  extends Promise<AsyncIterator<ImageConnection>>,
+export interface AlbumConnectionSubscription
+  extends Promise<AsyncIterator<AlbumConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ImageEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateImageSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<AlbumEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateAlbumSubscription>() => T;
 }
 
 export interface ArtistConnection {
@@ -6706,21 +6895,25 @@ export interface ArtistConnectionSubscription
   aggregate: <T = AggregateArtistSubscription>() => T;
 }
 
-export interface GameEdge {
-  node: Game;
-  cursor: String;
+export interface GameConnection {
+  pageInfo: PageInfo;
+  edges: GameEdge[];
 }
 
-export interface GameEdgePromise extends Promise<GameEdge>, Fragmentable {
-  node: <T = GamePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface GameEdgeSubscription
-  extends Promise<AsyncIterator<GameEdge>>,
+export interface GameConnectionPromise
+  extends Promise<GameConnection>,
     Fragmentable {
-  node: <T = GameSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<GameEdge>>() => T;
+  aggregate: <T = AggregateGamePromise>() => T;
+}
+
+export interface GameConnectionSubscription
+  extends Promise<AsyncIterator<GameConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<GameEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateGameSubscription>() => T;
 }
 
 export interface PartyCartItemSubscriptionPayload {
@@ -6879,25 +7072,20 @@ export interface PartyInvitationSubscriptionPayloadSubscription
   previousValues: <T = PartyInvitationPreviousValuesSubscription>() => T;
 }
 
-export interface PartyConnection {
-  pageInfo: PageInfo;
-  edges: PartyEdge[];
+export interface AggregateMessage {
+  count: Int;
 }
 
-export interface PartyConnectionPromise
-  extends Promise<PartyConnection>,
+export interface AggregateMessagePromise
+  extends Promise<AggregateMessage>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PartyEdge>>() => T;
-  aggregate: <T = AggregatePartyPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface PartyConnectionSubscription
-  extends Promise<AsyncIterator<PartyConnection>>,
+export interface AggregateMessageSubscription
+  extends Promise<AsyncIterator<AggregateMessage>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PartyEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePartySubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface PartyInvitationPreviousValues {
@@ -6925,20 +7113,21 @@ export interface PartyInvitationPreviousValuesSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface AggregateImage {
-  count: Int;
+export interface ImageEdge {
+  node: Image;
+  cursor: String;
 }
 
-export interface AggregateImagePromise
-  extends Promise<AggregateImage>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface ImageEdgePromise extends Promise<ImageEdge>, Fragmentable {
+  node: <T = ImagePromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateImageSubscription
-  extends Promise<AsyncIterator<AggregateImage>>,
+export interface ImageEdgeSubscription
+  extends Promise<AsyncIterator<ImageEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = ImageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AggregateArtist {
@@ -6957,20 +7146,21 @@ export interface AggregateArtistSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface AggregateChat {
-  count: Int;
+export interface ChatEdge {
+  node: Chat;
+  cursor: String;
 }
 
-export interface AggregateChatPromise
-  extends Promise<AggregateChat>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface ChatEdgePromise extends Promise<ChatEdge>, Fragmentable {
+  node: <T = ChatPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateChatSubscription
-  extends Promise<AsyncIterator<AggregateChat>>,
+export interface ChatEdgeSubscription
+  extends Promise<AsyncIterator<ChatEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = ChatSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AggregatePartyInvitation {
@@ -7153,43 +7343,39 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface Image {
-  id: ID_Output;
-  height: Int;
-  width: Int;
-  url: String;
-}
-
-export interface ImagePromise extends Promise<Image>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  height: () => Promise<Int>;
-  width: () => Promise<Int>;
-  url: () => Promise<String>;
-}
-
-export interface ImageSubscription
-  extends Promise<AsyncIterator<Image>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  height: () => Promise<AsyncIterator<Int>>;
-  width: () => Promise<AsyncIterator<Int>>;
-  url: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateLocation {
+export interface AggregateGame {
   count: Int;
 }
 
-export interface AggregateLocationPromise
-  extends Promise<AggregateLocation>,
+export interface AggregateGamePromise
+  extends Promise<AggregateGame>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateLocationSubscription
-  extends Promise<AsyncIterator<AggregateLocation>>,
+export interface AggregateGameSubscription
+  extends Promise<AsyncIterator<AggregateGame>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface LocationEdge {
+  node: Location;
+  cursor: String;
+}
+
+export interface LocationEdgePromise
+  extends Promise<LocationEdge>,
+    Fragmentable {
+  node: <T = LocationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LocationEdgeSubscription
+  extends Promise<AsyncIterator<LocationEdge>>,
+    Fragmentable {
+  node: <T = LocationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 /*

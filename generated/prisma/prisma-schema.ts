@@ -1662,7 +1662,7 @@ type Party {
   start: DateTime!
   end: DateTime!
   inviteSecret: String!
-  playlist: Playlist
+  playlist(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Playlist!]
   savedTracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
   cart: PartyCart
 }
@@ -2101,7 +2101,7 @@ input PartyCreateInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-  playlist: PlaylistCreateOneWithoutPartiesInput
+  playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
   cart: PartyCartCreateOneWithoutPartyInput
 }
@@ -2145,7 +2145,7 @@ input PartyCreateWithoutCartInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-  playlist: PlaylistCreateOneWithoutPartiesInput
+  playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
 }
 
@@ -2162,7 +2162,7 @@ input PartyCreateWithoutMembersInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-  playlist: PlaylistCreateOneWithoutPartiesInput
+  playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
   cart: PartyCartCreateOneWithoutPartyInput
 }
@@ -2199,7 +2199,7 @@ input PartyCreateWithoutSavedTracksInput {
   start: DateTime
   end: DateTime
   inviteSecret: String!
-  playlist: PlaylistCreateOneWithoutPartiesInput
+  playlist: PlaylistCreateManyWithoutPartiesInput
   cart: PartyCartCreateOneWithoutPartyInput
 }
 
@@ -3138,7 +3138,7 @@ input PartyUpdateDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneWithoutPartiesInput
+  playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
   cart: PartyCartUpdateOneWithoutPartyInput
 }
@@ -3156,7 +3156,7 @@ input PartyUpdateInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneWithoutPartiesInput
+  playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
   cart: PartyCartUpdateOneWithoutPartyInput
 }
@@ -3246,7 +3246,7 @@ input PartyUpdateWithoutCartDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneWithoutPartiesInput
+  playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
 }
 
@@ -3262,7 +3262,7 @@ input PartyUpdateWithoutMembersDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneWithoutPartiesInput
+  playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
   cart: PartyCartUpdateOneWithoutPartyInput
 }
@@ -3297,7 +3297,7 @@ input PartyUpdateWithoutSavedTracksDataInput {
   start: DateTime
   end: DateTime
   inviteSecret: String
-  playlist: PlaylistUpdateOneWithoutPartiesInput
+  playlist: PlaylistUpdateManyWithoutPartiesInput
   cart: PartyCartUpdateOneWithoutPartyInput
 }
 
@@ -3465,7 +3465,9 @@ input PartyWhereInput {
   inviteSecret_not_starts_with: String
   inviteSecret_ends_with: String
   inviteSecret_not_ends_with: String
-  playlist: PlaylistWhereInput
+  playlist_every: PlaylistWhereInput
+  playlist_some: PlaylistWhereInput
+  playlist_none: PlaylistWhereInput
   savedTracks_every: PartySavedTrackWhereInput
   savedTracks_some: PartySavedTrackWhereInput
   savedTracks_none: PartySavedTrackWhereInput
@@ -3490,6 +3492,7 @@ type Playlist {
   user: User!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   name: String!
+  imageUrl: String!
   tracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
   isTemporary: Boolean
 }
@@ -3508,13 +3511,14 @@ input PlaylistCreateInput {
   user: UserCreateOneInput!
   parties: PartyCreateManyWithoutPlaylistInput
   name: String!
+  imageUrl: String!
   tracks: PartySavedTrackCreateManyInput
   isTemporary: Boolean
 }
 
-input PlaylistCreateOneWithoutPartiesInput {
-  create: PlaylistCreateWithoutPartiesInput
-  connect: PlaylistWhereUniqueInput
+input PlaylistCreateManyWithoutPartiesInput {
+  create: [PlaylistCreateWithoutPartiesInput!]
+  connect: [PlaylistWhereUniqueInput!]
 }
 
 input PlaylistCreateWithoutPartiesInput {
@@ -3524,6 +3528,7 @@ input PlaylistCreateWithoutPartiesInput {
   spotifyExternalUrl: String!
   user: UserCreateOneInput!
   name: String!
+  imageUrl: String!
   tracks: PartySavedTrackCreateManyInput
   isTemporary: Boolean
 }
@@ -3548,6 +3553,8 @@ enum PlaylistOrderByInput {
   spotifyExternalUrl_DESC
   name_ASC
   name_DESC
+  imageUrl_ASC
+  imageUrl_DESC
   isTemporary_ASC
   isTemporary_DESC
 }
@@ -3560,7 +3567,116 @@ type PlaylistPreviousValues {
   uri: String!
   spotifyExternalUrl: String!
   name: String!
+  imageUrl: String!
   isTemporary: Boolean
+}
+
+input PlaylistScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  spotifyId: ID
+  spotifyId_not: ID
+  spotifyId_in: [ID!]
+  spotifyId_not_in: [ID!]
+  spotifyId_lt: ID
+  spotifyId_lte: ID
+  spotifyId_gt: ID
+  spotifyId_gte: ID
+  spotifyId_contains: ID
+  spotifyId_not_contains: ID
+  spotifyId_starts_with: ID
+  spotifyId_not_starts_with: ID
+  spotifyId_ends_with: ID
+  spotifyId_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  uri: String
+  uri_not: String
+  uri_in: [String!]
+  uri_not_in: [String!]
+  uri_lt: String
+  uri_lte: String
+  uri_gt: String
+  uri_gte: String
+  uri_contains: String
+  uri_not_contains: String
+  uri_starts_with: String
+  uri_not_starts_with: String
+  uri_ends_with: String
+  uri_not_ends_with: String
+  spotifyExternalUrl: String
+  spotifyExternalUrl_not: String
+  spotifyExternalUrl_in: [String!]
+  spotifyExternalUrl_not_in: [String!]
+  spotifyExternalUrl_lt: String
+  spotifyExternalUrl_lte: String
+  spotifyExternalUrl_gt: String
+  spotifyExternalUrl_gte: String
+  spotifyExternalUrl_contains: String
+  spotifyExternalUrl_not_contains: String
+  spotifyExternalUrl_starts_with: String
+  spotifyExternalUrl_not_starts_with: String
+  spotifyExternalUrl_ends_with: String
+  spotifyExternalUrl_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  isTemporary: Boolean
+  isTemporary_not: Boolean
+  AND: [PlaylistScalarWhereInput!]
+  OR: [PlaylistScalarWhereInput!]
+  NOT: [PlaylistScalarWhereInput!]
 }
 
 type PlaylistSubscriptionPayload {
@@ -3588,7 +3704,17 @@ input PlaylistUpdateInput {
   user: UserUpdateOneRequiredInput
   parties: PartyUpdateManyWithoutPlaylistInput
   name: String
+  imageUrl: String
   tracks: PartySavedTrackUpdateManyInput
+  isTemporary: Boolean
+}
+
+input PlaylistUpdateManyDataInput {
+  spotifyId: ID
+  uri: String
+  spotifyExternalUrl: String
+  name: String
+  imageUrl: String
   isTemporary: Boolean
 }
 
@@ -3597,16 +3723,25 @@ input PlaylistUpdateManyMutationInput {
   uri: String
   spotifyExternalUrl: String
   name: String
+  imageUrl: String
   isTemporary: Boolean
 }
 
-input PlaylistUpdateOneWithoutPartiesInput {
-  create: PlaylistCreateWithoutPartiesInput
-  update: PlaylistUpdateWithoutPartiesDataInput
-  upsert: PlaylistUpsertWithoutPartiesInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: PlaylistWhereUniqueInput
+input PlaylistUpdateManyWithoutPartiesInput {
+  create: [PlaylistCreateWithoutPartiesInput!]
+  delete: [PlaylistWhereUniqueInput!]
+  connect: [PlaylistWhereUniqueInput!]
+  set: [PlaylistWhereUniqueInput!]
+  disconnect: [PlaylistWhereUniqueInput!]
+  update: [PlaylistUpdateWithWhereUniqueWithoutPartiesInput!]
+  upsert: [PlaylistUpsertWithWhereUniqueWithoutPartiesInput!]
+  deleteMany: [PlaylistScalarWhereInput!]
+  updateMany: [PlaylistUpdateManyWithWhereNestedInput!]
+}
+
+input PlaylistUpdateManyWithWhereNestedInput {
+  where: PlaylistScalarWhereInput!
+  data: PlaylistUpdateManyDataInput!
 }
 
 input PlaylistUpdateWithoutPartiesDataInput {
@@ -3615,11 +3750,18 @@ input PlaylistUpdateWithoutPartiesDataInput {
   spotifyExternalUrl: String
   user: UserUpdateOneRequiredInput
   name: String
+  imageUrl: String
   tracks: PartySavedTrackUpdateManyInput
   isTemporary: Boolean
 }
 
-input PlaylistUpsertWithoutPartiesInput {
+input PlaylistUpdateWithWhereUniqueWithoutPartiesInput {
+  where: PlaylistWhereUniqueInput!
+  data: PlaylistUpdateWithoutPartiesDataInput!
+}
+
+input PlaylistUpsertWithWhereUniqueWithoutPartiesInput {
+  where: PlaylistWhereUniqueInput!
   update: PlaylistUpdateWithoutPartiesDataInput!
   create: PlaylistCreateWithoutPartiesInput!
 }
@@ -3715,6 +3857,20 @@ input PlaylistWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
   tracks_every: PartySavedTrackWhereInput
   tracks_some: PartySavedTrackWhereInput
   tracks_none: PartySavedTrackWhereInput

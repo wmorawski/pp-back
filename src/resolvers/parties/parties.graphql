@@ -67,7 +67,6 @@ type Mutation {
   ): PartyInvitation
   joinParty(partyId: ID!): Boolean
   createPartySavedTrack(data: PartySavedTrackCreateInput!): PartySavedTrack!
-  createPlaylist(data: PlaylistCreateInput!): Playlist!
 }
 
 type Subscription {

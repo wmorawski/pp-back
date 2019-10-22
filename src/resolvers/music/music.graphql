@@ -1,0 +1,15 @@
+type Query {
+  playlistsConnection(
+    where: PlaylistWhereInput
+    orderBy: PlaylistOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PlaylistConnection!
+}
+
+type Mutation {
+  createPlaylist(data: PlaylistCreateInput!): Playlist!
+}

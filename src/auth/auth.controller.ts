@@ -199,6 +199,12 @@ export class AuthController {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
+  @Get('spotify')
+  @UseGuards(AuthGuard('spotify'))
+  async spotifyLogin() {
+    // do not remove me lol plix
+  }
+
   @Post('spotify/new-token')
   @UseGuards(AuthGuard('jwt'))
   async TestSomething(@Body() { refreshToken }: GetNewSpotifyTokenDto) {

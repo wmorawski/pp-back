@@ -25,6 +25,11 @@ export class MusicResolver {
     return this.prisma.mutation.updatePlaylist(args, info);
   }
 
+  @Mutation('deletePlaylist')
+  async deletePlaylist(@Args() args, @Info() info) {
+    return this.prisma.mutation.deletePlaylist(args, info);
+  }
+
   @Mutation('importPlaylistsToParty')
   async importPlaylistsToParty(@Args() { playlists, partyId }, @Info() info) {
     try {

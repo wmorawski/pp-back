@@ -17,4 +17,5 @@ type Mutation {
     where: PlaylistWhereUniqueInput!
   ): Playlist
   importPlaylistsToParty(playlists: String!, partyId: ID!): Boolean!
+  deletePlaylist(where: PlaylistWhereUniqueInput!): Playlist
 }

@@ -157,6 +157,13 @@ export class AuthController {
     res.redirect(getSuccessReAuthCallbackUrl(req.user));
   }
 
+  // DO NOT DELETE ME
+  @Get('spotify/reAuth')
+  @UseGuards(AuthGuard('spotify-reauth'))
+  async spotifyReAuth() {
+    // empty
+  }
+
   @Get('facebook')
   async handleOauthRequest(
     @Req() req: Request,
@@ -199,10 +206,11 @@ export class AuthController {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
+  // DO NOT DELETE ME
   @Get('spotify')
   @UseGuards(AuthGuard('spotify'))
   async spotifyLogin() {
-    // do not remove me lol plix
+    // empty
   }
 
   @Post('spotify/new-token')

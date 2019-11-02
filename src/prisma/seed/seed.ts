@@ -67,6 +67,7 @@ const createFakeParty = (author: any, members: any[]): PartyCreateInput => {
     end: partyEndDate,
     colorTint: faker.random.arrayElement(calendarTintsHexArray),
     inviteSecret: uuid(),
+    cart: {},
   };
 };
 const getRandomElementsFromArray = (arr: any[]) => {

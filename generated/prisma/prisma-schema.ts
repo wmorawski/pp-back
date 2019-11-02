@@ -1664,7 +1664,7 @@ type Party {
   inviteSecret: String!
   playlist(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Playlist!]
   savedTracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
-  cart: PartyCart
+  cart: PartyCart!
 }
 
 type PartyCart {
@@ -1717,6 +1717,7 @@ type PartyCartItem {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int!
 }
 
@@ -1733,6 +1734,7 @@ input PartyCartItemCreateInput {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int
 }
 
@@ -1747,6 +1749,7 @@ input PartyCartItemCreateWithoutCartInput {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int
 }
 
@@ -1764,6 +1767,8 @@ enum PartyCartItemOrderByInput {
   description_DESC
   price_ASC
   price_DESC
+  status_ASC
+  status_DESC
   quantity_ASC
   quantity_DESC
 }
@@ -1773,6 +1778,7 @@ type PartyCartItemPreviousValues {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int!
 }
 
@@ -1827,6 +1833,10 @@ input PartyCartItemScalarWhereInput {
   price_lte: Float
   price_gt: Float
   price_gte: Float
+  status: PartyCartItemStatus
+  status_not: PartyCartItemStatus
+  status_in: [PartyCartItemStatus!]
+  status_not_in: [PartyCartItemStatus!]
   quantity: Int
   quantity_not: Int
   quantity_in: [Int!]
@@ -1838,6 +1848,12 @@ input PartyCartItemScalarWhereInput {
   AND: [PartyCartItemScalarWhereInput!]
   OR: [PartyCartItemScalarWhereInput!]
   NOT: [PartyCartItemScalarWhereInput!]
+}
+
+enum PartyCartItemStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
 }
 
 type PartyCartItemSubscriptionPayload {
@@ -1864,6 +1880,7 @@ input PartyCartItemUpdateInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -1871,6 +1888,7 @@ input PartyCartItemUpdateManyDataInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -1878,6 +1896,7 @@ input PartyCartItemUpdateManyMutationInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -1903,6 +1922,7 @@ input PartyCartItemUpdateWithoutCartDataInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -1970,6 +1990,10 @@ input PartyCartItemWhereInput {
   price_lte: Float
   price_gt: Float
   price_gte: Float
+  status: PartyCartItemStatus
+  status_not: PartyCartItemStatus
+  status_in: [PartyCartItemStatus!]
+  status_not_in: [PartyCartItemStatus!]
   quantity: Int
   quantity_not: Int
   quantity_in: [Int!]
@@ -2026,12 +2050,10 @@ input PartyCartUpdateOneRequiredWithoutItemsInput {
   connect: PartyCartWhereUniqueInput
 }
 
-input PartyCartUpdateOneWithoutPartyInput {
+input PartyCartUpdateOneRequiredWithoutPartyInput {
   create: PartyCartCreateWithoutPartyInput
   update: PartyCartUpdateWithoutPartyDataInput
   upsert: PartyCartUpsertWithoutPartyInput
-  delete: Boolean
-  disconnect: Boolean
   connect: PartyCartWhereUniqueInput
 }
 
@@ -2103,7 +2125,7 @@ input PartyCreateInput {
   inviteSecret: String!
   playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateManyWithoutMembersInput {
@@ -2164,7 +2186,7 @@ input PartyCreateWithoutMembersInput {
   inviteSecret: String!
   playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateWithoutPlaylistInput {
@@ -2182,7 +2204,7 @@ input PartyCreateWithoutPlaylistInput {
   end: DateTime
   inviteSecret: String!
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateWithoutSavedTracksInput {
@@ -2200,7 +2222,7 @@ input PartyCreateWithoutSavedTracksInput {
   end: DateTime
   inviteSecret: String!
   playlist: PlaylistCreateManyWithoutPartiesInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 type PartyEdge {
@@ -3140,7 +3162,7 @@ input PartyUpdateDataInput {
   inviteSecret: String
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateInput {
@@ -3158,7 +3180,7 @@ input PartyUpdateInput {
   inviteSecret: String
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateManyDataInput {
@@ -3264,7 +3286,7 @@ input PartyUpdateWithoutMembersDataInput {
   inviteSecret: String
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithoutPlaylistDataInput {
@@ -3281,7 +3303,7 @@ input PartyUpdateWithoutPlaylistDataInput {
   end: DateTime
   inviteSecret: String
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithoutSavedTracksDataInput {
@@ -3298,7 +3320,7 @@ input PartyUpdateWithoutSavedTracksDataInput {
   end: DateTime
   inviteSecret: String
   playlist: PlaylistUpdateManyWithoutPartiesInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithWhereUniqueWithoutMembersInput {

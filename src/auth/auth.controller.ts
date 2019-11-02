@@ -143,6 +143,12 @@ export class AuthController {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
+  @Get('spotify')
+  @UseGuards(AuthGuard('spotify'))
+  async spotifyAuth() {
+    // empty block do not delete!
+  }
+
   @Get('spotify/callback')
   @UseFilters(SocialAuthAccessDeniedFilter)
   @UseGuards(AuthGuard('spotify'))

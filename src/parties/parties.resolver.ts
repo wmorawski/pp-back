@@ -1,4 +1,7 @@
-import { PartySavedTrackConnection } from './../prisma/prisma.binding';
+import {
+  PartySavedTrackConnection,
+  PartyCartItem,
+} from './../prisma/prisma.binding';
 
 import {
   Party,
@@ -52,7 +55,10 @@ export class PartiesResolver {
 
   @Mutation('createPartyCartItem')
   @UseGuards(GqlAuthGuard)
-  async createPartyCartItem(@Args() args, @Info() info) {
+  async createPartyCartItem(
+    @Args() args,
+    @Info() info,
+  ): Promise<PartyCartItem> {
     return await this.prisma.mutation.createPartyCartItem(args, info);
   }
 

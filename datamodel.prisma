@@ -100,7 +100,7 @@ type Playlist {
   name: String!
   imageUrl: String!
   tracks: [PartySavedTrack!]!
-  isTemporary: Boolean @default(value: true)
+  isTemporary: Boolean @default(value: false)
 }
 
 type PartyCart {
@@ -116,6 +116,7 @@ type PartyCartItem {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int! @default(value: 0)
 }
 
@@ -174,4 +175,10 @@ enum SocialMediaType {
   FACEBOOK
   SPOTIFY
   TWITTER
+}
+
+enum PartyCartItemStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
 }

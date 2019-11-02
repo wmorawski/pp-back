@@ -3180,7 +3180,7 @@ type Party implements Node {
   inviteSecret: String!
   playlist(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Playlist!]
   savedTracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
-  cart: PartyCart
+  cart: PartyCart!
 }
 
 type PartyCart implements Node {
@@ -3241,6 +3241,7 @@ type PartyCartItem implements Node {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int!
 }
 
@@ -3259,6 +3260,7 @@ input PartyCartItemCreateInput {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int
   cart: PartyCartCreateOneWithoutItemsInput!
   user: UserCreateOneInput
@@ -3274,6 +3276,7 @@ input PartyCartItemCreateWithoutCartInput {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int
   user: UserCreateOneInput
 }
@@ -3296,6 +3299,8 @@ enum PartyCartItemOrderByInput {
   description_DESC
   price_ASC
   price_DESC
+  status_ASC
+  status_DESC
   quantity_ASC
   quantity_DESC
 }
@@ -3305,6 +3310,7 @@ type PartyCartItemPreviousValues {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int!
 }
 
@@ -3459,6 +3465,16 @@ input PartyCartItemScalarWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Float
+  status: PartyCartItemStatus
+
+  """All values that are not equal to given value."""
+  status_not: PartyCartItemStatus
+
+  """All values that are contained in given list."""
+  status_in: [PartyCartItemStatus!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [PartyCartItemStatus!]
   quantity: Int
 
   """All values that are not equal to given value."""
@@ -3481,6 +3497,12 @@ input PartyCartItemScalarWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
+}
+
+enum PartyCartItemStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
 }
 
 type PartyCartItemSubscriptionPayload {
@@ -3526,6 +3548,7 @@ input PartyCartItemUpdateInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
   cart: PartyCartUpdateOneRequiredWithoutItemsInput
   user: UserUpdateOneInput
@@ -3535,6 +3558,7 @@ input PartyCartItemUpdateManyDataInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -3542,6 +3566,7 @@ input PartyCartItemUpdateManyMutationInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -3566,6 +3591,7 @@ input PartyCartItemUpdateWithoutCartDataInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
   user: UserUpdateOneInput
 }
@@ -3732,6 +3758,16 @@ input PartyCartItemWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Float
+  status: PartyCartItemStatus
+
+  """All values that are not equal to given value."""
+  status_not: PartyCartItemStatus
+
+  """All values that are contained in given list."""
+  status_in: [PartyCartItemStatus!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [PartyCartItemStatus!]
   quantity: Int
 
   """All values that are not equal to given value."""
@@ -3822,11 +3858,9 @@ input PartyCartUpdateOneRequiredWithoutItemsInput {
   upsert: PartyCartUpsertWithoutItemsInput
 }
 
-input PartyCartUpdateOneWithoutPartyInput {
+input PartyCartUpdateOneRequiredWithoutPartyInput {
   create: PartyCartCreateWithoutPartyInput
   connect: PartyCartWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
   update: PartyCartUpdateWithoutPartyDataInput
   upsert: PartyCartUpsertWithoutPartyInput
 }
@@ -3934,7 +3968,7 @@ input PartyCreateInput {
   members: UserCreateManyWithoutPartiesInput
   playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateManyWithoutMembersInput {
@@ -3995,7 +4029,7 @@ input PartyCreateWithoutMembersInput {
   games: GameCreateManyInput
   playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateWithoutPlaylistInput {
@@ -4013,7 +4047,7 @@ input PartyCreateWithoutPlaylistInput {
   games: GameCreateManyInput
   members: UserCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateWithoutSavedTracksInput {
@@ -4031,7 +4065,7 @@ input PartyCreateWithoutSavedTracksInput {
   games: GameCreateManyInput
   members: UserCreateManyWithoutPartiesInput
   playlist: PlaylistCreateManyWithoutPartiesInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 """An edge in a connection."""
@@ -5901,7 +5935,7 @@ input PartyUpdateDataInput {
   members: UserUpdateManyWithoutPartiesInput
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateInput {
@@ -5919,7 +5953,7 @@ input PartyUpdateInput {
   members: UserUpdateManyWithoutPartiesInput
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateManyDataInput {
@@ -6025,7 +6059,7 @@ input PartyUpdateWithoutMembersDataInput {
   games: GameUpdateManyInput
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithoutPlaylistDataInput {
@@ -6042,7 +6076,7 @@ input PartyUpdateWithoutPlaylistDataInput {
   games: GameUpdateManyInput
   members: UserUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithoutSavedTracksDataInput {
@@ -6059,7 +6093,7 @@ input PartyUpdateWithoutSavedTracksDataInput {
   games: GameUpdateManyInput
   members: UserUpdateManyWithoutPartiesInput
   playlist: PlaylistUpdateManyWithoutPartiesInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -9063,8 +9097,14 @@ export type PartyCartItemOrderByInput =   'id_ASC' |
   'description_DESC' |
   'price_ASC' |
   'price_DESC' |
+  'status_ASC' |
+  'status_DESC' |
   'quantity_ASC' |
   'quantity_DESC'
+
+export type PartyCartItemStatus =   'PENDING' |
+  'ACCEPTED' |
+  'REJECTED'
 
 export type PartyCartOrderByInput =   'id_ASC' |
   'id_DESC'
@@ -10350,6 +10390,7 @@ export interface PartyCartItemCreateInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity?: Int | null
   cart: PartyCartCreateOneWithoutItemsInput
   user?: UserCreateOneInput | null
@@ -10365,6 +10406,7 @@ export interface PartyCartItemCreateWithoutCartInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity?: Int | null
   user?: UserCreateOneInput | null
 }
@@ -10423,6 +10465,10 @@ export interface PartyCartItemScalarWhereInput {
   price_lte?: Float | null
   price_gt?: Float | null
   price_gte?: Float | null
+  status?: PartyCartItemStatus | null
+  status_not?: PartyCartItemStatus | null
+  status_in?: PartyCartItemStatus[] | PartyCartItemStatus | null
+  status_not_in?: PartyCartItemStatus[] | PartyCartItemStatus | null
   quantity?: Int | null
   quantity_not?: Int | null
   quantity_in?: Int[] | Int | null
@@ -10448,6 +10494,7 @@ export interface PartyCartItemUpdateInput {
   name?: String | null
   description?: String | null
   price?: Float | null
+  status?: PartyCartItemStatus | null
   quantity?: Int | null
   cart?: PartyCartUpdateOneRequiredWithoutItemsInput | null
   user?: UserUpdateOneInput | null
@@ -10457,6 +10504,7 @@ export interface PartyCartItemUpdateManyDataInput {
   name?: String | null
   description?: String | null
   price?: Float | null
+  status?: PartyCartItemStatus | null
   quantity?: Int | null
 }
 
@@ -10464,6 +10512,7 @@ export interface PartyCartItemUpdateManyMutationInput {
   name?: String | null
   description?: String | null
   price?: Float | null
+  status?: PartyCartItemStatus | null
   quantity?: Int | null
 }
 
@@ -10488,6 +10537,7 @@ export interface PartyCartItemUpdateWithoutCartDataInput {
   name?: String | null
   description?: String | null
   price?: Float | null
+  status?: PartyCartItemStatus | null
   quantity?: Int | null
   user?: UserUpdateOneInput | null
 }
@@ -10557,6 +10607,10 @@ export interface PartyCartItemWhereInput {
   price_lte?: Float | null
   price_gt?: Float | null
   price_gte?: Float | null
+  status?: PartyCartItemStatus | null
+  status_not?: PartyCartItemStatus | null
+  status_in?: PartyCartItemStatus[] | PartyCartItemStatus | null
+  status_not_in?: PartyCartItemStatus[] | PartyCartItemStatus | null
   quantity?: Int | null
   quantity_not?: Int | null
   quantity_in?: Int[] | Int | null
@@ -10596,11 +10650,9 @@ export interface PartyCartUpdateOneRequiredWithoutItemsInput {
   upsert?: PartyCartUpsertWithoutItemsInput | null
 }
 
-export interface PartyCartUpdateOneWithoutPartyInput {
+export interface PartyCartUpdateOneRequiredWithoutPartyInput {
   create?: PartyCartCreateWithoutPartyInput | null
   connect?: PartyCartWhereUniqueInput | null
-  disconnect?: Boolean | null
-  delete?: Boolean | null
   update?: PartyCartUpdateWithoutPartyDataInput | null
   upsert?: PartyCartUpsertWithoutPartyInput | null
 }
@@ -10667,7 +10719,7 @@ export interface PartyCreateInput {
   members?: UserCreateManyWithoutPartiesInput | null
   playlist?: PlaylistCreateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackCreateManyWithoutPartyInput | null
-  cart?: PartyCartCreateOneWithoutPartyInput | null
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 export interface PartyCreateManyWithoutMembersInput {
@@ -10728,7 +10780,7 @@ export interface PartyCreateWithoutMembersInput {
   games?: GameCreateManyInput | null
   playlist?: PlaylistCreateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackCreateManyWithoutPartyInput | null
-  cart?: PartyCartCreateOneWithoutPartyInput | null
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 export interface PartyCreateWithoutPlaylistInput {
@@ -10746,7 +10798,7 @@ export interface PartyCreateWithoutPlaylistInput {
   games?: GameCreateManyInput | null
   members?: UserCreateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackCreateManyWithoutPartyInput | null
-  cart?: PartyCartCreateOneWithoutPartyInput | null
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 export interface PartyCreateWithoutSavedTracksInput {
@@ -10764,7 +10816,7 @@ export interface PartyCreateWithoutSavedTracksInput {
   games?: GameCreateManyInput | null
   members?: UserCreateManyWithoutPartiesInput | null
   playlist?: PlaylistCreateManyWithoutPartiesInput | null
-  cart?: PartyCartCreateOneWithoutPartyInput | null
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 export interface PartyInvitationCreateInput {
@@ -11538,7 +11590,7 @@ export interface PartyUpdateDataInput {
   members?: UserUpdateManyWithoutPartiesInput | null
   playlist?: PlaylistUpdateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateInput {
@@ -11556,7 +11608,7 @@ export interface PartyUpdateInput {
   members?: UserUpdateManyWithoutPartiesInput | null
   playlist?: PlaylistUpdateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateManyDataInput {
@@ -11662,7 +11714,7 @@ export interface PartyUpdateWithoutMembersDataInput {
   games?: GameUpdateManyInput | null
   playlist?: PlaylistUpdateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateWithoutPlaylistDataInput {
@@ -11679,7 +11731,7 @@ export interface PartyUpdateWithoutPlaylistDataInput {
   games?: GameUpdateManyInput | null
   members?: UserUpdateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateWithoutSavedTracksDataInput {
@@ -11696,7 +11748,7 @@ export interface PartyUpdateWithoutSavedTracksDataInput {
   games?: GameUpdateManyInput | null
   members?: UserUpdateManyWithoutPartiesInput | null
   playlist?: PlaylistUpdateManyWithoutPartiesInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -13384,7 +13436,7 @@ export interface Party extends Node {
   inviteSecret: String
   playlist?: Array<Playlist> | null
   savedTracks?: Array<PartySavedTrack> | null
-  cart?: PartyCart | null
+  cart: PartyCart
 }
 
 export interface PartyCart extends Node {
@@ -13419,6 +13471,7 @@ export interface PartyCartItem extends Node {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -13446,6 +13499,7 @@ export interface PartyCartItemPreviousValues {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 

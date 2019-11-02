@@ -58,7 +58,7 @@ type Party {
   inviteSecret: String! @unique
   playlist: [Playlist!]
   savedTracks: [PartySavedTrack!]
-  cart: PartyCart @relation(link: INLINE)
+  cart: PartyCart! @relation(link: INLINE)
 }
 
 type Chat {

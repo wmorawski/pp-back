@@ -51,6 +51,16 @@ type Query {
     first: Int
     last: Int
   ): [PartySavedTrack]!
+
+  partyCartItemsConnection(
+    where: PartyCartItemWhereInput
+    orderBy: PartyCartItemOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PartyCartItemConnection!
 }
 type PartyUserInviteInput {
   inviteSecret: String!
@@ -67,6 +77,7 @@ type Mutation {
   ): PartyInvitation
   joinParty(partyId: ID!): Boolean
   createPartySavedTrack(data: PartySavedTrackCreateInput!): PartySavedTrack!
+  createPartyCartItem(data: PartyCartItemCreateInput!): PartyCartItem!
 }
 
 type Subscription {

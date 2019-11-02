@@ -23,6 +23,7 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
 import { CanJoinPartyArgs, JoinPartyWhereInput } from './parties.types';
 import { GraphQLError } from 'graphql';
+import { PartyCartItemConnection } from 'generated/prisma';
 
 @Resolver('parties')
 export class PartiesResolver {
@@ -44,8 +45,15 @@ export class PartiesResolver {
   }
 
   @Mutation('createPartyInvitation')
+  @UseGuards(GqlAuthGuard)
   async createPartyInvitation(@Args() args, @Info() info) {
     return await this.prisma.mutation.createPartyInvitation(args, info);
+  }
+
+  @Mutation('createPartyCartItem')
+  @UseGuards(GqlAuthGuard)
+  async createPartyCartItem(@Args() args, @Info() info) {
+    return await this.prisma.mutation.createPartyCartItem(args, info);
   }
 
   @Mutation('deleteManyPartyInvitations')
@@ -172,6 +180,15 @@ export class PartiesResolver {
     @Info() info,
   ): Promise<PartySavedTrackConnection> {
     return await this.prisma.query.partySavedTracksConnection(args, info);
+  }
+
+  @Query('partyCartItemsConnection')
+  @UseGuards(GqlAuthGuard)
+  async PartyCartItemsConnection(
+    @Args() args,
+    @Info() info,
+  ): Promise<PartyCartItemConnection> {
+    return await this.prisma.query.partyCartItemsConnection(args, info);
   }
 
   @Query('partySavedTracks')

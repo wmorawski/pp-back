@@ -4563,7 +4563,7 @@ type PartySavedTrack implements Node {
   explicit: Boolean!
   name: String!
   previewUrl: String
-  uri: ID!
+  uri: String!
   party: Party!
   stringArtists: String!
   length: String!
@@ -4588,7 +4588,7 @@ input PartySavedTrackCreateInput {
   explicit: Boolean!
   name: String!
   previewUrl: String
-  uri: ID!
+  uri: String!
   stringArtists: String!
   length: String!
   popularity: Int!
@@ -4613,7 +4613,7 @@ input PartySavedTrackCreateWithoutPartyInput {
   explicit: Boolean!
   name: String!
   previewUrl: String
-  uri: ID!
+  uri: String!
   stringArtists: String!
   length: String!
   popularity: Int!
@@ -4659,7 +4659,7 @@ type PartySavedTrackPreviousValues {
   explicit: Boolean!
   name: String!
   previewUrl: String
-  uri: ID!
+  uri: String!
   stringArtists: String!
   length: String!
   popularity: Int!
@@ -4860,46 +4860,46 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   previewUrl_not_ends_with: String
-  uri: ID
+  uri: String
 
   """All values that are not equal to given value."""
-  uri_not: ID
+  uri_not: String
 
   """All values that are contained in given list."""
-  uri_in: [ID!]
+  uri_in: [String!]
 
   """All values that are not contained in given list."""
-  uri_not_in: [ID!]
+  uri_not_in: [String!]
 
   """All values less than the given value."""
-  uri_lt: ID
+  uri_lt: String
 
   """All values less than or equal the given value."""
-  uri_lte: ID
+  uri_lte: String
 
   """All values greater than the given value."""
-  uri_gt: ID
+  uri_gt: String
 
   """All values greater than or equal the given value."""
-  uri_gte: ID
+  uri_gte: String
 
   """All values containing the given string."""
-  uri_contains: ID
+  uri_contains: String
 
   """All values not containing the given string."""
-  uri_not_contains: ID
+  uri_not_contains: String
 
   """All values starting with the given string."""
-  uri_starts_with: ID
+  uri_starts_with: String
 
   """All values not starting with the given string."""
-  uri_not_starts_with: ID
+  uri_not_starts_with: String
 
   """All values ending with the given string."""
-  uri_ends_with: ID
+  uri_ends_with: String
 
   """All values not ending with the given string."""
-  uri_not_ends_with: ID
+  uri_not_ends_with: String
   stringArtists: String
 
   """All values that are not equal to given value."""
@@ -5049,7 +5049,7 @@ input PartySavedTrackUpdateDataInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -5063,7 +5063,7 @@ input PartySavedTrackUpdateInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -5077,7 +5077,7 @@ input PartySavedTrackUpdateManyDataInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -5101,7 +5101,7 @@ input PartySavedTrackUpdateManyMutationInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -5130,7 +5130,7 @@ input PartySavedTrackUpdateWithoutPartyDataInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -5354,46 +5354,46 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   previewUrl_not_ends_with: String
-  uri: ID
+  uri: String
 
   """All values that are not equal to given value."""
-  uri_not: ID
+  uri_not: String
 
   """All values that are contained in given list."""
-  uri_in: [ID!]
+  uri_in: [String!]
 
   """All values that are not contained in given list."""
-  uri_not_in: [ID!]
+  uri_not_in: [String!]
 
   """All values less than the given value."""
-  uri_lt: ID
+  uri_lt: String
 
   """All values less than or equal the given value."""
-  uri_lte: ID
+  uri_lte: String
 
   """All values greater than the given value."""
-  uri_gt: ID
+  uri_gt: String
 
   """All values greater than or equal the given value."""
-  uri_gte: ID
+  uri_gte: String
 
   """All values containing the given string."""
-  uri_contains: ID
+  uri_contains: String
 
   """All values not containing the given string."""
-  uri_not_contains: ID
+  uri_not_contains: String
 
   """All values starting with the given string."""
-  uri_starts_with: ID
+  uri_starts_with: String
 
   """All values not starting with the given string."""
-  uri_not_starts_with: ID
+  uri_not_starts_with: String
 
   """All values ending with the given string."""
-  uri_ends_with: ID
+  uri_ends_with: String
 
   """All values not ending with the given string."""
-  uri_not_ends_with: ID
+  uri_not_ends_with: String
   stringArtists: String
 
   """All values that are not equal to given value."""
@@ -5502,7 +5502,6 @@ input PartySavedTrackWhereInput {
 
 input PartySavedTrackWhereUniqueInput {
   id: ID
-  uri: ID
 }
 
 input PartyScalarWhereInput {
@@ -10980,7 +10979,7 @@ export interface PartySavedTrackCreateInput {
   explicit: Boolean
   name: String
   previewUrl?: String | null
-  uri: ID_Output
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -11005,7 +11004,7 @@ export interface PartySavedTrackCreateWithoutPartyInput {
   explicit: Boolean
   name: String
   previewUrl?: String | null
-  uri: ID_Output
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -11082,20 +11081,20 @@ export interface PartySavedTrackScalarWhereInput {
   previewUrl_not_starts_with?: String | null
   previewUrl_ends_with?: String | null
   previewUrl_not_ends_with?: String | null
-  uri?: ID_Input | null
-  uri_not?: ID_Input | null
-  uri_in?: ID_Output[] | ID_Output | null
-  uri_not_in?: ID_Output[] | ID_Output | null
-  uri_lt?: ID_Input | null
-  uri_lte?: ID_Input | null
-  uri_gt?: ID_Input | null
-  uri_gte?: ID_Input | null
-  uri_contains?: ID_Input | null
-  uri_not_contains?: ID_Input | null
-  uri_starts_with?: ID_Input | null
-  uri_not_starts_with?: ID_Input | null
-  uri_ends_with?: ID_Input | null
-  uri_not_ends_with?: ID_Input | null
+  uri?: String | null
+  uri_not?: String | null
+  uri_in?: String[] | String | null
+  uri_not_in?: String[] | String | null
+  uri_lt?: String | null
+  uri_lte?: String | null
+  uri_gt?: String | null
+  uri_gte?: String | null
+  uri_contains?: String | null
+  uri_not_contains?: String | null
+  uri_starts_with?: String | null
+  uri_not_starts_with?: String | null
+  uri_ends_with?: String | null
+  uri_not_ends_with?: String | null
   stringArtists?: String | null
   stringArtists_not?: String | null
   stringArtists_in?: String[] | String | null
@@ -11151,7 +11150,7 @@ export interface PartySavedTrackUpdateDataInput {
   explicit?: Boolean | null
   name?: String | null
   previewUrl?: String | null
-  uri?: ID_Input | null
+  uri?: String | null
   stringArtists?: String | null
   length?: String | null
   popularity?: Int | null
@@ -11165,7 +11164,7 @@ export interface PartySavedTrackUpdateInput {
   explicit?: Boolean | null
   name?: String | null
   previewUrl?: String | null
-  uri?: ID_Input | null
+  uri?: String | null
   stringArtists?: String | null
   length?: String | null
   popularity?: Int | null
@@ -11179,7 +11178,7 @@ export interface PartySavedTrackUpdateManyDataInput {
   explicit?: Boolean | null
   name?: String | null
   previewUrl?: String | null
-  uri?: ID_Input | null
+  uri?: String | null
   stringArtists?: String | null
   length?: String | null
   popularity?: Int | null
@@ -11203,7 +11202,7 @@ export interface PartySavedTrackUpdateManyMutationInput {
   explicit?: Boolean | null
   name?: String | null
   previewUrl?: String | null
-  uri?: ID_Input | null
+  uri?: String | null
   stringArtists?: String | null
   length?: String | null
   popularity?: Int | null
@@ -11232,7 +11231,7 @@ export interface PartySavedTrackUpdateWithoutPartyDataInput {
   explicit?: Boolean | null
   name?: String | null
   previewUrl?: String | null
-  uri?: ID_Input | null
+  uri?: String | null
   stringArtists?: String | null
   length?: String | null
   popularity?: Int | null
@@ -11331,20 +11330,20 @@ export interface PartySavedTrackWhereInput {
   previewUrl_not_starts_with?: String | null
   previewUrl_ends_with?: String | null
   previewUrl_not_ends_with?: String | null
-  uri?: ID_Input | null
-  uri_not?: ID_Input | null
-  uri_in?: ID_Output[] | ID_Output | null
-  uri_not_in?: ID_Output[] | ID_Output | null
-  uri_lt?: ID_Input | null
-  uri_lte?: ID_Input | null
-  uri_gt?: ID_Input | null
-  uri_gte?: ID_Input | null
-  uri_contains?: ID_Input | null
-  uri_not_contains?: ID_Input | null
-  uri_starts_with?: ID_Input | null
-  uri_not_starts_with?: ID_Input | null
-  uri_ends_with?: ID_Input | null
-  uri_not_ends_with?: ID_Input | null
+  uri?: String | null
+  uri_not?: String | null
+  uri_in?: String[] | String | null
+  uri_not_in?: String[] | String | null
+  uri_lt?: String | null
+  uri_lte?: String | null
+  uri_gt?: String | null
+  uri_gte?: String | null
+  uri_contains?: String | null
+  uri_not_contains?: String | null
+  uri_starts_with?: String | null
+  uri_not_starts_with?: String | null
+  uri_ends_with?: String | null
+  uri_not_ends_with?: String | null
   stringArtists?: String | null
   stringArtists_not?: String | null
   stringArtists_in?: String[] | String | null
@@ -11387,7 +11386,6 @@ export interface PartySavedTrackWhereInput {
 
 export interface PartySavedTrackWhereUniqueInput {
   id?: ID_Input | null
-  uri?: ID_Input | null
 }
 
 export interface PartyScalarWhereInput {
@@ -13552,7 +13550,7 @@ export interface PartySavedTrack extends Node {
   explicit: Boolean
   name: String
   previewUrl?: String | null
-  uri: ID_Output
+  uri: String
   party: Party
   stringArtists: String
   length: String
@@ -13586,7 +13584,7 @@ export interface PartySavedTrackPreviousValues {
   explicit: Boolean
   name: String
   previewUrl?: String | null
-  uri: ID_Output
+  uri: String
   stringArtists: String
   length: String
   popularity: Int

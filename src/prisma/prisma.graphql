@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Sat Nov 02 2019 13:53:40 GMT+0100 (Central European Standard Time)
+# timestamp: Sun Nov 03 2019 13:08:14 GMT+0100 (Central European Standard Time)
 
 type AggregateAlbum {
   count: Int!
@@ -4363,7 +4363,7 @@ type PartySavedTrack implements Node {
   explicit: Boolean!
   name: String!
   previewUrl: String
-  uri: ID!
+  uri: String!
   party: Party!
   stringArtists: String!
   length: String!
@@ -4388,7 +4388,7 @@ input PartySavedTrackCreateInput {
   explicit: Boolean!
   name: String!
   previewUrl: String
-  uri: ID!
+  uri: String!
   stringArtists: String!
   length: String!
   popularity: Int!
@@ -4413,7 +4413,7 @@ input PartySavedTrackCreateWithoutPartyInput {
   explicit: Boolean!
   name: String!
   previewUrl: String
-  uri: ID!
+  uri: String!
   stringArtists: String!
   length: String!
   popularity: Int!
@@ -4459,7 +4459,7 @@ type PartySavedTrackPreviousValues {
   explicit: Boolean!
   name: String!
   previewUrl: String
-  uri: ID!
+  uri: String!
   stringArtists: String!
   length: String!
   popularity: Int!
@@ -4660,46 +4660,46 @@ input PartySavedTrackScalarWhereInput {
 
   """All values not ending with the given string."""
   previewUrl_not_ends_with: String
-  uri: ID
+  uri: String
 
   """All values that are not equal to given value."""
-  uri_not: ID
+  uri_not: String
 
   """All values that are contained in given list."""
-  uri_in: [ID!]
+  uri_in: [String!]
 
   """All values that are not contained in given list."""
-  uri_not_in: [ID!]
+  uri_not_in: [String!]
 
   """All values less than the given value."""
-  uri_lt: ID
+  uri_lt: String
 
   """All values less than or equal the given value."""
-  uri_lte: ID
+  uri_lte: String
 
   """All values greater than the given value."""
-  uri_gt: ID
+  uri_gt: String
 
   """All values greater than or equal the given value."""
-  uri_gte: ID
+  uri_gte: String
 
   """All values containing the given string."""
-  uri_contains: ID
+  uri_contains: String
 
   """All values not containing the given string."""
-  uri_not_contains: ID
+  uri_not_contains: String
 
   """All values starting with the given string."""
-  uri_starts_with: ID
+  uri_starts_with: String
 
   """All values not starting with the given string."""
-  uri_not_starts_with: ID
+  uri_not_starts_with: String
 
   """All values ending with the given string."""
-  uri_ends_with: ID
+  uri_ends_with: String
 
   """All values not ending with the given string."""
-  uri_not_ends_with: ID
+  uri_not_ends_with: String
   stringArtists: String
 
   """All values that are not equal to given value."""
@@ -4849,7 +4849,7 @@ input PartySavedTrackUpdateDataInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -4863,7 +4863,7 @@ input PartySavedTrackUpdateInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -4877,7 +4877,7 @@ input PartySavedTrackUpdateManyDataInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -4901,7 +4901,7 @@ input PartySavedTrackUpdateManyMutationInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -4930,7 +4930,7 @@ input PartySavedTrackUpdateWithoutPartyDataInput {
   explicit: Boolean
   name: String
   previewUrl: String
-  uri: ID
+  uri: String
   stringArtists: String
   length: String
   popularity: Int
@@ -5154,46 +5154,46 @@ input PartySavedTrackWhereInput {
 
   """All values not ending with the given string."""
   previewUrl_not_ends_with: String
-  uri: ID
+  uri: String
 
   """All values that are not equal to given value."""
-  uri_not: ID
+  uri_not: String
 
   """All values that are contained in given list."""
-  uri_in: [ID!]
+  uri_in: [String!]
 
   """All values that are not contained in given list."""
-  uri_not_in: [ID!]
+  uri_not_in: [String!]
 
   """All values less than the given value."""
-  uri_lt: ID
+  uri_lt: String
 
   """All values less than or equal the given value."""
-  uri_lte: ID
+  uri_lte: String
 
   """All values greater than the given value."""
-  uri_gt: ID
+  uri_gt: String
 
   """All values greater than or equal the given value."""
-  uri_gte: ID
+  uri_gte: String
 
   """All values containing the given string."""
-  uri_contains: ID
+  uri_contains: String
 
   """All values not containing the given string."""
-  uri_not_contains: ID
+  uri_not_contains: String
 
   """All values starting with the given string."""
-  uri_starts_with: ID
+  uri_starts_with: String
 
   """All values not starting with the given string."""
-  uri_not_starts_with: ID
+  uri_not_starts_with: String
 
   """All values ending with the given string."""
-  uri_ends_with: ID
+  uri_ends_with: String
 
   """All values not ending with the given string."""
-  uri_not_ends_with: ID
+  uri_not_ends_with: String
   stringArtists: String
 
   """All values that are not equal to given value."""
@@ -5302,7 +5302,6 @@ input PartySavedTrackWhereInput {
 
 input PartySavedTrackWhereUniqueInput {
   id: ID
-  uri: ID
 }
 
 input PartyScalarWhereInput {

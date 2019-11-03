@@ -33,6 +33,8 @@ import * as qs from 'qs';
 
 import axios from 'axios';
 import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
+import { spotifyRequest, decrypt, encrypt } from 'src/helpers/spotify.helper';
+import { SPOTIFY_CLIENT_CALLBACK_URL } from 'src/server.constants';
 
 function getSuccessSocialCallbackUrl({
   provider,
@@ -135,19 +137,11 @@ export class AuthController {
     }
   }
 
-  @Get('google')
-  @UseGuards(AuthGuard('google'))
-  async googleLogin() {}
-
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
   async googleLoginCallback(@Req() req, @Res() res) {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
-
-  @Get('spotify')
-  @UseGuards(AuthGuard('spotify'))
-  async spotifyLogin() {}
 
   @Get('spotify/callback')
   @UseFilters(SocialAuthAccessDeniedFilter)
@@ -156,15 +150,18 @@ export class AuthController {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
-  @Get('spotify/reAuth')
-  @UseGuards(AuthGuard('spotify-reauth'))
-  async spotifyReAuth() {}
-
   @Get('spotify/reAuth/callback')
   @UseFilters(SocialAuthAccessDeniedFilter)
   @UseGuards(AuthGuard('spotify-reauth'))
   async spotifyReAuthCallback(@Req() req, @Res() res) {
     res.redirect(getSuccessReAuthCallbackUrl(req.user));
+  }
+
+  // DO NOT DELETE ME
+  @Get('spotify/reAuth')
+  @UseGuards(AuthGuard('spotify-reauth'))
+  async spotifyReAuth() {
+    // empty
   }
 
   @Get('facebook')
@@ -182,13 +179,6 @@ export class AuthController {
           : ''
       }/auth/facebook/callback`,
     };
-    console.log(
-      `${
-        process.env.NODE_ENV === 'production'
-          ? 'https://partyplannerio.herokuapp.com'
-          : ''
-      }/auth/facebook/callback`,
-    );
     authenticate('facebook', params)(req, res, next);
   }
 
@@ -216,6 +206,13 @@ export class AuthController {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
+  // DO NOT DELETE ME
+  @Get('spotify')
+  @UseGuards(AuthGuard('spotify'))
+  async spotifyLogin() {
+    // empty
+  }
+
   @Post('spotify/new-token')
   @UseGuards(AuthGuard('jwt'))
   async TestSomething(@Body() { refreshToken }: GetNewSpotifyTokenDto) {
@@ -229,6 +226,7 @@ export class AuthController {
       {
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
+          // tslint:disable-next-line
           Authorization: `Basic ${Buffer.from(
             `${this.configService.getFromEnv(
               'SPOTIFY_CLIENT_ID',
@@ -238,5 +236,55 @@ export class AuthController {
       },
     );
     return response.data;
+  }
+
+  @Post('spotify/exchange')
+  async spotifyExchange(@Body() body, @Res() res) {
+    const params = body;
+    if (!params.code) {
+      return res.json({
+        error: 'Parameter missing',
+      });
+    }
+
+    spotifyRequest({
+      grant_type: 'authorization_code',
+      redirect_uri: SPOTIFY_CLIENT_CALLBACK_URL,
+      code: params.code,
+    })
+      .then(session => {
+        const result = {
+          access_token: session.access_token,
+          expires_in: session.expires_in,
+          refresh_token: encrypt(session.refresh_token),
+        };
+        return res.send(result);
+      })
+      .catch(response => {
+        return res.json(response);
+      });
+  }
+  @Post('spotify/refresh')
+  async spotifyRefresh(@Body() body, @Res() res) {
+    const params = body;
+    if (!params.refresh_token) {
+      return res.json({
+        error: 'Parameter missing',
+      });
+    }
+
+    spotifyRequest({
+      grant_type: 'refresh_token',
+      refresh_token: decrypt(params.refresh_token),
+    })
+      .then(session => {
+        return res.send({
+          access_token: session.access_token,
+          expires_in: session.expires_in,
+        });
+      })
+      .catch(response => {
+        return res.json(response);
+      });
   }
 }

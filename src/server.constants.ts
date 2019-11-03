@@ -1,5 +1,10 @@
+export const env = process.env.NODE_ENV || 'development';
 
-const env = process.env.NODE_ENV || 'development';
+export const SPOTIFY_API_URL = 'https://accounts.spotify.com/api/token';
+export const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+export const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_SECRET;
+export const SPOTIFY_CLIENT_CALLBACK_URL = 'partyplanner://callback';
+export const SPOTIFY_ENCRYPTION_SECRET = process.env.PRISMA_SECRET;
 
 export const DB_CONNECTION_TOKEN: string = 'DbConnectionToken';
 export const SERVER_CONFIG_TOKEN: string = 'ServerConfigToken';

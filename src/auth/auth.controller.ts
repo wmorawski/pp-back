@@ -163,6 +163,13 @@ export class AuthController {
     res.redirect(getSuccessReAuthCallbackUrl(req.user));
   }
 
+  // DO NOT DELETE ME
+  @Get('spotify/reAuth')
+  @UseGuards(AuthGuard('spotify-reauth'))
+  async spotifyReAuth() {
+    // empty
+  }
+
   @Get('facebook')
   async handleOauthRequest(
     @Req() req: Request,
@@ -203,6 +210,13 @@ export class AuthController {
   @UseGuards(AuthGuard('twitter'))
   async twitterLoginCallback(@Req() req, @Res() res) {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
+  }
+
+  // DO NOT DELETE ME
+  @Get('spotify')
+  @UseGuards(AuthGuard('spotify'))
+  async spotifyLogin() {
+    // empty
   }
 
   @Post('spotify/new-token')

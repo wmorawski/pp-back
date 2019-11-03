@@ -1,5 +1,9 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
+<<<<<<< HEAD
 # timestamp: Sat Nov 02 2019 20:38:17 GMT+0100 (Central European Standard Time)
+=======
+# timestamp: Sun Nov 03 2019 13:08:14 GMT+0100 (Central European Standard Time)
+>>>>>>> dev
 
 type AggregateAlbum {
   count: Int!

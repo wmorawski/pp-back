@@ -53,6 +53,12 @@ export class PartiesResolver {
     return await this.prisma.mutation.createPartyInvitation(args, info);
   }
 
+  @Mutation('updatePartyCartItem')
+  @UseGuards(GqlAuthGuard)
+  async updatePartyCartItem(@Args() args, @Info() info) {
+    return await this.prisma.mutation.updatePartyCartItem(args, info);
+  }
+
   @Mutation('createPartyCartItem')
   @UseGuards(GqlAuthGuard)
   async createPartyCartItem(

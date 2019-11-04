@@ -19,6 +19,7 @@ type User {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  cartItems: [PartyCartItem!]!
 }
 
 type Message {
@@ -112,7 +113,7 @@ type PartyCart {
 type PartyCartItem {
   id: ID! @id
   cart: PartyCart!
-  user: User
+  user: User!
   name: String!
   description: String!
   price: Float!

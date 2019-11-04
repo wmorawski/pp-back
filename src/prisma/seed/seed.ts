@@ -1,5 +1,5 @@
 import * as uuid from 'uuid/v4';
-import { prisma } from './../../../generated/prisma-client/index';
+import { prisma } from './../../../generated/prisma';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { compose, filter } from 'ramda';

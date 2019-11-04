@@ -25,7 +25,7 @@ import {
   ApiCreatedResponse,
 } from '@nestjs/swagger';
 import { CreateUserDto } from '../users/create-user.dto';
-import { User } from 'generated/prisma-client';
+import { User } from '../../generated/prisma';
 import { AuthGuard } from '@nestjs/passport';
 import { authenticate } from 'passport';
 import { SocialAuthPayload, SocialReAuthPayload } from './auth.types';

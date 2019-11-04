@@ -1,9 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-<<<<<<< HEAD
-# timestamp: Sat Nov 02 2019 20:38:17 GMT+0100 (Central European Standard Time)
-=======
-# timestamp: Sun Nov 03 2019 13:08:14 GMT+0100 (Central European Standard Time)
->>>>>>> dev
+# timestamp: Sun Nov 03 2019 20:17:02 GMT+0100 (Central European Standard Time)
 
 type AggregateAlbum {
   count: Int!
@@ -3041,7 +3037,7 @@ type PartyCartEdge {
 type PartyCartItem implements Node {
   id: ID!
   cart: PartyCart!
-  user: User
+  user: User!
   name: String!
   description: String!
   price: Float!
@@ -3067,11 +3063,16 @@ input PartyCartItemCreateInput {
   status: PartyCartItemStatus!
   quantity: Int
   cart: PartyCartCreateOneWithoutItemsInput!
-  user: UserCreateOneInput
+  user: UserCreateOneWithoutCartItemsInput!
 }
 
 input PartyCartItemCreateManyWithoutCartInput {
   create: [PartyCartItemCreateWithoutCartInput!]
+  connect: [PartyCartItemWhereUniqueInput!]
+}
+
+input PartyCartItemCreateManyWithoutUserInput {
+  create: [PartyCartItemCreateWithoutUserInput!]
   connect: [PartyCartItemWhereUniqueInput!]
 }
 
@@ -3082,7 +3083,17 @@ input PartyCartItemCreateWithoutCartInput {
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
-  user: UserCreateOneInput
+  user: UserCreateOneWithoutCartItemsInput!
+}
+
+input PartyCartItemCreateWithoutUserInput {
+  id: ID
+  name: String!
+  description: String!
+  price: Float!
+  status: PartyCartItemStatus!
+  quantity: Int
+  cart: PartyCartCreateOneWithoutItemsInput!
 }
 
 """An edge in a connection."""
@@ -3355,7 +3366,7 @@ input PartyCartItemUpdateInput {
   status: PartyCartItemStatus
   quantity: Int
   cart: PartyCartUpdateOneRequiredWithoutItemsInput
-  user: UserUpdateOneInput
+  user: UserUpdateOneRequiredWithoutCartItemsInput
 }
 
 input PartyCartItemUpdateManyDataInput {
@@ -3386,6 +3397,18 @@ input PartyCartItemUpdateManyWithoutCartInput {
   upsert: [PartyCartItemUpsertWithWhereUniqueWithoutCartInput!]
 }
 
+input PartyCartItemUpdateManyWithoutUserInput {
+  create: [PartyCartItemCreateWithoutUserInput!]
+  connect: [PartyCartItemWhereUniqueInput!]
+  set: [PartyCartItemWhereUniqueInput!]
+  disconnect: [PartyCartItemWhereUniqueInput!]
+  delete: [PartyCartItemWhereUniqueInput!]
+  update: [PartyCartItemUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [PartyCartItemUpdateManyWithWhereNestedInput!]
+  deleteMany: [PartyCartItemScalarWhereInput!]
+  upsert: [PartyCartItemUpsertWithWhereUniqueWithoutUserInput!]
+}
+
 input PartyCartItemUpdateManyWithWhereNestedInput {
   where: PartyCartItemScalarWhereInput!
   data: PartyCartItemUpdateManyDataInput!
@@ -3397,7 +3420,16 @@ input PartyCartItemUpdateWithoutCartDataInput {
   price: Float
   status: PartyCartItemStatus
   quantity: Int
-  user: UserUpdateOneInput
+  user: UserUpdateOneRequiredWithoutCartItemsInput
+}
+
+input PartyCartItemUpdateWithoutUserDataInput {
+  name: String
+  description: String
+  price: Float
+  status: PartyCartItemStatus
+  quantity: Int
+  cart: PartyCartUpdateOneRequiredWithoutItemsInput
 }
 
 input PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
@@ -3405,10 +3437,21 @@ input PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
   data: PartyCartItemUpdateWithoutCartDataInput!
 }
 
+input PartyCartItemUpdateWithWhereUniqueWithoutUserInput {
+  where: PartyCartItemWhereUniqueInput!
+  data: PartyCartItemUpdateWithoutUserDataInput!
+}
+
 input PartyCartItemUpsertWithWhereUniqueWithoutCartInput {
   where: PartyCartItemWhereUniqueInput!
   update: PartyCartItemUpdateWithoutCartDataInput!
   create: PartyCartItemCreateWithoutCartInput!
+}
+
+input PartyCartItemUpsertWithWhereUniqueWithoutUserInput {
+  where: PartyCartItemWhereUniqueInput!
+  update: PartyCartItemUpdateWithoutUserDataInput!
+  create: PartyCartItemCreateWithoutUserInput!
 }
 
 input PartyCartItemWhereInput {
@@ -7482,6 +7525,7 @@ type User implements Node {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  cartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem!]
 }
 
 """A connection to a list of items."""
@@ -7512,6 +7556,7 @@ input UserCreateInput {
   pendingFriendInvitations: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
 input UserCreateManyInput {
@@ -7534,9 +7579,34 @@ input UserCreateOneInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutCartItemsInput {
+  create: UserCreateWithoutCartItemsInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateOneWithoutPendingPartyInvitationsInput {
   create: UserCreateWithoutPendingPartyInvitationsInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCartItemsInput {
+  id: ID
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  lastOnline: DateTime
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyInput
+  pendingFriendInvitations: UserCreateManyInput
+  pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
+  chats: ChatCreateManyWithoutMembersInput
 }
 
 input UserCreateWithoutChatsInput {
@@ -7556,6 +7626,7 @@ input UserCreateWithoutChatsInput {
   friends: UserCreateManyInput
   pendingFriendInvitations: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutPartiesInput {
@@ -7575,6 +7646,7 @@ input UserCreateWithoutPartiesInput {
   pendingFriendInvitations: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutPendingPartyInvitationsInput {
@@ -7594,6 +7666,7 @@ input UserCreateWithoutPendingPartyInvitationsInput {
   friends: UserCreateManyInput
   pendingFriendInvitations: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -8142,6 +8215,7 @@ input UserUpdateDataInput {
   pendingFriendInvitations: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateInput {
@@ -8161,6 +8235,7 @@ input UserUpdateInput {
   pendingFriendInvitations: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyDataInput {
@@ -8232,15 +8307,6 @@ input UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput!
 }
 
-input UserUpdateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
-}
-
 input UserUpdateOneRequiredInput {
   create: UserCreateInput
   connect: UserWhereUniqueInput
@@ -8248,11 +8314,37 @@ input UserUpdateOneRequiredInput {
   upsert: UserUpsertNestedInput
 }
 
+input UserUpdateOneRequiredWithoutCartItemsInput {
+  create: UserCreateWithoutCartItemsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutCartItemsDataInput
+  upsert: UserUpsertWithoutCartItemsInput
+}
+
 input UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
   create: UserCreateWithoutPendingPartyInvitationsInput
   connect: UserWhereUniqueInput
   update: UserUpdateWithoutPendingPartyInvitationsDataInput
   upsert: UserUpsertWithoutPendingPartyInvitationsInput
+}
+
+input UserUpdateWithoutCartItemsDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  lastOnline: DateTime
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyInput
+  pendingFriendInvitations: UserUpdateManyInput
+  pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
+  chats: ChatUpdateManyWithoutMembersInput
 }
 
 input UserUpdateWithoutChatsDataInput {
@@ -8271,6 +8363,7 @@ input UserUpdateWithoutChatsDataInput {
   friends: UserUpdateManyInput
   pendingFriendInvitations: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -8289,6 +8382,7 @@ input UserUpdateWithoutPartiesDataInput {
   pendingFriendInvitations: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutPendingPartyInvitationsDataInput {
@@ -8307,6 +8401,7 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   friends: UserUpdateManyInput
   pendingFriendInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -8327,6 +8422,11 @@ input UserUpdateWithWhereUniqueWithoutPartiesInput {
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
+}
+
+input UserUpsertWithoutCartItemsInput {
+  update: UserUpdateWithoutCartItemsDataInput!
+  create: UserCreateWithoutCartItemsInput!
 }
 
 input UserUpsertWithoutPendingPartyInvitationsInput {
@@ -8798,6 +8898,9 @@ input UserWhereInput {
   chats_every: ChatWhereInput
   chats_some: ChatWhereInput
   chats_none: ChatWhereInput
+  cartItems_every: PartyCartItemWhereInput
+  cartItems_some: PartyCartItemWhereInput
+  cartItems_none: PartyCartItemWhereInput
 }
 
 input UserWhereUniqueInput {

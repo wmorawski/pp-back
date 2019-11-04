@@ -78,6 +78,10 @@ type Mutation {
   joinParty(partyId: ID!): Boolean
   createPartySavedTrack(data: PartySavedTrackCreateInput!): PartySavedTrack!
   createPartyCartItem(data: PartyCartItemCreateInput!): PartyCartItem!
+updatePartyCartItem(
+data: PartyCartItemUpdateInput!
+where: PartyCartItemWhereUniqueInput!
+): PartyCartItem
 }
 
 type Subscription {

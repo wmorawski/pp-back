@@ -61,6 +61,8 @@ type Query {
     first: Int
     last: Int
   ): PartyCartItemConnection!
+
+  partyCartCost(id: ID!): Float!
 }
 type PartyUserInviteInput {
   inviteSecret: String!

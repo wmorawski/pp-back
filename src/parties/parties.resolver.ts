@@ -7,7 +7,6 @@ import {
   Party,
   PartyConnection,
   PartyCreateInput,
-  PartySavedTrack,
 } from '../prisma/prisma.binding';
 import {
   Resolver,
@@ -176,6 +175,41 @@ export class PartiesResolver {
   @Query('party')
   async party(@Args() args, @Info() info): Promise<Party> {
     return await this.prisma.query.party(args, info);
+  }
+
+  @Query('partyCartCost')
+  @UseGuards(GqlAuthGuard)
+  async partyCartCost(
+    @Args() { id }: { id: string },
+    @Info() info,
+  ): Promise<number> {
+    try {
+      const items = await this.prisma.query.partyCartItems(
+        {
+          where: {
+            cart: { id },
+            status: 'ACCEPTED',
+          },
+        },
+        `
+        {
+          quantity
+          price
+        }
+      `,
+      );
+
+      if (!items) {
+        throw new GraphQLError('This cart does not exist');
+      }
+
+      return items.reduce((totalCost, cartItem) => {
+        totalCost += cartItem.price * cartItem.quantity;
+        return totalCost;
+      }, 0);
+    } catch (e) {
+      throw new GraphQLError('Could not calculate the cost');
+    }
   }
 
   @Query('hasParties')

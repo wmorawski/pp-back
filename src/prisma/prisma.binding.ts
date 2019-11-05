@@ -3180,7 +3180,7 @@ type Party implements Node {
   inviteSecret: String!
   playlist(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Playlist!]
   savedTracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
-  cart: PartyCart
+  cart: PartyCart!
 }
 
 type PartyCart implements Node {
@@ -3237,10 +3237,11 @@ type PartyCartEdge {
 type PartyCartItem implements Node {
   id: ID!
   cart: PartyCart!
-  user: User
+  user: User!
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int!
 }
 
@@ -3259,13 +3260,19 @@ input PartyCartItemCreateInput {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int
   cart: PartyCartCreateOneWithoutItemsInput!
-  user: UserCreateOneInput
+  user: UserCreateOneWithoutCartItemsInput!
 }
 
 input PartyCartItemCreateManyWithoutCartInput {
   create: [PartyCartItemCreateWithoutCartInput!]
+  connect: [PartyCartItemWhereUniqueInput!]
+}
+
+input PartyCartItemCreateManyWithoutUserInput {
+  create: [PartyCartItemCreateWithoutUserInput!]
   connect: [PartyCartItemWhereUniqueInput!]
 }
 
@@ -3274,8 +3281,19 @@ input PartyCartItemCreateWithoutCartInput {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int
-  user: UserCreateOneInput
+  user: UserCreateOneWithoutCartItemsInput!
+}
+
+input PartyCartItemCreateWithoutUserInput {
+  id: ID
+  name: String!
+  description: String!
+  price: Float!
+  status: PartyCartItemStatus!
+  quantity: Int
+  cart: PartyCartCreateOneWithoutItemsInput!
 }
 
 """An edge in a connection."""
@@ -3296,6 +3314,8 @@ enum PartyCartItemOrderByInput {
   description_DESC
   price_ASC
   price_DESC
+  status_ASC
+  status_DESC
   quantity_ASC
   quantity_DESC
 }
@@ -3305,6 +3325,7 @@ type PartyCartItemPreviousValues {
   name: String!
   description: String!
   price: Float!
+  status: PartyCartItemStatus!
   quantity: Int!
 }
 
@@ -3459,6 +3480,16 @@ input PartyCartItemScalarWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Float
+  status: PartyCartItemStatus
+
+  """All values that are not equal to given value."""
+  status_not: PartyCartItemStatus
+
+  """All values that are contained in given list."""
+  status_in: [PartyCartItemStatus!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [PartyCartItemStatus!]
   quantity: Int
 
   """All values that are not equal to given value."""
@@ -3481,6 +3512,12 @@ input PartyCartItemScalarWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
+}
+
+enum PartyCartItemStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
 }
 
 type PartyCartItemSubscriptionPayload {
@@ -3526,15 +3563,17 @@ input PartyCartItemUpdateInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
   cart: PartyCartUpdateOneRequiredWithoutItemsInput
-  user: UserUpdateOneInput
+  user: UserUpdateOneRequiredWithoutCartItemsInput
 }
 
 input PartyCartItemUpdateManyDataInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -3542,6 +3581,7 @@ input PartyCartItemUpdateManyMutationInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -3557,6 +3597,18 @@ input PartyCartItemUpdateManyWithoutCartInput {
   upsert: [PartyCartItemUpsertWithWhereUniqueWithoutCartInput!]
 }
 
+input PartyCartItemUpdateManyWithoutUserInput {
+  create: [PartyCartItemCreateWithoutUserInput!]
+  connect: [PartyCartItemWhereUniqueInput!]
+  set: [PartyCartItemWhereUniqueInput!]
+  disconnect: [PartyCartItemWhereUniqueInput!]
+  delete: [PartyCartItemWhereUniqueInput!]
+  update: [PartyCartItemUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [PartyCartItemUpdateManyWithWhereNestedInput!]
+  deleteMany: [PartyCartItemScalarWhereInput!]
+  upsert: [PartyCartItemUpsertWithWhereUniqueWithoutUserInput!]
+}
+
 input PartyCartItemUpdateManyWithWhereNestedInput {
   where: PartyCartItemScalarWhereInput!
   data: PartyCartItemUpdateManyDataInput!
@@ -3566,8 +3618,18 @@ input PartyCartItemUpdateWithoutCartDataInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
-  user: UserUpdateOneInput
+  user: UserUpdateOneRequiredWithoutCartItemsInput
+}
+
+input PartyCartItemUpdateWithoutUserDataInput {
+  name: String
+  description: String
+  price: Float
+  status: PartyCartItemStatus
+  quantity: Int
+  cart: PartyCartUpdateOneRequiredWithoutItemsInput
 }
 
 input PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
@@ -3575,10 +3637,21 @@ input PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
   data: PartyCartItemUpdateWithoutCartDataInput!
 }
 
+input PartyCartItemUpdateWithWhereUniqueWithoutUserInput {
+  where: PartyCartItemWhereUniqueInput!
+  data: PartyCartItemUpdateWithoutUserDataInput!
+}
+
 input PartyCartItemUpsertWithWhereUniqueWithoutCartInput {
   where: PartyCartItemWhereUniqueInput!
   update: PartyCartItemUpdateWithoutCartDataInput!
   create: PartyCartItemCreateWithoutCartInput!
+}
+
+input PartyCartItemUpsertWithWhereUniqueWithoutUserInput {
+  where: PartyCartItemWhereUniqueInput!
+  update: PartyCartItemUpdateWithoutUserDataInput!
+  create: PartyCartItemCreateWithoutUserInput!
 }
 
 input PartyCartItemWhereInput {
@@ -3732,6 +3805,16 @@ input PartyCartItemWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Float
+  status: PartyCartItemStatus
+
+  """All values that are not equal to given value."""
+  status_not: PartyCartItemStatus
+
+  """All values that are contained in given list."""
+  status_in: [PartyCartItemStatus!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [PartyCartItemStatus!]
   quantity: Int
 
   """All values that are not equal to given value."""
@@ -3822,11 +3905,9 @@ input PartyCartUpdateOneRequiredWithoutItemsInput {
   upsert: PartyCartUpsertWithoutItemsInput
 }
 
-input PartyCartUpdateOneWithoutPartyInput {
+input PartyCartUpdateOneRequiredWithoutPartyInput {
   create: PartyCartCreateWithoutPartyInput
   connect: PartyCartWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
   update: PartyCartUpdateWithoutPartyDataInput
   upsert: PartyCartUpsertWithoutPartyInput
 }
@@ -3934,7 +4015,7 @@ input PartyCreateInput {
   members: UserCreateManyWithoutPartiesInput
   playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateManyWithoutMembersInput {
@@ -3995,7 +4076,7 @@ input PartyCreateWithoutMembersInput {
   games: GameCreateManyInput
   playlist: PlaylistCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateWithoutPlaylistInput {
@@ -4013,7 +4094,7 @@ input PartyCreateWithoutPlaylistInput {
   games: GameCreateManyInput
   members: UserCreateManyWithoutPartiesInput
   savedTracks: PartySavedTrackCreateManyWithoutPartyInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 input PartyCreateWithoutSavedTracksInput {
@@ -4031,7 +4112,7 @@ input PartyCreateWithoutSavedTracksInput {
   games: GameCreateManyInput
   members: UserCreateManyWithoutPartiesInput
   playlist: PlaylistCreateManyWithoutPartiesInput
-  cart: PartyCartCreateOneWithoutPartyInput
+  cart: PartyCartCreateOneWithoutPartyInput!
 }
 
 """An edge in a connection."""
@@ -5901,7 +5982,7 @@ input PartyUpdateDataInput {
   members: UserUpdateManyWithoutPartiesInput
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateInput {
@@ -5919,7 +6000,7 @@ input PartyUpdateInput {
   members: UserUpdateManyWithoutPartiesInput
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateManyDataInput {
@@ -6025,7 +6106,7 @@ input PartyUpdateWithoutMembersDataInput {
   games: GameUpdateManyInput
   playlist: PlaylistUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithoutPlaylistDataInput {
@@ -6042,7 +6123,7 @@ input PartyUpdateWithoutPlaylistDataInput {
   games: GameUpdateManyInput
   members: UserUpdateManyWithoutPartiesInput
   savedTracks: PartySavedTrackUpdateManyWithoutPartyInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithoutSavedTracksDataInput {
@@ -6059,7 +6140,7 @@ input PartyUpdateWithoutSavedTracksDataInput {
   games: GameUpdateManyInput
   members: UserUpdateManyWithoutPartiesInput
   playlist: PlaylistUpdateManyWithoutPartiesInput
-  cart: PartyCartUpdateOneWithoutPartyInput
+  cart: PartyCartUpdateOneRequiredWithoutPartyInput
 }
 
 input PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -7644,6 +7725,7 @@ type User implements Node {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  cartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem!]
 }
 
 """A connection to a list of items."""
@@ -7674,6 +7756,7 @@ input UserCreateInput {
   pendingFriendInvitations: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
 input UserCreateManyInput {
@@ -7696,9 +7779,34 @@ input UserCreateOneInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutCartItemsInput {
+  create: UserCreateWithoutCartItemsInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateOneWithoutPendingPartyInvitationsInput {
   create: UserCreateWithoutPendingPartyInvitationsInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCartItemsInput {
+  id: ID
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  lastOnline: DateTime
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyInput
+  pendingFriendInvitations: UserCreateManyInput
+  pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
+  chats: ChatCreateManyWithoutMembersInput
 }
 
 input UserCreateWithoutChatsInput {
@@ -7718,6 +7826,7 @@ input UserCreateWithoutChatsInput {
   friends: UserCreateManyInput
   pendingFriendInvitations: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutPartiesInput {
@@ -7737,6 +7846,7 @@ input UserCreateWithoutPartiesInput {
   pendingFriendInvitations: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutPendingPartyInvitationsInput {
@@ -7756,6 +7866,7 @@ input UserCreateWithoutPendingPartyInvitationsInput {
   friends: UserCreateManyInput
   pendingFriendInvitations: UserCreateManyInput
   chats: ChatCreateManyWithoutMembersInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -8304,6 +8415,7 @@ input UserUpdateDataInput {
   pendingFriendInvitations: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateInput {
@@ -8323,6 +8435,7 @@ input UserUpdateInput {
   pendingFriendInvitations: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyDataInput {
@@ -8394,15 +8507,6 @@ input UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput!
 }
 
-input UserUpdateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
-}
-
 input UserUpdateOneRequiredInput {
   create: UserCreateInput
   connect: UserWhereUniqueInput
@@ -8410,11 +8514,37 @@ input UserUpdateOneRequiredInput {
   upsert: UserUpsertNestedInput
 }
 
+input UserUpdateOneRequiredWithoutCartItemsInput {
+  create: UserCreateWithoutCartItemsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutCartItemsDataInput
+  upsert: UserUpsertWithoutCartItemsInput
+}
+
 input UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
   create: UserCreateWithoutPendingPartyInvitationsInput
   connect: UserWhereUniqueInput
   update: UserUpdateWithoutPendingPartyInvitationsDataInput
   upsert: UserUpsertWithoutPendingPartyInvitationsInput
+}
+
+input UserUpdateWithoutCartItemsDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  lastOnline: DateTime
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyInput
+  pendingFriendInvitations: UserUpdateManyInput
+  pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
+  chats: ChatUpdateManyWithoutMembersInput
 }
 
 input UserUpdateWithoutChatsDataInput {
@@ -8433,6 +8563,7 @@ input UserUpdateWithoutChatsDataInput {
   friends: UserUpdateManyInput
   pendingFriendInvitations: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -8451,6 +8582,7 @@ input UserUpdateWithoutPartiesDataInput {
   pendingFriendInvitations: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutPendingPartyInvitationsDataInput {
@@ -8469,6 +8601,7 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   friends: UserUpdateManyInput
   pendingFriendInvitations: UserUpdateManyInput
   chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -8489,6 +8622,11 @@ input UserUpdateWithWhereUniqueWithoutPartiesInput {
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
+}
+
+input UserUpsertWithoutCartItemsInput {
+  update: UserUpdateWithoutCartItemsDataInput!
+  create: UserCreateWithoutCartItemsInput!
 }
 
 input UserUpsertWithoutPendingPartyInvitationsInput {
@@ -8960,6 +9098,9 @@ input UserWhereInput {
   chats_every: ChatWhereInput
   chats_some: ChatWhereInput
   chats_none: ChatWhereInput
+  cartItems_every: PartyCartItemWhereInput
+  cartItems_some: PartyCartItemWhereInput
+  cartItems_none: PartyCartItemWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -9063,8 +9204,14 @@ export type PartyCartItemOrderByInput =   'id_ASC' |
   'description_DESC' |
   'price_ASC' |
   'price_DESC' |
+  'status_ASC' |
+  'status_DESC' |
   'quantity_ASC' |
   'quantity_DESC'
+
+export type PartyCartItemStatus =   'PENDING' |
+  'ACCEPTED' |
+  'REJECTED'
 
 export type PartyCartOrderByInput =   'id_ASC' |
   'id_DESC'
@@ -10350,13 +10497,19 @@ export interface PartyCartItemCreateInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity?: Int | null
   cart: PartyCartCreateOneWithoutItemsInput
-  user?: UserCreateOneInput | null
+  user: UserCreateOneWithoutCartItemsInput
 }
 
 export interface PartyCartItemCreateManyWithoutCartInput {
   create?: PartyCartItemCreateWithoutCartInput[] | PartyCartItemCreateWithoutCartInput | null
+  connect?: PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput | null
+}
+
+export interface PartyCartItemCreateManyWithoutUserInput {
+  create?: PartyCartItemCreateWithoutUserInput[] | PartyCartItemCreateWithoutUserInput | null
   connect?: PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput | null
 }
 
@@ -10365,8 +10518,19 @@ export interface PartyCartItemCreateWithoutCartInput {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity?: Int | null
-  user?: UserCreateOneInput | null
+  user: UserCreateOneWithoutCartItemsInput
+}
+
+export interface PartyCartItemCreateWithoutUserInput {
+  id?: ID_Input | null
+  name: String
+  description: String
+  price: Float
+  status: PartyCartItemStatus
+  quantity?: Int | null
+  cart: PartyCartCreateOneWithoutItemsInput
 }
 
 export interface PartyCartItemScalarWhereInput {
@@ -10423,6 +10587,10 @@ export interface PartyCartItemScalarWhereInput {
   price_lte?: Float | null
   price_gt?: Float | null
   price_gte?: Float | null
+  status?: PartyCartItemStatus | null
+  status_not?: PartyCartItemStatus | null
+  status_in?: PartyCartItemStatus[] | PartyCartItemStatus | null
+  status_not_in?: PartyCartItemStatus[] | PartyCartItemStatus | null
   quantity?: Int | null
   quantity_not?: Int | null
   quantity_in?: Int[] | Int | null
@@ -10448,15 +10616,17 @@ export interface PartyCartItemUpdateInput {
   name?: String | null
   description?: String | null
   price?: Float | null
+  status?: PartyCartItemStatus | null
   quantity?: Int | null
   cart?: PartyCartUpdateOneRequiredWithoutItemsInput | null
-  user?: UserUpdateOneInput | null
+  user?: UserUpdateOneRequiredWithoutCartItemsInput | null
 }
 
 export interface PartyCartItemUpdateManyDataInput {
   name?: String | null
   description?: String | null
   price?: Float | null
+  status?: PartyCartItemStatus | null
   quantity?: Int | null
 }
 
@@ -10464,6 +10634,7 @@ export interface PartyCartItemUpdateManyMutationInput {
   name?: String | null
   description?: String | null
   price?: Float | null
+  status?: PartyCartItemStatus | null
   quantity?: Int | null
 }
 
@@ -10479,6 +10650,18 @@ export interface PartyCartItemUpdateManyWithoutCartInput {
   upsert?: PartyCartItemUpsertWithWhereUniqueWithoutCartInput[] | PartyCartItemUpsertWithWhereUniqueWithoutCartInput | null
 }
 
+export interface PartyCartItemUpdateManyWithoutUserInput {
+  create?: PartyCartItemCreateWithoutUserInput[] | PartyCartItemCreateWithoutUserInput | null
+  connect?: PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput | null
+  set?: PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput | null
+  disconnect?: PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput | null
+  delete?: PartyCartItemWhereUniqueInput[] | PartyCartItemWhereUniqueInput | null
+  update?: PartyCartItemUpdateWithWhereUniqueWithoutUserInput[] | PartyCartItemUpdateWithWhereUniqueWithoutUserInput | null
+  updateMany?: PartyCartItemUpdateManyWithWhereNestedInput[] | PartyCartItemUpdateManyWithWhereNestedInput | null
+  deleteMany?: PartyCartItemScalarWhereInput[] | PartyCartItemScalarWhereInput | null
+  upsert?: PartyCartItemUpsertWithWhereUniqueWithoutUserInput[] | PartyCartItemUpsertWithWhereUniqueWithoutUserInput | null
+}
+
 export interface PartyCartItemUpdateManyWithWhereNestedInput {
   where: PartyCartItemScalarWhereInput
   data: PartyCartItemUpdateManyDataInput
@@ -10488,8 +10671,18 @@ export interface PartyCartItemUpdateWithoutCartDataInput {
   name?: String | null
   description?: String | null
   price?: Float | null
+  status?: PartyCartItemStatus | null
   quantity?: Int | null
-  user?: UserUpdateOneInput | null
+  user?: UserUpdateOneRequiredWithoutCartItemsInput | null
+}
+
+export interface PartyCartItemUpdateWithoutUserDataInput {
+  name?: String | null
+  description?: String | null
+  price?: Float | null
+  status?: PartyCartItemStatus | null
+  quantity?: Int | null
+  cart?: PartyCartUpdateOneRequiredWithoutItemsInput | null
 }
 
 export interface PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
@@ -10497,10 +10690,21 @@ export interface PartyCartItemUpdateWithWhereUniqueWithoutCartInput {
   data: PartyCartItemUpdateWithoutCartDataInput
 }
 
+export interface PartyCartItemUpdateWithWhereUniqueWithoutUserInput {
+  where: PartyCartItemWhereUniqueInput
+  data: PartyCartItemUpdateWithoutUserDataInput
+}
+
 export interface PartyCartItemUpsertWithWhereUniqueWithoutCartInput {
   where: PartyCartItemWhereUniqueInput
   update: PartyCartItemUpdateWithoutCartDataInput
   create: PartyCartItemCreateWithoutCartInput
+}
+
+export interface PartyCartItemUpsertWithWhereUniqueWithoutUserInput {
+  where: PartyCartItemWhereUniqueInput
+  update: PartyCartItemUpdateWithoutUserDataInput
+  create: PartyCartItemCreateWithoutUserInput
 }
 
 export interface PartyCartItemWhereInput {
@@ -10557,6 +10761,10 @@ export interface PartyCartItemWhereInput {
   price_lte?: Float | null
   price_gt?: Float | null
   price_gte?: Float | null
+  status?: PartyCartItemStatus | null
+  status_not?: PartyCartItemStatus | null
+  status_in?: PartyCartItemStatus[] | PartyCartItemStatus | null
+  status_not_in?: PartyCartItemStatus[] | PartyCartItemStatus | null
   quantity?: Int | null
   quantity_not?: Int | null
   quantity_in?: Int[] | Int | null
@@ -10596,11 +10804,9 @@ export interface PartyCartUpdateOneRequiredWithoutItemsInput {
   upsert?: PartyCartUpsertWithoutItemsInput | null
 }
 
-export interface PartyCartUpdateOneWithoutPartyInput {
+export interface PartyCartUpdateOneRequiredWithoutPartyInput {
   create?: PartyCartCreateWithoutPartyInput | null
   connect?: PartyCartWhereUniqueInput | null
-  disconnect?: Boolean | null
-  delete?: Boolean | null
   update?: PartyCartUpdateWithoutPartyDataInput | null
   upsert?: PartyCartUpsertWithoutPartyInput | null
 }
@@ -10667,7 +10873,7 @@ export interface PartyCreateInput {
   members?: UserCreateManyWithoutPartiesInput | null
   playlist?: PlaylistCreateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackCreateManyWithoutPartyInput | null
-  cart?: PartyCartCreateOneWithoutPartyInput | null
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 export interface PartyCreateManyWithoutMembersInput {
@@ -10728,7 +10934,7 @@ export interface PartyCreateWithoutMembersInput {
   games?: GameCreateManyInput | null
   playlist?: PlaylistCreateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackCreateManyWithoutPartyInput | null
-  cart?: PartyCartCreateOneWithoutPartyInput | null
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 export interface PartyCreateWithoutPlaylistInput {
@@ -10746,7 +10952,7 @@ export interface PartyCreateWithoutPlaylistInput {
   games?: GameCreateManyInput | null
   members?: UserCreateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackCreateManyWithoutPartyInput | null
-  cart?: PartyCartCreateOneWithoutPartyInput | null
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 export interface PartyCreateWithoutSavedTracksInput {
@@ -10764,7 +10970,7 @@ export interface PartyCreateWithoutSavedTracksInput {
   games?: GameCreateManyInput | null
   members?: UserCreateManyWithoutPartiesInput | null
   playlist?: PlaylistCreateManyWithoutPartiesInput | null
-  cart?: PartyCartCreateOneWithoutPartyInput | null
+  cart: PartyCartCreateOneWithoutPartyInput
 }
 
 export interface PartyInvitationCreateInput {
@@ -11538,7 +11744,7 @@ export interface PartyUpdateDataInput {
   members?: UserUpdateManyWithoutPartiesInput | null
   playlist?: PlaylistUpdateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateInput {
@@ -11556,7 +11762,7 @@ export interface PartyUpdateInput {
   members?: UserUpdateManyWithoutPartiesInput | null
   playlist?: PlaylistUpdateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateManyDataInput {
@@ -11662,7 +11868,7 @@ export interface PartyUpdateWithoutMembersDataInput {
   games?: GameUpdateManyInput | null
   playlist?: PlaylistUpdateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateWithoutPlaylistDataInput {
@@ -11679,7 +11885,7 @@ export interface PartyUpdateWithoutPlaylistDataInput {
   games?: GameUpdateManyInput | null
   members?: UserUpdateManyWithoutPartiesInput | null
   savedTracks?: PartySavedTrackUpdateManyWithoutPartyInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateWithoutSavedTracksDataInput {
@@ -11696,7 +11902,7 @@ export interface PartyUpdateWithoutSavedTracksDataInput {
   games?: GameUpdateManyInput | null
   members?: UserUpdateManyWithoutPartiesInput | null
   playlist?: PlaylistUpdateManyWithoutPartiesInput | null
-  cart?: PartyCartUpdateOneWithoutPartyInput | null
+  cart?: PartyCartUpdateOneRequiredWithoutPartyInput | null
 }
 
 export interface PartyUpdateWithWhereUniqueWithoutMembersInput {
@@ -12334,6 +12540,7 @@ export interface UserCreateInput {
   pendingFriendInvitations?: UserCreateManyInput | null
   pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
   chats?: ChatCreateManyWithoutMembersInput | null
+  cartItems?: PartyCartItemCreateManyWithoutUserInput | null
 }
 
 export interface UserCreateManyInput {
@@ -12356,9 +12563,34 @@ export interface UserCreateOneInput {
   connect?: UserWhereUniqueInput | null
 }
 
+export interface UserCreateOneWithoutCartItemsInput {
+  create?: UserCreateWithoutCartItemsInput | null
+  connect?: UserWhereUniqueInput | null
+}
+
 export interface UserCreateOneWithoutPendingPartyInvitationsInput {
   create?: UserCreateWithoutPendingPartyInvitationsInput | null
   connect?: UserWhereUniqueInput | null
+}
+
+export interface UserCreateWithoutCartItemsInput {
+  id?: ID_Input | null
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyCreateManyWithoutMembersInput | null
+  friends?: UserCreateManyInput | null
+  pendingFriendInvitations?: UserCreateManyInput | null
+  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
+  chats?: ChatCreateManyWithoutMembersInput | null
 }
 
 export interface UserCreateWithoutChatsInput {
@@ -12378,6 +12610,7 @@ export interface UserCreateWithoutChatsInput {
   friends?: UserCreateManyInput | null
   pendingFriendInvitations?: UserCreateManyInput | null
   pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
+  cartItems?: PartyCartItemCreateManyWithoutUserInput | null
 }
 
 export interface UserCreateWithoutPartiesInput {
@@ -12397,6 +12630,7 @@ export interface UserCreateWithoutPartiesInput {
   pendingFriendInvitations?: UserCreateManyInput | null
   pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
   chats?: ChatCreateManyWithoutMembersInput | null
+  cartItems?: PartyCartItemCreateManyWithoutUserInput | null
 }
 
 export interface UserCreateWithoutPendingPartyInvitationsInput {
@@ -12416,6 +12650,7 @@ export interface UserCreateWithoutPendingPartyInvitationsInput {
   friends?: UserCreateManyInput | null
   pendingFriendInvitations?: UserCreateManyInput | null
   chats?: ChatCreateManyWithoutMembersInput | null
+  cartItems?: PartyCartItemCreateManyWithoutUserInput | null
 }
 
 export interface UserScalarWhereInput {
@@ -12602,6 +12837,7 @@ export interface UserUpdateDataInput {
   pendingFriendInvitations?: UserUpdateManyInput | null
   pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
   chats?: ChatUpdateManyWithoutMembersInput | null
+  cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateInput {
@@ -12621,6 +12857,7 @@ export interface UserUpdateInput {
   pendingFriendInvitations?: UserUpdateManyInput | null
   pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
   chats?: ChatUpdateManyWithoutMembersInput | null
+  cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateManyDataInput {
@@ -12692,15 +12929,6 @@ export interface UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput
 }
 
-export interface UserUpdateOneInput {
-  create?: UserCreateInput | null
-  connect?: UserWhereUniqueInput | null
-  disconnect?: Boolean | null
-  delete?: Boolean | null
-  update?: UserUpdateDataInput | null
-  upsert?: UserUpsertNestedInput | null
-}
-
 export interface UserUpdateOneRequiredInput {
   create?: UserCreateInput | null
   connect?: UserWhereUniqueInput | null
@@ -12708,11 +12936,37 @@ export interface UserUpdateOneRequiredInput {
   upsert?: UserUpsertNestedInput | null
 }
 
+export interface UserUpdateOneRequiredWithoutCartItemsInput {
+  create?: UserCreateWithoutCartItemsInput | null
+  connect?: UserWhereUniqueInput | null
+  update?: UserUpdateWithoutCartItemsDataInput | null
+  upsert?: UserUpsertWithoutCartItemsInput | null
+}
+
 export interface UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
   create?: UserCreateWithoutPendingPartyInvitationsInput | null
   connect?: UserWhereUniqueInput | null
   update?: UserUpdateWithoutPendingPartyInvitationsDataInput | null
   upsert?: UserUpsertWithoutPendingPartyInvitationsInput | null
+}
+
+export interface UserUpdateWithoutCartItemsDataInput {
+  email?: String | null
+  firstName?: String | null
+  lastName?: String | null
+  password?: String | null
+  lastOnline?: DateTime | null
+  deleted?: Boolean | null
+  provider?: SocialMediaType | null
+  avatar?: String | null
+  thirdPartyId?: String | null
+  resetToken?: String | null
+  resetTokenExpiry?: DateTime | null
+  parties?: PartyUpdateManyWithoutMembersInput | null
+  friends?: UserUpdateManyInput | null
+  pendingFriendInvitations?: UserUpdateManyInput | null
+  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
+  chats?: ChatUpdateManyWithoutMembersInput | null
 }
 
 export interface UserUpdateWithoutChatsDataInput {
@@ -12731,6 +12985,7 @@ export interface UserUpdateWithoutChatsDataInput {
   friends?: UserUpdateManyInput | null
   pendingFriendInvitations?: UserUpdateManyInput | null
   pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
+  cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateWithoutPartiesDataInput {
@@ -12749,6 +13004,7 @@ export interface UserUpdateWithoutPartiesDataInput {
   pendingFriendInvitations?: UserUpdateManyInput | null
   pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
   chats?: ChatUpdateManyWithoutMembersInput | null
+  cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
@@ -12767,6 +13023,7 @@ export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
   friends?: UserUpdateManyInput | null
   pendingFriendInvitations?: UserUpdateManyInput | null
   chats?: ChatUpdateManyWithoutMembersInput | null
+  cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateWithWhereUniqueNestedInput {
@@ -12787,6 +13044,11 @@ export interface UserUpdateWithWhereUniqueWithoutPartiesInput {
 export interface UserUpsertNestedInput {
   update: UserUpdateDataInput
   create: UserCreateInput
+}
+
+export interface UserUpsertWithoutCartItemsInput {
+  update: UserUpdateWithoutCartItemsDataInput
+  create: UserCreateWithoutCartItemsInput
 }
 
 export interface UserUpsertWithoutPendingPartyInvitationsInput {
@@ -12981,6 +13243,9 @@ export interface UserWhereInput {
   chats_every?: ChatWhereInput | null
   chats_some?: ChatWhereInput | null
   chats_none?: ChatWhereInput | null
+  cartItems_every?: PartyCartItemWhereInput | null
+  cartItems_some?: PartyCartItemWhereInput | null
+  cartItems_none?: PartyCartItemWhereInput | null
 }
 
 export interface UserWhereUniqueInput {
@@ -13384,7 +13649,7 @@ export interface Party extends Node {
   inviteSecret: String
   playlist?: Array<Playlist> | null
   savedTracks?: Array<PartySavedTrack> | null
-  cart?: PartyCart | null
+  cart: PartyCart
 }
 
 export interface PartyCart extends Node {
@@ -13415,10 +13680,11 @@ export interface PartyCartEdge {
 export interface PartyCartItem extends Node {
   id: ID_Output
   cart: PartyCart
-  user?: User | null
+  user: User
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -13446,6 +13712,7 @@ export interface PartyCartItemPreviousValues {
   name: String
   description: String
   price: Float
+  status: PartyCartItemStatus
   quantity: Int
 }
 
@@ -13719,6 +13986,7 @@ export interface User extends Node {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  cartItems?: Array<PartyCartItem> | null
 }
 
 /*

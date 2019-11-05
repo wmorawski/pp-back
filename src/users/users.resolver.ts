@@ -1,4 +1,4 @@
-import { UserConnection } from './../../generated/prisma-client/index';
+import { UserConnection } from './../../generated/prisma';
 import { UsersService } from '../users/users.service';
 import {
   Query,

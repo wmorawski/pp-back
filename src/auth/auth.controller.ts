@@ -25,7 +25,7 @@ import {
   ApiCreatedResponse,
 } from '@nestjs/swagger';
 import { CreateUserDto } from '../users/create-user.dto';
-import { User } from 'generated/prisma-client';
+import { User } from '../../generated/prisma';
 import { AuthGuard } from '@nestjs/passport';
 import { authenticate } from 'passport';
 import { SocialAuthPayload, SocialReAuthPayload } from './auth.types';
@@ -143,6 +143,12 @@ export class AuthController {
     res.redirect(getSuccessSocialCallbackUrl(req.user));
   }
 
+  @Get('spotify')
+  @UseGuards(AuthGuard('spotify'))
+  async spotifyAuth() {
+    // empty block do not delete!
+  }
+
   @Get('spotify/callback')
   @UseFilters(SocialAuthAccessDeniedFilter)
   @UseGuards(AuthGuard('spotify'))
@@ -256,7 +262,7 @@ export class AuthController {
         const result = {
           access_token: session.access_token,
           expires_in: session.expires_in,
-          refresh_token: encrypt(session.refresh_token),
+          refresh_token: session.refresh_token,
         };
         return res.send(result);
       })
@@ -275,7 +281,7 @@ export class AuthController {
 
     spotifyRequest({
       grant_type: 'refresh_token',
-      refresh_token: decrypt(params.refresh_token),
+      refresh_token: params.refresh_token,
     })
       .then(session => {
         return res.send({

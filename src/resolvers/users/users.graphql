@@ -10,6 +10,7 @@ type Query {
     first: Int
     last: Int
   ): [User]!
+  userFriends(userId: ID!): UserFriends!
   paginateUsers(
     where: UserWhereInput
     orderBy: UserOrderByInput
@@ -28,6 +29,15 @@ type Query {
     first: Int
     last: Int
   ): UserConnection!
+  friendInvitationsConnection(
+    where: FriendInvitationWhereInput
+    orderBy: FriendInvitationOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): FriendInvitationConnection!
 }
 
 type Mutation {
@@ -41,13 +51,22 @@ type Mutation {
   socialLogin(id: String!): AuthPayload!
   updateMe(name: String): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  inviteToFriends(sender: ID!, receiver: ID!): User!
   requestReset(email: String!): SuccessMessage
   resetPassword(
     resetToken: String!
     password: String!
     confirmPassword: String!
   ): AuthPayload
+  createFriendInvitation(data: FriendInvitationCreateInput!): FriendInvitation!
+  deleteFriendInvitation(
+    where: FriendInvitationWhereUniqueInput!
+  ): FriendInvitation
+}
+
+type Subscription {
+  friendInvitation(
+    where: FriendInvitationSubscriptionWhereInput
+  ): FriendInvitationSubscriptionPayload
 }
 
 type AuthPayload {
@@ -57,6 +76,16 @@ type AuthPayload {
 
 type SuccessMessage {
   message: String!
+}
+
+type UserFriends {
+  current: [String!]!
+  pending: [UserPendingFriend!]!
+}
+
+type UserPendingFriend {
+  id: String!
+  invitedUserId: String!
 }
 
 type User {

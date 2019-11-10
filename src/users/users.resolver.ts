@@ -1,3 +1,4 @@
+import { FriendInvitation } from './../../generated/prisma/index';
 import { UserConnection } from './../../generated/prisma';
 import { UsersService } from '../users/users.service';
 import {
@@ -7,6 +8,7 @@ import {
   Info,
   Context,
   Mutation,
+  Subscription,
 } from '@nestjs/graphql';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
@@ -19,6 +21,7 @@ import { AuthPayload } from 'src/auth/auth.types';
 import { AuthService } from 'src/auth/auth.service';
 import { MailerService } from '@nest-modules/mailer';
 import { GraphQLError } from 'graphql';
+import { pluck } from 'ramda';
 
 function getResetPasswordRoute(resetToken: string) {
   return `${process.env.WEB_URL}/reset-password/${resetToken}`;
@@ -50,16 +53,62 @@ export class UsersResolver {
   async usersConnection(@Args() args, @Info() info): Promise<UserConnection> {
     return await this.prisma.query.usersConnection(args, info);
   }
+  @Query('userFriends')
+  async userFriends(@Args() { userId }, @Info() info) {
+    const currentFriends = await this.prisma.query.users(
+      { where: { friends_some: { id: userId } } },
+      `
+      {
+        id
+      }
+    `,
+    );
+    const pending = await this.prisma.query.friendInvitations(
+      {
+        where: {
+          invitedBy: { id: userId },
+        },
+      },
+      `{
+       invitedUserId
+       id
+    }`,
+    );
+    return {
+      current: pluck('id')(currentFriends),
+      pending,
+    };
+  }
   @Query('me')
   @UseGuards(GqlAuthGuard)
   async me(@Context() { req }, @Info() info): Promise<User> {
     return this.prisma.query.user({ where: { id: req.user.userId } }, info);
   }
-  @Mutation('inviteToFriends')
+
+  @Query('friendInvitationsConnection')
   @UseGuards(GqlAuthGuard)
-  async inviteToFriends(@Args() args, @Info() info): Promise<any> {
-    // return await this.usersService.inviteToFriends(args, info);
+  async friendInvitationsConnection(@Args() args, @Info() info) {
+    return this.prisma.query.friendInvitationsConnection(args, info);
   }
+
+  @Mutation('createFriendInvitation')
+  @UseGuards(GqlAuthGuard)
+  async createFriendInvitation(
+    @Args() args,
+    @Info() info,
+  ): Promise<FriendInvitation> {
+    return await this.prisma.mutation.createFriendInvitation(args, info);
+  }
+
+  @Mutation('deleteFriendInvitation')
+  @UseGuards(GqlAuthGuard)
+  async deleteFriendInvitation(
+    @Args() args,
+    @Info() info,
+  ): Promise<FriendInvitation> {
+    return this.prisma.mutation.deleteFriendInvitation(args, info);
+  }
+
   @Mutation('updateUser')
   @UseGuards(GqlAuthGuard)
   async updateUser(@Args() args, @Info() info): Promise<User> {
@@ -160,5 +209,13 @@ export class UsersResolver {
     } catch (e) {
       throw new GraphQLError('Could not reset the password');
     }
+  }
+  @Subscription('friendInvitation')
+  onFriendInvitation() {
+    return {
+      subscribe: (obj, args, ctx, info) => {
+        return this.prisma.subscription.friendInvitation(args, info);
+      },
+    };
   }
 }

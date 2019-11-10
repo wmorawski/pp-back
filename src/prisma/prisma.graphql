@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Sun Nov 03 2019 20:17:02 GMT+0100 (Central European Standard Time)
+# timestamp: Sun Nov 10 2019 15:32:12 GMT+0100 (Central European Standard Time)
 
 type AggregateAlbum {
   count: Int!
@@ -10,6 +10,10 @@ type AggregateArtist {
 }
 
 type AggregateChat {
+  count: Int!
+}
+
+type AggregateFriendInvitation {
   count: Int!
 }
 
@@ -1318,6 +1322,384 @@ input ChatWhereUniqueInput {
 }
 
 scalar DateTime
+
+type FriendInvitation implements Node {
+  id: ID!
+  invitedBy: User!
+  user: User!
+  createdAt: DateTime!
+  invitedUserId: String!
+}
+
+"""A connection to a list of items."""
+type FriendInvitationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FriendInvitationEdge]!
+  aggregate: AggregateFriendInvitation!
+}
+
+input FriendInvitationCreateInput {
+  id: ID
+  invitedUserId: String!
+  invitedBy: UserCreateOneInput!
+  user: UserCreateOneWithoutPendingFriendInvitationsInput!
+}
+
+input FriendInvitationCreateManyWithoutUserInput {
+  create: [FriendInvitationCreateWithoutUserInput!]
+  connect: [FriendInvitationWhereUniqueInput!]
+}
+
+input FriendInvitationCreateWithoutUserInput {
+  id: ID
+  invitedUserId: String!
+  invitedBy: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type FriendInvitationEdge {
+  """The item at the end of the edge."""
+  node: FriendInvitation!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FriendInvitationOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  invitedUserId_ASC
+  invitedUserId_DESC
+}
+
+type FriendInvitationPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  invitedUserId: String!
+}
+
+input FriendInvitationScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FriendInvitationScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FriendInvitationScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FriendInvitationScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  invitedUserId: String
+
+  """All values that are not equal to given value."""
+  invitedUserId_not: String
+
+  """All values that are contained in given list."""
+  invitedUserId_in: [String!]
+
+  """All values that are not contained in given list."""
+  invitedUserId_not_in: [String!]
+
+  """All values less than the given value."""
+  invitedUserId_lt: String
+
+  """All values less than or equal the given value."""
+  invitedUserId_lte: String
+
+  """All values greater than the given value."""
+  invitedUserId_gt: String
+
+  """All values greater than or equal the given value."""
+  invitedUserId_gte: String
+
+  """All values containing the given string."""
+  invitedUserId_contains: String
+
+  """All values not containing the given string."""
+  invitedUserId_not_contains: String
+
+  """All values starting with the given string."""
+  invitedUserId_starts_with: String
+
+  """All values not starting with the given string."""
+  invitedUserId_not_starts_with: String
+
+  """All values ending with the given string."""
+  invitedUserId_ends_with: String
+
+  """All values not ending with the given string."""
+  invitedUserId_not_ends_with: String
+}
+
+type FriendInvitationSubscriptionPayload {
+  mutation: MutationType!
+  node: FriendInvitation
+  updatedFields: [String!]
+  previousValues: FriendInvitationPreviousValues
+}
+
+input FriendInvitationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FriendInvitationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FriendInvitationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FriendInvitationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FriendInvitationWhereInput
+}
+
+input FriendInvitationUpdateInput {
+  invitedUserId: String
+  invitedBy: UserUpdateOneRequiredInput
+  user: UserUpdateOneRequiredWithoutPendingFriendInvitationsInput
+}
+
+input FriendInvitationUpdateManyDataInput {
+  invitedUserId: String
+}
+
+input FriendInvitationUpdateManyMutationInput {
+  invitedUserId: String
+}
+
+input FriendInvitationUpdateManyWithoutUserInput {
+  create: [FriendInvitationCreateWithoutUserInput!]
+  connect: [FriendInvitationWhereUniqueInput!]
+  set: [FriendInvitationWhereUniqueInput!]
+  disconnect: [FriendInvitationWhereUniqueInput!]
+  delete: [FriendInvitationWhereUniqueInput!]
+  update: [FriendInvitationUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [FriendInvitationUpdateManyWithWhereNestedInput!]
+  deleteMany: [FriendInvitationScalarWhereInput!]
+  upsert: [FriendInvitationUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input FriendInvitationUpdateManyWithWhereNestedInput {
+  where: FriendInvitationScalarWhereInput!
+  data: FriendInvitationUpdateManyDataInput!
+}
+
+input FriendInvitationUpdateWithoutUserDataInput {
+  invitedUserId: String
+  invitedBy: UserUpdateOneRequiredInput
+}
+
+input FriendInvitationUpdateWithWhereUniqueWithoutUserInput {
+  where: FriendInvitationWhereUniqueInput!
+  data: FriendInvitationUpdateWithoutUserDataInput!
+}
+
+input FriendInvitationUpsertWithWhereUniqueWithoutUserInput {
+  where: FriendInvitationWhereUniqueInput!
+  update: FriendInvitationUpdateWithoutUserDataInput!
+  create: FriendInvitationCreateWithoutUserInput!
+}
+
+input FriendInvitationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FriendInvitationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FriendInvitationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FriendInvitationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  invitedUserId: String
+
+  """All values that are not equal to given value."""
+  invitedUserId_not: String
+
+  """All values that are contained in given list."""
+  invitedUserId_in: [String!]
+
+  """All values that are not contained in given list."""
+  invitedUserId_not_in: [String!]
+
+  """All values less than the given value."""
+  invitedUserId_lt: String
+
+  """All values less than or equal the given value."""
+  invitedUserId_lte: String
+
+  """All values greater than the given value."""
+  invitedUserId_gt: String
+
+  """All values greater than or equal the given value."""
+  invitedUserId_gte: String
+
+  """All values containing the given string."""
+  invitedUserId_contains: String
+
+  """All values not containing the given string."""
+  invitedUserId_not_contains: String
+
+  """All values starting with the given string."""
+  invitedUserId_starts_with: String
+
+  """All values not starting with the given string."""
+  invitedUserId_not_starts_with: String
+
+  """All values ending with the given string."""
+  invitedUserId_ends_with: String
+
+  """All values not ending with the given string."""
+  invitedUserId_not_ends_with: String
+  invitedBy: UserWhereInput
+  user: UserWhereInput
+}
+
+input FriendInvitationWhereUniqueInput {
+  id: ID
+}
 
 type Game implements Node {
   id: ID!
@@ -2847,6 +3229,7 @@ input MessageWhereUniqueInput {
 type Mutation {
   createMessage(data: MessageCreateInput!): Message!
   createPartyInvitation(data: PartyInvitationCreateInput!): PartyInvitation!
+  createFriendInvitation(data: FriendInvitationCreateInput!): FriendInvitation!
   createChat(data: ChatCreateInput!): Chat!
   createPlaylist(data: PlaylistCreateInput!): Playlist!
   createPartyCart(data: PartyCartCreateInput!): PartyCart!
@@ -2862,6 +3245,7 @@ type Mutation {
   createAlbum(data: AlbumCreateInput!): Album!
   updateMessage(data: MessageUpdateInput!, where: MessageWhereUniqueInput!): Message
   updatePartyInvitation(data: PartyInvitationUpdateInput!, where: PartyInvitationWhereUniqueInput!): PartyInvitation
+  updateFriendInvitation(data: FriendInvitationUpdateInput!, where: FriendInvitationWhereUniqueInput!): FriendInvitation
   updateChat(data: ChatUpdateInput!, where: ChatWhereUniqueInput!): Chat
   updatePlaylist(data: PlaylistUpdateInput!, where: PlaylistWhereUniqueInput!): Playlist
   updatePartyCart(data: PartyCartUpdateInput!, where: PartyCartWhereUniqueInput!): PartyCart
@@ -2877,6 +3261,7 @@ type Mutation {
   updateAlbum(data: AlbumUpdateInput!, where: AlbumWhereUniqueInput!): Album
   deleteMessage(where: MessageWhereUniqueInput!): Message
   deletePartyInvitation(where: PartyInvitationWhereUniqueInput!): PartyInvitation
+  deleteFriendInvitation(where: FriendInvitationWhereUniqueInput!): FriendInvitation
   deleteChat(where: ChatWhereUniqueInput!): Chat
   deletePlaylist(where: PlaylistWhereUniqueInput!): Playlist
   deletePartyCart(where: PartyCartWhereUniqueInput!): PartyCart
@@ -2892,6 +3277,7 @@ type Mutation {
   deleteAlbum(where: AlbumWhereUniqueInput!): Album
   upsertMessage(where: MessageWhereUniqueInput!, create: MessageCreateInput!, update: MessageUpdateInput!): Message!
   upsertPartyInvitation(where: PartyInvitationWhereUniqueInput!, create: PartyInvitationCreateInput!, update: PartyInvitationUpdateInput!): PartyInvitation!
+  upsertFriendInvitation(where: FriendInvitationWhereUniqueInput!, create: FriendInvitationCreateInput!, update: FriendInvitationUpdateInput!): FriendInvitation!
   upsertChat(where: ChatWhereUniqueInput!, create: ChatCreateInput!, update: ChatUpdateInput!): Chat!
   upsertPlaylist(where: PlaylistWhereUniqueInput!, create: PlaylistCreateInput!, update: PlaylistUpdateInput!): Playlist!
   upsertPartyCart(where: PartyCartWhereUniqueInput!, create: PartyCartCreateInput!, update: PartyCartUpdateInput!): PartyCart!
@@ -2907,6 +3293,7 @@ type Mutation {
   upsertAlbum(where: AlbumWhereUniqueInput!, create: AlbumCreateInput!, update: AlbumUpdateInput!): Album!
   updateManyMessages(data: MessageUpdateManyMutationInput!, where: MessageWhereInput): BatchPayload!
   updateManyPartyInvitations(data: PartyInvitationUpdateManyMutationInput!, where: PartyInvitationWhereInput): BatchPayload!
+  updateManyFriendInvitations(data: FriendInvitationUpdateManyMutationInput!, where: FriendInvitationWhereInput): BatchPayload!
   updateManyPlaylists(data: PlaylistUpdateManyMutationInput!, where: PlaylistWhereInput): BatchPayload!
   updateManyPartyCartItems(data: PartyCartItemUpdateManyMutationInput!, where: PartyCartItemWhereInput): BatchPayload!
   updateManyTracks(data: TrackUpdateManyMutationInput!, where: TrackWhereInput): BatchPayload!
@@ -2920,6 +3307,7 @@ type Mutation {
   updateManyAlbums(data: AlbumUpdateManyMutationInput!, where: AlbumWhereInput): BatchPayload!
   deleteManyMessages(where: MessageWhereInput): BatchPayload!
   deleteManyPartyInvitations(where: PartyInvitationWhereInput): BatchPayload!
+  deleteManyFriendInvitations(where: FriendInvitationWhereInput): BatchPayload!
   deleteManyChats(where: ChatWhereInput): BatchPayload!
   deleteManyPlaylists(where: PlaylistWhereInput): BatchPayload!
   deleteManyPartyCarts(where: PartyCartWhereInput): BatchPayload!
@@ -7161,6 +7549,7 @@ input PlaylistWhereUniqueInput {
 type Query {
   messages(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Message]!
   partyInvitations(where: PartyInvitationWhereInput, orderBy: PartyInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyInvitation]!
+  friendInvitations(where: FriendInvitationWhereInput, orderBy: FriendInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FriendInvitation]!
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat]!
   playlists(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Playlist]!
   partyCarts(where: PartyCartWhereInput, orderBy: PartyCartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCart]!
@@ -7176,6 +7565,7 @@ type Query {
   albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
   message(where: MessageWhereUniqueInput!): Message
   partyInvitation(where: PartyInvitationWhereUniqueInput!): PartyInvitation
+  friendInvitation(where: FriendInvitationWhereUniqueInput!): FriendInvitation
   chat(where: ChatWhereUniqueInput!): Chat
   playlist(where: PlaylistWhereUniqueInput!): Playlist
   partyCart(where: PartyCartWhereUniqueInput!): PartyCart
@@ -7191,6 +7581,7 @@ type Query {
   album(where: AlbumWhereUniqueInput!): Album
   messagesConnection(where: MessageWhereInput, orderBy: MessageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MessageConnection!
   partyInvitationsConnection(where: PartyInvitationWhereInput, orderBy: PartyInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyInvitationConnection!
+  friendInvitationsConnection(where: FriendInvitationWhereInput, orderBy: FriendInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FriendInvitationConnection!
   chatsConnection(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChatConnection!
   playlistsConnection(where: PlaylistWhereInput, orderBy: PlaylistOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaylistConnection!
   partyCartsConnection(where: PartyCartWhereInput, orderBy: PartyCartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PartyCartConnection!
@@ -7221,6 +7612,7 @@ enum SocialMediaType {
 type Subscription {
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   partyInvitation(where: PartyInvitationSubscriptionWhereInput): PartyInvitationSubscriptionPayload
+  friendInvitation(where: FriendInvitationSubscriptionWhereInput): FriendInvitationSubscriptionPayload
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
   playlist(where: PlaylistSubscriptionWhereInput): PlaylistSubscriptionPayload
   partyCart(where: PartyCartSubscriptionWhereInput): PartyCartSubscriptionPayload
@@ -7513,7 +7905,7 @@ type User implements Node {
   password: String!
   parties(where: PartyWhereInput, orderBy: PartyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Party!]
   friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  pendingFriendInvitations(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  pendingFriendInvitations(where: FriendInvitationWhereInput, orderBy: FriendInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FriendInvitation!]
   pendingPartyInvitations(where: PartyInvitationWhereInput, orderBy: PartyInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyInvitation!]
   chats(where: ChatWhereInput, orderBy: ChatOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Chat!]
   createdAt: DateTime!
@@ -7553,7 +7945,7 @@ input UserCreateInput {
   resetTokenExpiry: DateTime
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
-  pendingFriendInvitations: UserCreateManyInput
+  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
   cartItems: PartyCartItemCreateManyWithoutUserInput
@@ -7584,6 +7976,11 @@ input UserCreateOneWithoutCartItemsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutPendingFriendInvitationsInput {
+  create: UserCreateWithoutPendingFriendInvitationsInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateOneWithoutPendingPartyInvitationsInput {
   create: UserCreateWithoutPendingPartyInvitationsInput
   connect: UserWhereUniqueInput
@@ -7604,7 +8001,7 @@ input UserCreateWithoutCartItemsInput {
   resetTokenExpiry: DateTime
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
-  pendingFriendInvitations: UserCreateManyInput
+  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
 }
@@ -7624,7 +8021,7 @@ input UserCreateWithoutChatsInput {
   resetTokenExpiry: DateTime
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
-  pendingFriendInvitations: UserCreateManyInput
+  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   cartItems: PartyCartItemCreateManyWithoutUserInput
 }
@@ -7643,7 +8040,27 @@ input UserCreateWithoutPartiesInput {
   resetToken: String
   resetTokenExpiry: DateTime
   friends: UserCreateManyInput
-  pendingFriendInvitations: UserCreateManyInput
+  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
+  pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
+  chats: ChatCreateManyWithoutMembersInput
+  cartItems: PartyCartItemCreateManyWithoutUserInput
+}
+
+input UserCreateWithoutPendingFriendInvitationsInput {
+  id: ID
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  lastOnline: DateTime
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
+  parties: PartyCreateManyWithoutMembersInput
+  friends: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
   cartItems: PartyCartItemCreateManyWithoutUserInput
@@ -7664,7 +8081,7 @@ input UserCreateWithoutPendingPartyInvitationsInput {
   resetTokenExpiry: DateTime
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
-  pendingFriendInvitations: UserCreateManyInput
+  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
   cartItems: PartyCartItemCreateManyWithoutUserInput
 }
@@ -8212,7 +8629,7 @@ input UserUpdateDataInput {
   resetTokenExpiry: DateTime
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
-  pendingFriendInvitations: UserUpdateManyInput
+  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
   cartItems: PartyCartItemUpdateManyWithoutUserInput
@@ -8232,7 +8649,7 @@ input UserUpdateInput {
   resetTokenExpiry: DateTime
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
-  pendingFriendInvitations: UserUpdateManyInput
+  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
   cartItems: PartyCartItemUpdateManyWithoutUserInput
@@ -8321,6 +8738,13 @@ input UserUpdateOneRequiredWithoutCartItemsInput {
   upsert: UserUpsertWithoutCartItemsInput
 }
 
+input UserUpdateOneRequiredWithoutPendingFriendInvitationsInput {
+  create: UserCreateWithoutPendingFriendInvitationsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutPendingFriendInvitationsDataInput
+  upsert: UserUpsertWithoutPendingFriendInvitationsInput
+}
+
 input UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
   create: UserCreateWithoutPendingPartyInvitationsInput
   connect: UserWhereUniqueInput
@@ -8342,7 +8766,7 @@ input UserUpdateWithoutCartItemsDataInput {
   resetTokenExpiry: DateTime
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
-  pendingFriendInvitations: UserUpdateManyInput
+  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
 }
@@ -8361,7 +8785,7 @@ input UserUpdateWithoutChatsDataInput {
   resetTokenExpiry: DateTime
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
-  pendingFriendInvitations: UserUpdateManyInput
+  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
@@ -8379,7 +8803,26 @@ input UserUpdateWithoutPartiesDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   friends: UserUpdateManyInput
-  pendingFriendInvitations: UserUpdateManyInput
+  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
+  pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
+  chats: ChatUpdateManyWithoutMembersInput
+  cartItems: PartyCartItemUpdateManyWithoutUserInput
+}
+
+input UserUpdateWithoutPendingFriendInvitationsDataInput {
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  lastOnline: DateTime
+  deleted: Boolean
+  provider: SocialMediaType
+  avatar: String
+  thirdPartyId: String
+  resetToken: String
+  resetTokenExpiry: DateTime
+  parties: PartyUpdateManyWithoutMembersInput
+  friends: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
   cartItems: PartyCartItemUpdateManyWithoutUserInput
@@ -8399,7 +8842,7 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   resetTokenExpiry: DateTime
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
-  pendingFriendInvitations: UserUpdateManyInput
+  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
   chats: ChatUpdateManyWithoutMembersInput
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
@@ -8427,6 +8870,11 @@ input UserUpsertNestedInput {
 input UserUpsertWithoutCartItemsInput {
   update: UserUpdateWithoutCartItemsDataInput!
   create: UserCreateWithoutCartItemsInput!
+}
+
+input UserUpsertWithoutPendingFriendInvitationsInput {
+  update: UserUpdateWithoutPendingFriendInvitationsDataInput!
+  create: UserCreateWithoutPendingFriendInvitationsInput!
 }
 
 input UserUpsertWithoutPendingPartyInvitationsInput {
@@ -8889,9 +9337,9 @@ input UserWhereInput {
   friends_every: UserWhereInput
   friends_some: UserWhereInput
   friends_none: UserWhereInput
-  pendingFriendInvitations_every: UserWhereInput
-  pendingFriendInvitations_some: UserWhereInput
-  pendingFriendInvitations_none: UserWhereInput
+  pendingFriendInvitations_every: FriendInvitationWhereInput
+  pendingFriendInvitations_some: FriendInvitationWhereInput
+  pendingFriendInvitations_none: FriendInvitationWhereInput
   pendingPartyInvitations_every: PartyInvitationWhereInput
   pendingPartyInvitations_some: PartyInvitationWhereInput
   pendingPartyInvitations_none: PartyInvitationWhereInput

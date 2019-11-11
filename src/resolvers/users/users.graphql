@@ -52,6 +52,8 @@ type Mutation {
   updateMe(name: String): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   requestReset(email: String!): SuccessMessage
+  acceptFriendInvitation(invitationId: ID!, invitingUserId: ID!): Boolean
+  unfriendPerson(personToUnfriendId: ID!): Boolean
   resetPassword(
     resetToken: String!
     password: String!

@@ -14,7 +14,11 @@ import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../guards/GqlAuthGuard.guard';
-import { SuccessMessage } from './user.types';
+import {
+  SuccessMessage,
+  AcceptFriendInvitationArgs,
+  UnfriendPersonArgs,
+} from './user.types';
 import { randomBytes } from 'crypto';
 import { promisify } from 'util';
 import { AuthPayload } from 'src/auth/auth.types';
@@ -109,6 +113,81 @@ export class UsersResolver {
     return this.prisma.mutation.deleteFriendInvitation(args, info);
   }
 
+  @Mutation('acceptFriendInvitation')
+  @UseGuards(GqlAuthGuard)
+  async acceptFriendInvitation(
+    @Args() { invitationId, invitingUserId }: AcceptFriendInvitationArgs,
+    @Context() { req },
+  ) {
+    const authenticatedUserId = req.user.userId;
+
+    try {
+      await this.prisma.mutation.updateUser({
+        where: { id: invitingUserId },
+        data: {
+          friends: { connect: { id: authenticatedUserId } },
+        },
+      });
+    } catch (e) {
+      throw new GraphQLError(
+        'Could not set friend relationship on user who requested the relation',
+      );
+    }
+
+    try {
+      await this.prisma.mutation.updateUser({
+        where: { id: authenticatedUserId },
+        data: {
+          friends: { connect: { id: invitingUserId } },
+        },
+      });
+    } catch (e) {
+      throw new GraphQLError(
+        'Could not set friend relationship on authenticated user!',
+      );
+    }
+
+    try {
+      await this.prisma.mutation.deleteFriendInvitation({
+        where: { id: invitationId },
+      });
+    } catch (e) {
+      throw new GraphQLError('Could not remove friend invitation!');
+    }
+    return true;
+  }
+  @Mutation('unfriendPerson')
+  @UseGuards(GqlAuthGuard)
+  async unfriendPerson(
+    @Args() { personToUnfriendId }: UnfriendPersonArgs,
+    @Context() { req },
+  ): Promise<boolean> {
+    const authenticatedUserId = req.user.userId;
+    try {
+      await this.prisma.mutation.updateUser({
+        where: { id: personToUnfriendId },
+        data: {
+          friends: { disconnect: { id: authenticatedUserId } },
+        },
+      });
+    } catch (e) {
+      throw new GraphQLError(
+        'Could not disconnect friend relationship from the personToUnfriend',
+      );
+    }
+
+    try {
+      await this.prisma.mutation.updateUser({
+        where: { id: authenticatedUserId },
+        data: { friends: { disconnect: { id: personToUnfriendId } } },
+      });
+    } catch (e) {
+      throw new GraphQLError(
+        'Could not disconnect friend relation from currently authenticated user',
+      );
+    }
+    return true;
+  }
   @Mutation('updateUser')
   @UseGuards(GqlAuthGuard)
   async updateUser(@Args() args, @Info() info): Promise<User> {

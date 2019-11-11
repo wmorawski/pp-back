@@ -12,4 +12,29 @@ type Query {
 
 type Mutation {
   createPlaylist(data: PlaylistCreateInput!): Playlist!
+  updatePlaylist(
+    data: PlaylistUpdateInput!
+    where: PlaylistWhereUniqueInput!
+  ): Playlist
+  importPlaylistsToParty(playlists: String!, partyId: ID!): Boolean!
+  deletePlaylist(where: PlaylistWhereUniqueInput!): Playlist
+  combinePlaylists(
+    partyPlannerData: CombinePlaylistPartyPlannerData!
+    spotifyData: CombinePlaylistCreatedSpotifyPlaylistInput!
+  ): Playlist!
+}
+
+input CombinePlaylistPartyPlannerData {
+  playlists: String!
+  partyId: ID!
+  userId: ID!
+  deleteAffected: Boolean!
+}
+
+input CombinePlaylistCreatedSpotifyPlaylistInput {
+  spotifyId: ID!
+  uri: String!
+  name: String!
+  imageUrl: String!
+  spotifyExternalUrl: String!
 }

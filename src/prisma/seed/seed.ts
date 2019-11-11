@@ -1,5 +1,5 @@
 import * as uuid from 'uuid/v4';
-import { prisma } from './../../../generated/prisma-client/index';
+import { prisma } from './../../../generated/prisma';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { compose, filter } from 'ramda';
@@ -67,6 +67,7 @@ const createFakeParty = (author: any, members: any[]): PartyCreateInput => {
     end: partyEndDate,
     colorTint: faker.random.arrayElement(calendarTintsHexArray),
     inviteSecret: uuid(),
+    cart: {},
   };
 };
 const getRandomElementsFromArray = (arr: any[]) => {

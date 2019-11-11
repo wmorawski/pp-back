@@ -1,4 +1,4 @@
-import { Chat } from '../../generated/prisma-client';
+import { Chat } from '../../generated/prisma';
 import { Get, Param, Controller } from '@nestjs/common';
 import { ChatsService } from './chats.service';
 

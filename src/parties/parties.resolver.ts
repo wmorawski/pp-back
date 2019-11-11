@@ -80,6 +80,7 @@ export class PartiesResolver {
   async createPartySavedTrack(@Args() args, @Info() info) {
     return this.prisma.mutation.createPartySavedTrack(args, info);
   }
+
   // TODO:
   // THIS IS REALLY REALLY BAD, USE RAW DB QUERY HERE OR SOMETHING
   // BUT PLEASE GOD OPTIMIZE IT!

@@ -84,6 +84,7 @@ type Mutation {
     data: PartyCartItemUpdateInput!
     where: PartyCartItemWhereUniqueInput!
   ): PartyCartItem
+  updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
 }
 
 type Subscription {

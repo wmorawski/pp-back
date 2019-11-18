@@ -87,14 +87,9 @@ export class PartiesResolver {
     return this.prisma.mutation.createPartySavedTrack(args, info);
   }
 
-  // TODO:
-  // THIS IS REALLY REALLY BAD, USE RAW DB QUERY HERE OR SOMETHING
-  // BUT PLEASE GOD OPTIMIZE IT!
   @Mutation('joinParty')
   @UseGuards(GqlAuthGuard)
   async joinParty(@Args() args: { partyId: string }, @Context() { req }) {
-    // 100 points for someone who tells me why I'm using arrow function here
-    // instead of normal function declaration :)
     const makeDeletePartyPromise = (partyId: string) => {
       return this.prisma.mutation.deletePartyInvitation({
         where: { id: partyId },

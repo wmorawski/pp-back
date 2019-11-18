@@ -1,0 +1,9 @@
+type Query {
+  authenticateParty(partyId: ID!): PartyAuthenticationResult!
+}
+
+type PartyAuthenticationResult {
+  canJoin: Boolean!
+  isMember: Boolean!
+  party: Party
+}

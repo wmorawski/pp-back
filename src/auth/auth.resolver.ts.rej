@@ -1,0 +1,7 @@
+diff a/src/auth/auth.resolver.ts b/src/auth/auth.resolver.ts	(rejected hunks)
+@@ -117 +118 @@ export class AuthResolver {
+-      const isMember = party.members.some(member => member.id == userId);
++      const isMember = party.members.some(member => member.id === userId);
+@@ -141 +142 @@ export class AuthResolver {
+-      console.log(e);
++      throw new GraphQLError('Something went wrong');

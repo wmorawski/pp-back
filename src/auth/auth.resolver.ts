@@ -1,22 +1,35 @@
-import { UnauthorizedException } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { CreateUserDto } from './../users/create-user.dto';
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 import {
+  AuthenticatePartyArgs,
+  AuthenticatePartyPayload,
   AuthPayload,
   LoginPayload,
   SignupPayload,
   SocialLoginPayload,
 } from './auth.types';
-import { UsersService } from '../users/users.service';
-import { AuthenticationError } from 'apollo-server-core';
 
-@Resolver()
+import {
+  Args,
+  Context,
+  Mutation,
+  Resolver,
+  Query,
+  Info,
+} from '@nestjs/graphql';
+import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { UseGuards } from '@nestjs/common';
+import { addFragmentToInfo } from 'graphql-binding';
+import { GraphQLError } from 'graphql';
+import { GraphQLError } from 'graphql';
+
+@Resolver('auth')
 export class AuthResolver {
   constructor(
     private readonly users: UsersService,
     private readonly auth: AuthService,
+    private readonly prisma: PrismaService,
   ) {}
 
   @Mutation('signup')
@@ -36,5 +49,98 @@ export class AuthResolver {
   async socialLogin(@Args() payload: SocialLoginPayload): Promise<AuthPayload> {
     const user = await this.auth.socialLogin(payload);
     return this.auth.createAuthPayload(user);
+  }
+
+  @Query('authenticateParty')
+  @UseGuards(GqlAuthGuard)
+  async authenticateParty(
+    @Args() { partyId }: AuthenticatePartyArgs,
+    @Context() { req },
+  ): Promise<AuthenticatePartyPayload> {
+    try {
+      const {
+        user: { userId },
+      } = req;
+
+      // this is pretty bad but did not find any other way
+      // tbh i do not really care anymore ;/
+      const [party] = await this.prisma.query.parties(
+        {
+          where: {
+            id: partyId,
+            OR: [{ members_some: { id: userId } }, { isPublic: true }],
+          },
+        },
+        `
+        {
+          id
+          title
+          description
+          location {
+            placeName
+            longitude
+            latitude
+          }
+          author {
+            firstName
+            lastName
+            id
+          }
+          members {
+            avatar
+            firstName
+            lastName
+            id
+          }
+          colorTint
+          start
+          end
+          isPublic
+          inviteSecret
+          cart {
+            id
+          }
+
+          members {
+            id
+          }
+        }
+        `,
+      );
+
+      if (!party) {
+        return {
+          canJoin: false,
+          isMember: false,
+          party: undefined,
+        };
+      }
+
+      const isMember = party.members.some(member => member.id === userId);
+
+      if (isMember) {
+        return {
+          canJoin: false,
+          isMember,
+          party,
+        };
+      }
+
+      if (!isMember && party.isPublic) {
+        return {
+          canJoin: true,
+          isMember: false,
+          party,
+        };
+      }
+
+      return {
+        canJoin: false,
+        isMember: false,
+        party: undefined,
+      };
+    } catch (e) {
+      throw new GraphQLError('Something went wrong');
+    }
   }
 }

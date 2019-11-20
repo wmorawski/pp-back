@@ -58,6 +58,12 @@ export class PartiesResolver {
     return await this.prisma.mutation.updatePartyCartItem(args, info);
   }
 
+  @Mutation('updateParty')
+  @UseGuards(GqlAuthGuard)
+  async updateParty(@Args() args, @Info() info) {
+    return await this.prisma.mutation.updateParty(args, info);
+  }
+
   @Mutation('createPartyCartItem')
   @UseGuards(GqlAuthGuard)
   async createPartyCartItem(
@@ -72,6 +78,17 @@ export class PartiesResolver {
     return this.prisma.mutation.deleteManyPartyInvitations(args, info);
   }
 
+  @Mutation('deleteParty')
+  async deleteParty(@Args() args, @Info() info) {
+    // Party has only one chat
+    // using `deleteMany` makes it possible to not identify chat by its id but by the relation to a given party
+    await this.prisma.mutation.deleteManyChats({
+      where: { party: { id: args.where.id } },
+    });
+
+    return this.prisma.mutation.deleteParty(args, info);
+  }
+
   @Mutation('deletePartyInvitation')
   async deletePartyInvitation(@Args() args, @Info() info) {
     return this.prisma.mutation.deletePartyInvitation(args, info);
@@ -81,14 +98,9 @@ export class PartiesResolver {
     return this.prisma.mutation.createPartySavedTrack(args, info);
   }
 
-  // TODO:
-  // THIS IS REALLY REALLY BAD, USE RAW DB QUERY HERE OR SOMETHING
-  // BUT PLEASE GOD OPTIMIZE IT!
   @Mutation('joinParty')
   @UseGuards(GqlAuthGuard)
   async joinParty(@Args() args: { partyId: string }, @Context() { req }) {
-    // 100 points for someone who tells me why I'm using arrow function here
-    // instead of normal function declaration :)
     const makeDeletePartyPromise = (partyId: string) => {
       return this.prisma.mutation.deletePartyInvitation({
         where: { id: partyId },

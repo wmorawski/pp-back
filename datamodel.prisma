@@ -66,9 +66,9 @@ type Party {
   start: DateTime! @default(value: "1970-01-01T00:00:01")
   end: DateTime! @default(value: "1970-01-01T00:00:01")
   inviteSecret: String! @unique
-  playlist: [Playlist!]
-  savedTracks: [PartySavedTrack!]
-  cart: PartyCart! @relation(link: INLINE)
+  playlist: [Playlist!] @relation(onDelete: CASCADE)
+  savedTracks: [PartySavedTrack!] @relation(onDelete: CASCADE)
+  cart: PartyCart! @relation(link: INLINE, onDelete: CASCADE)
 }
 
 type Chat {
@@ -116,7 +116,7 @@ type Playlist {
 type PartyCart {
   id: ID! @id
   party: Party!
-  items: [PartyCartItem!]!
+  items: [PartyCartItem!]! @relation(onDelete: CASCADE)
 }
 
 type PartyCartItem {

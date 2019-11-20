@@ -22,7 +22,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { UseGuards } from '@nestjs/common';
 import { addFragmentToInfo } from 'graphql-binding';
 import { GraphQLError } from 'graphql';
-import { GraphQLError } from 'graphql';
 
 @Resolver('auth')
 export class AuthResolver {

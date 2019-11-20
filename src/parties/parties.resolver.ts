@@ -78,6 +78,17 @@ export class PartiesResolver {
     return this.prisma.mutation.deleteManyPartyInvitations(args, info);
   }
 
+  @Mutation('deleteParty')
+  async deleteParty(@Args() args, @Info() info) {
+    // Party has only one chat
+    // using `deleteMany` makes it possible to not identify chat by its id but by the relation to a given party
+    await this.prisma.mutation.deleteManyChats({
+      where: { party: { id: args.where.id } },
+    });
+
+    return this.prisma.mutation.deleteParty(args, info);
+  }
+
   @Mutation('deletePartyInvitation')
   async deletePartyInvitation(@Args() args, @Info() info) {
     return this.prisma.mutation.deletePartyInvitation(args, info);

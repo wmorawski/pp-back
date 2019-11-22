@@ -909,8 +909,8 @@ export type PlaylistOrderByInput =
   | "name_DESC"
   | "imageUrl_ASC"
   | "imageUrl_DESC"
-  | "isTemporary_ASC"
-  | "isTemporary_DESC";
+  | "importable_ASC"
+  | "importable_DESC";
 
 export type MessageOrderByInput =
   | "id_ASC"
@@ -1843,7 +1843,7 @@ export interface PlaylistUpdateManyMutationInput {
   spotifyExternalUrl?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartyUpdateWithoutMembersDataInput {
@@ -2246,7 +2246,7 @@ export interface PlaylistUpdateWithoutPartiesDataInput {
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
   tracks?: Maybe<PartySavedTrackUpdateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartyCartItemUpdateInput {
@@ -3007,7 +3007,7 @@ export interface PlaylistCreateWithoutPartiesInput {
   name: String;
   imageUrl: String;
   tracks?: Maybe<PartySavedTrackCreateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartyInvitationUpdateManyWithWhereNestedInput {
@@ -3876,7 +3876,7 @@ export interface PlaylistUpdateInput {
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
   tracks?: Maybe<PartySavedTrackUpdateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartySavedTrackUpdateManyWithoutPartyInput {
@@ -3923,7 +3923,7 @@ export interface PlaylistCreateInput {
   name: String;
   imageUrl: String;
   tracks?: Maybe<PartySavedTrackCreateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
@@ -4887,8 +4887,8 @@ export interface PlaylistScalarWhereInput {
   imageUrl_not_starts_with?: Maybe<String>;
   imageUrl_ends_with?: Maybe<String>;
   imageUrl_not_ends_with?: Maybe<String>;
-  isTemporary?: Maybe<Boolean>;
-  isTemporary_not?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
+  importable_not?: Maybe<Boolean>;
   AND?: Maybe<PlaylistScalarWhereInput[] | PlaylistScalarWhereInput>;
   OR?: Maybe<PlaylistScalarWhereInput[] | PlaylistScalarWhereInput>;
   NOT?: Maybe<PlaylistScalarWhereInput[] | PlaylistScalarWhereInput>;
@@ -4920,7 +4920,7 @@ export interface PlaylistUpdateManyDataInput {
   spotifyExternalUrl?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface TrackSubscriptionWhereInput {
@@ -5415,8 +5415,8 @@ export interface PlaylistWhereInput {
   tracks_every?: Maybe<PartySavedTrackWhereInput>;
   tracks_some?: Maybe<PartySavedTrackWhereInput>;
   tracks_none?: Maybe<PartySavedTrackWhereInput>;
-  isTemporary?: Maybe<Boolean>;
-  isTemporary_not?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
+  importable_not?: Maybe<Boolean>;
   AND?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
   OR?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
   NOT?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
@@ -5850,7 +5850,7 @@ export interface PlaylistPreviousValues {
   spotifyExternalUrl: String;
   name: String;
   imageUrl: String;
-  isTemporary?: Boolean;
+  importable: Boolean;
 }
 
 export interface PlaylistPreviousValuesPromise
@@ -5864,7 +5864,7 @@ export interface PlaylistPreviousValuesPromise
   spotifyExternalUrl: () => Promise<String>;
   name: () => Promise<String>;
   imageUrl: () => Promise<String>;
-  isTemporary: () => Promise<Boolean>;
+  importable: () => Promise<Boolean>;
 }
 
 export interface PlaylistPreviousValuesSubscription
@@ -5878,7 +5878,7 @@ export interface PlaylistPreviousValuesSubscription
   spotifyExternalUrl: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   imageUrl: () => Promise<AsyncIterator<String>>;
-  isTemporary: () => Promise<AsyncIterator<Boolean>>;
+  importable: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface PageInfo {
@@ -6008,7 +6008,7 @@ export interface Playlist {
   spotifyExternalUrl: String;
   name: String;
   imageUrl: String;
-  isTemporary?: Boolean;
+  importable: Boolean;
 }
 
 export interface PlaylistPromise extends Promise<Playlist>, Fragmentable {
@@ -6039,7 +6039,7 @@ export interface PlaylistPromise extends Promise<Playlist>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
-  isTemporary: () => Promise<Boolean>;
+  importable: () => Promise<Boolean>;
 }
 
 export interface PlaylistSubscription
@@ -6072,7 +6072,7 @@ export interface PlaylistSubscription
     first?: Int;
     last?: Int;
   }) => T;
-  isTemporary: () => Promise<AsyncIterator<Boolean>>;
+  importable: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface PlaylistNullablePromise
@@ -6105,7 +6105,7 @@ export interface PlaylistNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
-  isTemporary: () => Promise<Boolean>;
+  importable: () => Promise<Boolean>;
 }
 
 export interface UserSubscriptionPayload {

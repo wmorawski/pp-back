@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Wed Nov 20 2019 15:49:21 GMT+0100 (Central European Standard Time)
+# timestamp: Fri Nov 22 2019 19:15:06 GMT+0100 (Central European Standard Time)
 
 type AggregateAlbum {
   count: Int!
@@ -6743,7 +6743,7 @@ type Playlist implements Node {
   name: String!
   imageUrl: String!
   tracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
-  isTemporary: Boolean
+  importable: Boolean!
 }
 
 """A connection to a list of items."""
@@ -6763,7 +6763,7 @@ input PlaylistCreateInput {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean
   user: UserCreateOneInput!
   parties: PartyCreateManyWithoutPlaylistInput
   tracks: PartySavedTrackCreateManyInput
@@ -6781,7 +6781,7 @@ input PlaylistCreateWithoutPartiesInput {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean
   user: UserCreateOneInput!
   tracks: PartySavedTrackCreateManyInput
 }
@@ -6812,8 +6812,8 @@ enum PlaylistOrderByInput {
   name_DESC
   imageUrl_ASC
   imageUrl_DESC
-  isTemporary_ASC
-  isTemporary_DESC
+  importable_ASC
+  importable_DESC
 }
 
 type PlaylistPreviousValues {
@@ -6825,7 +6825,7 @@ type PlaylistPreviousValues {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean!
 }
 
 input PlaylistScalarWhereInput {
@@ -7121,10 +7121,10 @@ input PlaylistScalarWhereInput {
 
   """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  isTemporary: Boolean
+  importable: Boolean
 
   """All values that are not equal to given value."""
-  isTemporary_not: Boolean
+  importable_not: Boolean
 }
 
 type PlaylistSubscriptionPayload {
@@ -7172,7 +7172,7 @@ input PlaylistUpdateInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
   user: UserUpdateOneRequiredInput
   parties: PartyUpdateManyWithoutPlaylistInput
   tracks: PartySavedTrackUpdateManyInput
@@ -7184,7 +7184,7 @@ input PlaylistUpdateManyDataInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyMutationInput {
@@ -7193,7 +7193,7 @@ input PlaylistUpdateManyMutationInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyWithoutPartiesInput {
@@ -7219,7 +7219,7 @@ input PlaylistUpdateWithoutPartiesDataInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
   user: UserUpdateOneRequiredInput
   tracks: PartySavedTrackUpdateManyInput
 }
@@ -7528,10 +7528,10 @@ input PlaylistWhereInput {
 
   """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  isTemporary: Boolean
+  importable: Boolean
 
   """All values that are not equal to given value."""
-  isTemporary_not: Boolean
+  importable_not: Boolean
   user: UserWhereInput
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput

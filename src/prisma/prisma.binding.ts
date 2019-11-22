@@ -6954,7 +6954,7 @@ type Playlist implements Node {
   name: String!
   imageUrl: String!
   tracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
-  isTemporary: Boolean
+  importable: Boolean!
 }
 
 """A connection to a list of items."""
@@ -6974,7 +6974,7 @@ input PlaylistCreateInput {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean
   user: UserCreateOneInput!
   parties: PartyCreateManyWithoutPlaylistInput
   tracks: PartySavedTrackCreateManyInput
@@ -6992,7 +6992,7 @@ input PlaylistCreateWithoutPartiesInput {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean
   user: UserCreateOneInput!
   tracks: PartySavedTrackCreateManyInput
 }
@@ -7023,8 +7023,8 @@ enum PlaylistOrderByInput {
   name_DESC
   imageUrl_ASC
   imageUrl_DESC
-  isTemporary_ASC
-  isTemporary_DESC
+  importable_ASC
+  importable_DESC
 }
 
 type PlaylistPreviousValues {
@@ -7036,7 +7036,7 @@ type PlaylistPreviousValues {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean!
 }
 
 input PlaylistScalarWhereInput {
@@ -7332,10 +7332,10 @@ input PlaylistScalarWhereInput {
 
   """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  isTemporary: Boolean
+  importable: Boolean
 
   """All values that are not equal to given value."""
-  isTemporary_not: Boolean
+  importable_not: Boolean
 }
 
 type PlaylistSubscriptionPayload {
@@ -7383,7 +7383,7 @@ input PlaylistUpdateInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
   user: UserUpdateOneRequiredInput
   parties: PartyUpdateManyWithoutPlaylistInput
   tracks: PartySavedTrackUpdateManyInput
@@ -7395,7 +7395,7 @@ input PlaylistUpdateManyDataInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyMutationInput {
@@ -7404,7 +7404,7 @@ input PlaylistUpdateManyMutationInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyWithoutPartiesInput {
@@ -7430,7 +7430,7 @@ input PlaylistUpdateWithoutPartiesDataInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
   user: UserUpdateOneRequiredInput
   tracks: PartySavedTrackUpdateManyInput
 }
@@ -7739,10 +7739,10 @@ input PlaylistWhereInput {
 
   """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  isTemporary: Boolean
+  importable: Boolean
 
   """All values that are not equal to given value."""
-  isTemporary_not: Boolean
+  importable_not: Boolean
   user: UserWhereInput
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
@@ -9751,8 +9751,8 @@ export type PlaylistOrderByInput =   'id_ASC' |
   'name_DESC' |
   'imageUrl_ASC' |
   'imageUrl_DESC' |
-  'isTemporary_ASC' |
-  'isTemporary_DESC'
+  'importable_ASC' |
+  'importable_DESC'
 
 export type SocialMediaType =   'FACEBOOK' |
   'SPOTIFY' |
@@ -12725,7 +12725,7 @@ export interface PlaylistCreateInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary?: Boolean | null
+  importable?: Boolean | null
   user: UserCreateOneInput
   parties?: PartyCreateManyWithoutPlaylistInput | null
   tracks?: PartySavedTrackCreateManyInput | null
@@ -12743,7 +12743,7 @@ export interface PlaylistCreateWithoutPartiesInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary?: Boolean | null
+  importable?: Boolean | null
   user: UserCreateOneInput
   tracks?: PartySavedTrackCreateManyInput | null
 }
@@ -12852,8 +12852,8 @@ export interface PlaylistScalarWhereInput {
   imageUrl_not_starts_with?: String | null
   imageUrl_ends_with?: String | null
   imageUrl_not_ends_with?: String | null
-  isTemporary?: Boolean | null
-  isTemporary_not?: Boolean | null
+  importable?: Boolean | null
+  importable_not?: Boolean | null
 }
 
 export interface PlaylistSubscriptionWhereInput {
@@ -12873,7 +12873,7 @@ export interface PlaylistUpdateInput {
   spotifyExternalUrl?: String | null
   name?: String | null
   imageUrl?: String | null
-  isTemporary?: Boolean | null
+  importable?: Boolean | null
   user?: UserUpdateOneRequiredInput | null
   parties?: PartyUpdateManyWithoutPlaylistInput | null
   tracks?: PartySavedTrackUpdateManyInput | null
@@ -12885,7 +12885,7 @@ export interface PlaylistUpdateManyDataInput {
   spotifyExternalUrl?: String | null
   name?: String | null
   imageUrl?: String | null
-  isTemporary?: Boolean | null
+  importable?: Boolean | null
 }
 
 export interface PlaylistUpdateManyMutationInput {
@@ -12894,7 +12894,7 @@ export interface PlaylistUpdateManyMutationInput {
   spotifyExternalUrl?: String | null
   name?: String | null
   imageUrl?: String | null
-  isTemporary?: Boolean | null
+  importable?: Boolean | null
 }
 
 export interface PlaylistUpdateManyWithoutPartiesInput {
@@ -12920,7 +12920,7 @@ export interface PlaylistUpdateWithoutPartiesDataInput {
   spotifyExternalUrl?: String | null
   name?: String | null
   imageUrl?: String | null
-  isTemporary?: Boolean | null
+  importable?: Boolean | null
   user?: UserUpdateOneRequiredInput | null
   tracks?: PartySavedTrackUpdateManyInput | null
 }
@@ -13040,8 +13040,8 @@ export interface PlaylistWhereInput {
   imageUrl_not_starts_with?: String | null
   imageUrl_ends_with?: String | null
   imageUrl_not_ends_with?: String | null
-  isTemporary?: Boolean | null
-  isTemporary_not?: Boolean | null
+  importable?: Boolean | null
+  importable_not?: Boolean | null
   user?: UserWhereInput | null
   parties_every?: PartyWhereInput | null
   parties_some?: PartyWhereInput | null
@@ -14615,7 +14615,7 @@ export interface Playlist extends Node {
   name: String
   imageUrl: String
   tracks?: Array<PartySavedTrack> | null
-  isTemporary?: Boolean | null
+  importable: Boolean
 }
 
 /*
@@ -14646,7 +14646,7 @@ export interface PlaylistPreviousValues {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary?: Boolean | null
+  importable: Boolean
 }
 
 export interface PlaylistSubscriptionPayload {

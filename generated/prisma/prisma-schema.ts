@@ -3780,7 +3780,7 @@ type Playlist {
   name: String!
   imageUrl: String!
   tracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
-  isTemporary: Boolean
+  importable: Boolean!
 }
 
 type PlaylistConnection {
@@ -3799,7 +3799,7 @@ input PlaylistCreateInput {
   name: String!
   imageUrl: String!
   tracks: PartySavedTrackCreateManyInput
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistCreateManyWithoutPartiesInput {
@@ -3816,7 +3816,7 @@ input PlaylistCreateWithoutPartiesInput {
   name: String!
   imageUrl: String!
   tracks: PartySavedTrackCreateManyInput
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 type PlaylistEdge {
@@ -3841,8 +3841,8 @@ enum PlaylistOrderByInput {
   name_DESC
   imageUrl_ASC
   imageUrl_DESC
-  isTemporary_ASC
-  isTemporary_DESC
+  importable_ASC
+  importable_DESC
 }
 
 type PlaylistPreviousValues {
@@ -3854,7 +3854,7 @@ type PlaylistPreviousValues {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean!
 }
 
 input PlaylistScalarWhereInput {
@@ -3958,8 +3958,8 @@ input PlaylistScalarWhereInput {
   imageUrl_not_starts_with: String
   imageUrl_ends_with: String
   imageUrl_not_ends_with: String
-  isTemporary: Boolean
-  isTemporary_not: Boolean
+  importable: Boolean
+  importable_not: Boolean
   AND: [PlaylistScalarWhereInput!]
   OR: [PlaylistScalarWhereInput!]
   NOT: [PlaylistScalarWhereInput!]
@@ -3992,7 +3992,7 @@ input PlaylistUpdateInput {
   name: String
   imageUrl: String
   tracks: PartySavedTrackUpdateManyInput
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyDataInput {
@@ -4001,7 +4001,7 @@ input PlaylistUpdateManyDataInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyMutationInput {
@@ -4010,7 +4010,7 @@ input PlaylistUpdateManyMutationInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyWithoutPartiesInput {
@@ -4038,7 +4038,7 @@ input PlaylistUpdateWithoutPartiesDataInput {
   name: String
   imageUrl: String
   tracks: PartySavedTrackUpdateManyInput
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateWithWhereUniqueWithoutPartiesInput {
@@ -4160,8 +4160,8 @@ input PlaylistWhereInput {
   tracks_every: PartySavedTrackWhereInput
   tracks_some: PartySavedTrackWhereInput
   tracks_none: PartySavedTrackWhereInput
-  isTemporary: Boolean
-  isTemporary_not: Boolean
+  importable: Boolean
+  importable_not: Boolean
   AND: [PlaylistWhereInput!]
   OR: [PlaylistWhereInput!]
   NOT: [PlaylistWhereInput!]

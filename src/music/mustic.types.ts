@@ -4,6 +4,7 @@ export interface CombinePlaylistsInput {
     partyId: string;
     userId: string;
     deleteAffected: boolean;
+    importable: boolean;
   };
   spotifyData: {
     spotifyId: string;

@@ -8128,6 +8128,7 @@ type User implements Node {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean!
   cartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem!]
 }
 
@@ -8154,6 +8155,7 @@ input UserCreateInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
@@ -8210,6 +8212,7 @@ input UserCreateWithoutCartItemsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
@@ -8230,6 +8233,7 @@ input UserCreateWithoutChatsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
@@ -8250,6 +8254,7 @@ input UserCreateWithoutPartiesInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
@@ -8270,6 +8275,7 @@ input UserCreateWithoutPendingFriendInvitationsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
@@ -8290,6 +8296,7 @@ input UserCreateWithoutPendingPartyInvitationsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
@@ -8335,6 +8342,8 @@ enum UserOrderByInput {
   resetToken_DESC
   resetTokenExpiry_ASC
   resetTokenExpiry_DESC
+  isPrivate_ASC
+  isPrivate_DESC
 }
 
 type UserPreviousValues {
@@ -8352,6 +8361,7 @@ type UserPreviousValues {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean!
 }
 
 input UserScalarWhereInput {
@@ -8785,6 +8795,10 @@ input UserScalarWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: DateTime
+  isPrivate: Boolean
+
+  """All values that are not equal to given value."""
+  isPrivate_not: Boolean
 }
 
 type UserSubscriptionPayload {
@@ -8838,6 +8852,7 @@ input UserUpdateDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -8858,6 +8873,7 @@ input UserUpdateInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -8878,6 +8894,7 @@ input UserUpdateManyDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
 }
 
 input UserUpdateManyInput {
@@ -8904,6 +8921,7 @@ input UserUpdateManyMutationInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -8975,6 +8993,7 @@ input UserUpdateWithoutCartItemsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -8994,6 +9013,7 @@ input UserUpdateWithoutChatsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -9013,6 +9033,7 @@ input UserUpdateWithoutPartiesDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
@@ -9032,6 +9053,7 @@ input UserUpdateWithoutPendingFriendInvitationsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
@@ -9051,6 +9073,7 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -9542,6 +9565,10 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: DateTime
+  isPrivate: Boolean
+
+  """All values that are not equal to given value."""
+  isPrivate_not: Boolean
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput
@@ -9794,7 +9821,9 @@ export type UserOrderByInput =   'id_ASC' |
   'resetToken_ASC' |
   'resetToken_DESC' |
   'resetTokenExpiry_ASC' |
-  'resetTokenExpiry_DESC'
+  'resetTokenExpiry_DESC' |
+  'isPrivate_ASC' |
+  'isPrivate_DESC'
 
 export interface AlbumCreateInput {
   id?: ID_Input | null
@@ -13167,6 +13196,7 @@ export interface UserCreateInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
   pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
@@ -13223,6 +13253,7 @@ export interface UserCreateWithoutCartItemsInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
   pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
@@ -13243,6 +13274,7 @@ export interface UserCreateWithoutChatsInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
   pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
@@ -13263,6 +13295,7 @@ export interface UserCreateWithoutPartiesInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   friends?: UserCreateManyInput | null
   pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
   pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
@@ -13283,6 +13316,7 @@ export interface UserCreateWithoutPendingFriendInvitationsInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
   pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
@@ -13303,6 +13337,7 @@ export interface UserCreateWithoutPendingPartyInvitationsInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyCreateManyWithoutMembersInput | null
   friends?: UserCreateManyInput | null
   pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
@@ -13464,6 +13499,8 @@ export interface UserScalarWhereInput {
   resetTokenExpiry_lte?: DateTime | null
   resetTokenExpiry_gt?: DateTime | null
   resetTokenExpiry_gte?: DateTime | null
+  isPrivate?: Boolean | null
+  isPrivate_not?: Boolean | null
 }
 
 export interface UserSubscriptionWhereInput {
@@ -13489,6 +13526,7 @@ export interface UserUpdateDataInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
@@ -13509,6 +13547,7 @@ export interface UserUpdateInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
@@ -13529,6 +13568,7 @@ export interface UserUpdateManyDataInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
 }
 
 export interface UserUpdateManyInput {
@@ -13555,6 +13595,7 @@ export interface UserUpdateManyMutationInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
 }
 
 export interface UserUpdateManyWithoutChatsInput {
@@ -13626,6 +13667,7 @@ export interface UserUpdateWithoutCartItemsDataInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
@@ -13645,6 +13687,7 @@ export interface UserUpdateWithoutChatsDataInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
@@ -13664,6 +13707,7 @@ export interface UserUpdateWithoutPartiesDataInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   friends?: UserUpdateManyInput | null
   pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
   pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
@@ -13683,6 +13727,7 @@ export interface UserUpdateWithoutPendingFriendInvitationsDataInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
@@ -13702,6 +13747,7 @@ export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate?: Boolean | null
   parties?: PartyUpdateManyWithoutMembersInput | null
   friends?: UserUpdateManyInput | null
   pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
@@ -13916,6 +13962,8 @@ export interface UserWhereInput {
   resetTokenExpiry_lte?: DateTime | null
   resetTokenExpiry_gt?: DateTime | null
   resetTokenExpiry_gte?: DateTime | null
+  isPrivate?: Boolean | null
+  isPrivate_not?: Boolean | null
   parties_every?: PartyWhereInput | null
   parties_some?: PartyWhereInput | null
   parties_none?: PartyWhereInput | null
@@ -14718,6 +14766,7 @@ export interface User extends Node {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate: Boolean
   cartItems?: Array<PartyCartItem> | null
 }
 
@@ -14755,6 +14804,7 @@ export interface UserPreviousValues {
   thirdPartyId?: String | null
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
+  isPrivate: Boolean
 }
 
 export interface UserSubscriptionPayload {

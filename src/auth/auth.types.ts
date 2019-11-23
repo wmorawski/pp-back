@@ -15,6 +15,7 @@ export interface SocialAuthPayload {
   jwt: string;
   providerToken: string;
   providerRefreshToken: string;
+  missingLastName?: boolean;
 }
 
 export type SocialAuthDoneFn = (

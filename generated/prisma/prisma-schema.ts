@@ -4412,6 +4412,7 @@ type User {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean!
   cartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem!]
 }
 
@@ -4439,6 +4440,7 @@ input UserCreateInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
@@ -4495,6 +4497,7 @@ input UserCreateWithoutCartItemsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
 }
 
 input UserCreateWithoutChatsInput {
@@ -4514,6 +4517,7 @@ input UserCreateWithoutChatsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
@@ -4534,6 +4538,7 @@ input UserCreateWithoutFriendsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
@@ -4554,6 +4559,7 @@ input UserCreateWithoutPartiesInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
@@ -4574,6 +4580,7 @@ input UserCreateWithoutPendingFriendInvitationsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
@@ -4594,6 +4601,7 @@ input UserCreateWithoutPendingPartyInvitationsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
 }
 
@@ -4631,6 +4639,8 @@ enum UserOrderByInput {
   resetToken_DESC
   resetTokenExpiry_ASC
   resetTokenExpiry_DESC
+  isPrivate_ASC
+  isPrivate_DESC
 }
 
 type UserPreviousValues {
@@ -4648,6 +4658,7 @@ type UserPreviousValues {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean!
 }
 
 input UserScalarWhereInput {
@@ -4801,6 +4812,8 @@ input UserScalarWhereInput {
   resetTokenExpiry_lte: DateTime
   resetTokenExpiry_gt: DateTime
   resetTokenExpiry_gte: DateTime
+  isPrivate: Boolean
+  isPrivate_not: Boolean
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
@@ -4841,6 +4854,7 @@ input UserUpdateDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
@@ -4861,6 +4875,7 @@ input UserUpdateInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
@@ -4876,6 +4891,7 @@ input UserUpdateManyDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
 }
 
 input UserUpdateManyMutationInput {
@@ -4890,6 +4906,7 @@ input UserUpdateManyMutationInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -4978,6 +4995,7 @@ input UserUpdateWithoutCartItemsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
 }
 
 input UserUpdateWithoutChatsDataInput {
@@ -4996,6 +5014,7 @@ input UserUpdateWithoutChatsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
@@ -5015,6 +5034,7 @@ input UserUpdateWithoutFriendsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
@@ -5034,6 +5054,7 @@ input UserUpdateWithoutPartiesDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
@@ -5053,6 +5074,7 @@ input UserUpdateWithoutPendingFriendInvitationsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
@@ -5072,6 +5094,7 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
 }
 
@@ -5294,6 +5317,8 @@ input UserWhereInput {
   resetTokenExpiry_lte: DateTime
   resetTokenExpiry_gt: DateTime
   resetTokenExpiry_gte: DateTime
+  isPrivate: Boolean
+  isPrivate_not: Boolean
   cartItems_every: PartyCartItemWhereInput
   cartItems_some: PartyCartItemWhereInput
   cartItems_none: PartyCartItemWhereInput

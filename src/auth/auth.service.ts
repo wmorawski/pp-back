@@ -98,16 +98,20 @@ export class AuthService {
 
     return user;
   }
-  async validateOAuthLogin(payload: SignupPayload): Promise<string> {
+  async validateOAuthLogin(
+    payload: SignupPayload,
+  ): Promise<{ jwt: string; missingLastName: boolean }> {
     try {
-      // Something there token doesn't works.
       let user = await this.prisma.query.user({
         where: { email: payload.email },
       });
       if (!user) {
         user = await this.usersService.createUser(payload);
       }
-      return this.createToken(user.id);
+      return {
+        jwt: this.createToken(user.id),
+        missingLastName: !Boolean(user.lastName),
+      };
     } catch (err) {
       throw new InternalServerErrorException('validateOAuthLogin', err.message);
     }

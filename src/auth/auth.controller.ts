@@ -32,7 +32,6 @@ import { SocialAuthPayload, SocialReAuthPayload } from './auth.types';
 import * as qs from 'qs';
 
 import axios from 'axios';
-import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
 import { spotifyRequest, decrypt, encrypt } from 'src/helpers/spotify.helper';
 import { SPOTIFY_CLIENT_CALLBACK_URL } from 'src/server.constants';
 
@@ -41,10 +40,14 @@ function getSuccessSocialCallbackUrl({
   jwt,
   providerToken,
   providerRefreshToken,
+  missingLastName,
 }: SocialAuthPayload) {
   return `${
     process.env.WEB_URL
-  }/auth/social/success?provider=${provider}&jwt=${jwt}&providerToken=${providerToken}&providerRefreshToken=${providerRefreshToken}`;
+    // tslint:disable-next-line:max-line-length
+  }/auth/social/success?provider=${provider}&jwt=${jwt}&providerToken=${providerToken}&providerRefreshToken=${providerRefreshToken}&missingLastName=${String(
+    missingLastName,
+  )}`;
 }
 
 function getSuccessReAuthCallbackUrl({

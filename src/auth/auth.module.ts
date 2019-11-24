@@ -1,22 +1,22 @@
-import { ConfigService } from './../config/config.service';
-import {
-  SpotifyStrategy,
-  SpotifyReAuthStrategy,
-} from './passport/spotify.strategy';
-import { ConfigModule } from './../config/config.module';
-import { GoogleStrategy } from './passport/google.strategy';
-import { JwtModule } from '@nestjs/jwt';
-import { Module, MiddlewareConsumer, forwardRef } from '@nestjs/common';
-import { AuthService, Provider } from './auth.service';
 import { UsersModule } from '../users/users.module';
+import { ConfigModule } from './../config/config.module';
+import { ConfigService } from './../config/config.service';
 import { AuthController } from './auth.controller';
 import { AuthResolver } from './auth.resolver';
-import { PassportModule } from '@nestjs/passport';
-import { JwtStrategy } from './passport/jwt.strategy';
+import { AuthService } from './auth.service';
 import { FacebookStrategy } from './passport/facebook.strategy';
+import { GoogleStrategy } from './passport/google.strategy';
+import { JwtStrategy } from './passport/jwt.strategy';
+import {
+  SpotifyReAuthStrategy,
+  SpotifyStrategy,
+} from './passport/spotify.strategy';
 import { TwitterStrategy } from './passport/twitter.strategy';
-import { ExpressSessionMiddleware } from '@nest-middlewares/express-session';
-import passport = require('passport');
+
+import { forwardRef, Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
   imports: [
@@ -31,6 +31,7 @@ import passport = require('passport');
     }),
     forwardRef(() => UsersModule),
     ConfigModule,
+    PrismaModule,
   ],
   providers: [
     JwtStrategy,
@@ -43,6 +44,6 @@ import passport = require('passport');
     TwitterStrategy,
   ],
   controllers: [AuthController],
-  exports: [AuthService],
+  exports: [AuthService, AuthResolver],
 })
 export class AuthModule {}

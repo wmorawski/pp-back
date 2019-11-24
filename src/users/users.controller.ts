@@ -1,3 +1,4 @@
+import { PrismaService } from './../prisma/prisma.service';
 import { UsersService } from './users.service';
 import {
   Get,
@@ -7,6 +8,7 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  Req,
 } from '@nestjs/common';
 import {
   ApiUseTags,
@@ -22,7 +24,7 @@ import { User } from '../prisma/prisma.binding';
 @ApiBearerAuth()
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Get()
   @UseGuards(AuthGuard())
@@ -38,5 +40,19 @@ export class UsersController {
   async getUsers(): Promise<User[]> {
     return [];
     // return await this.usersService.getUsers();
+  }
+
+  @Post('patchMissingLastName')
+  @UseGuards(AuthGuard('jwt'))
+  async patchMissingLastName(@Req() req, res) {
+    const {
+      user: { userId },
+      body,
+    } = req;
+
+    return await this.prisma.mutation.updateUser({
+      where: { id: userId },
+      data: { lastName: body.lastName },
+    });
   }
 }

@@ -77,6 +77,7 @@ type Mutation {
   deletePartyInvitation(
     where: PartyInvitationWhereUniqueInput!
   ): PartyInvitation
+  deleteParty(where: PartyWhereUniqueInput!): Party
   joinParty(partyId: ID!): Boolean
   createPartySavedTrack(data: PartySavedTrackCreateInput!): PartySavedTrack!
   createPartyCartItem(data: PartyCartItemCreateInput!): PartyCartItem!
@@ -84,6 +85,7 @@ type Mutation {
     data: PartyCartItemUpdateInput!
     where: PartyCartItemWhereUniqueInput!
   ): PartyCartItem
+  updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
 }
 
 type Subscription {

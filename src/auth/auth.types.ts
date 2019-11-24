@@ -1,3 +1,4 @@
+import { Party } from './../prisma/prisma.binding';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { User, SocialMediaType } from '../prisma/prisma.binding';
 import { Omit } from 'ramda';
@@ -14,6 +15,7 @@ export interface SocialAuthPayload {
   jwt: string;
   providerToken: string;
   providerRefreshToken: string;
+  missingLastName?: boolean;
 }
 
 export type SocialAuthDoneFn = (
@@ -44,4 +46,14 @@ export interface SocialLoginPayload {
 export interface AuthPayload {
   token: string;
   user: User;
+}
+
+export interface AuthenticatePartyArgs {
+  partyId: string;
+}
+
+export interface AuthenticatePartyPayload {
+  canJoin: boolean;
+  isMember: boolean;
+  party?: Party;
 }

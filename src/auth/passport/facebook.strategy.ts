@@ -34,7 +34,10 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
     done: SocialAuthDoneFn,
   ) {
     try {
-      const jwt: string = await this.authService.validateOAuthLogin({
+      const {
+        jwt,
+        missingLastName,
+      } = await this.authService.validateOAuthLogin({
         thirdPartyId: profile.id,
         email: profile.emails[0].value,
         firstName: profile.name.givenName,
@@ -48,6 +51,7 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
         providerToken: accessToken,
         providerRefreshToken: refreshToken,
         provider: 'FACEBOOK',
+        missingLastName,
       };
       done(null, user);
     } catch (err) {

@@ -888,7 +888,9 @@ export type UserOrderByInput =
   | "resetToken_ASC"
   | "resetToken_DESC"
   | "resetTokenExpiry_ASC"
-  | "resetTokenExpiry_DESC";
+  | "resetTokenExpiry_DESC"
+  | "isPrivate_ASC"
+  | "isPrivate_DESC";
 
 export type PartyCartOrderByInput = "id_ASC" | "id_DESC";
 
@@ -909,8 +911,8 @@ export type PlaylistOrderByInput =
   | "name_DESC"
   | "imageUrl_ASC"
   | "imageUrl_DESC"
-  | "isTemporary_ASC"
-  | "isTemporary_DESC";
+  | "importable_ASC"
+  | "importable_DESC";
 
 export type MessageOrderByInput =
   | "id_ASC"
@@ -1591,6 +1593,7 @@ export interface UserCreateWithoutCartItemsInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
 }
 
 export interface ChatSubscriptionWhereInput {
@@ -1637,6 +1640,7 @@ export interface UserCreateWithoutChatsInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemCreateManyWithoutUserInput>;
 }
 
@@ -1657,6 +1661,7 @@ export interface UserUpdateInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemUpdateManyWithoutUserInput>;
 }
 
@@ -1794,6 +1799,7 @@ export interface UserUpdateDataInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemUpdateManyWithoutUserInput>;
 }
 
@@ -1843,7 +1849,7 @@ export interface PlaylistUpdateManyMutationInput {
   spotifyExternalUrl?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartyUpdateWithoutMembersDataInput {
@@ -2089,6 +2095,7 @@ export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemUpdateManyWithoutUserInput>;
 }
 
@@ -2246,7 +2253,7 @@ export interface PlaylistUpdateWithoutPartiesDataInput {
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
   tracks?: Maybe<PartySavedTrackUpdateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartyCartItemUpdateInput {
@@ -2400,6 +2407,7 @@ export interface UserUpdateWithoutPartiesDataInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemUpdateManyWithoutUserInput>;
 }
 
@@ -2519,6 +2527,7 @@ export interface UserUpdateWithoutFriendsDataInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemUpdateManyWithoutUserInput>;
 }
 
@@ -2883,6 +2892,7 @@ export interface UserCreateInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemCreateManyWithoutUserInput>;
 }
 
@@ -3007,7 +3017,7 @@ export interface PlaylistCreateWithoutPartiesInput {
   name: String;
   imageUrl: String;
   tracks?: Maybe<PartySavedTrackCreateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartyInvitationUpdateManyWithWhereNestedInput {
@@ -3089,6 +3099,7 @@ export interface UserCreateWithoutPartiesInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemCreateManyWithoutUserInput>;
 }
 
@@ -3114,6 +3125,7 @@ export interface UserCreateWithoutFriendsInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemCreateManyWithoutUserInput>;
 }
 
@@ -3341,6 +3353,8 @@ export interface UserWhereInput {
   resetTokenExpiry_lte?: Maybe<DateTimeInput>;
   resetTokenExpiry_gt?: Maybe<DateTimeInput>;
   resetTokenExpiry_gte?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
+  isPrivate_not?: Maybe<Boolean>;
   cartItems_every?: Maybe<PartyCartItemWhereInput>;
   cartItems_some?: Maybe<PartyCartItemWhereInput>;
   cartItems_none?: Maybe<PartyCartItemWhereInput>;
@@ -3876,7 +3890,7 @@ export interface PlaylistUpdateInput {
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
   tracks?: Maybe<PartySavedTrackUpdateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartySavedTrackUpdateManyWithoutPartyInput {
@@ -3923,7 +3937,7 @@ export interface PlaylistCreateInput {
   name: String;
   imageUrl: String;
   tracks?: Maybe<PartySavedTrackCreateManyInput>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface PartySavedTrackUpdateWithWhereUniqueWithoutPartyInput {
@@ -3980,6 +3994,7 @@ export interface UserCreateWithoutPendingPartyInvitationsInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemCreateManyWithoutUserInput>;
 }
 
@@ -4494,6 +4509,8 @@ export interface UserScalarWhereInput {
   resetTokenExpiry_lte?: Maybe<DateTimeInput>;
   resetTokenExpiry_gt?: Maybe<DateTimeInput>;
   resetTokenExpiry_gte?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
+  isPrivate_not?: Maybe<Boolean>;
   AND?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
   OR?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
   NOT?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
@@ -4533,6 +4550,7 @@ export interface UserUpdateManyDataInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
 }
 
 export interface ChatCreateManyWithoutMembersInput {
@@ -4711,6 +4729,7 @@ export interface UserUpdateWithoutCartItemsDataInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
 }
 
 export type MessageWhereUniqueInput = AtLeastOne<{
@@ -4887,8 +4906,8 @@ export interface PlaylistScalarWhereInput {
   imageUrl_not_starts_with?: Maybe<String>;
   imageUrl_ends_with?: Maybe<String>;
   imageUrl_not_ends_with?: Maybe<String>;
-  isTemporary?: Maybe<Boolean>;
-  isTemporary_not?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
+  importable_not?: Maybe<Boolean>;
   AND?: Maybe<PlaylistScalarWhereInput[] | PlaylistScalarWhereInput>;
   OR?: Maybe<PlaylistScalarWhereInput[] | PlaylistScalarWhereInput>;
   NOT?: Maybe<PlaylistScalarWhereInput[] | PlaylistScalarWhereInput>;
@@ -4920,7 +4939,7 @@ export interface PlaylistUpdateManyDataInput {
   spotifyExternalUrl?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
-  isTemporary?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
 }
 
 export interface TrackSubscriptionWhereInput {
@@ -5203,6 +5222,7 @@ export interface UserUpdateWithoutChatsDataInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemUpdateManyWithoutUserInput>;
 }
 
@@ -5218,6 +5238,7 @@ export interface UserUpdateManyMutationInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
 }
 
 export interface UserUpsertWithWhereUniqueWithoutChatsInput {
@@ -5271,6 +5292,7 @@ export interface UserUpdateWithoutPendingFriendInvitationsDataInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemUpdateManyWithoutUserInput>;
 }
 
@@ -5304,6 +5326,7 @@ export interface UserCreateWithoutPendingFriendInvitationsInput {
   thirdPartyId?: Maybe<String>;
   resetToken?: Maybe<String>;
   resetTokenExpiry?: Maybe<DateTimeInput>;
+  isPrivate?: Maybe<Boolean>;
   cartItems?: Maybe<PartyCartItemCreateManyWithoutUserInput>;
 }
 
@@ -5415,8 +5438,8 @@ export interface PlaylistWhereInput {
   tracks_every?: Maybe<PartySavedTrackWhereInput>;
   tracks_some?: Maybe<PartySavedTrackWhereInput>;
   tracks_none?: Maybe<PartySavedTrackWhereInput>;
-  isTemporary?: Maybe<Boolean>;
-  isTemporary_not?: Maybe<Boolean>;
+  importable?: Maybe<Boolean>;
+  importable_not?: Maybe<Boolean>;
   AND?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
   OR?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
   NOT?: Maybe<PlaylistWhereInput[] | PlaylistWhereInput>;
@@ -5461,6 +5484,7 @@ export interface UserPreviousValues {
   thirdPartyId?: String;
   resetToken?: String;
   resetTokenExpiry?: DateTimeOutput;
+  isPrivate: Boolean;
 }
 
 export interface UserPreviousValuesPromise
@@ -5480,6 +5504,7 @@ export interface UserPreviousValuesPromise
   thirdPartyId: () => Promise<String>;
   resetToken: () => Promise<String>;
   resetTokenExpiry: () => Promise<DateTimeOutput>;
+  isPrivate: () => Promise<Boolean>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -5499,6 +5524,7 @@ export interface UserPreviousValuesSubscription
   thirdPartyId: () => Promise<AsyncIterator<String>>;
   resetToken: () => Promise<AsyncIterator<String>>;
   resetTokenExpiry: () => Promise<AsyncIterator<DateTimeOutput>>;
+  isPrivate: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface PartySavedTrack {
@@ -5580,6 +5606,7 @@ export interface User {
   thirdPartyId?: String;
   resetToken?: String;
   resetTokenExpiry?: DateTimeOutput;
+  isPrivate: Boolean;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -5642,6 +5669,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   thirdPartyId: () => Promise<String>;
   resetToken: () => Promise<String>;
   resetTokenExpiry: () => Promise<DateTimeOutput>;
+  isPrivate: () => Promise<Boolean>;
   cartItems: <T = FragmentableArray<PartyCartItem>>(args?: {
     where?: PartyCartItemWhereInput;
     orderBy?: PartyCartItemOrderByInput;
@@ -5719,6 +5747,7 @@ export interface UserSubscription
   thirdPartyId: () => Promise<AsyncIterator<String>>;
   resetToken: () => Promise<AsyncIterator<String>>;
   resetTokenExpiry: () => Promise<AsyncIterator<DateTimeOutput>>;
+  isPrivate: () => Promise<AsyncIterator<Boolean>>;
   cartItems: <T = Promise<AsyncIterator<PartyCartItemSubscription>>>(args?: {
     where?: PartyCartItemWhereInput;
     orderBy?: PartyCartItemOrderByInput;
@@ -5792,6 +5821,7 @@ export interface UserNullablePromise
   thirdPartyId: () => Promise<String>;
   resetToken: () => Promise<String>;
   resetTokenExpiry: () => Promise<DateTimeOutput>;
+  isPrivate: () => Promise<Boolean>;
   cartItems: <T = FragmentableArray<PartyCartItem>>(args?: {
     where?: PartyCartItemWhereInput;
     orderBy?: PartyCartItemOrderByInput;
@@ -5850,7 +5880,7 @@ export interface PlaylistPreviousValues {
   spotifyExternalUrl: String;
   name: String;
   imageUrl: String;
-  isTemporary?: Boolean;
+  importable: Boolean;
 }
 
 export interface PlaylistPreviousValuesPromise
@@ -5864,7 +5894,7 @@ export interface PlaylistPreviousValuesPromise
   spotifyExternalUrl: () => Promise<String>;
   name: () => Promise<String>;
   imageUrl: () => Promise<String>;
-  isTemporary: () => Promise<Boolean>;
+  importable: () => Promise<Boolean>;
 }
 
 export interface PlaylistPreviousValuesSubscription
@@ -5878,7 +5908,7 @@ export interface PlaylistPreviousValuesSubscription
   spotifyExternalUrl: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   imageUrl: () => Promise<AsyncIterator<String>>;
-  isTemporary: () => Promise<AsyncIterator<Boolean>>;
+  importable: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface PageInfo {
@@ -6008,7 +6038,7 @@ export interface Playlist {
   spotifyExternalUrl: String;
   name: String;
   imageUrl: String;
-  isTemporary?: Boolean;
+  importable: Boolean;
 }
 
 export interface PlaylistPromise extends Promise<Playlist>, Fragmentable {
@@ -6039,7 +6069,7 @@ export interface PlaylistPromise extends Promise<Playlist>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
-  isTemporary: () => Promise<Boolean>;
+  importable: () => Promise<Boolean>;
 }
 
 export interface PlaylistSubscription
@@ -6072,7 +6102,7 @@ export interface PlaylistSubscription
     first?: Int;
     last?: Int;
   }) => T;
-  isTemporary: () => Promise<AsyncIterator<Boolean>>;
+  importable: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface PlaylistNullablePromise
@@ -6105,7 +6135,7 @@ export interface PlaylistNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
-  isTemporary: () => Promise<Boolean>;
+  importable: () => Promise<Boolean>;
 }
 
 export interface UserSubscriptionPayload {

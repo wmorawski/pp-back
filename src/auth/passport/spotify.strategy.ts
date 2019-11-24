@@ -1,14 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
 import { ConfigService } from '../../config/config.service';
-import { AuthService, Provider } from '../auth.service';
-import { Strategy } from 'passport-spotify';
-import * as faker from 'faker';
+import { AuthService } from '../auth.service';
 import {
-  SocialAuthPayload,
   SocialAuthDoneFn,
+  SocialAuthPayload,
   SocialReAuthPayload,
 } from '../auth.types';
+
+import { Injectable } from '@nestjs/common';
+import { PassportStrategy } from '@nestjs/passport';
+import * as faker from 'faker';
+import { Strategy } from 'passport-spotify';
 
 function createPassportStrategyConfig(
   config: ConfigService,
@@ -51,22 +52,29 @@ export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
     done: SocialAuthDoneFn,
   ) {
     try {
-      const userLastName =
-        profile.lastName != null ? profile.displayName.split(' ')[1] : '';
-      const jwt: string = await this.authService.validateOAuthLogin({
+      const maybeLastName = profile.displayName.split(' ')[1];
+
+      const lastName = maybeLastName ? maybeLastName : '';
+
+      const {
+        jwt,
+        missingLastName,
+      } = await this.authService.validateOAuthLogin({
         email: profile.emails[0].value,
-        lastName: userLastName,
+        lastName,
         firstName: profile.displayName.split(' ')[0],
         provider: 'SPOTIFY',
         password: faker.internet.password(),
-        avatar: profile.photos[0] ? profile.photos[0].value : null,
+        avatar: profile.photos[0] ? profile.photos[0] : null,
         thirdPartyId: profile.id,
       });
+
       const payload: SocialAuthPayload = {
         jwt,
         providerToken: accessToken,
         providerRefreshToken: refreshToken,
         provider: 'SPOTIFY',
+        missingLastName,
       };
       done(null, payload);
     } catch (err) {

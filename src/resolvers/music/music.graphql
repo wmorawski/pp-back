@@ -29,6 +29,7 @@ input CombinePlaylistPartyPlannerData {
   partyId: ID!
   userId: ID!
   deleteAffected: Boolean!
+  importable: Boolean!
 }
 
 input CombinePlaylistCreatedSpotifyPlaylistInput {

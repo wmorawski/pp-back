@@ -52,7 +52,13 @@ export class MusicResolver {
   async combinePlaylists(
     @Args()
     {
-      partyPlannerData: { playlists, partyId, userId, deleteAffected },
+      partyPlannerData: {
+        playlists,
+        partyId,
+        userId,
+        deleteAffected,
+        importable,
+      },
       spotifyData,
     }: CombinePlaylistsInput,
     @Info() info,
@@ -85,6 +91,7 @@ export class MusicResolver {
           parties: { connect: [{ id: partyId }] },
           tracks: { connect: tracks },
           user: { connect: { id: userId } },
+          importable,
         },
       },
       info,

@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Wed Nov 20 2019 15:49:21 GMT+0100 (Central European Standard Time)
+# timestamp: Sat Nov 23 2019 19:11:46 GMT+0100 (Central European Standard Time)
 
 type AggregateAlbum {
   count: Int!
@@ -6743,7 +6743,7 @@ type Playlist implements Node {
   name: String!
   imageUrl: String!
   tracks(where: PartySavedTrackWhereInput, orderBy: PartySavedTrackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartySavedTrack!]
-  isTemporary: Boolean
+  importable: Boolean!
 }
 
 """A connection to a list of items."""
@@ -6763,7 +6763,7 @@ input PlaylistCreateInput {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean
   user: UserCreateOneInput!
   parties: PartyCreateManyWithoutPlaylistInput
   tracks: PartySavedTrackCreateManyInput
@@ -6781,7 +6781,7 @@ input PlaylistCreateWithoutPartiesInput {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean
   user: UserCreateOneInput!
   tracks: PartySavedTrackCreateManyInput
 }
@@ -6812,8 +6812,8 @@ enum PlaylistOrderByInput {
   name_DESC
   imageUrl_ASC
   imageUrl_DESC
-  isTemporary_ASC
-  isTemporary_DESC
+  importable_ASC
+  importable_DESC
 }
 
 type PlaylistPreviousValues {
@@ -6825,7 +6825,7 @@ type PlaylistPreviousValues {
   spotifyExternalUrl: String!
   name: String!
   imageUrl: String!
-  isTemporary: Boolean
+  importable: Boolean!
 }
 
 input PlaylistScalarWhereInput {
@@ -7121,10 +7121,10 @@ input PlaylistScalarWhereInput {
 
   """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  isTemporary: Boolean
+  importable: Boolean
 
   """All values that are not equal to given value."""
-  isTemporary_not: Boolean
+  importable_not: Boolean
 }
 
 type PlaylistSubscriptionPayload {
@@ -7172,7 +7172,7 @@ input PlaylistUpdateInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
   user: UserUpdateOneRequiredInput
   parties: PartyUpdateManyWithoutPlaylistInput
   tracks: PartySavedTrackUpdateManyInput
@@ -7184,7 +7184,7 @@ input PlaylistUpdateManyDataInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyMutationInput {
@@ -7193,7 +7193,7 @@ input PlaylistUpdateManyMutationInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
 }
 
 input PlaylistUpdateManyWithoutPartiesInput {
@@ -7219,7 +7219,7 @@ input PlaylistUpdateWithoutPartiesDataInput {
   spotifyExternalUrl: String
   name: String
   imageUrl: String
-  isTemporary: Boolean
+  importable: Boolean
   user: UserUpdateOneRequiredInput
   tracks: PartySavedTrackUpdateManyInput
 }
@@ -7528,10 +7528,10 @@ input PlaylistWhereInput {
 
   """All values not ending with the given string."""
   imageUrl_not_ends_with: String
-  isTemporary: Boolean
+  importable: Boolean
 
   """All values that are not equal to given value."""
-  isTemporary_not: Boolean
+  importable_not: Boolean
   user: UserWhereInput
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
@@ -7917,6 +7917,7 @@ type User implements Node {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean!
   cartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem!]
 }
 
@@ -7943,6 +7944,7 @@ input UserCreateInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
@@ -7999,6 +8001,7 @@ input UserCreateWithoutCartItemsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
@@ -8019,6 +8022,7 @@ input UserCreateWithoutChatsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
@@ -8039,6 +8043,7 @@ input UserCreateWithoutPartiesInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
@@ -8059,6 +8064,7 @@ input UserCreateWithoutPendingFriendInvitationsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
@@ -8079,6 +8085,7 @@ input UserCreateWithoutPendingPartyInvitationsInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyCreateManyWithoutMembersInput
   friends: UserCreateManyInput
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
@@ -8124,6 +8131,8 @@ enum UserOrderByInput {
   resetToken_DESC
   resetTokenExpiry_ASC
   resetTokenExpiry_DESC
+  isPrivate_ASC
+  isPrivate_DESC
 }
 
 type UserPreviousValues {
@@ -8141,6 +8150,7 @@ type UserPreviousValues {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean!
 }
 
 input UserScalarWhereInput {
@@ -8574,6 +8584,10 @@ input UserScalarWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: DateTime
+  isPrivate: Boolean
+
+  """All values that are not equal to given value."""
+  isPrivate_not: Boolean
 }
 
 type UserSubscriptionPayload {
@@ -8627,6 +8641,7 @@ input UserUpdateDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -8647,6 +8662,7 @@ input UserUpdateInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -8667,6 +8683,7 @@ input UserUpdateManyDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
 }
 
 input UserUpdateManyInput {
@@ -8693,6 +8710,7 @@ input UserUpdateManyMutationInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -8764,6 +8782,7 @@ input UserUpdateWithoutCartItemsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -8783,6 +8802,7 @@ input UserUpdateWithoutChatsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -8802,6 +8822,7 @@ input UserUpdateWithoutPartiesDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
@@ -8821,6 +8842,7 @@ input UserUpdateWithoutPendingFriendInvitationsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
@@ -8840,6 +8862,7 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean
   parties: PartyUpdateManyWithoutMembersInput
   friends: UserUpdateManyInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
@@ -9331,6 +9354,10 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: DateTime
+  isPrivate: Boolean
+
+  """All values that are not equal to given value."""
+  isPrivate_not: Boolean
   parties_every: PartyWhereInput
   parties_some: PartyWhereInput
   parties_none: PartyWhereInput

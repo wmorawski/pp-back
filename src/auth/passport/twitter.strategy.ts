@@ -33,7 +33,10 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
     done: SocialAuthDoneFn,
   ) {
     try {
-      const jwt: string = await this.authService.validateOAuthLogin({
+      const {
+        jwt,
+        missingLastName,
+      } = await this.authService.validateOAuthLogin({
         email: profile.emails[0].value,
         lastName: profile.displayName.split(' ')[1],
         firstName: profile.displayName.split(' ')[0],
@@ -47,6 +50,7 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
         providerToken: accessToken,
         providerRefreshToken: refreshToken,
         provider: 'TWITTER',
+        missingLastName,
       };
       done(null, user);
     } catch (err) {

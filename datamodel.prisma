@@ -20,6 +20,7 @@ type User {
   thirdPartyId: String
   resetToken: String
   resetTokenExpiry: DateTime
+  isPrivate: Boolean! @default(value: true)
   cartItems: [PartyCartItem!]!
 }
 
@@ -110,7 +111,7 @@ type Playlist {
   name: String!
   imageUrl: String!
   tracks: [PartySavedTrack!]!
-  isTemporary: Boolean @default(value: false)
+  importable: Boolean! @default(value: true)
 }
 
 type PartyCart {

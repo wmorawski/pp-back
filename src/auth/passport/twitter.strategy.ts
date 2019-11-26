@@ -17,7 +17,7 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
       consumerSecret: config.getFromEnv('TWITTER_API_SECRET'), // <- Replace this with your client secret
       callbackURL: `${
         process.env.NODE_ENV === 'production'
-          ? 'https://partyplannerio.herokuapp.com'
+          ? 'https://api.ppback.fun'
           : ''
       }/auth/twitter/callback`,
       passReqToCallback: true,

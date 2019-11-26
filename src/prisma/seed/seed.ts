@@ -1,10 +1,13 @@
+import {
+  PartyCreateInput,
+  UserCreateInput,
+} from './../../../generated/prisma/index';
 import * as uuid from 'uuid/v4';
 import { prisma } from './../../../generated/prisma';
 import * as faker from 'faker';
 import * as bcrypt from 'bcrypt';
 import { compose, filter } from 'ramda';
 import { parse, addHours } from 'date-fns';
-import { PartyCreateInput, UserCreateInput } from '../prisma.binding';
 
 const USERS_NUM = 30;
 const PARTIES_NUM = 20;
@@ -67,7 +70,9 @@ const createFakeParty = (author: any, members: any[]): PartyCreateInput => {
     end: partyEndDate,
     colorTint: faker.random.arrayElement(calendarTintsHexArray),
     inviteSecret: uuid(),
-    cart: {},
+    cart: {
+      create: {},
+    },
   };
 };
 const getRandomElementsFromArray = (arr: any[]) => {
@@ -168,7 +173,7 @@ async function main() {
         ),
       );
     } catch (e) {
-      console.log(e);
+      console.log('ERROR WHEN CREATING USER', e);
     }
   }
 
@@ -188,10 +193,11 @@ async function main() {
 
   // arr.forEach doesn't respect async/await (it's just like for(i,i<len,i++){callback(arr[i])})
   for (const party of parties) {
+    // console.log(party);
     try {
       await prisma.createChat(createFakeChat(party));
     } catch (e) {
-      console.log(e);
+      console.log('ERROR WHEN CREATING A PARTY', e);
     }
   }
 }

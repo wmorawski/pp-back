@@ -985,7 +985,7 @@ export interface PartyCartItemCreateWithoutUserInput {
   id?: Maybe<ID_Input>;
   cart: PartyCartCreateOneWithoutItemsInput;
   name: String;
-  description: String;
+  description?: Maybe<String>;
   price: Float;
   status: PartyCartItemStatus;
   quantity?: Maybe<Int>;
@@ -1549,7 +1549,7 @@ export interface PartyCartItemCreateWithoutCartInput {
   id?: Maybe<ID_Input>;
   user: UserCreateOneWithoutCartItemsInput;
   name: String;
-  description: String;
+  description?: Maybe<String>;
   price: Float;
   status: PartyCartItemStatus;
   quantity?: Maybe<Int>;
@@ -4756,7 +4756,7 @@ export interface PartyCartItemCreateInput {
   cart: PartyCartCreateOneWithoutItemsInput;
   user: UserCreateOneWithoutCartItemsInput;
   name: String;
-  description: String;
+  description?: Maybe<String>;
   price: Float;
   status: PartyCartItemStatus;
   quantity?: Maybe<Int>;
@@ -6926,7 +6926,7 @@ export interface AggregateGameSubscription
 export interface PartyCartItem {
   id: ID_Output;
   name: String;
-  description: String;
+  description?: String;
   price: Float;
   status: PartyCartItemStatus;
   quantity: Int;
@@ -7776,7 +7776,7 @@ export interface PlaylistEdgeSubscription
 export interface PartyCartItemPreviousValues {
   id: ID_Output;
   name: String;
-  description: String;
+  description?: String;
   price: Float;
   status: PartyCartItemStatus;
   quantity: Int;

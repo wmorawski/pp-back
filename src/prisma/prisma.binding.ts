@@ -3638,7 +3638,7 @@ type PartyCartItem implements Node {
   cart: PartyCart!
   user: User!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int!
@@ -3657,7 +3657,7 @@ type PartyCartItemConnection {
 input PartyCartItemCreateInput {
   id: ID
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -3678,7 +3678,7 @@ input PartyCartItemCreateManyWithoutUserInput {
 input PartyCartItemCreateWithoutCartInput {
   id: ID
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -3688,7 +3688,7 @@ input PartyCartItemCreateWithoutCartInput {
 input PartyCartItemCreateWithoutUserInput {
   id: ID
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -3722,7 +3722,7 @@ enum PartyCartItemOrderByInput {
 type PartyCartItemPreviousValues {
   id: ID!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int!
@@ -11156,7 +11156,7 @@ export interface PartyCartCreateWithoutPartyInput {
 export interface PartyCartItemCreateInput {
   id?: ID_Input | null
   name: String
-  description: String
+  description?: String | null
   price: Float
   status: PartyCartItemStatus
   quantity?: Int | null
@@ -11177,7 +11177,7 @@ export interface PartyCartItemCreateManyWithoutUserInput {
 export interface PartyCartItemCreateWithoutCartInput {
   id?: ID_Input | null
   name: String
-  description: String
+  description?: String | null
   price: Float
   status: PartyCartItemStatus
   quantity?: Int | null
@@ -11187,7 +11187,7 @@ export interface PartyCartItemCreateWithoutCartInput {
 export interface PartyCartItemCreateWithoutUserInput {
   id?: ID_Input | null
   name: String
-  description: String
+  description?: String | null
   price: Float
   status: PartyCartItemStatus
   quantity?: Int | null
@@ -14462,7 +14462,7 @@ export interface PartyCartItem extends Node {
   cart: PartyCart
   user: User
   name: String
-  description: String
+  description?: String | null
   price: Float
   status: PartyCartItemStatus
   quantity: Int
@@ -14490,7 +14490,7 @@ export interface PartyCartItemEdge {
 export interface PartyCartItemPreviousValues {
   id: ID_Output
   name: String
-  description: String
+  description?: String | null
   price: Float
   status: PartyCartItemStatus
   quantity: Int

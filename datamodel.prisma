@@ -125,7 +125,7 @@ type PartyCartItem {
   cart: PartyCart!
   user: User!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int! @default(value: 0)

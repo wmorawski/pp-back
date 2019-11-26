@@ -1932,7 +1932,7 @@ type PartyCartItem {
   cart: PartyCart!
   user: User!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int!
@@ -1949,7 +1949,7 @@ input PartyCartItemCreateInput {
   cart: PartyCartCreateOneWithoutItemsInput!
   user: UserCreateOneWithoutCartItemsInput!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -1969,7 +1969,7 @@ input PartyCartItemCreateWithoutCartInput {
   id: ID
   user: UserCreateOneWithoutCartItemsInput!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -1979,7 +1979,7 @@ input PartyCartItemCreateWithoutUserInput {
   id: ID
   cart: PartyCartCreateOneWithoutItemsInput!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -2008,7 +2008,7 @@ enum PartyCartItemOrderByInput {
 type PartyCartItemPreviousValues {
   id: ID!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int!

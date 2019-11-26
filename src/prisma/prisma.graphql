@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Sat Nov 23 2019 19:11:46 GMT+0100 (Central European Standard Time)
+# timestamp: Tue Nov 26 2019 19:43:05 GMT+0100 (Central European Standard Time)
 
 type AggregateAlbum {
   count: Int!
@@ -3427,7 +3427,7 @@ type PartyCartItem implements Node {
   cart: PartyCart!
   user: User!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int!
@@ -3446,7 +3446,7 @@ type PartyCartItemConnection {
 input PartyCartItemCreateInput {
   id: ID
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -3467,7 +3467,7 @@ input PartyCartItemCreateManyWithoutUserInput {
 input PartyCartItemCreateWithoutCartInput {
   id: ID
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -3477,7 +3477,7 @@ input PartyCartItemCreateWithoutCartInput {
 input PartyCartItemCreateWithoutUserInput {
   id: ID
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int
@@ -3511,7 +3511,7 @@ enum PartyCartItemOrderByInput {
 type PartyCartItemPreviousValues {
   id: ID!
   name: String!
-  description: String!
+  description: String
   price: Float!
   status: PartyCartItemStatus!
   quantity: Int!

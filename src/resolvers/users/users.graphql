@@ -48,7 +48,14 @@ type Mutation {
     lastName: String!
   ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
-  socialLogin(id: String!): AuthPayload!
+  socialLogin(
+    id: String!
+    email: String!
+    avatar: String
+    firstName: String!
+    lastName: String!
+    provider: SocialMediaType!
+  ): AuthPayload!
   updateMe(name: String): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   requestReset(email: String!): SuccessMessage

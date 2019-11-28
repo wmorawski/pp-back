@@ -11,12 +11,14 @@ import {
   JwtPayload,
   SignupPayload,
   SocialLoginPayload,
+  SocialSignupPayload,
 } from './auth.types';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '../prisma/prisma.binding';
 import { ConfigService } from '../config/config.service';
 import faker = require('faker');
+import { renameProp } from 'src/helpers/object.helper';
 
 export enum Provider {
   GOOGLE = 'google',
@@ -81,16 +83,21 @@ export class AuthService {
     return user;
   }
 
-  async socialLogin(payload: SocialLoginPayload): Promise<User> {
-    const [user] = await this.prisma.query.users({
-      where: { thirdPartyId: payload.id },
+  async socialLogin(payload: SocialSignupPayload): Promise<User> {
+    payload.password = payload.password || faker.internet.password();
+    let [user] = await this.prisma.query.users({
+      where: {
+        OR: [{ thirdPartyId: payload.id }, { email: payload.email }],
+      },
     });
 
     if (!user) {
-      throw new UnauthorizedException(`ERR_SIGNIN_SOCIAL_USER_NOT_FOUIND`);
+      user = await this.usersService.createUser(
+        renameProp('id', 'thirdPartyId', payload),
+      );
     }
 
-    if (user.provider) {
+    if (user.provider !== payload.provider) {
       throw new InternalServerErrorException(
         `You already logged with this email using ${user.provider}`,
       );
@@ -98,6 +105,7 @@ export class AuthService {
 
     return user;
   }
+
   async validateOAuthLogin(
     payload: SignupPayload,
   ): Promise<{ jwt: string; missingLastName: boolean }> {
@@ -116,9 +124,11 @@ export class AuthService {
       throw new InternalServerErrorException('validateOAuthLogin', err.message);
     }
   }
+
   compare(password: string, hashedPassword: string): Promise<boolean> {
     return bcrypt.compare(password, hashedPassword);
   }
+
   createAuthPayload(user: any): AuthPayload {
     return {
       token: this.createToken(user.id),

@@ -41,6 +41,7 @@ export class AuthResolver {
 
   @Mutation('login')
   async login(@Args() payload: LoginPayload): Promise<AuthPayload> {
+    console.log(process.env.PRISMA_ENDPOINT)
     const user = await this.auth.login(payload);
     return this.auth.createAuthPayload(user);
   }

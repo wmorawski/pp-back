@@ -6,6 +6,9 @@ import { AppModule } from './app.module';
 import { join } from 'path';
 import { initialize, serializeUser, deserializeUser } from 'passport';
 import * as session from 'express-session';
+import * as admin from 'firebase-admin';
+import { ServiceAccount } from 'firebase-admin';
+const adminConfig: ServiceAccount = require('../partyplanner-c76a2-firebase-adminsdk-5xxao-5ae159bab4.json');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -37,5 +40,10 @@ async function bootstrap() {
     done(null, user);
   });
   await app.listen(port);
+
+  admin.initializeApp({
+    credential: admin.credential.cert(adminConfig),
+    databaseURL: 'https://partyplanner-c76a2.firebaseio.com',
+  });
 }
 bootstrap();

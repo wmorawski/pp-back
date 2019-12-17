@@ -19,6 +19,7 @@ import { User } from '../prisma/prisma.binding';
 import { ConfigService } from '../config/config.service';
 import faker = require('faker');
 import { renameProp } from 'src/helpers/object.helper';
+import { FirebaseService } from '../services/firebase/firebase.service';
 
 export enum Provider {
   GOOGLE = 'google',
@@ -32,6 +33,7 @@ export class AuthService {
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     private readonly prisma: PrismaService,
+    private readonly firebase: FirebaseService,
   ) {}
 
   createToken(id: string) {
@@ -80,6 +82,15 @@ export class AuthService {
     if (!passwordValid) {
       throw new UnauthorizedException('Invalid password');
     }
+    console.dir(
+      await this.firebase.send(
+        user.id,
+        'Logowanie',
+        'Zalogowano się na Twoje konto',
+        'http://placekitten.com/64/64',
+      ),
+      { depth: 4 },
+    );
     return user;
   }
 

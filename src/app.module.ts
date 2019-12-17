@@ -12,6 +12,8 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
 import { MusicModule } from './music/music.module';
+import { FirebaseService } from './services/firebase/firebase.service';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   imports: [
@@ -48,6 +50,7 @@ import { MusicModule } from './music/music.module';
       },
     }),
     MusicModule,
+    SharedModule,
   ],
   controllers: [AppController],
   providers: [
@@ -58,6 +61,7 @@ import { MusicModule } from './music/music.module';
         `${process.env.NODE_ENV ? process.env.NODE_ENV : 'development'}.env`,
       ),
     },
+    FirebaseService,
   ],
 })
 export class AppModule {}

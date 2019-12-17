@@ -57,6 +57,7 @@
     "express-session": "^1.15.6",
     "faker": "^4.1.0",
     "fastify": "^2.1.0",
+    "firebase-admin": "^8.8.0",
     "google-auth-library": "^3.1.1",
     "graphql": "^14.1.1",
     "graphql-binding": "^2.5.1",

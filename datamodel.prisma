@@ -22,6 +22,10 @@ type User {
   resetTokenExpiry: DateTime
   isPrivate: Boolean! @default(value: true)
   cartItems: [PartyCartItem!]!
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: [PushNotificationScope]
+    @scalarList(strategy: RELATION)
 }
 
 type Message {
@@ -176,4 +180,9 @@ enum PartyCartItemStatus {
   PENDING
   ACCEPTED
   REJECTED
+}
+
+enum PushNotificationScope {
+  PARTY_INVITES
+  FRIEND_INVITES
 }

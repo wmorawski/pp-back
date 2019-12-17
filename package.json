@@ -28,7 +28,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "update:prisma": "prisma deploy",
+    "update:prisma": "prisma deploy --force",
     "update:graphql": "graphql get-schema --project database && graphql codegen --project database",
     "update": "npm run update:prisma && npm run update:graphql",
     "dev": "source development.env && export $(cut -d= -f1 development.env) && npm run start:dev"

@@ -1,52 +1,66 @@
+import { User } from './../../prisma/prisma.binding';
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { props, compose, flatten, map, filter } from 'ramda';
+
+function getTokensFromUser(user: User): string[] {
+  const pluckedKeys = props([
+    'webPushNotificationToken',
+    'appPushNotificationToken',
+  ])(user as any) as string[];
+  return pluckedKeys.filter(Boolean);
+}
 
 @Injectable()
 export class FirebaseService {
   constructor(private readonly prisma: PrismaService) {}
-  private devices: any[];
-  private async getDevices(userId: string | string[]) {
-    // return (await this.prisma.query.users({
-    //     where: {
-    //         id_in: userId,
-    //     },
-    // })).map(user => user.pushNotificationsTokens);
-    return (await admin
-      .firestore()
-      .collection('devices')
-      .where('userId', Array.isArray(userId) ? 'array-contains' : '==', userId)
-      .get()).docs.map(doc => doc.data().token);
+
+  private async getDevices(userIds: string[]) {
+    try {
+      const users = await this.prisma.query.users({
+        where: { id_in: userIds },
+      });
+
+      return compose(
+        flatten,
+        map(getTokensFromUser),
+      )(users);
+    } catch (e) {
+      return [];
+    }
   }
 
   public async send(
-    userId: string | string[],
+    userIds: string[],
     title: string,
     body: string,
     image: string = null,
   ) {
-    const tokens = await this.getDevices(userId);
-    if (tokens) {
-      const message: any = {
-        notification: {
-          title,
-          body,
-        },
-        topic: 'notifications',
-        android: {
-          notification: {
-            sound: 'default',
-            vibrate_timings: ['0.5s', '2.1s', '3.2s', '4.1s'],
-          },
-        },
-        tokens,
-      };
-      if (image) {
-        message.android.notification.image = image;
-      }
-      return admin.messaging().sendMulticast(message);
-    } else {
-      return null;
+    const tokens = await this.getDevices(userIds);
+
+    if (tokens.length === 0) {
+      return;
     }
+
+    const message: any = {
+      notification: {
+        title,
+        body,
+      },
+      android: {
+        notification: {
+          sound: 'default',
+          vibrate_timings: ['0.5s', '2.1s', '3.2s', '4.1s'],
+        },
+      },
+      tokens,
+    };
+
+    if (image) {
+      message.android.notification.image = image;
+    }
+
+    return admin.messaging().sendMulticast(message);
   }
 }

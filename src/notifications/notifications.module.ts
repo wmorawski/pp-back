@@ -1,11 +1,13 @@
+import { SharedModule } from './../shared/shared.module';
 import { NotificationsController } from './notifications.controller';
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { PrismaModule } from '../prisma/prisma.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [PrismaModule],
-  exports: [NotificationsController],
-  controllers: [NotificationsController],
+  imports: [PrismaModule, SharedModule],
   providers: [NotificationsController],
+  controllers: [NotificationsController],
+  exports: [NotificationsController],
 })
-export class PartiesModule {}
+export class NotificationsModule {}

@@ -14,6 +14,7 @@ import { HandlebarsAdapter, MailerModule } from '@nest-modules/mailer';
 import { MusicModule } from './music/music.module';
 import { FirebaseService } from './services/firebase/firebase.service';
 import { SharedModule } from './shared/shared.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { SharedModule } from './shared/shared.module';
     ConfigModule,
     AuthModule,
     MessagesModule,
+    NotificationsModule,
     MailerModule.forRoot({
       transport: `smtp://${process.env.MAILTRAP_USER}:${
         process.env.MAILTRAP_PASSWORD

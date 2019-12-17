@@ -1,3 +1,5 @@
+import { PushNotificationScope } from './../prisma/prisma.binding';
+
 import { JwtService } from '@nestjs/jwt';
 import {
   Injectable,

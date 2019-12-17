@@ -1,31 +1,54 @@
-import { User } from './../../prisma/prisma.binding';
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
+import { compose, flatten, map, props } from 'ramda';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { props, compose, flatten, map, filter } from 'ramda';
+
+import { PushNotificationScope, User } from './../../prisma/prisma.binding';
+
+const DEFAULT_NOTIFICATION_IMAGE = 'https://i.imgur.com/tjOPkh4.png';
 
 function getTokensFromUser(user: User): string[] {
   const pluckedKeys = props([
     'webPushNotificationToken',
     'appPushNotificationToken',
   ])(user as any) as string[];
+
   return pluckedKeys.filter(Boolean);
+}
+
+interface NotificationPayload {
+  title: string;
+  body: string;
+  image?: string;
 }
 
 @Injectable()
 export class FirebaseService {
   constructor(private readonly prisma: PrismaService) {}
 
-  private async getDevices(userIds: string[]) {
+  private async getDevices(userIds: string[], scopes: PushNotificationScope[]) {
     try {
-      const users = await this.prisma.query.users({
-        where: { id_in: userIds },
-      });
+      const users = await this.prisma.query.users(
+        {
+          where: { id_in: userIds },
+        },
+        `
+        {
+          webPushNotificationToken
+          appPushNotificationToken
+          pushNotificationsScopes
+        }
+      `,
+      );
+
+      const scopedUsers = users.filter(user =>
+        user.pushNotificationsScopes.some(scope => scopes.includes(scope)),
+      );
 
       return compose(
         flatten,
         map(getTokensFromUser),
-      )(users);
+      )(scopedUsers);
     } catch (e) {
       return [];
     }
@@ -33,34 +56,34 @@ export class FirebaseService {
 
   public async send(
     userIds: string[],
-    title: string,
-    body: string,
-    image: string = null,
+    notificationPayload: NotificationPayload,
+    scopes: PushNotificationScope[],
   ) {
-    const tokens = await this.getDevices(userIds);
-
+    const tokens = await this.getDevices(userIds, scopes);
     if (tokens.length === 0) {
       return;
     }
 
     const message: any = {
       notification: {
-        title,
-        body,
+        ...notificationPayload,
+        image: DEFAULT_NOTIFICATION_IMAGE,
       },
       android: {
         notification: {
           sound: 'default',
           vibrate_timings: ['0.5s', '2.1s', '3.2s', '4.1s'],
         },
+        image: notificationPayload.image,
       },
       tokens,
     };
 
-    if (image) {
-      message.android.notification.image = image;
+    try {
+      await admin.messaging().sendMulticast(message);
+    } catch (e) {
+      // tslint:disable-next-line: no-console
+      console.log('could not fire notification!');
     }
-
-    return admin.messaging().sendMulticast(message);
   }
 }

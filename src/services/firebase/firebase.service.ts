@@ -25,23 +25,28 @@ export class FirebaseService {
     body: string,
     image: string = null,
   ) {
-    const message: any = {
-      notification: {
-        title,
-        body,
-      },
-      topic: 'notifications',
-      android: {
+    const tokens = await this.getDevices(userId);
+    if (tokens) {
+      const message: any = {
         notification: {
-          sound: 'default',
-          vibrate_timings: ['0.5s', '2.1s', '3.2s', '4.1s'],
+          title,
+          body,
         },
-      },
-      tokens: await this.getDevices(userId),
-    };
-    if (image) {
-      message.android.notification.image = image;
+        topic: 'notifications',
+        android: {
+          notification: {
+            sound: 'default',
+            vibrate_timings: ['0.5s', '2.1s', '3.2s', '4.1s'],
+          },
+        },
+        tokens,
+      };
+      if (image) {
+        message.android.notification.image = image;
+      }
+      return admin.messaging().sendMulticast(message);
+    } else {
+      return null;
     }
-    return admin.messaging().sendMulticast(message);
   }
 }

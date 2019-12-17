@@ -28,7 +28,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "update:prisma": "prisma deploy",
+    "update:prisma": "prisma deploy --force",
     "update:graphql": "graphql get-schema --project database && graphql codegen --project database",
     "update": "npm run update:prisma && npm run update:graphql",
     "dev": "source development.env && export $(cut -d= -f1 development.env) && npm run start:dev"
@@ -75,7 +75,7 @@
     "passport-spotify": "^1.0.1",
     "passport-twitter": "^1.0.4",
     "point-of-view": "^3.1.1",
-    "prisma": "^1.32.2",
+    "prisma": "1.34.10",
     "prisma-binding": "^2.3.3",
     "prisma-client-lib": "^1.27.3",
     "qs": "^6.7.0",

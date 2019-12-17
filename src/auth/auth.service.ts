@@ -1,3 +1,5 @@
+import { PushNotificationScope } from './../prisma/prisma.binding';
+
 import { JwtService } from '@nestjs/jwt';
 import {
   Injectable,
@@ -82,15 +84,7 @@ export class AuthService {
     if (!passwordValid) {
       throw new UnauthorizedException('Invalid password');
     }
-    console.dir(
-      await this.firebase.send(
-        user.id,
-        'Logowanie',
-        'Zalogowano się na Twoje konto',
-        'http://placekitten.com/64/64',
-      ),
-      { depth: 4 },
-    );
+
     return user;
   }
 

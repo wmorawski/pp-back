@@ -58,6 +58,12 @@ export class PartiesResolver {
     return await this.prisma.mutation.updatePartyCartItem(args, info);
   }
 
+  @Mutation('deletePartyCartItem')
+  @UseGuards(GqlAuthGuard)
+  async deletePartyCartItem(@Args() args, @Info() info) {
+    return await this.prisma.mutation.deletePartyCartItem(args, info);
+  }
+
   @Mutation('updateParty')
   @UseGuards(GqlAuthGuard)
   async updateParty(@Args() args, @Info() info) {

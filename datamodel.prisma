@@ -22,12 +22,8 @@ type User {
   resetTokenExpiry: DateTime
   isPrivate: Boolean! @default(value: true)
   cartItems: [PartyCartItem!]!
-<<<<<<< Updated upstream
   webPushNotificationToken: String
   appPushNotificationToken: String
-=======
-  pushNotificationsToken: String
->>>>>>> Stashed changes
   pushNotificationsScopes: [PushNotificationScope]
     @scalarList(strategy: RELATION)
 }

@@ -4164,12 +4164,8 @@ type User {
   resetTokenExpiry: DateTime
   isPrivate: Boolean!
   cartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem!]
-<<<<<<< Updated upstream
   webPushNotificationToken: String
   appPushNotificationToken: String
-=======
-  pushNotificationsToken: String
->>>>>>> Stashed changes
   pushNotificationsScopes: [PushNotificationScope!]!
 }
 
@@ -4198,16 +4194,6 @@ input UserCreateInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
-  parties: PartyCreateManyWithoutMembersInput
-  friends: UserCreateManyInput
-  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
-  pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
-  chats: ChatCreateManyWithoutMembersInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemCreateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -4272,19 +4258,9 @@ input UserCreateWithoutCartItemsInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
   webPushNotificationToken: String
   appPushNotificationToken: String
   pushNotificationsScopes: UserCreatepushNotificationsScopesInput
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
-  parties: PartyCreateManyWithoutMembersInput
-  friends: UserCreateManyInput
-  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
-  pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
-  chats: ChatCreateManyWithoutMembersInput
->>>>>>> Stashed changes
 }
 
 input UserCreateWithoutChatsInput {
@@ -4305,15 +4281,6 @@ input UserCreateWithoutChatsInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
-  parties: PartyCreateManyWithoutMembersInput
-  friends: UserCreateManyInput
-  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
-  pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemCreateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -4338,7 +4305,6 @@ input UserCreateWithoutFriendsInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
   cartItems: PartyCartItemCreateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -4352,11 +4318,6 @@ input UserCreateWithoutPartiesInput {
   lastName: String!
   password: String!
   friends: UserCreateManyWithoutFriendsInput
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
-  friends: UserCreateManyInput
->>>>>>> Stashed changes
   pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
   chats: ChatCreateManyWithoutMembersInput
@@ -4392,15 +4353,6 @@ input UserCreateWithoutPendingFriendInvitationsInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
-  parties: PartyCreateManyWithoutMembersInput
-  friends: UserCreateManyInput
-  pendingPartyInvitations: PartyInvitationCreateManyWithoutUserInput
-  chats: ChatCreateManyWithoutMembersInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemCreateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -4425,15 +4377,6 @@ input UserCreateWithoutPendingPartyInvitationsInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
-  parties: PartyCreateManyWithoutMembersInput
-  friends: UserCreateManyInput
-  pendingFriendInvitations: FriendInvitationCreateManyWithoutUserInput
-  chats: ChatCreateManyWithoutMembersInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemCreateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -4476,15 +4419,10 @@ enum UserOrderByInput {
   resetTokenExpiry_DESC
   isPrivate_ASC
   isPrivate_DESC
-<<<<<<< Updated upstream
   webPushNotificationToken_ASC
   webPushNotificationToken_DESC
   appPushNotificationToken_ASC
   appPushNotificationToken_DESC
-=======
-  pushNotificationsToken_ASC
-  pushNotificationsToken_DESC
->>>>>>> Stashed changes
 }
 
 type UserPreviousValues {
@@ -4503,12 +4441,8 @@ type UserPreviousValues {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean!
-<<<<<<< Updated upstream
   webPushNotificationToken: String
   appPushNotificationToken: String
-=======
-  pushNotificationsToken: String
->>>>>>> Stashed changes
   pushNotificationsScopes: [PushNotificationScope!]!
 }
 
@@ -4665,7 +4599,6 @@ input UserScalarWhereInput {
   resetTokenExpiry_gte: DateTime
   isPrivate: Boolean
   isPrivate_not: Boolean
-<<<<<<< Updated upstream
   webPushNotificationToken: String
   webPushNotificationToken_not: String
   webPushNotificationToken_in: [String!]
@@ -4697,48 +4630,6 @@ input UserScalarWhereInput {
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
-=======
-  pushNotificationsToken: String
-
-  """All values that are not equal to given value."""
-  pushNotificationsToken_not: String
-
-  """All values that are contained in given list."""
-  pushNotificationsToken_in: [String!]
-
-  """All values that are not contained in given list."""
-  pushNotificationsToken_not_in: [String!]
-
-  """All values less than the given value."""
-  pushNotificationsToken_lt: String
-
-  """All values less than or equal the given value."""
-  pushNotificationsToken_lte: String
-
-  """All values greater than the given value."""
-  pushNotificationsToken_gt: String
-
-  """All values greater than or equal the given value."""
-  pushNotificationsToken_gte: String
-
-  """All values containing the given string."""
-  pushNotificationsToken_contains: String
-
-  """All values not containing the given string."""
-  pushNotificationsToken_not_contains: String
-
-  """All values starting with the given string."""
-  pushNotificationsToken_starts_with: String
-
-  """All values not starting with the given string."""
-  pushNotificationsToken_not_starts_with: String
-
-  """All values ending with the given string."""
-  pushNotificationsToken_ends_with: String
-
-  """All values not ending with the given string."""
-  pushNotificationsToken_not_ends_with: String
->>>>>>> Stashed changes
 }
 
 type UserSubscriptionPayload {
@@ -4777,16 +4668,6 @@ input UserUpdateDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-  parties: PartyUpdateManyWithoutMembersInput
-  friends: UserUpdateManyInput
-  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
-  pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
-  chats: ChatUpdateManyWithoutMembersInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemUpdateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -4811,16 +4692,6 @@ input UserUpdateInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-  parties: PartyUpdateManyWithoutMembersInput
-  friends: UserUpdateManyInput
-  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
-  pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
-  chats: ChatUpdateManyWithoutMembersInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemUpdateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -4840,26 +4711,9 @@ input UserUpdateManyDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
   webPushNotificationToken: String
   appPushNotificationToken: String
   pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-}
-
-input UserUpdateManyInput {
-  create: [UserCreateInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueNestedInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserScalarWhereInput!]
-  upsert: [UserUpsertWithWhereUniqueNestedInput!]
->>>>>>> Stashed changes
 }
 
 input UserUpdateManyMutationInput {
@@ -4875,12 +4729,8 @@ input UserUpdateManyMutationInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
   webPushNotificationToken: String
   appPushNotificationToken: String
-=======
-  pushNotificationsToken: String
->>>>>>> Stashed changes
   pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
@@ -4957,10 +4807,6 @@ input UserUpdatepushNotificationsScopesInput {
   set: [PushNotificationScope!]
 }
 
-input UserUpdatepushNotificationsScopesInput {
-  set: [PushNotificationScope!]
-}
-
 input UserUpdateWithoutCartItemsDataInput {
   email: String
   firstName: String
@@ -4979,19 +4825,9 @@ input UserUpdateWithoutCartItemsDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
   webPushNotificationToken: String
   appPushNotificationToken: String
   pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-  parties: PartyUpdateManyWithoutMembersInput
-  friends: UserUpdateManyInput
-  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
-  pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
-  chats: ChatUpdateManyWithoutMembersInput
->>>>>>> Stashed changes
 }
 
 input UserUpdateWithoutChatsDataInput {
@@ -5011,7 +4847,6 @@ input UserUpdateWithoutChatsDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
   cartItems: PartyCartItemUpdateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -5023,10 +4858,6 @@ input UserUpdateWithoutFriendsDataInput {
   firstName: String
   lastName: String
   password: String
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
->>>>>>> Stashed changes
   parties: PartyUpdateManyWithoutMembersInput
   pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
   pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
@@ -5062,15 +4893,6 @@ input UserUpdateWithoutPartiesDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-  friends: UserUpdateManyInput
-  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
-  pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
-  chats: ChatUpdateManyWithoutMembersInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemUpdateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -5094,15 +4916,6 @@ input UserUpdateWithoutPendingFriendInvitationsDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-  parties: PartyUpdateManyWithoutMembersInput
-  friends: UserUpdateManyInput
-  pendingPartyInvitations: PartyInvitationUpdateManyWithoutUserInput
-  chats: ChatUpdateManyWithoutMembersInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemUpdateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -5126,15 +4939,6 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
-  parties: PartyUpdateManyWithoutMembersInput
-  friends: UserUpdateManyInput
-  pendingFriendInvitations: FriendInvitationUpdateManyWithoutUserInput
-  chats: ChatUpdateManyWithoutMembersInput
->>>>>>> Stashed changes
   cartItems: PartyCartItemUpdateManyWithoutUserInput
   webPushNotificationToken: String
   appPushNotificationToken: String
@@ -5362,64 +5166,6 @@ input UserWhereInput {
   resetTokenExpiry_gte: DateTime
   isPrivate: Boolean
   isPrivate_not: Boolean
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken: String
-
-  """All values that are not equal to given value."""
-  pushNotificationsToken_not: String
-
-  """All values that are contained in given list."""
-  pushNotificationsToken_in: [String!]
-
-  """All values that are not contained in given list."""
-  pushNotificationsToken_not_in: [String!]
-
-  """All values less than the given value."""
-  pushNotificationsToken_lt: String
-
-  """All values less than or equal the given value."""
-  pushNotificationsToken_lte: String
-
-  """All values greater than the given value."""
-  pushNotificationsToken_gt: String
-
-  """All values greater than or equal the given value."""
-  pushNotificationsToken_gte: String
-
-  """All values containing the given string."""
-  pushNotificationsToken_contains: String
-
-  """All values not containing the given string."""
-  pushNotificationsToken_not_contains: String
-
-  """All values starting with the given string."""
-  pushNotificationsToken_starts_with: String
-
-  """All values not starting with the given string."""
-  pushNotificationsToken_not_starts_with: String
-
-  """All values ending with the given string."""
-  pushNotificationsToken_ends_with: String
-
-  """All values not ending with the given string."""
-  pushNotificationsToken_not_ends_with: String
-  parties_every: PartyWhereInput
-  parties_some: PartyWhereInput
-  parties_none: PartyWhereInput
-  friends_every: UserWhereInput
-  friends_some: UserWhereInput
-  friends_none: UserWhereInput
-  pendingFriendInvitations_every: FriendInvitationWhereInput
-  pendingFriendInvitations_some: FriendInvitationWhereInput
-  pendingFriendInvitations_none: FriendInvitationWhereInput
-  pendingPartyInvitations_every: PartyInvitationWhereInput
-  pendingPartyInvitations_some: PartyInvitationWhereInput
-  pendingPartyInvitations_none: PartyInvitationWhereInput
-  chats_every: ChatWhereInput
-  chats_some: ChatWhereInput
-  chats_none: ChatWhereInput
->>>>>>> Stashed changes
   cartItems_every: PartyCartItemWhereInput
   cartItems_some: PartyCartItemWhereInput
   cartItems_none: PartyCartItemWhereInput
@@ -5668,15 +5414,10 @@ export type UserOrderByInput =   'id_ASC' |
   'resetTokenExpiry_DESC' |
   'isPrivate_ASC' |
   'isPrivate_DESC' |
-<<<<<<< Updated upstream
   'webPushNotificationToken_ASC' |
   'webPushNotificationToken_DESC' |
   'appPushNotificationToken_ASC' |
   'appPushNotificationToken_DESC'
-=======
-  'pushNotificationsToken_ASC' |
-  'pushNotificationsToken_DESC'
->>>>>>> Stashed changes
 
 export interface AlbumCreateInput {
   id?: ID_Input | null
@@ -8741,16 +8482,6 @@ export interface UserCreateInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserCreatepushNotificationsScopesInput | null
-  parties?: PartyCreateManyWithoutMembersInput | null
-  friends?: UserCreateManyInput | null
-  pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
-  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
-  chats?: ChatCreateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemCreateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -8815,19 +8546,9 @@ export interface UserCreateWithoutCartItemsInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
   pushNotificationsScopes?: UserCreatepushNotificationsScopesInput | null
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserCreatepushNotificationsScopesInput | null
-  parties?: PartyCreateManyWithoutMembersInput | null
-  friends?: UserCreateManyInput | null
-  pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
-  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
-  chats?: ChatCreateManyWithoutMembersInput | null
->>>>>>> Stashed changes
 }
 
 export interface UserCreateWithoutChatsInput {
@@ -8848,7 +8569,6 @@ export interface UserCreateWithoutChatsInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
   cartItems?: PartyCartItemCreateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -8861,10 +8581,6 @@ export interface UserCreateWithoutFriendsInput {
   firstName: String
   lastName: String
   password: String
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserCreatepushNotificationsScopesInput | null
->>>>>>> Stashed changes
   parties?: PartyCreateManyWithoutMembersInput | null
   pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
   pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
@@ -8901,15 +8617,6 @@ export interface UserCreateWithoutPartiesInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserCreatepushNotificationsScopesInput | null
-  friends?: UserCreateManyInput | null
-  pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
-  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
-  chats?: ChatCreateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemCreateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -8934,15 +8641,6 @@ export interface UserCreateWithoutPendingFriendInvitationsInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserCreatepushNotificationsScopesInput | null
-  parties?: PartyCreateManyWithoutMembersInput | null
-  friends?: UserCreateManyInput | null
-  pendingPartyInvitations?: PartyInvitationCreateManyWithoutUserInput | null
-  chats?: ChatCreateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemCreateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -8967,15 +8665,6 @@ export interface UserCreateWithoutPendingPartyInvitationsInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserCreatepushNotificationsScopesInput | null
-  parties?: PartyCreateManyWithoutMembersInput | null
-  friends?: UserCreateManyInput | null
-  pendingFriendInvitations?: FriendInvitationCreateManyWithoutUserInput | null
-  chats?: ChatCreateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemCreateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -9135,7 +8824,6 @@ export interface UserScalarWhereInput {
   resetTokenExpiry_gte?: DateTime | null
   isPrivate?: Boolean | null
   isPrivate_not?: Boolean | null
-<<<<<<< Updated upstream
   webPushNotificationToken?: String | null
   webPushNotificationToken_not?: String | null
   webPushNotificationToken_in?: String[] | String | null
@@ -9167,22 +8855,6 @@ export interface UserScalarWhereInput {
   AND?: UserScalarWhereInput[] | UserScalarWhereInput | null
   OR?: UserScalarWhereInput[] | UserScalarWhereInput | null
   NOT?: UserScalarWhereInput[] | UserScalarWhereInput | null
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsToken_not?: String | null
-  pushNotificationsToken_in?: String[] | String | null
-  pushNotificationsToken_not_in?: String[] | String | null
-  pushNotificationsToken_lt?: String | null
-  pushNotificationsToken_lte?: String | null
-  pushNotificationsToken_gt?: String | null
-  pushNotificationsToken_gte?: String | null
-  pushNotificationsToken_contains?: String | null
-  pushNotificationsToken_not_contains?: String | null
-  pushNotificationsToken_starts_with?: String | null
-  pushNotificationsToken_not_starts_with?: String | null
-  pushNotificationsToken_ends_with?: String | null
-  pushNotificationsToken_not_ends_with?: String | null
->>>>>>> Stashed changes
 }
 
 export interface UserSubscriptionWhereInput {
@@ -9214,16 +8886,6 @@ export interface UserUpdateDataInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-  parties?: PartyUpdateManyWithoutMembersInput | null
-  friends?: UserUpdateManyInput | null
-  pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -9248,16 +8910,6 @@ export interface UserUpdateInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-  parties?: PartyUpdateManyWithoutMembersInput | null
-  friends?: UserUpdateManyInput | null
-  pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -9277,26 +8929,9 @@ export interface UserUpdateManyDataInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
   pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-}
-
-export interface UserUpdateManyInput {
-  create?: UserCreateInput[] | UserCreateInput | null
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  set?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
-  update?: UserUpdateWithWhereUniqueNestedInput[] | UserUpdateWithWhereUniqueNestedInput | null
-  updateMany?: UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput | null
-  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput | null
-  upsert?: UserUpsertWithWhereUniqueNestedInput[] | UserUpsertWithWhereUniqueNestedInput | null
->>>>>>> Stashed changes
 }
 
 export interface UserUpdateManyMutationInput {
@@ -9312,12 +8947,8 @@ export interface UserUpdateManyMutationInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
-=======
-  pushNotificationsToken?: String | null
->>>>>>> Stashed changes
   pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
 }
 
@@ -9394,10 +9025,6 @@ export interface UserUpdatepushNotificationsScopesInput {
   set?: PushNotificationScope[] | PushNotificationScope | null
 }
 
-export interface UserUpdatepushNotificationsScopesInput {
-  set?: PushNotificationScope[] | PushNotificationScope | null
-}
-
 export interface UserUpdateWithoutCartItemsDataInput {
   email?: String | null
   firstName?: String | null
@@ -9416,19 +9043,9 @@ export interface UserUpdateWithoutCartItemsDataInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
   pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-  parties?: PartyUpdateManyWithoutMembersInput | null
-  friends?: UserUpdateManyInput | null
-  pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
->>>>>>> Stashed changes
 }
 
 export interface UserUpdateWithoutChatsDataInput {
@@ -9448,7 +9065,6 @@ export interface UserUpdateWithoutChatsDataInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
   cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -9460,10 +9076,6 @@ export interface UserUpdateWithoutFriendsDataInput {
   firstName?: String | null
   lastName?: String | null
   password?: String | null
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
->>>>>>> Stashed changes
   parties?: PartyUpdateManyWithoutMembersInput | null
   pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
   pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
@@ -9499,15 +9111,6 @@ export interface UserUpdateWithoutPartiesDataInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-  friends?: UserUpdateManyInput | null
-  pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -9531,15 +9134,6 @@ export interface UserUpdateWithoutPendingFriendInvitationsDataInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-  parties?: PartyUpdateManyWithoutMembersInput | null
-  friends?: UserUpdateManyInput | null
-  pendingPartyInvitations?: PartyInvitationUpdateManyWithoutUserInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -9563,15 +9157,6 @@ export interface UserUpdateWithoutPendingPartyInvitationsDataInput {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsScopes?: UserUpdatepushNotificationsScopesInput | null
-  parties?: PartyUpdateManyWithoutMembersInput | null
-  friends?: UserUpdateManyInput | null
-  pendingFriendInvitations?: FriendInvitationUpdateManyWithoutUserInput | null
-  chats?: ChatUpdateManyWithoutMembersInput | null
->>>>>>> Stashed changes
   cartItems?: PartyCartItemUpdateManyWithoutUserInput | null
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
@@ -9799,38 +9384,6 @@ export interface UserWhereInput {
   resetTokenExpiry_gte?: DateTime | null
   isPrivate?: Boolean | null
   isPrivate_not?: Boolean | null
-<<<<<<< Updated upstream
-=======
-  pushNotificationsToken?: String | null
-  pushNotificationsToken_not?: String | null
-  pushNotificationsToken_in?: String[] | String | null
-  pushNotificationsToken_not_in?: String[] | String | null
-  pushNotificationsToken_lt?: String | null
-  pushNotificationsToken_lte?: String | null
-  pushNotificationsToken_gt?: String | null
-  pushNotificationsToken_gte?: String | null
-  pushNotificationsToken_contains?: String | null
-  pushNotificationsToken_not_contains?: String | null
-  pushNotificationsToken_starts_with?: String | null
-  pushNotificationsToken_not_starts_with?: String | null
-  pushNotificationsToken_ends_with?: String | null
-  pushNotificationsToken_not_ends_with?: String | null
-  parties_every?: PartyWhereInput | null
-  parties_some?: PartyWhereInput | null
-  parties_none?: PartyWhereInput | null
-  friends_every?: UserWhereInput | null
-  friends_some?: UserWhereInput | null
-  friends_none?: UserWhereInput | null
-  pendingFriendInvitations_every?: FriendInvitationWhereInput | null
-  pendingFriendInvitations_some?: FriendInvitationWhereInput | null
-  pendingFriendInvitations_none?: FriendInvitationWhereInput | null
-  pendingPartyInvitations_every?: PartyInvitationWhereInput | null
-  pendingPartyInvitations_some?: PartyInvitationWhereInput | null
-  pendingPartyInvitations_none?: PartyInvitationWhereInput | null
-  chats_every?: ChatWhereInput | null
-  chats_some?: ChatWhereInput | null
-  chats_none?: ChatWhereInput | null
->>>>>>> Stashed changes
   cartItems_every?: PartyCartItemWhereInput | null
   cartItems_some?: PartyCartItemWhereInput | null
   cartItems_none?: PartyCartItemWhereInput | null
@@ -10446,12 +9999,8 @@ export interface User {
   resetTokenExpiry?: DateTime | null
   isPrivate: Boolean
   cartItems?: Array<PartyCartItem> | null
-<<<<<<< Updated upstream
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
-=======
-  pushNotificationsToken?: String | null
->>>>>>> Stashed changes
   pushNotificationsScopes: Array<PushNotificationScope>
 }
 
@@ -10482,12 +10031,8 @@ export interface UserPreviousValues {
   resetToken?: String | null
   resetTokenExpiry?: DateTime | null
   isPrivate: Boolean
-<<<<<<< Updated upstream
   webPushNotificationToken?: String | null
   appPushNotificationToken?: String | null
-=======
-  pushNotificationsToken?: String | null
->>>>>>> Stashed changes
   pushNotificationsScopes: Array<PushNotificationScope>
 }
 

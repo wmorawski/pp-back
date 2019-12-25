@@ -22,8 +22,12 @@ type User {
   resetTokenExpiry: DateTime
   isPrivate: Boolean! @default(value: true)
   cartItems: [PartyCartItem!]!
+<<<<<<< Updated upstream
   webPushNotificationToken: String
   appPushNotificationToken: String
+=======
+  pushNotificationsToken: String
+>>>>>>> Stashed changes
   pushNotificationsScopes: [PushNotificationScope]
     @scalarList(strategy: RELATION)
 }
@@ -31,7 +35,7 @@ type User {
 type Message {
   id: ID! @id
   author: User! @relation(name: "MessageAuthor")
-  chat: Chat! @relation(name: "MessagesInChat")
+  chat: Chat! @relation(name: "MessagesInChat", onDelete: CASCADE)
   content: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -79,7 +83,7 @@ type Chat {
   id: ID! @id
   party: Party!
   members: [User!]!
-  messages: [Message!] @relation(name: "MessagesInChat")
+  messages: [Message!] @relation(name: "MessagesInChat", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

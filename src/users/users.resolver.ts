@@ -1,3 +1,5 @@
+import { FirebaseService } from './../services/firebase/firebase.service';
+import { FriendInvitationCreateInput } from './../prisma/prisma.binding';
 import { FriendInvitation } from './../../generated/prisma/index';
 import { UserConnection } from './../../generated/prisma';
 import { UsersService } from '../users/users.service';
@@ -38,6 +40,7 @@ export class UsersResolver {
     private readonly usersService: UsersService,
     private readonly auth: AuthService,
     private readonly mailerService: MailerService,
+    private readonly firebaseService: FirebaseService,
   ) {}
 
   @Query('getUsers')
@@ -98,9 +101,26 @@ export class UsersResolver {
   @Mutation('createFriendInvitation')
   @UseGuards(GqlAuthGuard)
   async createFriendInvitation(
-    @Args() args,
+    @Args() args: { data: FriendInvitationCreateInput },
     @Info() info,
   ): Promise<FriendInvitation> {
+    const {
+      user: {
+        connect: { id },
+      },
+    } = args.data;
+
+    if (id) {
+      this.firebaseService.send(
+        [id as string],
+        {
+          title: 'New friend invite!',
+          body: 'You just got a new friend invite.',
+        },
+        ['FRIEND_INVITES'],
+      );
+    }
+
     return await this.prisma.mutation.createFriendInvitation(args, info);
   }
 

@@ -34,6 +34,17 @@ export interface SignupPayload {
   provider?: SocialMediaType;
 }
 
+export interface SocialSignupPayload {
+  id?: string;
+  avatar?: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  thirdPartyId?: string;
+  provider: SocialMediaType;
+}
+
 export interface LoginPayload {
   email: string;
   password: string;

@@ -183,9 +183,7 @@ export class AuthController {
       session: false,
       scope: ['email'],
       callbackURL: `${
-        process.env.NODE_ENV === 'production'
-          ? 'https://partyplannerio.herokuapp.com'
-          : ''
+        process.env.NODE_ENV === 'production' ? 'https://api.ppback.fun' : ''
       }/auth/facebook/callback`,
     };
     authenticate('facebook', params)(req, res, next);

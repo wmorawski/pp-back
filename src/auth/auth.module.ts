@@ -17,6 +17,7 @@ import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { PrismaModule } from 'src/prisma/prisma.module';
+import { SharedModule } from 'src/shared/shared.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { PrismaModule } from 'src/prisma/prisma.module';
     forwardRef(() => UsersModule),
     ConfigModule,
     PrismaModule,
+    SharedModule,
   ],
   providers: [
     JwtStrategy,

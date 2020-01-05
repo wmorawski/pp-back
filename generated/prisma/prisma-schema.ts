@@ -18,14 +18,6 @@ type AggregateFriendInvitation {
   count: Int!
 }
 
-type AggregateGame {
-  count: Int!
-}
-
-type AggregateImage {
-  count: Int!
-}
-
 type AggregateLocation {
   count: Int!
 }
@@ -946,406 +938,6 @@ input FriendInvitationWhereUniqueInput {
   id: ID
 }
 
-type Game {
-  id: ID!
-  title: String!
-  cover: String
-  type: GameType!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type GameConnection {
-  pageInfo: PageInfo!
-  edges: [GameEdge]!
-  aggregate: AggregateGame!
-}
-
-input GameCreateInput {
-  id: ID
-  title: String!
-  cover: String
-  type: GameType!
-}
-
-input GameCreateManyInput {
-  create: [GameCreateInput!]
-  connect: [GameWhereUniqueInput!]
-}
-
-type GameEdge {
-  node: Game!
-  cursor: String!
-}
-
-enum GameOrderByInput {
-  id_ASC
-  id_DESC
-  title_ASC
-  title_DESC
-  cover_ASC
-  cover_DESC
-  type_ASC
-  type_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type GamePreviousValues {
-  id: ID!
-  title: String!
-  cover: String
-  type: GameType!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-input GameScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  title: String
-  title_not: String
-  title_in: [String!]
-  title_not_in: [String!]
-  title_lt: String
-  title_lte: String
-  title_gt: String
-  title_gte: String
-  title_contains: String
-  title_not_contains: String
-  title_starts_with: String
-  title_not_starts_with: String
-  title_ends_with: String
-  title_not_ends_with: String
-  cover: String
-  cover_not: String
-  cover_in: [String!]
-  cover_not_in: [String!]
-  cover_lt: String
-  cover_lte: String
-  cover_gt: String
-  cover_gte: String
-  cover_contains: String
-  cover_not_contains: String
-  cover_starts_with: String
-  cover_not_starts_with: String
-  cover_ends_with: String
-  cover_not_ends_with: String
-  type: GameType
-  type_not: GameType
-  type_in: [GameType!]
-  type_not_in: [GameType!]
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [GameScalarWhereInput!]
-  OR: [GameScalarWhereInput!]
-  NOT: [GameScalarWhereInput!]
-}
-
-type GameSubscriptionPayload {
-  mutation: MutationType!
-  node: Game
-  updatedFields: [String!]
-  previousValues: GamePreviousValues
-}
-
-input GameSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: GameWhereInput
-  AND: [GameSubscriptionWhereInput!]
-  OR: [GameSubscriptionWhereInput!]
-  NOT: [GameSubscriptionWhereInput!]
-}
-
-enum GameType {
-  BOARD
-  PC
-  CONSOLE
-}
-
-input GameUpdateDataInput {
-  title: String
-  cover: String
-  type: GameType
-}
-
-input GameUpdateInput {
-  title: String
-  cover: String
-  type: GameType
-}
-
-input GameUpdateManyDataInput {
-  title: String
-  cover: String
-  type: GameType
-}
-
-input GameUpdateManyInput {
-  create: [GameCreateInput!]
-  update: [GameUpdateWithWhereUniqueNestedInput!]
-  upsert: [GameUpsertWithWhereUniqueNestedInput!]
-  delete: [GameWhereUniqueInput!]
-  connect: [GameWhereUniqueInput!]
-  set: [GameWhereUniqueInput!]
-  disconnect: [GameWhereUniqueInput!]
-  deleteMany: [GameScalarWhereInput!]
-  updateMany: [GameUpdateManyWithWhereNestedInput!]
-}
-
-input GameUpdateManyMutationInput {
-  title: String
-  cover: String
-  type: GameType
-}
-
-input GameUpdateManyWithWhereNestedInput {
-  where: GameScalarWhereInput!
-  data: GameUpdateManyDataInput!
-}
-
-input GameUpdateWithWhereUniqueNestedInput {
-  where: GameWhereUniqueInput!
-  data: GameUpdateDataInput!
-}
-
-input GameUpsertWithWhereUniqueNestedInput {
-  where: GameWhereUniqueInput!
-  update: GameUpdateDataInput!
-  create: GameCreateInput!
-}
-
-input GameWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  title: String
-  title_not: String
-  title_in: [String!]
-  title_not_in: [String!]
-  title_lt: String
-  title_lte: String
-  title_gt: String
-  title_gte: String
-  title_contains: String
-  title_not_contains: String
-  title_starts_with: String
-  title_not_starts_with: String
-  title_ends_with: String
-  title_not_ends_with: String
-  cover: String
-  cover_not: String
-  cover_in: [String!]
-  cover_not_in: [String!]
-  cover_lt: String
-  cover_lte: String
-  cover_gt: String
-  cover_gte: String
-  cover_contains: String
-  cover_not_contains: String
-  cover_starts_with: String
-  cover_not_starts_with: String
-  cover_ends_with: String
-  cover_not_ends_with: String
-  type: GameType
-  type_not: GameType
-  type_in: [GameType!]
-  type_not_in: [GameType!]
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [GameWhereInput!]
-  OR: [GameWhereInput!]
-  NOT: [GameWhereInput!]
-}
-
-input GameWhereUniqueInput {
-  id: ID
-  title: String
-}
-
-type Image {
-  id: ID!
-  height: Int!
-  width: Int!
-  url: String!
-}
-
-type ImageConnection {
-  pageInfo: PageInfo!
-  edges: [ImageEdge]!
-  aggregate: AggregateImage!
-}
-
-input ImageCreateInput {
-  id: ID
-  height: Int!
-  width: Int!
-  url: String!
-}
-
-type ImageEdge {
-  node: Image!
-  cursor: String!
-}
-
-enum ImageOrderByInput {
-  id_ASC
-  id_DESC
-  height_ASC
-  height_DESC
-  width_ASC
-  width_DESC
-  url_ASC
-  url_DESC
-}
-
-type ImagePreviousValues {
-  id: ID!
-  height: Int!
-  width: Int!
-  url: String!
-}
-
-type ImageSubscriptionPayload {
-  mutation: MutationType!
-  node: Image
-  updatedFields: [String!]
-  previousValues: ImagePreviousValues
-}
-
-input ImageSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ImageWhereInput
-  AND: [ImageSubscriptionWhereInput!]
-  OR: [ImageSubscriptionWhereInput!]
-  NOT: [ImageSubscriptionWhereInput!]
-}
-
-input ImageUpdateInput {
-  height: Int
-  width: Int
-  url: String
-}
-
-input ImageUpdateManyMutationInput {
-  height: Int
-  width: Int
-  url: String
-}
-
-input ImageWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  height: Int
-  height_not: Int
-  height_in: [Int!]
-  height_not_in: [Int!]
-  height_lt: Int
-  height_lte: Int
-  height_gt: Int
-  height_gte: Int
-  width: Int
-  width_not: Int
-  width_in: [Int!]
-  width_not_in: [Int!]
-  width_lt: Int
-  width_lte: Int
-  width_gt: Int
-  width_gte: Int
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  AND: [ImageWhereInput!]
-  OR: [ImageWhereInput!]
-  NOT: [ImageWhereInput!]
-}
-
-input ImageWhereUniqueInput {
-  id: ID
-}
-
 type Location {
   id: ID!
   placeName: String!
@@ -1773,18 +1365,6 @@ type Mutation {
   upsertFriendInvitation(where: FriendInvitationWhereUniqueInput!, create: FriendInvitationCreateInput!, update: FriendInvitationUpdateInput!): FriendInvitation!
   deleteFriendInvitation(where: FriendInvitationWhereUniqueInput!): FriendInvitation
   deleteManyFriendInvitations(where: FriendInvitationWhereInput): BatchPayload!
-  createGame(data: GameCreateInput!): Game!
-  updateGame(data: GameUpdateInput!, where: GameWhereUniqueInput!): Game
-  updateManyGames(data: GameUpdateManyMutationInput!, where: GameWhereInput): BatchPayload!
-  upsertGame(where: GameWhereUniqueInput!, create: GameCreateInput!, update: GameUpdateInput!): Game!
-  deleteGame(where: GameWhereUniqueInput!): Game
-  deleteManyGames(where: GameWhereInput): BatchPayload!
-  createImage(data: ImageCreateInput!): Image!
-  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
-  updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
-  upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
-  deleteImage(where: ImageWhereUniqueInput!): Image
-  deleteManyImages(where: ImageWhereInput): BatchPayload!
   createLocation(data: LocationCreateInput!): Location!
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
@@ -1872,7 +1452,6 @@ type Party {
   createdAt: DateTime!
   updatedAt: DateTime!
   location: Location!
-  games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game!]
   colorTint: String!
   isPublic: Boolean
   members(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -2380,7 +1959,6 @@ input PartyCreateInput {
   description: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
-  games: GameCreateManyInput
   colorTint: String!
   isPublic: Boolean
   members: UserCreateManyWithoutPartiesInput
@@ -2424,7 +2002,6 @@ input PartyCreateWithoutCartInput {
   description: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
-  games: GameCreateManyInput
   colorTint: String!
   isPublic: Boolean
   members: UserCreateManyWithoutPartiesInput
@@ -2442,7 +2019,6 @@ input PartyCreateWithoutMembersInput {
   description: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
-  games: GameCreateManyInput
   colorTint: String!
   isPublic: Boolean
   start: DateTime
@@ -2460,7 +2036,6 @@ input PartyCreateWithoutPlaylistInput {
   description: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
-  games: GameCreateManyInput
   colorTint: String!
   isPublic: Boolean
   members: UserCreateManyWithoutPartiesInput
@@ -2478,7 +2053,6 @@ input PartyCreateWithoutSavedTracksInput {
   description: String!
   author: UserCreateOneInput!
   location: LocationCreateOneInput!
-  games: GameCreateManyInput
   colorTint: String!
   isPublic: Boolean
   members: UserCreateManyWithoutPartiesInput
@@ -3417,7 +2991,6 @@ input PartyUpdateDataInput {
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
-  games: GameUpdateManyInput
   colorTint: String
   isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
@@ -3435,7 +3008,6 @@ input PartyUpdateInput {
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
-  games: GameUpdateManyInput
   colorTint: String
   isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
@@ -3525,7 +3097,6 @@ input PartyUpdateWithoutCartDataInput {
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
-  games: GameUpdateManyInput
   colorTint: String
   isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
@@ -3542,7 +3113,6 @@ input PartyUpdateWithoutMembersDataInput {
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
-  games: GameUpdateManyInput
   colorTint: String
   isPublic: Boolean
   start: DateTime
@@ -3559,7 +3129,6 @@ input PartyUpdateWithoutPlaylistDataInput {
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
-  games: GameUpdateManyInput
   colorTint: String
   isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
@@ -3576,7 +3145,6 @@ input PartyUpdateWithoutSavedTracksDataInput {
   description: String
   author: UserUpdateOneRequiredInput
   location: LocationUpdateOneRequiredInput
-  games: GameUpdateManyInput
   colorTint: String
   isPublic: Boolean
   members: UserUpdateManyWithoutPartiesInput
@@ -3699,9 +3267,6 @@ input PartyWhereInput {
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
   location: LocationWhereInput
-  games_every: GameWhereInput
-  games_some: GameWhereInput
-  games_none: GameWhereInput
   colorTint: String
   colorTint_not: String
   colorTint_in: [String!]
@@ -4172,6 +3737,11 @@ input PlaylistWhereUniqueInput {
   spotifyId: ID
 }
 
+enum PushNotificationScope {
+  PARTY_INVITES
+  FRIEND_INVITES
+}
+
 type Query {
   album(where: AlbumWhereUniqueInput!): Album
   albums(where: AlbumWhereInput, orderBy: AlbumOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Album]!
@@ -4185,12 +3755,6 @@ type Query {
   friendInvitation(where: FriendInvitationWhereUniqueInput!): FriendInvitation
   friendInvitations(where: FriendInvitationWhereInput, orderBy: FriendInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FriendInvitation]!
   friendInvitationsConnection(where: FriendInvitationWhereInput, orderBy: FriendInvitationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FriendInvitationConnection!
-  game(where: GameWhereUniqueInput!): Game
-  games(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Game]!
-  gamesConnection(where: GameWhereInput, orderBy: GameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
-  image(where: ImageWhereUniqueInput!): Image
-  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
-  imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
   location(where: LocationWhereUniqueInput!): Location
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
@@ -4235,8 +3799,6 @@ type Subscription {
   artist(where: ArtistSubscriptionWhereInput): ArtistSubscriptionPayload
   chat(where: ChatSubscriptionWhereInput): ChatSubscriptionPayload
   friendInvitation(where: FriendInvitationSubscriptionWhereInput): FriendInvitationSubscriptionPayload
-  game(where: GameSubscriptionWhereInput): GameSubscriptionPayload
-  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   message(where: MessageSubscriptionWhereInput): MessageSubscriptionPayload
   party(where: PartySubscriptionWhereInput): PartySubscriptionPayload
@@ -4414,6 +3976,9 @@ type User {
   resetTokenExpiry: DateTime
   isPrivate: Boolean!
   cartItems(where: PartyCartItemWhereInput, orderBy: PartyCartItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PartyCartItem!]
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: [PushNotificationScope!]!
 }
 
 type UserConnection {
@@ -4442,6 +4007,9 @@ input UserCreateInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
 }
 
 input UserCreateManyWithoutChatsInput {
@@ -4479,6 +4047,10 @@ input UserCreateOneWithoutPendingPartyInvitationsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreatepushNotificationsScopesInput {
+  set: [PushNotificationScope!]
+}
+
 input UserCreateWithoutCartItemsInput {
   id: ID
   email: String!
@@ -4498,6 +4070,9 @@ input UserCreateWithoutCartItemsInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
 }
 
 input UserCreateWithoutChatsInput {
@@ -4519,6 +4094,9 @@ input UserCreateWithoutChatsInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
 }
 
 input UserCreateWithoutFriendsInput {
@@ -4540,6 +4118,9 @@ input UserCreateWithoutFriendsInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
 }
 
 input UserCreateWithoutPartiesInput {
@@ -4561,6 +4142,9 @@ input UserCreateWithoutPartiesInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
 }
 
 input UserCreateWithoutPendingFriendInvitationsInput {
@@ -4582,6 +4166,9 @@ input UserCreateWithoutPendingFriendInvitationsInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
 }
 
 input UserCreateWithoutPendingPartyInvitationsInput {
@@ -4603,6 +4190,9 @@ input UserCreateWithoutPendingPartyInvitationsInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemCreateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserCreatepushNotificationsScopesInput
 }
 
 type UserEdge {
@@ -4641,6 +4231,10 @@ enum UserOrderByInput {
   resetTokenExpiry_DESC
   isPrivate_ASC
   isPrivate_DESC
+  webPushNotificationToken_ASC
+  webPushNotificationToken_DESC
+  appPushNotificationToken_ASC
+  appPushNotificationToken_DESC
 }
 
 type UserPreviousValues {
@@ -4659,6 +4253,9 @@ type UserPreviousValues {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean!
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: [PushNotificationScope!]!
 }
 
 input UserScalarWhereInput {
@@ -4814,6 +4411,34 @@ input UserScalarWhereInput {
   resetTokenExpiry_gte: DateTime
   isPrivate: Boolean
   isPrivate_not: Boolean
+  webPushNotificationToken: String
+  webPushNotificationToken_not: String
+  webPushNotificationToken_in: [String!]
+  webPushNotificationToken_not_in: [String!]
+  webPushNotificationToken_lt: String
+  webPushNotificationToken_lte: String
+  webPushNotificationToken_gt: String
+  webPushNotificationToken_gte: String
+  webPushNotificationToken_contains: String
+  webPushNotificationToken_not_contains: String
+  webPushNotificationToken_starts_with: String
+  webPushNotificationToken_not_starts_with: String
+  webPushNotificationToken_ends_with: String
+  webPushNotificationToken_not_ends_with: String
+  appPushNotificationToken: String
+  appPushNotificationToken_not: String
+  appPushNotificationToken_in: [String!]
+  appPushNotificationToken_not_in: [String!]
+  appPushNotificationToken_lt: String
+  appPushNotificationToken_lte: String
+  appPushNotificationToken_gt: String
+  appPushNotificationToken_gte: String
+  appPushNotificationToken_contains: String
+  appPushNotificationToken_not_contains: String
+  appPushNotificationToken_starts_with: String
+  appPushNotificationToken_not_starts_with: String
+  appPushNotificationToken_ends_with: String
+  appPushNotificationToken_not_ends_with: String
   AND: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
@@ -4856,6 +4481,9 @@ input UserUpdateDataInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateInput {
@@ -4877,6 +4505,9 @@ input UserUpdateInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateManyDataInput {
@@ -4892,6 +4523,9 @@ input UserUpdateManyDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateManyMutationInput {
@@ -4907,6 +4541,9 @@ input UserUpdateManyMutationInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateManyWithoutChatsInput {
@@ -4978,6 +4615,10 @@ input UserUpdateOneRequiredWithoutPendingPartyInvitationsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdatepushNotificationsScopesInput {
+  set: [PushNotificationScope!]
+}
+
 input UserUpdateWithoutCartItemsDataInput {
   email: String
   firstName: String
@@ -4996,6 +4637,9 @@ input UserUpdateWithoutCartItemsDataInput {
   resetToken: String
   resetTokenExpiry: DateTime
   isPrivate: Boolean
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateWithoutChatsDataInput {
@@ -5016,6 +4660,9 @@ input UserUpdateWithoutChatsDataInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateWithoutFriendsDataInput {
@@ -5036,6 +4683,9 @@ input UserUpdateWithoutFriendsDataInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateWithoutPartiesDataInput {
@@ -5056,6 +4706,9 @@ input UserUpdateWithoutPartiesDataInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateWithoutPendingFriendInvitationsDataInput {
@@ -5076,6 +4729,9 @@ input UserUpdateWithoutPendingFriendInvitationsDataInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateWithoutPendingPartyInvitationsDataInput {
@@ -5096,6 +4752,9 @@ input UserUpdateWithoutPendingPartyInvitationsDataInput {
   resetTokenExpiry: DateTime
   isPrivate: Boolean
   cartItems: PartyCartItemUpdateManyWithoutUserInput
+  webPushNotificationToken: String
+  appPushNotificationToken: String
+  pushNotificationsScopes: UserUpdatepushNotificationsScopesInput
 }
 
 input UserUpdateWithWhereUniqueWithoutChatsInput {
@@ -5322,6 +4981,34 @@ input UserWhereInput {
   cartItems_every: PartyCartItemWhereInput
   cartItems_some: PartyCartItemWhereInput
   cartItems_none: PartyCartItemWhereInput
+  webPushNotificationToken: String
+  webPushNotificationToken_not: String
+  webPushNotificationToken_in: [String!]
+  webPushNotificationToken_not_in: [String!]
+  webPushNotificationToken_lt: String
+  webPushNotificationToken_lte: String
+  webPushNotificationToken_gt: String
+  webPushNotificationToken_gte: String
+  webPushNotificationToken_contains: String
+  webPushNotificationToken_not_contains: String
+  webPushNotificationToken_starts_with: String
+  webPushNotificationToken_not_starts_with: String
+  webPushNotificationToken_ends_with: String
+  webPushNotificationToken_not_ends_with: String
+  appPushNotificationToken: String
+  appPushNotificationToken_not: String
+  appPushNotificationToken_in: [String!]
+  appPushNotificationToken_not_in: [String!]
+  appPushNotificationToken_lt: String
+  appPushNotificationToken_lte: String
+  appPushNotificationToken_gt: String
+  appPushNotificationToken_gte: String
+  appPushNotificationToken_contains: String
+  appPushNotificationToken_not_contains: String
+  appPushNotificationToken_starts_with: String
+  appPushNotificationToken_not_starts_with: String
+  appPushNotificationToken_ends_with: String
+  appPushNotificationToken_not_ends_with: String
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

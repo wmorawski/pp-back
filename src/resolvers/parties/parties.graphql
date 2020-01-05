@@ -86,6 +86,7 @@ type Mutation {
     where: PartyCartItemWhereUniqueInput!
   ): PartyCartItem
   updateParty(data: PartyUpdateInput!, where: PartyWhereUniqueInput!): Party
+  deletePartyCartItem(where: PartyCartItemWhereUniqueInput!): PartyCartItem
 }
 
 type Subscription {

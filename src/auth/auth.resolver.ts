@@ -7,6 +7,7 @@ import {
   LoginPayload,
   SignupPayload,
   SocialLoginPayload,
+  SocialSignupPayload,
 } from './auth.types';
 
 import {
@@ -45,7 +46,9 @@ export class AuthResolver {
   }
 
   @Mutation('socialLogin')
-  async socialLogin(@Args() payload: SocialLoginPayload): Promise<AuthPayload> {
+  async socialLogin(
+    @Args() payload: SocialSignupPayload,
+  ): Promise<AuthPayload> {
     const user = await this.auth.socialLogin(payload);
     return this.auth.createAuthPayload(user);
   }

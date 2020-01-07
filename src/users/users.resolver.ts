@@ -104,23 +104,6 @@ export class UsersResolver {
     @Args() args: { data: FriendInvitationCreateInput },
     @Info() info,
   ): Promise<FriendInvitation> {
-    const {
-      user: {
-        connect: { id },
-      },
-    } = args.data;
-
-    if (id) {
-      this.firebaseService.send(
-        [id as string],
-        {
-          title: 'New friend invite!',
-          body: 'You just got a new friend invite.',
-        },
-        ['FRIEND_INVITES'],
-      );
-    }
-
     return await this.prisma.mutation.createFriendInvitation(args, info);
   }
 

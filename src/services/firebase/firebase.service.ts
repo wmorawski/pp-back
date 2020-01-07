@@ -83,7 +83,7 @@ export class FirebaseService {
       await admin.messaging().sendMulticast(message);
     } catch (e) {
       // tslint:disable-next-line: no-console
-      console.log('could not fire notification!');
+      console.log('could not fire notification!', e);
     }
   }
 }

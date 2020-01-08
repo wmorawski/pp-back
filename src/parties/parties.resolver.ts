@@ -234,8 +234,14 @@ export class PartiesResolver {
   @Query('hasParties')
   @UseGuards(GqlAuthGuard)
   async hasParties(@Context() { req }, @Args() args): Promise<boolean> {
+    const userId = req.user.userId;
     return this.prisma.exists.Party({
-      AND: [{ members_some: { id: req.user.userId } }, { ...args.where }],
+      OR: [
+        { members_some: { id: userId } },
+        { isPublic: true },
+        { author: { id: userId } },
+      ],
+      ...args.where,
     });
   }
 

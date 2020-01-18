@@ -6920,7 +6920,6 @@ input PlaylistWhereInput {
 
 input PlaylistWhereUniqueInput {
   id: ID
-  spotifyId: ID
 }
 
 enum PushNotificationScope {
@@ -12135,7 +12134,6 @@ export interface PlaylistWhereInput {
 
 export interface PlaylistWhereUniqueInput {
   id?: ID_Input | null
-  spotifyId?: ID_Input | null
 }
 
 export interface TrackCreateInput {

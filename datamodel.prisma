@@ -95,7 +95,7 @@ type Location {
 
 type Playlist {
   id: ID! @id
-  spotifyId: ID! @unique
+  spotifyId: ID!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   uri: String!

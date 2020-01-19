@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/wiktor-morawski-3876dc/partyplanner/dev
-# timestamp: Wed Jan 08 2020 10:26:40 GMT+0100 (Central European Standard Time)
+# timestamp: Sat Jan 18 2020 08:03:24 GMT+0100 (Central European Standard Time)
 
 type AggregateAlbum {
   count: Int!
@@ -6731,7 +6731,6 @@ input PlaylistWhereInput {
 
 input PlaylistWhereUniqueInput {
   id: ID
-  spotifyId: ID
 }
 
 enum PushNotificationScope {

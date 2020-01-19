@@ -1,9 +1,18 @@
+import { GqlAuthGuard } from 'src/guards/GqlAuthGuard.guard';
 import { CombinePlaylistsInput } from './mustic.types';
 import { Playlist, PlaylistConnection } from './../prisma/prisma.binding';
 
-import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Info,
+  Mutation,
+  Query,
+  Resolver,
+  Context,
+} from '@nestjs/graphql';
 import { GraphQLError } from 'graphql';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UseGuards, Req } from '@nestjs/common';
 
 @Resolver('parties')
 export class MusicResolver {
@@ -31,20 +40,53 @@ export class MusicResolver {
     return this.prisma.mutation.deletePlaylist(args, info);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation('importPlaylistsToParty')
-  async importPlaylistsToParty(@Args() { playlists, partyId }, @Info() info) {
+  async importPlaylistsToParty(
+    @Args() { playlists, partyId },
+    @Context()
+    {
+      req: {
+        user: { userId },
+      },
+    },
+  ) {
+    const playlistsIds = playlists.split(',');
+
     try {
-      this.prisma.mutation.updateParty({
-        where: {
-          id: partyId,
+      const playlistsToCopy = await this.prisma.query.playlists(
+        {
+          where: { id_in: playlistsIds },
         },
-        data: {
-          playlist: { connect: playlists.split(',').map(id => ({ id })) },
+        `
+        {
+            spotifyId
+            uri
+            spotifyExternalUrl
+            name
+            imageUrl
+            tracks {
+                id
+            }
+        }
+      `,
+      );
+      const playlistsPayload = playlistsToCopy.map(playlist => ({
+        ...playlist,
+        tracks: {
+          connect: (playlist.tracks || []).map(track => ({ id: track.id })),
         },
+        user: { connect: { id: userId } },
+      }));
+
+      await this.prisma.mutation.updateParty({
+        where: { id: partyId },
+        data: { playlist: { create: playlistsPayload } },
       });
+
       return true;
     } catch (e) {
-      throw new GraphQLError('Could not import');
+      throw new GraphQLError('Could not import playlists');
     }
   }
 
